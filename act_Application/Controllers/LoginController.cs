@@ -50,6 +50,10 @@ namespace act_Application.Controllers
 
                 HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), authProperties);
             }
+            else
+            {
+                return RedirectToAction("Index", "Login", new { error = "Contraseña incorrecta" });
+            }
 
             // Aquí puedes seguir utilizando la variable "claims" si es necesario
 
