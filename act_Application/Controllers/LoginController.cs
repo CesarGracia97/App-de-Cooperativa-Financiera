@@ -20,7 +20,7 @@ namespace act_Application.Controllers
         {
             string hashedPassword = HashPassword(Contrasena);
 
-            ActUser objeto = new MetodoLogeo().EncontrarUser(Correo, Contrasena);
+            ActUser objeto = new MetodoLogeo().EncontrarUser(Correo, hashedPassword);
             var claims = new List<Claim>();
 
             if (objeto.NombreYapellido != null)
