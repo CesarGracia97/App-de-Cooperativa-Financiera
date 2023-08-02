@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using act_Application.Models;
 using act_Application.Data.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace act_Application.Controllers.Admin
 {
@@ -20,6 +21,7 @@ namespace act_Application.Controllers.Admin
         }
 
         // GET: ActRols
+        [Authorize(Policy = "AdminOnly")]
         public async Task<IActionResult> Index()
         {
             return _context.ActRols != null ?
@@ -28,6 +30,7 @@ namespace act_Application.Controllers.Admin
         }
 
         // GET: ActRols/Details/5
+        [Authorize(Policy = "AdminOnly")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.ActRols == null)
@@ -46,6 +49,7 @@ namespace act_Application.Controllers.Admin
         }
 
         // GET: ActRols/Create
+        [Authorize(Policy = "AdminOnly")]
         public IActionResult Create()
         {
             return View();
@@ -68,6 +72,7 @@ namespace act_Application.Controllers.Admin
         }
 
         // GET: ActRols/Edit/5
+        [Authorize(Policy = "AdminOnly")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.ActRols == null)
@@ -119,6 +124,7 @@ namespace act_Application.Controllers.Admin
         }
 
         // GET: ActRols/Delete/5
+        [Authorize(Policy = "AdminOnly")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.ActRols == null)
@@ -137,6 +143,7 @@ namespace act_Application.Controllers.Admin
         }
 
         // POST: ActRols/Delete/5
+        [Authorize(Policy = "AdminOnly")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

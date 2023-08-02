@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using act_Application.Models;
 using act_Application.Data.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace act_Application.Controllers.Admin
 {
@@ -20,6 +21,7 @@ namespace act_Application.Controllers.Admin
         }
 
         // GET: ActMultas
+        [Authorize(Policy = "AdminOnly")]
         public async Task<IActionResult> Index()
         {
             return _context.ActMultas != null ?
@@ -28,6 +30,7 @@ namespace act_Application.Controllers.Admin
         }
 
         // GET: ActMultas/Details/5
+        [Authorize(Policy = "AdminOnly")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.ActMultas == null)
@@ -46,6 +49,7 @@ namespace act_Application.Controllers.Admin
         }
 
         // GET: ActMultas/Create
+        [Authorize(Policy = "AdminOnly")]
         public IActionResult Create()
         {
             return View();
@@ -68,6 +72,7 @@ namespace act_Application.Controllers.Admin
         }
 
         // GET: ActMultas/Edit/5
+        [Authorize(Policy = "AdminOnly")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.ActMultas == null)
@@ -119,6 +124,7 @@ namespace act_Application.Controllers.Admin
         }
 
         // GET: ActMultas/Delete/5
+        [Authorize(Policy = "AdminOnly")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.ActMultas == null)
