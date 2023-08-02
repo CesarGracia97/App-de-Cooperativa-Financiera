@@ -1,7 +1,14 @@
+using act_Application.Models;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+//Cadena de conexion BD
+builder.Services.AddDbContext<DesarrolloContext>(options =>
+    options.UseMySQL(builder.Configuration.GetConnectionString("Cadena")));
 
 var app = builder.Build();
 

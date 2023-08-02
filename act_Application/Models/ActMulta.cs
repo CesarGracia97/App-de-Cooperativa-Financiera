@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace act_Application.Models;
 
-public partial class ActMultum
+public partial class ActMulta
 {
     public int Id { get; set; }
 
