@@ -264,3 +264,4 @@ E:\cesar.gracia\Proyectos\C#\act_Application\act_Application\obj\Debug\net7.0\re
 E:\cesar.gracia\Proyectos\C#\act_Application\act_Application\obj\Debug\net7.0\act_Application.pdb
 E:\cesar.gracia\Proyectos\C#\act_Application\act_Application\obj\Debug\net7.0\act_Application.genruntimeconfig.cache
 E:\cesar.gracia\Proyectos\C#\act_Application\act_Application\obj\Debug\net7.0\ref\act_Application.dll
+E:\cesar.gracia\Proyectos\C#\act_Application\act_Application\bin\Debug\net7.0\Data\Config\config.json

@@ -1,0 +1,26 @@
+﻿@{
+    ViewData["Title"] = "Menu";
+}
+<div class="text-center">
+    <div class="alert alert-success">
+        <h1>Menu</h1>
+        <h2>Bienvenido, @User.Identity.Name!</h2>
+        @if (User.HasClaim("Rol", "Administrador"))
+        {
+            <p>Tienes el rol de Administrador.</p>
+        }
+        else if (User.HasClaim("Rol", "Accionista"))
+        {
+            <p>Tienes el rol de Accionista.</p>
+        }
+        else if (User.HasClaim("Rol", "Referente"))
+        {
+            <p>Tienes el rol de Referente.</p>
+        }
+        else
+        {
+            <p>Tu rol no está definido o no tiene permisos asignados.</p>
+        }
+    </div>
+</div>
+

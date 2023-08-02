@@ -6,8 +6,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using act_Application.Models;
+using act_Application.Data.Data;
+using Microsoft.AspNetCore.Authorization;
+using System.Text;
+using System.Security.Cryptography;
 
-namespace act_Application.Controllers
+namespace act_Application.Controllers.Admin
 {
     public class ActUsersController : Controller
     {
@@ -19,14 +23,16 @@ namespace act_Application.Controllers
         }
 
         // GET: ActUsers
+        [Authorize(Policy = "AdminOnly")]
         public async Task<IActionResult> Index()
         {
-              return _context.ActUsers != null ? 
-                          View(await _context.ActUsers.ToListAsync()) :
-                          Problem("Entity set 'DesarrolloContext.ActUsers'  is null.");
+            return _context.ActUsers != null ?
+                        View(await _context.ActUsers.ToListAsync()) :
+                        Problem("Entity set 'DesarrolloContext.ActUsers'  is null.");
         }
 
         // GET: ActUsers/Details/5
+        [Authorize(Policy = "AdminOnly")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.ActUsers == null)
@@ -45,6 +51,7 @@ namespace act_Application.Controllers
         }
 
         // GET: ActUsers/Create
+        [Authorize(Policy = "AdminOnly")]
         public IActionResult Create()
         {
             return View();
@@ -67,6 +74,7 @@ namespace act_Application.Controllers
         }
 
         // GET: ActUsers/Edit/5
+        [Authorize(Policy = "AdminOnly")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.ActUsers == null)
@@ -96,6 +104,9 @@ namespace act_Application.Controllers
 
             if (ModelState.IsValid)
             {
+                // Encriptar la contraseña antes de actualizarla en la base de datos
+                actUser.Contrasena = HashPassword(actUser.Contrasena);
+
                 try
                 {
                     _context.Update(actUser);
@@ -118,6 +129,7 @@ namespace act_Application.Controllers
         }
 
         // GET: ActUsers/Delete/5
+        [Authorize(Policy = "AdminOnly")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.ActUsers == null)
@@ -149,14 +161,28 @@ namespace act_Application.Controllers
             {
                 _context.ActUsers.Remove(actUser);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool ActUserExists(int id)
         {
-          return (_context.ActUsers?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.ActUsers?.Any(e => e.Id == id)).GetValueOrDefault();
+        }
+
+        public string HashPassword(string password)
+        {
+            using (var sha256 = SHA256.Create())
+            {
+                byte[] bytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
+                StringBuilder builder = new StringBuilder();
+                foreach (byte b in bytes)
+                {
+                    builder.Append(b.ToString("x2"));
+                }
+                return builder.ToString();
+            }
         }
     }
 }

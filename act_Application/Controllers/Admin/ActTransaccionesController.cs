@@ -6,8 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using act_Application.Models;
+using act_Application.Data.Data;
 
-namespace act_Application.Controllers
+namespace act_Application.Controllers.Admin
 {
     public class ActTransaccionesController : Controller
     {
@@ -21,9 +22,9 @@ namespace act_Application.Controllers
         // GET: ActTransacciones
         public async Task<IActionResult> Index()
         {
-              return _context.ActTransacciones != null ? 
-                          View(await _context.ActTransacciones.ToListAsync()) :
-                          Problem("Entity set 'DesarrolloContext.ActTransacciones'  is null.");
+            return _context.ActTransacciones != null ?
+                        View(await _context.ActTransacciones.ToListAsync()) :
+                        Problem("Entity set 'DesarrolloContext.ActTransacciones'  is null.");
         }
 
         // GET: ActTransacciones/Details/5
@@ -149,14 +150,14 @@ namespace act_Application.Controllers
             {
                 _context.ActTransacciones.Remove(actTransaccione);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool ActTransaccioneExists(int id)
         {
-          return (_context.ActTransacciones?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.ActTransacciones?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

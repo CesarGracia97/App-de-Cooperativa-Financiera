@@ -6,8 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using act_Application.Models;
+using act_Application.Data.Data;
 
-namespace act_Application.Controllers
+namespace act_Application.Controllers.Admin
 {
     public class ActMultasController : Controller
     {
@@ -21,9 +22,9 @@ namespace act_Application.Controllers
         // GET: ActMultas
         public async Task<IActionResult> Index()
         {
-              return _context.ActMultas != null ? 
-                          View(await _context.ActMultas.ToListAsync()) :
-                          Problem("Entity set 'DesarrolloContext.ActMultas'  is null.");
+            return _context.ActMultas != null ?
+                        View(await _context.ActMultas.ToListAsync()) :
+                        Problem("Entity set 'DesarrolloContext.ActMultas'  is null.");
         }
 
         // GET: ActMultas/Details/5
@@ -149,14 +150,14 @@ namespace act_Application.Controllers
             {
                 _context.ActMultas.Remove(actMulta);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool ActMultaExists(int id)
         {
-          return (_context.ActMultas?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.ActMultas?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

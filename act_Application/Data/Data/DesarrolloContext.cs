@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using act_Application.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace act_Application.Models;
+namespace act_Application.Data.Data;
 
 public partial class DesarrolloContext : DbContext
 {
@@ -27,9 +28,6 @@ public partial class DesarrolloContext : DbContext
 
     public virtual DbSet<ActUser> ActUsers { get; set; }
 
-    //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-    //=> optionsBuilder.UseMySQL("server=192.168.21.193; port=3306; database=desarrollo; uid=cgarcia; password=cgarcia;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

@@ -6,8 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using act_Application.Models;
+using act_Application.Data.Data;
 
-namespace act_Application.Controllers
+namespace act_Application.Controllers.Admin
 {
     public class ActRolsController : Controller
     {
@@ -21,9 +22,9 @@ namespace act_Application.Controllers
         // GET: ActRols
         public async Task<IActionResult> Index()
         {
-              return _context.ActRols != null ? 
-                          View(await _context.ActRols.ToListAsync()) :
-                          Problem("Entity set 'DesarrolloContext.ActRols'  is null.");
+            return _context.ActRols != null ?
+                        View(await _context.ActRols.ToListAsync()) :
+                        Problem("Entity set 'DesarrolloContext.ActRols'  is null.");
         }
 
         // GET: ActRols/Details/5
@@ -149,14 +150,14 @@ namespace act_Application.Controllers
             {
                 _context.ActRols.Remove(actRol);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool ActRolExists(int id)
         {
-          return (_context.ActRols?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.ActRols?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

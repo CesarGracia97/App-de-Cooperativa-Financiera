@@ -5,12 +5,32 @@
       "PackagePath": "staticwebassets\\act_Application.bundle.scp.css"
     },
     {
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\css\\homeLogin.css",
+      "PackagePath": "staticwebassets\\css\\homeLogin.css"
+    },
+    {
       "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },
     {
       "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\favicon.ico",
       "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\img\\pradera_chilena.jpg",
+      "PackagePath": "staticwebassets\\img\\pradera_chilena.jpg"
+    },
+    {
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\img\\predera.jpg",
+      "PackagePath": "staticwebassets\\img\\predera.jpg"
+    },
+    {
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\img\\universo.jpg",
+      "PackagePath": "staticwebassets\\img\\universo.jpg"
+    },
+    {
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\img\\xtrim.png",
+      "PackagePath": "staticwebassets\\img\\xtrim.png"
     },
     {
       "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\js\\site.js",

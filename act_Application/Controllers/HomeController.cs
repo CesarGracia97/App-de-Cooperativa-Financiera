@@ -1,4 +1,7 @@
 ﻿using act_Application.Models;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -17,6 +20,11 @@ namespace act_Application.Controllers
         {
             return View();
         }
+        [Authorize]
+        public IActionResult Menu()
+        {
+            return View();
+        }
 
         public IActionResult Privacy()
         {
@@ -27,6 +35,12 @@ namespace act_Application.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+        public ActionResult CerrarSesion()
+        {
+            HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+
+            return RedirectToAction("Index", "Login");
         }
     }
 }
