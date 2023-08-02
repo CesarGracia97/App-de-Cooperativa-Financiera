@@ -39,6 +39,7 @@ namespace act_Application.Controllers
                     claims.Add(new Claim("Rol", objetoRol.NombreRol));
                     claims.Add(new Claim("DescripcionRol", objetoRol.DescripcionRol));
                     claims.Add(new Claim("IdRol", IdRol.ToString()));
+                    claims.Add(new Claim("TipoUsuario", objeto.TipoUser));
                 }
 
                 var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);

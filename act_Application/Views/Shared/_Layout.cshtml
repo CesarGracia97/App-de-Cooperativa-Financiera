@@ -18,8 +18,9 @@
                 </span>
 
                 <div class="text logo-text">
-                    <span class="name">Codinglab</span>
-                    <span class="profession">Web developer</span>
+                    <span class="name">Aportaciones</span>
+                    <span class="profession">@User.Identity.Name</span>
+                    <span class="tipousuario">@User.FindFirst("TipoUsuario")?.Value</span>
                 </div>
             </div>
 
@@ -39,35 +40,28 @@
                     <li class="nav-link">
                         <a href="#">
                             <i class='bx bx-home-alt icon'></i>
-                            <span class="text nav-text">Dashboard</span>
+                            <span class="text nav-text">Administracion</span>
                         </a>
                     </li>
 
                     <li class="nav-link">
                         <a href="#">
                             <i class='bx bx-bar-chart-alt-2 icon'></i>
-                            <span class="text nav-text">Revenue</span>
+                            <span class="text nav-text">Aportacion</span>
                         </a>
                     </li>
 
                     <li class="nav-link">
                         <a href="#">
                             <i class='bx bx-bell icon'></i>
-                            <span class="text nav-text">Notifications</span>
+                            <span class="text nav-text">Notificationes</span>
                         </a>
                     </li>
 
                     <li class="nav-link">
                         <a href="#">
                             <i class='bx bx-pie-chart-alt icon'></i>
-                            <span class="text nav-text">Analytics</span>
-                        </a>
-                    </li>
-
-                    <li class="nav-link">
-                        <a href="#">
-                            <i class='bx bx-heart icon'></i>
-                            <span class="text nav-text">Likes</span>
+                            <span class="text nav-text">Tabla de Aportacion</span>
                         </a>
                     </li>
 

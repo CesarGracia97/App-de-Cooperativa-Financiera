@@ -26,13 +26,29 @@ searchBtn.addEventListener("click", () => {
     sidebar.classList.remove("close");
 })
 
-modeSwitch.addEventListener("click", () => {
-    body.classList.toggle("dark");
-
-    if (body.classList.contains("dark")) {
+// Función para establecer el modo (oscuro o luz)
+function setMode(mode) {
+    if (mode === "dark") {
+        body.classList.add("dark");
         modeText.innerText = "Light mode";
     } else {
+        body.classList.remove("dark");
         modeText.innerText = "Dark mode";
-
     }
+}
+
+// Recuperar el estado del modo al cargar la página
+document.addEventListener("DOMContentLoaded", () => {
+    const storedMode = localStorage.getItem("mode");
+    if (storedMode) {
+        setMode(storedMode);
+    }
+});
+
+modeSwitch.addEventListener("click", () => {
+    body.classList.toggle("dark");
+    const currentMode = body.classList.contains("dark") ? "dark" : "light";
+    setMode(currentMode);
+    // Guardar el estado del modo en el almacenamiento local
+    localStorage.setItem("mode", currentMode);
 });
