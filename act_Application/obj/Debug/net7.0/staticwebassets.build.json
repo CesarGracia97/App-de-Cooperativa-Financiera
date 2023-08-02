@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "sZIzD7ASOqePpJSArk7M1ZpNbapQ66p4qd3TZohexj4=",
+  "Hash": "Zb8M2fMU5Uum4Xkh14uvfoPGP7f7WAQygNmoyAMLw64=",
   "Source": "act_Application",
   "BasePath": "_content/act_Application",
   "Mode": "Default",
@@ -100,6 +100,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\site.css"
+    },
+    {
+      "Identity": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\css\\tabla.css",
+      "SourceId": "act_Application",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\",
+      "BasePath": "_content/act_Application",
+      "RelativePath": "css/tabla.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\tabla.css"
     },
     {
       "Identity": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\favicon.ico",

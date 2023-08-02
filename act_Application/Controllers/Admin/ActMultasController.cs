@@ -60,7 +60,7 @@ namespace act_Application.Controllers.Admin
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,IdUser,Porcentaje")] ActMulta actMulta)
+        public async Task<IActionResult> Create([Bind("Id,IdUser,Porcentaje,Idaportacion")] ActMulta actMulta)
         {
             if (ModelState.IsValid)
             {
@@ -93,7 +93,7 @@ namespace act_Application.Controllers.Admin
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,IdUser,Porcentaje")] ActMulta actMulta)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,IdUser,Porcentaje,Idaportacion")] ActMulta actMulta)
         {
             if (id != actMulta.Id)
             {

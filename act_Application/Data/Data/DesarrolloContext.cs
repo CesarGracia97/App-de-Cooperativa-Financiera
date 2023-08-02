@@ -52,12 +52,17 @@ public partial class DesarrolloContext : DbContext
         {
             entity.HasKey(e => e.Id).HasName("PRIMARY");
 
-            entity.ToTable("act_Multas");
+            entity.ToTable("act_Multas", tb => tb.HasComment("Tabla de Multas"));
 
             entity.HasIndex(e => e.Id, "Id_UNIQUE").IsUnique();
 
+            entity.HasIndex(e => e.IdAportacion, "fk_Multas_Aportaciones");
+
+            entity.HasIndex(e => e.IdUser, "fk_Multas_User");
+
             entity.Property(e => e.Id).HasColumnType("int(11)");
             entity.Property(e => e.IdUser).HasColumnType("int(11)");
+            entity.Property(e => e.IdAportacion).HasColumnType("int(11)");
         });
 
         modelBuilder.Entity<ActRol>(entity =>

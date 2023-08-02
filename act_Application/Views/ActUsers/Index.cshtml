@@ -1,42 +1,49 @@
 ﻿@model IEnumerable<act_Application.Models.ActUser>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Usuarios";
 }
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/tabla.css" />
+</head>
 
-<h1>Index</h1>
+<h1>Usuarios</h1>
 
 <p>
-    <a asp-action="Create" class="btn btn-success">Create New</a>
+    <a class="button create" asp-action="Create">Crear Nuevo Registro</a>
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Cedula)
+                Cedula
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Cbancaria)
+                Cuenta Bancaria
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Correo)
+                Correo
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.NombreYapellido)
+                Identificacion
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Celular)
+                Celular
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Contrasena)
+                Contraseña
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TipoUser)
+                Tipo de Usuario
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Ncaccionario)
+                Cedula de su Invitado
             </th>
-            <th></th>
+            <th>
+                Acciones
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -58,7 +65,7 @@
                 @Html.DisplayFor(modelItem => item.Celular)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Contrasena)
+                @Html.Raw(new String('*', Math.Min(10, item.Contrasena.Length)))
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.TipoUser)
@@ -67,9 +74,8 @@
                 @Html.DisplayFor(modelItem => item.Ncaccionario)
             </td>
             <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-success">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-light">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-warning">Delete</a>
+                <a class="button edit" asp-action="Edit" asp-route-id="@item.Id">Editar</a> 
+                <a class="button delete" asp-action="Delete" asp-route-id="@item.Id">Eliminar</a>
             </td>
         </tr>
 }

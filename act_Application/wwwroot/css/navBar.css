@@ -322,3 +322,20 @@ body.dark .switch::before {
 body.dark .home .text {
     color: var(--text-color);
 }
+
+.content-container {
+    margin: 0px 60px 0px 60px; /* Espacio adicional para el contenido */
+
+    transition: margin-left var(--tran-05);
+}
+
+.sidebar.close ~ .content-container {
+    margin-left: 60px; /* Ancho del navbar en modo "close" */
+    margin-right: 60px;
+}
+
+/* Asegurarse de que el contenido no se superponga con el navbar */
+.sidebar.close ~ .content-container .text {
+    margin-left: 20px;
+    margin-right: 20px;
+}

@@ -10,4 +10,6 @@ public partial class ActMulta
     public int IdUser { get; set; }
 
     public float Porcentaje { get; set; }
+
+    public int IdAportacion { get; set; }
 }

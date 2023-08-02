@@ -1,5 +1,5 @@
 /*Si se gace mal forzarlo a como sea*/
-/*Scaffold-DbContext "server=192.168.21.193; port=3306; database=desarrollo; uid=cgarcia; password=cgarcia;" MySql.EntityFrameworkCore -OutputDir Models -Force
+/*Scaffold-DbContext "server=192.168.21.193; port=3306; database=desarrollo; uid=cgarcia; password=cgarcia;" MySql.EntityFrameworkCore -Tables "act_Multas" -OutputDir Models -Force
 
 
 Scaffold-DbContext "server=192.168.21.193; port=3306; database=desarrollo; uid=cgarcia; password=cgarcia;" MySql.EntityFrameworkCore -Tables  -OutputDir Models
@@ -111,18 +111,18 @@ ALTER TABLE act_Aportaciones
 
 /* Relacion */
 /* Multa-User */
-ALTER TABLE act_Multa
+ALTER TABLE act_Multas
 	ADD COLUMN IdUser INT NOT NULL,
     ADD COLUMN Porcentaje DECIMAL(10, 4) NOT NULL;
 ALTER TABLE act_Multa
-	ADD CONSTRAINT fk_Multa_User
+	ADD CONSTRAINT fk_Multas_User
 	FOREIGN KEY (IdUser) REFERENCES act_User (Id);
 
 
 /* Relacion */
 /* Multa-Aportaciones */
-ALTER TABLE act_Multa
+ALTER TABLE act_Multas
 	ADD COLUMN IdAportacion INT NOT NULL;
-ALTER TABLE act_Multa
-	ADD CONSTRAINT fk_Multa_Aportaciones
+ALTER TABLE act_Multas
+	ADD CONSTRAINT fk_Multas_Aportaciones
 	FOREIGN KEY (IdAportacion) REFERENCES act_Aportaciones (Id);

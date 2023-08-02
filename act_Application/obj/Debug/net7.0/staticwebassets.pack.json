@@ -17,6 +17,10 @@
       "PackagePath": "staticwebassets\\css\\site.css"
     },
     {
+      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\css\\tabla.css",
+      "PackagePath": "staticwebassets\\css\\tabla.css"
+    },
+    {
       "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\favicon.ico",
       "PackagePath": "staticwebassets\\favicon.ico"
     },

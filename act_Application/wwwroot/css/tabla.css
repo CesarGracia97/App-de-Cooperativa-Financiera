@@ -1,0 +1,59 @@
+﻿/* Estilo de la tabla */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 10px;
+    padding-right:60px;
+    font-size: 10pt;
+    font-family: Arial, sans-serif;
+}
+
+.table th,.table td {
+    padding: 8px;
+    text-align: center;
+    border: 1px solid #dcdcdc;
+    background-color: transparent;
+}
+
+/* Estilo de los botones */
+a.button {
+    display: inline-block;
+    padding: 6px 12px;
+    margin: 5px;
+    border-radius: 5px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 10pt;
+    font-family: Arial, sans-serif;
+    color: white;
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+a.button.edit {
+    background-color: green;
+}
+
+a.button.create {
+    background-color: green;
+}
+
+a.button.details {
+    background-color: blue;
+}
+
+a.button.delete {
+    background-color: red;
+}
+
+a.button:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Estilo responsivo */
+@media(max-width: 768px) {
+    .table {
+        font-size: 8pt;
+        padding-right: 10px;
+    }
+}
