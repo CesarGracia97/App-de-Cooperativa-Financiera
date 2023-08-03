@@ -35,19 +35,58 @@
                         <input type="text" placeholder="Search...">
                     </li>
                 </ul>
-
                 <ul class="menu-links">
-                    <li class="nav-link">
-                        <a href="#">
-                            <i class='bx bx-home-alt icon'></i>
-                            <span class="text nav-text">Administracion</span>
-                        </a>
-                    </li>
+
+                    @if (User.HasClaim("Rol", "Administrador"))
+                    {
+                        <li class="nav-link">
+                            <button id="adminButton" type="button" class="toggle-button">
+                                <i class='bx bx-home-alt icon'></i>
+                                <span class="text nav-text">Administracion</span>
+                            </button>
+                        </li>
+                        <li class="nav-link hidden-item">
+                            <a href="~/ActUsers/Index">
+                                <i class='bx bx-table icon'></i>
+                                <span class="text nav-text">T. Usuarios</span>
+                            </a>
+                        </li>
+                        <li class="nav-link hidden-item">
+                            <a href="~/ActRols/Index">
+                                <i class='bx bx-table icon'></i>
+                                <span class="text nav-text">T. Roles</span>
+                            </a>
+                        </li>
+                        <li class="nav-link hidden-item">
+                            <a href="~/ActRolUsers/Index">
+                                <i class='bx bx-table icon'></i>
+                                <span class="text nav-text">T. Roles y Usuarios</span>
+                            </a>
+                        </li>
+                        <li class="nav-link hidden-item">
+                            <a href="~/ActAportaciones/Index">
+                                <i class='bx bx-table icon'></i>
+                                <span class="text nav-text">T. Aportaciones</span>
+                            </a>
+                        </li>
+                        <li class="nav-link hidden-item">
+                            <a href="~/ActTransacciones/Index">
+                                <i class='bx bx-table icon'></i>
+                                <span class="text nav-text">T. Transacciones</span>
+                            </a>
+                        </li>
+                        <li class="nav-link hidden-item">
+                            <a href="~/ActMultas/Index">
+                                <i class='bx bx-table icon'></i>
+                                <span class="text nav-text">T. Multas</span>
+                            </a>
+                        </li>
+                    }
 
                     <li class="nav-link">
                         <a href="#">
-                            <i class='bx bx-bar-chart-alt-2 icon'></i>
-                            <span class="text nav-text">Aportacion</span>
+                            <i class='bx bx-money icon'></i>
+                            <span class="text nav-text">Aportar</span>
                         </a>
                     </li>
 
@@ -60,15 +99,15 @@
 
                     <li class="nav-link">
                         <a href="#">
-                            <i class='bx bx-pie-chart-alt icon'></i>
+                            <i class='bx bx-table icon'></i>
                             <span class="text nav-text">Tabla de Aportacion</span>
                         </a>
                     </li>
 
                     <li class="nav-link">
                         <a href="#">
-                            <i class='bx bx-wallet icon'></i>
-                            <span class="text nav-text">Wallets</span>
+                            <i class='bx bx-window-close icon'></i>
+                            <span class="text nav-text">Multas</span>
                         </a>
                     </li>
 
@@ -102,7 +141,6 @@
     </nav>
 
     <section class="home">
-        <div class="text">Dashboard Sidebar</div>
         <div class="content-container">
             @RenderBody()
         </div>

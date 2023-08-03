@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "Zb8M2fMU5Uum4Xkh14uvfoPGP7f7WAQygNmoyAMLw64=",
+  "Hash": "7yeVs0ZEJ7hq24C6qMTVNXM6vFqPu9TfFGX91C1mleU=",
   "Source": "act_Application",
   "BasePath": "_content/act_Application",
   "Mode": "Default",
@@ -49,6 +49,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\obj\\Debug\\net7.0\\scopedcss\\projectbundle\\act_Application.bundle.scp.css"
+    },
+    {
+      "Identity": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\css\\formularioEdicion.css",
+      "SourceId": "act_Application",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\",
+      "BasePath": "_content/act_Application",
+      "RelativePath": "css/formularioEdicion.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\formularioEdicion.css"
     },
     {
       "Identity": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\css\\homeLogin.css",

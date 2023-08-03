@@ -1,0 +1,109 @@
+﻿/* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+hr{
+
+    margin:15px 0px 15px 0px;
+}
+h1{
+    margin: 15px 0px 0px 0px;
+}
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f2f2f2;
+}
+
+/* Estilos para el formulario */
+.form-container {
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    max-width: 500px;
+    width: 100%;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.control-label {
+    display: inline-block;
+    width: 150px;
+    font-size: 14px;
+    margin-right: 10px;
+}
+
+.form-control {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+.btn,
+.btn-return {
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 14px;
+}
+
+.btn{
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+}
+
+    .btn:hover {
+        background-color: #45a049;
+    }
+
+.btn-return {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    text-decoration: none;
+}
+
+    .btn-return:hover {
+        background-color: #2980b9;
+    }
+.btn-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px; /* Ajusta el margen superior según tus necesidades */
+}
+
+.btn {
+    margin-right: 50px;
+}
+.form-group label.control-label {
+    font-weight: bold;
+}
+
+/* Estilos responsivos */
+@media (max-width: 600px) {
+    .form-container {
+        max-width: 90%;
+    }
+}
+/* Estilos para el modo oscuro */
+body.dark .content-text {
+    color: #ccc; /* Cambiar el color del texto en modo oscuro */
+}
+
+/* Estilos para el modo claro */
+body:not(.dark) .content-text {
+    color: #707070; /* Cambiar el color del texto en modo claro */
+}

@@ -8,45 +8,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/css/tabla.css" />
 </head>
-<h1>Multas</h1>
 
-<p>
-    <a class ="button create" asp-action="Create">Crear Nuevo Registro</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                Id del Usuario
-            </th>
-            <th>
-                Porcentaje de Multa %
-            </th>
-            <th>
-                Id de la Aportacion
-            </th>
-            <th>
-                Acciones
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdUser)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Porcentaje)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdAportacion)
-            </td>
-            <td>
-                    <a class="button edit" asp-action="Edit" asp-route-id="@item.Id">Editar</a>
-                    <a class="button delete" asp-action="Delete" asp-route-id="@item.Id">Eliminar</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<div class="content-text">
+
+    <h1>Multas</h1>
+
+    <p>
+        <a class="button create" asp-action="Create">Crear Nuevo Registro</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Id del Usuario
+                </th>
+                <th>
+                    Porcentaje de Multa %
+                </th>
+                <th>
+                    Id de la Aportacion
+                </th>
+                <th>
+                    Acciones
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IdUser)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Porcentaje)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IdAportacion)
+                    </td>
+                    <td>
+                        <a class="button edit" asp-action="Edit" asp-route-id="@item.Id">Editar</a>
+                        <a class="button delete" asp-action="Delete" asp-route-id="@item.Id">Eliminar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
+

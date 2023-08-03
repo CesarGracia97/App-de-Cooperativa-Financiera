@@ -50,6 +50,16 @@ a.button:hover {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
+/* Estilos para el modo oscuro */
+body.dark .content-text {
+    color: #ccc; /* Cambiar el color del texto en modo oscuro */
+}
+
+/* Estilos para el modo claro */
+body:not(.dark) .content-text {
+    color: #707070; /* Cambiar el color del texto en modo claro */
+}
+
 /* Estilo responsivo */
 @media(max-width: 768px) {
     .table {

@@ -9,75 +9,78 @@
     <link rel="stylesheet" href="/css/tabla.css" />
 </head>
 
-<h1>Usuarios</h1>
+<div class="content-text">
+    <h1>Usuarios</h1>
+    <p>
+        <a class="button create" asp-action="Create">Crear Nuevo Registro</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Cedula
+                </th>
+                <th>
+                    Cuenta Bancaria
+                </th>
+                <th>
+                    Correo
+                </th>
+                <th>
+                    Identificacion
+                </th>
+                <th>
+                    Celular
+                </th>
+                <th>
+                    Contraseña
+                </th>
+                <th>
+                    Tipo de Usuario
+                </th>
+                <th>
+                    Cedula de su Invitado
+                </th>
+                <th>
+                    Acciones
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Cedula)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Cbancaria)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Correo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NombreYapellido)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Celular)
+                    </td>
+                    <td>
+                        @Html.Raw(new String('*', Math.Min(10, item.Contrasena.Length)))
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TipoUser)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Ncaccionario)
+                    </td>
+                    <td>
+                        <a class="button edit" asp-action="Edit" asp-route-id="@item.Id">Editar</a>
+                        <a class="button delete" asp-action="Delete" asp-route-id="@item.Id">Eliminar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
 
-<p>
-    <a class="button create" asp-action="Create">Crear Nuevo Registro</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                Cedula
-            </th>
-            <th>
-                Cuenta Bancaria
-            </th>
-            <th>
-                Correo
-            </th>
-            <th>
-                Identificacion
-            </th>
-            <th>
-                Celular
-            </th>
-            <th>
-                Contraseña
-            </th>
-            <th>
-                Tipo de Usuario
-            </th>
-            <th>
-                Cedula de su Invitado
-            </th>
-            <th>
-                Acciones
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Cedula)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Cbancaria)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Correo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NombreYapellido)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Celular)
-            </td>
-            <td>
-                @Html.Raw(new String('*', Math.Min(10, item.Contrasena.Length)))
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TipoUser)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Ncaccionario)
-            </td>
-            <td>
-                <a class="button edit" asp-action="Edit" asp-route-id="@item.Id">Editar</a> 
-                <a class="button delete" asp-action="Delete" asp-route-id="@item.Id">Eliminar</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>

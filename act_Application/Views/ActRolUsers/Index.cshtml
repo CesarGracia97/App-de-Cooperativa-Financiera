@@ -8,39 +8,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/css/tabla.css" />
 </head>
-<h1>Rol de Usuarios</h1>
 
-<p>
-    <a class="button create" asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                Id del Usuario
-            </th>
-            <th>
-                Id del Rol
-            </th>
-            <th>
-                Acciones
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdUser)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdRol)
-            </td>
-            <td>
-                    <a class="button edit" asp-action="Edit" asp-route-id="@item.Id" >Editar</a>
-                    <a class="button delete" asp-action="Delete" asp-route-id="@item.Id" >Eliminar</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<div class="content-text">
+    <h1>Rol de Usuarios</h1>
+
+    <p>
+        <a class="button create" asp-action="Create">Create New</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Id del Usuario
+                </th>
+                <th>
+                    Id del Rol
+                </th>
+                <th>
+                    Acciones
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IdUser)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IdRol)
+                    </td>
+                    <td>
+                        <a class="button edit" asp-action="Edit" asp-route-id="@item.Id">Editar</a>
+                        <a class="button delete" asp-action="Delete" asp-route-id="@item.Id">Eliminar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

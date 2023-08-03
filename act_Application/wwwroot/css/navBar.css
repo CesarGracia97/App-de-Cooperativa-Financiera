@@ -43,6 +43,31 @@ body.dark {
     --text-color: #ccc;
 }
 
+/* ===== Button ===== */
+button {
+    /* Resetear estilos predeterminados */
+    background: none;
+    border: none;
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+    font-size: inherit;
+    font-family: inherit;
+    color: inherit;
+    text-align: inherit;
+    line-height: inherit;
+    list-style: none;
+    height: 100%;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: var(--tran-03);
+}
+
 /* ===== Sidebar ===== */
 .sidebar {
     position: fixed;
@@ -67,7 +92,9 @@ body.dark {
         display: flex;
         align-items: center;
         margin-top: 10px;
+        position: relative;
     }
+
 
     .sidebar header .image,
     .sidebar .icon {
@@ -211,16 +238,30 @@ body.dark .sidebar header .toggle {
     .sidebar li a:hover {
         background-color: var(--primary-color);
     }
+    .sidebar button:hover{
+        background-color: var(--primary-color);
+    }
 
-        .sidebar li a:hover .icon,
-        .sidebar li a:hover .text {
-            color: var(--sidebar-color);
-        }
+    .sidebar li a:hover .icon,
+    .sidebar li a:hover .text {
+        color: var(--sidebar-color);
+    }
 
-body.dark .sidebar li a:hover .icon,
-body.dark .sidebar li a:hover .text {
-    color: var(--text-color);
-}
+    .sidebar button:hover .icon,
+    .sidebar button:hover .text {
+        color: var(--sidebar-color);
+    }
+
+
+    body.dark .sidebar li a:hover .icon,
+    body.dark .sidebar li a:hover .text {
+        color: var(--text-color);
+    }
+    
+    body.dark .sidebar button:hover .icon,
+    body.dark .sidebar button:hover .text {
+        color: var(--text-color);
+    }
 
 .sidebar .menu-bar {
     height: calc(100% - 55px);
@@ -305,7 +346,7 @@ body.dark .switch::before {
     top: 0;
     top: 0;
     left: 250px;
-    height: 100vh;
+    height: 100%;
     width: calc(100% - 250px);
     background-color: var(--body-color);
     transition: var(--tran-05);
@@ -329,8 +370,14 @@ body.dark .home .text {
 }
 
 .content-container {
-    margin: 0px 60px 0px 60px; /* Espacio adicional para el contenido */
+    padding: 0px 60px 0px 60px; /* Espacio adicional para el contenido */
+    width: 100%; /* Ancho del contenedor al 100% del viewport */
+    max-width: 1500px; /* Máximo ancho del contenedor */
+    height:100%;
+    max-height:1500px;
 
+    background-color: var(--body-color);
+    transition: var(--tran-05);
     transition: margin-left var(--tran-05);
 }
 
@@ -344,3 +391,9 @@ body.dark .home .text {
     margin-left: 20px;
     margin-right: 20px;
 }
+
+/*Menu Administrador*/
+.hidden-item.hidden {
+    display: none;
+}
+

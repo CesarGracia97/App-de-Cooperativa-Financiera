@@ -52,3 +52,22 @@ modeSwitch.addEventListener("click", () => {
     // Guardar el estado del modo en el almacenamiento local
     localStorage.setItem("mode", currentMode);
 });
+/* */
+document.addEventListener("DOMContentLoaded", () => {
+    const hiddenItems = document.querySelectorAll('.hidden-item');
+
+    hiddenItems.forEach(item => {
+        item.style.display = 'none';
+    });
+
+    const adminButton = document.getElementById('adminButton');
+    adminButton.addEventListener('click', toggleHiddenItems);
+});
+
+function toggleHiddenItems() {
+    const hiddenItems = document.querySelectorAll('.hidden-item');
+
+    hiddenItems.forEach(item => {
+        item.style.display = item.style.display === 'none' ? 'block' : 'none';
+    });
+}
