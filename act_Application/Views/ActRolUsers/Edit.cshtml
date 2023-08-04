@@ -1,37 +1,38 @@
 ﻿@model act_Application.Models.ActRolUser
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Editar Roles de Usuario";
 }
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/formularioEdicion.css" />
+</head>
+<div class="content-text">
+    <h1>Editar Roles de Usuario</h1>
 
-<h1>Edit</h1>
-
-<h4>ActRolUser</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="IdUser" class="control-label"></label>
-                <input asp-for="IdUser" class="form-control" />
-                <span asp-validation-for="IdUser" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="IdRol" class="control-label"></label>
-                <input asp-for="IdRol" class="form-control" />
-                <span asp-validation-for="IdRol" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="IdUser" class="control-label">Id del Usuario</label>
+                    <input asp-for="IdUser" class="form-control" />
+                    <span asp-validation-for="IdUser" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="IdRol" class="control-label">Id del Rol</label>
+                    <input asp-for="IdRol" class="form-control" />
+                    <span asp-validation-for="IdRol" class="text-danger"></span>
+                </div>
+                <div class="btn-container">
+                    <input type="submit" value="Guardar" class="btn" />
+                    <a class="btn-return" asp-action="Index">Regresar</a>
+                </div>
+            </form>
+        </div>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {

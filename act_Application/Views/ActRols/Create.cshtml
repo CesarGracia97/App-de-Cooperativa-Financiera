@@ -1,36 +1,38 @@
 ﻿@model act_Application.Models.ActRol
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Crear Roles";
 }
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/formularioEdicion.css" />
+</head>
 
-<h1>Create</h1>
-
-<h4>ActRol</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="NombreRol" class="control-label"></label>
-                <input asp-for="NombreRol" class="form-control" />
-                <span asp-validation-for="NombreRol" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DescripcionRol" class="control-label"></label>
-                <input asp-for="DescripcionRol" class="form-control" />
-                <span asp-validation-for="DescripcionRol" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+<div class="content-text">
+    <h1>Crear Roles</h1>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="NombreRol" class="control-label">Nombre del Rol</label>
+                    <input asp-for="NombreRol" class="form-control" />
+                    <span asp-validation-for="NombreRol" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="DescripcionRol" class="control-label">Descripcion del Rol</label>
+                    <input asp-for="DescripcionRol" class="form-control" />
+                    <span asp-validation-for="DescripcionRol" class="text-danger"></span>
+                </div>
+                <div class="btn-container">
+                    <input type="submit" value="Crear" class="btn" />
+                    <a class="btn-return" asp-action="Index">Regresar</a>
+                </div>
+            </form>
+        </div>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {

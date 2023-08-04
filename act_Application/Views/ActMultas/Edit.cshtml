@@ -1,42 +1,45 @@
 ﻿@model act_Application.Models.ActMulta
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Editar Multa";
 }
 
-<h1>Edit</h1>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/formularioEdicion.css" />
+</head>
+<div class="content-text">
 
-<h4>ActMulta</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="IdUser" class="control-label"></label>
-                <input asp-for="IdUser" class="form-control" />
-                <span asp-validation-for="IdUser" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Porcentaje" class="control-label"></label>
-                <input asp-for="Porcentaje" class="form-control" />
-                <span asp-validation-for="Porcentaje" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="IdAportacion" class="control-label"></label>
-                <input asp-for="IdAportacion" class="form-control" />
-                <span asp-validation-for="IdAportacion" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+<h1>Editar Multas</h1>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Id" />
+                <div class="form-group">
+                    <label asp-for="IdUser" class="control-label">Id del Usuario</label>
+                    <input asp-for="IdUser" class="form-control" />
+                    <span asp-validation-for="IdUser" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Porcentaje" class="control-label">Porcentaje de Multa</label>
+                    <input asp-for="Porcentaje" class="form-control" />
+                    <span asp-validation-for="Porcentaje" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="IdAportacion" class="control-label">Id de Aportacion</label>
+                    <input asp-for="IdAportacion" class="form-control" />
+                    <span asp-validation-for="IdAportacion" class="text-danger"></span>
+                </div>
+                <div class="btn-container">
+                    <input type="submit" value="Guardar" class="btn" />
+                    <a class="btn-return" asp-action="Index">Regresar</a>
+                </div>
+            </form>
+        </div>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {

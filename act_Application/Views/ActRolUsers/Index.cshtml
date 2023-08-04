@@ -19,6 +19,9 @@
         <thead>
             <tr>
                 <th>
+                    Registro
+                </th>
+                <th>
                     Id del Usuario
                 </th>
                 <th>
@@ -33,6 +36,9 @@
             @foreach (var item in Model)
             {
                 <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.IdUser)
                     </td>

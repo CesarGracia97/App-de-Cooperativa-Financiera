@@ -1,66 +1,68 @@
 ﻿@model act_Application.Models.ActUser
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Crear Usuarios";
 }
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/formularioEdicion.css" />
+</head>
+<div class="content-text">
+    <h1>Crear usuarios</h1>
 
-<h1>Create</h1>
-
-<h4>ActUser</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Cedula" class="control-label"></label>
-                <input asp-for="Cedula" class="form-control" />
-                <span asp-validation-for="Cedula" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Cbancaria" class="control-label"></label>
-                <input asp-for="Cbancaria" class="form-control" />
-                <span asp-validation-for="Cbancaria" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Correo" class="control-label"></label>
-                <input asp-for="Correo" class="form-control" />
-                <span asp-validation-for="Correo" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="NombreYapellido" class="control-label"></label>
-                <input asp-for="NombreYapellido" class="form-control" />
-                <span asp-validation-for="NombreYapellido" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Celular" class="control-label"></label>
-                <input asp-for="Celular" class="form-control" />
-                <span asp-validation-for="Celular" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Contrasena" class="control-label"></label>
-                <input asp-for="Contrasena" class="form-control" />
-                <span asp-validation-for="Contrasena" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="TipoUser" class="control-label"></label>
-                <input asp-for="TipoUser" class="form-control" />
-                <span asp-validation-for="TipoUser" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Ncaccionario" class="control-label"></label>
-                <input asp-for="Ncaccionario" class="form-control" />
-                <span asp-validation-for="Ncaccionario" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Cedula" class="control-label">Cedula</label>
+                    <input asp-for="Cedula" class="form-control" />
+                    <span asp-validation-for="Cedula" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Cbancaria" class="control-label">Cuenta Bancaria</label>
+                    <input asp-for="Cbancaria" class="form-control" />
+                    <span asp-validation-for="Cbancaria" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Correo" class="control-label">Correo Electronico</label>
+                    <input asp-for="Correo" class="form-control" />
+                    <span asp-validation-for="Correo" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="NombreYapellido" class="control-label">Nombre y Apellido</label>
+                    <input asp-for="NombreYapellido" class="form-control" />
+                    <span asp-validation-for="NombreYapellido" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Celular" class="control-label">Cedula</label>
+                    <input asp-for="Celular" class="form-control" />
+                    <span asp-validation-for="Celular" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Contrasena" class="control-label">Contraseña</label>
+                    <input asp-for="Contrasena" type="password" class="form-control" />
+                    <span asp-validation-for="Contrasena" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="TipoUser" class="control-label">Tipo de Usuario</label>
+                    <input asp-for="TipoUser" class="form-control" />
+                    <span asp-validation-for="TipoUser" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Ncaccionario" class="control-label">Cedula del Accionista</label>
+                    <input asp-for="Ncaccionario" class="form-control" />
+                    <span asp-validation-for="Ncaccionario" class="text-danger"></span>
+                </div>
+                <div class="btn-container">
+                    <input type="submit" value="Crear" class="btn" />
+                    <a class="btn-return" asp-action="Index">Regresar</a>
+                </div>
+            </form>
+        </div>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {

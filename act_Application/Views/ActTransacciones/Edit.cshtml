@@ -1,31 +1,36 @@
 ﻿@model act_Application.Models.ActTransaccione
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Editar Transacciones";
 }
-
-<h1>Editar Transacciones</h1>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="Razon" class="control-label"></label>
-                <input asp-for="Razon" class="form-control" />
-                <span asp-validation-for="Razon" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="IdUser" class="control-label"></label>
-                <input asp-for="IdUser" class="form-control" />
-                <span asp-validation-for="IdUser" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input class="btn" type="submit" value="Save"/>
-                <a class="btn-return" asp-action="Index">Back to List</a>
-            </div>
-        </form>
+<header>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/formularioEdicion.css" />
+</header>
+<div class="content-text">
+    <h1>Editar Transacciones</h1>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Id" />
+                <div class="form-group">
+                    <label asp-for="Razon" class="control-label"></label>
+                    <input asp-for="Razon" class="form-control" />
+                    <span asp-validation-for="Razon" class="text-danger">Razon</span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="IdUser" class="control-label"></label>
+                    <input asp-for="IdUser" class="form-control" />
+                    <span asp-validation-for="IdUser" class="text-danger">Id del Usuario</span>
+                </div>
+                <div class="btn-container">
+                    <input class="btn" type="submit" value="Guardar"/>
+                    <a class="btn-return" asp-action="Index">Regresar</a>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 

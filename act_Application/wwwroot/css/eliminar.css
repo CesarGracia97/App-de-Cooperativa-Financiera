@@ -1,0 +1,113 @@
+﻿h1{
+    font-size: 20pt;
+    margin:10px 0px 10px 10px;
+}
+
+a {
+    all: unset;
+}
+.container {
+
+    margin: 30px 150px 30px 150px;
+}
+table {
+    margin-bottom:50px;
+}
+ 
+table tr .titulo {
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    background:#5f9be3;
+    color:#fff;
+    font-weight:bold;
+    padding:15px; 
+    width:200px; 
+    border-radius: 3px;
+
+}
+ 
+table tr .texto {
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    text-align:center;
+    padding-left:10px;
+    background-color:white;
+    width:500px; 
+    border-radius: 3px;
+}
+.btn-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-delete,
+.btn-return {
+    /* Elimina los estilos existentes */
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    margin: 12px; /* Ajusta este valor según el espaciado deseado */
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s ease; /* Agrega transición para los efectos hover */
+    padding: 10px 20px;
+}
+
+.btn-delete {
+    color: white;
+    background-color: orangered;
+    border-radius: 3px;
+    width: 111.5px;
+    height: 43px;
+
+
+}
+
+.btn-delete:hover {
+    background-color: crimson;
+}
+
+a.btn-return {
+    color: white;
+    background-color: lightblue;
+    border-radius: 3px;
+    width: 120px;
+    height: 40px;
+}
+a.btn-return:hover {
+    background-color: navy;
+}
+
+/* Estilos responsivos */
+@media (max-width: 600px) {
+    .form-container {
+        max-width: 90%;
+    }
+    .container {
+        margin: 30px 10px;
+    }
+
+    table tr .titulo {
+        width: 100%;
+    }
+
+    table tr .texto {
+        width: 100%;
+    }
+}
+/* Estilos para el modo oscuro */
+body.dark .content-text {
+    color: #ccc; /* Cambiar el color del texto en modo oscuro */
+}
+
+/* Estilos para el modo claro */
+body:not(.dark) .content-text {
+    color: #707070; /* Cambiar el color del texto en modo claro */
+}
