@@ -1,0 +1,64 @@
+﻿@model IEnumerable<act_Application.Models.ActAportacione>;
+@using System.Globalization;
+@using act_Application.Data;
+@{
+    ViewData["Title"] = "Tabla de Aportaciones";
+    var aportacionRepository = new AportacionRepository();
+    int totalAportaciones = aportacionRepository.GetTotalAportaciones();
+}
+<header>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/tablaAportaciones.css">
+</header>
+<body>
+    <div class="content-text">
+        <h1>Tabla de Aportaciones</h1>
+        <hr />
+        @if (totalAportaciones > 0)
+        {
+            <table class="aportacion-table">
+                <thead>
+                    <tr>
+                        <th>Nombre Aportante</th>
+                        <th colspan="24">Fechas de Aportación</th>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        @for (int i = 1; i <= 12; i++)
+                        {
+                            <th colspan="2">@CultureInfo.CurrentCulture.DateTimeFormat.GetAbbreviatedMonthName(i)</th>
+                        }
+                    </tr>
+                    <tr>
+                        <th></th>
+                        @for (int i = 1; i <= 12; i++)
+                        {
+                            <th>1-15</th>
+                            <th>16-30</th>
+                        }
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var aportacion in Model)
+                    {
+                        <tr>
+                            <td>@aportacion.IdUser</td>
+                            @for (int month = 12; month >= 1; month--)
+                            {
+                                <td>@aportacion.Valor</td>
+                                <td>@aportacion.Valor</td>
+                            }
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <p>No hay datos disponibles.</p>
+        }
+
+    </div>
+</body>
+
