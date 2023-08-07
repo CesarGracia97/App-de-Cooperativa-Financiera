@@ -31,14 +31,15 @@ namespace act_Application.Logica
                         objeto = new ActUser()
                         {
                             Id = rd.GetInt32(rd.GetOrdinal("Id")),
-                            Cedula = rd.GetInt32(rd.GetOrdinal("Cedula")),
-                            Cbancaria = rd.GetInt32(rd.GetOrdinal("CBancaria")),
+                            Cedula = rd["Cedula"].ToString(),
+                            Cbancaria = rd["CBancaria"].ToString(),
+                            Nbanco = rd["NBanco"].ToString(),
                             Correo = rd["Correo"].ToString(),
                             NombreYapellido = rd["NombreYApellido"].ToString(),
                             Celular = rd["Celular"].ToString(),
                             Contrasena = rd["Contrasena"].ToString(),
                             TipoUser = rd["TipoUser"].ToString(),
-                            Ncaccionario = rd.GetInt32(rd.GetOrdinal("NCAccionario")),
+                            IdSocio = rd.GetInt32(rd.GetOrdinal("IdSocio")),
                         };
 
                     }

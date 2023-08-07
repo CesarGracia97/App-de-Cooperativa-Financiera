@@ -9,13 +9,9 @@
         {
             <p>Tienes el rol de Administrador.</p>
         }
-        else if (User.HasClaim("Rol", "Accionista"))
+        else if (User.HasClaim("Rol", "Usuario"))
         {
-            <p>Tienes el rol de Accionista.</p>
-        }
-        else if (User.HasClaim("Rol", "Referente"))
-        {
-            <p>Tienes el rol de Referente.</p>
+            <p>Bienvenido Usuario.</p>
         }
         else
         {

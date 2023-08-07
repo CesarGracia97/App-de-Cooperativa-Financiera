@@ -28,6 +28,11 @@
                     <span asp-validation-for="Cbancaria" class="text-danger"></span>
                 </div>
                 <div class="form-group">
+                    <label asp-for="Nbanco" class="control-label">Cuenta Bancaria</label>
+                    <input asp-for="Nbanco" class="form-control" />
+                    <span asp-validation-for="Nbanco" class="text-danger"></span>
+                </div>
+                <div class="form-group">
                     <label asp-for="Correo" class="control-label">Correo Electronico</label>
                     <input asp-for="Correo" class="form-control" />
                     <span asp-validation-for="Correo" class="text-danger"></span>
@@ -53,9 +58,9 @@
                     <span asp-validation-for="TipoUser"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="Ncaccionario" class="control-label"> Cedula del Accionario</label>
-                    <input asp-for="Ncaccionario" class="form-control" />
-                    <span asp-validation-for="Ncaccionario"></span>
+                    <label asp-for="IdSocio" class="control-label"> Cedula del Accionario</label>
+                    <input asp-for="IdSocio" class="form-control" />
+                    <span asp-validation-for="IdSocio"></span>
                 </div>
                 <div class="btn-container">
                     <input class="btn" type="submit" value="Guardar" />

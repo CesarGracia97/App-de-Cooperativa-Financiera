@@ -20,6 +20,11 @@
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <input type="hidden" asp-for="Id" />
                 <div class="form-group">
+                    <label asp-for="Razon" class="control-label">Valor</label>
+                    <input asp-for="Razon" class="form-control" />
+                    <span asp-validation-for="Razon" class="text-danger"></span>
+                </div>
+                <div class="form-group">
                     <label asp-for="Valor" class="control-label">Valor</label>
                     <input asp-for="Valor" class="form-control" />
                     <span asp-validation-for="Valor" class="text-danger"></span>

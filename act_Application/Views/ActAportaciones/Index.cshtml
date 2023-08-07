@@ -20,6 +20,9 @@
         <thead>
             <tr>
                 <th>
+                    Razon
+                </th>
+                <th>
                     Valor
                 </th>
                 <th>
@@ -43,6 +46,9 @@
             @foreach (var item in Model)
             {
                 <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Razon)
+                    </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Valor)
                     </td>

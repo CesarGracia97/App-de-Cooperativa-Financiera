@@ -10,13 +10,16 @@ public partial class ActAportacione
 {
     public int Id { get; set; }
 
+    public string Razon { get; set; }
+
     public float Valor { get; set; }
 
     public int IdUser { get; set; }
+    
 
     public DateTime FechaAportacion { get; set; }
 
-    public string Aprobacion { get; set; } = null!;
+    public string Aprobacion { get; set; }
 
-    public byte[] CapturaPantalla { get; set; } = null!;
+    public byte[] CapturaPantalla { get; set; } 
 }

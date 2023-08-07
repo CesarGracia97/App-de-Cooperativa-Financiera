@@ -1,8 +1,8 @@
 /*Si se gace mal forzarlo a como sea*/
-/*Scaffold-DbContext "server=192.168.21.193; port=3306; database=desarrollo; uid=cgarcia; password=cgarcia;" MySql.EntityFrameworkCore -Tables "act_Multas" -OutputDir Models -Force
+/*Scaffold-DbContext "server=192.168.21.193; port=3306; database=desarrollo; uid=cgarcia; password=cgarcia;" MySql.EntityFrameworkCore -OutputDir Models -Force
 
 
-Scaffold-DbContext "server=192.168.21.193; port=3306; database=desarrollo; uid=cgarcia; password=cgarcia;" MySql.EntityFrameworkCore -Tables  -OutputDir Models
+Scaffold-DbContext "server=192.168.21.193; port=3306; database=desarrollo; uid=cgarcia; password=cgarcia;" MySql.EntityFrameworkCore -OutputDir Models
 */
 
 CREATE DATABASE `desarrollo`;
@@ -10,8 +10,9 @@ CREATE DATABASE `desarrollo`;
 /*Tabla de Usuarios*/
 CREATE TABLE `desarrollo`.`act_User` (
   `Id` INT NOT NULL AUTO_INCREMENT,
-  `Cedula` INT NOT NULL,
-  `CBancaria` INT(10) NOT NULL,
+  `Cedula` VARCHAR(10) NOT NULL,
+  `CBancaria` VARCHAR(10) NOT NULL,
+  `NBanco` VARCHAR(45) NOT NULL,
   `Correo` VARCHAR(45) NOT NULL,
   `NombreYApellido` VARCHAR(45) NOT NULL,
   `Celular` INT NOT NULL,
@@ -126,3 +127,9 @@ ALTER TABLE act_Multas
 ALTER TABLE act_Multas
 	ADD CONSTRAINT fk_Multas_Aportaciones
 	FOREIGN KEY (IdAportacion) REFERENCES act_Aportaciones (Id);
+
+  /*Relacion*/
+  /*act_User IdSocio - Id*/
+  ALTER TABLE act_User
+    ADD CONSTRAINT fk_UserSocio_UserId
+    FOREIGN KEY (IdSocio) REFERENCES act_User (Id);

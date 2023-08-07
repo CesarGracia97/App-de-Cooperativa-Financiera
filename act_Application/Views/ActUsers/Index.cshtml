@@ -24,6 +24,9 @@
                     Cuenta Bancaria
                 </th>
                 <th>
+                    Banco
+                </th>
+                <th>
                     Correo
                 </th>
                 <th>
@@ -39,7 +42,7 @@
                     Tipo de Usuario
                 </th>
                 <th>
-                    Cedula de su Invitado
+                    Id del Socio
                 </th>
                 <th>
                     Acciones
@@ -57,6 +60,9 @@
                         @Html.DisplayFor(modelItem => item.Cbancaria)
                     </td>
                     <td>
+                        @Html.DisplayFor(modelItem => item.Nbanco)
+                    </td>
+                    <td>
                         @Html.DisplayFor(modelItem => item.Correo)
                     </td>
                     <td>
@@ -72,13 +78,13 @@
                         @Html.DisplayFor(modelItem => item.TipoUser)
                     </td>
                     <td>
-                        @if (item.Ncaccionario == 0)
+                        @if (item.IdSocio == 0)
                         {
                             <text>(No posee invitado)</text>
                         }
                         else
                         {
-                            @Html.DisplayFor(modelItem => item.Ncaccionario)
+                            @Html.DisplayFor(modelItem => item.IdSocio)
                         }
                     </td>
                     <td>
