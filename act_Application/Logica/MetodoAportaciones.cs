@@ -1,7 +1,10 @@
 ﻿using act_Application.Helper;
 using act_Application.Models;
 using MySql.Data.MySqlClient;
+using System;
+using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 
 namespace act_Application.Logica
 {
@@ -24,20 +27,36 @@ namespace act_Application.Logica
 
                     using (MySqlDataReader rd = cmd.ExecuteReader())
                     {
-                        while (rd.Read())
-                        {
-                            string nombreUsuario = rd["NombreUsuario"].ToString();
-
-                            ActAportacione aportacion = new ActAportacione()
+                        var aportacionesPorUsuario = rd.Cast<IDataRecord>()
+                            .Select(r => new
                             {
-                                Id = rd.GetInt32("Id"),
-                                Razon = rd["Razon"].ToString(),
-                                Valor = rd.GetFloat("Valor"),
-                                IdUser = rd.GetInt32("IdUser"),
-                                FechaAportacion = rd.GetDateTime("FechaAportacion"),
-                                Aprobacion = rd["Aprobacion"].ToString(),
-                                CapturaPantalla = rd.IsDBNull(rd.GetOrdinal("CapturaPantalla")) ? null : (byte[])rd["CapturaPantalla"],
-                                NombreUsuario = rd["NombreUsuario"].ToString()
+                                Id = Convert.ToInt32(r["Id"]),
+                                Razon = r["Razon"].ToString(),
+                                Valor = Convert.ToSingle(r["Valor"]),
+                                IdUser = Convert.ToInt32(r["IdUser"]),
+                                FechaAportacion = Convert.ToDateTime(r["FechaAportacion"]),
+                                Aprobacion = r["Aprobacion"].ToString(),
+                                CapturaPantalla = r.IsDBNull(r.GetOrdinal("CapturaPantalla")) ? null : (byte[])r["CapturaPantalla"],
+                                NombreUsuario = r["NombreUsuario"].ToString()
+                            })
+                            .ToList();
+
+                        var aportacionesAgrupadas = aportacionesPorUsuario
+                            .GroupBy(a => new { a.NombreUsuario, a.FechaAportacion.Month }) // Agrupamos por NombreUsuario y Mes
+                            .ToList();
+
+                        foreach (var group in aportacionesAgrupadas)
+                        {
+                            var aportacion = new ActAportacione
+                            {
+                                Id = group.First().Id,
+                                Razon = group.First().Razon,
+                                Valor = group.Sum(a => a.Valor),
+                                IdUser = group.First().IdUser,
+                                FechaAportacion = group.First().FechaAportacion,
+                                Aprobacion = group.First().Aprobacion,
+                                CapturaPantalla = group.First().CapturaPantalla,
+                                NombreUsuario = group.Key.NombreUsuario
                             };
                             aportaciones.Add(aportacion);
                         }

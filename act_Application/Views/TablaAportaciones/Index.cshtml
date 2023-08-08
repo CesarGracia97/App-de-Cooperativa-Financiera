@@ -29,22 +29,14 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var aportacion in Model)
+                        @foreach (var aportacion in Model.GroupBy(ap => ap.NombreUsuario))
                         {
                             <tr>
-                                <td>@aportacion.NombreUsuario</td>
+                                <td>@aportacion.Key</td>
                                 @for (int month = 1; month <= 12; month++)
                                 {
-                                    <td>
-                                        @if (aportacion.FechaAportacion.Month == month)
-                                        {
-                                            @aportacion.Valor.ToString("N2")
-                                        }
-                                        else
-                                        {
-                                            <text>00.00</text>
-                                        }
-                                    </td>
+                                    var valor = aportacion.SingleOrDefault(a => a.FechaAportacion.Month == month)?.Valor ?? 0;
+                                    <td>@valor.ToString("N2")</td>
                                 }
                             </tr>
                         }
@@ -58,4 +50,3 @@
         </div>
     </div>
 </body>
-
