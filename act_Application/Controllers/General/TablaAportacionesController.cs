@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using act_Application.Logica;
+using Microsoft.AspNetCore.Mvc;
 
 namespace act_Application.Controllers.General
 {
@@ -6,7 +7,10 @@ namespace act_Application.Controllers.General
     {
         public IActionResult Index()
         {
-            return View();
+            var metodoAportaciones = new MetodoAportaciones();
+            var aportaciones = metodoAportaciones.ObtenerAportaciones();
+
+            return View(aportaciones);
         }
     }
 }

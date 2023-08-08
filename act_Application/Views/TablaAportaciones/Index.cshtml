@@ -15,49 +15,51 @@
     <div class="content-text">
         <h1>Tabla de Aportaciones</h1>
         <hr />
-        @if (totalAportaciones > 0)
-        {
-            <table class="aportacion-table">
-                <thead>
-                    <tr>
-                        <th>Nombre Aportante</th>
-                        <th colspan="24">Fechas de Aportación</th>
-                    </tr>
-                    <tr>
-                        <th></th>
-                        @for (int i = 1; i <= 12; i++)
-                        {
-                            <th colspan="2">@CultureInfo.CurrentCulture.DateTimeFormat.GetAbbreviatedMonthName(i)</th>
-                        }
-                    </tr>
-                    <tr>
-                        <th></th>
-                        @for (int i = 1; i <= 12; i++)
-                        {
-                            <th>1-15</th>
-                            <th>16-30</th>
-                        }
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var aportacion in Model)
-                    {
+        <div class="table-container">
+            @if (totalAportaciones > 0)
+            {
+                <table class="aportacion-table">
+                    <thead>
                         <tr>
-                            <td>@aportacion.IdUser</td>
-                            @for (int month = 12; month >= 1; month--)
+                            <th>Nombre Aportante</th>
+                            <th colspan="24">Fechas de Aportación</th>
+                        </tr>
+                        <tr>
+                            <th></th>
+                            @for (int i = 1; i <= 12; i++)
                             {
-                                <td>@aportacion.Valor</td>
-                                <td>@aportacion.Valor</td>
+                                <th colspan="2">@CultureInfo.CurrentCulture.DateTimeFormat.GetAbbreviatedMonthName(i)</th>
                             }
                         </tr>
-                    }
-                </tbody>
-            </table>
-        }
-        else
-        {
-            <p>No hay datos disponibles.</p>
-        }
+                        <tr>
+                            <th></th>
+                            @for (int i = 1; i <= 12; i++)
+                            {
+                                <th>1-15</th>
+                                <th>16-30</th>
+                            }
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var aportacion in Model)
+                        {
+                            <tr>
+                                <td>@aportacion.IdUser</td>
+                                @for (int month = 12; month >= 1; month--)
+                                {
+                                    <td>@aportacion.Valor</td>
+                                    <td>@aportacion.Valor</td>
+                                }
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <p>No hay datos disponibles.</p>
+            }
+        </div>
 
     </div>
 </body>

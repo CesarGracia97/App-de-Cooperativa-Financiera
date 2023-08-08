@@ -1,11 +1,11 @@
-﻿h1{
+﻿h1, p, hr{
     margin: 10px 0px 25px 25px;
 }
-p {
-    margin: 10px 0px 25px 25px;
-}
-hr{
-    margin: 10px 0px 25px 25px;
+
+.table-container {
+    overflow: scroll;
+    height: 100%;
+    width: 100%;
 }
 .aportacion-table {
     border-collapse: collapse;

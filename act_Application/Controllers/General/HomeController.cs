@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
-namespace act_Application.Controllers
+namespace act_Application.Controllers.General
 {
     public class HomeController : Controller
     {

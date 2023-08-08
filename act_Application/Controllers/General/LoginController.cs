@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Text;
 using System.Security.Cryptography;
 
-namespace act_Application.Controllers
+namespace act_Application.Controllers.General
 {
     public class LoginController : Controller
     {
