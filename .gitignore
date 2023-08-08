@@ -1,0 +1,46 @@
+# Ignorar la carpeta vs generada por Visual Studio
+.vs/
+
+# Ignorar archivos temporales y de caché
+[Oo]bj/
+[Bb]in/
+_UpgradeReport_Files/
+TestResults/
+[Tt]emp/
+.vscode/
+
+# Ignorar archivos generados por la depuración
+[Dd]ebug/
+[Rr]elease/
+
+# Ignorar archivos de configuración específicos del IDE de Visual Studio
+*.suo
+*.user
+*.sln.docstates
+*.vsconfig
+*.dll
+
+# Ignorar archivos de registro y de depuración
+*.log
+*.log.*
+*.dbmdl
+
+# Ignorar archivos de respaldo de código
+*~
+*#
+*.bak
+
+# Ignorar archivos de NuGet
+packages/
+
+# Ignorar archivos de resharper
+_ReSharper*/
+
+# Ignorar archivos de análisis de código
+*.DotSettings
+
+# Ignorar archivos de Node.js y npm
+node_modules/
+package-lock.json
+npm-debug.log*
+yarn.lock
