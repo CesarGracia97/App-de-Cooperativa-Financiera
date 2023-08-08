@@ -5,32 +5,28 @@
       "PackagePath": "staticwebassets\\act_Application.bundle.scp.css"
     },
     {
-      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\css\\eliminar.css",
-      "PackagePath": "staticwebassets\\css\\eliminar.css"
+      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\css\\Administracion\\estiloEditarCrear.css",
+      "PackagePath": "staticwebassets\\css\\Administracion\\estiloEditarCrear.css"
     },
     {
-      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\css\\formularioEdicion.css",
-      "PackagePath": "staticwebassets\\css\\formularioEdicion.css"
+      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\css\\Administracion\\estiloEliminar.css",
+      "PackagePath": "staticwebassets\\css\\Administracion\\estiloEliminar.css"
+    },
+    {
+      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\css\\Administracion\\estiloTablaIndex.css",
+      "PackagePath": "staticwebassets\\css\\Administracion\\estiloTablaIndex.css"
+    },
+    {
+      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\css\\General\\Complementos\\navBar.css",
+      "PackagePath": "staticwebassets\\css\\General\\Complementos\\navBar.css"
+    },
+    {
+      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\css\\General\\tablaAportaciones.css",
+      "PackagePath": "staticwebassets\\css\\General\\tablaAportaciones.css"
     },
     {
       "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\css\\homeLogin.css",
       "PackagePath": "staticwebassets\\css\\homeLogin.css"
-    },
-    {
-      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\css\\navBar.css",
-      "PackagePath": "staticwebassets\\css\\navBar.css"
-    },
-    {
-      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\css\\site.css",
-      "PackagePath": "staticwebassets\\css\\site.css"
-    },
-    {
-      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\css\\tabla.css",
-      "PackagePath": "staticwebassets\\css\\tabla.css"
-    },
-    {
-      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\css\\tablaAportaciones.css",
-      "PackagePath": "staticwebassets\\css\\tablaAportaciones.css"
     },
     {
       "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\favicon.ico",
