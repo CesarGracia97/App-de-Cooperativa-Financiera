@@ -22,21 +22,9 @@
                     <thead>
                         <tr>
                             <th>Nombre Aportante</th>
-                            <th colspan="24">Fechas de Aportación</th>
-                        </tr>
-                        <tr>
-                            <th></th>
                             @for (int i = 1; i <= 12; i++)
                             {
-                                <th colspan="2">@CultureInfo.CurrentCulture.DateTimeFormat.GetAbbreviatedMonthName(i)</th>
-                            }
-                        </tr>
-                        <tr>
-                            <th></th>
-                            @for (int i = 1; i <= 12; i++)
-                            {
-                                <th>1-15</th>
-                                <th>16-30</th>
+                                <th>@CultureInfo.CurrentCulture.DateTimeFormat.GetAbbreviatedMonthName(i)</th>
                             }
                         </tr>
                     </thead>
@@ -45,18 +33,18 @@
                         {
                             <tr>
                                 <td>@aportacion.NombreUsuario</td>
-                                @for (int month = 12; month >= 1; month--)
+                                @for (int month = 1; month <= 12; month++)
                                 {
-                                    @if (aportacion.FechaAportacion.Month == month)
-                                    {
-                                        <td>@(aportacion.FechaAportacion.Day <= 15 ? aportacion.Valor.ToString("N2") : "00,00")</td>
-                                        <td>@(aportacion.FechaAportacion.Day > 15 ? aportacion.Valor.ToString("N2") : "00,00")</td>
-                                    }
-                                    else
-                                    {
-                                        <td>00,00</td>
-                                        <td>00,00</td>
-                                    }
+                                    <td>
+                                        @if (aportacion.FechaAportacion.Month == month)
+                                        {
+                                            @aportacion.Valor.ToString("N2")
+                                        }
+                                        else
+                                        {
+                                            <text>00.00</text>
+                                        }
+                                    </td>
                                 }
                             </tr>
                         }
@@ -68,7 +56,6 @@
                 <p>No hay datos disponibles.</p>
             }
         </div>
-
     </div>
 </body>
 
