@@ -47,8 +47,16 @@
                                 <td>@aportacion.IdUser</td>
                                 @for (int month = 12; month >= 1; month--)
                                 {
-                                    <td>@aportacion.Valor</td>
-                                    <td>@aportacion.Valor</td>
+                                    @if (aportacion.FechaAportacion.Month == month)
+                                    {
+                                        <td>@(aportacion.FechaAportacion.Day <= 15 ? aportacion.Valor.ToString("N2") : "00.00")</td>
+                                        <td>@(aportacion.FechaAportacion.Day > 15 ? aportacion.Valor.ToString("N2") : "00.00")</td>
+                                    }
+                                    else
+                                    {
+                                        <td>00.00</td>
+                                        <td>00.00</td>
+                                    }
                                 }
                             </tr>
                         }
