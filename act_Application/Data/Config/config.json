@@ -3,7 +3,7 @@
     "SelectUser": "SELECT * FROM act_User WHERE Correo = @Correo AND Contrasena = @Contrasena",
     "SelectUserRole": "SELECT IdRol FROM act_RolUser WHERE IdUser = @IdUser",
     "SelectRol": "SELECT * FROM act_Rol WHERE Id = @IdRol",
-    "SelectAportaciones": "SELECT COUNT(*) FROM act_Aportaciones",
-    "SelectAportacion": "SELECT * FROM act_Aportaciones"
+    "SelectExistenciaAportaciones": "SELECT COUNT(*) FROM act_Aportaciones",
+    "SelectAportantes": "SELECT a.*, u.NombreYApellido AS NombreUsuario FROM act_Aportaciones a INNER JOIN act_User u ON a.IdUser = u.Id"
   }
 }

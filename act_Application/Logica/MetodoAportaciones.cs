@@ -10,7 +10,7 @@ namespace act_Application.Logica
         public List<ActAportacione> ObtenerAportaciones()
         {
             string connectionString = AppSettingsHelper.GetConnectionString();
-            string aportacionesQuery = ConfigReader.GetQuery("SelectAportacion");
+            string aportacionesQuery = ConfigReader.GetQuery("SelectAportantes");
 
             List<ActAportacione> aportaciones = new List<ActAportacione>();
 
@@ -26,6 +26,8 @@ namespace act_Application.Logica
                     {
                         while (rd.Read())
                         {
+                            string nombreUsuario = rd["NombreUsuario"].ToString();
+
                             ActAportacione aportacion = new ActAportacione()
                             {
                                 Id = rd.GetInt32("Id"),
@@ -34,7 +36,8 @@ namespace act_Application.Logica
                                 IdUser = rd.GetInt32("IdUser"),
                                 FechaAportacion = rd.GetDateTime("FechaAportacion"),
                                 Aprobacion = rd["Aprobacion"].ToString(),
-                                CapturaPantalla = rd.IsDBNull(rd.GetOrdinal("CapturaPantalla")) ? null : (byte[])rd["CapturaPantalla"]
+                                CapturaPantalla = rd.IsDBNull(rd.GetOrdinal("CapturaPantalla")) ? null : (byte[])rd["CapturaPantalla"],
+                                NombreUsuario = rd["NombreUsuario"].ToString()
                             };
                             aportaciones.Add(aportacion);
                         }

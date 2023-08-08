@@ -44,18 +44,18 @@
                         @foreach (var aportacion in Model)
                         {
                             <tr>
-                                <td>@aportacion.IdUser</td>
+                                <td>@aportacion.NombreUsuario</td>
                                 @for (int month = 12; month >= 1; month--)
                                 {
                                     @if (aportacion.FechaAportacion.Month == month)
                                     {
-                                        <td>@(aportacion.FechaAportacion.Day <= 15 ? aportacion.Valor.ToString("N2") : "00.00")</td>
-                                        <td>@(aportacion.FechaAportacion.Day > 15 ? aportacion.Valor.ToString("N2") : "00.00")</td>
+                                        <td>@(aportacion.FechaAportacion.Day <= 15 ? aportacion.Valor.ToString("N2") : "00,00")</td>
+                                        <td>@(aportacion.FechaAportacion.Day > 15 ? aportacion.Valor.ToString("N2") : "00,00")</td>
                                     }
                                     else
                                     {
-                                        <td>00.00</td>
-                                        <td>00.00</td>
+                                        <td>00,00</td>
+                                        <td>00,00</td>
                                     }
                                 }
                             </tr>

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace act_Application.Models;
 
@@ -21,5 +20,8 @@ public partial class ActAportacione
 
     public string Aprobacion { get; set; }
 
-    public byte[] CapturaPantalla { get; set; } 
+    public byte[] CapturaPantalla { get; set; }
+
+    [NotMapped]
+    public string NombreUsuario { get; set; }
 }

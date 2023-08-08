@@ -13,7 +13,7 @@ namespace act_Application.Data
             string connectionString = AppSettingsHelper.GetConnectionString();
             try
             {
-                string query = ConfigReader.GetQuery("SelectAportaciones");
+                string query = ConfigReader.GetQuery("SelectExistenciaAportaciones");
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
                     connection.Open();
