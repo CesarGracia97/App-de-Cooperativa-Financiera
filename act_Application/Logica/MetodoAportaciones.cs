@@ -3,6 +3,7 @@ using act_Application.Models;
 using MySql.Data.MySqlClient;
 using System.Data;
 
+
 namespace act_Application.Logica
 {
     public class MetodoAportaciones
@@ -48,13 +49,24 @@ namespace act_Application.Logica
                             {
                                 Id = group.First().Id,
                                 Razon = group.First().Razon,
-                                Valor = group.Sum(a => a.Valor),
                                 IdUser = group.First().IdUser,
                                 FechaAportacion = group.First().FechaAportacion,
                                 Aprobacion = group.First().Aprobacion,
                                 CapturaPantalla = group.First().CapturaPantalla,
                                 NombreUsuario = group.Key.NombreUsuario
                             };
+
+                            // Calculamos el número de aportaciones y almacenamos detalles
+                            aportacion.NumeroAportaciones = group.Count();
+                            aportacion.DetallesAportaciones = group.Select(a => new DetalleAportacion
+                            {
+                                Valor = a.Valor,
+                                FechaAportacion = a.FechaAportacion
+                            }).ToList();
+
+                            // Sumamos los valores para calcular la sumatoria total
+                            aportacion.Valor = group.Sum(a => a.Valor);
+
                             aportaciones.Add(aportacion);
                         }
                     }

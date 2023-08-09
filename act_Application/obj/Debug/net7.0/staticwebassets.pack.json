@@ -53,6 +53,10 @@
       "PackagePath": "staticwebassets\\img\\xtrim.png"
     },
     {
+      "Id": "C:\\Users\\cgracia\\Desktop\\act_Application\\act_Application\\wwwroot\\js\\mensajeAportantes.js",
+      "PackagePath": "staticwebassets\\js\\mensajeAportantes.js"
+    },
+    {
       "Id": "C:\\Users\\cgracia\\Desktop\\act_Application\\act_Application\\wwwroot\\js\\navBar.js",
       "PackagePath": "staticwebassets\\js\\navBar.js"
     },

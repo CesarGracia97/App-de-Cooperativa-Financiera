@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "PKRM9xz/4lzRcr7sJsh/pv2uNLPN3mXNGSqtsqk4tJ4=",
+  "Hash": "g3X1rdOqSDisUMaITZXJHVO2CD1itbSE8sa2aR+Lagw=",
   "Source": "act_Application",
   "BasePath": "_content/act_Application",
   "Mode": "Default",
@@ -253,6 +253,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\img\\xtrim.png"
+    },
+    {
+      "Identity": "C:\\Users\\cgracia\\Desktop\\act_Application\\act_Application\\wwwroot\\js\\mensajeAportantes.js",
+      "SourceId": "act_Application",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\cgracia\\Desktop\\act_Application\\act_Application\\wwwroot\\",
+      "BasePath": "_content/act_Application",
+      "RelativePath": "js/mensajeAportantes.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\mensajeAportantes.js"
     },
     {
       "Identity": "C:\\Users\\cgracia\\Desktop\\act_Application\\act_Application\\wwwroot\\js\\navBar.js",

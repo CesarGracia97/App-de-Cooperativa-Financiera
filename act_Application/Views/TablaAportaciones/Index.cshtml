@@ -10,6 +10,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/tablaAportaciones.css">
+    <script src="~/js/mensajeAportantes.js"> </script>
 </header>
 <body>
     <div class="content-text">
@@ -35,9 +36,14 @@
                                 <td>@aportacion.Key</td>
                                 @for (int month = 1; month <= 12; month++)
                                 {
-                                    var valor = aportacion.SingleOrDefault(a => a.FechaAportacion.Month == month)?.Valor ?? 0;
+                                    var usuarioAportacion = aportacion.FirstOrDefault(a => a.FechaAportacion.Month == month);
+                                    var valor = usuarioAportacion?.Valor ?? 0;
+                                    var detallesAportaciones = usuarioAportacion?.DetallesAportaciones;
+
                                     var mensajeSinAportes = $"\"{aportacion.Key}\" no realizó aportes este mes";
-                                    var mensajeConAportes = $"\"{aportacion.Key}\" realizó aportes este mes: {valor.ToString("N2")}";
+                                    var mensajeConAportes = detallesAportaciones != null && detallesAportaciones.Count > 1
+                                    ? $"\"{aportacion.Key}\" realizo {detallesAportaciones.Count} aportaciones: \n {string.Join("\n ", detallesAportaciones.Select(d => d.Valor.ToString("N2")))}"
+                                    : $"\"{aportacion.Key}\" realizó una aportación: {valor.ToString("N2")}";
 
                                     <td class="aportacion-cell"
                                         data-mensaje-sin-aportes="@mensajeSinAportes"
@@ -57,23 +63,3 @@
         </div>
     </div>
 </body>
-
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        var cells = document.querySelectorAll(".aportacion-cell");
-
-        cells.forEach(function (cell) {
-            cell.addEventListener("mouseover", function () {
-                var mensajeSinAportes = this.getAttribute("data-mensaje-sin-aportes");
-                var mensajeConAportes = this.getAttribute("data-mensaje-con-aportes");
-                var valor = parseFloat(this.innerText);
-
-                if (valor === 0) {
-                    this.setAttribute("title", mensajeSinAportes);
-                } else {
-                    this.setAttribute("title", mensajeConAportes);
-                }
-            });
-        });
-    });
-</script>

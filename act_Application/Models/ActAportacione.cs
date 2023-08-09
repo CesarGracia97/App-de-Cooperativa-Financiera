@@ -14,7 +14,7 @@ public partial class ActAportacione
     public float Valor { get; set; }
 
     public int IdUser { get; set; }
-    
+
 
     public DateTime FechaAportacion { get; set; }
 
@@ -24,4 +24,14 @@ public partial class ActAportacione
 
     [NotMapped]
     public string NombreUsuario { get; set; }
+    [NotMapped]
+    public int NumeroAportaciones { get; set; }
+
+    [NotMapped]
+    public List<DetalleAportacion> DetallesAportaciones { get; set; }
+}
+public class DetalleAportacion
+{
+    public float Valor { get; set; }
+    public DateTime FechaAportacion { get; set; }
 }
