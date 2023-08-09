@@ -44,8 +44,7 @@
 
                                     var mensajeConAportes = detallesAportaciones != null && detallesAportaciones.Count > 1
                                     ? $"Total de Aportaciones: {valor.ToString("N2")}.\n\"{aportacion.Key}\" realizó {detallesAportaciones.Count} aportaciones:\n{string.Join("\n", detallesAportaciones.Select((d, index) => $"{index + 1}. Fecha: {d.FechaAportacion.ToShortDateString()}, Valor: {d.Valor.ToString("N2")}"))}"
-                                    : $"\"{aportacion.Key}\" realizó una aportación: {valor.ToString("N2")}";
-
+                                    : $"\"{aportacion.Key}\" realizó una aportación: {valor.ToString("N2")}\nFecha: {usuarioAportacion?.FechaAportacion.ToShortDateString()}";
                                     <td class="aportacion-cell"
                                         data-mensaje-sin-aportes="@mensajeSinAportes"
                                         data-mensaje-con-aportes="@mensajeConAportes">

@@ -1,5 +1,5 @@
-﻿using System.IO;
-using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json.Linq;
+
 namespace act_Application.Helper
 {
     public class ConfigReader
