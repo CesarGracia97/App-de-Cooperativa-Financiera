@@ -11990,11 +11990,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\act_Application.csproj",
+      "projectUniqueName": "C:\\Users\\cgracia\\Desktop\\act_Application\\act_Application\\act_Application.csproj",
       "projectName": "act_Application",
-      "projectPath": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\act_Application.csproj",
+      "projectPath": "C:\\Users\\cgracia\\Desktop\\act_Application\\act_Application\\act_Application.csproj",
       "packagesPath": "C:\\Users\\cgracia\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\obj\\",
+      "outputPath": "C:\\Users\\cgracia\\Desktop\\act_Application\\act_Application\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\cgracia\\AppData\\Roaming\\NuGet\\NuGet.Config",

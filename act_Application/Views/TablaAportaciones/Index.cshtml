@@ -9,7 +9,7 @@
 <header>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/General/tablaAportaciones.css">
+    <link rel="stylesheet" href="/css/tablaAportaciones.css">
 </header>
 <body>
     <div class="content-text">
@@ -21,7 +21,7 @@
                 <table class="aportacion-table">
                     <thead>
                         <tr>
-                            <th>Nombre Aportante</th>
+                            <th>Aportantes</th>
                             @for (int i = 1; i <= 12; i++)
                             {
                                 <th>@CultureInfo.CurrentCulture.DateTimeFormat.GetAbbreviatedMonthName(i)</th>
@@ -36,7 +36,14 @@
                                 @for (int month = 1; month <= 12; month++)
                                 {
                                     var valor = aportacion.SingleOrDefault(a => a.FechaAportacion.Month == month)?.Valor ?? 0;
-                                    <td>@valor.ToString("N2")</td>
+                                    var mensajeSinAportes = $"\"{aportacion.Key}\" no realizó aportes este mes";
+                                    var mensajeConAportes = $"\"{aportacion.Key}\" realizó aportes este mes: {valor.ToString("N2")}";
+
+                                    <td class="aportacion-cell"
+                                        data-mensaje-sin-aportes="@mensajeSinAportes"
+                                        data-mensaje-con-aportes="@mensajeConAportes">
+                                        @valor.ToString("N2")
+                                    </td>
                                 }
                             </tr>
                         }
@@ -50,3 +57,23 @@
         </div>
     </div>
 </body>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var cells = document.querySelectorAll(".aportacion-cell");
+
+        cells.forEach(function (cell) {
+            cell.addEventListener("mouseover", function () {
+                var mensajeSinAportes = this.getAttribute("data-mensaje-sin-aportes");
+                var mensajeConAportes = this.getAttribute("data-mensaje-con-aportes");
+                var valor = parseFloat(this.innerText);
+
+                if (valor === 0) {
+                    this.setAttribute("title", mensajeSinAportes);
+                } else {
+                    this.setAttribute("title", mensajeConAportes);
+                }
+            });
+        });
+    });
+</script>

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "kQqptud05PaFKG4MjWB2M1Q6lgaBq5BLzvzEK6xnkT3IcB5MO/TEz4aPt8uQT3++70Lrv+IB9s2dqGEqp9SCIg==",
+  "dgSpecHash": "iptVBO3+ixKycwMtj7CpYcW2cZaQq3+7VuvPCTLvHmjZelcKCKOEUWh4p389Ft+E/WlzjktVh04u84j9wyhqsA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\act_Application.csproj",
+  "projectFilePath": "C:\\Users\\cgracia\\Desktop\\act_Application\\act_Application\\act_Application.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\cgracia\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\cgracia\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",
