@@ -20,7 +20,7 @@ public partial class ActAportacione
 
     public string Aprobacion { get; set; }
 
-    public byte[] CapturaPantalla { get; set; }
+    public byte[]? CapturaPantalla { get; set; }
 
     [NotMapped]
     public string NombreUsuario { get; set; }

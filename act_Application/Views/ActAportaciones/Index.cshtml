@@ -62,7 +62,14 @@
                         @Html.DisplayFor(modelItem => item.Aprobacion)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.CapturaPantalla)
+                        @if (item.CapturaPantalla != null && item.CapturaPantalla.Length > 0)
+                        {
+                            <img src="data:image;base64,@Convert.ToBase64String(item.CapturaPantalla)" alt="Captura de Pantalla" />
+                        }
+                        else
+                        {
+                            <p>Sin captura de pantalla</p>
+                        }
                     </td>
                     <td>
                         <a class="button edit" asp-action="Edit" asp-route-id="@item.Id">Editar</a>
