@@ -42,7 +42,7 @@
 
                                     var mensajeSinAportes = $"\"{aportacion.Key}\" no realizó aportes este mes";
                                     var mensajeConAportes = detallesAportaciones != null && detallesAportaciones.Count > 1
-                                    ? $"\"{aportacion.Key}\" realizo {detallesAportaciones.Count} aportaciones: \n {string.Join("\n ", detallesAportaciones.Select(d => d.Valor.ToString("N2")))}"
+                                    ? $"Total de Aportaciones: {@valor.ToString("N2")} \n\"{aportacion.Key}\" realizo {detallesAportaciones.Count} aportaciones: \n {string.Join("\n ", detallesAportaciones.Select(d => d.Valor.ToString("N2")))}"
                                     : $"\"{aportacion.Key}\" realizó una aportación: {valor.ToString("N2")}";
 
                                     <td class="aportacion-cell"
