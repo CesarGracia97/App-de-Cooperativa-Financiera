@@ -63,8 +63,16 @@ namespace act_Application.Controllers.General
                 };
 
                 HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), authProperties);
+                try
+                {
+                    new MetodoLogeo().EnviarNotificacionInicioSesion(objeto);
+                }
+                catch(Exception ex)
+                {
+                    Console.WriteLine("Hubo un problema al enviar la notificación por correo electrónico.");
+                    Console.WriteLine("Detalles del error: " + ex.Message);
+                }
 
-                new MetodoLogeo().EnviarNotificacionInicioSesion(objeto);
 
                 return RedirectToAction("Menu", "Home");
             }
