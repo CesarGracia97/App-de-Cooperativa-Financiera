@@ -6,6 +6,7 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Text;
 using System.Security.Cryptography;
+using Newtonsoft.Json;
 
 namespace act_Application.Controllers.General
 {
@@ -18,6 +19,18 @@ namespace act_Application.Controllers.General
         [HttpPost]
         public IActionResult Index(string Correo, string Contrasena)
         {
+
+            if (!ModelState.IsValid) // Verificacion desde la Tabla Modelo
+            {
+                return View(); // Confirmacion de Error
+            }
+            if (!new MetodoLogeo().ValidarCorreo(Correo)) //Validacion desde la incersion de datos
+            {
+                ViewBag.ErrorMessage = "Caracteres especiales o formato de correo incorrecto detectado, corríjalo por favor.";
+                ViewBag.ShowErrorMessage = true;
+                return View();
+            }
+
             string hashedPassword = HashPassword(Contrasena);
 
             ActUser objeto = new MetodoLogeo().EncontrarUser(Correo, hashedPassword);
@@ -50,6 +63,10 @@ namespace act_Application.Controllers.General
                 };
 
                 HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), authProperties);
+
+                new MetodoLogeo().EnviarNotificacionInicioSesion(objeto);
+
+                return RedirectToAction("Menu", "Home");
             }
             else
             {
@@ -58,7 +75,6 @@ namespace act_Application.Controllers.General
 
             // Aquí puedes seguir utilizando la variable "claims" si es necesario
 
-            return RedirectToAction("Menu", "Home");
         }
         public string HashPassword(string password)
         {

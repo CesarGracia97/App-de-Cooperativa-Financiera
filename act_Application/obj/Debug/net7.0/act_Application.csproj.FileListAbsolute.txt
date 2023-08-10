@@ -799,3 +799,4 @@ C:\Users\cgracia\Desktop\act_Application\act_Application\obj\Debug\net7.0\refint
 C:\Users\cgracia\Desktop\act_Application\act_Application\obj\Debug\net7.0\act_Application.pdb
 C:\Users\cgracia\Desktop\act_Application\act_Application\obj\Debug\net7.0\act_Application.genruntimeconfig.cache
 C:\Users\cgracia\Desktop\act_Application\act_Application\obj\Debug\net7.0\ref\act_Application.dll
+C:\Users\cgracia\Desktop\act_Application\act_Application\bin\Debug\net7.0\Data\Config\smtpconfig.json

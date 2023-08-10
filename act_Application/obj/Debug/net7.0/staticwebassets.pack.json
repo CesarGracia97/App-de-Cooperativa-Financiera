@@ -21,6 +21,10 @@
       "PackagePath": "staticwebassets\\css\\General\\Complementos\\navBar.css"
     },
     {
+      "Id": "C:\\Users\\cgracia\\Desktop\\act_Application\\act_Application\\wwwroot\\css\\General\\Complementos\\ventanModal.css",
+      "PackagePath": "staticwebassets\\css\\General\\Complementos\\ventanModal.css"
+    },
+    {
       "Id": "C:\\Users\\cgracia\\Desktop\\act_Application\\act_Application\\wwwroot\\css\\homeLogin.css",
       "PackagePath": "staticwebassets\\css\\homeLogin.css"
     },
@@ -55,6 +59,10 @@
     {
       "Id": "C:\\Users\\cgracia\\Desktop\\act_Application\\act_Application\\wwwroot\\js\\mensajeAportantes.js",
       "PackagePath": "staticwebassets\\js\\mensajeAportantes.js"
+    },
+    {
+      "Id": "C:\\Users\\cgracia\\Desktop\\act_Application\\act_Application\\wwwroot\\js\\msjerrCorreoValidacion.js",
+      "PackagePath": "staticwebassets\\js\\msjerrCorreoValidacion.js"
     },
     {
       "Id": "C:\\Users\\cgracia\\Desktop\\act_Application\\act_Application\\wwwroot\\js\\navBar.js",

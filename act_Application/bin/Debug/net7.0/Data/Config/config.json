@@ -4,6 +4,7 @@
     "SelectUserRole": "SELECT IdRol FROM act_RolUser WHERE IdUser = @IdUser",
     "SelectRol": "SELECT * FROM act_Rol WHERE Id = @IdRol",
     "SelectExistenciaAportaciones": "SELECT COUNT(*) FROM act_Aportaciones",
-    "SelectAportantes": "SELECT a.*, u.NombreYApellido AS NombreUsuario FROM act_Aportaciones a INNER JOIN act_User u ON a.IdUser = u.Id"
+    "SelectAportantes": "SELECT a.*, u.NombreYApellido AS NombreUsuario FROM act_Aportaciones a INNER JOIN act_User u ON a.IdUser = u.Id",
+    "SelectEmail": "SELECT Correo FROM act_User Where Id =1"
   }
 }

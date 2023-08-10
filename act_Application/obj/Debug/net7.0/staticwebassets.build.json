@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "g3X1rdOqSDisUMaITZXJHVO2CD1itbSE8sa2aR+Lagw=",
+  "Hash": "vsKnN5PZehgSEtjOed+MebDHdhm1AfJP73BC4BeKVk4=",
   "Source": "act_Application",
   "BasePath": "_content/act_Application",
   "Mode": "Default",
@@ -117,6 +117,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\General\\Complementos\\navBar.css"
+    },
+    {
+      "Identity": "C:\\Users\\cgracia\\Desktop\\act_Application\\act_Application\\wwwroot\\css\\General\\Complementos\\ventanModal.css",
+      "SourceId": "act_Application",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\cgracia\\Desktop\\act_Application\\act_Application\\wwwroot\\",
+      "BasePath": "_content/act_Application",
+      "RelativePath": "css/General/Complementos/ventanModal.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\General\\Complementos\\ventanModal.css"
     },
     {
       "Identity": "C:\\Users\\cgracia\\Desktop\\act_Application\\act_Application\\wwwroot\\css\\homeLogin.css",
@@ -270,6 +287,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\mensajeAportantes.js"
+    },
+    {
+      "Identity": "C:\\Users\\cgracia\\Desktop\\act_Application\\act_Application\\wwwroot\\js\\msjerrCorreoValidacion.js",
+      "SourceId": "act_Application",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\cgracia\\Desktop\\act_Application\\act_Application\\wwwroot\\",
+      "BasePath": "_content/act_Application",
+      "RelativePath": "js/msjerrCorreoValidacion.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\msjerrCorreoValidacion.js"
     },
     {
       "Identity": "C:\\Users\\cgracia\\Desktop\\act_Application\\act_Application\\wwwroot\\js\\navBar.js",

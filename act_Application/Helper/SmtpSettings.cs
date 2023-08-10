@@ -1,19 +1,19 @@
 ﻿using Newtonsoft.Json;
+using System.IO;
 
 namespace act_Application.Helper
 {
-    public class SmtpSettings
+    public class SmtpConfig
     {
         public string Server { get; set; }
         public int Port { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
 
-        public static SmtpSettings Load()
+        public static SmtpConfig LoadConfig(string filePath)
         {
-            string configPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Data", "Config", "smtpconfig.json");
-            string jsonConfig = File.ReadAllText(configPath);
-            return JsonConvert.DeserializeObject<SmtpSettings>(jsonConfig);
+            string json = File.ReadAllText(filePath);
+            return JsonConvert.DeserializeObject<SmtpConfig>(json);
         }
     }
 }
