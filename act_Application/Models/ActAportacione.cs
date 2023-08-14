@@ -36,6 +36,6 @@ public partial class ActAportacione
 }
 public class DetalleAportacion
 {
-    public float Valor { get; set; }
+    public decimal Valor { get; set; }
     public DateTime FechaAportacion { get; set; }
 }

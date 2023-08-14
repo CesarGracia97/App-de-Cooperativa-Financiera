@@ -60,7 +60,7 @@ namespace act_Application.Logica
                             aportacion.NumeroAportaciones = group.Count();
                             aportacion.DetallesAportaciones = group.Select(a => new DetalleAportacion
                             {
-                                Valor = a.Valor,
+                                Valor = (decimal)a.Valor,
                                 FechaAportacion = a.FechaAportacion
                             }).ToList();
 

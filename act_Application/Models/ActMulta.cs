@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace act_Application.Models;
 
@@ -21,4 +20,17 @@ public partial class ActMulta
 
     public int Cuadrante2 { get; set; }
 
+    [NotMapped]
+    public string NombreUsuario { get; set; }
+
+    [NotMapped]
+    public int NumeroMultas { get; set; }
+
 }
+
+public class DetalleMulta
+{
+    public decimal Valor { get; set; }
+    public DateTime FechaMulta { get; set; }
+}
+
