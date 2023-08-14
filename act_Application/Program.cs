@@ -25,8 +25,14 @@ builder.Services.AddAuthorization(options =>
     options.AddPolicy("AdminOnly", policy =>
         policy.RequireClaim("IdRol", "1")); //Admin
 
-    options.AddPolicy("AccionistaOnly", policy =>
-        policy.RequireClaim("IdRol", "2")); //Usuario
+    options.AddPolicy("SocioOnly", policy =>
+        policy.RequireClaim("IdRol", "2")); //Socio
+
+    options.AddPolicy("ReferenteOnly", policy =>
+        policy.RequireClaim("IdRol", "3")); //Referente
+
+    options.AddPolicy("AdminSocioOnly", policy =>
+        policy.RequireClaim("IdRol", "1", "2")); // Admin o Socio
 
 });
 

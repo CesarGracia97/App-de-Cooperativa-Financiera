@@ -32,6 +32,19 @@
                     <input asp-for="IdAportacion" class="form-control" />
                     <span asp-validation-for="IdAportacion" class="text-danger"></span>
                 </div>
+                <div class="form-group">
+                    <label asp-for="Valor" class="control-label">Valor</label>
+                    <input asp-for="Valor" class="form-control" />
+                    <span asp-validation-for="Valor" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="FechaMulta" class="control-label">Fecha de la Multa</label>
+                    <input asp-for="FechaMulta" class="form-control" />
+                    <span asp-validation-for="FechaMulta" class="text-danger"></span>
+                    @{
+                        act_Application.Logica.ComplementosLogicos.ObtenerCuadrante.CalcularCuadrantesMulta(Model);
+                    }
+                </div>
                 <div class="btn-container">
                     <input type="submit" value="Crear" class="btn" />
                     <a class="btn-return" asp-action="Index">Regresar</a>

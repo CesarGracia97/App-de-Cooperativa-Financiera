@@ -1,0 +1,54 @@
+﻿@using System.Globalization;
+@using act_Application.Data.Data;
+@{
+    ViewData["Title"] = "Tabla de Multas";
+    var multaRepository = new MultaRepository();
+    int totalMultas = multaRepository.GetTotalMultas();
+}
+<header>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/tablaAportaciones.css">
+</header>
+<body>
+    <div class="content-text">
+        <h1>Tabla de Multas</h1>
+        <hr />
+        <div class="table-container">
+            @if (totalMultas > 0)
+            {
+                <table class="multa-table">
+                    <thead>
+                        <tr>
+                            <th>Multados</th>
+                            @for (int i = 1; i <= 12; i++)
+                            {
+                                <th>@CultureInfo.CurrentCulture.DateTimeFormat.GetAbbreviatedMonthName(i)</th>
+                            }
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var multaGroup in Model.GroupBy(m => m.NombreUsuario))
+                        {
+                            <tr>
+                                <td>@multaGroup.Key</td>
+                                @for (int month = 1; month <= 12; month++)
+                                {
+                                    var multasEnMes = multaGroup.Where(m => m.FechaMulta.Month == month).ToList();
+                                    var totalMultaEnMes = multasEnMes.Any() ? multasEnMes.Sum(m => m.Valor) : 0;
+                                    <td class="multa-cell">
+                                        @totalMultaEnMes.ToString("N2")
+                                    </td>
+                                }
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <p>No hay datos disponibles.</p>
+            }
+        </div>
+    </div>
+</body>

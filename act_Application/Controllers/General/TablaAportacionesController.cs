@@ -1,16 +1,18 @@
-﻿    using act_Application.Logica;
-    using Microsoft.AspNetCore.Mvc;
+﻿using act_Application.Logica;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
-    namespace act_Application.Controllers.General
+namespace act_Application.Controllers.General  
+{
+    public class TablaAportacionesController : Controller
     {
-        public class TablaAportacionesController : Controller
+        [Authorize(Policy = "AdminSocioOnly")]
+        public IActionResult Index()
         {
-            public IActionResult Index()
-            {
-                var metodoAportaciones = new MetodoAportaciones();
-                var aportaciones = metodoAportaciones.ObtenerAportaciones();
+            var metodoAportaciones = new MetodoAportaciones();
+            var aportaciones = metodoAportaciones.ObtenerAportaciones();
 
-                return View(aportaciones);
-            }
+            return View(aportaciones);
         }
     }
+}

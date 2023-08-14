@@ -65,7 +65,7 @@ namespace act_Application.Logica
                             }).ToList();
 
                             // Sumamos los valores para calcular la sumatoria total
-                            aportacion.Valor = group.Sum(a => a.Valor);
+                            aportacion.Valor = group.Sum(a => (decimal)a.Valor);
 
                             aportaciones.Add(aportacion);
                         }

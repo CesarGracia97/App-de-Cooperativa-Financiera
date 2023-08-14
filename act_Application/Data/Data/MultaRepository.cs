@@ -1,17 +1,16 @@
 ﻿using act_Application.Helper;
 using MySql.Data.MySqlClient;
 
-namespace act_Application.Data
+namespace act_Application.Data.Data
 {
-    public class AportacionRepository
+    public class MultaRepository
     {
-
-        public int GetTotalAportaciones()
+        public int GetTotalMultas()
         {
             string connectionString = AppSettingsHelper.GetConnectionString();
             try
             {
-                string query = ConfigReader.GetQuery("SelectExistenciaAportaciones");
+                string query = ConfigReader.GetQuery("SelectExistenciaMultas"); // Asegúrate de tener la consulta SQL correcta para obtener la existencia de multas
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
                     connection.Open();

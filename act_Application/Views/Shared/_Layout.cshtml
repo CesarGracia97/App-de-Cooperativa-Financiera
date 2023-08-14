@@ -82,35 +82,36 @@
                             </a>
                         </li>
                     }
+                    @if (User.HasClaim("Rol", "Administrador") || User.HasClaim("Rol", "Socio"))
+                    {
+                        <li class="nav-link">
+                            <a href="#">
+                                <i class='bx bx-money icon'></i>
+                                <span class="text nav-text">Aportar</span>
+                            </a>
+                        </li>
 
-                    <li class="nav-link">
-                        <a href="#">
-                            <i class='bx bx-money icon'></i>
-                            <span class="text nav-text">Aportar</span>
-                        </a>
-                    </li>
+                        <li class="nav-link">
+                            <a href="#">
+                                <i class='bx bx-bell icon'></i>
+                                <span class="text nav-text">Notificationes</span>
+                            </a>
+                        </li>
 
-                    <li class="nav-link">
-                        <a href="#">
-                            <i class='bx bx-bell icon'></i>
-                            <span class="text nav-text">Notificationes</span>
-                        </a>
-                    </li>
+                        <li class="nav-link">
+                            <a href="~/TablaAportaciones/Index">
+                                <i class='bx bx-table icon'></i>
+                                <span class="text nav-text">Tabla de Aportacion</span>
+                            </a>
+                        </li>
 
-                    <li class="nav-link">
-                        <a href="~/TablaAportaciones/Index">
-                            <i class='bx bx-table icon'></i>
-                            <span class="text nav-text">Tabla de Aportacion</span>
-                        </a>
-                    </li>
-
-                    <li class="nav-link">
-                        <a href="#">
-                            <i class='bx bx-window-close icon'></i>
-                            <span class="text nav-text">Multas</span>
-                        </a>
-                    </li>
-
+                        <li class="nav-link">
+                            <a href="~/TablaMultas/Index">
+                                <i class='bx bx-window-close icon'></i>
+                                <span class="text nav-text">Tabla de Multas</span>
+                            </a>
+                        </li>
+                    }
                 </ul>
             </div>
 

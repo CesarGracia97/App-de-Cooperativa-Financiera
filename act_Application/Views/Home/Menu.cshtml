@@ -9,7 +9,11 @@
         {
             <p>Tienes el rol de Administrador.</p>
         }
-        else if (User.HasClaim("Rol", "Usuario"))
+        else if (User.HasClaim("Rol", "Socio"))
+        {
+            <p>Bienvenido Usuario.</p>
+        }
+        else if (User.HasClaim("Rol", "Referente"))
         {
             <p>Bienvenido Usuario.</p>
         }

@@ -16,7 +16,8 @@ public static class RolesInitializer
             dbContext.ActRols.AddRange(new[]
             {
                 new ActRol { NombreRol = "Administrador", DescripcionRol = "Rol con acceso total al sistema" },
-                new ActRol { NombreRol = "Usuario", DescripcionRol = "Rol con permisos limitados" }
+                new ActRol { NombreRol = "Socio", DescripcionRol = "Rol con permisos limitados" },
+                new ActRol { NombreRol = "Referente", DescripcionRol = "Rol con permisos limitados como referente" }
             });
 
             dbContext.SaveChanges();

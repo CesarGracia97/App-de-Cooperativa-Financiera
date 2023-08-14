@@ -29,6 +29,12 @@
                     Id de la Aportacion
                 </th>
                 <th>
+                    Valor
+                </th>
+                <th>
+                    Fecha de Multa
+                </th>
+                <th>
                     Acciones
                 </th>
             </tr>
@@ -45,6 +51,12 @@
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.IdAportacion)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Valor)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FechaMulta)
                     </td>
                     <td>
                         <a class="button edit" asp-action="Edit" asp-route-id="@item.Id">Editar</a>

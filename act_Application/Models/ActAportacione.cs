@@ -11,7 +11,7 @@ public partial class ActAportacione
 
     public string Razon { get; set; }
 
-    public float Valor { get; set; }
+    public decimal Valor { get; set; }
 
     public int IdUser { get; set; }
 
@@ -21,6 +21,10 @@ public partial class ActAportacione
     public string Aprobacion { get; set; }
 
     public byte[]? CapturaPantalla { get; set; }
+
+    public int Cuadrante1 { get; set; }
+
+    public int Cuadrante2 { get; set; }
 
     [NotMapped]
     public string NombreUsuario { get; set; }

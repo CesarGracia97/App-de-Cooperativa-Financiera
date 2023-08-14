@@ -46,6 +46,10 @@ public partial class DesarrolloContext : DbContext
             entity.Property(e => e.CapturaPantalla).HasColumnType("blob");
             entity.Property(e => e.FechaAportacion).HasColumnType("date");
             entity.Property(e => e.IdUser).HasColumnType("int(11)");
+            entity.Property(e => e.Valor).HasColumnType("decimal(10, 2)");
+            entity.Property(e => e.Cuadrante1).HasColumnType("int(1)");
+            entity.Property(e => e.Cuadrante2).HasColumnType("int(1)");
+
         });
 
         modelBuilder.Entity<ActMulta>(entity =>
@@ -63,6 +67,11 @@ public partial class DesarrolloContext : DbContext
             entity.Property(e => e.Id).HasColumnType("int(11)");
             entity.Property(e => e.IdAportacion).HasColumnType("int(11)");
             entity.Property(e => e.IdUser).HasColumnType("int(11)");
+            entity.Property(e => e.Porcentaje).HasColumnType("decimal(10, 2)");
+            entity.Property(e => e.Valor).HasColumnType("decimal(10, 2)");
+            entity.Property(e => e.FechaMulta).HasColumnType("date");
+            entity.Property(e => e.Cuadrante1).HasColumnType("int(1)");
+            entity.Property(e => e.Cuadrante2).HasColumnType("int(1)");
         });
 
         modelBuilder.Entity<ActRol>(entity =>

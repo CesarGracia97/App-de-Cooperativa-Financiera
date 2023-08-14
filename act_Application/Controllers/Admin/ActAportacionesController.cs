@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using act_Application.Models;
 using act_Application.Data.Data;
 using Microsoft.AspNetCore.Authorization;
+using act_Application.Logica.ComplementosLogicos;
 
 namespace act_Application.Controllers.Admin
 {
@@ -60,10 +56,12 @@ namespace act_Application.Controllers.Admin
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Valor,IdUser,FechaAportacion,Aprobacion,CapturaPantalla")] ActAportacione actAportacione)
+        public async Task<IActionResult> Create([Bind("Id,Razon,Valor,IdUser,FechaAportacion,Aprobacion,CapturaPantalla,Cuadrante1,Cuadrante2")] ActAportacione actAportacione)
         {
             if (ModelState.IsValid)
             {
+                // Calcula los cuadrantes antes de guardar los datos
+                ObtenerCuadrante.CalcularCuadrantesAportacione(actAportacione);
                 _context.Add(actAportacione);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -93,7 +91,7 @@ namespace act_Application.Controllers.Admin
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Valor,IdUser,FechaAportacion,Aprobacion,CapturaPantalla")] ActAportacione actAportacione)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Razon,Valor,IdUser,FechaAportacion,Aprobacion,CapturaPantalla,Cuadrante1,Cuadrante2")] ActAportacione actAportacione)
         {
             if (id != actAportacione.Id)
             {
@@ -102,6 +100,9 @@ namespace act_Application.Controllers.Admin
 
             if (ModelState.IsValid)
             {
+                // Calcula los cuadrantes antes de guardar los datos
+                ObtenerCuadrante.CalcularCuadrantesAportacione(actAportacione);
+
                 try
                 {
                     _context.Update(actAportacione);

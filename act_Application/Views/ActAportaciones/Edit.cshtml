@@ -20,13 +20,13 @@
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <input type="hidden" asp-for="Id" />
                 <div class="form-group">
-                    <label asp-for="Razon" class="control-label">Valor</label>
+                    <label asp-for="Razon" class="control-label">Razon</label>
                     <input asp-for="Razon" class="form-control" />
                     <span asp-validation-for="Razon" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="Valor" class="control-label">Valor</label>
-                    <input asp-for="Valor" class="form-control" />
+                    <input asp-for="Valor" class="form-control" type="number" step="0.01" />
                     <span asp-validation-for="Valor" class="text-danger"></span>
                 </div>
                 <div class="form-group">
@@ -39,6 +39,7 @@
                     <input asp-for="FechaAportacion" class="form-control" />
                     <span asp-validation-for="FechaAportacion" class="text-danger"></span>
                 </div>
+
                 <div class="form-group">
                     <label asp-for="Aprobacion" class="control-label">Aprobacion</label>
                     <input asp-for="Aprobacion" class="form-control" />

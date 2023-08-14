@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using act_Application.Models;
 using act_Application.Data.Data;
 using Microsoft.AspNetCore.Authorization;
+using act_Application.Logica.ComplementosLogicos;
 
 namespace act_Application.Controllers.Admin
 {
@@ -60,8 +56,9 @@ namespace act_Application.Controllers.Admin
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,IdUser,Porcentaje,Idaportacion")] ActMulta actMulta)
+        public async Task<IActionResult> Create([Bind("Id,IdUser,Porcentaje,Idaportacion,Valor,FechaMulta,Cuadrante1,Cuadrante2")] ActMulta actMulta)
         {
+            ObtenerCuadrante.CalcularCuadrantesMulta(actMulta);
             if (ModelState.IsValid)
             {
                 _context.Add(actMulta);
@@ -93,7 +90,7 @@ namespace act_Application.Controllers.Admin
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,IdUser,Porcentaje,Idaportacion")] ActMulta actMulta)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,IdUser,Porcentaje,Idaportacion,Valor,FechaMulta,Cuadrante1,Cuadrante2")] ActMulta actMulta)
         {
             if (id != actMulta.Id)
             {
@@ -102,6 +99,7 @@ namespace act_Application.Controllers.Admin
 
             if (ModelState.IsValid)
             {
+                ObtenerCuadrante.CalcularCuadrantesMulta(actMulta);
                 try
                 {
                     _context.Update(actMulta);
