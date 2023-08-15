@@ -1,0 +1,52 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Aportar";
+}
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/General/aportar.css">
+    <script src="~/js/aportar.js"> </script>
+</head>
+<body>
+    <div class="container">
+        <h2>Registro de Aportación</h2>
+        <form id="aportacion-form">
+            <label for="monto">Monto:</label>
+            <div class="input-container">
+                <span class="dollar-sign">$</span>
+                <input type="number" id="monto" name="monto" step="0.01" required>
+            </div>
+
+            <label for="banco">Banco:</label>
+            <select id="banco" name="banco" required>
+                <option value="Banco Pichincha">Banco Pichincha</option>
+                <option value="Banco Guayaquil">Banco Guayaquil</option>
+                <option value="Produbanco">Produbanco</option>
+                <option value="Banco del Austro">Banco del Austro</option>
+            </select>
+
+            <label for="cuenta">Cuenta:</label>
+            <input type="number" id="cuenta" name="cuenta" min="8" max="12" required>
+            <div class="error-message">Rango de números mínimo 8 y máximo 12</div>
+
+            <label class="date-label">Fecha de Hoy:</label>
+            <label id="fechaActual"></label>
+
+            <label for="razon">Razón:</label>
+            <select id="razon" name="razon" required>
+                <option value="CUOTA">CUOTA</option>
+            </select>
+
+            <label for="comprobante">Comprobante de Transferencia:</label>
+            <input type="file" id="comprobante" name="comprobante" accept=".jpg, .png" required>
+
+            <div class="buttons">
+                <button type="submit" class="save-button">Guardar</button>
+                <button type="button" class="clear-button">Limpiar</button>
+            </div>
+        </form>
+    </div>
+</body>

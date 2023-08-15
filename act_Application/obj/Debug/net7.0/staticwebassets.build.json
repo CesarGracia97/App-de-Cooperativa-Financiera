@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "BLK/iN1KZPms2tdm9KQD0t1WlhNeXPV9psLDdYKMesQ=",
+  "Hash": "DOC5chD/q/sMvLaNt25xXqVurnyHuNM38y4HhZFKsSw=",
   "Source": "act_Application",
   "BasePath": "_content/act_Application",
   "Mode": "Default",
@@ -100,6 +100,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\Administracion\\estiloTablaIndex.css"
+    },
+    {
+      "Identity": "C:\\Users\\cgracia\\Desktop\\act_Application\\act_Application\\wwwroot\\css\\General\\aportar.css",
+      "SourceId": "act_Application",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\cgracia\\Desktop\\act_Application\\act_Application\\wwwroot\\",
+      "BasePath": "_content/act_Application",
+      "RelativePath": "css/General/aportar.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\General\\aportar.css"
     },
     {
       "Identity": "C:\\Users\\cgracia\\Desktop\\act_Application\\act_Application\\wwwroot\\css\\General\\Complementos\\navBar.css",
@@ -287,6 +304,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\img\\xtrim.png"
+    },
+    {
+      "Identity": "C:\\Users\\cgracia\\Desktop\\act_Application\\act_Application\\wwwroot\\js\\aportar.js",
+      "SourceId": "act_Application",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\cgracia\\Desktop\\act_Application\\act_Application\\wwwroot\\",
+      "BasePath": "_content/act_Application",
+      "RelativePath": "js/aportar.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\aportar.js"
     },
     {
       "Identity": "C:\\Users\\cgracia\\Desktop\\act_Application\\act_Application\\wwwroot\\js\\mensajeAportantes.js",
