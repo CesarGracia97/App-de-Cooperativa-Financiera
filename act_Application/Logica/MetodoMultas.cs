@@ -49,6 +49,14 @@ namespace act_Application.Logica
                                 NombreUsuario = group.Key.NombreUsuario
                             };
 
+                            multa.NumeroMultas = group.Count();
+                            multa.DetallesMulta = group.Select(a => new DetalleMulta
+                            {
+                                Valor = (decimal)a.Valor,
+                                FechaMulta = a.FechaMulta,
+                                Cuadrante = a.FechaMulta.Day <= 15 ? 1 : 2
+                            }).ToList();
+
                             // Calculamos el valor total de las multas en el mes
                             multa.Valor = group.Sum(m => m.Valor);
 

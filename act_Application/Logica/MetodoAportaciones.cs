@@ -36,6 +36,7 @@ namespace act_Application.Logica
                                 Aprobacion = r["Aprobacion"].ToString(),
                                 CapturaPantalla = r.IsDBNull(r.GetOrdinal("CapturaPantalla")) ? null : (byte[])r["CapturaPantalla"],
                                 NombreUsuario = r["NombreUsuario"].ToString()
+
                             })
                             .ToList();
 
@@ -54,6 +55,7 @@ namespace act_Application.Logica
                                 Aprobacion = group.First().Aprobacion,
                                 CapturaPantalla = group.First().CapturaPantalla,
                                 NombreUsuario = group.Key.NombreUsuario
+
                             };
 
                             // Calculamos el número de aportaciones y almacenamos detalles
@@ -61,7 +63,8 @@ namespace act_Application.Logica
                             aportacion.DetallesAportaciones = group.Select(a => new DetalleAportacion
                             {
                                 Valor = (decimal)a.Valor,
-                                FechaAportacion = a.FechaAportacion
+                                FechaAportacion = a.FechaAportacion,
+                                Cuadrante = a.FechaAportacion.Day <= 15 ? 1 : 2
                             }).ToList();
 
                             // Sumamos los valores para calcular la sumatoria total

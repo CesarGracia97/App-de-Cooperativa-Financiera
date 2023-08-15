@@ -26,11 +26,16 @@ public partial class ActMulta
     [NotMapped]
     public int NumeroMultas { get; set; }
 
+    [NotMapped]
+    public List<DetalleMulta> DetallesMulta { get; set; }
+
+
 }
 
 public class DetalleMulta
 {
     public decimal Valor { get; set; }
     public DateTime FechaMulta { get; set; }
+    public int Cuadrante { get; set; }
 }
 

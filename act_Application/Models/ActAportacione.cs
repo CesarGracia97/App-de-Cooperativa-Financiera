@@ -38,4 +38,6 @@ public class DetalleAportacion
 {
     public decimal Valor { get; set; }
     public DateTime FechaAportacion { get; set; }
+    public int Cuadrante { get; set; }
+
 }

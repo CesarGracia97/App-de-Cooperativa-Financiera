@@ -9,7 +9,8 @@
 <header>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/tablaAportaciones.css">
+    <script src="~/js/mensajeMultados.js"> </script>
+    <link rel="stylesheet" href="/css/General/tablaMultas.css">
 </header>
 <body>
     <div class="content-text">
@@ -29,16 +30,25 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var multaGroup in Model.GroupBy(m => m.NombreUsuario))
+                        @foreach (var multa in Model.GroupBy(m => m.NombreUsuario))
                         {
                             <tr>
-                                <td>@multaGroup.Key</td>
+                                <td>@multa.Key</td>
                                 @for (int month = 1; month <= 12; month++)
                                 {
-                                    var multasEnMes = multaGroup.Where(m => m.FechaMulta.Month == month).ToList();
-                                    var totalMultaEnMes = multasEnMes.Any() ? multasEnMes.Sum(m => m.Valor) : 0;
-                                    <td class="multa-cell">
-                                        @totalMultaEnMes.ToString("N2")
+                                    var usuarioMulta = multa.FirstOrDefault(a => a.FechaMulta.Month == month);
+                                    var valor = usuarioMulta?.Valor ?? 0;
+                                    var detallesMultas = usuarioMulta?.DetallesMulta;
+
+                                    var mensajeSinMultas = $"\"{multa.Key}\" no tiene Multas este mes";
+
+                                    var mensajeConMultas = detallesMultas != null && detallesMultas.Count > 1
+                                    ? $"Total de Multas: {valor.ToString("N2")}.\n\"{multa.Key}\" tiene {detallesMultas.Count} Multas:\n{string.Join("\n", detallesMultas.Select((d, index) => $"{index + 1}. Fecha: {d.FechaMulta.ToShortDateString()} - Cuadrante {d.Cuadrante}, Valor: {d.Valor.ToString("N2")}"))}"
+                                    : $"\"{multa.Key}\" tiene una Multa: {valor.ToString("N2")}\nFecha: {usuarioMulta?.FechaMulta.ToShortDateString()} - Cuadrante {usuarioMulta?.DetallesMulta.FirstOrDefault()?.Cuadrante}";
+                                    <td class="multa-cell"
+                                        data-mensaje-sin-multas="@mensajeSinMultas"
+                                        data-mensaje-con-multas="@mensajeConMultas">
+                                        @valor.ToString("N2")
                                     </td>
                                 }
                             </tr>
