@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using act_Application.Logica;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace act_Application.Controllers.General
@@ -8,7 +9,9 @@ namespace act_Application.Controllers.General
         [Authorize(Policy = "AdminSocioOnly")]
         public IActionResult Index()
         {
-            return View();
+            var metodoMultas = new MetodoMultas();
+            var multas = metodoMultas.ObtenerMultas();
+            return View(multas);
         }
     }
 }

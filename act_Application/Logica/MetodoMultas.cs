@@ -10,7 +10,7 @@ namespace act_Application.Logica
         public List<ActMulta> ObtenerMultas()
         {
             string connectionString = AppSettingsHelper.GetConnectionString();
-            string multasQuery = ConfigReader.GetQuery("SelectMultas");
+            string multasQuery = ConfigReader.GetQuery("SelectMultados");
 
             List<ActMulta> multas = new List<ActMulta>();
 
