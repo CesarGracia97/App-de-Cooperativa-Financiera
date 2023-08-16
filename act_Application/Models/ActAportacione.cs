@@ -26,6 +26,10 @@ public partial class ActAportacione
 
     public int Cuadrante2 { get; set; }
 
+    public string Cbancaria { get; set; }
+
+    public string Nbanco { get; set; }
+
     [NotMapped]
     public string NombreUsuario { get; set; }
     [NotMapped]

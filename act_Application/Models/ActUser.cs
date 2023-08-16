@@ -11,10 +11,6 @@ public partial class ActUser
 
     public string Cedula { get; set; }
 
-    public string Cbancaria { get; set; }
-
-    public string Nbanco { get; set; }
-
     [Required(ErrorMessage = "El correo electrónico es obligatorio.")]
     [EmailAddress(ErrorMessage = "El correo electrónico no tiene un formato válido.")]
     [RegularExpression(@"^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$", ErrorMessage = "El correo electrónico contiene caracteres no permitidos.")]

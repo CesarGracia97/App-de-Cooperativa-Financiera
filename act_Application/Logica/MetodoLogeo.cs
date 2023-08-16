@@ -36,8 +36,6 @@ namespace act_Application.Logica
                         {
                             Id = rd.GetInt32(rd.GetOrdinal("Id")),
                             Cedula = rd["Cedula"].ToString(),
-                            Cbancaria = rd["CBancaria"].ToString(),
-                            Nbanco = rd["NBanco"].ToString(),
                             Correo = rd["Correo"].ToString(),
                             NombreYapellido = rd["NombreYApellido"].ToString(),
                             Celular = rd["Celular"].ToString(),

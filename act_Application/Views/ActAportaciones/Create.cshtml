@@ -51,6 +51,16 @@
                     <input asp-for="CapturaPantalla" class="form-control" />
                     <span asp-validation-for="CapturaPantalla" class="text-danger"></span>
                 </div>
+                <div class="form-group">
+                    <label asp-for="Cbancaria" class="control-label">Cuenta Bancaria</label>
+                    <input asp-for="Cbancaria" class="form-control" />
+                    <span asp-validation-for="Cbancaria" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Nbanco" class="control-label">Nombre del banco</label>
+                    <input asp-for="Nbanco" class="form-control" />
+                    <span asp-validation-for="Nbanco" class="text-danger"></span>
+                </div>
                 <div class="btn-container">
                     <input type="submit" value="Crear" class="btn" />
                     <a class="btn-return" asp-action="Index">Regresar</a>
