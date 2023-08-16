@@ -9,6 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/css/General/aportar.css">
     <script src="~/js/aportar.js"> </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
     <div class="container">
@@ -17,7 +18,7 @@
             <label for="monto">Monto:</label>
             <div class="input-container">
                 <span class="dollar-sign">$</span>
-                <input type="number" id="monto" name="monto" step="0.01" required>
+                <input class="input-monto" type="number" id="monto" name="monto" step="0.01" required>
             </div>
 
             <label for="banco">Banco:</label>
@@ -29,12 +30,16 @@
             </select>
 
             <label for="cuenta">Cuenta:</label>
-            <input type="number" id="cuenta" name="cuenta" min="8" max="12" required>
+            <input class="input-cuenta" type="number" id="cuenta" name="cuenta" min="10000000" max="999999999999" required>
             <div class="error-message">Rango de números mínimo 8 y máximo 12</div>
 
-            <label class="date-label">Fecha de Hoy:</label>
-            <div id="current_date">
-                </p>
+            <label for="date-label">Fecha de Hoy:</label>
+            <div class="date">
+                <script>
+                    date = new Date().toLocaleDateString();
+                    document.write(date);
+                </script>
+            </div>
 
             <label for="razon">Razón:</label>
             <select id="razon" name="razon" required>
@@ -42,7 +47,7 @@
             </select>
 
             <label for="comprobante">Comprobante de Transferencia:</label>
-            <input type="file" id="comprobante" name="comprobante" accept=".jpg, .png" required>
+            <input class="input-file" type="file" id="comprobante" name="comprobante" accept=".jpg, .png" required>
 
             <div class="buttons">
                 <button type="submit" class="save-button">Guardar</button>

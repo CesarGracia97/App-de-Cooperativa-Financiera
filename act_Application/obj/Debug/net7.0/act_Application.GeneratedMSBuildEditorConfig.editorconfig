@@ -9,149 +9,149 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = act_Application
 build_property.RootNamespace = act_Application
-build_property.ProjectDir = C:\Users\cgracia\Desktop\act_Application\act_Application\
+build_property.ProjectDir = E:\cesar.gracia\Proyectos\C#\act_Application\act_Application\
 build_property.RazorLangVersion = 7.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\cgracia\Desktop\act_Application\act_Application
+build_property.MSBuildProjectDirectory = E:\cesar.gracia\Proyectos\C#\act_Application\act_Application
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/cgracia/Desktop/act_Application/act_Application/Views/ActAportaciones/Create.cshtml]
+[E:/cesar.gracia/Proyectos/C\#/act_Application/act_Application/Views/ActAportaciones/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWN0QXBvcnRhY2lvbmVzXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/cgracia/Desktop/act_Application/act_Application/Views/ActAportaciones/Delete.cshtml]
+[E:/cesar.gracia/Proyectos/C\#/act_Application/act_Application/Views/ActAportaciones/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWN0QXBvcnRhY2lvbmVzXERlbGV0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/cgracia/Desktop/act_Application/act_Application/Views/ActAportaciones/Edit.cshtml]
+[E:/cesar.gracia/Proyectos/C\#/act_Application/act_Application/Views/ActAportaciones/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWN0QXBvcnRhY2lvbmVzXEVkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/cgracia/Desktop/act_Application/act_Application/Views/ActAportaciones/Index.cshtml]
+[E:/cesar.gracia/Proyectos/C\#/act_Application/act_Application/Views/ActAportaciones/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWN0QXBvcnRhY2lvbmVzXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/cgracia/Desktop/act_Application/act_Application/Views/ActMultas/Create.cshtml]
+[E:/cesar.gracia/Proyectos/C\#/act_Application/act_Application/Views/ActMultas/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWN0TXVsdGFzXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/cgracia/Desktop/act_Application/act_Application/Views/ActMultas/Delete.cshtml]
+[E:/cesar.gracia/Proyectos/C\#/act_Application/act_Application/Views/ActMultas/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWN0TXVsdGFzXERlbGV0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/cgracia/Desktop/act_Application/act_Application/Views/ActMultas/Edit.cshtml]
+[E:/cesar.gracia/Proyectos/C\#/act_Application/act_Application/Views/ActMultas/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWN0TXVsdGFzXEVkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/cgracia/Desktop/act_Application/act_Application/Views/ActMultas/Index.cshtml]
+[E:/cesar.gracia/Proyectos/C\#/act_Application/act_Application/Views/ActMultas/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWN0TXVsdGFzXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/cgracia/Desktop/act_Application/act_Application/Views/ActRols/Create.cshtml]
+[E:/cesar.gracia/Proyectos/C\#/act_Application/act_Application/Views/ActRols/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWN0Um9sc1xDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/cgracia/Desktop/act_Application/act_Application/Views/ActRols/Delete.cshtml]
+[E:/cesar.gracia/Proyectos/C\#/act_Application/act_Application/Views/ActRols/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWN0Um9sc1xEZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/cgracia/Desktop/act_Application/act_Application/Views/ActRols/Edit.cshtml]
+[E:/cesar.gracia/Proyectos/C\#/act_Application/act_Application/Views/ActRols/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWN0Um9sc1xFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/cgracia/Desktop/act_Application/act_Application/Views/ActRols/Index.cshtml]
+[E:/cesar.gracia/Proyectos/C\#/act_Application/act_Application/Views/ActRols/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWN0Um9sc1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/cgracia/Desktop/act_Application/act_Application/Views/ActRolUsers/Create.cshtml]
+[E:/cesar.gracia/Proyectos/C\#/act_Application/act_Application/Views/ActRolUsers/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWN0Um9sVXNlcnNcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/cgracia/Desktop/act_Application/act_Application/Views/ActRolUsers/Delete.cshtml]
+[E:/cesar.gracia/Proyectos/C\#/act_Application/act_Application/Views/ActRolUsers/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWN0Um9sVXNlcnNcRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/cgracia/Desktop/act_Application/act_Application/Views/ActRolUsers/Edit.cshtml]
+[E:/cesar.gracia/Proyectos/C\#/act_Application/act_Application/Views/ActRolUsers/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWN0Um9sVXNlcnNcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/cgracia/Desktop/act_Application/act_Application/Views/ActRolUsers/Index.cshtml]
+[E:/cesar.gracia/Proyectos/C\#/act_Application/act_Application/Views/ActRolUsers/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWN0Um9sVXNlcnNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/cgracia/Desktop/act_Application/act_Application/Views/ActTransacciones/Create.cshtml]
+[E:/cesar.gracia/Proyectos/C\#/act_Application/act_Application/Views/ActTransacciones/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWN0VHJhbnNhY2Npb25lc1xDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/cgracia/Desktop/act_Application/act_Application/Views/ActTransacciones/Delete.cshtml]
+[E:/cesar.gracia/Proyectos/C\#/act_Application/act_Application/Views/ActTransacciones/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWN0VHJhbnNhY2Npb25lc1xEZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/cgracia/Desktop/act_Application/act_Application/Views/ActTransacciones/Edit.cshtml]
+[E:/cesar.gracia/Proyectos/C\#/act_Application/act_Application/Views/ActTransacciones/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWN0VHJhbnNhY2Npb25lc1xFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/cgracia/Desktop/act_Application/act_Application/Views/ActTransacciones/Index.cshtml]
+[E:/cesar.gracia/Proyectos/C\#/act_Application/act_Application/Views/ActTransacciones/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWN0VHJhbnNhY2Npb25lc1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/cgracia/Desktop/act_Application/act_Application/Views/ActUsers/Create.cshtml]
+[E:/cesar.gracia/Proyectos/C\#/act_Application/act_Application/Views/ActUsers/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWN0VXNlcnNcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/cgracia/Desktop/act_Application/act_Application/Views/ActUsers/Delete.cshtml]
+[E:/cesar.gracia/Proyectos/C\#/act_Application/act_Application/Views/ActUsers/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWN0VXNlcnNcRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/cgracia/Desktop/act_Application/act_Application/Views/ActUsers/Edit.cshtml]
+[E:/cesar.gracia/Proyectos/C\#/act_Application/act_Application/Views/ActUsers/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWN0VXNlcnNcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/cgracia/Desktop/act_Application/act_Application/Views/ActUsers/Index.cshtml]
+[E:/cesar.gracia/Proyectos/C\#/act_Application/act_Application/Views/ActUsers/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWN0VXNlcnNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/cgracia/Desktop/act_Application/act_Application/Views/Aportar/Aportar.cshtml]
+[E:/cesar.gracia/Proyectos/C\#/act_Application/act_Application/Views/Aportar/Aportar.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXBvcnRhclxBcG9ydGFyLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/cgracia/Desktop/act_Application/act_Application/Views/Home/Index.cshtml]
+[E:/cesar.gracia/Proyectos/C\#/act_Application/act_Application/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/cgracia/Desktop/act_Application/act_Application/Views/Home/Menu.cshtml]
+[E:/cesar.gracia/Proyectos/C\#/act_Application/act_Application/Views/Home/Menu.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxNZW51LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/cgracia/Desktop/act_Application/act_Application/Views/Login/Index.cshtml]
+[E:/cesar.gracia/Proyectos/C\#/act_Application/act_Application/Views/Login/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9naW5cSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/cgracia/Desktop/act_Application/act_Application/Views/Shared/Error.cshtml]
+[E:/cesar.gracia/Proyectos/C\#/act_Application/act_Application/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/cgracia/Desktop/act_Application/act_Application/Views/Shared/_ValidationScriptsPartial.cshtml]
+[E:/cesar.gracia/Proyectos/C\#/act_Application/act_Application/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/cgracia/Desktop/act_Application/act_Application/Views/TablaAportaciones/Index.cshtml]
+[E:/cesar.gracia/Proyectos/C\#/act_Application/act_Application/Views/TablaAportaciones/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFibGFBcG9ydGFjaW9uZXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/cgracia/Desktop/act_Application/act_Application/Views/TablaMultas/Index.cshtml]
+[E:/cesar.gracia/Proyectos/C\#/act_Application/act_Application/Views/TablaMultas/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFibGFNdWx0YXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/cgracia/Desktop/act_Application/act_Application/Views/_ViewImports.cshtml]
+[E:/cesar.gracia/Proyectos/C\#/act_Application/act_Application/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/cgracia/Desktop/act_Application/act_Application/Views/_ViewStart.cshtml]
+[E:/cesar.gracia/Proyectos/C\#/act_Application/act_Application/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/cgracia/Desktop/act_Application/act_Application/Views/Shared/_Layout.cshtml]
+[E:/cesar.gracia/Proyectos/C\#/act_Application/act_Application/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-a84chinnm1
