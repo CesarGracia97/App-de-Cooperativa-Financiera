@@ -21,27 +21,31 @@
                     <input asp-for="Valor" class="input-monto" type="number" id="monto" name="monto" step="0.01" required>
                 </div>
             </div>
-
-
-            <label asp-for="Nbanco">Banco:</label>
-            <select  id="banco" name="banco" required>
-                <option value="Banco Pichincha">Banco Pichincha</option>
-                <option value="Banco Guayaquil">Banco Guayaquil</option>
-                <option value="Produbanco">Produbanco</option>
-                <option value="Banco del Austro">Banco del Austro</option>
-            </select>
-
-            <label asp-for="Cbancaria">Cuenta:</label>
-            <input class="input-cuenta" type="number" id="cuenta" name="cuenta" min="10000000" max="999999999999" required>
-            <div class="error-message">Rango de números mínimo 8 y máximo 12</div>
-
-            <label asp-for="FechaAportacion">Fecha de Hoy:</label>
-            <div class="date">
-                <script>
-                    date = new Date().toLocaleDateString();
-                    document.write(date);
-                </script>
+            <div class="form-group">
+                <label asp-for="Nbanco">Banco:</label>
+                <select id="banco" name="banco" required>
+                    <option value="Banco Pichincha">Banco Pichincha</option>
+                    <option value="Banco Guayaquil">Banco Guayaquil</option>
+                    <option value="Produbanco">Produbanco</option>
+                    <option value="Banco del Austro">Banco del Austro</option>
+                </select>
             </div>
+            <div class="form-group">
+                <label asp-for="Cbancaria">Cuenta:</label>
+                <input class="input-cuenta" type="number" id="cuenta" name="cuenta" min="10000000" max="999999999999" required>
+                <div class="error-message">Rango de números mínimo 8 y máximo 12</div>
+            </div>
+            <div class ="form-group">
+                <label asp-for="FechaAportacion">Fecha de Hoy:</label>
+                <div class="date">
+                    <script>
+                        date = new Date().toLocaleDateString();
+                        document.write(date);
+                    </script>
+                </div>
+            </div>
+
+
 
             <label asp-for="Razon">Razón:</label>
             <select id="razon" name="razon" required>
