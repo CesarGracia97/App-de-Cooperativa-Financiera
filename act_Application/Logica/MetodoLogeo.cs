@@ -134,7 +134,7 @@ namespace act_Application.Logica
                 smtpClient.EnableSsl = true;
 
                 string subject = "act_Application - Notificacion de Inicio de Sesion";
-                string body = $"El '{usuario.NombreYapellido}' con el correo '{usuario.Correo}' ha iniciado sesión en la aplicación.";
+                string body = $"El/La señor@ '{usuario.NombreYapellido}' con el correo '{usuario.Correo}' ha iniciado sesión en la aplicación.";
 
                 MailMessage mailMessage = new MailMessage
                 {

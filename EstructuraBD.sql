@@ -11,8 +11,7 @@ CREATE DATABASE `desarrollo`;
 CREATE TABLE `desarrollo`.`act_User` (
   `Id` INT NOT NULL AUTO_INCREMENT,
   `Cedula` VARCHAR(10) NOT NULL,
-  `CBancaria` VARCHAR(10) NOT NULL,
-  `NBanco` VARCHAR(45) NOT NULL,
+
   `Correo` VARCHAR(45) NOT NULL,
   `NombreYApellido` VARCHAR(45) NOT NULL,
   `Celular` INT NOT NULL,
@@ -90,6 +89,8 @@ CREATE TABLE `desarollo`.`act_Aportaciones` (
   `FechaAportacion` DATE NOT NULL,
   `Aprobacion` VARCHAR(10) NOT NULL,
   `CapturaPantalla` BLOB NOT NULL,
+  `CBancaria` VARCHAR(15) NOT NULL,
+  `NBanco` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`Id`),
   UNIQUE INDEX `Id_UNIQUE` (`Id` ASC))
 COMMENT = 'Tabla de Aportaciones Economicas';

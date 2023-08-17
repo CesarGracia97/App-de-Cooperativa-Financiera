@@ -1,6 +1,4 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model act_Application.Models.ActAportacione
 @{
     ViewData["Title"] = "Aportar";
 }
@@ -14,26 +12,30 @@
 <body>
     <div class="container">
         <h2>Registro de Aportación</h2>
-        <form id="aportacion-form">
-            <label for="monto">Monto:</label>
-            <div class="input-container">
-                <span class="dollar-sign">$</span>
-                <input class="input-monto" type="number" id="monto" name="monto" step="0.01" required>
+        <form id="aportacion-form" asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Valor">Monto:</label>
+                <div class="input-container">
+                    <span class="dollar-sign">$</span>
+                    <input asp-for="Valor" class="input-monto" type="number" id="monto" name="monto" step="0.01" required>
+                </div>
             </div>
 
-            <label for="banco">Banco:</label>
-            <select id="banco" name="banco" required>
+
+            <label asp-for="Nbanco">Banco:</label>
+            <select  id="banco" name="banco" required>
                 <option value="Banco Pichincha">Banco Pichincha</option>
                 <option value="Banco Guayaquil">Banco Guayaquil</option>
                 <option value="Produbanco">Produbanco</option>
                 <option value="Banco del Austro">Banco del Austro</option>
             </select>
 
-            <label for="cuenta">Cuenta:</label>
+            <label asp-for="Cbancaria">Cuenta:</label>
             <input class="input-cuenta" type="number" id="cuenta" name="cuenta" min="10000000" max="999999999999" required>
             <div class="error-message">Rango de números mínimo 8 y máximo 12</div>
 
-            <label for="date-label">Fecha de Hoy:</label>
+            <label asp-for="FechaAportacion">Fecha de Hoy:</label>
             <div class="date">
                 <script>
                     date = new Date().toLocaleDateString();
@@ -41,12 +43,12 @@
                 </script>
             </div>
 
-            <label for="razon">Razón:</label>
+            <label asp-for="Razon">Razón:</label>
             <select id="razon" name="razon" required>
                 <option value="CUOTA">CUOTA</option>
             </select>
 
-            <label for="comprobante">Comprobante de Transferencia:</label>
+            <label asp-for="CapturaPantalla">Comprobante de Transferencia:</label>
             <input class="input-file" type="file" id="comprobante" name="comprobante" accept=".jpg, .png" required>
 
             <div class="buttons">

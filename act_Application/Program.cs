@@ -61,4 +61,3 @@ app.MapControllerRoute(
 RolesInitializer.CreateRoles(app);
 
 app.Run();
-
