@@ -1,4 +1,5 @@
-﻿@model act_Application.Models.Sistema.AportarViewModel;
+﻿@model act_Application.Models.BD.ActAportacione;
+@using act_Application.Models.Sistema
 @{
     ViewData["Title"] = "Aportar";
 }
@@ -13,12 +14,12 @@
     <div class="container">
         <h2>Registro de Aportación</h2>
 
-        <form asp-action="AportarPost" method="post">
+        <form asp-action="Aportar" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
             <!--Contenedor de la Fecha-->
             <div class="form-group">
-                <label asp-for="Aportacion.FechaAportacion">Fecha de Hoy:</label>
+                <label asp-for="FechaAportacion">Fecha de Hoy:</label>
                 <div class="date">
                     <script>
                         date = new Date().toLocaleDateString();
@@ -29,10 +30,10 @@
 
             <!--Contenedor de Nombre del Banco-->
             <div class="form-group">
-                <label asp-for="Aportacion.Nbanco">Banco:</label>
-                <select asp-for="Aportacion.Nbanco" id="banco" name="banco" required>
+                <label asp-for="Nbanco">Banco:</label>
+                <select asp-for="Nbanco" id="banco" name="banco" required>
                     <option value="">Seleccionar un Banco...</option>
-                    @foreach (var item in Model.ItemsNBanco)
+                    @foreach (var item in ViewData["ItemsNBanco"] as List<act_Application.Models.Sistema.AportarItem>)
                     {
                         <option value="@item.Id">@item.Nombre</option>
                     }
@@ -41,17 +42,17 @@
 
             <!--Contenedor de la Cuenta Bancaria-->
             <div class="form-group">
-                <label asp-for="Aportacion.Cbancaria">Cuenta:</label>
-                <input asp-for="Aportacion.Cbancaria" class="input-cuenta" type="number" id="cuenta" name="cuenta" min="10000000" max="999999999999" required>
+                <label asp-for="Cbancaria">Cuenta:</label>
+                <input asp-for="Cbancaria" class="input-cuenta" type="number" id="cuenta" name="cuenta" min="10000000" max="999999999999" required>
                 <div class="error-message">Rango de números mínimo 8 y máximo 12</div>
             </div>
 
             <!--Contenedor de la Razon-->
             <div class="form-group">
-                <label asp-for="Aportacion.Razon">Razón:</label>
-                <select asp-for="Aportacion.Razon" id="razon" name="razon" required>
+                <label asp-for="Razon">Razón:</label>
+                <select asp-for="Razon" id="razon" name="razon" required>
                     <option value="">Seleccionar una Razon...</option>
-                    @foreach (var item in Model.ItemsRazon)
+                    @foreach (var item in ViewData["ItemsRazon"] as List<act_Application.Models.Sistema.AportarItem>)
                     {
                         <option value="@item.Id">@item.Nombre</option>
                     }
@@ -60,17 +61,17 @@
 
             <!--Contenedor de Valor-->
             <div class="form-group">
-                <label asp-for="Aportacion.Valor">Monto:</label>
+                <label asp-for="Valor">Monto:</label>
                 <div class="input-container">
                     <span class="dollar-sign">$</span>
-                    <input asp-for="Aportacion.Valor" class="input-monto" type="number" id="monto" name="monto" step="0.01" min="0.01" required>
+                    <input asp-for="Valor" class="input-monto" type="number" id="monto" name="monto" step="0.01" min="0.01" required>
                 </div>
             </div>
 
             <!--Contenedor de Captura de Pantalla-->
             <div class="form-group">
-                <label asp-for="Aportacion.CapturaPantalla">Comprobante de Transferencia:</label>
-                <input asp-for="Aportacion.CapturaPantalla" class="input-file" type="file" id="comprobante" name="comprobante" accept=".jpg, .png" required>
+                <label asp-for="CapturaPantalla">Comprobante de Transferencia:</label>
+                <input asp-for="CapturaPantalla" class="input-file" type="file" id="comprobante" name="comprobante" accept=".jpg, .png" required>
             </div>
 
             <!--Contenedor de los Botones-->
