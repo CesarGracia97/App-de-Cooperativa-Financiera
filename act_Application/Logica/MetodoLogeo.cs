@@ -1,11 +1,11 @@
 ﻿using System.Data;
-using act_Application.Models;
 using MySql.Data.MySqlClient;
 using act_Application.Helper;
 using System.Text.RegularExpressions;
 using System.Net.Mail;
 using System.Net;
 using act_Application.Services;
+using act_Application.Models.BD;
 
 namespace act_Application.Logica
 {
@@ -134,7 +134,7 @@ namespace act_Application.Logica
                 smtpClient.EnableSsl = true;
 
                 string subject = "act_Application - Notificacion de Inicio de Sesion";
-                string body = $"El/La señor@ '{usuario.NombreYapellido}' con el correo '{usuario.Correo}' ha iniciado sesión en la aplicación.";
+                string body = $"El '{usuario.NombreYapellido}' con el correo '{usuario.Correo}' ha iniciado sesión en la aplicación.";
 
                 MailMessage mailMessage = new MailMessage
                 {

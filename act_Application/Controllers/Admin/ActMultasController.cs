@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using act_Application.Models;
 using act_Application.Data.Data;
 using Microsoft.AspNetCore.Authorization;
 using act_Application.Logica.ComplementosLogicos;
+using act_Application.Models.BD;
 
 namespace act_Application.Controllers.Admin
 {

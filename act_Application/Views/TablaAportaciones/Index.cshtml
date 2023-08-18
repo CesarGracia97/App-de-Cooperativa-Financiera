@@ -1,6 +1,7 @@
-﻿@model IEnumerable<act_Application.Models.ActAportacione>;
+﻿@model IEnumerable<act_Application.Models.BD.ActAportacione>;
 @using System.Globalization;
 @using act_Application.Data;
+@using act_Application.Models.BD;
 @{
     ViewData["Title"] = "Tabla de Aportaciones";
     var aportacionRepository = new AportacionRepository();

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace act_Application.Models;
+namespace act_Application.Models.BD;
 
 public partial class ActMulta
 {
@@ -12,7 +12,7 @@ public partial class ActMulta
 
     public decimal Valor { get; set; }
 
-    public DateTime  FechaMulta { get; set; } 
+    public DateTime FechaMulta { get; set; }
 
     public int IdAportacion { get; set; }
 

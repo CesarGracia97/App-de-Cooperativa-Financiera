@@ -1,4 +1,4 @@
-﻿@model IEnumerable<act_Application.Models.ActUser>
+﻿@model IEnumerable<act_Application.Models.BD.ActUser>
 
 @{
     ViewData["Title"] = "Usuarios";
@@ -19,7 +19,7 @@
             <tr>
                 <th>
                     Cedula
-                </th>>
+                </th>
                 <th>
                     Correo
                 </th>
@@ -50,6 +50,7 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.Cedula)
                     </td>
+
                     <td>
                         @Html.DisplayFor(modelItem => item.Correo)
                     </td>

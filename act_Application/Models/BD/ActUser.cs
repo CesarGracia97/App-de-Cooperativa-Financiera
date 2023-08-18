@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace act_Application.Models;
+namespace act_Application.Models.BD;
 
 /// <summary>
 /// Tabla de Usuarios

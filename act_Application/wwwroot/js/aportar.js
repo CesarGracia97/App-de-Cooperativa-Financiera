@@ -1,6 +1,13 @@
 ﻿const form = document.getElementById("aportacion-form");
 const cuentaInput = document.getElementById("cuenta");
 const errorMessage = document.querySelector(".error-message");
+const fechaActualLabel = document.getElementById("fechaActual");
+
+document.getElementById("fechaActual").innerHTML = Date();
+
+const today = new Date();
+const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
+fechaActualLabel.textContent = today.toLocaleDateString('es-ES', options);
 
 cuentaInput.addEventListener("input", function () {
     if (cuentaInput.validity.valid) {

@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using act_Application.Models;
 using act_Application.Data.Data;
 using Microsoft.AspNetCore.Authorization;
+using act_Application.Models.BD;
 
 namespace act_Application.Controllers.Admin
 {

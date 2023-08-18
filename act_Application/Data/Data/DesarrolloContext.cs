@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using act_Application.Models;
+using act_Application.Models.BD;
 using Microsoft.EntityFrameworkCore;
 
 namespace act_Application.Data.Data;
@@ -47,10 +47,10 @@ public partial class DesarrolloContext : DbContext
             entity.Property(e => e.FechaAportacion).HasColumnType("date");
             entity.Property(e => e.IdUser).HasColumnType("int(11)");
             entity.Property(e => e.Valor).HasColumnType("decimal(10, 2)");
-            entity.Property(e => e.Nbanco).HasMaxLength(45).HasColumnName("NBanco");
-            entity.Property(e => e.Cbancaria).HasMaxLength(15).HasColumnName("CBancaria");
             entity.Property(e => e.Cuadrante1).HasColumnType("int(1)");
             entity.Property(e => e.Cuadrante2).HasColumnType("int(1)");
+            entity.Property(e => e.Cbancaria).HasMaxLength(15).HasColumnName("CBancaria");
+            entity.Property(e => e.Nbanco).HasMaxLength(45).HasColumnName("NBanco");
 
         });
 
@@ -129,7 +129,6 @@ public partial class DesarrolloContext : DbContext
 
             entity.ToTable("act_User", tb => tb.HasComment("Tabla de Usuarios"));
 
-
             entity.HasIndex(e => e.Cedula, "Cedula_UNIQUE").IsUnique();
 
             entity.HasIndex(e => e.Correo, "Correo_UNIQUE").IsUnique();
@@ -139,6 +138,7 @@ public partial class DesarrolloContext : DbContext
             entity.HasIndex(e => e.IdSocio, "fk_UserSocio_UserId");
 
             entity.Property(e => e.Id).HasColumnType("int(11)");
+
             entity.Property(e => e.Cedula).HasMaxLength(10).HasColumnName("Cedula");
             entity.Property(e => e.Celular).HasMaxLength(45).HasColumnName("Celular");
             entity.Property(e => e.Contrasena).HasMaxLength(75).HasColumnName("Contrasena");

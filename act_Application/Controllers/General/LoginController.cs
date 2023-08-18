@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authentication;
-using act_Application.Models;
 using act_Application.Logica;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Text;
 using System.Security.Cryptography;
 using Newtonsoft.Json;
+using act_Application.Models.BD;
 
 namespace act_Application.Controllers.General
 {
@@ -48,8 +48,9 @@ namespace act_Application.Controllers.General
                 {
                     claims.Add(new Claim(ClaimTypes.Name, objeto.NombreYapellido));
                     claims.Add(new Claim(ClaimTypes.Email, objeto.Correo));
-                    claims.Add(new Claim("Id", objeto.Id.ToString()));
+                    claims.Add(new Claim("Cedula", objeto.Cedula.ToString()));
                     claims.Add(new Claim("Rol", objetoRol.NombreRol));
+                    claims.Add(new Claim("DescripcionRol", objetoRol.DescripcionRol));
                     claims.Add(new Claim("IdRol", IdRol.ToString()));
                     claims.Add(new Claim("TipoUsuario", objeto.TipoUser));
                 }

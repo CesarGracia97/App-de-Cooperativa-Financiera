@@ -1,5 +1,5 @@
 ﻿namespace act_Application.Data.Data;
-using act_Application.Models;
+using act_Application.Models.BD;
 using Microsoft.Extensions.DependencyInjection;
 using System.Linq;
 

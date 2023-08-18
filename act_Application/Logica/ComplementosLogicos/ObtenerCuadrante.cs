@@ -1,4 +1,4 @@
-﻿using act_Application.Models;
+﻿using act_Application.Models.BD;
 
 namespace act_Application.Logica.ComplementosLogicos
 {

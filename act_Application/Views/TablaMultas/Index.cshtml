@@ -1,6 +1,7 @@
 ﻿@using System.Globalization;
 @using act_Application.Data.Data;
-@model IEnumerable<act_Application.Models.ActMulta>;
+@using act_Application.Models.BD;
+@model IEnumerable<act_Application.Models.BD.ActMulta>;
 @{
     ViewData["Title"] = "Tabla de Multas";
     var multaRepository = new MultaRepository();

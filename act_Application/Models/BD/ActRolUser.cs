@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace act_Application.Models;
+namespace act_Application.Models.BD;
 
 /// <summary>
 /// Tabla Relacion Rol Usuario

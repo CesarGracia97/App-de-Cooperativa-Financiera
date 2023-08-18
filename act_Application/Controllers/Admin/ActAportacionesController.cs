@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using act_Application.Models;
 using act_Application.Data.Data;
 using Microsoft.AspNetCore.Authorization;
 using act_Application.Logica.ComplementosLogicos;
+using act_Application.Models.BD;
 
 namespace act_Application.Controllers.Admin
 {
@@ -56,7 +56,7 @@ namespace act_Application.Controllers.Admin
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Razon,Valor,IdUser,FechaAportacion,Aprobacion,CapturaPantalla,Cuadrante1,Cuadrante2,CBancaria,NBanco")] ActAportacione actAportacione)
+        public async Task<IActionResult> Create([Bind("Id,Razon,Valor,IdUser,FechaAportacion,Aprobacion,CapturaPantalla,Cuadrante1,Cuadrante2")] ActAportacione actAportacione)
         {
             if (ModelState.IsValid)
             {
@@ -91,7 +91,7 @@ namespace act_Application.Controllers.Admin
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Razon,Valor,IdUser,FechaAportacion,Aprobacion,CapturaPantalla,Cuadrante1,Cuadrante2,CBancaria,NBanco")] ActAportacione actAportacione)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Razon,Valor,IdUser,FechaAportacion,Aprobacion,CapturaPantalla,Cuadrante1,Cuadrante2")] ActAportacione actAportacione)
         {
             if (id != actAportacione.Id)
             {

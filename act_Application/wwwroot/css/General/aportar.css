@@ -20,7 +20,16 @@ label {
     font-weight: bold;
 }
 
-select, .input-monto, .input-cuenta, .input-file {
+select, .input-cuenta, .input-file {
+    width: 100%;
+    padding: 8px 8px 8px 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.input-monto {
     width: 100%;
     padding: 8px 8px 8px 30px;
     margin-bottom: 10px;
@@ -29,15 +38,15 @@ select, .input-monto, .input-cuenta, .input-file {
     box-sizing: border-box;
 }
 
-    input-cuenta::-webkit-inner-spin-button,
-    input-cuenta::-webkit-outer-spin-button {
-        -webkit-appearance: none;
-        margin: 0;
-    }
+input-cuenta::-webkit-inner-spin-button,
+input-cuenta::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
 
 .dollar-sign {
     position: absolute;
-    top: 5px;
+    top: 8px;
     left: 15px;
     z-index: 1;
 }
@@ -50,8 +59,8 @@ select, .input-monto, .input-cuenta, .input-file {
 
 .date {
     justify-content: center;
-    text-align:center;
-    align-content:center;
+    text-align: center;
+    align-content: center;
 }
 
 .buttons {
@@ -82,5 +91,5 @@ select, .input-monto, .input-cuenta, .input-file {
     cursor: pointer;
     margin-left: 20px;
     margin-right: 20px;
-    justify-content:center;
+    justify-content: center;
 }

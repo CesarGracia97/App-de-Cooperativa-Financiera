@@ -1,5 +1,5 @@
 ﻿using act_Application.Helper;
-using act_Application.Models;
+using act_Application.Models.BD;
 using MySql.Data.MySqlClient;
 using System.Data;
 

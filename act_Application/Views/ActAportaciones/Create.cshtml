@@ -1,4 +1,4 @@
-﻿@model act_Application.Models.ActAportacione
+﻿@model act_Application.Models.BD.ActAportacione;
 
 @{
     ViewData["Title"] = "Crear Aportacion";
@@ -71,5 +71,7 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
