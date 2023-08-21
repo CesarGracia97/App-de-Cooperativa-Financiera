@@ -26,7 +26,7 @@
                     <span asp-validation-for="IdUser" class="text-danger">Id del Usuario</span>
                 </div>
                 <div class="btn-container">
-                    <input class="btn" type="submit" value="Guardar"/>
+                    <input class="btn" type="submit" value="Guardar" />
                     <a class="btn-return" asp-action="Index">Regresar</a>
                 </div>
             </form>
@@ -35,5 +35,7 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

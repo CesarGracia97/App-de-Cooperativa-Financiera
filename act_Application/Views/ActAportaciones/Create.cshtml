@@ -1,4 +1,4 @@
-﻿@model act_Application.Models.BD.ActAportacione;
+﻿@model act_Application.Models.BD.ActAportacione
 
 @{
     ViewData["Title"] = "Crear Aportacion";
@@ -36,9 +36,6 @@
                     <label asp-for="FechaAportacion" class="control-label">Fecha de la Aportacion</label>
                     <input asp-for="FechaAportacion" class="form-control" />
                     <span asp-validation-for="FechaAportacion" class="text-danger"></span>
-                    @{
-                        act_Application.Logica.ComplementosLogicos.ObtenerCuadrante.CalcularCuadrantesAportacione(Model);
-                    }
                 </div>
 
                 <div class="form-group">

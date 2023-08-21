@@ -1,0 +1,95 @@
+﻿@model act_Application.Models.BD.ActAportacione;
+@using act_Application.Models.Sistema
+@{
+    ViewData["Title"] = "Aportar";
+}
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/General/aportar.css">
+    <script src="~/js/aportar.js"> </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+    <div class="container">
+        <h2>Registro de Aportación</h2>
+
+        <form asp-action="Create" method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <!--Contenedor de la Fecha-->
+            <div class="form-group">
+                <label asp-for="FechaAportacion">Fecha de Hoy:</label>
+                <div class="date">
+                    <script>
+                        date = new Date().toLocaleDateString();
+                        document.write(date);
+                    </script>
+                </div>
+            </div>
+
+            <!--Contenedor de Nombre del Banco-->
+            <div class="form-group">
+                <label asp-for="Nbanco">Banco:</label>
+                <select asp-for="Nbanco" id="banco" >
+                    <option value="">Seleccionar un Banco...</option>
+                    @foreach (var item in ViewData["ItemsNBanco"] as List<act_Application.Models.Sistema.AportarItem>)
+                    {
+                        <option value="@item.Nombre">@item.Nombre</option>
+                    }
+                    <input type="hidden" asp-for="Nbanco" />
+                </select>
+                <span asp-validation-for="Nbanco" class="text-danger"></span>
+            </div>
+
+            <!--Contenedor de la Cuenta Bancaria-->
+            <div class="form-group">
+                <label asp-for="Cbancaria">Cuenta:</label>
+                <input asp-for="Cbancaria" class="input-cuenta" type="number" min="10000000" max="999999999999"/>
+                <span asp-validation-for="Cbancaria" class="text-danger"></span>
+            </div>
+
+            <!--Contenedor de la Razon-->
+            <div class="form-group">
+                <label asp-for="Razon">Razón:</label>
+                <select asp-for="Razon" id="razon" name="razon" required>
+                    <option value="">Seleccionar una Razon...</option>
+                    @foreach (var item in ViewData["ItemsRazon"] as List<act_Application.Models.Sistema.AportarItem>)
+                    {
+                        <option value="@item.Nombre">@item.Nombre</option>
+                    }
+                </select>
+                <span asp-validation-for="Razon" class="text-danger"></span>
+            </div>
+
+            <!--Contenedor de Valor-->
+            <div class="form-group">
+                <label asp-for="Valor">Monto:</label>
+                <div class="input-container">
+                    <span class="dollar-sign">$</span>
+                    <input asp-for="Valor" class="input-monto" type="number" step="0.01" min="0.01"/>
+                    <span asp-validation-for="Valor" class="text-danger"></span>
+                </div>
+            </div>
+
+            <!--Contenedor de Captura de Pantalla-->
+            <div class="form-group">
+                <label asp-for="CapturaPantalla">Comprobante de Transferencia:</label>
+                <input asp-for="CapturaPantalla" id="imagen" name="imagen" class="input-file" type="file" accept=".jpg, .png" />
+                <span asp-validation-for="CapturaPantalla" class="text-danger"></span>
+            </div>
+
+            <!--Contenedor de los Botones-->
+            <div class="buttons">
+                <button type="submit" class="save-button">Guardar</button>
+                <button type="button" class="clear-button">Limpiar</button>
+            </div>
+
+        </form>
+    </div>
+</body>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

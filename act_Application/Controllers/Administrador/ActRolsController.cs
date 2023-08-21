@@ -5,11 +5,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using act_Application.Data.Data;
-using Microsoft.AspNetCore.Authorization;
 using act_Application.Models.BD;
+using act_Application.Data.Data;
 
-namespace act_Application.Controllers.Admin
+namespace act_Application.Controllers.Administrador
 {
     public class ActRolsController : Controller
     {
@@ -21,7 +20,6 @@ namespace act_Application.Controllers.Admin
         }
 
         // GET: ActRols
-        [Authorize(Policy = "AdminOnly")]
         public async Task<IActionResult> Index()
         {
             return _context.ActRols != null ?
@@ -30,7 +28,6 @@ namespace act_Application.Controllers.Admin
         }
 
         // GET: ActRols/Details/5
-        [Authorize(Policy = "AdminOnly")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.ActRols == null)
@@ -49,7 +46,6 @@ namespace act_Application.Controllers.Admin
         }
 
         // GET: ActRols/Create
-        [Authorize(Policy = "AdminOnly")]
         public IActionResult Create()
         {
             return View();
@@ -72,7 +68,6 @@ namespace act_Application.Controllers.Admin
         }
 
         // GET: ActRols/Edit/5
-        [Authorize(Policy = "AdminOnly")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.ActRols == null)
@@ -124,7 +119,6 @@ namespace act_Application.Controllers.Admin
         }
 
         // GET: ActRols/Delete/5
-        [Authorize(Policy = "AdminOnly")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.ActRols == null)
@@ -143,7 +137,6 @@ namespace act_Application.Controllers.Admin
         }
 
         // POST: ActRols/Delete/5
-        [Authorize(Policy = "AdminOnly")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

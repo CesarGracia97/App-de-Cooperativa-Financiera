@@ -1,37 +1,18 @@
 ﻿@model act_Application.Models.BD.ActAportacione
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Edit";
 }
 
-<h1>Create</h1>
+<h1>Edit</h1>
 
 <h4>ActAportacione</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="IdUser" class="control-label"></label>
-                <input asp-for="IdUser" class="form-control" />
-                <span asp-validation-for="IdUser" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="FechaAportacion" class="control-label"></label>
-                <input asp-for="FechaAportacion" class="form-control" />
-                <span asp-validation-for="FechaAportacion" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Nbanco" class="control-label"></label>
-                <input asp-for="Nbanco" class="form-control" />
-                <span asp-validation-for="Nbanco" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Cbancaria" class="control-label"></label>
-                <input asp-for="Cbancaria" class="form-control" />
-                <span asp-validation-for="Cbancaria" class="text-danger"></span>
-            </div>
+            <input type="hidden" asp-for="Id" />
             <div class="form-group">
                 <label asp-for="Razon" class="control-label"></label>
                 <input asp-for="Razon" class="form-control" />
@@ -43,14 +24,24 @@
                 <span asp-validation-for="Valor" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="CapturaPantalla" class="control-label"></label>
-                <input asp-for="CapturaPantalla" class="form-control" />
-                <span asp-validation-for="CapturaPantalla" class="text-danger"></span>
+                <label asp-for="IdUser" class="control-label"></label>
+                <input asp-for="IdUser" class="form-control" />
+                <span asp-validation-for="IdUser" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FechaAportacion" class="control-label"></label>
+                <input asp-for="FechaAportacion" class="form-control" />
+                <span asp-validation-for="FechaAportacion" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Aprobacion" class="control-label"></label>
                 <input asp-for="Aprobacion" class="form-control" />
                 <span asp-validation-for="Aprobacion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CapturaPantalla" class="control-label"></label>
+                <input asp-for="CapturaPantalla" class="form-control" />
+                <span asp-validation-for="CapturaPantalla" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Cuadrante1" class="control-label"></label>
@@ -63,7 +54,17 @@
                 <span asp-validation-for="Cuadrante2" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <label asp-for="Nbanco" class="control-label"></label>
+                <input asp-for="Nbanco" class="form-control" />
+                <span asp-validation-for="Nbanco" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cbancaria" class="control-label"></label>
+                <input asp-for="Cbancaria" class="form-control" />
+                <span asp-validation-for="Cbancaria" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
     </div>

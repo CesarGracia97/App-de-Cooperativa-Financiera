@@ -1,5 +1,4 @@
 ﻿@model act_Application.Models.BD.ActRol
-
 @{
     ViewData["Title"] = "Crear Roles";
 }
@@ -36,5 +35,7 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

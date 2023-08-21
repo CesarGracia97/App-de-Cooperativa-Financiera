@@ -1,5 +1,4 @@
 ﻿@model act_Application.Models.BD.ActMulta
-
 @{
     ViewData["Title"] = "Crear Multas";
 }
@@ -55,5 +54,7 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

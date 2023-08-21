@@ -5,13 +5,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using act_Application.Data.Data;
-using Microsoft.AspNetCore.Authorization;
-using System.Text;
-using System.Security.Cryptography;
 using act_Application.Models.BD;
+using act_Application.Data.Data;
 
-namespace act_Application.Controllers.Admin
+namespace act_Application.Controllers.Administrador
 {
     public class ActUsersController : Controller
     {
@@ -23,7 +20,6 @@ namespace act_Application.Controllers.Admin
         }
 
         // GET: ActUsers
-        [Authorize(Policy = "AdminOnly")]
         public async Task<IActionResult> Index()
         {
             return _context.ActUsers != null ?
@@ -32,7 +28,6 @@ namespace act_Application.Controllers.Admin
         }
 
         // GET: ActUsers/Details/5
-        [Authorize(Policy = "AdminOnly")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.ActUsers == null)
@@ -51,7 +46,6 @@ namespace act_Application.Controllers.Admin
         }
 
         // GET: ActUsers/Create
-        [Authorize(Policy = "AdminOnly")]
         public IActionResult Create()
         {
             return View();
@@ -74,7 +68,6 @@ namespace act_Application.Controllers.Admin
         }
 
         // GET: ActUsers/Edit/5
-        [Authorize(Policy = "AdminOnly")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.ActUsers == null)
@@ -95,7 +88,7 @@ namespace act_Application.Controllers.Admin
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Cedula,Cbancaria,Correo,NombreYapellido,Celular,Contrasena,TipoUser,Ncaccionario")] ActUser actUser)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Cedula,Correo,NombreYapellido,Celular,Contrasena,TipoUser,IdSocio")] ActUser actUser)
         {
             if (id != actUser.Id)
             {
@@ -104,9 +97,6 @@ namespace act_Application.Controllers.Admin
 
             if (ModelState.IsValid)
             {
-                // Encriptar la contraseña antes de actualizarla en la base de datos
-                actUser.Contrasena = HashPassword(actUser.Contrasena);
-
                 try
                 {
                     _context.Update(actUser);
@@ -129,7 +119,6 @@ namespace act_Application.Controllers.Admin
         }
 
         // GET: ActUsers/Delete/5
-        [Authorize(Policy = "AdminOnly")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.ActUsers == null)
@@ -169,20 +158,6 @@ namespace act_Application.Controllers.Admin
         private bool ActUserExists(int id)
         {
             return (_context.ActUsers?.Any(e => e.Id == id)).GetValueOrDefault();
-        }
-
-        public string HashPassword(string password)
-        {
-            using (var sha256 = SHA256.Create())
-            {
-                byte[] bytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
-                StringBuilder builder = new StringBuilder();
-                foreach (byte b in bytes)
-                {
-                    builder.Append(b.ToString("x2"));
-                }
-                return builder.ToString();
-            }
         }
     }
 }

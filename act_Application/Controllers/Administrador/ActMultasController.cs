@@ -1,11 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using act_Application.Data.Data;
-using Microsoft.AspNetCore.Authorization;
-using act_Application.Logica.ComplementosLogicos;
 using act_Application.Models.BD;
+using act_Application.Data.Data;
 
-namespace act_Application.Controllers.Admin
+namespace act_Application.Controllers.Administrador
 {
     public class ActMultasController : Controller
     {
@@ -17,7 +20,6 @@ namespace act_Application.Controllers.Admin
         }
 
         // GET: ActMultas
-        [Authorize(Policy = "AdminOnly")]
         public async Task<IActionResult> Index()
         {
             return _context.ActMultas != null ?
@@ -26,7 +28,6 @@ namespace act_Application.Controllers.Admin
         }
 
         // GET: ActMultas/Details/5
-        [Authorize(Policy = "AdminOnly")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.ActMultas == null)
@@ -45,7 +46,6 @@ namespace act_Application.Controllers.Admin
         }
 
         // GET: ActMultas/Create
-        [Authorize(Policy = "AdminOnly")]
         public IActionResult Create()
         {
             return View();
@@ -56,9 +56,8 @@ namespace act_Application.Controllers.Admin
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,IdUser,Porcentaje,Idaportacion,Valor,FechaMulta,Cuadrante1,Cuadrante2")] ActMulta actMulta)
+        public async Task<IActionResult> Create([Bind("Id,IdUser,Porcentaje,Valor,FechaMulta,IdAportacion,Cuadrante1,Cuadrante2")] ActMulta actMulta)
         {
-            ObtenerCuadrante.CalcularCuadrantesMulta(actMulta);
             if (ModelState.IsValid)
             {
                 _context.Add(actMulta);
@@ -69,7 +68,6 @@ namespace act_Application.Controllers.Admin
         }
 
         // GET: ActMultas/Edit/5
-        [Authorize(Policy = "AdminOnly")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.ActMultas == null)
@@ -90,7 +88,7 @@ namespace act_Application.Controllers.Admin
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,IdUser,Porcentaje,Idaportacion,Valor,FechaMulta,Cuadrante1,Cuadrante2")] ActMulta actMulta)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,IdUser,Porcentaje,Valor,FechaMulta,IdAportacion,Cuadrante1,Cuadrante2")] ActMulta actMulta)
         {
             if (id != actMulta.Id)
             {
@@ -99,7 +97,6 @@ namespace act_Application.Controllers.Admin
 
             if (ModelState.IsValid)
             {
-                ObtenerCuadrante.CalcularCuadrantesMulta(actMulta);
                 try
                 {
                     _context.Update(actMulta);
@@ -122,7 +119,6 @@ namespace act_Application.Controllers.Admin
         }
 
         // GET: ActMultas/Delete/5
-        [Authorize(Policy = "AdminOnly")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.ActMultas == null)
