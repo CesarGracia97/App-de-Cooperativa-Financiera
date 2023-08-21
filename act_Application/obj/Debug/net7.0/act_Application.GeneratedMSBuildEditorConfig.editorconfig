@@ -112,28 +112,8 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWN0VXNlcnNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/cgracia/Desktop/act_Application/act_Application/Views/Aportar/Aportar.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXBvcnRhclxBcG9ydGFyLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Users/cgracia/Desktop/act_Application/act_Application/Views/Aportar/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXBvcnRhclxDcmVhdGUuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/cgracia/Desktop/act_Application/act_Application/Views/Aportar/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXBvcnRhclxEZWxldGUuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/cgracia/Desktop/act_Application/act_Application/Views/Aportar/Details.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXBvcnRhclxEZXRhaWxzLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/cgracia/Desktop/act_Application/act_Application/Views/Aportar/Edit.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXBvcnRhclxFZGl0LmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/cgracia/Desktop/act_Application/act_Application/Views/Aportar/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXBvcnRhclxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/cgracia/Desktop/act_Application/act_Application/Views/Home/Index.cshtml]
