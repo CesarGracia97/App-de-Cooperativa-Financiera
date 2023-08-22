@@ -24,5 +24,5 @@ public partial class ActUser
 
     public string TipoUser { get; set; }
 
-    public int IdSocio { get; set; }
+    public string IdSocio { get; set; }
 }

@@ -1,19 +1,17 @@
 ﻿@model IEnumerable<act_Application.Models.BD.ActTransaccione>
 
 @{
-    ViewData["Title"] = "Transacciones";
+    ViewData["Title"] = "Index";
 }
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/css/Administracion/estiloTablaIndex.css" />
 </head>
-
 <div class="content-text">
     <h1>Transacciones</h1>
-
     <p>
-        <a class="button create" asp-action="Create">Crear nuevo Registro</a>
+        <a class="button create" asp-action="Create">Crear Nuevo Registro</a>
     </p>
     <table class="table">
         <thead>
@@ -25,7 +23,19 @@
                     Id del Usuario
                 </th>
                 <th>
-                    Accion
+                    Valor
+                </th>
+                <th>
+                    Estado
+                </th>
+                <th>
+                    Fecha del Pago total del Prestamo
+                </th>
+                <th>
+                    Fecha de Inicio de pago de Cuotas del Prestamo
+                </th>
+                <th>
+                    Acciones
                 </th>
             </tr>
         </thead>
@@ -40,6 +50,18 @@
                         @Html.DisplayFor(modelItem => item.IdUser)
                     </td>
                     <td>
+                        @Html.DisplayFor(modelItem => item.Valor)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Estado)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FechPagoTotalPrestamo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FechaIniCoutaPrestamo)
+                    </td>
+                    <td>
                         <a class="button edit" asp-action="Edit" asp-route-id="@item.Id">Editar</a>
                         <a class="button delete" asp-action="Delete" asp-route-id="@item.Id">Eliminar</a>
                     </td>
@@ -47,5 +69,4 @@
             }
         </tbody>
     </table>
-
 </div>

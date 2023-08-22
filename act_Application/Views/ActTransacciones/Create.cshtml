@@ -1,7 +1,7 @@
 ﻿@model act_Application.Models.BD.ActTransaccione
 
 @{
-    ViewData["Title"] = "Crear Transacciones";
+    ViewData["Title"] = "Create";
 }
 <head>
     <meta charset="utf-8" />
@@ -26,6 +26,26 @@
                     <input asp-for="IdUser" class="form-control" />
                     <span asp-validation-for="IdUser" class="text-danger"></span>
                 </div>
+                <div class="form-group">
+                    <label asp-for="Valor" class="control-label">Id del Usuario</label>
+                    <input asp-for="Valor" class="form-control" />
+                    <span asp-validation-for="Valor" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Estado" class="control-label">Id del Usuario</label>
+                    <input asp-for="Estado" class="form-control" />
+                    <span asp-validation-for="Estado" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="FechaIniCoutaPrestamo" class="control-label">Id del Usuario</label>
+                    <input asp-for="FechaIniCoutaPrestamo" class="form-control" />
+                    <span asp-validation-for="FechaIniCoutaPrestamo" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="FechPagoTotalPrestamo" class="control-label">Id del Usuario</label>
+                    <input asp-for="FechPagoTotalPrestamo" class="form-control" />
+                    <span asp-validation-for="FechPagoTotalPrestamo" class="text-danger"></span>
+                </div>
                 <div class="btn-container">
                     <input class="btn" type="submit" value="Crear" />
                     <a class="btn-return" asp-action="Index">Regresar</a>
@@ -35,8 +55,7 @@
     </div>
 </div>
 
+
 @section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

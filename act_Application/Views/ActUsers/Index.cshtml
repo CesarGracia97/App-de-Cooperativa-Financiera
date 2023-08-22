@@ -67,14 +67,7 @@
                         @Html.DisplayFor(modelItem => item.TipoUser)
                     </td>
                     <td>
-                        @if (item.IdSocio == 0)
-                        {
-                            <text>(No posee invitado)</text>
-                        }
-                        else
-                        {
-                            @Html.DisplayFor(modelItem => item.IdSocio)
-                        }
+                        @Html.DisplayFor(modelItem => item.IdSocio)
                     </td>
                     <td>
                         <a class="button edit" asp-action="Edit" asp-route-id="@item.Id">Editar</a>

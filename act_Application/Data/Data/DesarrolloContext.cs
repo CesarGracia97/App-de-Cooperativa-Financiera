@@ -122,8 +122,12 @@ public partial class DesarrolloContext : DbContext
             entity.HasIndex(e => e.IdUser, "fk_Transacciones_User");
 
             entity.Property(e => e.Id).HasColumnType("int(11)");
+            entity.Property(e => e.Estado).HasMaxLength(45);
+            entity.Property(e => e.FechPagoTotalPrestamo).HasColumnType("date");
+            entity.Property(e => e.FechaIniCoutaPrestamo).HasColumnType("date");
             entity.Property(e => e.IdUser).HasColumnType("int(11)");
             entity.Property(e => e.Razon).HasMaxLength(45);
+            entity.Property(e => e.Valor).HasPrecision(10);
         });
 
         modelBuilder.Entity<ActUser>(entity =>
@@ -138,17 +142,13 @@ public partial class DesarrolloContext : DbContext
 
             entity.HasIndex(e => e.Id, "Id_UNIQUE").IsUnique();
 
-            entity.HasIndex(e => e.IdSocio, "fk_UserSocio_UserId");
-
             entity.Property(e => e.Id).HasColumnType("int(11)");
             entity.Property(e => e.Cedula).HasMaxLength(10);
             entity.Property(e => e.Celular).HasMaxLength(45);
             entity.Property(e => e.Contrasena).HasMaxLength(75);
             entity.Property(e => e.Correo).HasMaxLength(45);
-            entity.Property(e => e.IdSocio).HasColumnType("int(11)");
-            entity.Property(e => e.NombreYapellido)
-                .HasMaxLength(45)
-                .HasColumnName("NombreYApellido");
+            entity.Property(e => e.IdSocio).HasMaxLength(100);
+            entity.Property(e => e.NombreYapellido).HasMaxLength(45).HasColumnName("NombreYApellido");
             entity.Property(e => e.TipoUser).HasMaxLength(45);
         });
 

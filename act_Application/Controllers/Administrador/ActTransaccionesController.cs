@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using act_Application.Models.BD;
 using act_Application.Data.Data;
+using act_Application.Models.BD;
 
 namespace act_Application.Controllers.Administrador
 {
@@ -22,27 +22,7 @@ namespace act_Application.Controllers.Administrador
         // GET: ActTransacciones
         public async Task<IActionResult> Index()
         {
-            return _context.ActTransacciones != null ?
-                        View(await _context.ActTransacciones.ToListAsync()) :
-                        Problem("Entity set 'DesarrolloContext.ActTransacciones'  is null.");
-        }
-
-        // GET: ActTransacciones/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null || _context.ActTransacciones == null)
-            {
-                return NotFound();
-            }
-
-            var actTransaccione = await _context.ActTransacciones
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (actTransaccione == null)
-            {
-                return NotFound();
-            }
-
-            return View(actTransaccione);
+              return View(await _context.ActTransacciones.ToListAsync());
         }
 
         // GET: ActTransacciones/Create
@@ -56,7 +36,7 @@ namespace act_Application.Controllers.Administrador
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Razon,IdUser")] ActTransaccione actTransaccione)
+        public async Task<IActionResult> Create([Bind("Id,Razon,IdUser,Valor,Estado,FechPagoTotalPrestamo,FechaIniCoutaPrestamo")] ActTransaccione actTransaccione)
         {
             if (ModelState.IsValid)
             {
@@ -88,7 +68,7 @@ namespace act_Application.Controllers.Administrador
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Razon,IdUser")] ActTransaccione actTransaccione)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Razon,IdUser,Valor,Estado,FechPagoTotalPrestamo,FechaIniCoutaPrestamo")] ActTransaccione actTransaccione)
         {
             if (id != actTransaccione.Id)
             {
@@ -150,14 +130,14 @@ namespace act_Application.Controllers.Administrador
             {
                 _context.ActTransacciones.Remove(actTransaccione);
             }
-
+            
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool ActTransaccioneExists(int id)
         {
-            return (_context.ActTransacciones?.Any(e => e.Id == id)).GetValueOrDefault();
+          return _context.ActTransacciones.Any(e => e.Id == id);
         }
     }
 }

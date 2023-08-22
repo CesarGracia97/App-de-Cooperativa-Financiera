@@ -13,4 +13,12 @@ public partial class ActTransaccione
     public string Razon { get; set; } = null!;
 
     public int IdUser { get; set; }
+
+    public decimal Valor { get; set; }
+
+    public string Estado { get; set; } = null!;
+
+    public DateTime FechPagoTotalPrestamo { get; set; }
+
+    public DateTime FechaIniCoutaPrestamo { get; set; }
 }

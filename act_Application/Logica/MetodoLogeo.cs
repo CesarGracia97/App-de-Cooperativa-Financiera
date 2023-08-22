@@ -41,7 +41,6 @@ namespace act_Application.Logica
                             Celular = rd["Celular"].ToString(),
                             Contrasena = rd["Contrasena"].ToString(),
                             TipoUser = rd["TipoUser"].ToString(),
-                            IdSocio = rd.GetInt32(rd.GetOrdinal("IdSocio")),
                         };
 
                     }

@@ -1,7 +1,7 @@
 ﻿@model act_Application.Models.BD.ActTransaccione
 
 @{
-    ViewData["Title"] = "Editar Transacciones";
+    ViewData["Title"] = "Edit";
 }
 <header>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -18,12 +18,32 @@
                 <div class="form-group">
                     <label asp-for="Razon" class="control-label"></label>
                     <input asp-for="Razon" class="form-control" />
-                    <span asp-validation-for="Razon" class="text-danger">Razon</span>
+                    <span asp-validation-for="Razon" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="IdUser" class="control-label"></label>
                     <input asp-for="IdUser" class="form-control" />
-                    <span asp-validation-for="IdUser" class="text-danger">Id del Usuario</span>
+                    <span asp-validation-for="IdUser" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Valor" class="control-label"></label>
+                    <input asp-for="Valor" class="form-control" />
+                    <span asp-validation-for="Valor" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Estado" class="control-label"></label>
+                    <input asp-for="Estado" class="form-control" />
+                    <span asp-validation-for="Estado" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="FechPagoTotalPrestamo" class="control-label"></label>
+                    <input asp-for="FechPagoTotalPrestamo" class="form-control" />
+                    <span asp-validation-for="FechPagoTotalPrestamo" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="FechaIniCoutaPrestamo" class="control-label"></label>
+                    <input asp-for="FechaIniCoutaPrestamo" class="form-control" />
+                    <span asp-validation-for="FechaIniCoutaPrestamo" class="text-danger"></span>
                 </div>
                 <div class="btn-container">
                     <input class="btn" type="submit" value="Guardar" />
@@ -35,7 +55,5 @@
 </div>
 
 @section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
