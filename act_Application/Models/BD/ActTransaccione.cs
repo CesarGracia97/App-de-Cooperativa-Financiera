@@ -21,4 +21,6 @@ public partial class ActTransaccione
     public DateTime FechPagoTotalPrestamo { get; set; }
 
     public DateTime FechaIniCoutaPrestamo { get; set; }
+
+    public string TipoCuota  { get; set;}
 }

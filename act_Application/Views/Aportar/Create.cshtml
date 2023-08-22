@@ -7,7 +7,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/css/General/aportar.css">
-    <script src="~/js/aportar.js"> </script>
+    <script src="~/js/aportar.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
@@ -33,7 +33,7 @@
                 <label asp-for="Nbanco">Banco:</label>
                 <select asp-for="Nbanco" id="banco" >
                     <option value="">Seleccionar un Banco...</option>
-                    @foreach (var item in ViewData["ItemsNBanco"] as List<act_Application.Models.Sistema.AportarItem>)
+                    @foreach (var item in ViewData["ItemsNBanco"] as List<act_Application.Models.Sistema.ListItems>)
                     {
                         <option value="@item.Nombre">@item.Nombre</option>
                     }
@@ -54,7 +54,7 @@
                 <label asp-for="Razon">Razón:</label>
                 <select asp-for="Razon" id="razon" name="razon" required>
                     <option value="">Seleccionar una Razon...</option>
-                    @foreach (var item in ViewData["ItemsRazon"] as List<act_Application.Models.Sistema.AportarItem>)
+                    @foreach (var item in ViewData["ItemsRazon"] as List<act_Application.Models.Sistema.ListItems>)
                     {
                         <option value="@item.Nombre">@item.Nombre</option>
                     }

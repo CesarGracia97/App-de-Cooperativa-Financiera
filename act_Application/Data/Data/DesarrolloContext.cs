@@ -128,6 +128,8 @@ public partial class DesarrolloContext : DbContext
             entity.Property(e => e.IdUser).HasColumnType("int(11)");
             entity.Property(e => e.Razon).HasMaxLength(45);
             entity.Property(e => e.Valor).HasPrecision(10);
+            entity.Property(e => e.TipoCuota).HasMaxLength(45);
+
         });
 
         modelBuilder.Entity<ActUser>(entity =>

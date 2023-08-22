@@ -29,23 +29,23 @@ namespace act_Application.Controllers.General
                           Problem("Entity set 'DesarrolloContext.ActAportaciones'  is null.");
         }
 
-        private List<AportarItem> ObtenerItemsNBanco()          //Contenido de la Lista Bancos
+        private List<ListItems> ObtenerItemsNBanco()          //Contenido de la Lista Bancos
         {
-            return new List<AportarItem>
+            return new List<ListItems>
             {
-                new AportarItem { Id = 1, Nombre = "Banco Pichincha" },
-                new AportarItem { Id = 2, Nombre = "Banco Guayaquil" },
-                new AportarItem { Id = 3, Nombre = "Produbanco" },
-                new AportarItem { Id = 4, Nombre = "Banco del Austro" },
-                new AportarItem { Id = 5, Nombre = "Banco Internacional" }
+                new ListItems { Id = 1, Nombre = "Banco Pichincha" },
+                new ListItems { Id = 2, Nombre = "Banco Guayaquil" },
+                new ListItems { Id = 3, Nombre = "Produbanco" },
+                new ListItems { Id = 4, Nombre = "Banco del Austro" },
+                new ListItems { Id = 5, Nombre = "Banco Internacional" }
             };
         }
 
-        private List<AportarItem> ObtenerItemsRazon()           //Contenido de la Lista Razones
+        private List<ListItems> ObtenerItemsRazon()           //Contenido de la Lista Razones
         {
-            return new List<AportarItem>
+            return new List<ListItems>
             {
-                new AportarItem { Id = 1, Nombre = "CUOTA" }
+                new ListItems { Id = 1, Nombre = "CUOTA" }
             };
         }
 

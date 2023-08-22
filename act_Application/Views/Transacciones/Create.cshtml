@@ -1,58 +1,84 @@
 ﻿@model act_Application.Models.BD.ActTransaccione
-
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Transaccion";
 }
-
-<h1>Create</h1>
-
-<h4>ActTransaccione</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="~/css/General/Transacciones.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="~/js/Transaccion.js"> </script>
+</head>
+<div>
+    <div class="container">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <!--Contenedor de la Razon-->
             <div class="form-group">
-                <label asp-for="Razon" class="control-label"></label>
-                <input asp-for="Razon" class="form-control" />
+                <label asp-for="Razon">Razón:</label>
+                <select asp-for="Razon" id="Razon" placeholder="Seleccionar una Razon...">
+                    <option value="0">Seleccionar una Razon...</option>
+                    @foreach (var item in ViewData["ItemsRazon"] as List<act_Application.Models.Sistema.ListItems>)
+                    {
+                        <option value="@item.Nombre">@item.Nombre</option>
+                    }
+                    <input type="hidden" asp-for="Razon" />
+                </select>
                 <span asp-validation-for="Razon" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="IdUser" class="control-label"></label>
-                <input asp-for="IdUser" class="form-control" />
-                <span asp-validation-for="IdUser" class="text-danger"></span>
+
+            <!--Contenedor de Valor-->
+            <div class="form-group" >
+                <label asp-for="Valor">Monto:</label>
+                <div class="input-container">
+                    <span class="dollar-sign">$</span>
+                    <input asp-for="Valor" class="input-monto" type="number" step="0.01" min="0.01" id="Valor" placeholder="Agrega el Valor que deseas que te presten" />
+                    <span asp-validation-for="Valor" class="text-danger"></span>
+                </div>
             </div>
+
+            <!--Contenedor de la Fecha de Inicio del Prestamo-->
             <div class="form-group">
-                <label asp-for="Valor" class="control-label"></label>
-                <input asp-for="Valor" class="form-control" />
-                <span asp-validation-for="Valor" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Estado" class="control-label"></label>
-                <input asp-for="Estado" class="form-control" />
-                <span asp-validation-for="Estado" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="FechPagoTotalPrestamo" class="control-label"></label>
-                <input asp-for="FechPagoTotalPrestamo" class="form-control" />
-                <span asp-validation-for="FechPagoTotalPrestamo" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="FechaIniCoutaPrestamo" class="control-label"></label>
-                <input asp-for="FechaIniCoutaPrestamo" class="form-control" />
+                <label asp-for="FechaIniCoutaPrestamo">Fecha de Inicio del Prestamo (CUOTA)</label>
+                @{
+                    DateTime minDate = DateTime.Now.AddDays(7); // Calcula la fecha actual + 1 semana
+                    string minDateStr = minDate.ToString("yyyy-MM-dd");
+                }
+                <input asp-for="FechaIniCoutaPrestamo" type="date" class="inpdate" min="@minDateStr" id="FechaIniCoutaPrestamo" placeholder="Agrega una fecha de Inicio de Cuotas" />
                 <span asp-validation-for="FechaIniCoutaPrestamo" class="text-danger"></span>
             </div>
+
+
+            <!--Contenedor del Tipo de Cuota-->
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <label asp-for="TipoCuota">Tipo de Cuota:</label>
+                <select asp-for="TipoCuota" id="TipoCuota" placeholder="Seleccionar un Tipo de Cuota...">
+                    <option value="">Seleccionar un Tipo de Cuota...</option>
+                    @foreach (var item in ViewData["ItemsCuota"] as List<act_Application.Models.Sistema.ListItems>)
+                    {
+                        <option value="@item.Nombre">@item.Nombre</option>
+                    }
+                    <input type="hidden" asp-for="TipoCuota" />
+                </select>
+                <span asp-validation-for="TipoCuota" class="text-danger"></span>
+            </div>
+
+            <!--Contenedor de la Fecha de Pago Total-->
+            <div class="form-group">
+                <label asp-for="FechPagoTotalPrestamo">Fecha Tentativa de Pago (CUOTA)</label>
+                <input asp-for="FechPagoTotalPrestamo" type="date" class="inpdate" id="FechPagoTotalPrestamo" placeholder="Seleccionar una Fecha de Pago Total Tentativa" />
+                <span asp-validation-for="FechPagoTotalPrestamo" class="text-danger"></span>
+            </div>
+
+            <!--Contenedor de los Botones-->
+            <div class="buttons">
+                <button type="submit" class="save-button">Guardar</button>
+                <button type="button" onclick="limpiar()" class="clear-button">Limpiar</button>
             </div>
         </form>
     </div>
 </div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

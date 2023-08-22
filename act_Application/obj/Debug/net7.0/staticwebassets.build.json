@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "DOC5chD/q/sMvLaNt25xXqVurnyHuNM38y4HhZFKsSw=",
+  "Hash": "LuR/hJp9xBuEwEdagiGCURSPe1tGwIcRCcec6d5FjKE=",
   "Source": "act_Application",
   "BasePath": "_content/act_Application",
   "Mode": "Default",
@@ -202,6 +202,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\General\\tablaMultas.css"
+    },
+    {
+      "Identity": "C:\\Users\\cgracia\\Desktop\\act_Application\\act_Application\\wwwroot\\css\\General\\Transacciones.css",
+      "SourceId": "act_Application",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\cgracia\\Desktop\\act_Application\\act_Application\\wwwroot\\",
+      "BasePath": "_content/act_Application",
+      "RelativePath": "css/General/Transacciones.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\General\\Transacciones.css"
     },
     {
       "Identity": "C:\\Users\\cgracia\\Desktop\\act_Application\\act_Application\\wwwroot\\favicon.ico",
@@ -406,6 +423,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\site.js"
+    },
+    {
+      "Identity": "C:\\Users\\cgracia\\Desktop\\act_Application\\act_Application\\wwwroot\\js\\Transaccion.js",
+      "SourceId": "act_Application",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\cgracia\\Desktop\\act_Application\\act_Application\\wwwroot\\",
+      "BasePath": "_content/act_Application",
+      "RelativePath": "js/Transaccion.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\Transaccion.js"
     },
     {
       "Identity": "C:\\Users\\cgracia\\Desktop\\act_Application\\act_Application\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",

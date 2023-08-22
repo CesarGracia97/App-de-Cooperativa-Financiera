@@ -9,8 +9,8 @@ namespace act_Application.Models.Sistema
             Aportacion = new ActAportacione(); // Inicializar aquí
         }
         public ActAportacione Aportacion { get; set; }
-        public List<AportarItem> ItemsNBanco { get; set; }
-        public List<AportarItem> ItemsRazon { get; set; }
+        public List<ListItems> ItemsNBanco { get; set; }
+        public List<ListItems> ItemsRazon { get; set; }
     }
 }
 
