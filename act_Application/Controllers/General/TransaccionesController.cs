@@ -33,16 +33,14 @@ namespace act_Application.Controllers.General
             return new List<ListItems>
             {
                 new ListItems { Id = 1, Nombre = "PAGO UNICO" },
-                new ListItems { Id = 2, Nombre = "PAGO MENSUAL" },
-                new ListItems { Id = 3, Nombre = "PAGO SEMANAL" },
-                new ListItems { Id = 4, Nombre = "PAGO TRIMESTRAL" }
-
+                new ListItems { Id = 2, Nombre = "PAGO MENSUAL" }
             };
         }
 
         // GET: Aportar/Create
         public IActionResult Create()
         {
+
             ViewData["ItemsRazon"] = ObtenerItemsRazon();
             ViewData["ItemsCuota"] = ObtenerItemsCuota();
 
@@ -58,12 +56,13 @@ namespace act_Application.Controllers.General
         {
             if (ModelState.IsValid)
             {
-                DateTime minDate = DateTime.Now.AddDays(7); // Calcula la fecha actual + 1 semana
-
-                if (actTransaccione.FechaIniCoutaPrestamo < minDate)
+                if (actTransaccione.TipoCuota == "PAGO UNICO")
                 {
-                    ModelState.AddModelError("FechaIniCoutaPrestamo", "La fecha de inicio del préstamo debe ser al menos una semana después de la fecha actual.");
-                    return View(actTransaccione);
+                    actTransaccione.FechPagoTotalPrestamo = actTransaccione.FechaIniCoutaPrestamo.AddDays(31);
+                }
+                else if (actTransaccione.TipoCuota == "PAGO MENSUAL")
+                {
+                    actTransaccione.FechPagoTotalPrestamo = actTransaccione.FechaIniCoutaPrestamo.AddDays(90);
                 }
                 _context.Add(actTransaccione);
                 await _context.SaveChangesAsync();

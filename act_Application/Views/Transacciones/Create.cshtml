@@ -1,6 +1,10 @@
 ﻿@model act_Application.Models.BD.ActTransaccione
 @{
     ViewData["Title"] = "Transaccion";
+    DateTime minDate = DateTime.Now.AddDays(7);
+    string minDateStr = minDate.ToString("yyyy-MM-dd");
+    DateTime minDateP = DateTime.Now.AddDays(45);
+    string minDateStrP = minDateP.ToString("yyyy-MM-dd");
 }
 <head>
     <meta charset="utf-8" />
@@ -38,18 +42,6 @@
                 </div>
             </div>
 
-            <!--Contenedor de la Fecha de Inicio del Prestamo-->
-            <div class="form-group">
-                <label asp-for="FechaIniCoutaPrestamo">Fecha de Inicio del Prestamo (CUOTA)</label>
-                @{
-                    DateTime minDate = DateTime.Now.AddDays(7); // Calcula la fecha actual + 1 semana
-                    string minDateStr = minDate.ToString("yyyy-MM-dd");
-                }
-                <input asp-for="FechaIniCoutaPrestamo" type="date" class="inpdate" min="@minDateStr" id="FechaIniCoutaPrestamo" placeholder="Agrega una fecha de Inicio de Cuotas" />
-                <span asp-validation-for="FechaIniCoutaPrestamo" class="text-danger"></span>
-            </div>
-
-
             <!--Contenedor del Tipo de Cuota-->
             <div class="form-group">
                 <label asp-for="TipoCuota">Tipo de Cuota:</label>
@@ -64,10 +56,46 @@
                 <span asp-validation-for="TipoCuota" class="text-danger"></span>
             </div>
 
+            <!--Contenedor de la Fecha de Inicio del Prestamo-->
+            <div class="form-group">
+                <label asp-for="FechaIniCoutaPrestamo">Fecha de Inicio del Prestamo (CUOTA)</label>
+                <input asp-for="FechaIniCoutaPrestamo" type="date" class="inpdate" min="@minDateStr" max="@minDateStrP" id="FechaIniCoutaPrestamo"/>
+                <span asp-validation-for="FechaIniCoutaPrestamo" class="text-danger"></span>
+            </div>
+
+            <script>
+                var tipoCuotaSelect = document.getElementById('TipoCuota');
+                var fechaInicioInput = document.getElementById('FechaIniCoutaPrestamo');
+
+                tipoCuotaSelect.addEventListener('change', function () {
+                    var selectedOption = tipoCuotaSelect.options[tipoCuotaSelect.selectedIndex].value;
+
+                    // Obtener la fecha seleccionada en el input de Fecha de Inicio
+                    var fechaInicio = new Date(fechaInicioInput.value);
+
+                    // Crear una nueva fecha para Fecha de Pago Total
+                    var fechaPagoTotal = new Date(fechaInicio);
+
+                    switch (selectedOption) {
+                        case 'PAGO UNICO':
+                            fechaPagoTotal.setMonth(fechaInicio.getMonth() + 1);
+                            break;
+                        case 'PAGO MENSUAL':
+                            fechaPagoTotal.setMonth(fechaInicio.getMonth() + 3);
+                            break;
+                    }
+                    // Formatear la fecha para el input de Fecha de Pago Total
+                    var fechaPagoTotalFormatted = fechaPagoTotal.toISOString().split('T')[0];
+
+                    // Establecer el valor mínimo en el input de Fecha de Pago Total
+                    document.getElementById('FechPagoTotalPrestamo').min = fechaPagoTotalFormatted;
+                });
+            </script>
+
             <!--Contenedor de la Fecha de Pago Total-->
             <div class="form-group">
                 <label asp-for="FechPagoTotalPrestamo">Fecha Tentativa de Pago (CUOTA)</label>
-                <input asp-for="FechPagoTotalPrestamo" type="date" class="inpdate" id="FechPagoTotalPrestamo" placeholder="Seleccionar una Fecha de Pago Total Tentativa" />
+                <input asp-for="FechPagoTotalPrestamo" type="date" class="inpdate" id="FechPagoTotalPrestamo" min="@minDateStrP" />
                 <span asp-validation-for="FechPagoTotalPrestamo" class="text-danger"></span>
             </div>
 
