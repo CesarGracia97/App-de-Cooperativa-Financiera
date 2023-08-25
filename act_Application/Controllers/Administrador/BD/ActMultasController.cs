@@ -5,92 +5,90 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using act_Application.Models.BD;
 using act_Application.Data.Data;
+using act_Application.Models.BD;
 
-namespace act_Application.Controllers.Administrador
+namespace act_Application.Controllers.Administrador.BD
 {
-    public class ActAportacionesController : Controller
+    public class ActMultasController : Controller
     {
         private readonly DesarrolloContext _context;
 
-        public ActAportacionesController(DesarrolloContext context)
+        public ActMultasController(DesarrolloContext context)
         {
             _context = context;
         }
 
-        // GET: ActAportaciones
+        // GET: ActMultas
         public async Task<IActionResult> Index()
         {
-            return _context.ActAportaciones != null ?
-                        View(await _context.ActAportaciones.ToListAsync()) :
-                        Problem("Entity set 'DesarrolloContext.ActAportaciones'  is null.");
+              return View(await _context.ActMultas.ToListAsync());
         }
 
-        // GET: ActAportaciones/Details/5
+        // GET: ActMultas/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.ActAportaciones == null)
+            if (id == null || _context.ActMultas == null)
             {
                 return NotFound();
             }
 
-            var actAportacione = await _context.ActAportaciones
+            var actMulta = await _context.ActMultas
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (actAportacione == null)
+            if (actMulta == null)
             {
                 return NotFound();
             }
 
-            return View(actAportacione);
+            return View(actMulta);
         }
 
-        // GET: ActAportaciones/Create
+        // GET: ActMultas/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: ActAportaciones/Create
+        // POST: ActMultas/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Razon,Valor,IdUser,FechaAportacion,Aprobacion,CapturaPantalla,Cuadrante1,Cuadrante2,Nbanco,Cbancaria")] ActAportacione actAportacione)
+        public async Task<IActionResult> Create([Bind("Id,IdUser,Porcentaje,Valor,FechaMulta,IdAportacion,Cuadrante1,Cuadrante2")] ActMulta actMulta)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(actAportacione);
+                _context.Add(actMulta);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(actAportacione);
+            return View(actMulta);
         }
 
-        // GET: ActAportaciones/Edit/5
+        // GET: ActMultas/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.ActAportaciones == null)
+            if (id == null || _context.ActMultas == null)
             {
                 return NotFound();
             }
 
-            var actAportacione = await _context.ActAportaciones.FindAsync(id);
-            if (actAportacione == null)
+            var actMulta = await _context.ActMultas.FindAsync(id);
+            if (actMulta == null)
             {
                 return NotFound();
             }
-            return View(actAportacione);
+            return View(actMulta);
         }
 
-        // POST: ActAportaciones/Edit/5
+        // POST: ActMultas/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Razon,Valor,IdUser,FechaAportacion,Aprobacion,CapturaPantalla,Cuadrante1,Cuadrante2,Nbanco,Cbancaria")] ActAportacione actAportacione)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,IdUser,Porcentaje,Valor,FechaMulta,IdAportacion,Cuadrante1,Cuadrante2")] ActMulta actMulta)
         {
-            if (id != actAportacione.Id)
+            if (id != actMulta.Id)
             {
                 return NotFound();
             }
@@ -99,12 +97,12 @@ namespace act_Application.Controllers.Administrador
             {
                 try
                 {
-                    _context.Update(actAportacione);
+                    _context.Update(actMulta);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ActAportacioneExists(actAportacione.Id))
+                    if (!ActMultaExists(actMulta.Id))
                     {
                         return NotFound();
                     }
@@ -115,49 +113,49 @@ namespace act_Application.Controllers.Administrador
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(actAportacione);
+            return View(actMulta);
         }
 
-        // GET: ActAportaciones/Delete/5
+        // GET: ActMultas/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.ActAportaciones == null)
+            if (id == null || _context.ActMultas == null)
             {
                 return NotFound();
             }
 
-            var actAportacione = await _context.ActAportaciones
+            var actMulta = await _context.ActMultas
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (actAportacione == null)
+            if (actMulta == null)
             {
                 return NotFound();
             }
 
-            return View(actAportacione);
+            return View(actMulta);
         }
 
-        // POST: ActAportaciones/Delete/5
+        // POST: ActMultas/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.ActAportaciones == null)
+            if (_context.ActMultas == null)
             {
-                return Problem("Entity set 'DesarrolloContext.ActAportaciones'  is null.");
+                return Problem("Entity set 'DesarrolloContext.ActMultas'  is null.");
             }
-            var actAportacione = await _context.ActAportaciones.FindAsync(id);
-            if (actAportacione != null)
+            var actMulta = await _context.ActMultas.FindAsync(id);
+            if (actMulta != null)
             {
-                _context.ActAportaciones.Remove(actAportacione);
+                _context.ActMultas.Remove(actMulta);
             }
-
+            
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ActAportacioneExists(int id)
+        private bool ActMultaExists(int id)
         {
-            return (_context.ActAportaciones?.Any(e => e.Id == id)).GetValueOrDefault();
+          return _context.ActMultas.Any(e => e.Id == id);
         }
     }
 }

@@ -8,69 +8,87 @@ using Microsoft.EntityFrameworkCore;
 using act_Application.Data.Data;
 using act_Application.Models.BD;
 
-namespace act_Application.Controllers.Administrador
+namespace act_Application.Controllers.Administrador.BD
 {
-    public class ActTransaccionesController : Controller
+    public class ActNotificacionesController : Controller
     {
         private readonly DesarrolloContext _context;
 
-        public ActTransaccionesController(DesarrolloContext context)
+        public ActNotificacionesController(DesarrolloContext context)
         {
             _context = context;
         }
 
-        // GET: ActTransacciones
+        // GET: ActNotificaciones
         public async Task<IActionResult> Index()
         {
-              return View(await _context.ActTransacciones.ToListAsync());
+            return View(await _context.ActNotificaciones.ToListAsync());
         }
 
-        // GET: ActTransacciones/Create
+        // GET: ActNotificaciones/Details/5
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null || _context.ActNotificaciones == null)
+            {
+                return NotFound();
+            }
+
+            var actNotificacione = await _context.ActNotificaciones
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (actNotificacione == null)
+            {
+                return NotFound();
+            }
+
+            return View(actNotificacione);
+        }
+
+        // GET: ActNotificaciones/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: ActTransacciones/Create
+        // POST: ActNotificaciones/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Razon,IdUser,Valor,Estado,FechPagoTotalPrestamo,FechaIniCoutaPrestamo")] ActTransaccione actTransaccione)
+        public async Task<IActionResult> Create([Bind("Id,IdUser,Razon,Descripcion,FechaNotificacion")] ActNotificacione actNotificacione)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(actTransaccione);
+                _context.Add(actNotificacione);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(actTransaccione);
+            return View(actNotificacione);
         }
 
-        // GET: ActTransacciones/Edit/5
+        // GET: ActNotificaciones/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.ActTransacciones == null)
+            if (id == null || _context.ActNotificaciones == null)
             {
                 return NotFound();
             }
 
-            var actTransaccione = await _context.ActTransacciones.FindAsync(id);
-            if (actTransaccione == null)
+            var actNotificacione = await _context.ActNotificaciones.FindAsync(id);
+            if (actNotificacione == null)
             {
                 return NotFound();
             }
-            return View(actTransaccione);
+            return View(actNotificacione);
         }
 
-        // POST: ActTransacciones/Edit/5
+        // POST: ActNotificaciones/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Razon,IdUser,Valor,Estado,FechPagoTotalPrestamo,FechaIniCoutaPrestamo")] ActTransaccione actTransaccione)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,IdUser,Razon,Descripcion,FechaNotificacion")] ActNotificacione actNotificacione)
         {
-            if (id != actTransaccione.Id)
+            if (id != actNotificacione.Id)
             {
                 return NotFound();
             }
@@ -79,12 +97,12 @@ namespace act_Application.Controllers.Administrador
             {
                 try
                 {
-                    _context.Update(actTransaccione);
+                    _context.Update(actNotificacione);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ActTransaccioneExists(actTransaccione.Id))
+                    if (!ActNotificacioneExists(actNotificacione.Id))
                     {
                         return NotFound();
                     }
@@ -95,49 +113,49 @@ namespace act_Application.Controllers.Administrador
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(actTransaccione);
+            return View(actNotificacione);
         }
 
-        // GET: ActTransacciones/Delete/5
+        // GET: ActNotificaciones/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.ActTransacciones == null)
+            if (id == null || _context.ActNotificaciones == null)
             {
                 return NotFound();
             }
 
-            var actTransaccione = await _context.ActTransacciones
+            var actNotificacione = await _context.ActNotificaciones
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (actTransaccione == null)
+            if (actNotificacione == null)
             {
                 return NotFound();
             }
 
-            return View(actTransaccione);
+            return View(actNotificacione);
         }
 
-        // POST: ActTransacciones/Delete/5
+        // POST: ActNotificaciones/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.ActTransacciones == null)
+            if (_context.ActNotificaciones == null)
             {
-                return Problem("Entity set 'DesarrolloContext.ActTransacciones'  is null.");
+                return Problem("Entity set 'DesarrolloContext.ActNotificaciones'  is null.");
             }
-            var actTransaccione = await _context.ActTransacciones.FindAsync(id);
-            if (actTransaccione != null)
+            var actNotificacione = await _context.ActNotificaciones.FindAsync(id);
+            if (actNotificacione != null)
             {
-                _context.ActTransacciones.Remove(actTransaccione);
+                _context.ActNotificaciones.Remove(actNotificacione);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ActTransaccioneExists(int id)
+        private bool ActNotificacioneExists(int id)
         {
-          return _context.ActTransacciones.Any(e => e.Id == id);
+            return _context.ActNotificaciones.Any(e => e.Id == id);
         }
     }
 }

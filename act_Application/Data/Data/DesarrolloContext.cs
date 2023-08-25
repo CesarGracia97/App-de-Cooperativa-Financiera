@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using act_Application.Models.BD;
+﻿using act_Application.Models.BD;
 using Microsoft.EntityFrameworkCore;
 
 namespace act_Application.Data.Data;
@@ -18,7 +16,11 @@ public partial class DesarrolloContext : DbContext
 
     public virtual DbSet<ActAportacione> ActAportaciones { get; set; }
 
+    public virtual DbSet<ActCuota> ActCuotas { get; set; }
+
     public virtual DbSet<ActMulta> ActMultas { get; set; }
+
+    public virtual DbSet<ActNotificacione> ActNotificaciones { get; set; }
 
     public virtual DbSet<ActRol> ActRols { get; set; }
 
@@ -42,7 +44,6 @@ public partial class DesarrolloContext : DbContext
 
             entity.Property(e => e.Id).HasColumnType("int(11)");
             entity.Property(e => e.Aprobacion).HasMaxLength(10);
-            entity.Property(e => e.CapturaPantalla).HasColumnType("longblob");
             entity.Property(e => e.Cbancaria)
                 .HasMaxLength(15)
                 .HasColumnName("CBancaria");
@@ -55,6 +56,26 @@ public partial class DesarrolloContext : DbContext
                 .HasColumnName("NBanco");
             entity.Property(e => e.Razon).HasMaxLength(45);
             entity.Property(e => e.Valor).HasPrecision(10);
+        });
+
+        modelBuilder.Entity<ActCuota>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PRIMARY");
+
+            entity.ToTable("act_Cuotas", tb => tb.HasComment("Tabla de Cuotas"));
+
+            entity.HasIndex(e => e.Id, "Id_UNIQUE").IsUnique();
+
+            entity.HasIndex(e => e.IdTransaccion, "fk_Cuotas_Transacciones");
+
+            entity.HasIndex(e => e.IdUser, "fk_Cuotas_User");
+
+            entity.Property(e => e.Id).HasColumnType("int(11)");
+            entity.Property(e => e.Estado).HasMaxLength(45);
+            entity.Property(e => e.FechaCuota).HasColumnType("date");
+            entity.Property(e => e.IdTransaccion).HasColumnType("int(11)");
+            entity.Property(e => e.IdUser).HasColumnType("int(11)");
+            entity.Property(e => e.ValorCuota).HasPrecision(10);
         });
 
         modelBuilder.Entity<ActMulta>(entity =>
@@ -77,6 +98,23 @@ public partial class DesarrolloContext : DbContext
             entity.Property(e => e.IdUser).HasColumnType("int(11)");
             entity.Property(e => e.Porcentaje).HasPrecision(10);
             entity.Property(e => e.Valor).HasPrecision(10);
+        });
+
+        modelBuilder.Entity<ActNotificacione>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PRIMARY");
+
+            entity.ToTable("act_Notificaciones", tb => tb.HasComment("Tabla de Notificaciones"));
+
+            entity.HasIndex(e => e.IdUser, "fk_Notificaciones_User");
+
+            entity.HasIndex(e => e.Id, "idact_Notificaciones_UNIQUE").IsUnique();
+
+            entity.Property(e => e.Id).HasColumnType("int(11)");
+            entity.Property(e => e.Descripcion).HasColumnType("varchar(50000)");
+            entity.Property(e => e.FechaNotificacion).HasColumnType("datetime");
+            entity.Property(e => e.IdUser).HasColumnType("int(11)");
+            entity.Property(e => e.Razon).HasMaxLength(90);
         });
 
         modelBuilder.Entity<ActRol>(entity =>
@@ -123,13 +161,13 @@ public partial class DesarrolloContext : DbContext
 
             entity.Property(e => e.Id).HasColumnType("int(11)");
             entity.Property(e => e.Estado).HasMaxLength(45);
-            entity.Property(e => e.FechPagoTotalPrestamo).HasColumnType("date");
+            entity.Property(e => e.FechaEntregaDinero).HasColumnType("date");
             entity.Property(e => e.FechaIniCoutaPrestamo).HasColumnType("date");
+            entity.Property(e => e.FechaPagoTotalPrestamo).HasColumnType("date");
             entity.Property(e => e.IdUser).HasColumnType("int(11)");
             entity.Property(e => e.Razon).HasMaxLength(45);
-            entity.Property(e => e.Valor).HasPrecision(10);
             entity.Property(e => e.TipoCuota).HasMaxLength(45);
-
+            entity.Property(e => e.Valor).HasPrecision(10);
         });
 
         modelBuilder.Entity<ActUser>(entity =>
@@ -144,13 +182,17 @@ public partial class DesarrolloContext : DbContext
 
             entity.HasIndex(e => e.Id, "Id_UNIQUE").IsUnique();
 
+            entity.HasIndex(e => e.IdSocio, "fk_UserSocio_UserId");
+
             entity.Property(e => e.Id).HasColumnType("int(11)");
             entity.Property(e => e.Cedula).HasMaxLength(10);
             entity.Property(e => e.Celular).HasMaxLength(45);
             entity.Property(e => e.Contrasena).HasMaxLength(75);
             entity.Property(e => e.Correo).HasMaxLength(45);
-            entity.Property(e => e.IdSocio).HasMaxLength(100);
-            entity.Property(e => e.NombreYapellido).HasMaxLength(45).HasColumnName("NombreYApellido");
+            entity.Property(e => e.IdSocio).HasColumnType("int(11)");
+            entity.Property(e => e.NombreYapellido)
+                .HasMaxLength(45)
+                .HasColumnName("NombreYApellido");
             entity.Property(e => e.TipoUser).HasMaxLength(45);
         });
 

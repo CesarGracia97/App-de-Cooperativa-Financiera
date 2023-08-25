@@ -27,7 +27,7 @@
                     <span asp-validation-for="IdUser" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="Valor" class="control-label">IValor</label>
+                    <label asp-for="Valor" class="control-label">Valor</label>
                     <input asp-for="Valor" class="form-control" />
                     <span asp-validation-for="Valor" class="text-danger"></span>
                 </div>
@@ -38,13 +38,18 @@
                 </div>
                 <div class="form-group">
                     <label asp-for="FechaIniCoutaPrestamo" class="control-label">Fecha de Inicio del Prestamo (CUOTA)</label>
-                    <input asp-for="FechaIniCoutaPrestamo" class="form-control" />
+                    <input asp-for="FechaIniCoutaPrestamo" type="date" class="form-control" />
                     <span asp-validation-for="FechaIniCoutaPrestamo" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="FechPagoTotalPrestamo" class="control-label">Fecha de Pago Total del Prestamo</label>
-                    <input asp-for="FechPagoTotalPrestamo" class="form-control" />
-                    <span asp-validation-for="FechPagoTotalPrestamo" class="text-danger"></span>
+                    <label asp-for="FechaEntregaDinero" class="control-label">Fecha Entrega del Dinero</label>
+                    <input asp-for="FechaEntregaDinero" type="date" class="form-control" />
+                    <span asp-validation-for="FechaEntregaDinero" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="FechaPagoTotalPrestamo" class="control-label">Fecha de Pago Total del Prestamo</label>
+                    <input asp-for="FechaPagoTotalPrestamo" class="form-control" />
+                    <span asp-validation-for="FechaPagoTotalPrestamo" type="date" class="text-danger"></span>
                 </div>
                 <div class="btn-container">
                     <input class="btn" type="submit" value="Crear" />
@@ -57,5 +62,7 @@
 
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

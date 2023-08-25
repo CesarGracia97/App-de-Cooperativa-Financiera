@@ -42,9 +42,6 @@
                     <label asp-for="FechaMulta" class="control-label">Fecha  de Multa</label>
                     <input asp-for="FechaMulta" class="form-control" />
                     <span asp-validation-for="FechaMulta" class="text-danger"></span>
-                    @{
-                        act_Application.Logica.ComplementosLogicos.ObtenerCuadrante.CalcularCuadrantesMulta(Model);
-                    }
                 </div>
 
                 <div class="btn-container">

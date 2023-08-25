@@ -24,7 +24,7 @@ public partial class ActMulta
     public int Cuadrante1 { get; set; }
 
     public int Cuadrante2 { get; set; }
-   
+
     [NotMapped]
     public string NombreUsuario { get; set; }
 
@@ -33,8 +33,6 @@ public partial class ActMulta
 
     [NotMapped]
     public List<DetalleMulta> DetallesMulta { get; set; }
-
-
 }
 
 public class DetalleMulta

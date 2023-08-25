@@ -1,0 +1,49 @@
+﻿@model act_Application.Models.BD.ActCuota
+
+@{
+    ViewData["Title"] = "Eliminar Cuotas";
+}
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/Administracion/estiloEliminar.css" />
+</head>
+<div class="content-text">
+    <h1>Eliminar Cuotas</h1>
+    <hr />
+    <div class="container">
+        <table>
+            <tr>
+                <td class="titulo">Id User</td>
+                <td class="texto">@Html.DisplayFor(model => model.IdUser)</td>
+            </tr>
+            <tr>
+                <td class="titulo">Id Transaccion</td>
+                <td class="texto">@Html.DisplayFor(model => model.IdTransaccion)</td>
+            </tr>
+            <tr>
+                <td class="titulo">Valor CUota</td>
+                <td class="texto">@Html.DisplayFor(model => model.IdUser)</td>
+            </tr>
+            <tr>
+                <td class="titulo">Id del Usuario</td>
+                <td class="texto">@Html.DisplayFor(model => model.ValorCuota)</td>
+            </tr>
+            <tr>
+                <td class="titulo">Fecha de la Cuota</td>
+                <td class="texto">@Html.DisplayFor(model => model.FechaCuota)</td>
+            </tr>
+            <tr>
+                <td class="titulo">Estado</td>
+                <td class="texto">@Html.DisplayFor(model => model.Estado)</td>
+            </tr>
+        </table>
+    </div>
+    <div class="btn-container">
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="Id" />
+            <input type="submit" value="Eliminar" class="btn-delite" />
+            <a class="btn-return" asp-action="Index">Regresar</a>
+        </form>
+    </div>
+</div>

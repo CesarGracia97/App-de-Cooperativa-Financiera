@@ -49,18 +49,10 @@ namespace act_Application.Controllers.General
         // POST: Transacciones/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Razon,IdUser,Valor,Estado,FechPagoTotalPrestamo,FechaIniCoutaPrestamo,TipoCuota")] ActTransaccione actTransaccione)
+        public async Task<IActionResult> Create([Bind("Id,Razon,IdUser,Valor,Estado,FechPagoTotalPrestamo,FechaEntregaDinero,FechaIniCoutaPrestamo,TipoCuota")] ActTransaccione actTransaccione)
         {
             if (ModelState.IsValid)
             {
-                if (actTransaccione.TipoCuota == "PAGO UNICO")
-                {
-                    actTransaccione.FechPagoTotalPrestamo = actTransaccione.FechaIniCoutaPrestamo.AddDays(31);
-                }
-                else if (actTransaccione.TipoCuota == "PAGO MENSUAL")
-                {
-                    actTransaccione.FechPagoTotalPrestamo = actTransaccione.FechaIniCoutaPrestamo.AddDays(90);
-                }
                 _context.Add(actTransaccione);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

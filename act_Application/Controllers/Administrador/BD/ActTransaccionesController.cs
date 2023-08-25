@@ -5,92 +5,90 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using act_Application.Models.BD;
 using act_Application.Data.Data;
+using act_Application.Models.BD;
 
-namespace act_Application.Controllers.Administrador
+namespace act_Application.Controllers.Administrador.BD
 {
-    public class ActRolsController : Controller
+    public class ActTransaccionesController : Controller
     {
         private readonly DesarrolloContext _context;
 
-        public ActRolsController(DesarrolloContext context)
+        public ActTransaccionesController(DesarrolloContext context)
         {
             _context = context;
         }
 
-        // GET: ActRols
+        // GET: ActTransacciones
         public async Task<IActionResult> Index()
         {
-            return _context.ActRols != null ?
-                        View(await _context.ActRols.ToListAsync()) :
-                        Problem("Entity set 'DesarrolloContext.ActRols'  is null.");
+              return View(await _context.ActTransacciones.ToListAsync());
         }
 
-        // GET: ActRols/Details/5
+        // GET: ActTransacciones/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.ActRols == null)
+            if (id == null || _context.ActTransacciones == null)
             {
                 return NotFound();
             }
 
-            var actRol = await _context.ActRols
+            var actTransaccione = await _context.ActTransacciones
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (actRol == null)
+            if (actTransaccione == null)
             {
                 return NotFound();
             }
 
-            return View(actRol);
+            return View(actTransaccione);
         }
 
-        // GET: ActRols/Create
+        // GET: ActTransacciones/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: ActRols/Create
+        // POST: ActTransacciones/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,NombreRol,DescripcionRol")] ActRol actRol)
+        public async Task<IActionResult> Create([Bind("Id,Razon,IdUser,Valor,Estado,FechaEntregaDinero,FechaPagoTotalPrestamo,FechaIniCoutaPrestamo,TipoCuota")] ActTransaccione actTransaccione)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(actRol);
+                _context.Add(actTransaccione);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(actRol);
+            return View(actTransaccione);
         }
 
-        // GET: ActRols/Edit/5
+        // GET: ActTransacciones/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.ActRols == null)
+            if (id == null || _context.ActTransacciones == null)
             {
                 return NotFound();
             }
 
-            var actRol = await _context.ActRols.FindAsync(id);
-            if (actRol == null)
+            var actTransaccione = await _context.ActTransacciones.FindAsync(id);
+            if (actTransaccione == null)
             {
                 return NotFound();
             }
-            return View(actRol);
+            return View(actTransaccione);
         }
 
-        // POST: ActRols/Edit/5
+        // POST: ActTransacciones/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,NombreRol,DescripcionRol")] ActRol actRol)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Razon,IdUser,Valor,Estado,FechaEntregaDinero,FechaPagoTotalPrestamo,FechaIniCoutaPrestamo,TipoCuota")] ActTransaccione actTransaccione)
         {
-            if (id != actRol.Id)
+            if (id != actTransaccione.Id)
             {
                 return NotFound();
             }
@@ -99,12 +97,12 @@ namespace act_Application.Controllers.Administrador
             {
                 try
                 {
-                    _context.Update(actRol);
+                    _context.Update(actTransaccione);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ActRolExists(actRol.Id))
+                    if (!ActTransaccioneExists(actTransaccione.Id))
                     {
                         return NotFound();
                     }
@@ -115,49 +113,49 @@ namespace act_Application.Controllers.Administrador
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(actRol);
+            return View(actTransaccione);
         }
 
-        // GET: ActRols/Delete/5
+        // GET: ActTransacciones/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.ActRols == null)
+            if (id == null || _context.ActTransacciones == null)
             {
                 return NotFound();
             }
 
-            var actRol = await _context.ActRols
+            var actTransaccione = await _context.ActTransacciones
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (actRol == null)
+            if (actTransaccione == null)
             {
                 return NotFound();
             }
 
-            return View(actRol);
+            return View(actTransaccione);
         }
 
-        // POST: ActRols/Delete/5
+        // POST: ActTransacciones/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.ActRols == null)
+            if (_context.ActTransacciones == null)
             {
-                return Problem("Entity set 'DesarrolloContext.ActRols'  is null.");
+                return Problem("Entity set 'DesarrolloContext.ActTransacciones'  is null.");
             }
-            var actRol = await _context.ActRols.FindAsync(id);
-            if (actRol != null)
+            var actTransaccione = await _context.ActTransacciones.FindAsync(id);
+            if (actTransaccione != null)
             {
-                _context.ActRols.Remove(actRol);
+                _context.ActTransacciones.Remove(actTransaccione);
             }
-
+            
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ActRolExists(int id)
+        private bool ActTransaccioneExists(int id)
         {
-            return (_context.ActRols?.Any(e => e.Id == id)).GetValueOrDefault();
+          return _context.ActTransacciones.Any(e => e.Id == id);
         }
     }
 }

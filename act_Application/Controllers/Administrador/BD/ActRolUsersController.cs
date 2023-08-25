@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using act_Application.Models.BD;
 using act_Application.Data.Data;
+using act_Application.Models.BD;
 
-namespace act_Application.Controllers.Administrador
+namespace act_Application.Controllers.Administrador.BD
 {
     public class ActRolUsersController : Controller
     {
@@ -22,9 +22,7 @@ namespace act_Application.Controllers.Administrador
         // GET: ActRolUsers
         public async Task<IActionResult> Index()
         {
-            return _context.ActRolUsers != null ?
-                        View(await _context.ActRolUsers.ToListAsync()) :
-                        Problem("Entity set 'DesarrolloContext.ActRolUsers'  is null.");
+              return View(await _context.ActRolUsers.ToListAsync());
         }
 
         // GET: ActRolUsers/Details/5
@@ -150,14 +148,14 @@ namespace act_Application.Controllers.Administrador
             {
                 _context.ActRolUsers.Remove(actRolUser);
             }
-
+            
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool ActRolUserExists(int id)
         {
-            return (_context.ActRolUsers?.Any(e => e.Id == id)).GetValueOrDefault();
+          return _context.ActRolUsers.Any(e => e.Id == id);
         }
     }
 }

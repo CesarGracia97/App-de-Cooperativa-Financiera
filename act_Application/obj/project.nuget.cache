@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "v3Xeqx4Q2UdH/JONlPj7lj8cPkcZgN5fIGhemGmXLtfOl8mqAYfmv1XolrNN31JEzxZnGAwc7ORejmTdPB6QLw==",
+  "dgSpecHash": "qI/81tjWV0BNTX7NutqFqRjb7QOJN2U559y15ztDgmonMusFXWtEnVKOIZ9ApA4xB2i2788mSaNX6bgsUz/9Hw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\cgracia\\Desktop\\act_Application\\act_Application\\act_Application.csproj",
+  "projectFilePath": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\act_Application.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\cgracia\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\cgracia\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",
@@ -109,7 +109,7 @@
     "C:\\Users\\cgracia\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
     "C:\\Users\\cgracia\\.nuget\\packages\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",
     "C:\\Users\\cgracia\\.nuget\\packages\\microsoft.sqlserver.server\\1.0.0\\microsoft.sqlserver.server.1.0.0.nupkg.sha512",
-    "C:\\Users\\cgracia\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.19.5\\microsoft.visualstudio.azure.containers.tools.targets.1.19.5.nupkg.sha512",
+    "C:\\Users\\cgracia\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.18.1\\microsoft.visualstudio.azure.containers.tools.targets.1.18.1.nupkg.sha512",
     "C:\\Users\\cgracia\\.nuget\\packages\\microsoft.visualstudio.web.codegeneration\\7.0.9\\microsoft.visualstudio.web.codegeneration.7.0.9.nupkg.sha512",
     "C:\\Users\\cgracia\\.nuget\\packages\\microsoft.visualstudio.web.codegeneration.core\\7.0.9\\microsoft.visualstudio.web.codegeneration.core.7.0.9.nupkg.sha512",
     "C:\\Users\\cgracia\\.nuget\\packages\\microsoft.visualstudio.web.codegeneration.design\\7.0.9\\microsoft.visualstudio.web.codegeneration.design.7.0.9.nupkg.sha512",

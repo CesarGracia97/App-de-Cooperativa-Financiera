@@ -33,14 +33,18 @@
             </tr>
             <tr>
                 <td class="titulo">Fecha de Pago Total del Prestamo</td>
-                <td class="texto">@Html.DisplayFor(model => model.FechPagoTotalPrestamo)</td>
+                <td class="texto">@Html.DisplayFor(model => model.FechaPagoTotalPrestamo)</td>
+            </tr>
+            <tr>
+                <td class="titulo">Fecha de Entrega del Dineros</td>
+                <td class="texto">@Html.DisplayFor(model => model.FechaEntregaDinero)</td>
             </tr>
             <tr>
                 <td class="titulo">Fecha de Inicio del Prestamo por Cuotas</td>
                 <td class="texto">@Html.DisplayFor(model => model.FechaIniCoutaPrestamo)</td>
             </tr>
         </table>
-    </div>    
+    </div>
     <div class="btn-container">
         <form asp-action="Delete">
             <input type="hidden" asp-for="Id" />

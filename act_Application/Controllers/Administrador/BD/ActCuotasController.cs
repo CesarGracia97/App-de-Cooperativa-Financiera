@@ -5,92 +5,90 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using act_Application.Models.BD;
 using act_Application.Data.Data;
+using act_Application.Models.BD;
 
-namespace act_Application.Controllers.Administrador
+namespace act_Application.Controllers.Administrador.BD
 {
-    public class ActUsersController : Controller
+    public class ActCuotasController : Controller
     {
         private readonly DesarrolloContext _context;
 
-        public ActUsersController(DesarrolloContext context)
+        public ActCuotasController(DesarrolloContext context)
         {
             _context = context;
         }
 
-        // GET: ActUsers
+        // GET: ActCuotas
         public async Task<IActionResult> Index()
         {
-            return _context.ActUsers != null ?
-                        View(await _context.ActUsers.ToListAsync()) :
-                        Problem("Entity set 'DesarrolloContext.ActUsers'  is null.");
+              return View(await _context.ActCuotas.ToListAsync());
         }
 
-        // GET: ActUsers/Details/5
+        // GET: ActCuotas/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.ActUsers == null)
+            if (id == null || _context.ActCuotas == null)
             {
                 return NotFound();
             }
 
-            var actUser = await _context.ActUsers
+            var actCuota = await _context.ActCuotas
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (actUser == null)
+            if (actCuota == null)
             {
                 return NotFound();
             }
 
-            return View(actUser);
+            return View(actCuota);
         }
 
-        // GET: ActUsers/Create
+        // GET: ActCuotas/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: ActUsers/Create
+        // POST: ActCuotas/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Cedula,Correo,NombreYapellido,Celular,Contrasena,TipoUser,IdSocio")] ActUser actUser)
+        public async Task<IActionResult> Create([Bind("Id,IdUser,IdTransaccion,ValorCuota,FechaCuota,Estado")] ActCuota actCuota)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(actUser);
+                _context.Add(actCuota);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(actUser);
+            return View(actCuota);
         }
 
-        // GET: ActUsers/Edit/5
+        // GET: ActCuotas/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.ActUsers == null)
+            if (id == null || _context.ActCuotas == null)
             {
                 return NotFound();
             }
 
-            var actUser = await _context.ActUsers.FindAsync(id);
-            if (actUser == null)
+            var actCuota = await _context.ActCuotas.FindAsync(id);
+            if (actCuota == null)
             {
                 return NotFound();
             }
-            return View(actUser);
+            return View(actCuota);
         }
 
-        // POST: ActUsers/Edit/5
+        // POST: ActCuotas/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Cedula,Correo,NombreYapellido,Celular,Contrasena,TipoUser,IdSocio")] ActUser actUser)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,IdUser,IdTransaccion,ValorCuota,FechaCuota,Estado")] ActCuota actCuota)
         {
-            if (id != actUser.Id)
+            if (id != actCuota.Id)
             {
                 return NotFound();
             }
@@ -99,12 +97,12 @@ namespace act_Application.Controllers.Administrador
             {
                 try
                 {
-                    _context.Update(actUser);
+                    _context.Update(actCuota);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ActUserExists(actUser.Id))
+                    if (!ActCuotaExists(actCuota.Id))
                     {
                         return NotFound();
                     }
@@ -115,49 +113,49 @@ namespace act_Application.Controllers.Administrador
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(actUser);
+            return View(actCuota);
         }
 
-        // GET: ActUsers/Delete/5
+        // GET: ActCuotas/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.ActUsers == null)
+            if (id == null || _context.ActCuotas == null)
             {
                 return NotFound();
             }
 
-            var actUser = await _context.ActUsers
+            var actCuota = await _context.ActCuotas
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (actUser == null)
+            if (actCuota == null)
             {
                 return NotFound();
             }
 
-            return View(actUser);
+            return View(actCuota);
         }
 
-        // POST: ActUsers/Delete/5
+        // POST: ActCuotas/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.ActUsers == null)
+            if (_context.ActCuotas == null)
             {
-                return Problem("Entity set 'DesarrolloContext.ActUsers'  is null.");
+                return Problem("Entity set 'DesarrolloContext.ActCuotas'  is null.");
             }
-            var actUser = await _context.ActUsers.FindAsync(id);
-            if (actUser != null)
+            var actCuota = await _context.ActCuotas.FindAsync(id);
+            if (actCuota != null)
             {
-                _context.ActUsers.Remove(actUser);
+                _context.ActCuotas.Remove(actCuota);
             }
-
+            
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ActUserExists(int id)
+        private bool ActCuotaExists(int id)
         {
-            return (_context.ActUsers?.Any(e => e.Id == id)).GetValueOrDefault();
+          return _context.ActCuotas.Any(e => e.Id == id);
         }
     }
 }

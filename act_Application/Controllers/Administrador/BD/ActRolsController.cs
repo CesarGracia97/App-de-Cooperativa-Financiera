@@ -5,92 +5,90 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using act_Application.Models.BD;
 using act_Application.Data.Data;
+using act_Application.Models.BD;
 
-namespace act_Application.Controllers.Administrador
+namespace act_Application.Controllers.Administrador.BD
 {
-    public class ActMultasController : Controller
+    public class ActRolsController : Controller
     {
         private readonly DesarrolloContext _context;
 
-        public ActMultasController(DesarrolloContext context)
+        public ActRolsController(DesarrolloContext context)
         {
             _context = context;
         }
 
-        // GET: ActMultas
+        // GET: ActRols
         public async Task<IActionResult> Index()
         {
-            return _context.ActMultas != null ?
-                        View(await _context.ActMultas.ToListAsync()) :
-                        Problem("Entity set 'DesarrolloContext.ActMultas'  is null.");
+              return View(await _context.ActRols.ToListAsync());
         }
 
-        // GET: ActMultas/Details/5
+        // GET: ActRols/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.ActMultas == null)
+            if (id == null || _context.ActRols == null)
             {
                 return NotFound();
             }
 
-            var actMulta = await _context.ActMultas
+            var actRol = await _context.ActRols
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (actMulta == null)
+            if (actRol == null)
             {
                 return NotFound();
             }
 
-            return View(actMulta);
+            return View(actRol);
         }
 
-        // GET: ActMultas/Create
+        // GET: ActRols/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: ActMultas/Create
+        // POST: ActRols/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,IdUser,Porcentaje,Valor,FechaMulta,IdAportacion,Cuadrante1,Cuadrante2")] ActMulta actMulta)
+        public async Task<IActionResult> Create([Bind("Id,NombreRol,DescripcionRol")] ActRol actRol)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(actMulta);
+                _context.Add(actRol);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(actMulta);
+            return View(actRol);
         }
 
-        // GET: ActMultas/Edit/5
+        // GET: ActRols/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.ActMultas == null)
+            if (id == null || _context.ActRols == null)
             {
                 return NotFound();
             }
 
-            var actMulta = await _context.ActMultas.FindAsync(id);
-            if (actMulta == null)
+            var actRol = await _context.ActRols.FindAsync(id);
+            if (actRol == null)
             {
                 return NotFound();
             }
-            return View(actMulta);
+            return View(actRol);
         }
 
-        // POST: ActMultas/Edit/5
+        // POST: ActRols/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,IdUser,Porcentaje,Valor,FechaMulta,IdAportacion,Cuadrante1,Cuadrante2")] ActMulta actMulta)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,NombreRol,DescripcionRol")] ActRol actRol)
         {
-            if (id != actMulta.Id)
+            if (id != actRol.Id)
             {
                 return NotFound();
             }
@@ -99,12 +97,12 @@ namespace act_Application.Controllers.Administrador
             {
                 try
                 {
-                    _context.Update(actMulta);
+                    _context.Update(actRol);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ActMultaExists(actMulta.Id))
+                    if (!ActRolExists(actRol.Id))
                     {
                         return NotFound();
                     }
@@ -115,49 +113,49 @@ namespace act_Application.Controllers.Administrador
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(actMulta);
+            return View(actRol);
         }
 
-        // GET: ActMultas/Delete/5
+        // GET: ActRols/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.ActMultas == null)
+            if (id == null || _context.ActRols == null)
             {
                 return NotFound();
             }
 
-            var actMulta = await _context.ActMultas
+            var actRol = await _context.ActRols
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (actMulta == null)
+            if (actRol == null)
             {
                 return NotFound();
             }
 
-            return View(actMulta);
+            return View(actRol);
         }
 
-        // POST: ActMultas/Delete/5
+        // POST: ActRols/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.ActMultas == null)
+            if (_context.ActRols == null)
             {
-                return Problem("Entity set 'DesarrolloContext.ActMultas'  is null.");
+                return Problem("Entity set 'DesarrolloContext.ActRols'  is null.");
             }
-            var actMulta = await _context.ActMultas.FindAsync(id);
-            if (actMulta != null)
+            var actRol = await _context.ActRols.FindAsync(id);
+            if (actRol != null)
             {
-                _context.ActMultas.Remove(actMulta);
+                _context.ActRols.Remove(actRol);
             }
-
+            
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ActMultaExists(int id)
+        private bool ActRolExists(int id)
         {
-            return (_context.ActMultas?.Any(e => e.Id == id)).GetValueOrDefault();
+          return _context.ActRols.Any(e => e.Id == id);
         }
     }
 }

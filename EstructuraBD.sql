@@ -2,7 +2,7 @@
 /*Scaffold-DbContext "server=192.168.21.193; port=3306; database=desarrollo; uid=cgarcia; password=cgarcia;" MySql.EntityFrameworkCore -OutputDir Models -Force
 
 
-Scaffold-DbContext "server=192.168.21.193; port=3306; database=desarrollo; uid=cgarcia; password=cgarcia;" MySql.EntityFrameworkCore -OutputDir Models
+Scaffold-DbContext "server=192.168.21.193; port=3306; database=desarrollo; uid=cgarcia; password=cgarcia;" MySql.EntityFrameworkCore -OutputDir "Models/BD/"
 */
 
 CREATE DATABASE `desarrollo`;
@@ -61,6 +61,7 @@ CREATE TABLE `act_Multas` (
   KEY `fk_Multas_Aportaciones` (`IdAportacion`),
   KEY `fk_Multas_User` (`IdUser`)
 ) COMMENT='Tabla de Multas';
+
  /*Tabla de Transacciones*/
 CREATE TABLE `act_Transacciones` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
@@ -81,7 +82,7 @@ CREATE TABLE `act_Transacciones` (
 CREATE TABLE `act_Cuotas` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
   `ValorCuota` decimal(10,2) NOT NULL,
-  `FechaCuota` varchar(45) NOT NULL,
+  `FechaCuota` DATETIME NOT NULL,
   `Estado` varchar(45) NOT NULL,
   `IdUser` int(11) NOT NULL,
   `IdTransaccion` int(11) NOT NULL,
@@ -89,3 +90,15 @@ CREATE TABLE `act_Cuotas` (
   KEY `fk_Cuotas_User` (`IdUser`),
   KEY `fk_Cuotas_Transacciones` (`IdTransaccion`)
 ) COMMENT='Tabla de Cuotas, aqui se almacena el Id del Usuario, el Id d';
+
+/*Tabla de Notificaciones*/
+CREATE TABLE `act_Notificaciones` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `IdUser` int(11) NOT NULL,
+  `Razon` varchar(90) NOT NULL,
+  `Descripcion` varchar(50000) NOT NULL,
+  `FechaNotificacion` datetime NOT NULL,
+  PRIMARY KEY (`Id`),
+  UNIQUE KEY `idact_Notificaciones_UNIQUE` (`Id`),
+  KEY `fk_Notificaciones_User` (`IdUser`)
+)COMMENT='Tabla de Notificaciones';

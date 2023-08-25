@@ -1,7 +1,7 @@
-﻿@model IEnumerable<act_Application.Models.BD.ActRolUser>
+﻿@model IEnumerable<act_Application.Models.BD.ActNotificacione>
 
 @{
-    ViewData["Title"] = "Rol de Usuarios";
+    ViewData["Title"] = "Index";
 }
 <head>
     <meta charset="utf-8" />
@@ -9,27 +9,27 @@
     <link rel="stylesheet" href="/css/Administracion/estiloTablaIndex.css" />
 </head>
 
+<h1>Notificaciones</h1>
 <div class="content-text">
-    <h1>Rol de Usuarios</h1>
-
     <p>
-        <a class="button create" asp-action="Create">Create New</a>
+        <a asp-action="Create">Create New</a>
     </p>
     <table class="table">
         <thead>
             <tr>
                 <th>
-                    Registro
+                    @Html.DisplayNameFor(model => model.IdUser)
                 </th>
                 <th>
-                    Id del Usuario
+                    @Html.DisplayNameFor(model => model.Razon)
                 </th>
                 <th>
-                    Id del Rol
+                    @Html.DisplayNameFor(model => model.Descripcion)
                 </th>
                 <th>
-                    Acciones
+                    @Html.DisplayNameFor(model => model.FechaNotificacion)
                 </th>
+                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -37,22 +37,24 @@
             {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Id)
-                    </td>
-                    <td>
                         @Html.DisplayFor(modelItem => item.IdUser)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.IdRol)
+                        @Html.DisplayFor(modelItem => item.Razon)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Descripcion)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FechaNotificacion)
                     </td>
                     <td>
                         <a class="button edit" asp-action="Edit" asp-route-id="@item.Id">Editar</a>
                         <a class="button delete" asp-action="Delete" asp-route-id="@item.Id">Eliminar</a>
+
                     </td>
                 </tr>
             }
         </tbody>
     </table>
 </div>
-
-

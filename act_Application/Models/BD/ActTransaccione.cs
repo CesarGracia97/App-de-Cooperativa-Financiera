@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace act_Application.Models.BD;
 
@@ -19,12 +18,13 @@ public partial class ActTransaccione
 
     public string Estado { get; set; } = null!;
 
-    public DateTime FechPagoTotalPrestamo { get; set; }
+    public DateTime FechaEntregaDinero { get; set; }
+
+    public DateTime FechaPagoTotalPrestamo { get; set; }
 
     public DateTime FechaIniCoutaPrestamo { get; set; }
 
-    public string TipoCuota  { get; set;}
+    public string TipoCuota { get; set; } = null!;
 
-    [NotMapped]
-    public DateTime MinFechaPagoTotal { get; set; }
+
 }

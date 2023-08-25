@@ -1,41 +1,37 @@
-﻿@model IEnumerable<act_Application.Models.BD.ActTransaccione>
+﻿@model IEnumerable<act_Application.Models.BD.ActCuota>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Cuotas";
 }
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/css/Administracion/estiloTablaIndex.css" />
 </head>
+
 <div class="content-text">
-    <h1>Transacciones</h1>
+    <h1>Cuotas</h1>
+
     <p>
-        <a class="button create" asp-action="Create">Crear Nuevo Registro</a>
+        <a asp-action="Create">Create New</a>
     </p>
     <table class="table">
         <thead>
             <tr>
                 <th>
-                    Razon
+                    @Html.DisplayNameFor(model => model.IdUser)
                 </th>
                 <th>
-                    Id del Usuario
+                    @Html.DisplayNameFor(model => model.IdTransaccion)
                 </th>
                 <th>
-                    Valor
+                    @Html.DisplayNameFor(model => model.ValorCuota)
                 </th>
                 <th>
-                    Estado
+                    @Html.DisplayNameFor(model => model.FechaCuota)
                 </th>
                 <th>
-                    Fecha del Pago total del Prestamo
-                </th>
-                <th>
-                    Fecha de la Entrega del Dinero
-                </th>
-                <th>
-                    Fecha de Inicio de pago de Cuotas del Prestamo
+                    @Html.DisplayNameFor(model => model.Estado)
                 </th>
                 <th>
                     Acciones
@@ -47,25 +43,19 @@
             {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Razon)
-                    </td>
-                    <td>
                         @Html.DisplayFor(modelItem => item.IdUser)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Valor)
+                        @Html.DisplayFor(modelItem => item.IdTransaccion)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ValorCuota)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FechaCuota)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Estado)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.FechaPagoTotalPrestamo)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.FechaEntregaDinero)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.FechaIniCoutaPrestamo)
                     </td>
                     <td>
                         <a class="button edit" asp-action="Edit" asp-route-id="@item.Id">Editar</a>

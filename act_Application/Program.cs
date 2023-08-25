@@ -1,4 +1,4 @@
-﻿using act_Application.Data.Data;
+using act_Application.Data.Data;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 
