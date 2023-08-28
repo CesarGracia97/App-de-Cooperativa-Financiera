@@ -1,17 +1,16 @@
 ﻿using act_Application.Helper;
 using MySql.Data.MySqlClient;
 
-namespace act_Application.Data
+namespace act_Application.Data.Data
 {
-    public class AportacionRepository
+    public class NotificacionesRepository
     {
-
-        public int GetTotalAportaciones()
+        public int GetTotalNotificacionesAdministrador()
         {
             string connectionString = AppSettingsHelper.GetConnectionString();
             try
             {
-                string query = ConfigReader.GetQuery("SelectExistenciaAportaciones");
+                string query = ConfigReader.GetQuery("SelectExistenciaNotifiAdmin"); // Asegúrate de tener la consulta SQL correcta para obtener la existencia de multas
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
                     connection.Open();
@@ -24,10 +23,11 @@ namespace act_Application.Data
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Hubo un problema al momento de realizar la consulta de las aportaciones.");
+                Console.WriteLine("Hubo En la consulta de la Notificacion");
                 Console.WriteLine("Detalles del error: " + ex.Message);
                 return -1; // Valor negativo para indicar un error
             }
         }
+
     }
 }

@@ -23,7 +23,8 @@ namespace act_Application.Data.Data
             }
             catch (Exception ex)
             {
-                // Maneja las excepciones aquí si es necesario
+                Console.WriteLine("Hubo un problema al momento de  realizar la consulta de la Multa");
+                Console.WriteLine("Detalles del error: " + ex.Message);
                 return -1; // Valor negativo para indicar un error
             }
         }

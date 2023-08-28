@@ -48,6 +48,8 @@ namespace act_Application.Controllers.General
                 {
                     claims.Add(new Claim(ClaimTypes.Name, objeto.NombreYapellido));
                     claims.Add(new Claim(ClaimTypes.Email, objeto.Correo));
+                    claims.Add(new Claim("Identificacion", objeto.NombreYapellido));
+                    claims.Add(new Claim("CI", objeto.Cedula));
                     claims.Add(new Claim("Id", objeto.Id.ToString()));
                     claims.Add(new Claim("Rol", objetoRol.NombreRol));
                     claims.Add(new Claim("IdRol", IdRol.ToString()));
@@ -71,10 +73,7 @@ namespace act_Application.Controllers.General
                     Thread.Sleep(5000);
                     Console.WriteLine("Hubo un problema al enviar la notificación por correo electrónico.");
                     Console.WriteLine("Detalles del error: " + ex.Message);
-
                 }
-
-
                 return RedirectToAction("Menu", "Home");
             }
             else

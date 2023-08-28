@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using act_Application.Data.Data;
 using act_Application.Models.BD;
+using Microsoft.AspNetCore.Authorization;
 
 namespace act_Application.Controllers.Administrador.BD
 {
@@ -20,30 +21,14 @@ namespace act_Application.Controllers.Administrador.BD
         }
 
         // GET: ActRols
+        [Authorize(Policy = "AdminOnly")]
         public async Task<IActionResult> Index()
         {
               return View(await _context.ActRols.ToListAsync());
         }
 
-        // GET: ActRols/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null || _context.ActRols == null)
-            {
-                return NotFound();
-            }
-
-            var actRol = await _context.ActRols
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (actRol == null)
-            {
-                return NotFound();
-            }
-
-            return View(actRol);
-        }
-
         // GET: ActRols/Create
+        [Authorize(Policy = "AdminOnly")]
         public IActionResult Create()
         {
             return View();
@@ -54,6 +39,7 @@ namespace act_Application.Controllers.Administrador.BD
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Policy = "AdminOnly")]
         public async Task<IActionResult> Create([Bind("Id,NombreRol,DescripcionRol")] ActRol actRol)
         {
             if (ModelState.IsValid)
@@ -66,6 +52,7 @@ namespace act_Application.Controllers.Administrador.BD
         }
 
         // GET: ActRols/Edit/5
+        [Authorize(Policy = "AdminOnly")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.ActRols == null)
@@ -86,6 +73,7 @@ namespace act_Application.Controllers.Administrador.BD
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Policy = "AdminOnly")]
         public async Task<IActionResult> Edit(int id, [Bind("Id,NombreRol,DescripcionRol")] ActRol actRol)
         {
             if (id != actRol.Id)
@@ -117,6 +105,7 @@ namespace act_Application.Controllers.Administrador.BD
         }
 
         // GET: ActRols/Delete/5
+        [Authorize(Policy = "AdminOnly")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.ActRols == null)
@@ -137,6 +126,7 @@ namespace act_Application.Controllers.Administrador.BD
         // POST: ActRols/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Policy = "AdminOnly")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             if (_context.ActRols == null)

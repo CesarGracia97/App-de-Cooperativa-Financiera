@@ -17,4 +17,7 @@ public partial class ActNotificacione
     public string Descripcion { get; set; } = null!;
 
     public DateTime FechaNotificacion { get; set; }
+
+    public string Destino { get; set; }
+
 }

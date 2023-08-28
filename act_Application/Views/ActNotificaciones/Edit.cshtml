@@ -37,6 +37,11 @@
                     <input asp-for="FechaNotificacion" class="form-control" />
                     <span asp-validation-for="FechaNotificacion" class="text-danger"></span>
                 </div>
+                <div class="form-group">
+                    <label asp-for="Destino" class="control-label"></label>
+                    <input asp-for="Destino" class="form-control" />
+                    <span asp-validation-for="Destino" class="text-danger"></span>
+                </div>
                 <div class="btn-container">
                     <input type="submit" value="Guardar" class="btn" />
                     <a class="btn-return" asp-action="Index">Regresar</a>

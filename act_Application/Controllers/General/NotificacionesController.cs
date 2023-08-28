@@ -9,49 +9,26 @@ using act_Application.Data.Data;
 using act_Application.Models.BD;
 using Microsoft.AspNetCore.Authorization;
 
-namespace act_Application.Controllers.Administrador.BD
+namespace act_Application.Controllers.General
 {
-    public class ActNotificacionesController : Controller
+    public class NotificacionesController : Controller
     {
         private readonly DesarrolloContext _context;
 
-        public ActNotificacionesController(DesarrolloContext context)
+        public NotificacionesController(DesarrolloContext context)
         {
             _context = context;
         }
 
-        // GET: ActNotificaciones
+        // GET: Notificaciones
+        [Authorize]
         public async Task<IActionResult> Index()
         {
-            return View(await _context.ActNotificaciones.ToListAsync());
+              return View(await _context.ActNotificaciones.ToListAsync());
         }
 
-        // GET: ActNotificaciones/Create
-        [Authorize(Policy = "AdminOnly")]
-        public IActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: ActNotificaciones/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [Authorize(Policy = "AdminOnly")]
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,IdUser,Razon,Descripcion,FechaNotificacion,Destino")] ActNotificacione actNotificacione)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(actNotificacione);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(actNotificacione);
-        }
-
-        // GET: ActNotificaciones/Edit/5
-        [Authorize(Policy = "AdminOnly")]
+        // GET: Notificaciones/Edit/5
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.ActNotificaciones == null)
@@ -67,12 +44,12 @@ namespace act_Application.Controllers.Administrador.BD
             return View(actNotificacione);
         }
 
-        // POST: ActNotificaciones/Edit/5
+        // POST: Notificaciones/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [Authorize(Policy = "AdminOnly")]
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Edit(int id, [Bind("Id,IdUser,Razon,Descripcion,FechaNotificacion,Destino")] ActNotificacione actNotificacione)
         {
             if (id != actNotificacione.Id)
@@ -103,7 +80,8 @@ namespace act_Application.Controllers.Administrador.BD
             return View(actNotificacione);
         }
 
-        // GET: ActNotificaciones/Delete/5
+        // GET: Notificaciones/Delete/5
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.ActNotificaciones == null)
@@ -121,10 +99,10 @@ namespace act_Application.Controllers.Administrador.BD
             return View(actNotificacione);
         }
 
-        // POST: ActNotificaciones/Delete/5
+        // POST: Notificaciones/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        [Authorize(Policy = "AdminOnly")]
+        [Authorize]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             if (_context.ActNotificaciones == null)
@@ -136,14 +114,14 @@ namespace act_Application.Controllers.Administrador.BD
             {
                 _context.ActNotificaciones.Remove(actNotificacione);
             }
-
+            
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool ActNotificacioneExists(int id)
         {
-            return _context.ActNotificaciones.Any(e => e.Id == id);
+          return _context.ActNotificaciones.Any(e => e.Id == id);
         }
     }
 }

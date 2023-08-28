@@ -7,7 +7,8 @@
     "SelectAportantes": "SELECT a.*, u.NombreYApellido AS NombreUsuario FROM act_Aportaciones a INNER JOIN act_User u ON a.IdUser = u.Id",
     "SelectEmail": "SELECT Correo FROM act_User Where Id =1",
     "SelectExistenciaMultas": "SELECT COUNT(*) FROM act_Multas",
-    "SelectMultados": "SELECT a.*, u.NombreYApellido AS NombreUsuario FROM act_Multas a INNER JOIN act_User u ON a.IdUser = u.Id"
+    "SelectMultados": "SELECT a.*, u.NombreYApellido AS NombreUsuario FROM act_Multas a INNER JOIN act_User u ON a.IdUser = u.Id",
+    "SelectExistenciaNotifiAdmin": "SELECT COUNT(*) FROM act_Notificaciones WHERE Destino 'Administrador'"
 
 
   }

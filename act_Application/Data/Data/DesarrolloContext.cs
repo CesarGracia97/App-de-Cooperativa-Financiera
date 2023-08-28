@@ -114,6 +114,7 @@ public partial class DesarrolloContext : DbContext
             entity.Property(e => e.Descripcion).HasColumnType("varchar(50000)");
             entity.Property(e => e.FechaNotificacion).HasColumnType("datetime");
             entity.Property(e => e.IdUser).HasColumnType("int(11)");
+            entity.Property(e => e.Destino).HasColumnType("varchar(50000)");
             entity.Property(e => e.Razon).HasMaxLength(90);
         });
 

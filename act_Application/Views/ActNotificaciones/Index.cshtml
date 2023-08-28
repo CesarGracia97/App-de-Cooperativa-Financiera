@@ -29,6 +29,9 @@
                 <th>
                     @Html.DisplayNameFor(model => model.FechaNotificacion)
                 </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Destino)
+                </th>
                 <th>Acciones</th>
             </tr>
         </thead>
@@ -47,6 +50,9 @@
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.FechaNotificacion)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Destino)
                     </td>
                     <td>
                         <a class="button edit" asp-action="Edit" asp-route-id="@item.Id">Editar</a>

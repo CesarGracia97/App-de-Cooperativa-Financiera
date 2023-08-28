@@ -9,6 +9,7 @@ using act_Application.Models.BD;
 using act_Application.Data.Data;
 using act_Application.Models.Sistema;
 using act_Application.Logica.ComplementosLogicos;
+using Microsoft.AspNetCore.Authorization;
 
 namespace act_Application.Controllers.General
 {
@@ -20,15 +21,6 @@ namespace act_Application.Controllers.General
         {
             _context = context;
         }
-
-        // GET: Aportar
-        public async Task<IActionResult> Index()
-        {
-              return _context.ActAportaciones != null ? 
-                          View(await _context.ActAportaciones.ToListAsync()) :
-                          Problem("Entity set 'DesarrolloContext.ActAportaciones'  is null.");
-        }
-
         private List<ListItems> ObtenerItemsNBanco()          //Contenido de la Lista Bancos
         {
             return new List<ListItems>
@@ -50,6 +42,7 @@ namespace act_Application.Controllers.General
         }
 
         // GET: Aportar/Create
+        [Authorize(Policy = "AdminSocioOnly")]
         public IActionResult Create()
         {
             ViewData["ItemsNBanco"] = ObtenerItemsNBanco();
@@ -63,6 +56,7 @@ namespace act_Application.Controllers.General
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Policy = "AdminSocioOnly")]
         public async Task<IActionResult> Create([Bind("Id,Razon,Valor,IdUser,FechaAportacion,Aprobacion,CapturaPantalla,Cuadrante1,Cuadrante2,Nbanco,Cbancaria")] ActAportacione actAportacione, [FromForm] IFormFile imagen)
         {
             if (ModelState.IsValid)

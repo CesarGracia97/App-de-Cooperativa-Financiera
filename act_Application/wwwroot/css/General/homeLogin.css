@@ -5,6 +5,17 @@
     font-family: 'Poppins', sans-serif;
 }
 
+.notification-badge {
+    position: absolute;
+    top: 0;
+    right: -10px;
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    padding: 4px 8px;
+    font-size: 12px;
+}
+
 .wrapper {
     background: #ececec;
     padding: 0 20px 0 20px;

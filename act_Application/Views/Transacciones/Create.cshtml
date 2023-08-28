@@ -1,11 +1,11 @@
 ﻿@model act_Application.Models.BD.ActTransaccione
 @{
     ViewData["Title"] = "Transaccion";
-    DateTime minDate = DateTime.Now.AddDays(7);
+    DateTime minDate = DateTime.Now.AddDays(14);
     string minDateStr = minDate.ToString("yyyy-MM-dd");
-    DateTime maxDate = DateTime.Now.AddDays(14);
+    DateTime maxDate = DateTime.Now.AddDays(25);
     string maxDateStr = maxDate.ToString("yyyy-MM-dd");
-    DateTime minDateP = DateTime.Now.AddDays(45);
+    DateTime minDateP = DateTime.Now.AddDays(26);
     string minDateStrP = minDateP.ToString("yyyy-MM-dd");
 }
 <head>
@@ -58,13 +58,14 @@
                 <span asp-validation-for="TipoCuota" class="text-danger"></span>
             </div>
 
-            <!--Contenedor de la Fecha de Inicio del Prestamo-->
+            <!--Contenedor de la Fecha de Entrega del Dinero-->
             <div class="form-group">
-                <label asp-for="FechaIniCoutaPrestamo">Fecha de Inicio del Prestamo (CUOTA)</label>
-                <input asp-for="FechaIniCoutaPrestamo" type="date" class="inpdate" min="@minDateStr" max="@maxDateStr" id="FechaIniCoutaPrestamo"/>
-                <span asp-validation-for="FechaIniCoutaPrestamo" class="text-danger"></span>
+                <label asp-for="FechaEntregaDinero">Fecha de Entrega del Efectivo</label>
+                <input asp-for="FechaEntregaDinero" type="date" class="inpdate" min="@minDateStr" max="@maxDateStr" id="FechaEntregaDinero" />
+                <span asp-validation-for="FechaEntregaDinero" class="text-danger"></span>
             </div>
 
+            <!--
             <script>
                 var tipoCuotaSelect = document.getElementById('TipoCuota');
                 var fechaInicioInput = document.getElementById('FechaIniCoutaPrestamo');
@@ -93,12 +94,12 @@
                     document.getElementById('FechPagoTotalPrestamo').min = fechaPagoTotalFormatted;
                 });
             </script>
-
-            <!--Contenedor de la Fecha de Pago Total-->
+            -->
+            <!--Contenedor de la Fecha de Inicio de Pago-->
             <div class="form-group">
-                <label asp-for="FechaPagoTotalPrestamo">Fecha Tentativa de Pago (CUOTA)</label>
-                <input asp-for="FechaPagoTotalPrestamo" type="date" class="inpdate" id="FechPagoTotalPrestamo" min="@minDateStrP" />
-                <span asp-validation-for="FechaPagoTotalPrestamo" class="text-danger"></span>
+                <label asp-for="FechaIniCoutaPrestamo">Fecha Inicio de Pago de Cuotas</label>
+                <input asp-for="FechaIniCoutaPrestamo" type="date" class="inpdate" id="FechaIniCoutaPrestamo" min="@minDateStrP" />
+                <span asp-validation-for="FechaIniCoutaPrestamo" class="text-danger"></span>
             </div>
 
             <!--Contenedor de los Botones-->

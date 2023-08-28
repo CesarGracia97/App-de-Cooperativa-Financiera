@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using act_Application.Data.Data;
 using act_Application.Models.BD;
+using Microsoft.AspNetCore.Authorization;
 
 namespace act_Application.Controllers.Administrador.BD
 {
@@ -20,30 +21,14 @@ namespace act_Application.Controllers.Administrador.BD
         }
 
         // GET: ActAportaciones
+        [Authorize(Policy = "AdminOnly")]
         public async Task<IActionResult> Index()
         {
               return View(await _context.ActAportaciones.ToListAsync());
         }
 
-        // GET: ActAportaciones/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null || _context.ActAportaciones == null)
-            {
-                return NotFound();
-            }
-
-            var actAportacione = await _context.ActAportaciones
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (actAportacione == null)
-            {
-                return NotFound();
-            }
-
-            return View(actAportacione);
-        }
-
         // GET: ActAportaciones/Create
+        [Authorize(Policy = "AdminOnly")]
         public IActionResult Create()
         {
             return View();
@@ -54,6 +39,7 @@ namespace act_Application.Controllers.Administrador.BD
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Policy = "AdminOnly")]
         public async Task<IActionResult> Create([Bind("Id,Razon,Valor,IdUser,FechaAportacion,Aprobacion,CapturaPantalla,Cuadrante1,Cuadrante2,Nbanco,Cbancaria")] ActAportacione actAportacione)
         {
             if (ModelState.IsValid)
@@ -66,6 +52,7 @@ namespace act_Application.Controllers.Administrador.BD
         }
 
         // GET: ActAportaciones/Edit/5
+        [Authorize(Policy = "AdminOnly")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.ActAportaciones == null)
@@ -84,6 +71,7 @@ namespace act_Application.Controllers.Administrador.BD
         // POST: ActAportaciones/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Policy = "AdminOnly")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Razon,Valor,IdUser,FechaAportacion,Aprobacion,CapturaPantalla,Cuadrante1,Cuadrante2,Nbanco,Cbancaria")] ActAportacione actAportacione)
@@ -117,6 +105,7 @@ namespace act_Application.Controllers.Administrador.BD
         }
 
         // GET: ActAportaciones/Delete/5
+        [Authorize(Policy = "AdminOnly")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.ActAportaciones == null)
@@ -135,6 +124,7 @@ namespace act_Application.Controllers.Administrador.BD
         }
 
         // POST: ActAportaciones/Delete/5
+        [Authorize(Policy = "AdminOnly")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
