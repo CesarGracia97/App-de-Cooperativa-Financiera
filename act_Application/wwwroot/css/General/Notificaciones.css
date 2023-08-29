@@ -50,7 +50,14 @@ body:not(.dark) .content-text {
     color: #000000; /* Cambiar el color del texto en modo claro */
 }
 
-
+.modal__description {
+    margin-top: 10px;
+    text-align: left;
+    white-space: pre-wrap;
+    overflow: auto;
+    max-height: 200px; /* Máxima altura para evitar que la ventana modal se haga muy grande */
+    max-width: 1000px;
+}
 
 .modal {
     display: none;
@@ -61,6 +68,17 @@ body:not(.dark) .content-text {
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
 }
 
 .modal__container {
@@ -75,6 +93,7 @@ body:not(.dark) .content-text {
     width: 100%;
     text-align: center;
     animation: slideIn 0.5s forwards;
+    max-width: 80%; /* Ajusta este valor según tus preferencias */
 }
 
 @keyframes slideIn {

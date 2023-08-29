@@ -27,9 +27,16 @@
                     </div>
                     <div class="modal" id="modal-@notificacion.Id">
                         <div class="modal__container">
-                            <h2 class="modal__title">Ventana Modal</h2>
-                            <p class="modal__paragraph">Soy una ventana modal.</p>
-                            <a href="#" class="modal__close" data-notification-id="@notificacion.Id">Cerrar Modal</a>
+                            <h2 class="modal__title">Detalles</h2>
+                            <div class="modal__content">
+                                <p class="modal__paragraph"><strong>Razon:</strong> @notificacion.Razon</p>
+                                <p class="modal__paragraph"><strong>Fecha:</strong> @notificacion.FechaNotificacion.ToString("yyyy-MM-dd HH:mm:ss")</p>
+                                <p class="modal__paragraph"><strong>IdUser:</strong> @notificacion.IdUser</p>
+                                <p class="modal__paragraph"><strong>Descripcion:</strong></p>
+                                <p class="modal__description">@notificacion.Descripcion</p>
+                                <p class="modal__paragraph"><strong>Destino:</strong> @notificacion.Destino</p>                            
+                                <a href="#" class="modal__close" data-notification-id="@notificacion.Id">Cerrar Modal</a>
+                            </div>
                         </div>
                     </div>
                 }
