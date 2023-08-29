@@ -111,10 +111,10 @@ public partial class DesarrolloContext : DbContext
             entity.HasIndex(e => e.Id, "idact_Notificaciones_UNIQUE").IsUnique();
 
             entity.Property(e => e.Id).HasColumnType("int(11)");
-            entity.Property(e => e.Descripcion).HasColumnType("varchar(50000)");
+            entity.Property(e => e.Descripcion).HasColumnType("nvarchar(50000)");
             entity.Property(e => e.FechaNotificacion).HasColumnType("datetime");
             entity.Property(e => e.IdUser).HasColumnType("int(11)");
-            entity.Property(e => e.Destino).HasColumnType("varchar(50000)");
+            entity.Property(e => e.Destino).HasColumnType("varchar(13)");
             entity.Property(e => e.Razon).HasMaxLength(90);
         });
 

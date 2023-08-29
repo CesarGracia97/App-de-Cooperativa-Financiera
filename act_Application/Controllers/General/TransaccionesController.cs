@@ -93,7 +93,8 @@ namespace act_Application.Controllers.General
             return View(actTransaccione);
         }
 
-        private async Task EnviarNotificacionAdministrador(ActUser usuario, ActTransaccione actTransaccione)
+        public string _descripcionGlobal;
+        public async Task EnviarNotificacionAdministrador(ActUser usuario, ActTransaccione actTransaccione)
         {
             var userEmail = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
             var userIdentificacion = User.Claims.FirstOrDefault(c => c.Type == "Identificacion")?.Value;
@@ -110,6 +111,7 @@ namespace act_Application.Controllers.General
                        $"Fecha de Pago Total del Préstamo: En Espera de Evaluacion" +
                        $"Numero de Cuotas: En Espera de Evaluacion \n"+
                        $"Valor de las Cuotas: En Espera de Evaluacion";
+            _descripcionGlobal = body;
 
             await EnviarCorreo(correoDestino, subject, body);
         }
@@ -167,9 +169,9 @@ namespace act_Application.Controllers.General
             {
                 actNotificacione.IdUser = userId;
                 actNotificacione.Razon = _razonGlobal;
-                actNotificacione.Descripcion = "";
+                actNotificacione.Descripcion = _descripcionGlobal;
                 actNotificacione.FechaNotificacion = DateTime.Now;
-                actNotificacione.Destino = "Administrador";
+                actNotificacione.Destino = "ADMINISTRADOR";
 
                 _context.Add(actNotificacione);
                 await _context.SaveChangesAsync();

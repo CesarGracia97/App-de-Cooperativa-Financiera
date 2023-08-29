@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace act_Application.Models.BD;
+﻿namespace act_Application.Models.BD;
 
 /// <summary>
 /// Tabla de Notificaciones

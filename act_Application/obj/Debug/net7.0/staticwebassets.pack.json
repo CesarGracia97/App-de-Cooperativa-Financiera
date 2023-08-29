@@ -25,6 +25,10 @@
       "PackagePath": "staticwebassets\\css\\General\\Complementos\\ventanModal.css"
     },
     {
+      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\css\\General\\Notificaciones.css",
+      "PackagePath": "staticwebassets\\css\\General\\Notificaciones.css"
+    },
+    {
       "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\css\\General\\Transacciones.css",
       "PackagePath": "staticwebassets\\css\\General\\Transacciones.css"
     },
@@ -67,6 +71,10 @@
     {
       "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\img\\xtrim.png",
       "PackagePath": "staticwebassets\\img\\xtrim.png"
+    },
+    {
+      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\js\\Notificaciones.js",
+      "PackagePath": "staticwebassets\\js\\Notificaciones.js"
     },
     {
       "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\js\\Transaccion.js",

@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using act_Application.Data.Data;
 using act_Application.Models.BD;
 using Microsoft.AspNetCore.Authorization;
+using act_Application.Logica;
 
 namespace act_Application.Controllers.General
 {
@@ -22,9 +23,11 @@ namespace act_Application.Controllers.General
 
         // GET: Notificaciones
         [Authorize]
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-              return View(await _context.ActNotificaciones.ToListAsync());
+            var metodoNotificacion = new MetodoNotificaciones();
+            var notificaciones = metodoNotificacion.GetNotificacionesAdministrador();
+            return View(notificaciones);
         }
 
         // GET: Notificaciones/Edit/5

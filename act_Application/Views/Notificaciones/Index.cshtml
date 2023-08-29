@@ -1,5 +1,6 @@
 ﻿@model IEnumerable<act_Application.Models.BD.ActNotificacione>
 @using act_Application.Data.Data;
+@using act_Application.Logica;
 @{
     ViewData["Title"] = "Notificaciones";
     var NotifiRepository = new NotificacionesRepository();
@@ -8,15 +9,31 @@
 <header>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src=""> </script>
-    <link rel="stylesheet" href="">
+    <link rel="stylesheet" href="/css/General/Notificaciones.css" />
+    <script src="/js/Notificaciones.js"></script>
 </header>
 <body>
     <div class="content-text">
         <h1>Notificaciones</h1>
-        @if(TotalNotiAdmin > 0)
+        @if (TotalNotiAdmin > 0)
         {
-
+            <div class="content-notif">
+                @foreach (var notificacion in Model)
+                {
+                    <div class="notif-container">
+                        <p class="notif-text">Razon: @notificacion.Razon</p>
+                        <p class="notif-text">Fecha: @notificacion.FechaNotificacion.ToString("yyyy-MM-dd HH:mm:ss")</p>
+                        <button class="btn-visualizar" data-notification-id="@notificacion.Id">Visualizar</button>
+                    </div>
+                    <div class="modal" id="modal-@notificacion.Id">
+                        <div class="modal__container">
+                            <h2 class="modal__title">Ventana Modal</h2>
+                            <p class="modal__paragraph">Soy una ventana modal.</p>
+                            <a href="#" class="modal__close" data-notification-id="@notificacion.Id">Cerrar Modal</a>
+                        </div>
+                    </div>
+                }
+            </div>
         }
         else
         {
