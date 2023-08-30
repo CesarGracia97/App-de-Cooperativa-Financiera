@@ -116,6 +116,9 @@ public partial class DesarrolloContext : DbContext
             entity.Property(e => e.IdUser).HasColumnType("int(11)");
             entity.Property(e => e.Destino).HasColumnType("varchar(13)");
             entity.Property(e => e.Razon).HasMaxLength(90);
+            entity.Property(e => e.IdTransacciones).HasColumnType("int(11)");
+            entity.Property(e => e.IdAportaciones).HasColumnType("int(11)");
+            entity.Property(e => e.IdCuotas).HasColumnType("int(11)");
         });
 
         modelBuilder.Entity<ActRol>(entity =>

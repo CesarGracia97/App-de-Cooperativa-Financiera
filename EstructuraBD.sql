@@ -96,9 +96,21 @@ CREATE TABLE `act_Notificaciones` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
   `IdUser` int(11) NOT NULL,
   `Razon` varchar(90) NOT NULL,
-  `Descripcion` varchar(50000) NOT NULL,
+  `Descripcion` mediumtext CHARACTER SET utf8 NOT NULL,
   `FechaNotificacion` datetime NOT NULL,
+  `Destino` varchar(13) NOT NULL,
+  `IdTransacciones` int(11) NOT NULL,
+  `IdAportaciones` int(11) NOT NULL,
+  `IdCuotas` int(11) NOT NULL,
   PRIMARY KEY (`Id`),
   UNIQUE KEY `idact_Notificaciones_UNIQUE` (`Id`),
   KEY `fk_Notificaciones_User` (`IdUser`)
-)COMMENT='Tabla de Notificaciones';
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COMMENT='Tabla de Notificaciones';
+
+CREATE TABLE `desarrollo`.`act_Querys` (
+  `Id` INT NOT NULL,
+  `Query` VARCHAR(2000) NOT NULL,
+  `NombreQuery` VARCHAR(60) NOT NULL,
+  `Descripcion` VARCHAR(5000) NOT NULL,
+  PRIMARY KEY (`Id`))
+COMMENT = 'Querys para consultas';

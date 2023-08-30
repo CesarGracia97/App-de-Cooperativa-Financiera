@@ -17,4 +17,9 @@ public partial class ActNotificacione
 
     public string Destino { get; set; }
 
+    public int IdTransacciones { get; set; }
+
+    public int IdAportaciones { get; set; }
+
+    public int IdCuotas { get; set; }
 }

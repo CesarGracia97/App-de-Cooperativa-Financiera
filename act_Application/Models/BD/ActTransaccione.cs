@@ -25,6 +25,4 @@ public partial class ActTransaccione
     public DateTime FechaIniCoutaPrestamo { get; set; }
 
     public string TipoCuota { get; set; } = null!;
-
-
 }

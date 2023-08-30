@@ -1,4 +1,4 @@
-﻿@model IEnumerable<act_Application.Models.BD.ActNotificacione>
+﻿@model IEnumerable<act_Application.Models.Sistema.NT_ViewModel>
 @using act_Application.Data.Data;
 @using act_Application.Logica;
 @{
@@ -21,21 +21,37 @@
                 @foreach (var notificacion in Model)
                 {
                     <div class="notif-container">
-                        <p class="notif-text">Razon: @notificacion.Razon</p>
-                        <p class="notif-text">Fecha: @notificacion.FechaNotificacion.ToString("yyyy-MM-dd HH:mm:ss")</p>
-                        <button class="btn-visualizar" data-notification-id="@notificacion.Id">Visualizar</button>
+                        <p class="notif-text">Razon: @notificacion.Notificaciones.Razon</p>
+                        <p class="notif-text">Fecha: @notificacion.Notificaciones.FechaNotificacion.ToString("yyyy-MM-dd HH:mm:ss")</p>
+                        <button class="btn-visualizar" data-notification-id="@notificacion.Notificaciones.Id">Visualizar</button>
                     </div>
-                    <div class="modal" id="modal-@notificacion.Id">
+
+                    <div class="modal-principal" id="modal-@notificacion.Notificaciones.Id">
                         <div class="modal__container">
                             <h2 class="modal__title">Detalles</h2>
                             <div class="modal__content">
-                                <p class="modal__paragraph"><strong>Razon:</strong> @notificacion.Razon</p>
-                                <p class="modal__paragraph"><strong>Fecha:</strong> @notificacion.FechaNotificacion.ToString("yyyy-MM-dd HH:mm:ss")</p>
-                                <p class="modal__paragraph"><strong>IdUser:</strong> @notificacion.IdUser</p>
+                                <p class="modal__paragraph"><strong>Razon:</strong> @notificacion.Notificaciones.Razon</p>
+                                <p class="modal__paragraph"><strong>Fecha:</strong> @notificacion.Notificaciones.FechaNotificacion.ToString("yyyy-MM-dd HH:mm:ss")</p>
+                                <p class="modal__paragraph"><strong>IdUser:</strong> @notificacion.Notificaciones.IdUser</p>
                                 <p class="modal__paragraph"><strong>Descripcion:</strong></p>
-                                <p class="modal__description">@notificacion.Descripcion</p>
-                                <p class="modal__paragraph"><strong>Destino:</strong> @notificacion.Destino</p>                            
-                                <a href="#" class="modal__close" data-notification-id="@notificacion.Id">Cerrar Modal</a>
+                                <p class="modal__description">@notificacion.Notificaciones.Descripcion</p>
+                                <p class="modal__paragraph"><strong>Destino:</strong> @notificacion.Notificaciones.Destino</p>
+                                <div class= "container-modal-btn">
+                                    <button class="btn-mdl-confir" data-notification-id="@notificacion.Notificaciones.Id">Confirmar</button>
+                                    <a href="#" class="modal__close" data-notification-id="@notificacion.Notificaciones.Id">Cerrar</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-secundaria" id="modal-resp-@notificacion.Notificaciones.Id">
+                        <div class="modal-secundaria__container">
+                            <h2 class="modal__title">Soy una ventana Modal Secundaria</h2>
+                            <div class="modal-secundaria__content">
+                                <input type="date" id="fecha-pago" name="FechaPagoTotalPrestamo" value="@notificacion.Transacciones.FechaPagoTotalPrestamo.ToString("yyyy-MM-dd")">
+                                <div class="container-modal-btn">
+                                    <a href="#" class="modal-secundaria__close" data-notification-id="@notificacion.Notificaciones.Id">Cerrar</a>
+                                </div>
                             </div>
                         </div>
                     </div>

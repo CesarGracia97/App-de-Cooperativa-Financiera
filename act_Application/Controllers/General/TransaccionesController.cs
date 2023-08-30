@@ -8,6 +8,7 @@ using System.Net.Mail;
 using System.Net;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.EntityFrameworkCore;
 
 namespace act_Application.Controllers.General
 {
@@ -48,6 +49,7 @@ namespace act_Application.Controllers.General
         }
 
         public string _razonGlobal;
+        public int _idTransaccionGlobal;
 
         // POST: Transacciones/Create
         [Authorize(Policy = "AdminReferenteOnly")]
@@ -67,7 +69,11 @@ namespace act_Application.Controllers.General
                     _razonGlobal = actTransaccione.Razon;
 
                     _context.Add(actTransaccione);
+
                     await _context.SaveChangesAsync();
+
+                    _idTransaccionGlobal = actTransaccione.Id;
+
                     ActUser usuario = new ActUser(); 
                     try
                     {
@@ -162,7 +168,7 @@ namespace act_Application.Controllers.General
             }
         }
 
-        private async Task CrearNotificacion([Bind("Id,IdUser,Razon,Descripcion,FechaNotificacion,Destino")] ActNotificacione actNotificacione)
+        private async Task CrearNotificacion([Bind("Id,IdUser,Razon,Descripcion,FechaNotificacion,Destino,IdTransacciones,IdAportaciones,IdCuotas ")] ActNotificacione actNotificacione)
         {
             var userIdClaim = User.Claims.FirstOrDefault(c => c.Type == "Id");
             if (userIdClaim != null && int.TryParse(userIdClaim.Value, out int userId))
@@ -172,6 +178,9 @@ namespace act_Application.Controllers.General
                 actNotificacione.Descripcion = _descripcionGlobal;
                 actNotificacione.FechaNotificacion = DateTime.Now;
                 actNotificacione.Destino = "ADMINISTRADOR";
+                actNotificacione.IdTransacciones = _idTransaccionGlobal;
+                actNotificacione.IdCuotas = 0;
+                actNotificacione.IdAportaciones = 0;
 
                 _context.Add(actNotificacione);
                 await _context.SaveChangesAsync();
@@ -183,9 +192,6 @@ namespace act_Application.Controllers.General
                 Console.WriteLine("Fallo el guardado");
             }
         }
-        private bool ActTransaccioneExists(int id)
-        {
-          return _context.ActTransacciones.Any(e => e.Id == id);
-        }
+
     }
 }
