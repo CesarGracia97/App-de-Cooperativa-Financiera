@@ -5,7 +5,6 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Text;
 using System.Security.Cryptography;
-using Newtonsoft.Json;
 using act_Application.Models.BD;
 
 namespace act_Application.Controllers.General

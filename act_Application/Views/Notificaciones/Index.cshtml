@@ -48,7 +48,7 @@
                         <div class="modal-secundaria__container">
                             <h2 class="modal__title">Soy una ventana Modal Secundaria</h2>
                             <div class="modal-secundaria__content">
-                                <input type="date" id="fecha-pago" name="FechaPagoTotalPrestamo" value="@notificacion.Transacciones.FechaPagoTotalPrestamo.ToString("yyyy-MM-dd")">
+                                <p class="modal__paragraph"><strong>Fecha Entrega Dinero:</strong> @notificacion.Transacciones.FechaEntregaDinero.ToString("yyyy-MM-dd HH:mm:ss")</p>
                                 <div class="container-modal-btn">
                                     <a href="#" class="modal-secundaria__close" data-notification-id="@notificacion.Notificaciones.Id">Cerrar</a>
                                 </div>

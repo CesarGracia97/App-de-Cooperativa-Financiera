@@ -9,6 +9,7 @@
     "SelectExistenciaMultas": "SELECT COUNT(*) FROM act_Multas",
     "SelectMultados": "SELECT a.*, u.NombreYApellido AS NombreUsuario FROM act_Multas a INNER JOIN act_User u ON a.IdUser = u.Id",
     "SelectExistenciaNotifiAdmin": "SELECT COUNT(*) AS TotalRegistros FROM act_Notificaciones WHERE Destino = 'ADMINISTRADOR'",
-    "SelectNotifiAdmin": "SELECT * FROM act_Notificaciones WHERE Destino = 'ADMINISTRADOR'"
+    "SelectNotifiAdmin": "SELECT * FROM act_Notificaciones WHERE Destino = 'ADMINISTRADOR'",
+    "SelecInfoTransacciones": "SELECT* FROM act_Transacciones WHERE Id =@IdTransacciones"
   }
 }

@@ -24,12 +24,12 @@ namespace act_Application.Controllers.General
             var metodoNotificacion = new MetodoNotificaciones();
             var notificaciones = metodoNotificacion.GetNotificacionesAdministrador();
 
-            // Convierte la lista de ActNotificacione a una lista de NT_ViewModel
             var viewModelList = notificaciones.Select(notificacion => new NT_ViewModel
             {
                 Notificaciones = notificacion,
-                Transacciones = new ActTransaccione() // Puedes inicializar Transacciones si es necesario
+                Transacciones = _context.ActTransacciones.FirstOrDefault(t => t.Id == notificacion.IdTransacciones)
             });
+
             return View(viewModelList);
         }
 
