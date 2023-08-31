@@ -48,10 +48,23 @@
                         <div class="modal-secundaria__container">
                             <h2 class="modal__title">Soy una ventana Modal Secundaria</h2>
                             <div class="modal-secundaria__content">
-                                <p class="modal__paragraph"><strong>Fecha Entrega Dinero:</strong> @notificacion.Transacciones.FechaEntregaDinero.ToString("yyyy-MM-dd HH:mm:ss")</p>
-                                <div class="container-modal-btn">
-                                    <a href="#" class="modal-secundaria__close" data-notification-id="@notificacion.Notificaciones.Id">Cerrar</a>
-                                </div>
+                                <form asp-action="Edit" method="post">
+                                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                    <div class="form-group">
+                                        <label asp-for="@notificacion.Transacciones.Razon" class="control-label">Razon de la Operacion</label>
+                                        <input asp-for="@notificacion.Transacciones.Razon" class="input-date" disabled />
+                                        <span asp-validation-for="@notificacion.Transacciones.Razon" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="@notificacion.Transacciones.FechaPagoTotalPrestamo" class="control-label">Fecha de Pago del Prestamo</label>
+                                        <input asp-for="@notificacion.Transacciones.FechaPagoTotalPrestamo" type="date" class="input-date" />
+                                        <span asp-validation-for="@notificacion.Transacciones.FechaPagoTotalPrestamo" class="text-danger"></span>
+                                    </div>
+                                    <div class="container-modal-btn">
+                                        <button type="submit" class="save-button">Guardar</button>
+                                        <a href="#" class="modal-secundaria__close" data-notification-id="@notificacion.Notificaciones.Id">Cerrar</a>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>

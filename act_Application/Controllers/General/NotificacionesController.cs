@@ -33,6 +33,59 @@ namespace act_Application.Controllers.General
             return View(viewModelList);
         }
 
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null || _context.ActTransacciones == null)
+            {
+                return NotFound();
+            }
+
+            var actTransaccione = await _context.ActTransacciones.FindAsync(id);
+            if (actTransaccione == null)
+            {
+                return NotFound();
+            }
+            return View(actTransaccione);
+        }
+
+        // POST: ActTransacciones/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Policy = "AdminOnly")]
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Razon,IdUser,Valor,Estado,FechaEntregaDinero,FechaPagoTotalPrestamo,FechaIniCoutaPrestamo,TipoCuota")] ActTransaccione actTransaccione)
+        {
+            if (id != actTransaccione.Id)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    actTransaccione.Estado = "Pendiente Referente";
+                    _context.Update(actTransaccione);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!ActTransaccionesExists(actTransaccione.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            return View(actTransaccione);
+        }
+
+
         private bool ActTransaccionesExists(int id)
         {
           return _context.ActTransacciones.Any(e => e.Id == id);
