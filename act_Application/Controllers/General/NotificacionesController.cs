@@ -5,6 +5,8 @@ using act_Application.Models.BD;
 using Microsoft.AspNetCore.Authorization;
 using act_Application.Logica;
 using act_Application.Models.Sistema;
+using act_Application.Helper;
+using MySql.Data.MySqlClient;
 
 namespace act_Application.Controllers.General
 {
@@ -33,30 +35,15 @@ namespace act_Application.Controllers.General
             return View(viewModelList);
         }
 
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null || _context.ActTransacciones == null)
-            {
-                return NotFound();
-            }
-
-            var actTransaccione = await _context.ActTransacciones.FindAsync(id);
-            if (actTransaccione == null)
-            {
-                return NotFound();
-            }
-            return View(actTransaccione);
-        }
-
         // POST: ActTransacciones/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Policy = "AdminOnly")]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Razon,IdUser,Valor,Estado,FechaEntregaDinero,FechaPagoTotalPrestamo,FechaIniCoutaPrestamo,TipoCuota")] ActTransaccione actTransaccione)
+        public async Task<IActionResult> Edit(int Id, [Bind("Id,FechaPagoTotalPrestamo")] ActTransaccione actTransaccione)
         {
-            if (id != actTransaccione.Id)
+            if (Id != actTransaccione.Id)
             {
                 return NotFound();
             }
@@ -65,7 +52,7 @@ namespace act_Application.Controllers.General
             {
                 try
                 {
-                    actTransaccione.Estado = "Pendiente Referente";
+                    actTransaccione.Estado = "Pendiente Referent";
                     _context.Update(actTransaccione);
                     await _context.SaveChangesAsync();
                 }
@@ -86,9 +73,33 @@ namespace act_Application.Controllers.General
         }
 
 
-        private bool ActTransaccionesExists(int id)
+        public bool ActTransaccionesExists(int id)
         {
-          return _context.ActTransacciones.Any(e => e.Id == id);
+            string connectionString = AppSettingsHelper.GetConnectionString();
+
+            try
+            {
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                {
+                    connection.Open();
+                    string query = ConfigReader.GetQuery("SelectExistTransancion"); ;
+
+                    using (MySqlCommand command = new MySqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@Id", id);
+                        object result = command.ExecuteScalar();
+                        int count = Convert.ToInt32(result);
+
+                        return count > 0;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Hubo un error al verificar la existencia del registro.");
+                Console.WriteLine("Detalles del error: " + ex.Message);
+                return false;
+            }
         }
     }
 }

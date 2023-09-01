@@ -7,6 +7,23 @@ Scaffold-DbContext "server=192.168.21.193; port=3306; database=desarrollo; uid=c
 
 CREATE DATABASE `desarrollo`;
 
+/*Tabla de Usuarios*/
+CREATE TABLE `act_User` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `Cedula` varchar(10) NOT NULL,
+  `Correo` varchar(45) NOT NULL,
+  `NombreYApellido` varchar(45) NOT NULL,
+  `Celular` varchar(45) NOT NULL,
+  `Contrasena` varchar(75) NOT NULL,
+  `TipoUser` varchar(45) NOT NULL,
+  `IdSocio` int(11) NOT NULL,
+  PRIMARY KEY (`Id`),
+  UNIQUE KEY `Id_UNIQUE` (`Id`),
+  UNIQUE KEY `Cedula_UNIQUE` (`Cedula`),
+  UNIQUE KEY `Correo_UNIQUE` (`Correo`),
+  FOREIGN KEY (IdSocio) REFERENCES act_User(Id)
+) COMMENT='Tabla de Usuarios';
+
 /*Tabla Roles*/
 CREATE TABLE `act_Rol` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
@@ -24,8 +41,8 @@ CREATE TABLE `act_RolUser` (
   `IdRol` int(11) NOT NULL,
   PRIMARY KEY (`Id`),
   UNIQUE KEY `Id_UNIQUE` (`Id`),
-  KEY `fk_RolUser_User` (`IdUser`),
-  KEY `fk_RolUser_Rol` (`IdRol`)
+  FOREIGN KEY (IdUser) REFERENCES act_User(Id),
+  FOREIGN KEY (IdRol) REFERENCES act_Rol(Id)
 ) COMMENT='Tabla Relacion Rol Usuario';
 
 /*Tabla de Aportaciones*/
@@ -43,7 +60,7 @@ CREATE TABLE `act_Aportaciones` (
   `CapturaPantalla` longblob NOT NULL,
   PRIMARY KEY (`Id`),
   UNIQUE KEY `Id_UNIQUE` (`Id`),
-  KEY `fk_Aportaciones_User` (`IdUser`)
+  FOREIGN KEY (IdUser) REFERENCES act_User(Id)
 ) COMMENT='Aportaciones ec';
 
 /*Tabla de Multas*/
@@ -58,24 +75,24 @@ CREATE TABLE `act_Multas` (
   `Cuadrante2` int(1) NOT NULL,
   PRIMARY KEY (`Id`),
   UNIQUE KEY `Id_UNIQUE` (`Id`),
-  KEY `fk_Multas_Aportaciones` (`IdAportacion`),
-  KEY `fk_Multas_User` (`IdUser`)
+  FOREIGN KEY (IdAportacion) REFERENCES act_Aportaciones(Id),
+  FOREIGN KEY (IdUser) REFERENCES act_User(Id)
 ) COMMENT='Tabla de Multas';
 
  /*Tabla de Transacciones*/
 CREATE TABLE `act_Transacciones` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
-  `Razon` varchar(45) NOT NULL,
-  `IdUser` int(11) NOT NULL,
-  `Valor` decimal(10,2) NOT NULL,
-  `Estado` varchar(45) NOT NULL,
-  `FechDesPago` date NOT NULL,
-  `FechPagoTotalPrestamo` date NOT NULL,
-  `FechaIniCoutaPrestamo` date NOT NULL,
-  `TipoCuota` varchar(45) NOT NULL,
+  `Razon` varchar(45),
+  `IdUser` int(11),
+  `Valor` decimal(10,2),
+  `Estado` varchar(45),
+  `FechaEntregaDinero` date,
+  `FechaPagoTotalPrestamo` date,
+  `FechaIniCoutaPrestamo` date,
+  `TipoCuota` varchar(45),
   PRIMARY KEY (`Id`),
   UNIQUE KEY `Id_UNIQUE` (`Id`),
-  KEY `fk_Transacciones_User` (`IdUser`)
+  FOREIGN KEY (IdUser) REFERENCES act_User(Id)
 ) COMMENT='Operaciones de Referentes';
 
 /*Tabla Cuotas*/
@@ -87,8 +104,8 @@ CREATE TABLE `act_Cuotas` (
   `IdUser` int(11) NOT NULL,
   `IdTransaccion` int(11) NOT NULL,
   PRIMARY KEY (`Id`),
-  KEY `fk_Cuotas_User` (`IdUser`),
-  KEY `fk_Cuotas_Transacciones` (`IdTransaccion`)
+  FOREIGN KEY (IdUser) REFERENCES act_User(Id),
+  FOREIGN KEY (IdTransaccion) REFERENCES act_Transacciones(Id)
 ) COMMENT='Tabla de Cuotas, aqui se almacena el Id del Usuario, el Id d';
 
 /*Tabla de Notificaciones*/
@@ -104,9 +121,12 @@ CREATE TABLE `act_Notificaciones` (
   `IdCuotas` int(11) NOT NULL,
   PRIMARY KEY (`Id`),
   UNIQUE KEY `idact_Notificaciones_UNIQUE` (`Id`),
-  KEY `fk_Notificaciones_User` (`IdUser`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 COMMENT='Tabla de Notificaciones';
+  FOREIGN KEY (IdUser) REFERENCES act_User(Id),
+  FOREIGN KEY (IdTransacciones) REFERENCES act_Transacciones(Id),
+  FOREIGN KEY (IdAportaciones) REFERENCES act_Aportaciones(Id)
+) COMMENT='Tabla de Notificaciones';
 
+/*Tabla de Consultas*/
 CREATE TABLE `desarrollo`.`act_Querys` (
   `Id` INT NOT NULL,
   `Query` VARCHAR(2000) NOT NULL,
