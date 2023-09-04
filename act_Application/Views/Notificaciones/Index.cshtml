@@ -5,8 +5,6 @@
     ViewData["Title"] = "Notificaciones";
     var NotifiRepository = new NotificacionesRepository();
     int TotalNotiAdmin = NotifiRepository.GetTotalNotificacionesAdministrador();
-    DateTime minDateP = DateTime.Now.AddDays(26);
-    string minDateStrP = minDateP.ToString("yyyy-MM-dd");
 }
 <header>
     <meta charset="UTF-8">
@@ -52,10 +50,15 @@
                             <div class="modal-secundaria__content">
                                 <form asp-action="Edit">
                                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                                    <input type="hidden" asp-for="@notificacion.Transacciones.Id" name="id" id="id"  />
+                                    <input type="hidden" asp-for="@notificacion.Transacciones.Id" />
+                                    <div class="form-group">
+                                        <label asp-for="@notificacion.Transacciones.Id" class="control-label">Fecha de Pago del Prestamo</label>
+                                        <input asp-for="@notificacion.Transacciones.Id"  />
+                                        <span asp-validation-for="@notificacion.Transacciones.Id" class="text-danger"></span>
+                                    </div>
                                     <div class="form-group">
                                         <label asp-for="@notificacion.Transacciones.FechaPagoTotalPrestamo" class="control-label">Fecha de Pago del Prestamo</label>
-                                        <input asp-for="@notificacion.Transacciones.FechaPagoTotalPrestamo" type="date" class="input-date" name="FechaPagoTotalPrestamo" min="@minDateStrP" required />
+                                        <input asp-for="@notificacion.Transacciones.FechaPagoTotalPrestamo" type="date" id="FechaPagoTotalPrestamo" class="input-date" />
                                         <span asp-validation-for="@notificacion.Transacciones.FechaPagoTotalPrestamo" class="text-danger"></span>
                                     </div>
                                     <div class="container-modal-btn">

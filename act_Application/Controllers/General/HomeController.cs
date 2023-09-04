@@ -21,10 +21,6 @@ namespace act_Application.Controllers.General
         {
             return View();
         }
-        public IActionResult Error()
-        {
-            return View();
-        }
 
         public ActionResult CerrarSesion()
         {

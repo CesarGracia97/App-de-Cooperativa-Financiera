@@ -23,7 +23,7 @@
             <!--Contenedor de la Razon-->
             <div class="form-group">
                 <label asp-for="Razon">Razón:</label>
-                <select asp-for="Razon" id="Razon" placeholder="Seleccionar una Razon..." required>
+                <select asp-for="Razon" id="Razon" placeholder="Seleccionar una Razon...">
                     <option value="0">Seleccionar una Razon...</option>
                     @foreach (var item in ViewData["ItemsRazon"] as List<act_Application.Models.Sistema.ListItems>)
                     {
@@ -39,7 +39,7 @@
                 <label asp-for="Valor">Monto:</label>
                 <div class="input-container">
                     <span class="dollar-sign">$</span>
-                    <input asp-for="Valor" class="input-monto" type="number" step="0.01" min="0.01" id="Valor" placeholder="Agrega el Valor que deseas que te presten" required/>
+                    <input asp-for="Valor" class="input-monto" type="number" step="0.01" min="0.01" id="Valor" placeholder="Agrega el Valor que deseas que te presten" />
                     <span asp-validation-for="Valor" class="text-danger"></span>
                 </div>
             </div>
@@ -47,7 +47,7 @@
             <!--Contenedor del Tipo de Cuota-->
             <div class="form-group">
                 <label asp-for="TipoCuota">Tipo de Cuota:</label>
-                <select asp-for="TipoCuota" id="TipoCuota" placeholder="Seleccionar un Tipo de Cuota..." required>
+                <select asp-for="TipoCuota" id="TipoCuota" placeholder="Seleccionar un Tipo de Cuota...">
                     <option value="">Seleccionar un Tipo de Cuota...</option>
                     @foreach (var item in ViewData["ItemsCuota"] as List<act_Application.Models.Sistema.ListItems>)
                     {
@@ -61,7 +61,7 @@
             <!--Contenedor de la Fecha de Entrega del Dinero-->
             <div class="form-group">
                 <label asp-for="FechaEntregaDinero">Fecha de Entrega del Efectivo</label>
-                <input asp-for="FechaEntregaDinero" type="date" class="inpdate" min="@minDateStr" max="@maxDateStr" id="FechaEntregaDinero" required/>
+                <input asp-for="FechaEntregaDinero" type="date" class="inpdate" min="@minDateStr" max="@maxDateStr" id="FechaEntregaDinero" />
                 <span asp-validation-for="FechaEntregaDinero" class="text-danger"></span>
             </div>
 
@@ -98,13 +98,13 @@
             <!--Contenedor de la Fecha de Inicio de Pago-->
             <div class="form-group">
                 <label asp-for="FechaIniCoutaPrestamo">Fecha Inicio de Pago de Cuotas</label>
-                <input asp-for="FechaIniCoutaPrestamo" type="date" class="inpdate" id="FechaIniCoutaPrestamo" min="@minDateStrP" required/>
+                <input asp-for="FechaIniCoutaPrestamo" type="date" class="inpdate" id="FechaIniCoutaPrestamo" min="@minDateStrP" />
                 <span asp-validation-for="FechaIniCoutaPrestamo" class="text-danger"></span>
             </div>
 
             <!--Contenedor de los Botones-->
             <div class="buttons">
-                <button type="submit" class="save-button"></button>
+                <button type="submit" class="save-button">Guardar</button>
                 <button type="button" onclick="limpiar()" class="clear-button">Limpiar</button>
             </div>
         </form>
