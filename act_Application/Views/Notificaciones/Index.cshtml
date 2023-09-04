@@ -5,6 +5,8 @@
     ViewData["Title"] = "Notificaciones";
     var NotifiRepository = new NotificacionesRepository();
     int TotalNotiAdmin = NotifiRepository.GetTotalNotificacionesAdministrador();
+    DateTime minDateP = DateTime.Now.AddDays(46);
+    string minDateStrP = minDateP.ToString("yyyy-MM-dd");
 }
 <header>
     <meta charset="UTF-8">
@@ -15,66 +17,76 @@
 <body>
     <div class="content-text">
         <h1>Notificaciones</h1>
-        @if (TotalNotiAdmin > 0)
+        @if (User.HasClaim("Rol", "Administrador"))
         {
-            <div class="content-notif">
-                @foreach (var notificacion in Model)
-                {
-                    <div class="notif-container">
-                        <p class="notif-text">Razon: @notificacion.Notificaciones.Razon</p>
-                        <p class="notif-text">Fecha: @notificacion.Notificaciones.FechaNotificacion.ToString("yyyy-MM-dd HH:mm:ss")</p>
-                        <button class="btn-visualizar" data-notification-id="@notificacion.Notificaciones.Id">Visualizar</button>
-                    </div>
+            @if (TotalNotiAdmin > 0)
+            {
+                <div class="content-notif">
+                    @foreach (var notificacion in Model)
+                    {
+                        <div class="notif-container">
+                            <p class="notif-text">Razon: @notificacion.Notificaciones.Razon</p>
+                            <p class="notif-text">Fecha: @notificacion.Notificaciones.FechaNotificacion.ToString("yyyy-MM-dd HH:mm:ss")</p>
+                            <button class="btn-visualizar" data-notification-id="@notificacion.Notificaciones.Id">Visualizar</button>
+                        </div>
 
-                    <div class="modal-principal" id="modal-@notificacion.Notificaciones.Id">
-                        <div class="modal__container">
-                            <h2 class="modal__title">Detalles</h2>
-                            <div class="modal__content">
-                                <p class="modal__paragraph"><strong>Razon:</strong> @notificacion.Notificaciones.Razon</p>
-                                <p class="modal__paragraph"><strong>Fecha:</strong> @notificacion.Notificaciones.FechaNotificacion.ToString("yyyy-MM-dd HH:mm:ss")</p>
-                                <p class="modal__paragraph"><strong>IdUser:</strong> @notificacion.Notificaciones.IdUser</p>
-                                <p class="modal__paragraph"><strong>Descripcion:</strong></p>
-                                <p class="modal__description">@notificacion.Notificaciones.Descripcion</p>
-                                <p class="modal__paragraph"><strong>Destino:</strong> @notificacion.Notificaciones.Destino</p>
-                                <div class= "container-modal-btn">
-                                    <button class="btn-mdl-confir" data-notification-id="@notificacion.Notificaciones.Id">Confirmar</button>
-                                    <a href="#" class="modal__close" data-notification-id="@notificacion.Notificaciones.Id">Cerrar</a>
+                        <div class="modal-principal" id="modal-@notificacion.Notificaciones.Id">
+                            <div class="modal__container">
+                                <h2 class="modal__title">Detalles</h2>
+                                <div class="modal__content">
+                                    <p class="modal__paragraph"><strong>Razon:</strong> @notificacion.Notificaciones.Razon</p>
+                                    <p class="modal__paragraph"><strong>Fecha:</strong> @notificacion.Notificaciones.FechaNotificacion.ToString("yyyy-MM-dd HH:mm:ss")</p>
+                                    <p class="modal__paragraph"><strong>IdUser:</strong> @notificacion.Notificaciones.IdUser</p>
+                                    <p class="modal__paragraph"><strong>Descripcion:</strong></p>
+                                    <p class="modal__description">@notificacion.Notificaciones.Descripcion</p>
+                                    <p class="modal__paragraph"><strong>Destino:</strong> @notificacion.Notificaciones.Destino</p>
+                                    <div class="container-modal-btn">
+                                        <button class="btn-mdl-confir" data-notification-id="@notificacion.Notificaciones.Id">Confirmar</button>
+                                        <a href="#" class="modal__close" data-notification-id="@notificacion.Notificaciones.Id">Cerrar</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="modal-secundaria" id="modal-resp-@notificacion.Notificaciones.Id">
-                        <div class="modal-secundaria__container">
-                            <h2 class="modal__title">Soy una ventana Modal Secundaria</h2>
-                            <div class="modal-secundaria__content">
-                                <form asp-action="Edit">
-                                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                                    <input type="hidden" asp-for="@notificacion.Transacciones.Id" />
-                                    <div class="form-group">
-                                        <label asp-for="@notificacion.Transacciones.Id" class="control-label">Fecha de Pago del Prestamo</label>
-                                        <input asp-for="@notificacion.Transacciones.Id"  />
-                                        <span asp-validation-for="@notificacion.Transacciones.Id" class="text-danger"></span>
-                                    </div>
-                                    <div class="form-group">
-                                        <label asp-for="@notificacion.Transacciones.FechaPagoTotalPrestamo" class="control-label">Fecha de Pago del Prestamo</label>
-                                        <input asp-for="@notificacion.Transacciones.FechaPagoTotalPrestamo" type="date" id="FechaPagoTotalPrestamo" class="input-date" />
-                                        <span asp-validation-for="@notificacion.Transacciones.FechaPagoTotalPrestamo" class="text-danger"></span>
-                                    </div>
-                                    <div class="container-modal-btn">
-                                        <button type="submit" class="save-button">Guardar</button>
-                                        <a href="#" class="modal-secundaria__close" data-notification-id="@notificacion.Notificaciones.Id">Cerrar</a>
-                                    </div>
-                                </form>
+                        <div class="modal-secundaria" id="modal-resp-@notificacion.Notificaciones.Id">
+                            <div class="modal-secundaria__container">
+                                <h2 class="modal__title">Soy una ventana Modal Secundaria</h2>
+                                <div class="modal-secundaria__content">
+                                    <form asp-action="Edit">
+                                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                        <input type="hidden" asp-for="@notificacion.Transacciones.Id" name="id" id="id" />
+                                        <div class="form-group">
+                                            <label asp-for="@notificacion.Transacciones.FechaPagoTotalPrestamo" class="control-label">Fecha de Pago del Prestamo</label>
+                                            <input asp-for="@notificacion.Transacciones.FechaPagoTotalPrestamo" type="date" class="input-date" name="FechaPagoTotalPrestamo" min="@notificacion.Transacciones.FechaIniCoutaPrestamo.ToString("yyyy-MM-dd")" required />
+                                            <span asp-validation-for="@notificacion.Transacciones.FechaPagoTotalPrestamo" class="text-danger"></span>
+                                        </div>
+                                        <div class="container-modal-btn">
+                                            <button type="submit" class="save-button">Guardar</button>
+                                            <a href="#" class="modal-secundaria__close" data-notification-id="@notificacion.Notificaciones.Id">Cerrar</a>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                }
-            </div>
+                    }
+                </div>
+            }
+            else
+            {
+                <p>Actualmente no Tienes Notificaciones.</p>
+            }
         }
         else
         {
-            <p>Actualmente no Tienes Notificaciones.</p>
+            @if (!User.HasClaim("Rol", "Administrador") && (User.HasClaim("Rol", "Socio") || User.HasClaim("Rol", "Referido")))
+            {
+                // Contenido que se ejecutará si el usuario no es Administrador pero es Socio o Referente
+                <p>Contenido que se ejecutará si el usuario no es Administrador pero es Socio o Referente</p>
+            }
+            else
+            {
+                <p>Usted no tiene permisos para esta funcion.</p>
+            }
         }
     </div>
 </body>

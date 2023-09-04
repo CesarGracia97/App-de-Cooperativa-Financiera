@@ -22,6 +22,11 @@ namespace act_Application.Controllers.General
             return View();
         }
 
+        public IActionResult Error()
+        {
+            return View();
+        }
+
         public ActionResult CerrarSesion()
         {
             HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);

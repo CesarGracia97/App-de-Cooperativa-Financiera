@@ -1,28 +1,31 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\act_Application.csproj": {}
+    "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\act_Application.csproj": {}
   },
   "projects": {
-    "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\act_Application.csproj": {
+    "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\act_Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\act_Application.csproj",
+        "projectUniqueName": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\act_Application.csproj",
         "projectName": "act_Application",
-        "projectPath": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\act_Application.csproj",
-        "packagesPath": "C:\\Users\\cgracia\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\obj\\",
+        "projectPath": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\act_Application.csproj",
+        "packagesPath": "C:\\Users\\cesar.gracia\\.nuget\\packages\\",
+        "outputPath": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "E:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\cgracia\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\cesar.gracia\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "E:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\sdk\\7.0.307\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
+          "E:\\Program Files\\dotnet\\library-packs": {},
+          "E:\\Program Files\\dotnet\\sdk\\7.0.302\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -91,7 +94,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.307\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "E:\\Program Files\\dotnet\\sdk\\7.0.302\\RuntimeIdentifierGraph.json"
         }
       }
     }
