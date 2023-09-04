@@ -8,6 +8,7 @@ using act_Application.Models.Sistema;
 using act_Application.Helper;
 using MySql.Data.MySqlClient;
 
+
 namespace act_Application.Controllers.General
 {
     public class NotificacionesController : Controller
@@ -41,18 +42,33 @@ namespace act_Application.Controllers.General
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Policy = "AdminOnly")]
-        public async Task<IActionResult> Edit(int Id, [Bind("Id,FechaPagoTotalPrestamo")] ActTransaccione actTransaccione)
+        public async Task<IActionResult> Edit(int Id, [Bind("Id,Razon,IdUser,Valor,Estado,FechaEntregaDinero,FechaPagoTotalPrestamo,FechaIniCoutaPrestamo,TipoCuota")] ActTransaccione actTransaccione)
         {
             if (Id != actTransaccione.Id)
             {
-                return NotFound();
+                return RedirectToAction("Error", "Home");
             }
 
             if (ModelState.IsValid)
             {
                 try
                 {
-                    actTransaccione.Estado = "Pendiente Referent";
+                    var metodoNotificacion = new MetodoNotificaciones(); // Crear una instancia de MetodoNotificaciones
+                    var transaccionOriginal = metodoNotificacion.GetTransaccionPorId(Id); // Llamar al método desde la instancia
+
+                    if (transaccionOriginal == null)
+                    {
+                        return RedirectToAction("Error", "Home");
+                    }
+
+                    // Asignar los valores originales a la transacción que se va a editar
+                    actTransaccione.Razon = transaccionOriginal.Razon;
+                    actTransaccione.IdUser = transaccionOriginal.IdUser;
+                    actTransaccione.Valor = transaccionOriginal.Valor;
+                    actTransaccione.FechaEntregaDinero = transaccionOriginal.FechaEntregaDinero;
+                    actTransaccione.FechaIniCoutaPrestamo = transaccionOriginal.FechaIniCoutaPrestamo;
+                    actTransaccione.TipoCuota = transaccionOriginal.TipoCuota;
+                    actTransaccione.Estado = "Pendiente Referente";
                     _context.Update(actTransaccione);
                     await _context.SaveChangesAsync();
                 }
@@ -60,14 +76,14 @@ namespace act_Application.Controllers.General
                 {
                     if (!ActTransaccionesExists(actTransaccione.Id))
                     {
-                        return NotFound();
+                        return RedirectToAction("Error", "Home");
                     }
                     else
                     {
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Menu", "Home"); // Puedes redirigir a donde desees después de la edición exitosa
             }
             return View(actTransaccione);
         }
