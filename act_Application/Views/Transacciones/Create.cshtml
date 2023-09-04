@@ -23,7 +23,7 @@
             <!--Contenedor de la Razon-->
             <div class="form-group">
                 <label asp-for="Razon">Razón:</label>
-                <select asp-for="Razon" id="Razon" placeholder="Seleccionar una Razon..." required>
+                <select asp-for="Razon" id="Razon" placeholder="Seleccionar una Razon..." required >
                     <option value="0">Seleccionar una Razon...</option>
                     @foreach (var item in ViewData["ItemsRazon"] as List<act_Application.Models.Sistema.ListItems>)
                     {
@@ -39,7 +39,7 @@
                 <label asp-for="Valor">Monto:</label>
                 <div class="input-container">
                     <span class="dollar-sign">$</span>
-                    <input asp-for="Valor" class="input-monto" type="number" step="0.01" required min="0.01" id="Valor" placeholder="Agrega el Valor que deseas que te presten" />
+                    <input asp-for="Valor" class="input-monto" type="number" step="0.50" min="5.00" id="Valor" placeholder="Agrega el Valor que deseas que te presten" required />
                     <span asp-validation-for="Valor" class="text-danger"></span>
                 </div>
             </div>
@@ -65,36 +65,6 @@
                 <span asp-validation-for="FechaEntregaDinero" class="text-danger"></span>
             </div>
 
-            <!--
-            <script>
-                var tipoCuotaSelect = document.getElementById('TipoCuota');
-                var fechaInicioInput = document.getElementById('FechaIniCoutaPrestamo');
-
-                tipoCuotaSelect.addEventListener('change', function () {
-                    var selectedOption = tipoCuotaSelect.options[tipoCuotaSelect.selectedIndex].value;
-
-                    // Obtener la fecha seleccionada en el input de Fecha de Inicio
-                    var fechaInicio = new Date(fechaInicioInput.value);
-
-                    // Crear una nueva fecha para Fecha de Pago Total
-                    var fechaPagoTotal = new Date(fechaInicio);
-
-                    switch (selectedOption) {
-                        case 'PAGO UNICO':
-                            fechaPagoTotal.setMonth(fechaInicio.getMonth() + 1);
-                            break;
-                        case 'PAGO MENSUAL':
-                            fechaPagoTotal.setMonth(fechaInicio.getMonth() + 3);
-                            break;
-                    }
-                    // Formatear la fecha para el input de Fecha de Pago Total
-                    var fechaPagoTotalFormatted = fechaPagoTotal.toISOString().split('T')[0];
-
-                    // Establecer el valor mínimo en el input de Fecha de Pago Total
-                    document.getElementById('FechPagoTotalPrestamo').min = fechaPagoTotalFormatted;
-                });
-            </script>
-            -->
             <!--Contenedor de la Fecha de Inicio de Pago-->
             <div class="form-group">
                 <label asp-for="FechaIniCoutaPrestamo">Fecha Inicio de Pago de Cuotas</label>

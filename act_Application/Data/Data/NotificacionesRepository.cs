@@ -1,5 +1,6 @@
 ﻿using act_Application.Helper;
 using MySql.Data.MySqlClient;
+using System.Security.Claims;
 
 namespace act_Application.Data.Data
 {
@@ -10,7 +11,7 @@ namespace act_Application.Data.Data
             string connectionString = AppSettingsHelper.GetConnectionString();
             try
             {
-                string query = ConfigReader.GetQuery("SelectExistenciaNotifiAdmin"); // Asegúrate de tener la consulta SQL correcta para obtener la existencia de multas
+                string query = ConfigReader.GetQuery("SelectExistenciaNotifiAdmin");
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
                     connection.Open();
@@ -23,7 +24,7 @@ namespace act_Application.Data.Data
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Hubo En la consulta de la Notificacion");
+                Console.WriteLine("Hubo En la consulta de la Notificacion del Administrador");
                 Console.WriteLine("Detalles del error: " + ex.Message);
                 return -1; // Valor negativo para indicar un error
             }

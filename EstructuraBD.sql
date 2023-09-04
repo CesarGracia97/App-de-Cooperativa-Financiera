@@ -123,7 +123,8 @@ CREATE TABLE `act_Notificaciones` (
   UNIQUE KEY `idact_Notificaciones_UNIQUE` (`Id`),
   FOREIGN KEY (IdUser) REFERENCES act_User(Id),
   FOREIGN KEY (IdTransacciones) REFERENCES act_Transacciones(Id),
-  FOREIGN KEY (IdAportaciones) REFERENCES act_Aportaciones(Id)
+  FOREIGN KEY (IdAportaciones) REFERENCES act_Aportaciones(Id),
+  FOREIGN KEY (IdCuotas) REFERENCES act_Cuotas(Id)
 ) COMMENT='Tabla de Notificaciones';
 
 /*Tabla de Consultas*/

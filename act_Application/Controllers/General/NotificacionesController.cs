@@ -7,6 +7,7 @@ using act_Application.Logica;
 using act_Application.Models.Sistema;
 using act_Application.Helper;
 using MySql.Data.MySqlClient;
+using System.Security.Claims;
 
 
 namespace act_Application.Controllers.General
@@ -21,24 +22,60 @@ namespace act_Application.Controllers.General
         }
 
         // GET: Notificaciones
-        [Authorize(Policy = "AdminOnly")]
+        [Authorize (Policy = "AllOnly")]
         public IActionResult Index()
         {
-            var metodoNotificacion = new MetodoNotificaciones();
-            var notificaciones = metodoNotificacion.GetNotificacionesAdministrador();
-
-            var viewModelList = notificaciones.Select(notificacion => new NT_ViewModel
+            try
             {
-                Notificaciones = notificacion,
-                Transacciones = _context.ActTransacciones.FirstOrDefault(t => t.Id == notificacion.IdTransacciones)
-            });
+                NT_ViewModel viewModel = null;
 
-            return View(viewModelList);
+                if (User.HasClaim("Rol", "Administrador"))
+                {
+                    var metodoNotificacion = new MetodoNotificaciones();
+                    var notificaciones = metodoNotificacion.GetNotificacionesAdministrador();
+
+                    var userIdClaim = User.Claims.FirstOrDefault(c => c.Type == "Id");
+                    if (userIdClaim != null && int.TryParse(userIdClaim.Value, out int userId))
+                    {
+
+                    }
+
+                    return View();
+                }
+                else
+                {
+                    if (!User.HasClaim("Rol", "Administrador") && (User.HasClaim("Rol", "Socio") || User.HasClaim("Rol", "Referido")))
+                    {
+                        var metodoNotificacion = new MetodoNotificaciones();
+                        var notificaciones = metodoNotificacion.GetNotificacionesAdministrador();
+
+                        var viewModelList = notificaciones.Select(notificacion => new NT_ViewModel
+                        {
+                            Notificaciones = notificacion,
+                            Transacciones = _context.ActTransacciones.FirstOrDefault(t => t.Id == notificacion.IdTransacciones)
+                        });
+
+
+                        return View(viewModelList);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Este usuario no posee un rol.");
+                    }
+                }
+
+                viewModel ??= new NT_ViewModel();
+
+                return View(viewModel);
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Se produjo un error en el rol del Usuario: " + ex.Message);
+                return RedirectToAction("Error", "Home");
+            }
         }
 
-        // POST: ActTransacciones/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Policy = "AdminOnly")]
