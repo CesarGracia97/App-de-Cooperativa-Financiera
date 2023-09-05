@@ -97,7 +97,7 @@ namespace act_Application.Controllers.General
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Policy = "AdminOnly")]
-        public async Task<IActionResult> Edit(int Id, [Bind("Id,Razon,IdUser,Valor,Estado,FechaEntregaDinero,FechaPagoTotalPrestamo,FechaIniCoutaPrestamo,TipoCuota")] ActTransaccione actTransaccione)
+        public async Task<IActionResult> Edit(int Id, [Bind("Id,Razon,IdUser,Valor,Estado,FechaEntregaDinero,FechaPagoTotalPrestamo,FechaIniCoutaPrestamo,TipoCuota")] ActTransaccione actTransaccione) //Metodo para Transaccion Evaluada y confirmada.
         {
             if (Id != actTransaccione.Id)
             {
@@ -147,8 +147,8 @@ namespace act_Application.Controllers.General
             }
             return View(actTransaccione);
         }
-
-        private async Task CrearNotificacion([Bind("Id,IdUser,Razon,Descripcion,FechaNotificacion,Destino,IdTransacciones,IdAportaciones,IdCuotas")] ActNotificacione actNotificacione)
+        
+        private async Task CrearNotificacion([Bind("Id,IdUser,Razon,Descripcion,FechaNotificacion,Destino,IdTransacciones,IdAportaciones,IdCuotas")] ActNotificacione actNotificacione) //Metodo para crear una nueva Notificacion en BD y notificacion al Usuario Remitente
         {
             var userIdClaim = User.Claims.FirstOrDefault(c => c.Type == "Id");
             if (userIdClaim != null && int.TryParse(userIdClaim.Value, out int userId))
@@ -173,7 +173,96 @@ namespace act_Application.Controllers.General
             }
         }
 
-        public bool ActTransaccionesExists(int id)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Policy = "AdminOnly")]
+        public async Task<IActionResult> Denegado ([Bind("Id,IdUser,Razon,Descripcion,FechaNotificacion,Destino")] ActNotificacione actNotificacione)
+        {
+            var userIdClaim = User.Claims.FirstOrDefault(c => c.Type == "Id");
+            if (userIdClaim != null && int.TryParse(userIdClaim.Value, out int userId))
+            {
+                var metodoNotificacion = new MetodoNotificaciones();
+                var notificacionOriginal = metodoNotificacion.GetNotificacionesAdministrador();
+
+                if(notificacionOriginal != null)
+                {
+                    return RedirectToAction("Error", "Home");
+                }
+
+                actNotificacione.IdUser = userId;
+                actNotificacione.Razon = "PETICION DE PRESTAMO DENEGADA";
+                actNotificacione.FechaNotificacion = DateTime.Now;
+                actNotificacione.Destino = notificacionOriginal.IdUser;
+                actNotificacione.IdTransacciones = _idTransaccionGlobal;
+                actNotificacione.IdCuotas = 0;
+                actNotificacione.IdAportaciones = 0;
+
+                _context.Add(actNotificacione);
+                await _context.SaveChangesAsync();
+            }
+            else
+            {
+                // Manejar el caso en que no se pueda obtener el Id del usuario
+                ModelState.AddModelError("", "Error al obtener el Id del usuario.");
+                Console.WriteLine("Fallo el guardado");
+            }
+            return View(actNotificacione);
+        }
+
+
+        [Authorize(Policy = "AdminOnly")]
+        public async Task<IActionResult> TransaccionDenegada(int Id, [Bind("Id,Razon,IdUser,Valor,Estado,FechaEntregaDinero,FechaPagoTotalPrestamo,FechaIniCoutaPrestamo,TipoCuota")] ActTransaccione actTransaccione) //Metodo para Transaccion Evaluada y Denegada.
+        {
+            if (Id != actTransaccione.Id)
+            {
+                return RedirectToAction("Error", "Home");
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var metodoNotificacion = new MetodoNotificaciones();
+                    var transaccionOriginal = metodoNotificacion.GetTransaccionPorId(Id);
+
+                    if (transaccionOriginal == null)
+                    {
+                        return RedirectToAction("Error", "Home");
+                    }
+
+                    actTransaccione.Razon = transaccionOriginal.Razon;
+                    actTransaccione.IdUser = transaccionOriginal.IdUser;
+                    actTransaccione.Valor = transaccionOriginal.Valor;
+                    actTransaccione.FechaEntregaDinero = transaccionOriginal.FechaEntregaDinero;
+                    actTransaccione.FechaIniCoutaPrestamo = transaccionOriginal.FechaIniCoutaPrestamo;
+                    actTransaccione.FechaIniCoutaPrestamo = transaccionOriginal.FechaPagoTotalPrestamo;
+                    actTransaccione.TipoCuota = transaccionOriginal.TipoCuota;
+                    actTransaccione.Estado = "DENEGADO";
+                    _context.Update(actTransaccione);
+                    await _context.SaveChangesAsync();
+
+                    _idTransaccionGlobal = actTransaccione.Id;
+                    _idUserGlobal = actTransaccione.IdUser;
+                    _fechaPagoTotal = actTransaccione.FechaPagoTotalPrestamo;
+
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!ActTransaccionesExists(actTransaccione.Id))
+                    {
+                        return RedirectToAction("Error", "Home");
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction("Menu", "Home");
+            }
+            return View(actTransaccione);
+        }
+
+        public bool ActTransaccionesExists(int id) //Verifica la existencia de una Transaccion en Especifico
         {
             string connectionString = AppSettingsHelper.GetConnectionString();
 
@@ -201,5 +290,6 @@ namespace act_Application.Controllers.General
                 return false;
             }
         }
+
     }
 }

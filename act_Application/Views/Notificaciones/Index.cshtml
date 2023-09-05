@@ -11,6 +11,7 @@
     {
         TotalNotiUser = NotifiRepository.GetTotalNotificacionesUsuario(userId);
     }
+    
     DateTime minDateP = DateTime.Now.AddDays(46);
     string minDateStrP = minDateP.ToString("yyyy-MM-dd");
 }
@@ -55,9 +56,28 @@
                             </div>
                         </div>
 
+                        <div class="modal-denagado" id="modal-@notificacionAdmin.Notificaciones.Id">
+                            <div class="modal-denegado__container">
+                                <h2 class="modal__title">Establesca la Razon de la Denegacion</h2>
+                                <form asp-action="Denegado">
+                                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                    <input type="hidden" asp-for="@notificacionAdmin.Notificaciones.Id" name="id" id="id" />
+                                    <div class="form-group">
+                                        <label asp-for="@notificacionAdmin.Notificaciones.Descripcion" class="control-label">Fecha de Pago del Prestamo</label>
+                                        <input asp-for="@notificacionAdmin.Notificaciones.Descripcion" class="input-date" name="Descripcion" required />
+                                        <span asp-validation-for="@notificacionAdmin.Notificaciones.Descripcion" class="text-danger"></span>
+                                    </div>
+                                    <div class="container-modal-denagado-btn">
+                                        <button type="submit" class="save-button" data-notification-id="@notificacionAdmin.Notificaciones.Id">Guardar</button>
+                                        <button class="modal-secundaria__close" data-notification-id="@notificacionAdmin.Notificaciones.Id">Cerrar</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
                         <div class="modal-secundaria" id="modal-resp-@notificacionAdmin.Notificaciones.Id">
                             <div class="modal-secundaria__container">
-                                <h2 class="modal__title">Soy una ventana Modal Secundaria</h2>
+                                <h2 class="modal__title">Establesca la Fecha de Pago Total del Prestamo</h2>
                                 <div class="modal-secundaria__content">
                                     <form asp-action="Edit">
                                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -68,7 +88,7 @@
                                             <span asp-validation-for="@notificacionAdmin.Transacciones.FechaPagoTotalPrestamo" class="text-danger"></span>
                                         </div>
                                         <div class="container-modal-btn">
-                                            <button type="submit" class="save-button">Guardar</button>
+                                            <button type="submit" data-notification-id="@notificacionAdmin.Notificaciones.Id" class="save-button">Guardar</button>
                                             <button class="modal-secundaria__close" data-notification-id="@notificacionAdmin.Notificaciones.Id">Cerrar</button>
                                         </div>
                                     </form>
