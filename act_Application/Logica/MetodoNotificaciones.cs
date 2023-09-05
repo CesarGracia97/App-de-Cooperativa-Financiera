@@ -61,7 +61,7 @@ namespace act_Application.Logica
                     connection.Open();
                     using (MySqlCommand command = new MySqlCommand(query, connection))
                     {
-                        command.Parameters.AddWithValue("@UserId", userId);
+                        command.Parameters.AddWithValue("@Id", userId);
                         using (MySqlDataReader reader = command.ExecuteReader())
                         {
                             List<ActNotificacione> notificacionesUser = new List<ActNotificacione>();

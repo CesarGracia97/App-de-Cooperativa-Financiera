@@ -154,7 +154,7 @@ namespace act_Application.Controllers.General
             if (userIdClaim != null && int.TryParse(userIdClaim.Value, out int userId))
             {
                 actNotificacione.IdUser = userId;
-                actNotificacione.Razon = "RESUESTA DE PETICION DE PRESTAMO ADMIN";
+                actNotificacione.Razon = "RESPUESTA DE PETICION DE PRESTAMO ADMIN";
                 actNotificacione.Descripcion = "El Administrador A Evaluado tu Peticion de Prestramo con La Condidion de la Fecha de Pago  Total para la fecha "+ _fechaPagoTotal.ToString("dd-MMM-yyyy");
                 actNotificacione.FechaNotificacion = DateTime.Now;
                 actNotificacione.Destino = _idUserGlobal.ToString();

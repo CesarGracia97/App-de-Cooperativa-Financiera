@@ -41,7 +41,7 @@
                                 <h2 class="modal__title">Detalles</h2>
                                 <div class="modal__content">
                                     <p class="modal__paragraph"><strong>Razon:</strong> @notificacionAdmin.Notificaciones.Razon</p>
-                                    <p class="modal__paragraph"><strong>Fecha:</strong> @notificacionAdmin.Notificaciones.FechaNotificacion.ToString("dd-MMMM-yyyy")</p>
+                                    <p class="modal__paragraph"><strong>Fecha:</strong> @notificacionAdmin.Notificaciones.FechaNotificacion.ToString("dd-MM-yyyy")</p>
                                     <p class="modal__paragraph"><strong>IdUser:</strong> @notificacionAdmin.Notificaciones.IdUser</p>
                                     <p class="modal__paragraph"><strong>Descripcion:</strong></p>
                                     <p class="modal__description">@notificacionAdmin.Notificaciones.Descripcion</p>
@@ -63,7 +63,7 @@
                                         <input type="hidden" asp-for="@notificacionAdmin.Transacciones.Id" name="id" id="id" />
                                         <div class="form-group">
                                             <label asp-for="@notificacionAdmin.Transacciones.FechaPagoTotalPrestamo" class="control-label">Fecha de Pago del Prestamo</label>
-                                            <input asp-for="@notificacionAdmin.Transacciones.FechaPagoTotalPrestamo" type="date" class="input-date" name="FechaPagoTotalPrestamo" min="@notificacionAdmin.Transacciones.FechaIniCoutaPrestamo.ToString("yyyy-MM-dd")" required />
+                                            <input asp-for="@notificacionAdmin.Transacciones.FechaPagoTotalPrestamo" type="date" class="input-date" name="FechaPagoTotalPrestamo" min="@notificacionAdmin.Transacciones.FechaIniCoutaPrestamo.ToString("dd-MM-yyyy")" required />
                                             <span asp-validation-for="@notificacionAdmin.Transacciones.FechaPagoTotalPrestamo" class="text-danger"></span>
                                         </div>
                                         <div class="container-modal-btn">
@@ -93,7 +93,7 @@
                         {
                             <div class="notif-container">
                                 <p class="notif-text">Razon: @notificacionUser.Notificaciones.Razon</p>
-                                <p class="notif-text">Fecha: @notificacionUser.Notificaciones.FechaNotificacion.ToString("dd-MMMM-yyyy HH:mm:ss")</p>
+                                <p class="notif-text">Fecha: @notificacionUser.Notificaciones.FechaNotificacion.ToString("dd-MM-yyyy HH:mm:ss")</p>
                                 <button class="btn-visualizar" data-notification-id="@notificacionUser.Notificaciones.Id">Visualizar</button>
                             </div>
 
@@ -106,7 +106,6 @@
                                         <p class="modal__paragraph"><strong>IdUser:</strong> @notificacionUser.Notificaciones.IdUser</p>
                                         <p class="modal__paragraph"><strong>Descripcion:</strong></p>
                                         <p class="modal__description">@notificacionUser.Notificaciones.Descripcion</p>
-                                        <p class="modal__paragraph"><strong>Destino:</strong> @notificacionUser.Notificaciones.Destino</p>
                                         <div class="container-modal-btn">
                                             <button class="btn-mdl-confir" data-notification-id="@notificacionUser.Notificaciones.Id">Confirmar</button>
                                             <a href="#" class="modal__close" data-notification-id="@notificacionUser.Notificaciones.Id">Cerrar</a>
