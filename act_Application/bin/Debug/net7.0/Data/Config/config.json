@@ -12,6 +12,7 @@
     "SelectNotifiAdmin": "SELECT * FROM act_Notificaciones WHERE Destino = 'ADMINISTRADOR'",
     "SelecInfoTransacciones": "SELECT * FROM act_Transacciones WHERE Id = @IdTransacciones",
     "SelectExistTransancion": "SELECT COUNT(*) AS existe FROM act_Transacciones WHERE Id = @Id",
-    "SelectNotifiUser": "SELECT * FROM act_Notificaciones WHERE Destino = @Id "
+    "SelectExistenciaNotifiUsuario": "SELECT COUNT(*) AS TotalRegistros FROM act_Notificaciones WHERE Destino = @Id",
+    "SelectNotifiUser": "SELECT * FROM act_Notificaciones WHERE Destino = @Id"
   }
 }

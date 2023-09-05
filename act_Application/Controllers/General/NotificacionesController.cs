@@ -21,6 +21,10 @@ namespace act_Application.Controllers.General
             _context = context;
         }
 
+        public int _idTransaccionGlobal;
+        public int _idUserGlobal;
+        public DateTime _fechaPagoTotal;
+
         // GET: Notificaciones
         [Authorize (Policy = "AllOnly")]
         public IActionResult Index()
@@ -33,21 +37,30 @@ namespace act_Application.Controllers.General
                 {
                     var metodoNotificacion = new MetodoNotificaciones();
                     var notificaciones = metodoNotificacion.GetNotificacionesAdministrador();
-
-                    var userIdClaim = User.Claims.FirstOrDefault(c => c.Type == "Id");
-                    if (userIdClaim != null && int.TryParse(userIdClaim.Value, out int userId))
+                    var viewModelList = notificaciones.Select(notificacion => new NT_ViewModel
                     {
+                        Notificaciones = notificacion,
+                        Transacciones = _context.ActTransacciones.FirstOrDefault(t => t.Id == notificacion.IdTransacciones)
+                    });
 
-                    }
-
-                    return View();
+                    return View(viewModelList);
                 }
+
                 else
+
                 {
                     if (!User.HasClaim("Rol", "Administrador") && (User.HasClaim("Rol", "Socio") || User.HasClaim("Rol", "Referido")))
                     {
                         var metodoNotificacion = new MetodoNotificaciones();
-                        var notificaciones = metodoNotificacion.GetNotificacionesAdministrador();
+                        var userIdClaim = User.Claims.FirstOrDefault(c => c.Type == "Id");
+                        int Bandera = 0;
+
+                        if (userIdClaim != null && int.TryParse(userIdClaim.Value, out int userId))
+                        {
+                            Bandera = userId;
+                        }
+
+                        var notificaciones = metodoNotificacion.GetNotificacionesUsuario(Bandera);
 
                         var viewModelList = notificaciones.Select(notificacion => new NT_ViewModel
                         {
@@ -58,14 +71,19 @@ namespace act_Application.Controllers.General
 
                         return View(viewModelList);
                     }
+
                     else
+
                     {
                         Console.WriteLine("Este usuario no posee un rol.");
+                        
                     }
                 }
 
-                viewModel ??= new NT_ViewModel();
-
+                if (viewModel == null)
+                {
+                    viewModel = new NT_ViewModel();
+                }
                 return View(viewModel);
 
             }
@@ -98,7 +116,6 @@ namespace act_Application.Controllers.General
                         return RedirectToAction("Error", "Home");
                     }
 
-                    // Asignar los valores originales a la transacción que se va a editar
                     actTransaccione.Razon = transaccionOriginal.Razon;
                     actTransaccione.IdUser = transaccionOriginal.IdUser;
                     actTransaccione.Valor = transaccionOriginal.Valor;
@@ -108,6 +125,11 @@ namespace act_Application.Controllers.General
                     actTransaccione.Estado = "Pendiente Referente";
                     _context.Update(actTransaccione);
                     await _context.SaveChangesAsync();
+
+                    _idTransaccionGlobal = actTransaccione.Id;
+                    _idUserGlobal = actTransaccione.IdUser;
+                    _fechaPagoTotal = actTransaccione.FechaPagoTotalPrestamo;
+
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -120,9 +142,35 @@ namespace act_Application.Controllers.General
                         throw;
                     }
                 }
+                await CrearNotificacion(new ActNotificacione());
                 return RedirectToAction("Menu", "Home"); // Puedes redirigir a donde desees después de la edición exitosa
             }
             return View(actTransaccione);
+        }
+
+        private async Task CrearNotificacion([Bind("Id,IdUser,Razon,Descripcion,FechaNotificacion,Destino,IdTransacciones,IdAportaciones,IdCuotas")] ActNotificacione actNotificacione)
+        {
+            var userIdClaim = User.Claims.FirstOrDefault(c => c.Type == "Id");
+            if (userIdClaim != null && int.TryParse(userIdClaim.Value, out int userId))
+            {
+                actNotificacione.IdUser = userId;
+                actNotificacione.Razon = "RESUESTA DE PETICION DE PRESTAMO ADMIN";
+                actNotificacione.Descripcion = "El Administrador A Evaluado tu Peticion de Prestramo con La Condidion de la Fecha de Pago  Total para la fecha "+ _fechaPagoTotal.ToString("dd-MMM-yyyy");
+                actNotificacione.FechaNotificacion = DateTime.Now;
+                actNotificacione.Destino = _idUserGlobal.ToString();
+                actNotificacione.IdTransacciones = _idTransaccionGlobal;
+                actNotificacione.IdCuotas = 0;
+                actNotificacione.IdAportaciones = 0;
+
+                _context.Add(actNotificacione);
+                await _context.SaveChangesAsync();
+            }
+            else
+            {
+                // Manejar el caso en que no se pueda obtener el Id del usuario
+                ModelState.AddModelError("", "Error al obtener el Id del usuario.");
+                Console.WriteLine("Fallo el guardado");
+            }
         }
 
         public bool ActTransaccionesExists(int id)
