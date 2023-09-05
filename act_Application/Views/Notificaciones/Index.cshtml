@@ -48,7 +48,8 @@
                                     <p class="modal__paragraph"><strong>Destino:</strong> @notificacionAdmin.Notificaciones.Destino</p>
                                     <div class="container-modal-btn">
                                         <button class="btn-mdl-confir" data-notification-id="@notificacionAdmin.Notificaciones.Id">Confirmar</button>
-                                        <a href="#" class="modal__close" data-notification-id="@notificacionAdmin.Notificaciones.Id">Cerrar</a>
+                                        <button class="bt-denegar" data-notification-id="@notificacionAdmin.Notificaciones.Id">Denegar</button>
+                                        <button class="modal__close" data-notification-id="@notificacionAdmin.Notificaciones.Id">Cerrar</button>
                                     </div>
                                 </div>
                             </div>
@@ -63,12 +64,12 @@
                                         <input type="hidden" asp-for="@notificacionAdmin.Transacciones.Id" name="id" id="id" />
                                         <div class="form-group">
                                             <label asp-for="@notificacionAdmin.Transacciones.FechaPagoTotalPrestamo" class="control-label">Fecha de Pago del Prestamo</label>
-                                            <input asp-for="@notificacionAdmin.Transacciones.FechaPagoTotalPrestamo" type="date" class="input-date" name="FechaPagoTotalPrestamo" min="@notificacionAdmin.Transacciones.FechaIniCoutaPrestamo.ToString("dd-MM-yyyy")" required />
+                                            <input asp-for="@notificacionAdmin.Transacciones.FechaPagoTotalPrestamo" type="date" class="input-date" name="FechaPagoTotalPrestamo" min="@notificacionAdmin.Transacciones.FechaIniCoutaPrestamo.ToString("dd-MMMM-yyyy HH:mm:ss")" required />
                                             <span asp-validation-for="@notificacionAdmin.Transacciones.FechaPagoTotalPrestamo" class="text-danger"></span>
                                         </div>
                                         <div class="container-modal-btn">
                                             <button type="submit" class="save-button">Guardar</button>
-                                            <a href="#" class="modal-secundaria__close" data-notification-id="@notificacionAdmin.Notificaciones.Id">Cerrar</a>
+                                            <button class="modal-secundaria__close" data-notification-id="@notificacionAdmin.Notificaciones.Id">Cerrar</button>
                                         </div>
                                     </form>
                                 </div>
@@ -107,7 +108,8 @@
                                         <p class="modal__paragraph"><strong>Descripcion:</strong></p>
                                         <p class="modal__description">@notificacionUser.Notificaciones.Descripcion</p>
                                         <div class="container-modal-btn">
-                                            <button class="btn-mdl-confir" data-notification-id="@notificacionUser.Notificaciones.Id">Confirmar</button>
+                                            <button class="btn-mdl-confir" data-notification-id="@notificacionUser.Notificaciones.Id">Aceptar</button>
+                                            <button class="bt-rechazar" data-notification-id="@notificacionUser.Notificaciones.Id">Rechazar</button>
                                             <a href="#" class="modal__close" data-notification-id="@notificacionUser.Notificaciones.Id">Cerrar</a>
                                         </div>
                                     </div>

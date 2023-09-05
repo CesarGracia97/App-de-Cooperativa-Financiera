@@ -50,6 +50,7 @@ namespace act_Application.Controllers.General
 
         public string _razonGlobal;
         public int _idTransaccionGlobal;
+        public string _descripcionGlobal;
 
         // POST: Transacciones/Create
         [Authorize(Policy = "AdminReferenteOnly")]
@@ -99,7 +100,6 @@ namespace act_Application.Controllers.General
             return View(actTransaccione);
         }
 
-        public string _descripcionGlobal;
         public async Task EnviarNotificacionAdministrador(ActUser usuario, ActTransaccione actTransaccione)
         {
             var userEmail = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;

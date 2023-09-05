@@ -1,4 +1,7 @@
-﻿
+﻿body{
+    margin: 0px 30px 0px 40px;
+}
+
 .content-notif {
     align-items: center;
     display: flex;
@@ -50,8 +53,6 @@ body:not(.dark) .content-text {
     color: #000000; /* Cambiar el color del texto en modo claro */
 }
 
-
-
 .modal-principal {
     display: none;
     position: fixed;
@@ -98,7 +99,18 @@ body:not(.dark) .content-text {
     color: #888;
     text-decoration: none;
     cursor: pointer;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s; /* Transición suave al hacer hover */
+    margin-top: 20px; /* Separación del botón cerrar */
+    margin-right: 30px; /* Separación del botón cerrar */
+    width: 125px;
 }
+    .modal__close:hover {
+        background-color: #ccc5c5; 
+    }
 
 .modal__content {
     display: flex;
@@ -134,6 +146,43 @@ body:not(.dark) .content-text {
         background-color: #689F38; /* Verde real con efecto hover */
     }
 
+.bt-denegar {
+    background-color: #ff6a00;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s; /* Transición suave al hacer hover */
+    margin-top: 20px; /* Separación del botón cerrar */
+    margin-right: 30px; /* Separación del botón cerrar */
+    width: 110px;
+    justify-content: center;
+    text-align: center;
+    align-content: center;
+}
+
+    .bt-denegar:hover {
+        background-color: #ff0000;
+    }
+
+.bt-rechazar {
+    background-color: #f70f0f;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s; /* Transición suave al hacer hover */
+    margin-top: 20px; /* Separación del botón cerrar */
+    margin-right: 30px; /* Separación del botón cerrar */
+    width: 110px;
+}
+
+.bt-rechazar:hover {
+    background-color: #ff6a00;
+}
+
 .container-modal-btn {
     display: flex;
     justify-content: space-between;
@@ -158,14 +207,6 @@ body:not(.dark) .content-text {
     justify-content: center;
     align-items: center;
     height: 100%;
-}
-
-.modal-secundaria__close {
-    display: block;
-    margin-top: 10px;
-    color: #888;
-    text-decoration: none;
-    cursor: pointer;
 }
 
 .modal-secundaria__container {
@@ -210,9 +251,48 @@ body:not(.dark) .content-text {
     color: white;
     padding: 8px 16px;
     border: none;
-    border-radius: 4px;
+    border-radius: 8px;
     cursor: pointer;
     margin-right: 20px;
     margin-left: 20px;
     justify-content: center;
+    width: 275px;
+}
+
+.modal-secundaria__close {
+    background-color: white;
+    color: #888;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 16px;
+    transition: background-color 0.3s, color 0.3s; /* Transición suave al hacer hover */
+    margin-right: 30px; /* Separación del botón cerrar */
+    width: 275px;
+    justify-content: center;
+}
+
+    .modal-secundaria__close:hover {
+        background-color: #ccc5c5; /* Verde real con efecto hover */
+    }
+
+@media (max-width: 767px) {
+    .notif-container {
+        width: 100%;
+        margin: 10px 0;
+    }
+}
+
+@media (max-width: 767px) {
+    .btn-visualizar {
+        width: 100%; 
+        margin: 10px 0; 
+    }
+}
+
+@media (min-width: 1200px) {
+    .notif-container {
+        max-width: 750px; 
+    }
 }
