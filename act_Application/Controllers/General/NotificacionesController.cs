@@ -274,6 +274,59 @@ namespace act_Application.Controllers.General
             return View(actTransaccione);
         }
 
+        public async Task<IActionResult> AceptarReferente(int Id, [Bind("Id,Razon,IdUser,Valor,Estado,FechaEntregaDinero,FechaPagoTotalPrestamo,FechaIniCoutaPrestamo,TipoCuota")] ActTransaccione actTransaccione)
+        {
+            if (Id != actTransaccione.Id)
+            {
+                return RedirectToAction("Error", "Home");
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var metodoNotificacion = new MetodoNotificaciones(); // Crear una instancia de MetodoNotificaciones
+                    var transaccionOriginal = metodoNotificacion.GetTransaccionPorId(Id); // Llamar al método desde la instancia
+
+                    if (transaccionOriginal == null)
+                    {
+                        return RedirectToAction("Error", "Home");
+                    }
+
+                    actTransaccione.Razon = transaccionOriginal.Razon;
+                    actTransaccione.IdUser = transaccionOriginal.IdUser;
+                    actTransaccione.Valor = transaccionOriginal.Valor;
+                    actTransaccione.FechaEntregaDinero = transaccionOriginal.FechaEntregaDinero;
+                    actTransaccione.FechaIniCoutaPrestamo = transaccionOriginal.FechaIniCoutaPrestamo;
+                    actTransaccione.TipoCuota = transaccionOriginal.TipoCuota;
+                    actTransaccione.Estado = "APROBADO";
+                    _context.Update(actTransaccione);
+                    await _context.SaveChangesAsync();
+
+                    _idTransaccionGlobal = actTransaccione.Id;
+                    _idUserGlobal = actTransaccione.IdUser;
+                    _fechaPagoTotal = actTransaccione.FechaPagoTotalPrestamo;
+
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!ActTransaccionesExists(actTransaccione.Id))
+                    {
+                        return RedirectToAction("Error", "Home");
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                await CrearNotificacion(new ActNotificacione());
+                return RedirectToAction("Menu", "Home"); // Puedes redirigir a donde desees después de la edición exitosa
+            }
+            return View(actTransaccione);
+
+        }
+
+
         public bool ActTransaccionesExists(int id) //Verifica la existencia de una Transaccion en Especifico 
         {
             string connectionString = AppSettingsHelper.GetConnectionString();
