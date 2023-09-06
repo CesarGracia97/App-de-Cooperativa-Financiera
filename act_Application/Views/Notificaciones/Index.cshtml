@@ -50,26 +50,25 @@
                                     <div class="container-modal-btn">
                                         <button class="btn-mdl-confir" data-notification-id="@notificacionAdmin.Notificaciones.Id">Confirmar</button>
                                         <button class="bt-denegar" data-notification-id="@notificacionAdmin.Notificaciones.Id">Denegar</button>
-                                        <button class="modal__close" data-notification-id="@notificacionAdmin.Notificaciones.Id">Cerrar</button>
+                                        <a href="" class="modal__close" data-notification-id="@notificacionAdmin.Notificaciones.Id">Cerrar</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="modal-denagado" id="modal-@notificacionAdmin.Notificaciones.Id">
+                        <div class="modal-denagado" id="modal-dene-@notificacionAdmin.Notificaciones.Id">
                             <div class="modal-denegado__container">
                                 <h2 class="modal__title">Establesca la Razon de la Denegacion</h2>
-                                <form asp-action="Denegado">
+                                <form asp-action="EditTran">
                                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                                    <input type="hidden" asp-for="@notificacionAdmin.Notificaciones.Id" name="id" id="id" />
+                                    <input type="hidden" asp-for="@notificacionAdmin.Transacciones.Id" name="Id" id="Id" />
+                                    <input type="hidden" asp-for="@notificacionAdmin.Notificaciones.Id" name="IdN" id="IdN" />
                                     <div class="form-group">
-                                        <label asp-for="@notificacionAdmin.Notificaciones.Descripcion" class="control-label">Fecha de Pago del Prestamo</label>
-                                        <input asp-for="@notificacionAdmin.Notificaciones.Descripcion" class="input-date" name="Descripcion" required />
-                                        <span asp-validation-for="@notificacionAdmin.Notificaciones.Descripcion" class="text-danger"></span>
+                                        <input asp-for="@notificacionAdmin.Notificaciones.Descripcion" class="input-descripcion" name="Descripcion" id="Descripcion" required />
                                     </div>
                                     <div class="container-modal-denagado-btn">
                                         <button type="submit" class="save-button" data-notification-id="@notificacionAdmin.Notificaciones.Id">Guardar</button>
-                                        <button class="modal-secundaria__close" data-notification-id="@notificacionAdmin.Notificaciones.Id">Cerrar</button>
+                                        <a href="" class="modal-secundaria__close" data-notification-id="@notificacionAdmin.Notificaciones.Id">Cerrar</a>
                                     </div>
                                 </form>
                             </div>
@@ -82,6 +81,7 @@
                                     <form asp-action="Edit">
                                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                                         <input type="hidden" asp-for="@notificacionAdmin.Transacciones.Id" name="id" id="id" />
+                                        <input type="hidden" asp-for="@notificacionAdmin.Notificaciones.Id" name="id" id="id" />
                                         <div class="form-group">
                                             <label asp-for="@notificacionAdmin.Transacciones.FechaPagoTotalPrestamo" class="control-label">Fecha de Pago del Prestamo</label>
                                             <input asp-for="@notificacionAdmin.Transacciones.FechaPagoTotalPrestamo" type="date" class="input-date" name="FechaPagoTotalPrestamo" min="@notificacionAdmin.Transacciones.FechaIniCoutaPrestamo.ToString("dd-MMMM-yyyy HH:mm:ss")" required />
@@ -89,7 +89,7 @@
                                         </div>
                                         <div class="container-modal-btn">
                                             <button type="submit" data-notification-id="@notificacionAdmin.Notificaciones.Id" class="save-button">Guardar</button>
-                                            <button class="modal-secundaria__close" data-notification-id="@notificacionAdmin.Notificaciones.Id">Cerrar</button>
+                                            <a href="" class="modal-secundaria__close" data-notification-id="@notificacionAdmin.Notificaciones.Id">Cerrar</a>
                                         </div>
                                     </form>
                                 </div>

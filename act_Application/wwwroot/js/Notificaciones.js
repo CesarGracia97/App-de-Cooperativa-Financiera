@@ -3,6 +3,7 @@
     const closeModalButtons = document.querySelectorAll(".modal__close");
     const modalSecundariaCloseButtons = document.querySelectorAll(".modal-secundaria__close");
     const confirmButtons = document.querySelectorAll(".btn-mdl-confir");
+    const denegarButtons = document.querySelectorAll(".bt-denegar");
 
     modalButtons.forEach((button) => {
         button.addEventListener("click", (event) => {
@@ -36,6 +37,14 @@
 
             const modalSecundaria = document.getElementById(`modal-resp-${notificationId}`);
             modalSecundaria.style.display = "block";
+        });
+    });
+
+    denegarButtons.forEach((button) => {
+        button.addEventListener("click", (event) => {
+            const notificationId = event.target.getAttribute("data-notification-id");
+            const modalDenegado = document.getElementById(`modal-dene-${notificationId}`);
+            modalDenegado.style.display = "block";
         });
     });
 

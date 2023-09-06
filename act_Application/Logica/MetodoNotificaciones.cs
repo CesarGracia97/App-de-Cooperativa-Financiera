@@ -137,5 +137,41 @@ namespace act_Application.Logica
 
             return null;
         }
+
+        public ActNotificacione GetNotificacionesUserId(int idTransacciones) //Consulta para obtener todos los datos de una transaccion especifica
+        {
+            string connectionString = AppSettingsHelper.GetConnectionString();
+            try
+            {
+                string query = ConfigReader.GetQuery("SelectNotificiacionIdTrans");
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                {
+                    connection.Open();
+                    using (MySqlCommand command = new MySqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@Id", idTransacciones);
+                        using (MySqlDataReader reader = command.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                ActNotificacione notificacione = new ActNotificacione
+                                {
+                                    IdUser = Convert.ToInt32(reader["IdUser"])
+                                };
+                                return notificacione;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Hubo un error en la consulta de la transacción");
+                Console.WriteLine("Detalles del error: " + ex.Message);
+            }
+
+            return null;
+        }
+
     }
 }

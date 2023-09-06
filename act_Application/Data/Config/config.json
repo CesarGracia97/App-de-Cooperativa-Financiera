@@ -13,6 +13,8 @@
     "SelecInfoTransacciones": "SELECT * FROM act_Transacciones WHERE Id = @IdTransacciones",
     "SelectExistTransancion": "SELECT COUNT(*) AS existe FROM act_Transacciones WHERE Id = @Id",
     "SelectExistenciaNotifiUsuario": "SELECT COUNT(*) AS TotalRegistros FROM act_Notificaciones WHERE Destino = @Id",
-    "SelectNotifiUser": "SELECT * FROM act_Notificaciones WHERE Destino = @Id"
+    "SelectNotificiacionIdTrans": "SELECT IdUser FROM act_Notificaciones Where IdTransacciones = @Id",
+    "SelectNotifiUser": "SELECT * FROM act_Notificaciones WHERE Destino = @Id",
+    "SelectExistNotificacion": "SELECT COUNT(*) AS existe FROM act_Notificaciones WHERE Id = @Id"
   }
 }

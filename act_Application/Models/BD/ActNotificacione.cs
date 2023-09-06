@@ -9,9 +9,9 @@ public partial class ActNotificacione
 
     public int IdUser { get; set; }
 
-    public string Razon { get; set; } = null!;
+    public string Razon { get; set; } 
 
-    public string Descripcion { get; set; } = null!;
+    public string Descripcion { get; set; }
 
     public DateTime FechaNotificacion { get; set; }
 
