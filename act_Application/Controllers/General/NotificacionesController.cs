@@ -22,7 +22,7 @@ namespace act_Application.Controllers.General
         }
 
         public int _idTransaccionGlobal;
-        public int _idUserGlobal;
+        public string DestinoG;
         public DateTime _fechaPagoTotal;
         public string _descripcionGlobal;
         public string _razonGlobal;
@@ -129,7 +129,7 @@ namespace act_Application.Controllers.General
                     await _context.SaveChangesAsync();
 
                     _idTransaccionGlobal = actTransaccione.Id;
-                    _idUserGlobal = actTransaccione.IdUser;
+                    DestinoG = actTransaccione.IdUser.ToString();
                     string Razon = "RESPUESTA DE PRESTAMO ADMIN", Descripcion = "El Administrador A Evaluado tu Peticion de Prestramo con La Condidion de la Fecha de Pago  Total para el dia " + actTransaccione.FechaPagoTotalPrestamo.ToString("dd-MMM-yyyy");
                     _razonGlobal = Razon;
                     _descripcionGlobal = Descripcion;
@@ -161,7 +161,7 @@ namespace act_Application.Controllers.General
                 actNotificacione.Razon = _razonGlobal;
                 actNotificacione.Descripcion = _descripcionGlobal;
                 actNotificacione.FechaNotificacion = DateTime.Now;
-                actNotificacione.Destino = _idUserGlobal.ToString();
+                actNotificacione.Destino = DestinoG;
                 actNotificacione.IdTransacciones = _idTransaccionGlobal;
                 actNotificacione.IdCuotas = 0;
                 actNotificacione.IdAportaciones = 0;
@@ -211,7 +211,7 @@ namespace act_Application.Controllers.General
                     await _context.SaveChangesAsync();
 
                     _idTransaccionGlobal = actTransaccione.Id;
-                    _idUserGlobal = actTransaccione.IdUser;
+                    DestinoG = actTransaccione.IdUser.ToString();
                     _fechaPagoTotal = actTransaccione.FechaPagoTotalPrestamo;
                     string Razon = "PETICION DE PRESTAMO DENEGADA";
                     _razonGlobal = Razon;
@@ -265,8 +265,65 @@ namespace act_Application.Controllers.General
                     await _context.SaveChangesAsync();
 
                     _idTransaccionGlobal = actTransaccione.Id;
-                    _idUserGlobal = actTransaccione.IdUser;
-                    _fechaPagoTotal = actTransaccione.FechaPagoTotalPrestamo;
+                    DestinoG = "ADMINISTRADOR";
+                    string Razon = "CONDICIONES ACEPTADAS", Descripcion ="El Usuario de la Transaccion "+ actTransaccione.Id+" a aceptado las condiciones del Prestamo";
+                    _razonGlobal = Razon;
+                    _descripcionGlobal = Descripcion;
+
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!ActTransaccionesExists(actTransaccione.Id))
+                    {
+                        return RedirectToAction("Error", "Home");
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                await CrearNotificacion(new ActNotificacione());
+                return RedirectToAction("Menu", "Home"); // Puedes redirigir a donde desees después de la edición exitosa
+            }
+            return View(actTransaccione);
+
+        }
+
+
+        public async Task<IActionResult> RechazarReferente(int Id, [Bind("Id,Razon,IdUser,Valor,Estado,FechaEntregaDinero,FechaPagoTotalPrestamo,FechaIniCoutaPrestamo,TipoCuota")] ActTransaccione actTransaccione)
+        {
+            if (Id != actTransaccione.Id)
+            {
+                return RedirectToAction("Error", "Home");
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var metodoNotificacion = new MetodoNotificaciones(); // Crear una instancia de MetodoNotificaciones
+                    var transaccionOriginal = metodoNotificacion.GetTransaccionPorId(Id); // Llamar al método desde la instancia
+
+                    if (transaccionOriginal == null)
+                    {
+                        return RedirectToAction("Error", "Home");
+                    }
+
+                    actTransaccione.Razon = transaccionOriginal.Razon;
+                    actTransaccione.IdUser = transaccionOriginal.IdUser;
+                    actTransaccione.Valor = transaccionOriginal.Valor;
+                    actTransaccione.FechaEntregaDinero = transaccionOriginal.FechaEntregaDinero;
+                    actTransaccione.FechaIniCoutaPrestamo = transaccionOriginal.FechaIniCoutaPrestamo;
+                    actTransaccione.TipoCuota = transaccionOriginal.TipoCuota;
+                    actTransaccione.Estado = "RECHAZADO";
+                    _context.Update(actTransaccione);
+                    await _context.SaveChangesAsync();
+
+                    _idTransaccionGlobal = actTransaccione.Id;
+                    DestinoG = "ADMINISTRADOR";
+                    string Razon = "CONDICIONES RECHAZADAS", Descripcion = "El Usuario de la Transaccion " + actTransaccione.Id + " a rechazado las condiciones del Prestamo";
+                    _razonGlobal = Razon;
+                    _descripcionGlobal = Descripcion;
 
                 }
                 catch (DbUpdateConcurrencyException)
@@ -316,6 +373,7 @@ namespace act_Application.Controllers.General
                 return false;
             }
         }
+
 
     }
 }

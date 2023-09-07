@@ -66,7 +66,7 @@ namespace act_Application.Controllers.General
                     // Establecer las propiedades que deben agregarse automáticamente
                     actTransaccione.IdUser = userId;
                     actTransaccione.FechaPagoTotalPrestamo = DateTime.MinValue;
-                    actTransaccione.Estado = "Pendiente Admin";
+                    actTransaccione.Estado = "PENDIENTE ADMIN";
                     _razonGlobal = actTransaccione.Razon;
 
                     _context.Add(actTransaccione);
