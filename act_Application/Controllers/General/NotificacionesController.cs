@@ -21,13 +21,7 @@ namespace act_Application.Controllers.General
             _context = context;
         }
 
-        public int _idTransaccionGlobal;
-        public string DestinoG;
-        public DateTime _fechaPagoTotal;
-        public string _descripcionGlobal;
-        public string _razonGlobal;
-
-        // GET: Notificaciones
+        
         [Authorize (Policy = "AllOnly")]
         public IActionResult Index()
         {
@@ -96,6 +90,7 @@ namespace act_Application.Controllers.General
             }
         }
 
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Policy = "AdminOnly")]
@@ -108,11 +103,12 @@ namespace act_Application.Controllers.General
 
             if (ModelState.IsValid)
             {
+                string razon, Descripcion;
+
                 try
                 {
                     var metodoNotificacion = new MetodoNotificaciones(); // Crear una instancia de MetodoNotificaciones
                     var transaccionOriginal = metodoNotificacion.GetTransaccionPorId(Id); // Llamar al método desde la instancia
-
                     if (transaccionOriginal == null)
                     {
                         return RedirectToAction("Error", "Home");
@@ -128,11 +124,9 @@ namespace act_Application.Controllers.General
                     _context.Update(actTransaccione);
                     await _context.SaveChangesAsync();
 
-                    _idTransaccionGlobal = actTransaccione.Id;
-                    DestinoG = actTransaccione.IdUser.ToString();
-                    string Razon = "RESPUESTA DE PRESTAMO ADMIN", Descripcion = "El Administrador A Evaluado tu Peticion de Prestramo con La Condidion de la Fecha de Pago  Total para el dia " + actTransaccione.FechaPagoTotalPrestamo.ToString("dd-MMM-yyyy");
-                    _razonGlobal = Razon;
-                    _descripcionGlobal = Descripcion;
+                    razon = "RESPUESTA DE PRESTAMO ADMIN"; 
+                    Descripcion = "El Administrador A Evaluado tu Peticion de Prestramo con La Condidion de la Fecha de Pago  Total para el dia " + actTransaccione.FechaPagoTotalPrestamo.ToString("dd-MMM-yyyy");
+
 
                 }
                 catch (DbUpdateConcurrencyException)
@@ -146,36 +140,12 @@ namespace act_Application.Controllers.General
                         throw;
                     }
                 }
-                await CrearNotificacion(new ActNotificacione());
+                await CrearNotificacion(actTransaccione.Id, actTransaccione.IdUser.ToString(), razon, Descripcion,  new ActNotificacione());
                 return RedirectToAction("Menu", "Home"); // Puedes redirigir a donde desees después de la edición exitosa
             }
             return View(actTransaccione);
         }
         
-        private async Task CrearNotificacion([Bind("Id,IdUser,Razon,Descripcion,FechaNotificacion,Destino,IdTransacciones,IdAportaciones,IdCuotas")] ActNotificacione actNotificacione) //Metodo para crear una nueva Notificacion en BD y notificacion al Usuario Remitente
-        {
-            var userIdClaim = User.Claims.FirstOrDefault(c => c.Type == "Id");
-            if (userIdClaim != null && int.TryParse(userIdClaim.Value, out int userId))
-            {
-                actNotificacione.IdUser = userId;
-                actNotificacione.Razon = _razonGlobal;
-                actNotificacione.Descripcion = _descripcionGlobal;
-                actNotificacione.FechaNotificacion = DateTime.Now;
-                actNotificacione.Destino = DestinoG;
-                actNotificacione.IdTransacciones = _idTransaccionGlobal;
-                actNotificacione.IdCuotas = 0;
-                actNotificacione.IdAportaciones = 0;
-
-                _context.Add(actNotificacione);
-                await _context.SaveChangesAsync();
-            }
-            else
-            {
-                // Manejar el caso en que no se pueda obtener el Id del usuario
-                ModelState.AddModelError("", "Error al obtener el Id del usuario.");
-                Console.WriteLine("Fallo el guardado");
-            }
-        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -189,6 +159,7 @@ namespace act_Application.Controllers.General
 
             if (ModelState.IsValid)
             {
+                string razon;
                 try
                 {
                     var metodoNotificacion = new MetodoNotificaciones();
@@ -210,12 +181,7 @@ namespace act_Application.Controllers.General
                     _context.Update(actTransaccione);
                     await _context.SaveChangesAsync();
 
-                    _idTransaccionGlobal = actTransaccione.Id;
-                    DestinoG = actTransaccione.IdUser.ToString();
-                    _fechaPagoTotal = actTransaccione.FechaPagoTotalPrestamo;
-                    string Razon = "PETICION DE PRESTAMO DENEGADA";
-                    _razonGlobal = Razon;
-                    _descripcionGlobal = Descripcion;
+                    razon = "PETICION DE PRESTAMO DENEGADA";
 
                 }
                 catch (DbUpdateConcurrencyException)
@@ -229,12 +195,16 @@ namespace act_Application.Controllers.General
                         throw;
                     }
                 }
-                await CrearNotificacion(new ActNotificacione());
+                await CrearNotificacion(actTransaccione.Id, actTransaccione.IdUser.ToString(), razon, Descripcion, new ActNotificacione());
                 return RedirectToAction("Menu", "Home");
             }
             return View(actTransaccione);
         }
 
+        
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Policy = "AdminReferenteOnly")]
         public async Task<IActionResult> AceptarReferente(int Id, [Bind("Id,Razon,IdUser,Valor,Estado,FechaEntregaDinero,FechaPagoTotalPrestamo,FechaIniCoutaPrestamo,TipoCuota")] ActTransaccione actTransaccione)
         {
             if (Id != actTransaccione.Id)
@@ -244,6 +214,7 @@ namespace act_Application.Controllers.General
 
             if (ModelState.IsValid)
             {
+                string Razon, Descripcion;
                 try
                 {
                     var metodoNotificacion = new MetodoNotificaciones(); // Crear una instancia de MetodoNotificaciones
@@ -264,11 +235,9 @@ namespace act_Application.Controllers.General
                     _context.Update(actTransaccione);
                     await _context.SaveChangesAsync();
 
-                    _idTransaccionGlobal = actTransaccione.Id;
-                    DestinoG = "ADMINISTRADOR";
-                    string Razon = "CONDICIONES ACEPTADAS", Descripcion ="El Usuario de la Transaccion "+ actTransaccione.Id+" a aceptado las condiciones del Prestamo";
-                    _razonGlobal = Razon;
-                    _descripcionGlobal = Descripcion;
+                    Razon = "CONDICIONES ACEPTADAS"; 
+                    Descripcion ="El Usuario de la Transaccion "+ actTransaccione.Id+" a aceptado las condiciones del Prestamo";
+
 
                 }
                 catch (DbUpdateConcurrencyException)
@@ -282,7 +251,7 @@ namespace act_Application.Controllers.General
                         throw;
                     }
                 }
-                await CrearNotificacion(new ActNotificacione());
+                await CrearNotificacion(actTransaccione.Id, "ADMINISTRADOR", Razon, Descripcion, new ActNotificacione());
                 return RedirectToAction("Menu", "Home"); // Puedes redirigir a donde desees después de la edición exitosa
             }
             return View(actTransaccione);
@@ -290,6 +259,9 @@ namespace act_Application.Controllers.General
         }
 
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Policy = "AdminReferenteOnly")]
         public async Task<IActionResult> RechazarReferente(int Id, [Bind("Id,Razon,IdUser,Valor,Estado,FechaEntregaDinero,FechaPagoTotalPrestamo,FechaIniCoutaPrestamo,TipoCuota")] ActTransaccione actTransaccione)
         {
             if (Id != actTransaccione.Id)
@@ -299,6 +271,7 @@ namespace act_Application.Controllers.General
 
             if (ModelState.IsValid)
             {
+                string Razon, Descripcion;
                 try
                 {
                     var metodoNotificacion = new MetodoNotificaciones(); // Crear una instancia de MetodoNotificaciones
@@ -319,11 +292,9 @@ namespace act_Application.Controllers.General
                     _context.Update(actTransaccione);
                     await _context.SaveChangesAsync();
 
-                    _idTransaccionGlobal = actTransaccione.Id;
-                    DestinoG = "ADMINISTRADOR";
-                    string Razon = "CONDICIONES RECHAZADAS", Descripcion = "El Usuario de la Transaccion " + actTransaccione.Id + " a rechazado las condiciones del Prestamo";
-                    _razonGlobal = Razon;
-                    _descripcionGlobal = Descripcion;
+                    Razon = "CONDICIONES RECHAZADAS"; 
+                    Descripcion = "El Usuario de la Transaccion " + actTransaccione.Id + " a rechazado las condiciones del Prestamo";
+
 
                 }
                 catch (DbUpdateConcurrencyException)
@@ -337,7 +308,7 @@ namespace act_Application.Controllers.General
                         throw;
                     }
                 }
-                await CrearNotificacion(new ActNotificacione());
+                await CrearNotificacion(actTransaccione.Id, "ADMINISTRADOR", Razon, Descripcion, new ActNotificacione());
                 return RedirectToAction("Menu", "Home"); // Puedes redirigir a donde desees después de la edición exitosa
             }
             return View(actTransaccione);
@@ -374,6 +345,30 @@ namespace act_Application.Controllers.General
             }
         }
 
+        private async Task CrearNotificacion(int idTransaccion, string Destino, string Razon, string Descripcion, [Bind("Id,IdUser,Razon,Descripcion,FechaNotificacion,Destino,IdTransacciones,IdAportaciones,IdCuotas")] ActNotificacione actNotificacione) //Metodo para crear una nueva Notificacion en BD y notificacion al Usuario Remitente
+        {
+            var userIdClaim = User.Claims.FirstOrDefault(c => c.Type == "Id");
+            if (userIdClaim != null && int.TryParse(userIdClaim.Value, out int userId))
+            {
+                actNotificacione.IdUser = userId;
+                actNotificacione.Razon = Razon;
+                actNotificacione.Descripcion = Descripcion;
+                actNotificacione.FechaNotificacion = DateTime.Now;
+                actNotificacione.Destino = Destino;
+                actNotificacione.IdTransacciones = idTransaccion;
+                actNotificacione.IdCuotas = 0;
+                actNotificacione.IdAportaciones = 0;
+
+                _context.Add(actNotificacione);
+                await _context.SaveChangesAsync();
+            }
+            else
+            {
+                // Manejar el caso en que no se pueda obtener el Id del usuario
+                ModelState.AddModelError("", "Error al obtener el Id del usuario.");
+                Console.WriteLine("Fallo el guardado");
+            }
+        }
 
     }
 }
