@@ -25,6 +25,7 @@ namespace act_Application.Controllers.General
         public int _idUserGlobal;
         public DateTime _fechaPagoTotal;
         public string _descripcionGlobal;
+        public string _razonGlobal;
 
         // GET: Notificaciones
         [Authorize (Policy = "AllOnly")]
@@ -129,7 +130,9 @@ namespace act_Application.Controllers.General
 
                     _idTransaccionGlobal = actTransaccione.Id;
                     _idUserGlobal = actTransaccione.IdUser;
-                    _fechaPagoTotal = actTransaccione.FechaPagoTotalPrestamo;
+                    string Razon = "RESPUESTA DE PRESTAMO ADMIN", Descripcion = "El Administrador A Evaluado tu Peticion de Prestramo con La Condidion de la Fecha de Pago  Total para el dia " + actTransaccione.FechaPagoTotalPrestamo.ToString("dd-MMM-yyyy");
+                    _razonGlobal = Razon;
+                    _descripcionGlobal = Descripcion;
 
                 }
                 catch (DbUpdateConcurrencyException)
@@ -155,8 +158,8 @@ namespace act_Application.Controllers.General
             if (userIdClaim != null && int.TryParse(userIdClaim.Value, out int userId))
             {
                 actNotificacione.IdUser = userId;
-                actNotificacione.Razon = "RESPUESTA DE PRESTAMO ADMIN";
-                actNotificacione.Descripcion = "El Administrador A Evaluado tu Peticion de Prestramo con La Condidion de la Fecha de Pago  Total para la fecha "+ _fechaPagoTotal.ToString("dd-MMM-yyyy");
+                actNotificacione.Razon = _razonGlobal;
+                actNotificacione.Descripcion = _descripcionGlobal;
                 actNotificacione.FechaNotificacion = DateTime.Now;
                 actNotificacione.Destino = _idUserGlobal.ToString();
                 actNotificacione.IdTransacciones = _idTransaccionGlobal;
@@ -177,50 +180,7 @@ namespace act_Application.Controllers.General
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Policy = "AdminOnly")]
-        public async Task<IActionResult> Denegado (int Id, [Bind("IdUser,Razon,Descripcion,FechaNotificacion,Destino")] ActNotificacione actNotificacione)
-        {
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    var userIdClaim = User.Claims.FirstOrDefault(c => c.Type == "Id");
-                    if (userIdClaim != null && int.TryParse(userIdClaim.Value, out int userId))
-                    {
-                        var metodoNotificacion = new MetodoNotificaciones();
-                        var notificacionOriginal = metodoNotificacion.GetNotificacionesUserId(Id);
-
-                        actNotificacione.IdUser = userId;
-                        actNotificacione.Razon = "PETICION DE PRESTAMO DENEGADA";
-                        actNotificacione.FechaNotificacion = DateTime.Now;
-                        actNotificacione.Destino = notificacionOriginal.IdUser.ToString();
-                        actNotificacione.Descripcion = _descripcionGlobal;
-                        actNotificacione.IdTransacciones = Id;
-                        actNotificacione.IdCuotas = 0;
-                        actNotificacione.IdAportaciones = 0;
-
-                        _context.Add(actNotificacione);
-                        await _context.SaveChangesAsync();
-                    }
-                    else
-                    {
-                        ModelState.AddModelError("", "Error al obtener el Id del usuario.");
-                        Console.WriteLine("Fallo el guardado");
-                    }
-                    
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine("Hubo un error en el metodo Denegado");
-                    Console.WriteLine("Detalles del error: " + ex.Message);
-                }
-            }
-            return View(actNotificacione);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        [Authorize(Policy = "AdminOnly")]
-        public async Task<IActionResult> EditTran(int Id, int IdN, string Descripcion, [Bind("Id,Razon,IdUser,Valor,Estado,FechaEntregaDinero,FechaPagoTotalPrestamo,FechaIniCoutaPrestamo,TipoCuota")] ActTransaccione actTransaccione) //Metodo para Transaccion Evaluada y Denegada.
+        public async Task<IActionResult> EditTran(int Id, string Descripcion, [Bind("Id,Razon,IdUser,Valor,Estado,FechaEntregaDinero,FechaPagoTotalPrestamo,FechaIniCoutaPrestamo,TipoCuota")] ActTransaccione actTransaccione) //Metodo para Transaccion Evaluada y Denegada.
         {
             if (Id != actTransaccione.Id)
             {
@@ -253,6 +213,8 @@ namespace act_Application.Controllers.General
                     _idTransaccionGlobal = actTransaccione.Id;
                     _idUserGlobal = actTransaccione.IdUser;
                     _fechaPagoTotal = actTransaccione.FechaPagoTotalPrestamo;
+                    string Razon = "PETICION DE PRESTAMO DENEGADA";
+                    _razonGlobal = Razon;
                     _descripcionGlobal = Descripcion;
 
                 }
@@ -267,7 +229,7 @@ namespace act_Application.Controllers.General
                         throw;
                     }
                 }
-                await Denegado(IdN,new ActNotificacione());
+                await CrearNotificacion(new ActNotificacione());
                 return RedirectToAction("Menu", "Home");
             }
             return View(actTransaccione);

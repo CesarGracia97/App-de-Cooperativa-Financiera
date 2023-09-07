@@ -62,7 +62,6 @@
                                 <form asp-action="EditTran">
                                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                                     <input type="hidden" asp-for="@notificacionAdmin.Transacciones.Id" name="Id" id="Id" />
-                                    <input type="hidden" asp-for="@notificacionAdmin.Notificaciones.Id" name="IdN" id="IdN" />
                                     <div class="form-group">
                                         <input asp-for="@notificacionAdmin.Notificaciones.Descripcion" class="input-descripcion" name="Descripcion" id="Descripcion" required />
                                     </div>
@@ -81,7 +80,6 @@
                                     <form asp-action="Edit">
                                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                                         <input type="hidden" asp-for="@notificacionAdmin.Transacciones.Id" name="id" id="id" />
-                                        <input type="hidden" asp-for="@notificacionAdmin.Notificaciones.Id" name="id" id="id" />
                                         <div class="form-group">
                                             <label asp-for="@notificacionAdmin.Transacciones.FechaPagoTotalPrestamo" class="control-label">Fecha de Pago del Prestamo</label>
                                             <input asp-for="@notificacionAdmin.Transacciones.FechaPagoTotalPrestamo" type="date" class="input-date" name="FechaPagoTotalPrestamo" min="@notificacionAdmin.Transacciones.FechaIniCoutaPrestamo.ToString("dd-MMMM-yyyy HH:mm:ss")" required />
@@ -151,7 +149,6 @@
                                                     <p class="modal__paragraph"><strong>Descripcion:</strong></p>
                                                     <p class="modal__description">@notificacionUser.Notificaciones.Descripcion</p>
                                                     <input type="hidden" asp-for="@notificacionUser.Transacciones.Id" name="Id" id="Id" />
-                                                    <input type="hidden" asp-for="@notificacionUser.Notificaciones.Id" name="IdN" id="IdN" />
                                                     <div class="container-modal-btn">
                                                         <button class="btn-mdl-confir" data-notification-id="@notificacionUser.Notificaciones.Id">Aceptar</button>
                                                         <button class="bt-rechazar" data-notification-id="@notificacionUser.Notificaciones.Id">Rechazar</button>
