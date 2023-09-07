@@ -179,7 +179,6 @@ namespace act_Application.Controllers.General
         [Authorize(Policy = "AdminOnly")]
         public async Task<IActionResult> Denegado (int Id, [Bind("IdUser,Razon,Descripcion,FechaNotificacion,Destino")] ActNotificacione actNotificacione)
         {
-
             if (ModelState.IsValid)
             {
                 try

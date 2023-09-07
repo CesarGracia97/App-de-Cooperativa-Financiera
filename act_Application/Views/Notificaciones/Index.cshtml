@@ -118,27 +118,51 @@
                                 <button class="btn-visualizar" data-notification-id="@notificacionUser.Notificaciones.Id">Visualizar</button>
                             </div>
 
-                            <div class="modal-principal" id="modal-@notificacionUser.Notificaciones.Id">
-                                <div class="modal__container">
-                                    <h2 class="modal__title">Detalles</h2>
-                                    <div class="modal__content">
-                                        <form asp-action="AceptarReferente">
+                            @if (notificacionUser.Transacciones.Estado == "DENEGADO")
+                            {
+                                <div class="modal-principal" id="modal-@notificacionUser.Notificaciones.Id">
+                                    <div class="modal__container">
+                                        <h2 class="modal__title">Detalles</h2>
+                                        <div class="modal__content">
                                             <p class="modal__paragraph"><strong>Razon:</strong> @notificacionUser.Notificaciones.Razon</p>
                                             <p class="modal__paragraph"><strong>Fecha:</strong> @notificacionUser.Notificaciones.FechaNotificacion.ToString("dd-MMMM-yyyy")</p>
                                             <p class="modal__paragraph"><strong>IdUser:</strong> @notificacionUser.Notificaciones.IdUser</p>
                                             <p class="modal__paragraph"><strong>Descripcion:</strong></p>
                                             <p class="modal__description">@notificacionUser.Notificaciones.Descripcion</p>
-                                            <input type="hidden" asp-for="@notificacionUser.Transacciones.Id" name="Id" id="Id" />
-                                            <input type="hidden" asp-for="@notificacionUser.Notificaciones.Id" name="IdN" id="IdN" />
                                             <div class="container-modal-btn">
-                                                <button class="btn-mdl-confir" data-notification-id="@notificacionUser.Notificaciones.Id">Aceptar</button>
-                                                <button class="bt-rechazar" data-notification-id="@notificacionUser.Notificaciones.Id">Rechazar</button>
                                                 <a href="#" class="modal__close" data-notification-id="@notificacionUser.Notificaciones.Id">Cerrar</a>
                                             </div>
-                                        </form>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            }
+                            else
+                            {
+                                @if (notificacionUser.Transacciones.Estado != "DENEGADO" && notificacionUser.Transacciones.Estado == "PENDIENTE REFERENTE")
+                                {
+                                    <div class="modal-principal" id="modal-@notificacionUser.Notificaciones.Id">
+                                        <div class="modal__container">
+                                            <h2 class="modal__title">Detalles</h2>
+                                            <div class="modal__content">
+                                                <form asp-action="AceptarReferente">
+                                                    <p class="modal__paragraph"><strong>Razon:</strong> @notificacionUser.Notificaciones.Razon</p>
+                                                    <p class="modal__paragraph"><strong>Fecha:</strong> @notificacionUser.Notificaciones.FechaNotificacion.ToString("dd-MMMM-yyyy")</p>
+                                                    <p class="modal__paragraph"><strong>IdUser:</strong> @notificacionUser.Notificaciones.IdUser</p>
+                                                    <p class="modal__paragraph"><strong>Descripcion:</strong></p>
+                                                    <p class="modal__description">@notificacionUser.Notificaciones.Descripcion</p>
+                                                    <input type="hidden" asp-for="@notificacionUser.Transacciones.Id" name="Id" id="Id" />
+                                                    <input type="hidden" asp-for="@notificacionUser.Notificaciones.Id" name="IdN" id="IdN" />
+                                                    <div class="container-modal-btn">
+                                                        <button class="btn-mdl-confir" data-notification-id="@notificacionUser.Notificaciones.Id">Aceptar</button>
+                                                        <button class="bt-rechazar" data-notification-id="@notificacionUser.Notificaciones.Id">Rechazar</button>
+                                                        <a href="#" class="modal__close" data-notification-id="@notificacionUser.Notificaciones.Id">Cerrar</a>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            }
                         }
                     </div>
                 }
