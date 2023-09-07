@@ -18,5 +18,5 @@ public partial class ActCuota
 
     public DateTime FechaCuota { get; set; }
 
-    public DateTime Estado { get; set; }
+    public string Estado { get; set; }
 }

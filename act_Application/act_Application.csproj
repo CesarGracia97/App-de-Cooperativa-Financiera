@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Controllers\General\NotificacionesController.cs~RF26db15.TMP" />
     <None Remove="Data\Config\config.json~RF76bdf3.TMP" />
   </ItemGroup>
 

@@ -46,6 +46,7 @@
                                         <p class="modal__paragraph"><strong>Razon:</strong> @notificacionAdmin.Notificaciones.Razon</p>
                                         <p class="modal__paragraph"><strong>Fecha:</strong> @notificacionAdmin.Notificaciones.FechaNotificacion.ToString("dd-MM-yyyy")</p>
                                         <p class="modal__paragraph"><strong>IdUser:</strong> @notificacionAdmin.Notificaciones.IdUser</p>
+                                        <p class="modal__paragraph"><strong>Tipo de Cuota:</strong> @notificacionAdmin.Transacciones.TipoCuota</p>
                                         <p class="modal__paragraph"><strong>Descripcion:</strong></p>
                                         <p class="modal__description">@notificacionAdmin.Notificaciones.Descripcion</p>
                                         <p class="modal__paragraph"><strong>Destino:</strong> @notificacionAdmin.Notificaciones.Destino</p>
@@ -58,6 +59,7 @@
                                 </div>
                             </div>
 
+                            /*Si Elije Negar El Prestamo*/
                             <div class="modal-denagado" id="modal-dene-@notificacionAdmin.Notificaciones.Id">
                                 <div class="modal-denegado__container">
                                     <h2 class="modal__title">Establesca la Razon de la Denegacion</h2>
@@ -75,6 +77,7 @@
                                 </div>
                             </div>
 
+                            /*Si decide Aceptar el Prestamo*/
                             <div class="modal-secundaria" id="modal-resp-@notificacionAdmin.Notificaciones.Id">
                                 <div class="modal-secundaria__container">
                                     <h2 class="modal__title">Establesca la Fecha de Pago Total del Prestamo</h2>
@@ -84,7 +87,7 @@
                                             <input type="hidden" asp-for="@notificacionAdmin.Transacciones.Id" name="id" id="id" />
                                             <div class="form-group">
                                                 <label asp-for="@notificacionAdmin.Transacciones.FechaPagoTotalPrestamo" class="control-label">Fecha de Pago del Prestamo</label>
-                                                <input asp-for="@notificacionAdmin.Transacciones.FechaPagoTotalPrestamo" type="date" class="input-date" name="FechaPagoTotalPrestamo" min="@notificacionAdmin.Transacciones.FechaIniCoutaPrestamo.ToString("dd-MMMM-yyyy HH:mm:ss")" required />
+                                                <input asp-for="@notificacionAdmin.Transacciones.FechaPagoTotalPrestamo" required type="date" class="input-date" name="FechaPagoTotalPrestamo" id="FechaPagoTotalPrestamo" min="@notificacionAdmin.Transacciones.FechaIniCoutaPrestamo.ToString("dd-MMMM-yyyy HH:mm:ss")" />
                                                 <span asp-validation-for="@notificacionAdmin.Transacciones.FechaPagoTotalPrestamo" class="text-danger"></span>
                                             </div>
                                             <div class="container-modal-btn">
@@ -95,7 +98,6 @@
                                     </div>
                                 </div>
                             </div>
-
                         }
                         else
                         {
@@ -108,6 +110,7 @@
                                             <p class="modal__paragraph"><strong>Razon:</strong> @notificacionAdmin.Notificaciones.Razon</p>
                                             <p class="modal__paragraph"><strong>Fecha:</strong> @notificacionAdmin.Notificaciones.FechaNotificacion.ToString("dd-MM-yyyy")</p>
                                             <p class="modal__paragraph"><strong>IdUser:</strong> @notificacionAdmin.Notificaciones.IdUser</p>
+                                            <p class="modal__paragraph"><strong>Tipo de Cuota:</strong> @notificacionAdmin.Transacciones.TipoCuota</p>
                                             <p class="modal__paragraph"><strong>Descripcion:</strong></p>
                                             <p class="modal__description">@notificacionAdmin.Notificaciones.Descripcion</p>
                                             <p class="modal__paragraph"><strong>Destino:</strong> @notificacionAdmin.Notificaciones.Destino</p>
@@ -124,7 +127,7 @@
                                     <div class="modal__container">
                                         <h2 class="modal__title">Detalles</h2>
                                         <div class="modal__content">
-                                            <p>Notificacion Con Estado Erroneo</p>
+                                            <p>Transaccion Con Estado Erroneo</p>
                                         </div>
                                     </div>
                                 </div>
@@ -161,7 +164,6 @@
                                         <div class="modal__content">
                                             <p class="modal__paragraph"><strong>Razon:</strong> @notificacionUser.Notificaciones.Razon</p>
                                             <p class="modal__paragraph"><strong>Fecha:</strong> @notificacionUser.Notificaciones.FechaNotificacion.ToString("dd-MMMM-yyyy")</p>
-                                            <p class="modal__paragraph"><strong>IdUser:</strong> @notificacionUser.Notificaciones.IdUser</p>
                                             <p class="modal__paragraph"><strong>Descripcion:</strong></p>
                                             <p class="modal__description">@notificacionUser.Notificaciones.Descripcion</p>
                                             <div class="container-modal-btn">
@@ -182,7 +184,6 @@
                                                 <form>
                                                     <p class="modal__paragraph"><strong>Razon:</strong> @notificacionUser.Notificaciones.Razon</p>
                                                     <p class="modal__paragraph"><strong>Fecha:</strong> @notificacionUser.Notificaciones.FechaNotificacion.ToString("dd-MMMM-yyyy")</p>
-                                                    <p class="modal__paragraph"><strong>IdUser:</strong> @notificacionUser.Notificaciones.IdUser</p>
                                                     <p class="modal__paragraph"><strong>Descripcion:</strong></p>
                                                     <p class="modal__description">@notificacionUser.Notificaciones.Descripcion</p>
                                                     <input type="hidden" asp-for="@notificacionUser.Transacciones.Id" name="Id" id="Id" />

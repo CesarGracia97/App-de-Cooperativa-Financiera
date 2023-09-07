@@ -94,7 +94,7 @@ namespace act_Application.Controllers.General
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Policy = "AdminOnly")]
-        public async Task<IActionResult> Edit(int Id, [Bind("Id,Razon,IdUser,Valor,Estado,FechaEntregaDinero,FechaPagoTotalPrestamo,FechaIniCoutaPrestamo,TipoCuota")] ActTransaccione actTransaccione) //Metodo para Transaccion Evaluada y confirmada.
+        public async Task<IActionResult> Edit(int Id, DateTime FechaPagoTotalPrestamo, [Bind("Id,Razon,IdUser,Valor,Estado,FechaEntregaDinero,FechaPagoTotalPrestamo,FechaIniCoutaPrestamo,TipoCuota")] ActTransaccione actTransaccione) //Metodo para Transaccion Evaluada y confirmada.
         {
             if (Id != actTransaccione.Id)
             {
@@ -140,12 +140,41 @@ namespace act_Application.Controllers.General
                         throw;
                     }
                 }
+                if(actTransaccione.TipoCuota == "PAGO MENSUAL")
+                {
+                    await CrearCuotas(Id, FechaPagoTotalPrestamo, new ActCuota());
+                }
                 await CrearNotificacion(actTransaccione.Id, actTransaccione.IdUser.ToString(), razon, Descripcion,  new ActNotificacione());
                 return RedirectToAction("Menu", "Home"); // Puedes redirigir a donde desees después de la edición exitosa
             }
             return View(actTransaccione);
         }
-        
+
+        private async Task CrearNotificacion(int idTransaccion, string Destino, string Razon, string Descripcion, [Bind("Id,IdUser,Razon,Descripcion,FechaNotificacion,Destino,IdTransacciones,IdAportaciones,IdCuotas")] ActNotificacione actNotificacione) //Metodo para crear una nueva Notificacion en BD y notificacion al Usuario Remitente
+        {
+            var userIdClaim = User.Claims.FirstOrDefault(c => c.Type == "Id");
+            if (userIdClaim != null && int.TryParse(userIdClaim.Value, out int userId))
+            {
+                actNotificacione.IdUser = userId;
+                actNotificacione.Razon = Razon;
+                actNotificacione.Descripcion = Descripcion;
+                actNotificacione.FechaNotificacion = DateTime.Now;
+                actNotificacione.Destino = Destino;
+                actNotificacione.IdTransacciones = idTransaccion;
+                actNotificacione.IdCuotas = 0;
+                actNotificacione.IdAportaciones = 0;
+
+                _context.Add(actNotificacione);
+                await _context.SaveChangesAsync();
+            }
+            else
+            {
+                // Manejar el caso en que no se pueda obtener el Id del usuario
+                ModelState.AddModelError("", "Error al obtener el Id del usuario.");
+                Console.WriteLine("Fallo el guardado");
+            }
+        }
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -316,6 +345,43 @@ namespace act_Application.Controllers.General
         }
 
 
+        private async Task<IActionResult> CrearCuotas(int IdTransaccion, DateTime FechaPagoTotalPrestamo, [Bind("Id,IdUser,IdTransaccion,ValorCuota,FechaCuota,Estado")] ActCuota actCuota)
+        {
+            var metodoNotificacion = new MetodoNotificaciones();
+            var transaccionOriginal = metodoNotificacion.GetTransaccionPorId(IdTransaccion);
+
+            if (transaccionOriginal == null)
+            {
+                return RedirectToAction("Error", "Home");
+            }
+            int numeroDeCuotas = (FechaPagoTotalPrestamo.Year - transaccionOriginal.FechaIniCoutaPrestamo.Year) * 12 +
+                FechaPagoTotalPrestamo.Month - transaccionOriginal.FechaIniCoutaPrestamo.Month + 1;
+
+            
+            decimal valorDeCuota = transaccionOriginal.Valor / numeroDeCuotas; 
+            
+            
+            for (int i = 0; i < numeroDeCuotas; i++) 
+            {
+                DateTime fechaDeCuota = transaccionOriginal.FechaIniCoutaPrestamo.AddMonths(i);
+
+                var cuota = new ActCuota
+                {
+                    IdUser = transaccionOriginal.IdUser,
+                    IdTransaccion = IdTransaccion,
+                    ValorCuota = valorDeCuota,
+                    FechaCuota = fechaDeCuota,
+                    Estado = "PENDIENTE DE PAGO"
+                };
+
+                _context.Add(cuota);
+            }
+
+            // Guardar los cambios en la base de datos
+            await _context.SaveChangesAsync();
+            return View(actCuota);
+        }
+
         public bool ActTransaccionesExists(int id) //Verifica la existencia de una Transaccion en Especifico 
         {
             string connectionString = AppSettingsHelper.GetConnectionString();
@@ -345,30 +411,6 @@ namespace act_Application.Controllers.General
             }
         }
 
-        private async Task CrearNotificacion(int idTransaccion, string Destino, string Razon, string Descripcion, [Bind("Id,IdUser,Razon,Descripcion,FechaNotificacion,Destino,IdTransacciones,IdAportaciones,IdCuotas")] ActNotificacione actNotificacione) //Metodo para crear una nueva Notificacion en BD y notificacion al Usuario Remitente
-        {
-            var userIdClaim = User.Claims.FirstOrDefault(c => c.Type == "Id");
-            if (userIdClaim != null && int.TryParse(userIdClaim.Value, out int userId))
-            {
-                actNotificacione.IdUser = userId;
-                actNotificacione.Razon = Razon;
-                actNotificacione.Descripcion = Descripcion;
-                actNotificacione.FechaNotificacion = DateTime.Now;
-                actNotificacione.Destino = Destino;
-                actNotificacione.IdTransacciones = idTransaccion;
-                actNotificacione.IdCuotas = 0;
-                actNotificacione.IdAportaciones = 0;
-
-                _context.Add(actNotificacione);
-                await _context.SaveChangesAsync();
-            }
-            else
-            {
-                // Manejar el caso en que no se pueda obtener el Id del usuario
-                ModelState.AddModelError("", "Error al obtener el Id del usuario.");
-                Console.WriteLine("Fallo el guardado");
-            }
-        }
 
     }
 }
