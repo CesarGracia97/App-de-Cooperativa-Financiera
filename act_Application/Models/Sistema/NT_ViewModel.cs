@@ -1,4 +1,5 @@
 ﻿using act_Application.Models.BD;
+using CodeGenerator.Models.BD;
 
 namespace act_Application.Models.Sistema
 {
@@ -9,6 +10,8 @@ namespace act_Application.Models.Sistema
             Transacciones = new ActTransaccione();
             Cuotas = new ActCuota ();
             Aportaciones = new ActAportacione();
+            Participante = new ActParticipante();
+
         }
 
         public ActNotificacione Notificaciones { get; set; }
@@ -18,5 +21,7 @@ namespace act_Application.Models.Sistema
         public ActCuota Cuotas { get; set; }
 
         public ActAportacione Aportaciones { get; set; }
+
+        public ActParticipante Participante { get; set; }
     }
 }

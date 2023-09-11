@@ -65,21 +65,14 @@ namespace act_Application.Controllers.General
                 var userIdClaim = User.Claims.FirstOrDefault(c => c.Type == "Id");
                 if (userIdClaim != null && int.TryParse(userIdClaim.Value, out int userId))
                 {
+                    var userIdentificacion = User.Claims.FirstOrDefault(c => c.Type == "Identificacion")?.Value;
                     // Establecer las propiedades que deben agregarse automáticamente
                     actTransaccione.IdUser = userId;
                     actTransaccione.FechaPagoTotalPrestamo = DateTime.MinValue;
                     actTransaccione.Estado = "PENDIENTE ADMIN";
                     actTransaccione.FechaGeneracion = DateTime.Now;
-                    int idParticipantes = await CrearParticipaciones(new ActParticipante());
-                    if (idParticipantes != -1)
-                    {
-                        actTransaccione.IdParticipantes = idParticipantes;
-                    }
-                    else
-                    {
-                        Console.WriteLine("Hubo un problema al obtener el Id del Registro de la participacion");
-                    }
-                        _context.Add(actTransaccione);
+                    actTransaccione.IdParticipantes = 0;
+                    _context.Add(actTransaccione);
 
                     await _context.SaveChangesAsync();
                     
@@ -94,7 +87,7 @@ namespace act_Application.Controllers.General
                         Console.WriteLine("Hubo un problema al enviar la notificación por correo electrónico.");
                         Console.WriteLine("Detalles del error: " + ex.Message);
                     }
-                    await CrearNotificacion(actTransaccione.Razon,"El usuario "+ actTransaccione.IdUser+" Esta pidiendo un prestamo", actTransaccione.Id, new ActNotificacione());
+                    await CrearNotificacion(actTransaccione.Razon, $"El usuario {userIdentificacion} Esta pidiendo un prestamo", actTransaccione.Id, new ActNotificacione());
                     return RedirectToAction("Menu", "Home");
                 }
                 else
@@ -198,28 +191,5 @@ namespace act_Application.Controllers.General
                 Console.WriteLine("Fallo el guardado");
             }
         }
-
-        private async Task<int> CrearParticipaciones([Bind("Id,FechaInicio,FechaFinaliacion,FechaGeneracion,Participantes")] ActParticipante actParticipante)
-        {
-            try
-            {
-                actParticipante.FechaInicio = DateTime.MinValue;
-                actParticipante.FechaFinaliacion = DateTime.MinValue;
-                actParticipante.FechaGeneracion = DateTime.Now;
-                actParticipante.Participantes = "";
-
-                _context.Add(actParticipante);
-                await _context.SaveChangesAsync();
-
-                return actParticipante.Id;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Hubo un problema al crear el Registro de los participantes.");
-                Console.WriteLine("Detalles del error: " + ex.Message);
-                return -1;
-            }
-        }
-
     }
 }

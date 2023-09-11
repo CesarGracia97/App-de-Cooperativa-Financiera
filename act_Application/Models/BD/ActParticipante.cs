@@ -17,4 +17,8 @@ public partial class ActParticipante
     public DateTime FechaGeneracion { get; set; }
 
     public string Participantes { get; set; } 
+
+    public int IdTransacciones { get; set; }
+
+    public string Estado { get; set; }
 }

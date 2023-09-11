@@ -7,8 +7,7 @@ using act_Application.Logica;
 using act_Application.Models.Sistema;
 using act_Application.Helper;
 using MySql.Data.MySqlClient;
-using System.Security.Claims;
-
+using CodeGenerator.Models.BD;
 
 namespace act_Application.Controllers.General
 {
@@ -415,6 +414,35 @@ namespace act_Application.Controllers.General
 
             return fechasDeCuotas;
         }
+
+        private async Task<int> CrearParticipaciones(int IdTransaccion, DateTime FechaInicio, DateTime FechaFinaliacion, [Bind("Id,FechaInicio,FechaFinaliacion,FechaGeneracion,Participantes")] ActParticipante actParticipante)
+        {
+            try
+            {
+                actParticipante.FechaInicio = FechaInicio;
+                actParticipante.FechaFinaliacion = FechaFinaliacion;
+                actParticipante.FechaGeneracion = DateTime.Now;
+                actParticipante.Participantes = "";
+                actParticipante.IdTransacciones = IdTransaccion;
+                actParticipante.Estado = "PENDIENTE";
+                /*ESTADOS:  PENDIENTE (ESESPERA DE LA RESPUESTA DEL USUARIO NO ADMIN.
+                            CONCURSO (A LA ESPERA DE KUE NUEVOS SOCIOS SE UNAN.
+                            DENEGADO (EL USUARIO NO ADMIN NO PERMITIO EL SEGUIMIENTO DE LA TRANSACCION.
+                            FINALIZADO (EL CONCURSO TERMINO Y SE SELECCIONARON LOS PARTICIPANTES.*/
+
+                _context.Add(actParticipante);
+                await _context.SaveChangesAsync();
+
+                return actParticipante.Id;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Hubo un problema al crear el Registro de los participantes.");
+                Console.WriteLine("Detalles del error: " + ex.Message);
+                return -1;
+            }
+        }
+
 
         public bool ActTransaccionesExists(int id) //Verifica la existencia de una Transaccion en Especifico 
         {
