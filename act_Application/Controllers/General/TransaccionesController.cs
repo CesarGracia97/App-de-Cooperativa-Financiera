@@ -56,7 +56,7 @@ namespace act_Application.Controllers.General
         [Authorize(Policy = "AdminReferenteOnly")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Razon,IdUser,Valor,Estado,FechPagoTotalPrestamo,FechaEntregaDinero,FechaIniCoutaPrestamo,TipoCuota")] ActTransaccione actTransaccione)
+        public async Task<IActionResult> Create([Bind("Id,Razon,IdUser,Valor,Estado,FechPagoTotalPrestamo,FechaEntregaDinero,FechaIniCoutaPrestamo,TipoCuota,IdParticipantes,FechaGeneracion")] ActTransaccione actTransaccione)
         {
             if (ModelState.IsValid)
             {
@@ -67,13 +67,11 @@ namespace act_Application.Controllers.General
                     actTransaccione.IdUser = userId;
                     actTransaccione.FechaPagoTotalPrestamo = DateTime.MinValue;
                     actTransaccione.Estado = "PENDIENTE ADMIN";
-                    _razonGlobal = actTransaccione.Razon;
+                    actTransaccione.FechaGeneracion = DateTime.Now;
 
                     _context.Add(actTransaccione);
 
                     await _context.SaveChangesAsync();
-
-                    _idTransaccionGlobal = actTransaccione.Id;
                     
                     try
                     {
@@ -86,7 +84,7 @@ namespace act_Application.Controllers.General
                         Console.WriteLine("Hubo un problema al enviar la notificación por correo electrónico.");
                         Console.WriteLine("Detalles del error: " + ex.Message);
                     }
-                    await CrearNotificacion(new ActNotificacione());
+                    await CrearNotificacion(actTransaccione.Razon,"El usuario "+ actTransaccione.IdUser+" Esta pidiendo un prestamo", actTransaccione.Id, new ActNotificacione());
                     return RedirectToAction("Menu", "Home");
                 }
                 else
@@ -167,17 +165,17 @@ namespace act_Application.Controllers.General
             }
         }
 
-        private async Task CrearNotificacion([Bind("Id,IdUser,Razon,Descripcion,FechaNotificacion,Destino,IdTransacciones,IdAportaciones,IdCuotas ")] ActNotificacione actNotificacione)
+        private async Task CrearNotificacion(string razon, string descripcion, int idTransaccion,[Bind("Id,IdUser,Razon,Descripcion,FechaNotificacion,Destino,IdTransacciones,IdAportaciones,IdCuotas")] ActNotificacione actNotificacione)
         {
             var userIdClaim = User.Claims.FirstOrDefault(c => c.Type == "Id");
             if (userIdClaim != null && int.TryParse(userIdClaim.Value, out int userId))
             {
                 actNotificacione.IdUser = userId;
-                actNotificacione.Razon = _razonGlobal;
-                actNotificacione.Descripcion = _descripcionGlobal;
+                actNotificacione.Razon = razon;
+                actNotificacione.Descripcion = descripcion;
                 actNotificacione.FechaNotificacion = DateTime.Now;
                 actNotificacione.Destino = "ADMINISTRADOR";
-                actNotificacione.IdTransacciones = _idTransaccionGlobal;
+                actNotificacione.IdTransacciones = idTransaccion;
                 actNotificacione.IdCuotas = 0;
                 actNotificacione.IdAportaciones = 0;
 

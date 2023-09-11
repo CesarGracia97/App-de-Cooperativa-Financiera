@@ -77,7 +77,8 @@ namespace act_Application.Logica
                                     Destino = reader["Destino"].ToString(),
                                     IdTransacciones = Convert.ToInt32(reader["IdTransacciones"]),
                                     IdAportaciones = Convert.ToInt32(reader["IdAportaciones"]),
-                                    IdCuotas = Convert.ToInt32(reader["IdCuotas"])
+                                    IdCuotas = Convert.ToInt32(reader["IdCuotas"]),
+                                    
                                 };
                                 notificacionesUser.Add(notificacion);
                                 GetTransaccionPorId(notificacion.IdTransacciones);
@@ -122,7 +123,8 @@ namespace act_Application.Logica
                                     FechaPagoTotalPrestamo = Convert.ToDateTime(reader["FechaPagoTotalPrestamo"]),
                                     FechaIniCoutaPrestamo = Convert.ToDateTime(reader["FechaIniCoutaPrestamo"]),
                                     TipoCuota = reader["TipoCuota"].ToString(),
-                                    IdParticipantes = Convert.ToInt32(reader["IdParticipantes"])
+                                    IdParticipantes = Convert.ToInt32(reader["IdParticipantes"]),
+                                    FechaGeneracion = Convert.ToDateTime(reader["FechaEntregaDinero"])
                                 };
                                 return transaccion;
                             }

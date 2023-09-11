@@ -8,6 +8,7 @@ namespace act_Application.Models.Sistema
             Notificaciones = new ActNotificacione();
             Transacciones = new ActTransaccione();
             Cuotas = new ActCuota ();
+            Aportaciones = new ActAportacione();
         }
 
         public ActNotificacione Notificaciones { get; set; }
@@ -15,5 +16,7 @@ namespace act_Application.Models.Sistema
         public ActTransaccione Transacciones { get; set; }
 
         public ActCuota Cuotas { get; set; }
+
+        public ActAportacione Aportaciones { get; set; }
     }
 }
