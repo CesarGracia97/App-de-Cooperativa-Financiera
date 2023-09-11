@@ -27,6 +27,4 @@ public partial class ActTransaccione
     public string TipoCuota { get; set; }
 
     public int IdParticipantes { get; set; }
-
-    public DateTime FechaGeneracion { get; set; }
 }

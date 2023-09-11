@@ -192,10 +192,9 @@ public partial class DesarrolloContext : DbContext
 
             entity.Property(e => e.Id).HasColumnType("int(11)");
             entity.Property(e => e.Estado).HasMaxLength(45);
-            entity.Property(e => e.FechaEntregaDinero).HasColumnType("date");
-            entity.Property(e => e.FechaGeneracion).HasColumnType("date");
-            entity.Property(e => e.FechaIniCoutaPrestamo).HasColumnType("date");
-            entity.Property(e => e.FechaPagoTotalPrestamo).HasColumnType("date");
+            entity.Property(e => e.FechaEntregaDinero).HasColumnType("datetime");
+            entity.Property(e => e.FechaIniCoutaPrestamo).HasColumnType("datetime");
+            entity.Property(e => e.FechaPagoTotalPrestamo).HasColumnType("datetime");
             entity.Property(e => e.IdParticipantes).HasColumnType("int(11)");
             entity.Property(e => e.IdUser).HasColumnType("int(11)");
             entity.Property(e => e.Razon).HasMaxLength(45);

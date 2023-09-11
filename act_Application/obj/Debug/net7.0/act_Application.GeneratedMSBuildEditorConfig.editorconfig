@@ -80,6 +80,26 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWN0Tm90aWZpY2FjaW9uZXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[E:/cesar.gracia/Proyectos/C\#/act_Application/act_Application/Views/ActParticipantes/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWN0UGFydGljaXBhbnRlc1xDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/cesar.gracia/Proyectos/C\#/act_Application/act_Application/Views/ActParticipantes/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWN0UGFydGljaXBhbnRlc1xEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/cesar.gracia/Proyectos/C\#/act_Application/act_Application/Views/ActParticipantes/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWN0UGFydGljaXBhbnRlc1xEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/cesar.gracia/Proyectos/C\#/act_Application/act_Application/Views/ActParticipantes/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWN0UGFydGljaXBhbnRlc1xFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/cesar.gracia/Proyectos/C\#/act_Application/act_Application/Views/ActParticipantes/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWN0UGFydGljaXBhbnRlc1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [E:/cesar.gracia/Proyectos/C\#/act_Application/act_Application/Views/ActRols/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWN0Um9sc1xDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 

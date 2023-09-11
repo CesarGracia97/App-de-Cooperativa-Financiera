@@ -121,7 +121,8 @@ namespace act_Application.Logica
                                     FechaEntregaDinero = Convert.ToDateTime(reader["FechaEntregaDinero"]),
                                     FechaPagoTotalPrestamo = Convert.ToDateTime(reader["FechaPagoTotalPrestamo"]),
                                     FechaIniCoutaPrestamo = Convert.ToDateTime(reader["FechaIniCoutaPrestamo"]),
-                                    TipoCuota = reader["TipoCuota"].ToString()
+                                    TipoCuota = reader["TipoCuota"].ToString(),
+                                    IdParticipantes = Convert.ToInt32(reader["IdParticipantes"])
                                 };
                                 return transaccion;
                             }

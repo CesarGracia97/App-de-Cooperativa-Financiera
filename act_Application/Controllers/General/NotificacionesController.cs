@@ -103,7 +103,7 @@ namespace act_Application.Controllers.General
 
             if (ModelState.IsValid)
             {
-                string razon, Descripcion;
+                string razon, Descripcion, DescripcionC="";
 
                 try
                 {
@@ -124,9 +124,25 @@ namespace act_Application.Controllers.General
                     _context.Update(actTransaccione);
                     await _context.SaveChangesAsync();
 
-                    razon = "RESPUESTA DE PRESTAMO ADMIN"; 
-                    Descripcion = "El Administrador A Evaluado tu Peticion de Prestramo con La Condidion de la Fecha de Pago  Total para el dia " + actTransaccione.FechaPagoTotalPrestamo.ToString("dd-MMM-yyyy");
+                    razon = "RESPUESTA DE PRESTAMO ADMIN";
+                    if (actTransaccione.TipoCuota == "PAGO UNICO")
+                    {
+                        DescripcionC = "El Administrador A Evaluado tu Peticion de Prestramo con La Condidion de la Fecha de Pago  Total para el dia " + actTransaccione.FechaPagoTotalPrestamo.ToString("dd-MMM-yyyy");
 
+                    }
+                    else if (actTransaccione.TipoCuota == "PAGO MENSUAL")
+                    {
+                        // Crea las cuotas y obtén las fechas de pago
+                        List<DateTime> fechasDePago = await CrearCuotas(Id, FechaPagoTotalPrestamo, new ActCuota());
+
+                        // Construye la descripción que incluye las fechas de pago
+                        DescripcionC = "El Administrador A Evaluado tu Petición de Préstamo con La Condición de que las fechas de pago sean las siguientes:";
+                        foreach (var fecha in fechasDePago)
+                        {
+                            DescripcionC += " " + fecha.ToString("dd-MMM-yyyy");
+                        }
+                    }
+                    Descripcion = DescripcionC;
 
                 }
                 catch (DbUpdateConcurrencyException)
@@ -140,17 +156,14 @@ namespace act_Application.Controllers.General
                         throw;
                     }
                 }
-                if(actTransaccione.TipoCuota == "PAGO MENSUAL")
-                {
-                    await CrearCuotas(Id, FechaPagoTotalPrestamo, new ActCuota());
-                }
-                await CrearNotificacion(actTransaccione.Id, actTransaccione.IdUser.ToString(), razon, Descripcion,  new ActNotificacione());
+
+                await CrearNotificacion(actTransaccione.Id, 0, 0, actTransaccione.IdUser.ToString(), razon, Descripcion,  new ActNotificacione());
                 return RedirectToAction("Menu", "Home"); // Puedes redirigir a donde desees después de la edición exitosa
             }
             return View(actTransaccione);
         }
 
-        private async Task CrearNotificacion(int idTransaccion, string Destino, string Razon, string Descripcion, [Bind("Id,IdUser,Razon,Descripcion,FechaNotificacion,Destino,IdTransacciones,IdAportaciones,IdCuotas")] ActNotificacione actNotificacione) //Metodo para crear una nueva Notificacion en BD y notificacion al Usuario Remitente
+        private async Task CrearNotificacion(int idTransaccion,int IdCuota, int IdAportacion, string Destino, string Razon, string Descripcion, [Bind("Id,IdUser,Razon,Descripcion,FechaNotificacion,Destino,IdTransacciones,IdAportaciones,IdCuotas")] ActNotificacione actNotificacione) //Metodo para crear una nueva Notificacion en BD y notificacion al Usuario Remitente
         {
             var userIdClaim = User.Claims.FirstOrDefault(c => c.Type == "Id");
             if (userIdClaim != null && int.TryParse(userIdClaim.Value, out int userId))
@@ -160,9 +173,27 @@ namespace act_Application.Controllers.General
                 actNotificacione.Descripcion = Descripcion;
                 actNotificacione.FechaNotificacion = DateTime.Now;
                 actNotificacione.Destino = Destino;
-                actNotificacione.IdTransacciones = idTransaccion;
+                if(idTransaccion > 0)  {
+                    actNotificacione.IdTransacciones = idTransaccion;
+                }
+                else
+                {
+                    actNotificacione.IdTransacciones = 0;
+                }
+                if(IdAportacion > 0){
+                    actNotificacione.IdAportaciones = IdAportacion;
+                }
+                else
+                {
+                    actNotificacione.IdAportaciones = 0;
+                }
                 actNotificacione.IdCuotas = 0;
-                actNotificacione.IdAportaciones = 0;
+                if(IdCuota > 0){
+                    actNotificacione.IdCuotas = IdCuota; ;
+                }
+                else{
+                    actNotificacione.IdCuotas = 0;
+                }
 
                 _context.Add(actNotificacione);
                 await _context.SaveChangesAsync();
@@ -224,7 +255,7 @@ namespace act_Application.Controllers.General
                         throw;
                     }
                 }
-                await CrearNotificacion(actTransaccione.Id, actTransaccione.IdUser.ToString(), razon, Descripcion, new ActNotificacione());
+                await CrearNotificacion(actTransaccione.Id, 0, 0, actTransaccione.IdUser.ToString(), razon, Descripcion, new ActNotificacione());
                 return RedirectToAction("Menu", "Home");
             }
             return View(actTransaccione);
@@ -280,7 +311,7 @@ namespace act_Application.Controllers.General
                         throw;
                     }
                 }
-                await CrearNotificacion(actTransaccione.Id, "ADMINISTRADOR", Razon, Descripcion, new ActNotificacione());
+                await CrearNotificacion(actTransaccione.Id, 0, 0, "ADMINISTRADOR", Razon, Descripcion, new ActNotificacione());
                 return RedirectToAction("Menu", "Home"); // Puedes redirigir a donde desees después de la edición exitosa
             }
             return View(actTransaccione);
@@ -337,7 +368,7 @@ namespace act_Application.Controllers.General
                         throw;
                     }
                 }
-                await CrearNotificacion(actTransaccione.Id, "ADMINISTRADOR", Razon, Descripcion, new ActNotificacione());
+                await CrearNotificacion(actTransaccione.Id, 0, 0, "ADMINISTRADOR", Razon, Descripcion, new ActNotificacione());
                 return RedirectToAction("Menu", "Home"); // Puedes redirigir a donde desees después de la edición exitosa
             }
             return View(actTransaccione);
@@ -345,25 +376,27 @@ namespace act_Application.Controllers.General
         }
 
 
-        private async Task<IActionResult> CrearCuotas(int IdTransaccion, DateTime FechaPagoTotalPrestamo, [Bind("Id,IdUser,IdTransaccion,ValorCuota,FechaCuota,Estado")] ActCuota actCuota)
+        private async Task<List<DateTime>> CrearCuotas(int IdTransaccion, DateTime FechaPagoTotalPrestamo, [Bind("Id,IdUser,IdTransaccion,ValorCuota,FechaCuota,Estado")] ActCuota actCuota)
         {
             var metodoNotificacion = new MetodoNotificaciones();
             var transaccionOriginal = metodoNotificacion.GetTransaccionPorId(IdTransaccion);
 
             if (transaccionOriginal == null)
             {
-                return RedirectToAction("Error", "Home");
+                Console.WriteLine("Hubo un error al verificar la existencia del registro en GetTransaccionPorId(IdTransaccion)");
             }
             int numeroDeCuotas = (FechaPagoTotalPrestamo.Year - transaccionOriginal.FechaIniCoutaPrestamo.Year) * 12 +
                 FechaPagoTotalPrestamo.Month - transaccionOriginal.FechaIniCoutaPrestamo.Month + 1;
 
             
-            decimal valorDeCuota = transaccionOriginal.Valor / numeroDeCuotas; 
-            
-            
+            decimal valorDeCuota = transaccionOriginal.Valor / numeroDeCuotas;
+
+            var fechasDeCuotas = new List<DateTime>();
+
             for (int i = 0; i < numeroDeCuotas; i++) 
             {
                 DateTime fechaDeCuota = transaccionOriginal.FechaIniCoutaPrestamo.AddMonths(i);
+                fechasDeCuotas.Add(fechaDeCuota);
 
                 var cuota = new ActCuota
                 {
@@ -379,7 +412,8 @@ namespace act_Application.Controllers.General
 
             // Guardar los cambios en la base de datos
             await _context.SaveChangesAsync();
-            return View(actCuota);
+
+            return fechasDeCuotas;
         }
 
         public bool ActTransaccionesExists(int id) //Verifica la existencia de una Transaccion en Especifico 

@@ -74,11 +74,10 @@ namespace act_Application.Controllers.General
                     await _context.SaveChangesAsync();
 
                     _idTransaccionGlobal = actTransaccione.Id;
-
-                    ActUser usuario = new ActUser(); 
+                    
                     try
                     {
-                        await EnviarNotificacionAdministrador(usuario, actTransaccione);
+                        await EnviarNotificacionAdministrador(actTransaccione);
                         await EnviarNotificacionUsuario(actTransaccione);
                     }
                     catch(Exception ex)
@@ -100,7 +99,7 @@ namespace act_Application.Controllers.General
             return View(actTransaccione);
         }
 
-        public async Task EnviarNotificacionAdministrador(ActUser usuario, ActTransaccione actTransaccione)
+        public async Task EnviarNotificacionAdministrador( ActTransaccione actTransaccione)
         {
             var userEmail = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
             var userIdentificacion = User.Claims.FirstOrDefault(c => c.Type == "Identificacion")?.Value;

@@ -7,7 +7,7 @@ namespace act_Application.Models.Sistema
         public NT_ViewModel() {
             Notificaciones = new ActNotificacione();
             Transacciones = new ActTransaccione();
-            Cuotas = new ActCuota();
+            Cuotas = new ActCuota ();
         }
 
         public ActNotificacione Notificaciones { get; set; }
