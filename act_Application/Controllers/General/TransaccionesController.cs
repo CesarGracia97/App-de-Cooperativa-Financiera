@@ -9,6 +9,8 @@ using System.Net;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
+using Org.BouncyCastle.Crypto;
+using CodeGenerator.Models.BD;
 
 namespace act_Application.Controllers.General
 {
@@ -68,8 +70,16 @@ namespace act_Application.Controllers.General
                     actTransaccione.FechaPagoTotalPrestamo = DateTime.MinValue;
                     actTransaccione.Estado = "PENDIENTE ADMIN";
                     actTransaccione.FechaGeneracion = DateTime.Now;
-
-                    _context.Add(actTransaccione);
+                    int idParticipantes = await CrearParticipaciones(new ActParticipante());
+                    if (idParticipantes != -1)
+                    {
+                        actTransaccione.IdParticipantes = idParticipantes;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Hubo un problema al obtener el Id del Registro de la participacion");
+                    }
+                        _context.Add(actTransaccione);
 
                     await _context.SaveChangesAsync();
                     
@@ -184,9 +194,30 @@ namespace act_Application.Controllers.General
             }
             else
             {
-                // Manejar el caso en que no se pueda obtener el Id del usuario
                 ModelState.AddModelError("", "Error al obtener el Id del usuario.");
                 Console.WriteLine("Fallo el guardado");
+            }
+        }
+
+        private async Task<int> CrearParticipaciones([Bind("Id,FechaInicio,FechaFinaliacion,FechaGeneracion,Participantes")] ActParticipante actParticipante)
+        {
+            try
+            {
+                actParticipante.FechaInicio = DateTime.MinValue;
+                actParticipante.FechaFinaliacion = DateTime.MinValue;
+                actParticipante.FechaGeneracion = DateTime.Now;
+                actParticipante.Participantes = "";
+
+                _context.Add(actParticipante);
+                await _context.SaveChangesAsync();
+
+                return actParticipante.Id;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Hubo un problema al crear el Registro de los participantes.");
+                Console.WriteLine("Detalles del error: " + ex.Message);
+                return -1;
             }
         }
 
