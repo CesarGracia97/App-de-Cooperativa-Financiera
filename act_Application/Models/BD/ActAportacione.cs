@@ -11,7 +11,7 @@ public partial class ActAportacione
 {
     public int Id { get; set; }
 
-    public string Razon { get; set; } = null!;
+    public string Razon { get; set; }
 
     public decimal Valor { get; set; }
 
@@ -19,7 +19,7 @@ public partial class ActAportacione
 
     public DateTime FechaAportacion { get; set; }
 
-    public string Aprobacion { get; set; } = null!;
+    public string Aprobacion { get; set; } 
 
     [Column(TypeName = "longblob")]
     public byte[] CapturaPantalla { get; set; }
@@ -28,9 +28,9 @@ public partial class ActAportacione
 
     public int Cuadrante2 { get; set; }
 
-    public string Nbanco { get; set; } = null!;
+    public string Nbanco { get; set; }
 
-    public string Cbancaria { get; set; } = null!;
+    public string Cbancaria { get; set; }
     [NotMapped]
     public string NombreUsuario { get; set; }
 

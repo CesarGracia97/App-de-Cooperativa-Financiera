@@ -82,17 +82,20 @@ CREATE TABLE `act_Multas` (
  /*Tabla de Transacciones*/
 CREATE TABLE `act_Transacciones` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
-  `Razon` varchar(45),
-  `IdUser` int(11),
-  `Valor` decimal(10,2),
-  `Estado` varchar(45),
-  `FechaEntregaDinero` date,
-  `FechaPagoTotalPrestamo` date,
-  `FechaIniCoutaPrestamo` date,
-  `TipoCuota` varchar(45),
+  `Razon` varchar(45) NOT NULL,
+  `IdUser` int(11) NOT NULL,
+  `Valor` decimal(10,2) NOT NULL,
+  `Estado` varchar(45) NOT NULL,
+  `FechaEntregaDinero` date NOT NULL,
+  `FechaPagoTotalPrestamo` date NOT NULL,
+  `FechaIniCoutaPrestamo` date NOT NULL,
+  `FechaGeneracion` date NOT NULL,
+  `TipoCuota` varchar(45) NOT NULL,
+  `IdParticipantes` int(11) NOT NULL,
   PRIMARY KEY (`Id`),
   UNIQUE KEY `Id_UNIQUE` (`Id`),
-  FOREIGN KEY (IdUser) REFERENCES act_User(Id)
+  KEY `IdUser` (`IdUser`),
+  KEY `FK_Transacciones_Participantes` (`IdParticipantes`)
 ) COMMENT='Operaciones de Referentes';
 
 /*Tabla Cuotas*/
@@ -127,6 +130,17 @@ CREATE TABLE `act_Notificaciones` (
   FOREIGN KEY (IdCuotas) REFERENCES act_Cuotas(Id)
 ) COMMENT='Tabla de Notificaciones';
 
+/*Tabla de Garantes*/
+CREATE TABLE `act_Participantes` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `FechaInicio` date NOT NULL,
+  `FechaFinaliacion` date NOT NULL,
+  `FechaGeneracion` date NOT NULL,
+  `Participantes` varchar(100) NOT NULL,
+  PRIMARY KEY (`Id`),
+  UNIQUE KEY `Id_UNIQUE` (`Id`)
+) COMMENT='Tabla de Participantes/Garantes de Prestamo';
+
 /*Tabla de Consultas*/
 CREATE TABLE `desarrollo`.`act_Querys` (
   `Id` INT NOT NULL,
@@ -135,3 +149,4 @@ CREATE TABLE `desarrollo`.`act_Querys` (
   `Descripcion` VARCHAR(5000) NOT NULL,
   PRIMARY KEY (`Id`))
 COMMENT = 'Querys para consultas';
+
