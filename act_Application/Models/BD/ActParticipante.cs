@@ -18,7 +18,7 @@ public partial class ActParticipante
 
     public string Participantes { get; set; } 
 
-    public int IdTransacciones { get; set; }
+    public int IdTransaccion { get; set; }
 
     public string Estado { get; set; }
 }

@@ -428,7 +428,7 @@ namespace act_Application.Controllers.General
                 actParticipante.FechaFinalizacion = FechaFinalizacion;
                 actParticipante.FechaGeneracion = DateTime.Now;
                 actParticipante.Participantes = "";
-                actParticipante.IdTransacciones = IdTransaccion;
+                actParticipante.IdTransaccion = IdTransaccion;
                 actParticipante.Estado = "PENDIENTE";
                 /*ESTADOS:  PENDIENTE (ESESPERA DE LA RESPUESTA DEL USUARIO NO ADMIN.
                             CONCURSO (A LA ESPERA DE KUE NUEVOS SOCIOS SE UNAN.
