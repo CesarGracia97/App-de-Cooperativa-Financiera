@@ -51,7 +51,7 @@ namespace act_Application.Controllers.Administrador.BD
             return View(actTransaccione);
         }
 
-        // GET: ActTransacciones/Edit/5
+        // GET: ActTransacciones/EditTConfirmado/5
         [Authorize(Policy = "AdminOnly")]
         public async Task<IActionResult> Edit(int? id)
         {
@@ -68,7 +68,7 @@ namespace act_Application.Controllers.Administrador.BD
             return View(actTransaccione);
         }
 
-        // POST: ActTransacciones/Edit/5
+        // POST: ActTransacciones/EditTConfirmado/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]

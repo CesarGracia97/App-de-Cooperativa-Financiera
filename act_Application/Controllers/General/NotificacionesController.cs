@@ -91,7 +91,7 @@ namespace act_Application.Controllers.General
 
         
         [HttpPost][ValidateAntiForgeryToken][Authorize(Policy = "AdminOnly")]
-        public async Task<IActionResult> Edit(int Id, DateTime FechaPagoTotalPrestamo, DateTime FechaInicio, DateTime FechaFinalizacion, [Bind("Id,Razon,IdUser,Valor,Estado,FechaEntregaDinero,FechaPagoTotalPrestamo,FechaIniCoutaPrestamo,TipoCuota")] ActTransaccione actTransaccione) //Metodo para Transaccion Evaluada y confirmada.
+        public async Task<IActionResult> EditTConfirmado (int Id, DateTime FechaPagoTotalPrestamo, DateTime FechaInicio, DateTime FechaFinalizacion, [Bind("Id,Razon,IdUser,Valor,Estado,FechaEntregaDinero,FechaPagoTotalPrestamo,FechaIniCoutaPrestamo,TipoCuota")] ActTransaccione actTransaccione) //Metodo para Transaccion Evaluada y confirmada.
         {
             if (Id != actTransaccione.Id)
             {
@@ -166,7 +166,8 @@ namespace act_Application.Controllers.General
             return View(actTransaccione);
         }
 
-        private async Task CrearNotificacion(int idTransaccion,int IdCuota, int IdAportacion, string Destino, string Razon, string Descripcion, [Bind("Id,IdUser,Razon,Descripcion,FechaNotificacion,Destino,IdTransacciones,IdAportaciones,IdCuotas")] ActNotificacione actNotificacione) //Metodo para crear una nueva Notificacion en BD y notificacion al Usuario Remitente
+
+        private async Task CrearNotificacion(int idTransaccion, int IdCuota, int IdAportacion, string Destino, string Razon, string Descripcion, [Bind("Id,IdUser,Razon,Descripcion,FechaNotificacion,Destino,IdTransacciones,IdAportaciones,IdCuotas")] ActNotificacione actNotificacione) //Metodo para crear una nueva Notificacion en BD y notificacion al Usuario Remitente
         {
             var userIdClaim = User.Claims.FirstOrDefault(c => c.Type == "Id");
             if (userIdClaim != null && int.TryParse(userIdClaim.Value, out int userId))
@@ -211,7 +212,7 @@ namespace act_Application.Controllers.General
 
 
         [HttpPost][ValidateAntiForgeryToken][Authorize(Policy = "AdminOnly")]
-        public async Task<IActionResult> EditTran(int Id, string Descripcion, [Bind("Id,Razon,IdUser,Valor,Estado,FechaEntregaDinero,FechaPagoTotalPrestamo,FechaIniCoutaPrestamo,TipoCuota")] ActTransaccione actTransaccione) //Metodo para Transaccion Evaluada y Denegada.
+        public async Task<IActionResult> EditTDenegado (int Id, string Descripcion, [Bind("Id,Razon,IdUser,Valor,Estado,FechaEntregaDinero,FechaPagoTotalPrestamo,FechaIniCoutaPrestamo,TipoCuota")] ActTransaccione actTransaccione) //Metodo para Transaccion Evaluada y Denegada.
         {
             if (Id != actTransaccione.Id)
             {
@@ -237,8 +238,11 @@ namespace act_Application.Controllers.General
                     actTransaccione.FechaEntregaDinero = transaccionOriginal.FechaEntregaDinero;
                     actTransaccione.FechaIniCoutaPrestamo = transaccionOriginal.FechaIniCoutaPrestamo;
                     actTransaccione.FechaIniCoutaPrestamo = transaccionOriginal.FechaPagoTotalPrestamo;
+                    actTransaccione.IdParticipantes = transaccionOriginal.IdParticipantes;
+                    actTransaccione.FechaGeneracion = transaccionOriginal.FechaGeneracion;
                     actTransaccione.TipoCuota = transaccionOriginal.TipoCuota;
                     actTransaccione.Estado = "DENEGADO";
+
                     _context.Update(actTransaccione);
                     await _context.SaveChangesAsync();
 
@@ -264,7 +268,7 @@ namespace act_Application.Controllers.General
 
         
         [HttpPost][ValidateAntiForgeryToken][Authorize(Policy = "AdminReferenteOnly")]
-        public async Task<IActionResult> AceptarReferente(int Id, [Bind("Id,Razon,IdUser,Valor,Estado,FechaEntregaDinero,FechaPagoTotalPrestamo,FechaIniCoutaPrestamo,TipoCuota")] ActTransaccione actTransaccione)
+        public async Task<IActionResult> AceptarReferente (int Id, [Bind("Id,Razon,IdUser,Valor,Estado,FechaEntregaDinero,FechaPagoTotalPrestamo,FechaIniCoutaPrestamo,TipoCuota")] ActTransaccione actTransaccione)
         {
             if (Id != actTransaccione.Id)
             {
@@ -290,6 +294,8 @@ namespace act_Application.Controllers.General
                     actTransaccione.FechaEntregaDinero = transaccionOriginal.FechaEntregaDinero;
                     actTransaccione.FechaIniCoutaPrestamo = transaccionOriginal.FechaIniCoutaPrestamo;
                     actTransaccione.TipoCuota = transaccionOriginal.TipoCuota;
+                    actTransaccione.FechaGeneracion = transaccionOriginal.FechaGeneracion;
+                    actTransaccione.IdParticipantes = transaccionOriginal.IdParticipantes;
                     actTransaccione.Estado = "APROBADO";
                     _context.Update(actTransaccione);
                     await _context.SaveChangesAsync();
@@ -310,8 +316,9 @@ namespace act_Application.Controllers.General
                         throw;
                     }
                 }
+                await EditParticipacion(actTransaccione.IdParticipantes, "CONCURSO", new ActParticipante());
                 await CrearNotificacion(actTransaccione.Id, 0, 0, "ADMINISTRADOR", Razon, Descripcion, new ActNotificacione());
-                return RedirectToAction("Menu", "Home"); // Puedes redirigir a donde desees después de la edición exitosa
+                return RedirectToAction("Menu", "Home");// Puedes redirigir a donde desees después de la edición exitosa
             }
             return View(actTransaccione);
 
@@ -319,7 +326,7 @@ namespace act_Application.Controllers.General
 
 
         [HttpPost][ValidateAntiForgeryToken][Authorize(Policy = "AdminReferenteOnly")]
-        public async Task<IActionResult> RechazarReferente(int Id, [Bind("Id,Razon,IdUser,Valor,Estado,FechaEntregaDinero,FechaPagoTotalPrestamo,FechaIniCoutaPrestamo,TipoCuota")] ActTransaccione actTransaccione)
+        public async Task <IActionResult> RechazarReferente (int Id, [Bind("Id,Razon,IdUser,Valor,Estado,FechaEntregaDinero,FechaPagoTotalPrestamo,FechaIniCoutaPrestamo,TipoCuota")] ActTransaccione actTransaccione)
         {
             if (Id != actTransaccione.Id)
             {
@@ -365,8 +372,9 @@ namespace act_Application.Controllers.General
                         throw;
                     }
                 }
+                await EditParticipacion(actTransaccione.IdParticipantes, "DENEGADO", new ActParticipante());
                 await CrearNotificacion(actTransaccione.Id, 0, 0, "ADMINISTRADOR", Razon, Descripcion, new ActNotificacione());
-                return RedirectToAction("Menu", "Home"); // Puedes redirigir a donde desees después de la edición exitosa
+                return RedirectToAction("Menu", "Home");
             }
             return View(actTransaccione);
 
@@ -425,9 +433,9 @@ namespace act_Application.Controllers.General
                     actParticipante.Participantes = "";
                     actParticipante.IdTransaccion = IdTransaccion;
                     actParticipante.Estado = "PENDIENTE";
-                    /*ESTADOS:  PENDIENTE (ESESPERA DE LA RESPUESTA DEL USUARIO NO ADMIN.
-                                CONCURSO (A LA ESPERA DE KUE NUEVOS SOCIOS SE UNAN.
-                                DENEGADO (EL USUARIO NO ADMIN NO PERMITIO EL SEGUIMIENTO DE LA TRANSACCION.
+                    /*ESTADOS:  PENDIENTE (ESESPERA DE LA RESPUESTA DEL USUARIO NO ADMIN).
+                                CONCURSO (A LA ESPERA DE KUE NUEVOS SOCIOS SE UNAN).
+                                DENEGADO (EL USUARIO NO ADMIN NO PERMITIO EL SEGUIMIENTO DE LA TRANSACCION).
                                 FINALIZADO (EL CONCURSO TERMINO Y SE SELECCIONARON LOS PARTICIPANTES.*/
                     _context.Add(actParticipante);
                     await _context.SaveChangesAsync();
@@ -442,6 +450,54 @@ namespace act_Application.Controllers.General
             }
 
         }
+
+
+        private async Task<IActionResult> EditParticipacion(int Id, string Estado, [Bind("Id,IdTransaccion,FechaInicio,FechaFinalizacion,FechaGeneracion,Participantes")] ActParticipante actParticipante)
+        {
+            if (Id != actParticipante.Id)
+            {
+                Console.WriteLine("Fallo la verificacion de Datos");
+                return RedirectToAction("Error", "Home");
+            }
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var metodoNotificacion = new MetodoNotificaciones();
+                    var RparticipantesOriginal = metodoNotificacion.GetRegistroParticipante(Id);
+
+                    if (RparticipantesOriginal == null)
+                    {
+                        return RedirectToAction("Error", "Home");
+                    }
+
+                    actParticipante.FechaInicio = RparticipantesOriginal.FechaInicio;
+                    actParticipante.FechaFinalizacion = RparticipantesOriginal.FechaFinalizacion;
+                    actParticipante.FechaGeneracion = RparticipantesOriginal.FechaGeneracion;
+                    actParticipante.Participantes = RparticipantesOriginal.Participantes;
+                    actParticipante.IdTransaccion = RparticipantesOriginal.IdTransaccion;
+                    actParticipante.Estado = Estado;
+
+
+
+                    _context.Update(actParticipante);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!ActParticipantesExist(actParticipante.Id))
+                    {
+                        return RedirectToAction("Error", "Home");
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+            }
+            return View(actParticipante);
+        }
+
 
         public bool ActTransaccionesExists(int id) //Verifica la existencia de una Transaccion en Especifico 
         {
@@ -473,5 +529,33 @@ namespace act_Application.Controllers.General
         }
 
 
+        public bool ActParticipantesExist (int id)
+        {
+            string connectionString = AppSettingsHelper.GetConnectionString();
+
+            try
+            {
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                {
+                    connection.Open();
+                    string query = ConfigReader.GetQuery("SelectParticipantesExist"); ;
+
+                    using (MySqlCommand command = new MySqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@IdTransaccion", id);
+                        object result = command.ExecuteScalar();
+                        int count = Convert.ToInt32(result);
+
+                        return count > 0;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Hubo un error al verificar la existencia del registro de la participacion.");
+                Console.WriteLine("Detalles del error: " + ex.Message);
+                return false;
+            }
+        }
     }
 }

@@ -65,7 +65,7 @@ namespace act_Application.Controllers.Administrador.BD
             return View(actParticipante);
         }
 
-        // GET: ActParticipantes/Edit/5
+        // GET: ActParticipantes/EditTConfirmado/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.ActParticipantes == null)
@@ -81,7 +81,7 @@ namespace act_Application.Controllers.Administrador.BD
             return View(actParticipante);
         }
 
-        // POST: ActParticipantes/Edit/5
+        // POST: ActParticipantes/EditTConfirmado/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]

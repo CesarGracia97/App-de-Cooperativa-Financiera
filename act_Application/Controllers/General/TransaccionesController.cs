@@ -23,7 +23,9 @@ namespace act_Application.Controllers.General
             _context = context;
         }
 
-        private List<ListItems> ObtenerItemsRazon()             //Contenido de la Lista Razones
+
+        //Contenido de la Lista Razones
+        private List<ListItems> ObtenerItemsRazon()
         {
             return new List<ListItems>
             {
@@ -31,7 +33,9 @@ namespace act_Application.Controllers.General
             };
         }
 
-        private List<ListItems> ObtenerItemsCuota()             //Contenido de la Lista Cuotas
+
+        //Contenido de la Lista Cuotas
+        private List<ListItems> ObtenerItemsCuota()
         {
             return new List<ListItems>
             {
@@ -41,8 +45,9 @@ namespace act_Application.Controllers.General
         }
 
 
+        //Datos directos kue se obtiene por las listas
         [Authorize(Policy = "AdminReferenteOnly")]
-        public IActionResult Create()                           //Datos directos kue se obtiene por las listas
+        public IActionResult Create()
         {
             ViewData["ItemsRazon"] = ObtenerItemsRazon();
             ViewData["ItemsCuota"] = ObtenerItemsCuota();
@@ -75,7 +80,7 @@ namespace act_Application.Controllers.General
 
                     try
                     {
-                        string Descripcion = $"El usuario {userIdentificacion} con Correo {userEmail} y C.I. {userCI} esta solicitando un prestamo de {actTransaccione.Valor}," +
+                        string Descripcion = $"El usuario {userIdentificacion} con Correo {userEmail} y C.I. {userCI} esta solicitando un prestamo de $ {actTransaccione.Valor} USD," +
                                                 $"con fecha de entrega para el dia {actTransaccione.FechaEntregaDinero}, e inicio de pago de la deuda para el dia {actTransaccione.FechaIniCoutaPrestamo}\n" +
                                                 $"Estado: {actTransaccione.Estado}\n" + $"Tipo de Cuota: {actTransaccione.TipoCuota}";
 

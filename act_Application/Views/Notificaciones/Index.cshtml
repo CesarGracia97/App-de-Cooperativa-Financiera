@@ -37,7 +37,7 @@
                             <button class="btn-visualizar" data-notification-id="@notificacionAdmin.Notificaciones.Id">Visualizar</button>
                         </div>
 
-                        @if (notificacionAdmin.Transacciones.Estado == "PENDIENTE ADMIN")
+                        @if (notificacionAdmin.Transacciones.Estado == "PENDIENTE ADMIN" || notificacionAdmin.Transacciones.Estado == "PENDIENTE REFERENTE")
                         {
                             <div class="modal-principal" id="modal-@notificacionAdmin.Notificaciones.Id">
                                 <div class="modal__container">
@@ -63,7 +63,7 @@
                             <div class="modal-denagado" id="modal-dene-@notificacionAdmin.Notificaciones.Id">
                                 <div class="modal-denegado__container">
                                     <h2 class="modal__title">Establesca la Razon de la Denegacion</h2>
-                                    <form asp-action="EditTran">
+                                    <form asp-action="EditTDenegado">
                                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                                         <input type="hidden" asp-for="@notificacionAdmin.Transacciones.Id" name="Id" id="Id" />
                                         <div class="form-group">
@@ -82,7 +82,7 @@
                                 <div class="modal-secundaria__container">
                                     <h2 class="modal__title">Establesca la Fecha de Pago Total del Prestamo</h2>
                                     <div class="modal-secundaria__content">
-                                        <form asp-action="Edit">
+                                        <form asp-action="EditTConfirmado">
                                             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                                             <input type="hidden" asp-for="@notificacionAdmin.Transacciones.Id" name="id" id="id" />
                                             <div class="form-group">
@@ -111,7 +111,7 @@
                         }
                         else
                         {
-                            @if (notificacionAdmin.Transacciones.Estado != "PENDIENTE ADMIN" && notificacionAdmin.Transacciones.Estado == "RECHAZADO" || notificacionAdmin.Transacciones.Estado == "APROBADO")
+                            @if (notificacionAdmin.Transacciones.Estado != "PENDIENTE ADMIN" || notificacionAdmin.Transacciones.Estado != "PENDIENTE REFERENTE" && notificacionAdmin.Transacciones.Estado == "RECHAZADO" || notificacionAdmin.Transacciones.Estado == "APROBADO")
                             {
                                 <div class="modal-principal" id="modal-@notificacionAdmin.Notificaciones.Id">
                                     <div class="modal__container">

@@ -1,5 +1,6 @@
 ﻿using act_Application.Helper;
 using act_Application.Models.BD;
+using CodeGenerator.Models.BD;
 using MySql.Data.MySqlClient;
 
 namespace act_Application.Logica
@@ -139,6 +140,49 @@ namespace act_Application.Logica
             }
 
             return null;
+        }
+
+
+        public ActParticipante GetRegistroParticipante (int Id)
+        {
+            string connectionString = AppSettingsHelper.GetConnectionString();
+            try
+            {
+                string query = ConfigReader.GetQuery("SelectParticipantes");
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                {
+                    connection.Open();
+                    using (MySqlCommand command = new MySqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@Id", Id);
+                        using (MySqlDataReader reader = command.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                ActParticipante transaccion = new ActParticipante
+                                {
+                                    Id = Convert.ToInt32(reader["Id"]),
+                                    FechaInicio = Convert.ToDateTime(reader["FechaInicio"]),
+                                    FechaFinalizacion = Convert.ToDateTime(reader["FechaFinalizacion"]),
+                                    FechaGeneracion = Convert.ToDateTime(reader["FechaGeneracion"]),
+                                    Participantes = reader["Participantes"].ToString(),
+                                    Estado = reader["Estado"].ToString(),
+                                    IdTransaccion = Convert.ToInt32(reader["IdTransaccion"])
+                                };
+                                return transaccion;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Hubo un error en la consulta de la transacción");
+                Console.WriteLine("Detalles del error: " + ex.Message);
+            }
+
+            return null;
+
         }
     }
 }
