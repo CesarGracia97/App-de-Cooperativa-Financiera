@@ -12,7 +12,7 @@ public partial class ActParticipante
 
     public DateTime FechaInicio { get; set; }
 
-    public DateTime FechaFinaliacion { get; set; }
+    public DateTime FechaFinalizacion { get; set; }
 
     public DateTime FechaGeneracion { get; set; }
 

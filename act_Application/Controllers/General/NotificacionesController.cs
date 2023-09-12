@@ -93,7 +93,7 @@ namespace act_Application.Controllers.General
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Policy = "AdminOnly")]
-        public async Task<IActionResult> Edit(int Id, DateTime FechaPagoTotalPrestamo, [Bind("Id,Razon,IdUser,Valor,Estado,FechaEntregaDinero,FechaPagoTotalPrestamo,FechaIniCoutaPrestamo,TipoCuota")] ActTransaccione actTransaccione) //Metodo para Transaccion Evaluada y confirmada.
+        public async Task<IActionResult> Edit(int Id, DateTime FechaPagoTotalPrestamo, DateTime FechaInicio, DateTime FechaFinalizacion, [Bind("Id,Razon,IdUser,Valor,Estado,FechaEntregaDinero,FechaPagoTotalPrestamo,FechaIniCoutaPrestamo,TipoCuota")] ActTransaccione actTransaccione) //Metodo para Transaccion Evaluada y confirmada.
         {
             if (Id != actTransaccione.Id)
             {
@@ -120,6 +120,11 @@ namespace act_Application.Controllers.General
                     actTransaccione.FechaIniCoutaPrestamo = transaccionOriginal.FechaIniCoutaPrestamo;
                     actTransaccione.TipoCuota = transaccionOriginal.TipoCuota;
                     actTransaccione.Estado = "PENDIENTE REFERENTE";
+                    int idParticipantes = await CrearParticipaciones(Id,FechaInicio, FechaFinalizacion, new ActParticipante());
+                    if (idParticipantes != -1)
+                    {
+                        actTransaccione.IdParticipantes = idParticipantes;
+                    }
                     _context.Update(actTransaccione);
                     await _context.SaveChangesAsync();
 
@@ -415,12 +420,12 @@ namespace act_Application.Controllers.General
             return fechasDeCuotas;
         }
 
-        private async Task<int> CrearParticipaciones(int IdTransaccion, DateTime FechaInicio, DateTime FechaFinaliacion, [Bind("Id,FechaInicio,FechaFinaliacion,FechaGeneracion,Participantes")] ActParticipante actParticipante)
+        private async Task<int> CrearParticipaciones(int IdTransaccion, DateTime FechaInicio, DateTime FechaFinalizacion, [Bind("Id,IdTransaccion,FechaInicio,FechaFinalizacion,FechaGeneracion,Participantes")] ActParticipante actParticipante)
         {
             try
             {
                 actParticipante.FechaInicio = FechaInicio;
-                actParticipante.FechaFinaliacion = FechaFinaliacion;
+                actParticipante.FechaFinalizacion = FechaFinalizacion;
                 actParticipante.FechaGeneracion = DateTime.Now;
                 actParticipante.Participantes = "";
                 actParticipante.IdTransacciones = IdTransaccion;

@@ -139,7 +139,7 @@ public partial class DesarrolloContext : DbContext
             entity.HasIndex(e => e.Id, "Id_UNIQUE").IsUnique();
 
             entity.Property(e => e.Id).HasColumnType("int(11)");
-            entity.Property(e => e.FechaFinaliacion).HasColumnType("date");
+            entity.Property(e => e.FechaFinalizacion).HasColumnType("date");
             entity.Property(e => e.FechaGeneracion).HasColumnType("date");
             entity.Property(e => e.FechaInicio).HasColumnType("date");
             entity.Property(e => e.Participantes).HasMaxLength(100);

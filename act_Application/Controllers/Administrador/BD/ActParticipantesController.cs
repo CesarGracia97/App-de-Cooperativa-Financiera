@@ -54,7 +54,7 @@ namespace act_Application.Controllers.Administrador.BD
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,FechaInicio,FechaFinaliacion,FechaGeneracion,Participantes")] ActParticipante actParticipante)
+        public async Task<IActionResult> Create([Bind("Id,FechaInicio,FechaFinalizacion,FechaGeneracion,Participantes")] ActParticipante actParticipante)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +86,7 @@ namespace act_Application.Controllers.Administrador.BD
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,FechaInicio,FechaFinaliacion,FechaGeneracion,Participantes")] ActParticipante actParticipante)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,FechaInicio,FechaFinalizacion,FechaGeneracion,Participantes")] ActParticipante actParticipante)
         {
             if (id != actParticipante.Id)
             {
