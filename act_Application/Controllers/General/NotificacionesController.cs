@@ -90,9 +90,7 @@ namespace act_Application.Controllers.General
         }
 
         
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        [Authorize(Policy = "AdminOnly")]
+        [HttpPost][ValidateAntiForgeryToken][Authorize(Policy = "AdminOnly")]
         public async Task<IActionResult> Edit(int Id, DateTime FechaPagoTotalPrestamo, DateTime FechaInicio, DateTime FechaFinalizacion, [Bind("Id,Razon,IdUser,Valor,Estado,FechaEntregaDinero,FechaPagoTotalPrestamo,FechaIniCoutaPrestamo,TipoCuota")] ActTransaccione actTransaccione) //Metodo para Transaccion Evaluada y confirmada.
         {
             if (Id != actTransaccione.Id)
@@ -120,6 +118,7 @@ namespace act_Application.Controllers.General
                     actTransaccione.FechaIniCoutaPrestamo = transaccionOriginal.FechaIniCoutaPrestamo;
                     actTransaccione.TipoCuota = transaccionOriginal.TipoCuota;
                     actTransaccione.Estado = "PENDIENTE REFERENTE";
+                    actTransaccione.FechaGeneracion = transaccionOriginal.FechaGeneracion;
                     int idParticipantes = await CrearParticipaciones(Id,FechaInicio, FechaFinalizacion, new ActParticipante());
                     if (idParticipantes != -1)
                     {
@@ -211,9 +210,7 @@ namespace act_Application.Controllers.General
         }
 
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        [Authorize(Policy = "AdminOnly")]
+        [HttpPost][ValidateAntiForgeryToken][Authorize(Policy = "AdminOnly")]
         public async Task<IActionResult> EditTran(int Id, string Descripcion, [Bind("Id,Razon,IdUser,Valor,Estado,FechaEntregaDinero,FechaPagoTotalPrestamo,FechaIniCoutaPrestamo,TipoCuota")] ActTransaccione actTransaccione) //Metodo para Transaccion Evaluada y Denegada.
         {
             if (Id != actTransaccione.Id)
@@ -266,9 +263,7 @@ namespace act_Application.Controllers.General
         }
 
         
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        [Authorize(Policy = "AdminReferenteOnly")]
+        [HttpPost][ValidateAntiForgeryToken][Authorize(Policy = "AdminReferenteOnly")]
         public async Task<IActionResult> AceptarReferente(int Id, [Bind("Id,Razon,IdUser,Valor,Estado,FechaEntregaDinero,FechaPagoTotalPrestamo,FechaIniCoutaPrestamo,TipoCuota")] ActTransaccione actTransaccione)
         {
             if (Id != actTransaccione.Id)
@@ -323,9 +318,7 @@ namespace act_Application.Controllers.General
         }
 
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        [Authorize(Policy = "AdminReferenteOnly")]
+        [HttpPost][ValidateAntiForgeryToken][Authorize(Policy = "AdminReferenteOnly")]
         public async Task<IActionResult> RechazarReferente(int Id, [Bind("Id,Razon,IdUser,Valor,Estado,FechaEntregaDinero,FechaPagoTotalPrestamo,FechaIniCoutaPrestamo,TipoCuota")] ActTransaccione actTransaccione)
         {
             if (Id != actTransaccione.Id)
@@ -424,20 +417,21 @@ namespace act_Application.Controllers.General
         {
             try
             {
-                actParticipante.FechaInicio = FechaInicio;
-                actParticipante.FechaFinalizacion = FechaFinalizacion;
-                actParticipante.FechaGeneracion = DateTime.Now;
-                actParticipante.Participantes = "";
-                actParticipante.IdTransaccion = IdTransaccion;
-                actParticipante.Estado = "PENDIENTE";
-                /*ESTADOS:  PENDIENTE (ESESPERA DE LA RESPUESTA DEL USUARIO NO ADMIN.
-                            CONCURSO (A LA ESPERA DE KUE NUEVOS SOCIOS SE UNAN.
-                            DENEGADO (EL USUARIO NO ADMIN NO PERMITIO EL SEGUIMIENTO DE LA TRANSACCION.
-                            FINALIZADO (EL CONCURSO TERMINO Y SE SELECCIONARON LOS PARTICIPANTES.*/
-
-                _context.Add(actParticipante);
-                await _context.SaveChangesAsync();
-
+                if (ModelState.IsValid)
+                {
+                    actParticipante.FechaInicio = FechaInicio;
+                    actParticipante.FechaFinalizacion = FechaFinalizacion;
+                    actParticipante.FechaGeneracion = DateTime.Now;
+                    actParticipante.Participantes = "";
+                    actParticipante.IdTransaccion = IdTransaccion;
+                    actParticipante.Estado = "PENDIENTE";
+                    /*ESTADOS:  PENDIENTE (ESESPERA DE LA RESPUESTA DEL USUARIO NO ADMIN.
+                                CONCURSO (A LA ESPERA DE KUE NUEVOS SOCIOS SE UNAN.
+                                DENEGADO (EL USUARIO NO ADMIN NO PERMITIO EL SEGUIMIENTO DE LA TRANSACCION.
+                                FINALIZADO (EL CONCURSO TERMINO Y SE SELECCIONARON LOS PARTICIPANTES.*/
+                    _context.Add(actParticipante);
+                    await _context.SaveChangesAsync();
+                }
                 return actParticipante.Id;
             }
             catch (Exception ex)
@@ -446,8 +440,8 @@ namespace act_Application.Controllers.General
                 Console.WriteLine("Detalles del error: " + ex.Message);
                 return -1;
             }
-        }
 
+        }
 
         public bool ActTransaccionesExists(int id) //Verifica la existencia de una Transaccion en Especifico 
         {

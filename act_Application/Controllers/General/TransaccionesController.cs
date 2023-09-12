@@ -23,7 +23,7 @@ namespace act_Application.Controllers.General
             _context = context;
         }
 
-        private List<ListItems> ObtenerItemsRazon()           //Contenido de la Lista Razones
+        private List<ListItems> ObtenerItemsRazon()             //Contenido de la Lista Razones
         {
             return new List<ListItems>
             {
@@ -31,7 +31,7 @@ namespace act_Application.Controllers.General
             };
         }
 
-        private List<ListItems> ObtenerItemsCuota()           //Contenido de la Lista Cuotas
+        private List<ListItems> ObtenerItemsCuota()             //Contenido de la Lista Cuotas
         {
             return new List<ListItems>
             {
@@ -40,24 +40,18 @@ namespace act_Application.Controllers.General
             };
         }
 
-        // GET: Aportar/Create
-        [Authorize(Policy = "AdminReferenteOnly")]
-        public IActionResult Create()
-        {
 
+        [Authorize(Policy = "AdminReferenteOnly")]
+        public IActionResult Create()                           //Datos directos kue se obtiene por las listas
+        {
             ViewData["ItemsRazon"] = ObtenerItemsRazon();
             ViewData["ItemsCuota"] = ObtenerItemsCuota();
             return View();
         }
 
-        public string _razonGlobal;
-        public int _idTransaccionGlobal;
-        public string _descripcionGlobal;
 
-        // POST: Transacciones/Create
-        [Authorize(Policy = "AdminReferenteOnly")]
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        /*Crea una solicitud de prestamo*/
+        [Authorize(Policy = "AdminReferenteOnly")][HttpPost][ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Razon,IdUser,Valor,Estado,FechPagoTotalPrestamo,FechaEntregaDinero,FechaIniCoutaPrestamo,TipoCuota,IdParticipantes,FechaGeneracion")] ActTransaccione actTransaccione)
         {
             if (ModelState.IsValid)
@@ -66,6 +60,9 @@ namespace act_Application.Controllers.General
                 if (userIdClaim != null && int.TryParse(userIdClaim.Value, out int userId))
                 {
                     var userIdentificacion = User.Claims.FirstOrDefault(c => c.Type == "Identificacion")?.Value;
+                    var userEmail = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
+                    var userCI = User.Claims.FirstOrDefault(c => c.Type == "CI")?.Value;
+
                     // Establecer las propiedades que deben agregarse automáticamente
                     actTransaccione.IdUser = userId;
                     actTransaccione.FechaPagoTotalPrestamo = DateTime.MinValue;
@@ -75,19 +72,23 @@ namespace act_Application.Controllers.General
                     _context.Add(actTransaccione);
 
                     await _context.SaveChangesAsync();
-                    
+
                     try
                     {
-                        await EnviarNotificacionAdministrador(actTransaccione);
-                        await EnviarNotificacionUsuario(actTransaccione);
+                        string Descripcion = $"El usuario {userIdentificacion} con Correo {userEmail} y C.I. {userCI} esta solicitando un prestamo de {actTransaccione.Valor}," +
+                                                $"con fecha de entrega para el dia {actTransaccione.FechaEntregaDinero}, e inicio de pago de la deuda para el dia {actTransaccione.FechaIniCoutaPrestamo}\n" +
+                                                $"Estado: {actTransaccione.Estado}\n" + $"Tipo de Cuota: {actTransaccione.TipoCuota}";
+
+                        await CrearNotificacion(actTransaccione.Razon, Descripcion, actTransaccione.Id, new ActNotificacione());
+                        await EnviarCorreoAdmin(Descripcion);
+                        await EnviarCorreoUsuario(Descripcion);
                     }
-                    catch(Exception ex)
+                    catch (Exception ex)
                     {
                         Thread.Sleep(500);
                         Console.WriteLine("Hubo un problema al enviar la notificación por correo electrónico.");
                         Console.WriteLine("Detalles del error: " + ex.Message);
                     }
-                    await CrearNotificacion(actTransaccione.Razon, $"El usuario {userIdentificacion} Esta pidiendo un prestamo", actTransaccione.Id, new ActNotificacione());
                     return RedirectToAction("Menu", "Home");
                 }
                 else
@@ -100,51 +101,58 @@ namespace act_Application.Controllers.General
             return View(actTransaccione);
         }
 
-        public async Task EnviarNotificacionAdministrador( ActTransaccione actTransaccione)
+
+        /*Crea un nuevo registro de Notificacion*/
+        private async Task CrearNotificacion(string razon, string descripcion, int idTransaccion, [Bind("Id,IdUser,Razon,Descripcion,FechaNotificacion,Destino,IdTransacciones,IdAportaciones,IdCuotas")] ActNotificacione actNotificacione)
         {
-            var userEmail = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
-            var userIdentificacion = User.Claims.FirstOrDefault(c => c.Type == "Identificacion")?.Value;
-            var userCI = User.Claims.FirstOrDefault(c => c.Type == "CI")?.Value;
+            var userIdClaim = User.Claims.FirstOrDefault(c => c.Type == "Id");
+            if (userIdClaim != null && int.TryParse(userIdClaim.Value, out int userId))
+            {
+                actNotificacione.IdUser = userId;
+                actNotificacione.Razon = razon;
+                actNotificacione.Descripcion = descripcion;
+                actNotificacione.FechaNotificacion = DateTime.Now;
+                actNotificacione.Destino = "ADMINISTRADOR";
+                actNotificacione.IdTransacciones = idTransaccion;
+                actNotificacione.IdCuotas = 0;
+                actNotificacione.IdAportaciones = 0;
+
+                _context.Add(actNotificacione);
+                await _context.SaveChangesAsync();
+            }
+            else
+            {
+                ModelState.AddModelError("", "Error al obtener el Id del usuario.");
+                Console.WriteLine("Fallo el guardado");
+            }
+        }
+
+
+        /*Envia la solicitud de prestamo*/
+        public async Task EnviarCorreoAdmin(string Descripcion)
+        {
             string correoDestino = CorreoHelper.ObtenerCorreoDestino();
             var subject = "act - Application: Solicitud de Prestamo (FASE 1)";
-            var body = $"El Usuario {userIdentificacion}, con correo electronico {userEmail} y C.I. {userCI} ha solicitado un préstamo:\n" +
-                       $"Detalles:\n" +
-                       $"Valor: {actTransaccione.Valor}\n" +
-                       $"Fecha de Entrega de Dinero: {actTransaccione.FechaEntregaDinero}\n" +
-                       $"Fecha de Inicio de Cuotas: {actTransaccione.FechaIniCoutaPrestamo}\n" +
-                       $"Tipo de Cuota: {actTransaccione.TipoCuota}\n" +
-                       $"Estado: {actTransaccione.Estado}\n" +
-                       $"Fecha de Pago Total del Préstamo: En Espera de Evaluacion" +
-                       $"Numero de Cuotas: En Espera de Evaluacion \n"+
-                       $"Valor de las Cuotas: En Espera de Evaluacion";
-            _descripcionGlobal = body;
+            var body = Descripcion;
 
             await EnviarCorreo(correoDestino, subject, body);
         }
 
-        private async Task EnviarNotificacionUsuario(ActTransaccione actTransaccione)
+
+        /*Envia una notificacion sobre la solicitud de prestamo*/
+        private async Task EnviarCorreoUsuario(string Descripcion)
         {
             var userEmail = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
             if (!string.IsNullOrEmpty(userEmail))
             {
                 var subject = "Solicitud de Prestamo (FASE 1)";
-                var body = $"Usted a solicitado préstamo con los siguientes detalles:\n\n" +
-                           $"Valor: {actTransaccione.Valor}\n" +
-                           $"Tipo de Cuota: {actTransaccione.TipoCuota}\n" +
-                           $"Fecha de Entrega de Dinero: {actTransaccione.FechaEntregaDinero}\n" +
-                           $"Fecha de Inicio de Cuotas: {actTransaccione.FechaIniCoutaPrestamo}\n\n" +
-                           $"Detalles en Espera:\n\n" +
-                           $"Fecha de Pago Total del Préstamo: En Espera de Evaluacion" +
-                           $"Numero de Cuotas: En Espera de Evaluacion \n" +
-                           $"Valor de las Cuotas: En Espera de Evaluacion\n\n" +
-                           $"Tu solicitud ha sido enviada para evaluación. Espera una respuesta pronto (Tiempo Maximo 3 Dias Habiles).\n\n"+
-                           $"-----------------------------------\n"+
-                           $"NO RESPONDER POR ESTE MEDIO\n" +
-                           $"-----------------------------------";
+                var body = Descripcion;
                 await EnviarCorreo(userEmail, subject, body);
             }
         }
 
+
+        /*Envia el Correo*/
         public async Task EnviarCorreo(string destinatario, string asunto, string mensaje)
         {
             var smtpConfig = SmtpConfig.LoadConfig("Data/Config/smtpconfig.json");
@@ -168,28 +176,6 @@ namespace act_Application.Controllers.General
             }
         }
 
-        private async Task CrearNotificacion(string razon, string descripcion, int idTransaccion,[Bind("Id,IdUser,Razon,Descripcion,FechaNotificacion,Destino,IdTransacciones,IdAportaciones,IdCuotas")] ActNotificacione actNotificacione)
-        {
-            var userIdClaim = User.Claims.FirstOrDefault(c => c.Type == "Id");
-            if (userIdClaim != null && int.TryParse(userIdClaim.Value, out int userId))
-            {
-                actNotificacione.IdUser = userId;
-                actNotificacione.Razon = razon;
-                actNotificacione.Descripcion = descripcion;
-                actNotificacione.FechaNotificacion = DateTime.Now;
-                actNotificacione.Destino = "ADMINISTRADOR";
-                actNotificacione.IdTransacciones = idTransaccion;
-                actNotificacione.IdCuotas = 0;
-                actNotificacione.IdAportaciones = 0;
 
-                _context.Add(actNotificacione);
-                await _context.SaveChangesAsync();
-            }
-            else
-            {
-                ModelState.AddModelError("", "Error al obtener el Id del usuario.");
-                Console.WriteLine("Fallo el guardado");
-            }
-        }
     }
 }
