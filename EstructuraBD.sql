@@ -169,13 +169,19 @@ FOREIGN KEY (IdAportaciones) REFERENCES act_Aportaciones(Id);
 /*Tabla de Garantes*/
 CREATE TABLE `act_Participantes` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `IdTransaccion` int(11) NOT NULL,
   `FechaInicio` date NOT NULL,
-  `FechaFinaliacion` date NOT NULL,
+  `FechaFinalizacion` date NOT NULL,
   `FechaGeneracion` date NOT NULL,
   `Participantes` varchar(100) NOT NULL,
+  `Estado` varchar(45) NOT NULL,
   PRIMARY KEY (`Id`),
   UNIQUE KEY `Id_UNIQUE` (`Id`)
 ) COMMENT='Tabla de Participantes/Garantes de Prestamo';
+
+ALTER TABLE act_Participantes
+ADD CONSTRAINT fk_Participantes_Transacciones
+FOREIGN KEY (IdTransaccion) REFERENCES act_Transacciones(Id);
 
 /*Tabla de Consultas*/
 CREATE TABLE `desarrollo`.`act_Querys` (
