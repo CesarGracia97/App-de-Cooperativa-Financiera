@@ -1,4 +1,4 @@
-﻿body{
+﻿body {
     margin: 0px 30px 0px 40px;
 }
 
@@ -110,8 +110,9 @@ body:not(.dark) .content-text {
     margin-right: 30px; /* Separación del botón cerrar */
     width: 125px;
 }
+
     .modal__close:hover {
-        background-color: #ccc5c5; 
+        background-color: #ccc5c5;
     }
 
 .modal__content {
@@ -181,9 +182,9 @@ body:not(.dark) .content-text {
     width: 110px;
 }
 
-.bt-rechazar:hover {
-    background-color: #ff6a00;
-}
+    .bt-rechazar:hover {
+        background-color: #ff6a00;
+    }
 
 .container-modal-btn {
     display: flex;
@@ -290,14 +291,14 @@ body:not(.dark) .content-text {
 
 @media (max-width: 767px) {
     .btn-visualizar {
-        width: 100%; 
-        margin: 10px 0; 
+        width: 100%;
+        margin: 10px 0;
     }
 }
 
 @media (min-width: 1200px) {
     .notif-container {
-        max-width: 750px; 
+        max-width: 750px;
     }
 }
 
@@ -357,6 +358,7 @@ body:not(.dark) .content-text {
     padding: 10px 0px 10px 0px;
     margin: 20px 0px 20px 0px;
 }
+
     .input-descripcion:valid {
         font-size: 0.9em; /* Ajusta el tamaño de fuente según tus preferencias */
     }

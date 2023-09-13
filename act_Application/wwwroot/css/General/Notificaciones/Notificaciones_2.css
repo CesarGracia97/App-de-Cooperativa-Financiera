@@ -1,0 +1,117 @@
+﻿
+/*Aceptar*/
+.aceptar {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+.modal_aceptar__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.modal_aceptar__container {
+    position: absolute;
+    background-color: white;
+    top: -100%;
+    left: 10%;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+    animation: slideIn 0.5s forwards;
+    max-width: 80%; /* Ajusta este valor según tus preferencias */
+}
+
+/*Rechazar*/
+.rechazar {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+.modal_rechazar__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.modal_rechazar__container {
+    position: absolute;
+    background-color: white;
+    top: -100%;
+    left: 10%;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+    animation: slideIn 0.5s forwards;
+    max-width: 80%; /* Ajusta este valor según tus preferencias */
+}
+
+@keyframes slideIn {
+    0% {
+        top: -100%;
+    }
+
+    100% {
+        top: 25%;
+    }
+}
+
+.btn-mdl-aceptar {
+    background-color: #8BC34A; /* Verde sabila */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s; /* Transición suave al hacer hover */
+    margin-top: 20px; /* Separación del botón cerrar */
+    margin-right: 30px; /* Separación del botón cerrar */
+    width: 125px;
+}
+
+    .btn-mdl-aceptar:hover {
+        background-color: #689F38; /* Verde real con efecto hover */
+    }
+
+.btn-mdl-rechazar {
+    background-color: #ff6a00;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s; /* Transición suave al hacer hover */
+    margin-top: 20px; /* Separación del botón cerrar */
+    margin-right: 30px; /* Separación del botón cerrar */
+    width: 110px;
+    justify-content: center;
+    text-align: center;
+    align-content: center;
+}
+
+    .btn-mdl-rechazar :hover {
+        background-color: #ff0000;
+    }

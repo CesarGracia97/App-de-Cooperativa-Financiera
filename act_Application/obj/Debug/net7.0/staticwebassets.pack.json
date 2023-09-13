@@ -17,6 +17,10 @@
       "PackagePath": "staticwebassets\\css\\Administracion\\estiloTablaIndex.css"
     },
     {
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\css\\General\\Aportar\\Aportar.css",
+      "PackagePath": "staticwebassets\\css\\General\\Aportar\\Aportar.css"
+    },
+    {
       "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\css\\General\\Complementos\\navBar.css",
       "PackagePath": "staticwebassets\\css\\General\\Complementos\\navBar.css"
     },
@@ -25,28 +29,32 @@
       "PackagePath": "staticwebassets\\css\\General\\Complementos\\ventanModal.css"
     },
     {
-      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\css\\General\\Notificaciones.css",
-      "PackagePath": "staticwebassets\\css\\General\\Notificaciones.css"
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\css\\General\\Home\\Menu.css",
+      "PackagePath": "staticwebassets\\css\\General\\Home\\Menu.css"
     },
     {
-      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\css\\General\\Transacciones.css",
-      "PackagePath": "staticwebassets\\css\\General\\Transacciones.css"
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\css\\General\\Login\\Login.css",
+      "PackagePath": "staticwebassets\\css\\General\\Login\\Login.css"
     },
     {
-      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\css\\General\\aportar.css",
-      "PackagePath": "staticwebassets\\css\\General\\aportar.css"
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\css\\General\\Notificaciones\\Notificaciones_1.css",
+      "PackagePath": "staticwebassets\\css\\General\\Notificaciones\\Notificaciones_1.css"
     },
     {
-      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\css\\General\\homeLogin.css",
-      "PackagePath": "staticwebassets\\css\\General\\homeLogin.css"
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\css\\General\\Notificaciones\\Notificaciones_2.css",
+      "PackagePath": "staticwebassets\\css\\General\\Notificaciones\\Notificaciones_2.css"
     },
     {
-      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\css\\General\\tablaAportaciones.css",
-      "PackagePath": "staticwebassets\\css\\General\\tablaAportaciones.css"
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\css\\General\\Tablas\\TablaAportaciones.css",
+      "PackagePath": "staticwebassets\\css\\General\\Tablas\\TablaAportaciones.css"
     },
     {
-      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\css\\General\\tablaMultas.css",
-      "PackagePath": "staticwebassets\\css\\General\\tablaMultas.css"
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\css\\General\\Tablas\\TablaMultas.css",
+      "PackagePath": "staticwebassets\\css\\General\\Tablas\\TablaMultas.css"
+    },
+    {
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\css\\General\\Transacciones\\Transacciones.css",
+      "PackagePath": "staticwebassets\\css\\General\\Transacciones\\Transacciones.css"
     },
     {
       "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\favicon.ico",

@@ -18,7 +18,8 @@
 <header>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/General/Notificaciones.css" />
+    <link rel="stylesheet" href="/css/General/Notificaciones/Notificaciones_1.css" />
+    <link rel="stylesheet" href="/css/General/Notificaciones/Notificaciones_2.css" />
     <script src="/js/Notificaciones.js"></script>
 </header>
 <body>
@@ -37,7 +38,7 @@
                             <button class="btn-visualizar" data-notification-id="@notificacionAdmin.Notificaciones.Id">Visualizar</button>
                         </div>
 
-                        @if (notificacionAdmin.Transacciones.Estado == "PENDIENTE ADMIN" || notificacionAdmin.Transacciones.Estado == "PENDIENTE REFERENTE")
+                        @if (notificacionAdmin.Transacciones.Estado == "PENDIENTE ADMIN")
                         {
                             <div class="modal-principal" id="modal-@notificacionAdmin.Notificaciones.Id">
                                 <div class="modal__container">
@@ -53,7 +54,7 @@
                                         <div class="container-modal-btn">
                                             <button class="btn-mdl-confir" data-notification-id="@notificacionAdmin.Notificaciones.Id">Confirmar</button>
                                             <button class="bt-denegar" data-notification-id="@notificacionAdmin.Notificaciones.Id">Denegar</button>
-                                            <a href="" class="modal__close" data-notification-id="@notificacionAdmin.Notificaciones.Id">Cerrar</a>
+                                            <a href="~/Notificaciones/Index" class="modal__close" data-notification-id="@notificacionAdmin.Notificaciones.Id">Cerrar</a>
                                         </div>
                                     </div>
                                 </div>
@@ -71,7 +72,7 @@
                                         </div>
                                         <div class="container-modal-denagado-btn">
                                             <button type="submit" class="save-button" data-notification-id="@notificacionAdmin.Notificaciones.Id">Guardar</button>
-                                            <a href="" class="modal-secundaria__close" data-notification-id="@notificacionAdmin.Notificaciones.Id">Cerrar</a>
+                                            <a href="~/Notificaciones/Index" class="modal-secundaria__close" data-notification-id="@notificacionAdmin.Notificaciones.Id">Cerrar</a>
                                         </div>
                                     </form>
                                 </div>
@@ -102,7 +103,7 @@
                                             </div>
                                             <div class="container-modal-btn">
                                                 <button type="submit" data-notification-id="@notificacionAdmin.Notificaciones.Id" class="save-button">Guardar</button>
-                                                <a href="" class="modal-secundaria__close" data-notification-id="@notificacionAdmin.Notificaciones.Id">Cerrar</a>
+                                                <a href="~/Notificaciones/Index" class="modal-secundaria__close" data-notification-id="@notificacionAdmin.Notificaciones.Id">Cerrar</a>
                                             </div>
                                         </form>
                                     </div>
@@ -111,7 +112,7 @@
                         }
                         else
                         {
-                            @if (notificacionAdmin.Transacciones.Estado != "PENDIENTE ADMIN" || notificacionAdmin.Transacciones.Estado != "PENDIENTE REFERENTE" && notificacionAdmin.Transacciones.Estado == "RECHAZADO" || notificacionAdmin.Transacciones.Estado == "APROBADO")
+                            @if (notificacionAdmin.Transacciones.Estado != "PENDIENTE ADMIN" && notificacionAdmin.Transacciones.Estado == "RECHAZADO" || notificacionAdmin.Transacciones.Estado == "APROBADO" || notificacionAdmin.Transacciones.Estado != "PENDIENTE REFERENTE")
                             {
                                 <div class="modal-principal" id="modal-@notificacionAdmin.Notificaciones.Id">
                                     <div class="modal__container">
@@ -125,7 +126,7 @@
                                             <p class="modal__description">@notificacionAdmin.Notificaciones.Descripcion</p>
                                             <p class="modal__paragraph"><strong>Destino:</strong> @notificacionAdmin.Notificaciones.Destino</p>
                                             <div class="container-modal-btn">
-                                                <a href="" class="modal__close" data-notification-id="@notificacionAdmin.Notificaciones.Id">Cerrar</a>
+                                                <a href="~/Notificaciones/Index" class="modal__close" data-notification-id="@notificacionAdmin.Notificaciones.Id">Cerrar</a>
                                             </div>
                                         </div>
                                     </div>
@@ -138,6 +139,9 @@
                                         <h2 class="modal__title">Detalles</h2>
                                         <div class="modal__content">
                                             <p>Transaccion Con Estado Erroneo</p>
+                                            <div class="container-modal-btn">
+                                                <a href="~/Notificaciones/Index" class="modal__close" data-notification-id="@notificacionAdmin.Notificaciones.Id">Cerrar</a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -177,7 +181,7 @@
                                             <p class="modal__paragraph"><strong>Descripcion:</strong></p>
                                             <p class="modal__description">@notificacionUser.Notificaciones.Descripcion</p>
                                             <div class="container-modal-btn">
-                                                <a href="#" class="modal__close" data-notification-id="@notificacionUser.Notificaciones.Id">Cerrar</a>
+                                                <a href="~/Notificaciones/Index" class="modal__close" data-notification-id="@notificacionUser.Notificaciones.Id">Cerrar</a>
                                             </div>
                                         </div>
                                     </div>
@@ -191,16 +195,45 @@
                                         <div class="modal__container">
                                             <h2 class="modal__title">Detalles</h2>
                                             <div class="modal__content">
-                                                <form>
-                                                    <p class="modal__paragraph"><strong>Razon:</strong> @notificacionUser.Notificaciones.Razon</p>
-                                                    <p class="modal__paragraph"><strong>Fecha:</strong> @notificacionUser.Notificaciones.FechaNotificacion.ToString("dd-MMMM-yyyy")</p>
-                                                    <p class="modal__paragraph"><strong>Descripcion:</strong></p>
-                                                    <p class="modal__description">@notificacionUser.Notificaciones.Descripcion</p>
+                                                <p class="modal__paragraph"><strong>Razon:</strong> @notificacionUser.Notificaciones.Razon</p>
+                                                <p class="modal__paragraph"><strong>Fecha:</strong> @notificacionUser.Notificaciones.FechaNotificacion.ToString("dd-MMMM-yyyy")</p>
+                                                <p class="modal__paragraph"><strong>Descripcion:</strong></p>
+                                                <p class="modal__description">@notificacionUser.Notificaciones.Descripcion</p>
+                                                <div class="container-modal-btn">
+                                                    <button class="btn-mdl-aceptar" data-notification-id="@notificacionUser.Notificaciones.Id">Aceptar</button>
+                                                    <button class="btn-mdl-rechazar" data-notification-id="@notificacionUser.Notificaciones.Id">Rechazar</button>
+                                                    <a href="~/Notificaciones/Index" class="modal__close" data-notification-id="@notificacionUser.Notificaciones.Id">Cerrar</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="aceptar" id="modal-resp-@notificacionUser.Notificaciones.Id">
+                                        <div class="modal_aceptar__container">
+                                            <h2 class="modal__title">Esta seguro en Aceptar las condiciones dadas por los Administradores?</h2>
+                                            <div class="modal_aceptar__content">
+                                                <form asp-action="AceptarReferente">
+                                                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                                                     <input type="hidden" asp-for="@notificacionUser.Transacciones.Id" name="Id" id="Id" />
-                                                    <div class="container-modal-btn">
-                                                        <button class="btn-mdl-confir" asp-action="AceptarReferente" data-notification-id="@notificacionUser.Notificaciones.Id">Aceptar</button>
-                                                        <button class="bt-rechazar" asp-action="RechazarReferente" data-notification-id="@notificacionUser.Notificaciones.Id">Rechazar</button>
-                                                        <a href="#" class="modal__close" data-notification-id="@notificacionUser.Notificaciones.Id">Cerrar</a>
+                                                    <div class="container_modal_aceptar_btn">
+                                                        <button type="submit" data-notification-id="@notificacionUser.Notificaciones.Id" class="save-button">Aceptar</button>
+                                                        <a href="~/Notificaciones/Index" class="modal-secundaria__close" data-notification-id="@notificacionUser.Notificaciones.Id">Cerrar</a>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="rechazar" id="modal-dene-@notificacionUser.Notificaciones.Id">
+                                        <div class="modal_rechazar__container">
+                                            <h2 class="modal__title">Esta Seguro en Rechazar las condiciones dadas por los Administradores?</h2>
+                                            <div class="modal_rechazar__content">
+                                                <form asp-action="RechazarReferente">
+                                                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                                    <input type="hidden" asp-for="@notificacionUser.Transacciones.Id" name="Id" id="Id" />
+                                                    <div class="container_modal_rechazar_btn">
+                                                        <button type="submit" class="save-button" data-notification-id="@notificacionUser.Notificaciones.Id">Rechazar</button>
+                                                        <a href="~/Notificaciones/Index" class="modal-secundaria__close" data-notification-id="@notificacionUser.Notificaciones.Id">Cerrar</a>
                                                     </div>
                                                 </form>
                                             </div>
