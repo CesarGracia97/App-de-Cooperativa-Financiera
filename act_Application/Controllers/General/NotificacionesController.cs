@@ -456,7 +456,7 @@ namespace act_Application.Controllers.General
         {
             if (Id != actParticipante.Id)
             {
-                Console.WriteLine("Fallo la verificacion de Datos");
+                Console.WriteLine("Fallo la verificacion de Datos de la Edicion del Participante");
                 return RedirectToAction("Error", "Home");
             }
             if (ModelState.IsValid)
