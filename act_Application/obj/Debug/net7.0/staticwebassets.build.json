@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "lYCtBmJWe90wLNjuD1xNIf54eQhJNgAGUk0uEA2XC1E=",
+  "Hash": "aWn4/pXc4ApfZ7F/6TozApiO7p73X0rGsug0l8z9qvs=",
   "Source": "act_Application",
   "BasePath": "_content/act_Application",
   "Mode": "Default",
@@ -374,12 +374,12 @@
       "OriginalItemSpec": "wwwroot\\img\\xtrim.png"
     },
     {
-      "Identity": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\js\\aportar.js",
+      "Identity": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\js\\_Layout\\navBar.js",
       "SourceId": "act_Application",
       "SourceType": "Discovered",
       "ContentRoot": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\",
       "BasePath": "_content/act_Application",
-      "RelativePath": "js/aportar.js",
+      "RelativePath": "js/_Layout/navBar.js",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -388,15 +388,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\js\\aportar.js"
+      "OriginalItemSpec": "wwwroot\\js\\_Layout\\navBar.js"
     },
     {
-      "Identity": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\js\\mensajeAportantes.js",
+      "Identity": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\js\\Aportar\\Aportar.js",
       "SourceId": "act_Application",
       "SourceType": "Discovered",
       "ContentRoot": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\",
       "BasePath": "_content/act_Application",
-      "RelativePath": "js/mensajeAportantes.js",
+      "RelativePath": "js/Aportar/Aportar.js",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -405,15 +405,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\js\\mensajeAportantes.js"
+      "OriginalItemSpec": "wwwroot\\js\\Aportar\\Aportar.js"
     },
     {
-      "Identity": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\js\\mensajeMultados.js",
+      "Identity": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\js\\Aportar\\MsjAportar.js",
       "SourceId": "act_Application",
       "SourceType": "Discovered",
       "ContentRoot": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\",
       "BasePath": "_content/act_Application",
-      "RelativePath": "js/mensajeMultados.js",
+      "RelativePath": "js/Aportar/MsjAportar.js",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -422,15 +422,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\js\\mensajeMultados.js"
+      "OriginalItemSpec": "wwwroot\\js\\Aportar\\MsjAportar.js"
     },
     {
-      "Identity": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\js\\msjerrCorreoValidacion.js",
+      "Identity": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\js\\Login\\MsjCorreoValidacionLogin.js",
       "SourceId": "act_Application",
       "SourceType": "Discovered",
       "ContentRoot": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\",
       "BasePath": "_content/act_Application",
-      "RelativePath": "js/msjerrCorreoValidacion.js",
+      "RelativePath": "js/Login/MsjCorreoValidacionLogin.js",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -439,15 +439,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\js\\msjerrCorreoValidacion.js"
+      "OriginalItemSpec": "wwwroot\\js\\Login\\MsjCorreoValidacionLogin.js"
     },
     {
-      "Identity": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\js\\navBar.js",
+      "Identity": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\js\\Multa\\MsjMulta.js",
       "SourceId": "act_Application",
       "SourceType": "Discovered",
       "ContentRoot": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\",
       "BasePath": "_content/act_Application",
-      "RelativePath": "js/navBar.js",
+      "RelativePath": "js/Multa/MsjMulta.js",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -456,15 +456,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\js\\navBar.js"
+      "OriginalItemSpec": "wwwroot\\js\\Multa\\MsjMulta.js"
     },
     {
-      "Identity": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\js\\Notificaciones.js",
+      "Identity": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\js\\Notificaciones\\Notificaciones_1.js",
       "SourceId": "act_Application",
       "SourceType": "Discovered",
       "ContentRoot": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\",
       "BasePath": "_content/act_Application",
-      "RelativePath": "js/Notificaciones.js",
+      "RelativePath": "js/Notificaciones/Notificaciones_1.js",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -473,15 +473,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\js\\Notificaciones.js"
+      "OriginalItemSpec": "wwwroot\\js\\Notificaciones\\Notificaciones_1.js"
     },
     {
-      "Identity": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\js\\site.js",
+      "Identity": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\js\\Notificaciones\\Notificaciones_2.js",
       "SourceId": "act_Application",
       "SourceType": "Discovered",
       "ContentRoot": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\",
       "BasePath": "_content/act_Application",
-      "RelativePath": "js/site.js",
+      "RelativePath": "js/Notificaciones/Notificaciones_2.js",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -490,15 +490,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\js\\site.js"
+      "OriginalItemSpec": "wwwroot\\js\\Notificaciones\\Notificaciones_2.js"
     },
     {
-      "Identity": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\js\\Transaccion.js",
+      "Identity": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\js\\Transaccion\\Transaccion.js",
       "SourceId": "act_Application",
       "SourceType": "Discovered",
       "ContentRoot": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\",
       "BasePath": "_content/act_Application",
-      "RelativePath": "js/Transaccion.js",
+      "RelativePath": "js/Transaccion/Transaccion.js",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -507,7 +507,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\js\\Transaccion.js"
+      "OriginalItemSpec": "wwwroot\\js\\Transaccion\\Transaccion.js"
     },
     {
       "Identity": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",

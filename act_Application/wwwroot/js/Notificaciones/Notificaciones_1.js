@@ -4,6 +4,9 @@
     const modalSecundariaCloseButtons = document.querySelectorAll(".modal-secundaria__close");
     const confirmButtons = document.querySelectorAll(".btn-mdl-confir");
     const denegarButtons = document.querySelectorAll(".bt-denegar");
+    const aceptarButtons = document.querySelectorAll(".btn-mdl-aceptar");
+    const rechazarButtons = document.querySelectorAll(".btn-mdl-rechazar");
+
 
     modalButtons.forEach((button) => {
         button.addEventListener("click", (event) => {

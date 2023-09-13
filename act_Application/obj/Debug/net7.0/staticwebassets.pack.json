@@ -81,36 +81,36 @@
       "PackagePath": "staticwebassets\\img\\xtrim.png"
     },
     {
-      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\js\\Notificaciones.js",
-      "PackagePath": "staticwebassets\\js\\Notificaciones.js"
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\js\\Aportar\\Aportar.js",
+      "PackagePath": "staticwebassets\\js\\Aportar\\Aportar.js"
     },
     {
-      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\js\\Transaccion.js",
-      "PackagePath": "staticwebassets\\js\\Transaccion.js"
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\js\\Aportar\\MsjAportar.js",
+      "PackagePath": "staticwebassets\\js\\Aportar\\MsjAportar.js"
     },
     {
-      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\js\\aportar.js",
-      "PackagePath": "staticwebassets\\js\\aportar.js"
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\js\\Login\\MsjCorreoValidacionLogin.js",
+      "PackagePath": "staticwebassets\\js\\Login\\MsjCorreoValidacionLogin.js"
     },
     {
-      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\js\\mensajeAportantes.js",
-      "PackagePath": "staticwebassets\\js\\mensajeAportantes.js"
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\js\\Multa\\MsjMulta.js",
+      "PackagePath": "staticwebassets\\js\\Multa\\MsjMulta.js"
     },
     {
-      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\js\\mensajeMultados.js",
-      "PackagePath": "staticwebassets\\js\\mensajeMultados.js"
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\js\\Notificaciones\\Notificaciones_1.js",
+      "PackagePath": "staticwebassets\\js\\Notificaciones\\Notificaciones_1.js"
     },
     {
-      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\js\\msjerrCorreoValidacion.js",
-      "PackagePath": "staticwebassets\\js\\msjerrCorreoValidacion.js"
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\js\\Notificaciones\\Notificaciones_2.js",
+      "PackagePath": "staticwebassets\\js\\Notificaciones\\Notificaciones_2.js"
     },
     {
-      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\js\\navBar.js",
-      "PackagePath": "staticwebassets\\js\\navBar.js"
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\js\\Transaccion\\Transaccion.js",
+      "PackagePath": "staticwebassets\\js\\Transaccion\\Transaccion.js"
     },
     {
-      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\js\\site.js",
-      "PackagePath": "staticwebassets\\js\\site.js"
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\js\\_Layout\\navBar.js",
+      "PackagePath": "staticwebassets\\js\\_Layout\\navBar.js"
     },
     {
       "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\lib\\bootstrap\\LICENSE",

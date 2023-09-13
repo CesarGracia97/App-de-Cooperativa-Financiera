@@ -1,6 +1,6 @@
 ﻿
 /*Aceptar*/
-.aceptar {
+.modal-aceptar {
     display: none;
     position: fixed;
     top: 0;
@@ -11,7 +11,7 @@
     z-index: 1000;
 }
 
-.modal_aceptar__content {
+.modal-aceptar__content {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -19,7 +19,7 @@
     height: 100%;
 }
 
-.modal_aceptar__container {
+.modal-aceptar__container {
     position: absolute;
     background-color: white;
     top: -100%;
@@ -35,7 +35,7 @@
 }
 
 /*Rechazar*/
-.rechazar {
+.modal-rechazar {
     display: none;
     position: fixed;
     top: 0;
@@ -46,7 +46,7 @@
     z-index: 1000;
 }
 
-.modal_rechazar__content {
+.modal-rechazar__content {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -54,7 +54,7 @@
     height: 100%;
 }
 
-.modal_rechazar__container {
+.modal-rechazar__container {
     position: absolute;
     background-color: white;
     top: -100%;
@@ -81,6 +81,7 @@
 
 .btn-mdl-aceptar {
     background-color: #8BC34A; /* Verde sabila */
+    justify-content: center;
     color: white;
     border: none;
     border-radius: 8px;
@@ -111,7 +112,14 @@
     text-align: center;
     align-content: center;
 }
-
-    .btn-mdl-rechazar :hover {
+    .btn-mdl-rechazar:hover {
         background-color: #ff0000;
     }
+/*
+.container-modal-btn {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px; //Separación del botón cerrar 
+}
+*/
