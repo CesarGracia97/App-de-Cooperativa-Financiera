@@ -35,7 +35,8 @@ namespace act_Application.Controllers.General
                     var viewModelList = notificaciones.Select(notificacion => new NT_ViewModel
                     {
                         Notificaciones = notificacion,
-                        Transacciones = _context.ActTransacciones.FirstOrDefault(t => t.Id == notificacion.IdTransacciones)
+                        Transacciones = _context.ActTransacciones.FirstOrDefault(t => t.Id == notificacion.IdTransacciones),
+                        Participante = _context.ActParticipantes.FirstOrDefault(t => t.Id != notificacion.IdTransacciones)
                     });
 
                     return View(viewModelList);
@@ -91,10 +92,11 @@ namespace act_Application.Controllers.General
 
         
         [HttpPost][ValidateAntiForgeryToken][Authorize(Policy = "AdminOnly")]
-        public async Task<IActionResult> EditTConfirmado (int Id, DateTime FechaPagoTotalPrestamo, DateTime FechaInicio, DateTime FechaFinalizacion, [Bind("Id,Razon,IdUser,Valor,Estado,FechaEntregaDinero,FechaPagoTotalPrestamo,FechaIniCoutaPrestamo,TipoCuota")] ActTransaccione actTransaccione) //Metodo para Transaccion Evaluada y confirmada.
+        public async Task<IActionResult> EditTConfirmado (int Id, DateTime FechaPagoTotalPrestamo, DateTime FechaInicio, DateTime FechaFinalizacion, [Bind("Id,Razon,IdUser,Valor,Estado,FechaEntregaDinero,FechaPagoTotalPrestamo,FechaIniCoutaPrestamo,TipoCuota,IdParticipantes,FechaGeneracion")] ActTransaccione actTransaccione) //Metodo para Transaccion Evaluada y confirmada.
         {
             if (Id != actTransaccione.Id)
             {
+                Console.WriteLine("Hubo un problema al momento de comprobar la validacion de la Transaccion en el Confirmado");
                 return RedirectToAction("Error", "Home");
             }
 
@@ -108,12 +110,14 @@ namespace act_Application.Controllers.General
                     var transaccionOriginal = metodoNotificacion.GetTransaccionPorId(Id); // Llamar al método desde la instancia
                     if (transaccionOriginal == null)
                     {
+                        Console.WriteLine("Hubo un problema al momento de comprobar la nulidad de la Transaccion en el Confirmado");
                         return RedirectToAction("Error", "Home");
                     }
 
                     actTransaccione.Razon = transaccionOriginal.Razon;
                     actTransaccione.IdUser = transaccionOriginal.IdUser;
                     actTransaccione.Valor = transaccionOriginal.Valor;
+                    actTransaccione.FechaPagoTotalPrestamo = FechaPagoTotalPrestamo;
                     actTransaccione.FechaEntregaDinero = transaccionOriginal.FechaEntregaDinero;
                     actTransaccione.FechaIniCoutaPrestamo = transaccionOriginal.FechaIniCoutaPrestamo;
                     actTransaccione.TipoCuota = transaccionOriginal.TipoCuota;
@@ -212,7 +216,7 @@ namespace act_Application.Controllers.General
 
 
         [HttpPost][ValidateAntiForgeryToken][Authorize(Policy = "AdminOnly")]
-        public async Task<IActionResult> EditTDenegado (int Id, string Descripcion, [Bind("Id,Razon,IdUser,Valor,Estado,FechaEntregaDinero,FechaPagoTotalPrestamo,FechaIniCoutaPrestamo,TipoCuota")] ActTransaccione actTransaccione) //Metodo para Transaccion Evaluada y Denegada.
+        public async Task<IActionResult> EditTDenegado (int Id, string Descripcion, [Bind("Id,Razon,IdUser,Valor,Estado,FechaEntregaDinero,FechaPagoTotalPrestamo,FechaIniCoutaPrestamo,TipoCuota,IdParticipantes,FechaGeneracion")] ActTransaccione actTransaccione) //Metodo para Transaccion Evaluada y Denegada.
         {
             if (Id != actTransaccione.Id)
             {
@@ -268,10 +272,11 @@ namespace act_Application.Controllers.General
 
         
         [HttpPost][ValidateAntiForgeryToken][Authorize(Policy = "AdminReferenteOnly")]
-        public async Task<IActionResult> AceptarReferente (int Id, [Bind("Id,Razon,IdUser,Valor,Estado,FechaEntregaDinero,FechaPagoTotalPrestamo,FechaIniCoutaPrestamo,TipoCuota")] ActTransaccione actTransaccione)
+        public async Task<IActionResult> AceptarReferente (int Id, [Bind("Id,Razon,IdUser,Valor,Estado,FechaEntregaDinero,FechaPagoTotalPrestamo,FechaIniCoutaPrestamo,TipoCuota,IdParticipantes,FechaGeneracion")] ActTransaccione actTransaccione)
         {
             if (Id != actTransaccione.Id)
             {
+                Console.WriteLine("Hubo un problema al momento de comprobar la validacion de la Transaccion en la Aceptacion");
                 return RedirectToAction("Error", "Home");
             }
 
@@ -285,6 +290,7 @@ namespace act_Application.Controllers.General
 
                     if (transaccionOriginal == null)
                     {
+                        Console.WriteLine("Hubo un problema al momento de comprobar la nulidad de la Transaccion en el Rechazo");
                         return RedirectToAction("Error", "Home");
                     }
 
@@ -293,6 +299,7 @@ namespace act_Application.Controllers.General
                     actTransaccione.Valor = transaccionOriginal.Valor;
                     actTransaccione.FechaEntregaDinero = transaccionOriginal.FechaEntregaDinero;
                     actTransaccione.FechaIniCoutaPrestamo = transaccionOriginal.FechaIniCoutaPrestamo;
+                    actTransaccione.FechaPagoTotalPrestamo = transaccionOriginal.FechaPagoTotalPrestamo;
                     actTransaccione.TipoCuota = transaccionOriginal.TipoCuota;
                     actTransaccione.FechaGeneracion = transaccionOriginal.FechaGeneracion;
                     actTransaccione.IdParticipantes = transaccionOriginal.IdParticipantes;
@@ -326,10 +333,11 @@ namespace act_Application.Controllers.General
 
 
         [HttpPost][ValidateAntiForgeryToken][Authorize(Policy = "AdminReferenteOnly")]
-        public async Task <IActionResult> RechazarReferente (int Id, [Bind("Id,Razon,IdUser,Valor,Estado,FechaEntregaDinero,FechaPagoTotalPrestamo,FechaIniCoutaPrestamo,TipoCuota")] ActTransaccione actTransaccione)
+        public async Task <IActionResult> RechazarReferente (int Id, [Bind("Id,Razon,IdUser,Valor,Estado,FechaEntregaDinero,FechaPagoTotalPrestamo,FechaIniCoutaPrestamo,TipoCuota,IdParticipantes,FechaGeneracion")] ActTransaccione actTransaccione)
         {
             if (Id != actTransaccione.Id)
             {
+                Console.WriteLine("Hubo un problema al momento de comprobar la validacion de la Transaccion en el Rechazo del Referente");
                 return RedirectToAction("Error", "Home");
             }
 
@@ -343,6 +351,7 @@ namespace act_Application.Controllers.General
 
                     if (transaccionOriginal == null)
                     {
+                        Console.WriteLine("Hubo un problema al momento de comprobar la nulidad de la Transaccion en el Rechazo del Referente");
                         return RedirectToAction("Error", "Home");
                     }
 
@@ -454,6 +463,7 @@ namespace act_Application.Controllers.General
 
         private async Task<IActionResult> EditParticipacion(int Id, string Estado, [Bind("Id,IdTransaccion,Estado,FechaInicio,FechaFinalizacion,FechaGeneracion,Participantes")] ActParticipante actParticipante)
         {
+            actParticipante.Id = Id;
             if (Id != actParticipante.Id)
             {
                 Console.WriteLine("Fallo la verificacion de Datos de la Edicion del Participante");
@@ -468,6 +478,7 @@ namespace act_Application.Controllers.General
 
                     if (RparticipantesOriginal == null)
                     {
+                        Console.WriteLine("Hubo un problema al momento de comprobar la nulidad de la Participacion e");
                         return RedirectToAction("Error", "Home");
                     }
 

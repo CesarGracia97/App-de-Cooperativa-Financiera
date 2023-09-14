@@ -215,7 +215,7 @@
                                             <div class="modal-aceptar__content">
                                                 <form asp-action="AceptarReferente">
                                                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                                                     <input type="hidden" asp-for="@notificacionUser.Transacciones.Id" name="Id" id="Id" />
+                                                    <input type="hidden" asp-for="@notificacionUser.Transacciones.Id" name="Id" id="Id" />
                                                     <div class="container-modal-btn">
                                                         <button type="submit" data-notification-id="@notificacionUser.Notificaciones.Id" class="save-button">Aceptar</button>
                                                         <a href="~/Notificaciones/Index" class="modal-secundaria__close" data-notification-id="@notificacionUser.Notificaciones.Id">Cerrar</a>
