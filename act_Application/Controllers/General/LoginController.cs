@@ -58,8 +58,7 @@ namespace act_Application.Controllers.General
                 var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                 var authProperties = new AuthenticationProperties
                 {
-                    //agregar componentes para después, como por ejemplo caducidad
-                    ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(15)
+                    ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(16)
                 };
 
                 HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), authProperties);
@@ -79,8 +78,6 @@ namespace act_Application.Controllers.General
             {
                 return RedirectToAction("Index", "Login", new { error = "Contraseña incorrecta" });
             }
-
-            // Aquí puedes seguir utilizando la variable "claims" si es necesario
 
         }
         public string HashPassword(string password)

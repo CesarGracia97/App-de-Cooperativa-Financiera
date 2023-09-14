@@ -1,1 +1,58 @@
-﻿
+﻿/* Estilos generales */
+.contenedor-principal {
+    padding: 10px 0px 10px 0px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    height: 100%
+}
+
+/* Estilos para cont-h1 */
+.cont-h1 {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+    height: 715px;
+}
+
+.ch1-conte1,
+.ch1-conte2 {
+    flex: 1;
+    border: 1px solid #695CFE;
+    background-color: #F6F5FF;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+/* Estilos para cont-h2 */
+.cont-h2 {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+}
+
+.ch2-conte1,
+.ch2-conte2 {
+    flex: 1;
+    border: 1px solid #695CFE;
+    background-color: #F6F5FF;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+/* Estilos para cont-h3 */
+.cont-h3 {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+}
+
+.ch3-conte1,
+.ch3-conte2 {
+    flex: 1;
+    border: 1px solid #695CFE;
+    background-color: #F6F5FF;
+    border-radius: 10px;
+    padding: 10px;
+}

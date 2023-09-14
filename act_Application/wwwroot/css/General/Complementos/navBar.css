@@ -370,7 +370,7 @@ body.dark .home .text {
 }
 
 .content-container {
-    padding: 0px 60px 0px 60px; /* Espacio adicional para el contenido */
+    padding: 20px 60px 20px 60px; /* Espacio adicional para el contenido */
     width: 100%; /* Ancho del contenedor al 100% del viewport */
     max-width: 1500px; /* Máximo ancho del contenedor */
     height:100%;
