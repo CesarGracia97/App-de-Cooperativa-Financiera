@@ -33,6 +33,10 @@
       "PackagePath": "staticwebassets\\css\\General\\Home\\Menu.css"
     },
     {
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\css\\General\\Home\\Menu_Grid_Principal.css",
+      "PackagePath": "staticwebassets\\css\\General\\Home\\Menu_Grid_Principal.css"
+    },
+    {
       "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\css\\General\\Login\\Login.css",
       "PackagePath": "staticwebassets\\css\\General\\Login\\Login.css"
     },

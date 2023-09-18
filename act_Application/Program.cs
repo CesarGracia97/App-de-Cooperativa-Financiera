@@ -16,7 +16,7 @@ builder.Services.AddDbContext<DesarrolloContext>(options =>
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
     {
-        options.ExpireTimeSpan = TimeSpan.FromMinutes(16); // Tiempo de expiracion de sesion inactiva
+         //options.ExpireTimeSpan = TimeSpan.FromMinutes(16); // Tiempo de expiracion de sesion inactiva
     });
 
 //Autorizacion (cualquier cambio o agregado directamente en los Claims en LoginController).

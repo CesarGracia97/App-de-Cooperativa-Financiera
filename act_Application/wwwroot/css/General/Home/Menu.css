@@ -1,58 +1,77 @@
-﻿/* Estilos generales */
-.contenedor-principal {
-    padding: 10px 0px 10px 0px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    width: 100%;
-    height: 100%
+﻿* {
+    padding: 0px;
+    margin: 0px;
+    font-family: "Arial";
+    font-weight: bold;
 }
 
-/* Estilos para cont-h1 */
-.cont-h1 {
-    display: flex;
-    gap: 20px;
-    width: 100%;
-    height: 715px;
+.grid-container {
+    display: grid;
+    grid-template-columns: 25% 50% 25% 50%;
+    grid-template-rows: 80px 80px 300px 100px 80px 150px;
+    box-sizing: border-box;
+    background-color: #EAF2E3;
 }
 
-.ch1-conte1,
-.ch1-conte2 {
-    flex: 1;
-    border: 1px solid #695CFE;
-    background-color: #F6F5FF;
-    border-radius: 10px;
-    padding: 10px;
+    .grid-container > div {
+        margin: 4px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+.item1 {
+    background-color: #F2A05D;
+    grid-column: 1/2;
+    grid-row: 1/3;
+    border-radius: 8px 9px;
+}
+.item2 {
+    background-color: #F25757;
+    grid-column: 2/4;
+    grid-row: 1/2;
+    border-radius: 8px 9px;
 }
 
-/* Estilos para cont-h2 */
-.cont-h2 {
-    display: flex;
-    gap: 20px;
-    width: 100%;
+.item3 {
+    background-color: #F2E863;
+    grid-column: 1/2;
+    grid-row: 3/6;
+    border-radius: 8px 9px;
 }
 
-.ch2-conte1,
-.ch2-conte2 {
-    flex: 1;
-    border: 1px solid #695CFE;
-    background-color: #F6F5FF;
-    border-radius: 10px;
-    padding: 10px;
+.item4 {
+    background-color: #61E8E1;
+    grid-column: 2/4;
+    grid-row: 2/6;
+    border-radius: 8px 9px;
 }
 
-/* Estilos para cont-h3 */
-.cont-h3 {
-    display: flex;
-    gap: 20px;
-    width: 100%;
+.item5 {
+    background-color: #F2A05D;
+    grid-column: 1/4;
+    grid-row: 6/7;
+    border-radius: 8px 9px;
 }
 
-.ch3-conte1,
-.ch3-conte2 {
-    flex: 1;
-    border: 1px solid #695CFE;
-    background-color: #F6F5FF;
-    border-radius: 10px;
-    padding: 10px;
+@media screen and (max-width: 850px) {
+
+    .item3 {
+        grid-column: 2/4;
+        grid-row: 2/3;
+        border-radius: 8px 9px;
+    }
+
+    .item4 {
+        grid-column: 1/4;
+        grid-row: 3/6;
+        border-radius: 8px 9px;
+    }
+
+    .item5 {
+        grid-column: 1/4;
+        grid-row: 6/7;
+        border-radius: 8px 9px;
+    }
 }
+
