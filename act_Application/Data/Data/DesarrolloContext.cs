@@ -1,4 +1,5 @@
 ﻿using act_Application.Models.BD;
+using act_Application.Models.Sistema;
 using CodeGenerator.Models.BD;
 using Microsoft.EntityFrameworkCore;
 
@@ -19,6 +20,8 @@ public partial class DesarrolloContext : DbContext
     public virtual DbSet<ActAportacione> ActAportaciones { get; set; }
 
     public virtual DbSet<ActCuota> ActCuotas { get; set; }
+
+    public virtual DbSet<ActCuentaDestino> ActCuentaDestinos { get; set; }
 
     public virtual DbSet<ActMulta> ActMultas { get; set; }
 
@@ -79,6 +82,22 @@ public partial class DesarrolloContext : DbContext
             entity.Property(e => e.IdTransaccion).HasColumnType("int(11)");
             entity.Property(e => e.IdUser).HasColumnType("int(11)");
             entity.Property(e => e.ValorCuota).HasPrecision(10);
+        });
+
+        modelBuilder.Entity<ActCuentaDestino>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PRIMARY");
+
+            entity.ToTable("act_CuentaDestino", tb => tb.HasComment("Cuentas Bancarias de Destino"));
+
+            entity.HasIndex(e => e.Id, "Id_UNIQUE").IsUnique();
+
+            entity.Property(e => e.Id).HasColumnType("int(11)");
+            entity.Property(e => e.NumeroCuenta).HasColumnType("int(11)");
+            entity.Property(e => e.NombreBanco).HasMaxLength(45);
+            entity.Property(e => e.DuenoCuenta).HasMaxLength(45);
+            entity.Property(e => e.Detalles).HasMaxLength(900);
+
         });
 
         modelBuilder.Entity<ActMulta>(entity =>

@@ -196,8 +196,8 @@ CREATE TABLE `desarrollo`.`act_CuentaDestino` (
   `Id` INT NOT NULL AUTO_INCREMENT,
   `NumeroCuenta` INT NOT NULL,
   `NombreBanco` VARCHAR(45) NOT NULL,
-  `DueñoCuenta` VARCHAR(45) NOT NULL,
-  `Destalles` NVARCHAR(900) NOT NULL,
+  `DuenoCuenta` VARCHAR(45) NOT NULL,
+  `Detalles` NVARCHAR(900) NOT NULL,
   PRIMARY KEY (`Id`),
   UNIQUE INDEX `Id_UNIQUE` (`Id` ASC),
   UNIQUE INDEX `NumeroCuenta_UNIQUE` (`NumeroCuenta` ASC))
