@@ -4,8 +4,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - act_Application</title>
-    <link rel="stylesheet" href="/css/General/Complementos/navBar.css">
-    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="/css/General/Complementos/navBar.css" />
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet' />
 </head>
 <body>
     <header>
@@ -18,7 +18,7 @@
                 </span>
 
                 <div class="text logo-text">
-                    <span class="name">Aportaciones</span>
+                    <span class="name">Coop XXhj</span>
                     <span class="profession">@User.Identity.Name</span>
                     <span class="tipousuario">@User.FindFirst("TipoUsuario")?.Value</span>
                 </div>
@@ -174,7 +174,7 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="/js/_Layout/navBar.js"></script>
-    <script src="/js/_Layout/DeslogeoAutomatico.js"></script>
+    <script src="/js/_Layout/Logout.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "OLkeHZ87U66lJNbTHAkdCeIBOWG5sz2uDhAx8zGUvkg=",
+  "Hash": "aPNIFTthi5IeuTyCB4tjMLxXyB7TRrTFvzc0y34Yae4=",
   "Source": "act_Application",
   "BasePath": "_content/act_Application",
   "Mode": "Default",
@@ -153,12 +153,12 @@
       "OriginalItemSpec": "wwwroot\\css\\General\\Complementos\\ventanModal.css"
     },
     {
-      "Identity": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\css\\General\\Home\\Menu.css",
+      "Identity": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\css\\General\\Home\\Esqueleto\\Menu_Grid_Components.css",
       "SourceId": "act_Application",
       "SourceType": "Discovered",
       "ContentRoot": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\",
       "BasePath": "_content/act_Application",
-      "RelativePath": "css/General/Home/Menu.css",
+      "RelativePath": "css/General/Home/Esqueleto/Menu_Grid_Components.css",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -167,24 +167,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\css\\General\\Home\\Menu.css"
-    },
-    {
-      "Identity": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\css\\General\\Home\\Menu_Grid_Principal.css",
-      "SourceId": "act_Application",
-      "SourceType": "Discovered",
-      "ContentRoot": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\",
-      "BasePath": "_content/act_Application",
-      "RelativePath": "css/General/Home/Menu_Grid_Principal.css",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\css\\General\\Home\\Menu_Grid_Principal.css"
+      "OriginalItemSpec": "wwwroot\\css\\General\\Home\\Esqueleto\\Menu_Grid_Components.css"
     },
     {
       "Identity": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\css\\General\\Login\\Login.css",
@@ -340,6 +323,23 @@
       "OriginalItemSpec": "wwwroot\\img\\predera.jpg"
     },
     {
+      "Identity": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\img\\Screenshot_38.png",
+      "SourceId": "act_Application",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\",
+      "BasePath": "_content/act_Application",
+      "RelativePath": "img/Screenshot_38.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\img\\Screenshot_38.png"
+    },
+    {
       "Identity": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\img\\SdXLogo.png",
       "SourceId": "act_Application",
       "SourceType": "Discovered",
@@ -391,12 +391,12 @@
       "OriginalItemSpec": "wwwroot\\img\\xtrim.png"
     },
     {
-      "Identity": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\js\\_Layout\\DeslogeoAutomatico.js",
+      "Identity": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\js\\_Layout\\Logout.js",
       "SourceId": "act_Application",
       "SourceType": "Discovered",
       "ContentRoot": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\",
       "BasePath": "_content/act_Application",
-      "RelativePath": "js/_Layout/DeslogeoAutomatico.js",
+      "RelativePath": "js/_Layout/Logout.js",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -405,7 +405,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\js\\_Layout\\DeslogeoAutomatico.js"
+      "OriginalItemSpec": "wwwroot\\js\\_Layout\\Logout.js"
     },
     {
       "Identity": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\js\\_Layout\\navBar.js",

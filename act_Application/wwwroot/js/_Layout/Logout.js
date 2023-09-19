@@ -1,4 +1,6 @@
-﻿var inactivityTimeout = 900000; // 15 minutos en milisegundos
+﻿// DeslogeoAutomático después de 1 minuto de inactividad
+var inactivityTimeout = 60000; // 1 minuto en milisegundos
+
 var inactivityTimer;
 
 function resetInactivityTimer() {

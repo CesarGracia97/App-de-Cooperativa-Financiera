@@ -29,12 +29,8 @@
       "PackagePath": "staticwebassets\\css\\General\\Complementos\\ventanModal.css"
     },
     {
-      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\css\\General\\Home\\Menu.css",
-      "PackagePath": "staticwebassets\\css\\General\\Home\\Menu.css"
-    },
-    {
-      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\css\\General\\Home\\Menu_Grid_Principal.css",
-      "PackagePath": "staticwebassets\\css\\General\\Home\\Menu_Grid_Principal.css"
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\css\\General\\Home\\Esqueleto\\Menu_Grid_Components.css",
+      "PackagePath": "staticwebassets\\css\\General\\Home\\Esqueleto\\Menu_Grid_Components.css"
     },
     {
       "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\css\\General\\Login\\Login.css",
@@ -63,6 +59,10 @@
     {
       "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\favicon.ico",
       "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\img\\Screenshot_38.png",
+      "PackagePath": "staticwebassets\\img\\Screenshot_38.png"
     },
     {
       "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\img\\SdXLogo.png",
@@ -113,8 +113,8 @@
       "PackagePath": "staticwebassets\\js\\Transaccion\\Transaccion.js"
     },
     {
-      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\js\\_Layout\\DeslogeoAutomatico.js",
-      "PackagePath": "staticwebassets\\js\\_Layout\\DeslogeoAutomatico.js"
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\js\\_Layout\\Logout.js",
+      "PackagePath": "staticwebassets\\js\\_Layout\\Logout.js"
     },
     {
       "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\js\\_Layout\\navBar.js",

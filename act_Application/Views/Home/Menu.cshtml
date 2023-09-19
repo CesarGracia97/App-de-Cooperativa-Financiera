@@ -4,15 +4,34 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/css/General/Home/Menu.css" />
+    <link rel="stylesheet" href="/css/General/Home/Esqueleto/Menu_Grid_Components.css" />
 </head>
 <body>
     <div class="grid-container">
-        <div class="item1"><label class="item1-title">Perfil</label></div>
-        <div class="item2"><label class="item1-title">Notificaciones</label></div>
-        <div class="item3"><label class="item1-title">Aportaciones, Multas</label></div>
-        <div class="item4">Main</div>
-        <div class="item5">Footer</div>
+        <div class="item1">
+            <span class="cont-img">
+                <img src="" alt="ft-perfil"/>
+            </span>
+            <div class="cont-textperf">
+                <span class="profession">@User.Identity.Name</span>
+                <span class="tipousuario">@User.FindFirst("TipoUsuario")?.Value</span>
+            </div>
+        </div>
+        <div class="item2">
+            <label class="item2-title">item2</label>
+        </div>
+        <div class="item3">
+            <label class="item3-title">item3</label>
+        </div>
+        <div class="item4">
+            <label class="item4-title">item4</label>
+        </div>
+        <div class="item5">
+            <label class="item4-title">item5</label>
+        </div>
+        <div class="item6">
+            <label class="item5-title">item6</label>
+        </div>
     </div>
 </body>
 
