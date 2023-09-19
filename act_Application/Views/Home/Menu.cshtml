@@ -5,18 +5,22 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/css/General/Home/Esqueleto/Menu_Grid_Components.css" />
+    <link rel="stylesheet" href="/css/General/Home/Profile/Profile.css" />
 </head>
 <body>
     <div class="grid-container">
         <div class="item1">
-            <span class="cont-img">
-                <img src="" alt="ft-perfil"/>
-            </span>
-            <div class="cont-textperf">
-                <span class="profession">@User.Identity.Name</span>
-                <span class="tipousuario">@User.FindFirst("TipoUsuario")?.Value</span>
+            <div class="perfil-card">
+                <div class="cont-img">
+                    <img src="/img/Screenshot_38.png" alt="Imagen de perfil" />
+                </div>
+                <div class="cont-title">
+                    <span class="profession">@User.Identity.Name</span>
+                    <span class="tipousuario">@User.FindFirst("TipoUsuario")?.Value</span>
+                </div>
             </div>
         </div>
+
         <div class="item2">
             <label class="item2-title">item2</label>
         </div>

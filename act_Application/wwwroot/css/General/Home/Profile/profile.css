@@ -1,6 +1,34 @@
-﻿namespace act_Application.wwwroot.css.General.Home.Profile
-{
-    public class profile
-    {
-    }
+﻿/* CSS para la tarjeta de perfil */
+.perfil-card {
+    padding: 20px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #F2A05D;
+    border-radius: 8px 9px;
 }
+
+.cont-img {
+    width: 100px;
+    height: 100px;
+    background-color: royalblue;
+    border-radius: 50%;
+    margin-right: 10px;
+    overflow: hidden;
+}
+
+    .cont-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+.cont-title {
+    flex-grow: 1;
+}
+
+    .cont-title span {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }

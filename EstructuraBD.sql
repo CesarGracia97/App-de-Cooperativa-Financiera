@@ -192,3 +192,13 @@ CREATE TABLE `desarrollo`.`act_Querys` (
   PRIMARY KEY (`Id`))
 COMMENT = 'Querys para consultas';
 
+CREATE TABLE `desarrollo`.`act_CuentaDestino` (
+  `Id` INT NOT NULL AUTO_INCREMENT,
+  `NumeroCuenta` INT NOT NULL,
+  `NombreBanco` VARCHAR(45) NOT NULL,
+  `DueñoCuenta` VARCHAR(45) NOT NULL,
+  `Destalles` NVARCHAR(900) NOT NULL,
+  PRIMARY KEY (`Id`),
+  UNIQUE INDEX `Id_UNIQUE` (`Id` ASC),
+  UNIQUE INDEX `NumeroCuenta_UNIQUE` (`NumeroCuenta` ASC))
+COMMENT = 'Cuentas Bancarias de Destino';
