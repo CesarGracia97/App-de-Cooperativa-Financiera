@@ -93,7 +93,7 @@ public partial class DesarrolloContext : DbContext
             entity.HasIndex(e => e.Id, "Id_UNIQUE").IsUnique();
 
             entity.Property(e => e.Id).HasColumnType("int(11)");
-            entity.Property(e => e.NumeroCuenta).HasColumnType("int(11)");
+            entity.Property(e => e.NumeroCuenta).HasMaxLength(12);
             entity.Property(e => e.NombreBanco).HasMaxLength(45);
             entity.Property(e => e.DuenoCuenta).HasMaxLength(45);
             entity.Property(e => e.Detalles).HasMaxLength(900);

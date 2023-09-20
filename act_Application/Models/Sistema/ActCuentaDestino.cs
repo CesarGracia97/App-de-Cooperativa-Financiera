@@ -2,15 +2,11 @@
 {
     public partial class ActCuentaDestino
     {
-        public int Id { get; set; }
+        public int Id { get; }
 
-        public int NumeroCuenta {  get; set; }
+        public string NumeroCuenta { get; }
 
-        public string NombreBanco { get; set; }
-
-        public string DuenoCuenta { get; set; }
-
-        public string Detalles {  get; set; }
+        public string NombreBanco { get; }
 
     }
 }

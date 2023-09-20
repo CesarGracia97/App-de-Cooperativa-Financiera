@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System.IO;
 
-namespace act_Application.Helper
+namespace act_Application.Models.Sistema
 {
     public class SmtpConfig
     {

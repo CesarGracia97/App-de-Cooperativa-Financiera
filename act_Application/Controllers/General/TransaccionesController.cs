@@ -2,7 +2,6 @@
 using act_Application.Data.Data;
 using act_Application.Models.BD;
 using act_Application.Models.Sistema;
-using act_Application.Helper;
 using act_Application.Services;
 using System.Net.Mail;
 using System.Net;

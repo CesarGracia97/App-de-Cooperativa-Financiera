@@ -194,7 +194,7 @@ COMMENT = 'Querys para consultas';
 
 CREATE TABLE `desarrollo`.`act_CuentaDestino` (
   `Id` INT NOT NULL AUTO_INCREMENT,
-  `NumeroCuenta` INT NOT NULL,
+  `NumeroCuenta` VARCHAR(12) NOT NULL,
   `NombreBanco` VARCHAR(45) NOT NULL,
   `DuenoCuenta` VARCHAR(45) NOT NULL,
   `Detalles` NVARCHAR(900) NOT NULL,
