@@ -18,7 +18,7 @@ public partial class DesarrolloContext : DbContext
 
     public virtual DbSet<ActAportacione> ActAportaciones { get; set; }
 
-    public virtual DbSet<ActCuentaDestino> ActCuentaDestinos { get; }
+    public virtual DbSet<ActCuentaDestino> ActCuentaDestinos { get; set; }
 
     public virtual DbSet<ActCuota> ActCuotas { get; set; }
 

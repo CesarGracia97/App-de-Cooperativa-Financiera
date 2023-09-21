@@ -8,9 +8,9 @@ namespace act_Application.Models.BD;
 /// </summary>
 public partial class ActCuentaDestino
 {
-    public int Id { get; }
+    public int Id { get; set; }
 
-    public string NumeroCuenta { get; }
+    public string NumeroCuenta { get; set; }
 
-    public string NombreBanco { get; }
+    public string NombreBanco { get; set; }
 }

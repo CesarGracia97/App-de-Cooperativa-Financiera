@@ -43,7 +43,7 @@ namespace act_Application.Controllers.General
 
         // GET: Aportar/Create
         [Authorize(Policy = "AdminSocioOnly")]
-        public IActionResult Create()
+        public IActionResult Aportacion()
         {
             ViewData["ItemsNBanco"] = ObtenerItemsNBanco();
             ViewData["ItemsRazon"] = ObtenerItemsRazon();
@@ -51,13 +51,10 @@ namespace act_Application.Controllers.General
             return View();
         }
 
-        // POST: Aportar/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Policy = "AdminSocioOnly")]
-        public async Task<IActionResult> Create([Bind("Id,Razon,Valor,IdUser,FechaAportacion,Aprobacion,CapturaPantalla,Cuadrante1,Cuadrante2,Nbanco,Cbancaria")] ActAportacione actAportacione, [FromForm] IFormFile imagen)
+        public async Task<IActionResult> Aportacion([Bind("Id,Razon,Valor,IdUser,FechaAportacion,Aprobacion,CapturaPantalla,Cuadrante1,Cuadrante2,Nbanco,Cbancaria,CuentaDestino,BancoDestino")] ActAportacione actAportacione, [FromForm] IFormFile imagen)
         {
             if (ModelState.IsValid)
             {
@@ -67,7 +64,7 @@ namespace act_Application.Controllers.General
                     // Establecer las propiedades que deben agregarse automáticamente
                     actAportacione.IdUser = userId;
                     actAportacione.FechaAportacion = DateTime.Now;
-                    actAportacione.Aprobacion = "A la espera de la Aprobacion";
+                    actAportacione.Aprobacion = "EN ESPERA";
                     ObtenerCuadrante.CalcularCuadrantesAportacione(actAportacione);
 
                     if (imagen != null && imagen.Length > 0)

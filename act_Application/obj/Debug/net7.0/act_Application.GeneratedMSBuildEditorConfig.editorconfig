@@ -160,8 +160,8 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5pc3RyYWRvclxFZGl0VXN1YXJpb3MuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/cesar.gracia/Proyectos/C\#/act_Application/act_Application/Views/Aportar/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXBvcnRhclxDcmVhdGUuY3NodG1s
+[E:/cesar.gracia/Proyectos/C\#/act_Application/act_Application/Views/Aportar/Aportacion.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXBvcnRhclxBcG9ydGFjaW9uLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [E:/cesar.gracia/Proyectos/C\#/act_Application/act_Application/Views/Home/Error.cshtml]

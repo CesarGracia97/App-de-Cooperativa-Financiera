@@ -72,6 +72,14 @@
                 </div>
             </div>
 
+            <!--Contenedor de Banco Destino-->
+            <div class="form-group">
+                <label asp-for="BancoDestino">Banco Destino:</label>
+                <select asp-for="CuentaDestino" id="cuentadestino" name="cuentadestino" required>
+                    <option value="">Seleccionar una Razon...</option>
+                </select>
+            </div>
+
             <!--Contenedor de Captura de Pantalla-->
             <div class="form-group">
                 <label asp-for="CapturaPantalla">Comprobante de Transferencia:</label>
@@ -88,8 +96,4 @@
         </form>
     </div>
 </body>
-@section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
-}
+
