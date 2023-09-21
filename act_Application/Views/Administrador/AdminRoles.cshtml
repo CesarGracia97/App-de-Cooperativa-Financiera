@@ -1,0 +1,55 @@
+﻿@model IEnumerable<act_Application.Models.BD.ActRol>
+@{
+    ViewData["Title"] = "Roles";
+}
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/Administracion/estiloTablaIndex.css" />
+</head>
+
+<div class="content-text">
+
+    <h1>Roles</h1>
+
+    <p>
+        <a class="button create" asp-action="CreateRoles">Crear Nuevo Registro</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Id del Rol
+                </th>
+                <th>
+                    Nombre del Rol
+                </th>
+                <th>
+                    Descripcion del Rol
+                </th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NombreRol)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DescripcionRol)
+                    </td>
+                    <td>
+                        <a class="button edit" asp-action="EditRoles" asp-route-id="@item.Id">Editar</a>
+                        <a class="button delete" asp-action="DeleteRoles" asp-route-id="@item.Id">Eliminar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>

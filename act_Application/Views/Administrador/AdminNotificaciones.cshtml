@@ -1,0 +1,66 @@
+﻿@model IEnumerable<act_Application.Models.BD.ActNotificacione>
+
+@{
+    ViewData["Title"] = "Notificaciones";
+}
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/Administracion/estiloTablaIndex.css" />
+</head>
+
+<h1>Notificaciones</h1>
+<div class="content-text">
+    <p>
+        <a asp-action="CreateNotificaciones">Create New</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.IdUser)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Razon)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Descripcion)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FechaNotificacion)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Destino)
+                </th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IdUser)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Razon)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Descripcion)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FechaNotificacion)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Destino)
+                    </td>
+                    <td>
+                        <a class="button edit" asp-action="EditNotificaciones" asp-route-id="@item.Id">Editar</a>
+                        <a class="button delete" asp-action="DeleteNotificaciones" asp-route-id="@item.Id">Eliminar</a>
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

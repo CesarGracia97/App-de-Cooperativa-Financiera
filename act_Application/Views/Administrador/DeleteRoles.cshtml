@@ -1,0 +1,35 @@
+﻿@model act_Application.Models.BD.ActRol
+
+@{
+    ViewData["Title"] = "Eliminar Rol";
+}
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/Administracion/estiloEliminar.css" />
+</head>
+<h1>Eliminar Rol</h1>
+<hr />
+<div class="container">
+    <table>
+        <tr>
+            <td class="titulo">Razon</td>
+            <td class="texto">@Html.DisplayFor(model => model.Id)</td>
+        </tr>
+        <tr>
+            <td class="titulo">Razon</td>
+            <td class="texto">@Html.DisplayFor(model => model.NombreRol)</td>
+        </tr>
+        <tr>
+            <td class="titulo">Id del Usuario</td>
+            <td class="texto">@Html.DisplayFor(model => model.DescripcionRol)</td>
+        </tr>
+    </table>
+</div>
+<div class="btn-container">
+    <form asp-action="DeleteRoles">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Eliminar" class="btn-delete" />
+        <a class="btn-return" asp-action="AdminRoles">Regresar</a>
+    </form>
+</div>

@@ -1,0 +1,44 @@
+﻿@model act_Application.Models.BD.ActMulta
+
+@{
+    ViewData["Title"] = "Eliminar Multa";
+}
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/Administracion/estiloEliminar.css" />
+</head>
+<h1>Eliminar Multa</h1>
+<hr />
+<div class="container">
+    <table>
+        <tr>
+            <td class="titulo">Id del Usuario</td>
+            <td class="texto">@Html.DisplayFor(model => model.IdUser)</td>
+        </tr>
+        <tr>
+            <td class="titulo">Porcentaje</td>
+            <td class="texto">@Html.DisplayFor(model => model.Porcentaje)</td>
+        </tr>
+        <tr>
+            <td class="titulo">Id de la Aportacion</td>
+            <td class="texto">@Html.DisplayFor(model => model.IdAportacion)</td>
+        </tr>
+        <tr>
+            <td class="titulo">Valor</td>
+            <td class="texto">@Html.DisplayFor(model => model.Valor)</td>
+        </tr>
+        <tr>
+            <td class="titulo">Fecha de la Multa</td>
+            <td class="texto">@Html.DisplayFor(model => model.FechaMulta)</td>
+        </tr>
+    </table>
+</div>
+<div class="btn-container">
+    <form asp-action="DeleteMultas">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Eliminar" class="btn-delite" />
+        <a class="btn-return" asp-action="AdminMultas">Regresar</a>
+    </form>
+</div>
+

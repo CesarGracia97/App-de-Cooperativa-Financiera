@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "d5DlidFgg5Dsh91EK1F4VcWhwrI0OiGa2ffh/YaHBMg=",
+  "Hash": "Ak5wwqEXVx7+GxbHfLfmllJpoaYI4B+hYFn8RnFZFQc=",
   "Source": "act_Application",
   "BasePath": "_content/act_Application",
   "Mode": "Default",
@@ -238,12 +238,12 @@
       "OriginalItemSpec": "wwwroot\\css\\General\\Home\\Notification\\Notificacion.css"
     },
     {
-      "Identity": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\css\\General\\Home\\Profile\\Profile.css",
+      "Identity": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\css\\General\\Home\\Profile\\profile.css",
       "SourceId": "act_Application",
       "SourceType": "Discovered",
       "ContentRoot": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\",
       "BasePath": "_content/act_Application",
-      "RelativePath": "css/General/Home/Profile/Profile.css",
+      "RelativePath": "css/General/Home/Profile/profile.css",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -252,7 +252,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\css\\General\\Home\\Profile\\Profile.css"
+      "OriginalItemSpec": "wwwroot\\css\\General\\Home\\Profile\\profile.css"
     },
     {
       "Identity": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\css\\General\\Login\\Login.css",

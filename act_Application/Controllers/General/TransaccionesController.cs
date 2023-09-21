@@ -9,7 +9,6 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Org.BouncyCastle.Crypto;
-using CodeGenerator.Models.BD;
 
 namespace act_Application.Controllers.General
 {

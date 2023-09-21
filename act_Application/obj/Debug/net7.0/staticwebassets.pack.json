@@ -49,8 +49,8 @@
       "PackagePath": "staticwebassets\\css\\General\\Home\\Notification\\Notificacion.css"
     },
     {
-      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\css\\General\\Home\\Profile\\Profile.css",
-      "PackagePath": "staticwebassets\\css\\General\\Home\\Profile\\Profile.css"
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\css\\General\\Home\\Profile\\profile.css",
+      "PackagePath": "staticwebassets\\css\\General\\Home\\Profile\\profile.css"
     },
     {
       "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\css\\General\\Login\\Login.css",

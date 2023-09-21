@@ -1,4 +1,4 @@
-﻿using act_Application.Logica;
+﻿using act_Application.Logic;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using act_Application.Models.BD;
 using act_Application.Data.Data;
 using act_Application.Models.Sistema;
-using act_Application.Logica.ComplementosLogicos;
+using act_Application.Logic.ComplementosLogicos;
 using Microsoft.AspNetCore.Authorization;
 
 namespace act_Application.Controllers.General

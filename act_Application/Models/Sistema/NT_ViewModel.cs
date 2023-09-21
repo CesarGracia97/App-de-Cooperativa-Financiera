@@ -1,5 +1,4 @@
 ﻿using act_Application.Models.BD;
-using CodeGenerator.Models.BD;
 
 namespace act_Application.Models.Sistema
 {

@@ -1,0 +1,52 @@
+﻿@model IEnumerable<act_Application.Models.BD.ActParticipante>
+
+@{
+    ViewData["Title"] = "Participantes";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="CreateParticipantes">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaInicio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaFinalizacion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaGeneracion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Participantes)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaInicio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaFinalizacion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaGeneracion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Participantes)
+            </td>
+            <td>
+                <a asp-action="EditParticipantes" asp-route-id="@item.Id">Edit</a>
+                <a asp-action="DeleteParticipantes" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

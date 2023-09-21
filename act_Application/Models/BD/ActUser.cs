@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace act_Application.Models.BD;
 
@@ -25,4 +26,9 @@ public partial class ActUser
     public string TipoUser { get; set; }
 
     public int IdSocio { get; set; }
+
+    [Column(TypeName = "longblob")]
+    public byte[] FotoPerfil { get; set; }
+
+    public int Activo { get; set; }
 }

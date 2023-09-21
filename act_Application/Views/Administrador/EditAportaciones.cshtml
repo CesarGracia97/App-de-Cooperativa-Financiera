@@ -1,0 +1,77 @@
+﻿@model act_Application.Models.BD.ActAportacione
+
+@{
+    ViewData["Title"] = "Editar Aportes";
+}
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/Administracion/estiloEditarCrear.css" />
+</head>
+<div class="content-text">
+    <h1>Editar Aportes</h1>
+
+    <h4>ActAportacione</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="EditAportaciones">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Id" />
+                <div class="form-group">
+                    <label asp-for="Razon" class="control-label">Razon</label>
+                    <input asp-for="Razon" class="form-control" />
+                    <span asp-validation-for="Razon" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Valor" class="control-label">Valor</label>
+                    <input asp-for="Valor" class="form-control" type="number" step="0.01" />
+                    <span asp-validation-for="Valor" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="IdUser" class="control-label">Id del Usuario</label>
+                    <input asp-for="IdUser" class="form-control" />
+                    <span asp-validation-for="IdUser" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="FechaAportacion" class="control-label">Fecha de Aporte</label>
+                    <input asp-for="FechaAportacion" class="form-control" />
+                    <span asp-validation-for="FechaAportacion" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Aprobacion" class="control-label">Aprobacion</label>
+                    <input asp-for="Aprobacion" class="form-control" />
+                    <span asp-validation-for="Aprobacion" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="CapturaPantalla" class="control-label">Captura de Pantalla</label>
+                    <input asp-for="CapturaPantalla" class="form-control" />
+                    <span asp-validation-for="CapturaPantalla" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Cbancaria" class="control-label">Cuenta Bancaria</label>
+                    <input asp-for="Cbancaria" class="form-control" />
+                    <span asp-validation-for="Cbancaria" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Nbanco" class="control-label">Cuenta de Banco</label>
+                    <input asp-for="Nbanco" class="form-control" />
+                    <span asp-validation-for="Nbanco" class="text-danger"></span>
+                </div>
+                <div class="btn-container">
+                    <input type="submit" value="Guardar" class="btn" />
+                    <a class="btn-return" asp-action="AdminAportaciones">Regresar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -19,7 +19,7 @@ public partial class ActAportacione
 
     public DateTime FechaAportacion { get; set; }
 
-    public string Aprobacion { get; set; } 
+    public string Aprobacion { get; set; }
 
     [Column(TypeName = "longblob")]
     public byte[] CapturaPantalla { get; set; }
@@ -31,6 +31,10 @@ public partial class ActAportacione
     public string Nbanco { get; set; }
 
     public string Cbancaria { get; set; }
+
+    public string CuentaDestino { get; set; }
+
+    public string BancoDestino { get; set; }
     [NotMapped]
     public string NombreUsuario { get; set; }
 

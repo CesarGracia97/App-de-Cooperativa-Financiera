@@ -10,7 +10,7 @@ public partial class ActRol
 {
     public int Id { get; set; }
 
-    public string NombreRol { get; set; } 
+    public string NombreRol { get; set; }
 
     public string DescripcionRol { get; set; }
 }

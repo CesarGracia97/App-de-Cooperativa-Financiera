@@ -17,6 +17,8 @@ CREATE TABLE `act_User` (
   `Contrasena` varchar(75) NOT NULL,
   `TipoUser` varchar(45) NOT NULL,
   `IdSocio` int(11) NOT NULL,
+  `Activo` int(1) NOT NULL,
+  `FotoPerfil` longblob NOT NULL,
   PRIMARY KEY (`Id`),
   UNIQUE KEY `Id_UNIQUE` (`Id`),
   UNIQUE KEY `Cedula_UNIQUE` (`Cedula`),
@@ -146,6 +148,7 @@ CREATE TABLE `act_Notificaciones` (
   `Descripcion` mediumtext CHARACTER SET utf8 NOT NULL,
   `FechaNotificacion` datetime NOT NULL,
   `Destino` varchar(13) NOT NULL,
+  `Visto` int(1) NOT NULL,
   `IdTransacciones` int(11) NOT NULL,
   `IdAportaciones` int(11) NOT NULL,
   `IdCuotas` int(11) NOT NULL,
@@ -183,15 +186,7 @@ ALTER TABLE act_Participantes
 ADD CONSTRAINT fk_Participantes_Transacciones
 FOREIGN KEY (IdTransaccion) REFERENCES act_Transacciones(Id);
 
-/*Tabla de Consultas*/
-CREATE TABLE `desarrollo`.`act_Querys` (
-  `Id` INT NOT NULL,
-  `Query` VARCHAR(2000) NOT NULL,
-  `NombreQuery` VARCHAR(60) NOT NULL,
-  `Descripcion` VARCHAR(5000) NOT NULL,
-  PRIMARY KEY (`Id`))
-COMMENT = 'Querys para consultas';
-
+/*Tabla de Destino*/
 CREATE TABLE `desarrollo`.`act_CuentaDestino` (
   `Id` INT NOT NULL AUTO_INCREMENT,
   `NumeroCuenta` VARCHAR(12) NOT NULL,
@@ -202,3 +197,13 @@ CREATE TABLE `desarrollo`.`act_CuentaDestino` (
   UNIQUE INDEX `Id_UNIQUE` (`Id` ASC),
   UNIQUE INDEX `NumeroCuenta_UNIQUE` (`NumeroCuenta` ASC))
 COMMENT = 'Cuentas Bancarias de Destino';
+
+/*Tabla de Consultas*/
+CREATE TABLE `desarrollo`.`act_Querys` (
+  `Id` INT NOT NULL,
+  `Query` VARCHAR(2000) NOT NULL,
+  `NombreQuery` VARCHAR(60) NOT NULL,
+  `Descripcion` VARCHAR(5000) NOT NULL,
+  PRIMARY KEY (`Id`))
+COMMENT = 'Querys para consultas';
+

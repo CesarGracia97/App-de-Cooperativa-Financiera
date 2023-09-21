@@ -1,0 +1,50 @@
+﻿@model act_Application.Models.BD.ActUser
+
+@{
+    ViewData["Title"] = "Eliminar Usuario";
+}
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/Administracion/estiloEliminar.css" />
+</head>
+<div class="content-text">
+    <h1>Eliminar Usuario</h1>
+    <hr />
+    <div class="container">
+        <table>
+            <tr>
+                <td class="titulo">Cedula</td>
+                <td class="texto">@Html.DisplayFor(model => model.Cedula)</td>
+            </tr>
+            <tr>
+                <td class="titulo">Nombre y Apellido</td>
+                <td class="texto">@Html.DisplayFor(model => model.NombreYapellido)</td>
+            </tr>
+            <tr>
+                <td class="titulo">Correo Electronico</td>
+                <td class="texto">@Html.DisplayFor(model => model.Correo)</td>
+            </tr>
+            <tr>
+                <td class="titulo">Tipo de Usuario</td>
+                <td class="texto">@Html.DisplayFor(model => model.TipoUser)</td>
+            </tr>
+            <tr>
+                <td class="titulo">Celular</td>
+                <td class="texto">@Html.DisplayFor(model => model.Celular)</td>
+            </tr>
+            <tr>
+                <td class="titulo">Cedula de su Accionista</td>
+                <td class="texto">@Html.DisplayFor(model => model.IdSocio)</td>
+            </tr>
+        </table>
+    </div>
+    <div class="btn-container">
+        <form asp-action="DeleteUsuarios">
+            <input type="hidden" asp-for="Id" />
+            <input class="btn-delete" type="submit" value="Eliminar" />
+            <a class="btn-return" asp-action="AdminUsuarios">Regresar</a>
+        </form>
+    </div>
+</div>
+

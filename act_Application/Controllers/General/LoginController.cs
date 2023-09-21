@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authentication;
-using act_Application.Logica;
+using act_Application.Logic;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Text;

@@ -3,11 +3,10 @@ using Microsoft.EntityFrameworkCore;
 using act_Application.Data.Data;
 using act_Application.Models.BD;
 using Microsoft.AspNetCore.Authorization;
-using act_Application.Logica;
+using act_Application.Logic;
 using act_Application.Models.Sistema;
 using act_Application.Helper;
 using MySql.Data.MySqlClient;
-using CodeGenerator.Models.BD;
 
 namespace act_Application.Controllers.General
 {

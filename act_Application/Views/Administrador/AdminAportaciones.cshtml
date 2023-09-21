@@ -1,0 +1,107 @@
+﻿@model IEnumerable<act_Application.Models.BD.ActAportacione>
+
+@{
+    ViewData["Title"] = "Aportaciones";
+}
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/Administracion/estiloTablaIndex.css" />
+</head>
+
+<div class="content-text">
+
+    <h1>Aportaciones</h1>
+
+    <p>
+        <a class="button create" asp-action="CreateAportaciones">Crear Nuevo Registro</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Razon
+                </th>
+                <th>
+                    Valor
+                </th>
+                <th>
+                    Id del Usuario
+                </th>
+                <th>
+                    Fecha de la Aportacion
+                </th>
+                <th>
+                    Aprobacion
+                </th>
+                <th>
+                    Cuenta Bancaria
+                </th>
+                <th>
+                    Banco
+                </th>
+                <th>
+                    Cuenta Destino
+                </th>
+                <th>
+                    Banco Destino
+                </th>
+                <th>
+                    Captura de Pantalla
+                </th>
+                <th>
+                    Acciones
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Razon)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Valor)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IdUser)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FechaAportacion)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Aprobacion)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Cbancaria)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nbanco)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CuentaDestino)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BancoDestino)
+                    </td>
+                    <td>
+                        @if (item.CapturaPantalla != null && item.CapturaPantalla.Length > 0)
+                        {
+                            <img src="data:image;base64,@Convert.ToBase64String(item.CapturaPantalla)" alt="Captura de Pantalla" />
+                        }
+                        else
+                        {
+                            <p>Sin captura de pantalla</p>
+                        }
+                    </td>
+                    <td>
+                        <a class="button edit" asp-action="EditAportaciones" asp-route-id="@item.Id">Editar</a>
+                        <a class="button delete" asp-action="DeleteAportaciones" asp-route-id="@item.Id">Eliminar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
