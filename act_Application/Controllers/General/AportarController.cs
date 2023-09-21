@@ -10,6 +10,7 @@ using act_Application.Data.Data;
 using act_Application.Models.Sistema;
 using act_Application.Logic.ComplementosLogicos;
 using Microsoft.AspNetCore.Authorization;
+using act_Application.Logic;
 
 namespace act_Application.Controllers.General
 {
@@ -48,7 +49,23 @@ namespace act_Application.Controllers.General
             ViewData["ItemsNBanco"] = ObtenerItemsNBanco();
             ViewData["ItemsRazon"] = ObtenerItemsRazon();
 
-            return View();
+            MetodoDestino.ObetnerDestinos obetnerDestinos = new MetodoDestino.ObetnerDestinos();
+            List<ActCuentaDestino> cbDestinos = obetnerDestinos.ObtenerTodosLosRegistros();
+
+            // Estructurar las listas para las opciones del banco destino
+            var itemCuentaBancoDestino = cbDestinos.Select(cuenta =>
+                new
+                {
+                    Value = $"{cuenta.NombreBanco} - #{cuenta.NumeroCuenta}",
+                    Text = $"{cuenta.NombreBanco} - #{cuenta.NumeroCuenta}"
+                }).ToList();
+
+            var viewModel = new AportarViewModel
+            {
+                ItemCuentaBancoDestino = cbDestinos
+            };
+
+            return View(viewModel);
         }
 
         [HttpPost]
