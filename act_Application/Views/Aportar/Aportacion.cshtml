@@ -1,4 +1,4 @@
-﻿@model act_Application.Models.BD.ActAportacione;
+﻿@model act_Application.Models.Sistema.AportarViewModel
 @using act_Application.Models.Sistema
 @{
     ViewData["Title"] = "Aportar";
@@ -14,12 +14,12 @@
     <div class="container">
         <h2>Registro de Aportación</h2>
 
-        <form asp-action="Create" method="post" enctype="multipart/form-data">
+        <form asp-action="Aportacion" method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
             <!--Contenedor de la Fecha-->
             <div class="form-group">
-                <label asp-for="FechaAportacion">Fecha de Hoy:</label>
+                <label asp-for="Aportacion.FechaAportacion">Fecha de Hoy:</label>
                 <div class="date">
                     <script>
                         date = new Date().toLocaleDateString();
@@ -30,61 +30,65 @@
 
             <!--Contenedor de Nombre del Banco-->
             <div class="form-group">
-                <label asp-for="Nbanco">Banco:</label>
-                <select asp-for="Nbanco" id="banco" >
+                <label asp-for="Aportacion.Nbanco">Banco:</label>
+                <select asp-for="Aportacion.Nbanco" id="banco">
                     <option value="">Seleccionar un Banco...</option>
                     @foreach (var item in ViewData["ItemsNBanco"] as List<act_Application.Models.Sistema.ListItems>)
                     {
                         <option value="@item.Nombre">@item.Nombre</option>
                     }
-                    <input type="hidden" asp-for="Nbanco" />
+                    <input type="hidden" asp-for="Aportacion.Nbanco" />
                 </select>
-                <span asp-validation-for="Nbanco" class="text-danger"></span>
+                <span asp-validation-for="Aportacion.Nbanco" class="text-danger"></span>
             </div>
 
             <!--Contenedor de la Cuenta Bancaria-->
             <div class="form-group">
-                <label asp-for="Cbancaria">Cuenta:</label>
-                <input asp-for="Cbancaria" class="input-cuenta" type="number" min="10000000" max="999999999999"/>
-                <span asp-validation-for="Cbancaria" class="text-danger"></span>
+                <label asp-for="Aportacion.Cbancaria">Cuenta:</label>
+                <input asp-for="Aportacion.Cbancaria" class="input-cuenta" type="number" min="10000000" max="999999999999" />
+                <span asp-validation-for="Aportacion.Cbancaria" class="text-danger"></span>
             </div>
 
             <!--Contenedor de la Razon-->
             <div class="form-group">
-                <label asp-for="Razon">Razón:</label>
-                <select asp-for="Razon" id="razon" name="razon" required>
+                <label asp-for="Aportacion.Razon">Razón:</label>
+                <select asp-for="Aportacion.Razon" id="razon" name="razon" required>
                     <option value="">Seleccionar una Razon...</option>
                     @foreach (var item in ViewData["ItemsRazon"] as List<act_Application.Models.Sistema.ListItems>)
                     {
                         <option value="@item.Nombre">@item.Nombre</option>
                     }
                 </select>
-                <span asp-validation-for="Razon" class="text-danger"></span>
+                <span asp-validation-for="Aportacion.Razon" class="text-danger"></span>
             </div>
 
             <!--Contenedor de Valor-->
             <div class="form-group">
-                <label asp-for="Valor">Monto:</label>
+                <label asp-for="Aportacion.Valor">Monto:</label>
                 <div class="input-container">
                     <span class="dollar-sign">$</span>
-                    <input asp-for="Valor" class="input-monto" type="number" min="5" step="0,01" />
-                    <span asp-validation-for="Valor" class="text-danger"></span>
+                    <input asp-for="Aportacion.Valor" class="input-monto" type="number" min="5" step="0,01" />
+                    <span asp-validation-for="Aportacion.Valor" class="text-danger"></span>
                 </div>
             </div>
 
             <!--Contenedor de Banco Destino-->
             <div class="form-group">
-                <label asp-for="BancoDestino">Banco Destino:</label>
-                <select asp-for="CuentaDestino" id="cuentadestino" name="cuentadestino" required>
-                    <option value="">Seleccionar una Razon...</option>
+                <label>Banco Destino:</label>
+                <select id="cuentadestino" name="cuentadestino" required>
+                    <option value="">Seleccionar un Banco Destino...</option>
+                    @foreach (var cuenta in Model.ItemCuentaBancoDestino) 
+                    {
+                        <option value="@cuenta.NombreBanco - #@cuenta.NumeroCuenta">@cuenta.NombreBanco - #@cuenta.NumeroCuenta</option>
+                    }
                 </select>
             </div>
 
             <!--Contenedor de Captura de Pantalla-->
             <div class="form-group">
-                <label asp-for="CapturaPantalla">Comprobante de Transferencia:</label>
-                <input asp-for="CapturaPantalla" id="imagen" name="imagen" class="input-file" type="file" accept=".jpg, .png" />
-                <span asp-validation-for="CapturaPantalla" class="text-danger"></span>
+                <label asp-for="Aportacion.CapturaPantalla">Comprobante de Transferencia:</label>
+                <input asp-for="Aportacion.CapturaPantalla" id="imagen" name="imagen" class="input-file" type="file" accept=".jpg, .png" />
+                <span asp-validation-for="Aportacion.CapturaPantalla" class="text-danger"></span>
             </div>
 
             <!--Contenedor de los Botones-->

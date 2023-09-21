@@ -84,6 +84,15 @@ namespace act_Application.Controllers.General
                     actAportacione.Aprobacion = "EN ESPERA";
                     ObtenerCuadrante.CalcularCuadrantesAportacione(actAportacione);
 
+                    // Buscar la cuenta bancaria seleccionada en ItemCuentaBancoDestino
+                    var cuentaSeleccionada = Model.ItemCuentaBancoDestino.FirstOrDefault(cuenta => cuenta.Id == actAportacione.CuentaDestinoId);
+                    if (cuentaSeleccionada != null)
+                    {
+                        actAportacione.BancoDestino = cuentaSeleccionada.NombreBanco;
+                        actAportacione.CuentaDestino = cuentaSeleccionada.NumeroCuenta;
+                    }
+
+
                     if (imagen != null && imagen.Length > 0)
                     {
                         using (var ms = new MemoryStream())

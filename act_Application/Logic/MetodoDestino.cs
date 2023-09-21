@@ -12,7 +12,7 @@ namespace act_Application.Logic
             public List<ActCuentaDestino> ObtenerTodosLosRegistros()
             {
                 string connectionString = AppSettingsHelper.GetConnectionString();
-                string Query = ConfigReader.GetQuery("SelectAportantes");
+                string Query = ConfigReader.GetQuery("SelectDestino");
                 List<ActCuentaDestino> cuentasDestino = new List<ActCuentaDestino>();
 
                 using (MySqlConnection conexion = new MySqlConnection(connectionString))
