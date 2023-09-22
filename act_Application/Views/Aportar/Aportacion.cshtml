@@ -31,7 +31,7 @@
             <!--Contenedor de Nombre del Banco-->
             <div class="form-group">
                 <label asp-for="Aportacion.Nbanco">Banco:</label>
-                <select asp-for="Aportacion.Nbanco" id="banco">
+                <select asp-for="Aportacion.Nbanco" id="banco" name="Nbanco">
                     <option value="">Seleccionar un Banco...</option>
                     @foreach (var item in ViewData["ItemsNBanco"] as List<act_Application.Models.Sistema.ListItems>)
                     {
@@ -45,7 +45,7 @@
             <!--Contenedor de la Cuenta Bancaria-->
             <div class="form-group">
                 <label asp-for="Aportacion.Cbancaria">Cuenta:</label>
-                <input asp-for="Aportacion.Cbancaria" class="input-cuenta" type="number" min="10000000" max="999999999999" />
+                <input asp-for="Aportacion.Cbancaria" class="input-cuenta" type="number" min="10000000" max="999999999999" name="Cbancaria" />
                 <span asp-validation-for="Aportacion.Cbancaria" class="text-danger"></span>
             </div>
 
@@ -67,7 +67,7 @@
                 <label asp-for="Aportacion.Valor">Monto:</label>
                 <div class="input-container">
                     <span class="dollar-sign">$</span>
-                    <input asp-for="Aportacion.Valor" class="input-monto" type="number" min="5" step="0,01" />
+                    <input asp-for="Aportacion.Valor" class="input-monto" type="number" min="5" step="0.01" name="Valor" />
                     <span asp-validation-for="Aportacion.Valor" class="text-danger"></span>
                 </div>
             </div>
@@ -75,9 +75,9 @@
             <!--Contenedor de Banco Destino-->
             <div class="form-group">
                 <label>Banco Destino:</label>
-                <select id="cuentadestino" name="cuentadestino" required>
+                <select id="CuentaDestino" name="CuentaDestino" required>
                     <option value="">Seleccionar un Banco Destino...</option>
-                    @foreach (var cuenta in Model.ItemCuentaBancoDestino) 
+                    @foreach (var cuenta in Model.ItemCuentaBancoDestino)
                     {
                         <option value="@cuenta.NombreBanco - #@cuenta.NumeroCuenta">@cuenta.NombreBanco - #@cuenta.NumeroCuenta</option>
                     }

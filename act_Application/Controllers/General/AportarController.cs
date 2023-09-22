@@ -71,7 +71,7 @@ namespace act_Application.Controllers.General
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Policy = "AdminSocioOnly")]
-        public async Task<IActionResult> Aportacion([Bind("Id,Razon,Valor,IdUser,FechaAportacion,Aprobacion,CapturaPantalla,Cuadrante1,Cuadrante2,Nbanco,Cbancaria,CuentaDestino,BancoDestino")] ActAportacione actAportacione, [FromForm] IFormFile imagen)
+        public async Task<IActionResult> Aportacion([Bind("Id,Razon,Valor,IdUser,FechaAportacion,Aprobacion,CapturaPantalla,Cuadrante1,Cuadrante2,Nbanco,Cbancaria,CuentaDestino,BancoDestino")] ActAportacione actAportacione, [FromForm] IFormFile imagen, string Cuentadestino, string Cbancaria, string Nbanco, decimal Valor)
         {
             if (ModelState.IsValid)
             {
@@ -82,14 +82,19 @@ namespace act_Application.Controllers.General
                     actAportacione.IdUser = userId;
                     actAportacione.FechaAportacion = DateTime.Now;
                     actAportacione.Aprobacion = "EN ESPERA";
+                    actAportacione.Cbancaria = Cbancaria;
+                    actAportacione.Nbanco = Nbanco;
+                    actAportacione.Valor = Valor;
                     ObtenerCuadrante.CalcularCuadrantesAportacione(actAportacione);
 
-                    // Buscar la cuenta bancaria seleccionada en ItemCuentaBancoDestino
-                    var cuentaSeleccionada = Model.ItemCuentaBancoDestino.FirstOrDefault(cuenta => cuenta.Id == actAportacione.CuentaDestinoId);
-                    if (cuentaSeleccionada != null)
+                    if (!string.IsNullOrEmpty(Cuentadestino))
                     {
-                        actAportacione.BancoDestino = cuentaSeleccionada.NombreBanco;
-                        actAportacione.CuentaDestino = cuentaSeleccionada.NumeroCuenta;
+                        var parts = Cuentadestino.Split(" - #");
+                        if (parts.Length == 2)
+                        {
+                            actAportacione.BancoDestino = parts[0];
+                            actAportacione.CuentaDestino = parts[1];
+                        }
                     }
 
 
