@@ -164,7 +164,8 @@ namespace act_Application.Logic
                                     FechaInicio = Convert.ToDateTime(reader["FechaInicio"]),
                                     FechaFinalizacion = Convert.ToDateTime(reader["FechaFinalizacion"]),
                                     FechaGeneracion = Convert.ToDateTime(reader["FechaGeneracion"]),
-                                    Participantes = reader["Participantes"].ToString(),
+                                    ParticipantesId = reader["ParticipantesId"].ToString(),
+                                    ParticipantesNombre = reader["ParticipantesNombre"].ToString(),
                                     Estado = reader["Estado"].ToString(),
                                     IdTransaccion = Convert.ToInt32(reader["IdTransaccion"])
                                 };

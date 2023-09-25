@@ -322,7 +322,7 @@ namespace act_Application.Controllers.General
                         throw;
                     }
                 }
-                await EditParticipacion(actTransaccione.IdParticipantes, "CONCURSO", new ActParticipante());
+                await EditParticipacion(actTransaccione.IdParticipantes, "EN CREACION", new ActParticipante());
                 await CrearNotificacion(actTransaccione.Id, 0, 0, "ADMINISTRADOR", Razon, Descripcion, new ActNotificacione());
                 return RedirectToAction("Menu", "Home");// Puedes redirigir a donde desees después de la edición exitosa
             }
@@ -429,7 +429,7 @@ namespace act_Application.Controllers.General
             return fechasDeCuotas;
         }
 
-        private async Task<int> CrearParticipaciones(int IdTransaccion, DateTime FechaInicio, DateTime FechaFinalizacion, [Bind("Id,IdTransaccion,Estado,FechaInicio,FechaFinalizacion,FechaGeneracion,Participantes")] ActParticipante actParticipante)
+        private async Task<int> CrearParticipaciones(int IdTransaccion, DateTime FechaInicio, DateTime FechaFinalizacion, [Bind("Id,IdTransaccion,Estado,FechaInicio,FechaFinalizacion,FechaGeneracion,ParticipantesId,ParticipantesNombre")] ActParticipante actParticipante)
         {
             try
             {
@@ -438,10 +438,12 @@ namespace act_Application.Controllers.General
                     actParticipante.FechaInicio = FechaInicio;
                     actParticipante.FechaFinalizacion = FechaFinalizacion;
                     actParticipante.FechaGeneracion = DateTime.Now;
-                    actParticipante.Participantes = "";
+                    actParticipante.ParticipantesId = "";
+                    actParticipante.ParticipantesNombre = "";
                     actParticipante.IdTransaccion = IdTransaccion;
                     actParticipante.Estado = "PENDIENTE";
                     /*ESTADOS:  PENDIENTE (ESESPERA DE LA RESPUESTA DEL USUARIO NO ADMIN).
+                     *          EN CREACION (A LA ESPERA KUE EL ADMIN CONFIGURE LOS LIMITES ANTES DE LA PUBLICACION)
                                 CONCURSO (A LA ESPERA DE KUE NUEVOS SOCIOS SE UNAN).
                                 DENEGADO (EL USUARIO NO ADMIN NO PERMITIO EL SEGUIMIENTO DE LA TRANSACCION).
                                 FINALIZADO (EL CONCURSO TERMINO Y SE SELECCIONARON LOS PARTICIPANTES.*/
@@ -460,7 +462,7 @@ namespace act_Application.Controllers.General
         }
 
 
-        private async Task<IActionResult> EditParticipacion(int Id, string Estado, [Bind("Id,IdTransaccion,Estado,FechaInicio,FechaFinalizacion,FechaGeneracion,Participantes")] ActParticipante actParticipante)
+        private async Task<IActionResult> EditParticipacion(int Id, string Estado, [Bind("Id,IdTransaccion,Estado,FechaInicio,FechaFinalizacion,FechaGeneracion,ParticipantesId,ParticipantesNombre")] ActParticipante actParticipante)
         {
             actParticipante.Id = Id;
             if (Id != actParticipante.Id)
@@ -484,7 +486,8 @@ namespace act_Application.Controllers.General
                     actParticipante.FechaInicio = RparticipantesOriginal.FechaInicio;
                     actParticipante.FechaFinalizacion = RparticipantesOriginal.FechaFinalizacion;
                     actParticipante.FechaGeneracion = RparticipantesOriginal.FechaGeneracion;
-                    actParticipante.Participantes = RparticipantesOriginal.Participantes;
+                    actParticipante.ParticipantesId = RparticipantesOriginal.ParticipantesId;
+                    actParticipante.ParticipantesNombre = RparticipantesOriginal.ParticipantesNombre;
                     actParticipante.IdTransaccion = RparticipantesOriginal.IdTransaccion;
                     actParticipante.Estado = Estado;
 
@@ -508,6 +511,7 @@ namespace act_Application.Controllers.General
             return View(actParticipante);
         }
 
+        [HttpPost]
 
         public bool ActTransaccionesExists(int id) //Verifica la existencia de una Transaccion en Especifico 
         {

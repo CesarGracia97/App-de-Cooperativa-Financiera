@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "lj8SjMcqWCGk0O0qeDfy15J6K+NbifhDSRHJV4661To=",
+  "Hash": "Kip0sUiv7J+U7uIuDSjWU9lsrezM9ODWliOGScIgyUY=",
   "Source": "act_Application",
   "BasePath": "_content/act_Application",
   "Mode": "Default",
@@ -187,23 +187,6 @@
       "OriginalItemSpec": "wwwroot\\css\\General\\Home\\Esqueleto\\Cuerpo.css"
     },
     {
-      "Identity": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\css\\General\\Home\\Esqueleto\\Menu_Grid_Components.css",
-      "SourceId": "act_Application",
-      "SourceType": "Discovered",
-      "ContentRoot": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\",
-      "BasePath": "_content/act_Application",
-      "RelativePath": "css/General/Home/Esqueleto/Menu_Grid_Components.css",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\css\\General\\Home\\Esqueleto\\Menu_Grid_Components.css"
-    },
-    {
       "Identity": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\css\\General\\Home\\Footer\\Footer.css",
       "SourceId": "act_Application",
       "SourceType": "Discovered",
@@ -270,23 +253,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\General\\Home\\Profile\\cardProfile.css"
-    },
-    {
-      "Identity": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\css\\General\\Home\\Profile\\profile.css",
-      "SourceId": "act_Application",
-      "SourceType": "Discovered",
-      "ContentRoot": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\",
-      "BasePath": "_content/act_Application",
-      "RelativePath": "css/General/Home/Profile/profile.css",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\css\\General\\Home\\Profile\\profile.css"
     },
     {
       "Identity": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\css\\General\\Login\\Login.css",

@@ -469,7 +469,7 @@ namespace act_Application.Controllers.Administrador.BD
         }
 
 
-        //-----------------------------------------------------------------------------------------------------------------------------------------------Participantes
+        //-----------------------------------------------------------------------------------------------------------------------------------------------ParticipantesId
 
         public async Task<IActionResult> AdminParticipantes()
         {
@@ -484,7 +484,7 @@ namespace act_Application.Controllers.Administrador.BD
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateParticipantes([Bind("Id,IdTransaccion,FechaInicio,FechaFinalizacion,FechaGeneracion,Participantes,Estado")] ActParticipante actParticipante)
+        public async Task<IActionResult> CreateParticipantes([Bind("Id,IdTransaccion,FechaInicio,FechaFinalizacion,FechaGeneracion,ParticipantesId,Estado")] ActParticipante actParticipante)
         {
             if (ModelState.IsValid)
             {
@@ -512,7 +512,7 @@ namespace act_Application.Controllers.Administrador.BD
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditParticipantes(int id, [Bind("Id,IdTransaccion,FechaInicio,FechaFinalizacion,FechaGeneracion,Participantes,Estado")] ActParticipante actParticipante)
+        public async Task<IActionResult> EditParticipantes(int id, [Bind("Id,IdTransaccion,FechaInicio,FechaFinalizacion,FechaGeneracion,ParticipantesId,Estado")] ActParticipante actParticipante)
         {
             if (id != actParticipante.Id)
             {

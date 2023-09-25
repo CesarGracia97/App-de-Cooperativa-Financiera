@@ -18,7 +18,9 @@ public partial class ActParticipante
 
     public DateTime FechaGeneracion { get; set; }
 
-    public string Participantes { get; set; } = null!;
+    public string ParticipantesId { get; set; }
+
+    public string ParticipantesNombre { get; set; }
 
     public string Estado { get; set; } = null!;
 }

@@ -31,5 +31,7 @@ namespace act_Application.Controllers.General
 
             return RedirectToAction("Index", "Login");
         }
+
+
     }
 }

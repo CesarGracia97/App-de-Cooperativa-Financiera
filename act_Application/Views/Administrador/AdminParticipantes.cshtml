@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<act_Application.Models.BD.ActParticipante>
 
 @{
-    ViewData["Title"] = "Participantes";
+    ViewData["Title"] = "ParticipantesId";
 }
 
 <h1>Index</h1>
@@ -22,7 +22,7 @@
                 @Html.DisplayNameFor(model => model.FechaGeneracion)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Participantes)
+                @Html.DisplayNameFor(model => model.ParticipantesId)
             </th>
             <th></th>
         </tr>
@@ -40,7 +40,7 @@
                 @Html.DisplayFor(modelItem => item.FechaGeneracion)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Participantes)
+                @Html.DisplayFor(modelItem => item.ParticipantesId)
             </td>
             <td>
                 <a asp-action="EditParticipantes" asp-route-id="@item.Id">Edit</a>
