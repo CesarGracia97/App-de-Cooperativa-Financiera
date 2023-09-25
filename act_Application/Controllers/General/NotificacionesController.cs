@@ -511,7 +511,55 @@ namespace act_Application.Controllers.General
             return View(actParticipante);
         }
 
-        [HttpPost]
+        [HttpPost][ValidateAntiForgeryToken][Authorize(Policy = "AdminReferenteOnly")]
+        public async Task<IActionResult> ConfigurarParticipante(int Id, DateTime fechaInicio, DateTime fechaFinalizacion, [Bind("Id,IdTransaccion,Estado,FechaInicio,FechaFinalizacion,FechaGeneracion,ParticipantesId,ParticipantesNombre")] ActParticipante actParticipante)
+        {
+            actParticipante.Id = Id;
+            if (Id != actParticipante.Id)
+            {
+                Console.WriteLine("Fallo la verificacion de Datos de la Edicion del Participante");
+                return RedirectToAction("Error", "Home");
+            }
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var metodoNotificacion = new MetodoNotificaciones();
+                    var RparticipantesOriginal = metodoNotificacion.GetRegistroParticipante(Id);
+
+                    if (RparticipantesOriginal == null)
+                    {
+                        Console.WriteLine("Hubo un problema al momento de comprobar la nulidad de la Participacion e");
+                        return RedirectToAction("Error", "Home");
+                    }
+
+                    actParticipante.FechaInicio = fechaInicio;
+                    actParticipante.FechaFinalizacion = fechaFinalizacion;
+                    actParticipante.FechaGeneracion = RparticipantesOriginal.FechaGeneracion;
+                    actParticipante.ParticipantesId = RparticipantesOriginal.ParticipantesId;
+                    actParticipante.ParticipantesNombre = RparticipantesOriginal.ParticipantesNombre;
+                    actParticipante.IdTransaccion = RparticipantesOriginal.IdTransaccion;
+                    actParticipante.Estado = RparticipantesOriginal.Estado;
+
+                    _context.Update(actParticipante);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!ActParticipantesExist(actParticipante.Id))
+                    {
+                        return RedirectToAction("Error", "Home");
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+            }
+            return View(actParticipante);
+
+        }
+
 
         public bool ActTransaccionesExists(int id) //Verifica la existencia de una Transaccion en Especifico 
         {
