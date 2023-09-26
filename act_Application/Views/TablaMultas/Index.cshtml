@@ -4,6 +4,7 @@
 @model IEnumerable<act_Application.Models.BD.ActMulta>;
 @{
     ViewData["Title"] = "Tabla de Multas";
+
     var multaRepository = new MultaRepository();
     int totalMultas = multaRepository.GetTotalMultas();
 }

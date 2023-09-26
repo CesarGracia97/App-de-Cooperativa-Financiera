@@ -21,7 +21,7 @@ namespace act_Application.Controllers.General
 
         
         [Authorize (Policy = "AllOnly")]
-        public IActionResult Notificaciones()
+        public IActionResult Notificacion()
         {
             try
             {

@@ -32,7 +32,7 @@ namespace act_Application.Controllers.General
         {
             HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
 
-            return RedirectToAction("Notificaciones", "Login");
+            return RedirectToAction("Index", "Login");
         }
 
 

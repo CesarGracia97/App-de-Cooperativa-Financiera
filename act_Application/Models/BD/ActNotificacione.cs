@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace act_Application.Models.BD;
 
 /// <summary>
-/// Tabla de Notificaciones
+/// Tabla de Index
 /// </summary>
 public partial class ActNotificacione
 {

@@ -126,7 +126,7 @@ public partial class DesarrolloContext : DbContext
         {
             entity.HasKey(e => e.Id).HasName("PRIMARY");
 
-            entity.ToTable("act_Notificaciones", tb => tb.HasComment("Tabla de Index"));
+            entity.ToTable("act_Notificaciones", tb => tb.HasComment("Tabla de Notificaciones"));
 
             entity.HasIndex(e => e.IdAportaciones, "fk_Notificaciones_Aportaciones");
 

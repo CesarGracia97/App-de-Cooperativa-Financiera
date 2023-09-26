@@ -4,6 +4,7 @@
 @using act_Application.Models.BD;
 @{
     ViewData["Title"] = "Tabla de Aportaciones";
+
     var aportacionRepository = new AportacionRepository();
     int totalAportaciones = aportacionRepository.GetTotalAportaciones();
 }

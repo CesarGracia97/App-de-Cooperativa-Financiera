@@ -76,7 +76,7 @@ namespace act_Application.Controllers.General
             }
             else
             {
-                return RedirectToAction("Notificaciones", "Login", new { error = "Contraseña incorrecta" });
+                return RedirectToAction("Index", "Login", new { error = "Contraseña incorrecta" });
             }
 
         }
