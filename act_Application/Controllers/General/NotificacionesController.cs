@@ -122,7 +122,7 @@ namespace act_Application.Controllers.General
                     actTransaccione.TipoCuota = transaccionOriginal.TipoCuota;
                     actTransaccione.Estado = "PENDIENTE REFERENTE";
                     actTransaccione.FechaGeneracion = transaccionOriginal.FechaGeneracion;
-                    int idParticipantes = await CrearParticipaciones(Id,FechaInicio, FechaFinalizacion, new ActParticipante());
+                    int idParticipantes = await CrearParticipaciones(Id, transaccionOriginal.IdUser,FechaInicio, FechaFinalizacion, new ActParticipante());
                     if (idParticipantes != -1)
                     {
                         actTransaccione.IdParticipantes = idParticipantes;
@@ -271,7 +271,7 @@ namespace act_Application.Controllers.General
 
         
         [HttpPost][ValidateAntiForgeryToken][Authorize(Policy = "AdminReferenteOnly")]
-        public async Task<IActionResult> AceptarReferente (int Id, [Bind("Id,Razon,IdUser,Valor,Estado,FechaEntregaDinero,FechaPagoTotalPrestamo,FechaIniCoutaPrestamo,TipoCuota,IdParticipantes,FechaGeneracion")] ActTransaccione actTransaccione)
+        public async Task<IActionResult> AceptarReferente (int Id, [Bind("Id,Razon,IdUser,Valor,Estado,FechaEntregaDinero,FechaPagoTotalPrestamo,FechaIniCoutaPrestamo,TipoCuota,IdParticipantes,FechaGeneracion,")] ActTransaccione actTransaccione)
         {
             if (Id != actTransaccione.Id)
             {
@@ -322,7 +322,7 @@ namespace act_Application.Controllers.General
                         throw;
                     }
                 }
-                await EditParticipacion(actTransaccione.IdParticipantes, "EN CREACION", new ActParticipante());
+                await EditParticipacion(actTransaccione.IdParticipantes, "CONCURSO", new ActParticipante());
                 await CrearNotificacion(actTransaccione.Id, 0, 0, "ADMINISTRADOR", Razon, Descripcion, new ActNotificacione());
                 return RedirectToAction("Menu", "Home");// Puedes redirigir a donde desees después de la edición exitosa
             }
@@ -429,7 +429,7 @@ namespace act_Application.Controllers.General
             return fechasDeCuotas;
         }
 
-        private async Task<int> CrearParticipaciones(int IdTransaccion, DateTime FechaInicio, DateTime FechaFinalizacion, [Bind("Id,IdTransaccion,Estado,FechaInicio,FechaFinalizacion,FechaGeneracion,ParticipantesId,ParticipantesNombre")] ActParticipante actParticipante)
+        private async Task<int> CrearParticipaciones(int IdTransaccion, int IdUser, DateTime FechaInicio, DateTime FechaFinalizacion, [Bind("Id,IdTransaccion,Estado,FechaInicio,FechaFinalizacion,FechaGeneracion,ParticipantesId,ParticipantesNombre,IdUser")] ActParticipante actParticipante)
         {
             try
             {
@@ -441,6 +441,7 @@ namespace act_Application.Controllers.General
                     actParticipante.ParticipantesId = "";
                     actParticipante.ParticipantesNombre = "";
                     actParticipante.IdTransaccion = IdTransaccion;
+                    actParticipante.IdUser = IdUser;
                     actParticipante.Estado = "PENDIENTE";
                     /*ESTADOS:  PENDIENTE (ESESPERA DE LA RESPUESTA DEL USUARIO NO ADMIN).
                      *          EN CREACION (A LA ESPERA KUE EL ADMIN CONFIGURE LOS LIMITES ANTES DE LA PUBLICACION)
@@ -462,7 +463,7 @@ namespace act_Application.Controllers.General
         }
 
 
-        private async Task<IActionResult> EditParticipacion(int Id, string Estado, [Bind("Id,IdTransaccion,Estado,FechaInicio,FechaFinalizacion,FechaGeneracion,ParticipantesId,ParticipantesNombre")] ActParticipante actParticipante)
+        private async Task<IActionResult> EditParticipacion(int Id, string Estado, [Bind("Id,IdTransaccion,Estado,FechaInicio,FechaFinalizacion,FechaGeneracion,ParticipantesId,ParticipantesNombre,IdUser")] ActParticipante actParticipante)
         {
             actParticipante.Id = Id;
             if (Id != actParticipante.Id)
@@ -490,7 +491,7 @@ namespace act_Application.Controllers.General
                     actParticipante.ParticipantesNombre = RparticipantesOriginal.ParticipantesNombre;
                     actParticipante.IdTransaccion = RparticipantesOriginal.IdTransaccion;
                     actParticipante.Estado = Estado;
-
+                    actParticipante.IdUser = RparticipantesOriginal.IdUser;
 
 
                     _context.Update(actParticipante);
@@ -510,56 +511,6 @@ namespace act_Application.Controllers.General
             }
             return View(actParticipante);
         }
-
-        [HttpPost][ValidateAntiForgeryToken][Authorize(Policy = "AdminReferenteOnly")]
-        public async Task<IActionResult> ConfigurarParticipante(int Id, DateTime fechaInicio, DateTime fechaFinalizacion, [Bind("Id,IdTransaccion,Estado,FechaInicio,FechaFinalizacion,FechaGeneracion,ParticipantesId,ParticipantesNombre")] ActParticipante actParticipante)
-        {
-            actParticipante.Id = Id;
-            if (Id != actParticipante.Id)
-            {
-                Console.WriteLine("Fallo la verificacion de Datos de la Edicion del Participante");
-                return RedirectToAction("Error", "Home");
-            }
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    var metodoNotificacion = new MetodoNotificaciones();
-                    var RparticipantesOriginal = metodoNotificacion.GetRegistroParticipante(Id);
-
-                    if (RparticipantesOriginal == null)
-                    {
-                        Console.WriteLine("Hubo un problema al momento de comprobar la nulidad de la Participacion e");
-                        return RedirectToAction("Error", "Home");
-                    }
-
-                    actParticipante.FechaInicio = fechaInicio;
-                    actParticipante.FechaFinalizacion = fechaFinalizacion;
-                    actParticipante.FechaGeneracion = RparticipantesOriginal.FechaGeneracion;
-                    actParticipante.ParticipantesId = RparticipantesOriginal.ParticipantesId;
-                    actParticipante.ParticipantesNombre = RparticipantesOriginal.ParticipantesNombre;
-                    actParticipante.IdTransaccion = RparticipantesOriginal.IdTransaccion;
-                    actParticipante.Estado = RparticipantesOriginal.Estado;
-
-                    _context.Update(actParticipante);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ActParticipantesExist(actParticipante.Id))
-                    {
-                        return RedirectToAction("Error", "Home");
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-            }
-            return View(actParticipante);
-
-        }
-
 
         public bool ActTransaccionesExists(int id) //Verifica la existencia de una Transaccion en Especifico 
         {

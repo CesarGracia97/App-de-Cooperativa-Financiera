@@ -16,17 +16,12 @@ namespace act_Application.Controllers.General
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
         private readonly DesarrolloContext _context;
 
-        public HomeController(DesarrolloContext context)
-        {
-            _context = context;
-        }
-
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, DesarrolloContext context)
         {
             _logger = logger;
+            _context = context;
         }
 
         [Authorize]
