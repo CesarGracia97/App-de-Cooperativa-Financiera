@@ -1,5 +1,9 @@
-﻿@{
+﻿@using act_Application.Data.Data;
+@{
     ViewBag.Title = "Home";
+
+    var eventosRepository = new EventosRepository();
+    int TotalEventos = eventosRepository.GetTotalEventos();
 }
 <head>
     <meta charset="utf-8" />
@@ -49,7 +53,13 @@
                 </div>
             </div>
             <div class="fila-infr">
-                <button class="btn-participante">Participar</button>
+                @if(TotalEventos > 0)
+                {
+                    <button class="btn-participante">Participar</button>
+                }else
+                {
+                    <label>Por el Momento no hay Eventos para Participar</label>
+                }
             </div>
         </div>
 

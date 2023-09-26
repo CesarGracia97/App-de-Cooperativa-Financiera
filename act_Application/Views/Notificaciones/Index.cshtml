@@ -89,7 +89,7 @@
                                             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                                             <input type="hidden" asp-for="@notificacionAdmin.Transacciones.Id" name="id" id="id" />
                                             <div class="form-group">
-                                                <label asp-for="@notificacionAdmin.Transacciones.FechaPagoTotalPrestamo" class="control-label">Fecha de Pago del Prestamo</label>
+                                                <label asp-for="@notificacionAdmin.Transacciones.FechaPagoTotalPrestamo" class="control-label">Fecha de Pago del Prestamo -> Fecha de Inicio de Pago de Cuotas @notificacionAdmin.Transacciones.FechaIniCoutaPrestamo.ToString("dd-MMMM-yyyy")</label>
                                                 <input asp-for="@notificacionAdmin.Transacciones.FechaPagoTotalPrestamo" required type="date" class="input-date" name="FechaPagoTotalPrestamo" id="FechaPagoTotalPrestamo" min="@fechaactual" />
                                                 <span asp-validation-for="@notificacionAdmin.Transacciones.FechaPagoTotalPrestamo" class="text-danger"></span>
                                             </div>
