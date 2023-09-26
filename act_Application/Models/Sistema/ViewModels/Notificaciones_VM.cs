@@ -1,13 +1,14 @@
 ﻿using act_Application.Models.BD;
 
-namespace act_Application.Models.Sistema
+namespace act_Application.Models.Sistema.ViewModels
 {
-    public class NT_ViewModel
+    public class Notificaciones_VM
     {
-        public NT_ViewModel() {
+        public Notificaciones_VM()
+        {
             Notificaciones = new ActNotificacione();
             Transacciones = new ActTransaccione();
-            Cuotas = new ActCuota ();
+            Cuotas = new ActCuota();
             Aportaciones = new ActAportacione();
             Participante = new ActParticipante();
 

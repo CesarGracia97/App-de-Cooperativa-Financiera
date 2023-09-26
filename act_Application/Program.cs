@@ -65,7 +65,7 @@ app.UseAuthorization();  //Habilitada la Autorizacion
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Login}/{action=Index}/{id?}");
+    pattern: "{controller=Login}/{action=Notificaciones}/{id?}");
 
 RolesInitializer.CreateRoles(app);
 

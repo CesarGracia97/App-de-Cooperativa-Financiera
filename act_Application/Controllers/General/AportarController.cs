@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc;
 using act_Application.Models.BD;
 using act_Application.Data.Data;
-using act_Application.Models.Sistema;
+using act_Application.Models.Sistema.ViewModels;
 using act_Application.Logic.ComplementosLogicos;
 using Microsoft.AspNetCore.Authorization;
 using act_Application.Logic;
+using act_Application.Models.Sistema.Complementos;
 
 namespace act_Application.Controllers.General
 {
@@ -44,7 +39,7 @@ namespace act_Application.Controllers.General
 
         // GET: Aportar/Create
         [Authorize(Policy = "AdminSocioOnly")]
-        public IActionResult Aportacion()
+        public IActionResult Aportar()
         {
             ViewData["ItemsNBanco"] = ObtenerItemsNBanco();
             ViewData["ItemsRazon"] = ObtenerItemsRazon();
@@ -60,7 +55,7 @@ namespace act_Application.Controllers.General
                     Text = $"{cuenta.NombreBanco} - #{cuenta.NumeroCuenta}"
                 }).ToList();
 
-            var viewModel = new AportarViewModel
+            var viewModel = new Aportar_VM
             {
                 ItemCuentaBancoDestino = cbDestinos
             };

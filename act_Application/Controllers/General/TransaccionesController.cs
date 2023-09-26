@@ -9,6 +9,7 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Org.BouncyCastle.Crypto;
+using act_Application.Models.Sistema.Complementos;
 
 namespace act_Application.Controllers.General
 {
@@ -45,7 +46,7 @@ namespace act_Application.Controllers.General
 
         //Datos directos kue se obtiene por las listas
         [Authorize(Policy = "AdminReferenteOnly")]
-        public IActionResult Create()
+        public IActionResult Transacciones()
         {
             ViewData["ItemsRazon"] = ObtenerItemsRazon();
             ViewData["ItemsCuota"] = ObtenerItemsCuota();

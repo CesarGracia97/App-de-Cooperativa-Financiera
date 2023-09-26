@@ -1,5 +1,6 @@
-﻿@model act_Application.Models.Sistema.AportarViewModel
-@using act_Application.Models.Sistema
+﻿@model act_Application.Models.Sistema.ViewModels.Aportar_VM;
+@using act_Application.Models.Sistema;
+@using act_Application.Models.Sistema.Complementos;
 @{
     ViewData["Title"] = "Aportar";
 }
@@ -33,7 +34,7 @@
                 <label asp-for="Aportacion.Nbanco">Banco:</label>
                 <select asp-for="Aportacion.Nbanco" id="banco" name="Nbanco">
                     <option value="">Seleccionar un Banco...</option>
-                    @foreach (var item in ViewData["ItemsNBanco"] as List<act_Application.Models.Sistema.ListItems>)
+                    @foreach (var item in ViewData["ItemsNBanco"] as List<ListItems>)
                     {
                         <option value="@item.Nombre">@item.Nombre</option>
                     }
@@ -54,7 +55,7 @@
                 <label asp-for="Aportacion.Razon">Razón:</label>
                 <select asp-for="Aportacion.Razon" id="razon" name="razon" required>
                     <option value="">Seleccionar una Razon...</option>
-                    @foreach (var item in ViewData["ItemsRazon"] as List<act_Application.Models.Sistema.ListItems>)
+                    @foreach (var item in ViewData["ItemsRazon"] as List<ListItems>)
                     {
                         <option value="@item.Nombre">@item.Nombre</option>
                     }

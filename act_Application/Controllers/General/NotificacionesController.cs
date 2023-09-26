@@ -4,9 +4,9 @@ using act_Application.Data.Data;
 using act_Application.Models.BD;
 using Microsoft.AspNetCore.Authorization;
 using act_Application.Logic;
-using act_Application.Models.Sistema;
 using act_Application.Helper;
 using MySql.Data.MySqlClient;
+using act_Application.Models.Sistema.ViewModels;
 
 namespace act_Application.Controllers.General
 {
@@ -21,17 +21,17 @@ namespace act_Application.Controllers.General
 
         
         [Authorize (Policy = "AllOnly")]
-        public IActionResult Index()
+        public IActionResult Notificaciones()
         {
             try
             {
-                NT_ViewModel viewModel = null;
+                Notificaciones_VM viewModel = null;
 
                 if (User.HasClaim("Rol", "Administrador"))
                 {
                     var metodoNotificacion = new MetodoNotificaciones();
                     var notificaciones = metodoNotificacion.GetNotificacionesAdministrador();
-                    var viewModelList = notificaciones.Select(notificacion => new NT_ViewModel
+                    var viewModelList = notificaciones.Select(notificacion => new Notificaciones_VM
                     {
                         Notificaciones = notificacion,
                         Transacciones = _context.ActTransacciones.FirstOrDefault(t => t.Id == notificacion.IdTransacciones),
@@ -57,7 +57,7 @@ namespace act_Application.Controllers.General
 
                         var notificaciones = metodoNotificacion.GetNotificacionesUsuario(Bandera);
 
-                        var viewModelList = notificaciones.Select(notificacion => new NT_ViewModel
+                        var viewModelList = notificaciones.Select(notificacion => new Notificaciones_VM
                         {
                             Notificaciones = notificacion,
                             Transacciones = _context.ActTransacciones.FirstOrDefault(t => t.Id == notificacion.IdTransacciones)
@@ -77,7 +77,7 @@ namespace act_Application.Controllers.General
 
                 if (viewModel == null)
                 {
-                    viewModel = new NT_ViewModel();
+                    viewModel = new Notificaciones_VM();
                 }
                 return View(viewModel);
 

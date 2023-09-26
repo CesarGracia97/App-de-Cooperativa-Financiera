@@ -1,4 +1,5 @@
-﻿@model act_Application.Models.BD.ActTransaccione
+﻿@model act_Application.Models.BD.ActTransaccione;
+@using act_Application.Models.Sistema.Complementos;
 @{
     ViewData["Title"] = "Transaccion";
     DateTime minDate = DateTime.Now.AddDays(14);
@@ -25,7 +26,7 @@
                 <label asp-for="Razon">Razón:</label>
                 <select asp-for="Razon" id="Razon" placeholder="Seleccionar una Razon..." required >
                     <option value="0">Seleccionar una Razon...</option>
-                    @foreach (var item in ViewData["ItemsRazon"] as List<act_Application.Models.Sistema.ListItems>)
+                    @foreach (var item in ViewData["ItemsRazon"] as List<ListItems>)
                     {
                         <option value="@item.Nombre">@item.Nombre</option>
                     }
@@ -49,7 +50,7 @@
                 <label asp-for="TipoCuota">Tipo de Cuota:</label>
                 <select asp-for="TipoCuota" id="TipoCuota" placeholder="Seleccionar un Tipo de Cuota..." required >
                     <option value="">Seleccionar un Tipo de Cuota...</option>
-                    @foreach (var item in ViewData["ItemsCuota"] as List<act_Application.Models.Sistema.ListItems>)
+                    @foreach (var item in ViewData["ItemsCuota"] as List<ListItems>)
                     {
                         <option value="@item.Nombre">@item.Nombre</option>
                     }

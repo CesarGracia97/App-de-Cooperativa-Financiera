@@ -1,10 +1,11 @@
 ﻿using act_Application.Models.BD;
+using act_Application.Models.Sistema.Complementos;
 
-namespace act_Application.Models.Sistema
+namespace act_Application.Models.Sistema.ViewModels
 {
-    public class AportarViewModel
+    public class Aportar_VM
     {
-        public AportarViewModel()
+        public Aportar_VM()
         {
             Aportacion = new ActAportacione(); // Inicializar aquí
         }

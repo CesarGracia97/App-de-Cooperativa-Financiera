@@ -2,12 +2,13 @@
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using act_Application.Logic;
 
 namespace act_Application.Controllers.General
 {
     public class HomeController : Controller
     {
-        private readonly ILogger <HomeController> _logger;
+        private readonly ILogger<HomeController> _logger;
 
         public HomeController(ILogger<HomeController> logger)
         {
@@ -17,7 +18,9 @@ namespace act_Application.Controllers.General
         [Authorize]
         public IActionResult Menu()
         {
-            return View();
+            var metodoeventos = new MetodoEventos();
+            var eventos = metodoeventos.GetDataEventos();
+            return View(eventos);
         }
 
         public IActionResult Error()
@@ -29,7 +32,7 @@ namespace act_Application.Controllers.General
         {
             HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
 
-            return RedirectToAction("Index", "Login");
+            return RedirectToAction("Notificaciones", "Login");
         }
 
 

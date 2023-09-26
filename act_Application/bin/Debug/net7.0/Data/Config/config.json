@@ -17,6 +17,9 @@
     "SelectNotifiUser": "SELECT * FROM act_Notificaciones WHERE Destino = @Id",
     "SelectExistNotificacion": "SELECT COUNT(*) AS existe FROM act_Notificaciones WHERE Id = @Id",
     "SelectParticipantes": "SELECT * FROM act_Participantes WHERE Id = @Id",
-    "SelectParticipantesExist": "SELECT COUNT(*) AS existe FROM act_Participantes WHERE Id = @Id"
+    "SelectParticipantesExist": "SELECT COUNT(*) AS existe FROM act_Participantes WHERE Id = @Id",
+    "SelectDestino": "SELECT Id, NumeroCuenta, NombreBanco FROM act_CuentaDestino",
+    "SelectExistsEventos": "SELECT COUNT(*) FROM act_Participantes WHERE Estado ='CONCURSO'",
+    "SelectDatosEventoParticipante": "SELECT * FROM act_Participantes WHERE Estado ='CONCURSO'"
   }
 }
