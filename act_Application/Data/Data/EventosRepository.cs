@@ -28,6 +28,5 @@ namespace act_Application.Data.Data
                 return -1; // Valor negativo para indicar un error
             }
         }
-
     }
 }

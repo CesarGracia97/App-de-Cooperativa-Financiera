@@ -47,7 +47,6 @@ namespace act_Application.Controllers.General
                 {
                     claims.Add(new Claim(ClaimTypes.Name, objeto.NombreYapellido));
                     claims.Add(new Claim(ClaimTypes.Email, objeto.Correo));
-                    claims.Add(new Claim("Identificacion", objeto.NombreYapellido));
                     claims.Add(new Claim("CI", objeto.Cedula));
                     claims.Add(new Claim("Id", objeto.Id.ToString()));
                     claims.Add(new Claim("Rol", objetoRol.NombreRol));

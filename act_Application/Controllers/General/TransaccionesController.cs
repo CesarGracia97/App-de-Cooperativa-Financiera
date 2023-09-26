@@ -63,7 +63,7 @@ namespace act_Application.Controllers.General
                 var userIdClaim = User.Claims.FirstOrDefault(c => c.Type == "Id");
                 if (userIdClaim != null && int.TryParse(userIdClaim.Value, out int userId))
                 {
-                    var userIdentificacion = User.Claims.FirstOrDefault(c => c.Type == "Identificacion")?.Value;
+                    var userIdentificacion = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value;
                     var userEmail = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
                     var userCI = User.Claims.FirstOrDefault(c => c.Type == "CI")?.Value;
 

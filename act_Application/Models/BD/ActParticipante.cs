@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace act_Application.Models.BD;
 
@@ -9,6 +10,8 @@ namespace act_Application.Models.BD;
 public partial class ActParticipante
 {
     public int Id { get; set; }
+
+    public int IdUser { get; set; }
 
     public int IdTransaccion { get; set; }
 
@@ -22,5 +25,8 @@ public partial class ActParticipante
 
     public string ParticipantesNombre { get; set; }
 
-    public string Estado { get; set; } = null!;
+    public string Estado { get; set; }
+
+    [NotMapped]
+    public string NombreUsuario {  get; set; }
 }

@@ -160,7 +160,10 @@ public partial class DesarrolloContext : DbContext
 
             entity.HasIndex(e => e.IdTransaccion, "fk_Participantes_Transacciones");
 
+            entity.HasIndex(e => e.IdUser, "fk_Participantes_User");
+
             entity.Property(e => e.Id).HasColumnType("int(11)");
+            entity.Property(e => e.IdUser).HasColumnType("int(11)");
             entity.Property(e => e.Estado).HasMaxLength(45);
             entity.Property(e => e.FechaFinalizacion).HasColumnType("date");
             entity.Property(e => e.FechaGeneracion).HasColumnType("date");

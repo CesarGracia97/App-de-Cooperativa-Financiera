@@ -11,7 +11,6 @@ namespace act_Application.Models.Sistema.ViewModels
             Cuotas = new ActCuota();
             Aportaciones = new ActAportacione();
             Participante = new ActParticipante();
-
         }
 
         public ActNotificacione Notificaciones { get; set; }

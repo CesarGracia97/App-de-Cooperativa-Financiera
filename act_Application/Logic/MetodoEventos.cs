@@ -2,51 +2,51 @@
 using act_Application.Models.BD;
 using MySql.Data.MySqlClient;
 
-namespace act_Application.Logic
-{
-    public class MetodoEventos
+    namespace act_Application.Logic
     {
-        public IEnumerable<ActParticipante> GetDataEventos() //Consulta para obtener todos los datos de los eventos de Participacion
+        public class MetodoEventos
         {
-            string connectionString = AppSettingsHelper.GetConnectionString();
-            try
+            public IEnumerable<ActParticipante> GetDataEventos() //Consulta para obtener todos los datos de los eventos de Participacion
             {
-                string query = ConfigReader.GetQuery("SelectDatosEventoParticipante");
-                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                string connectionString = AppSettingsHelper.GetConnectionString();
+                try
                 {
-                    connection.Open();
-                    using (MySqlCommand command = new MySqlCommand(query, connection))
+                    string query = ConfigReader.GetQuery("SelectDatosEventoParticipante");
+                    using (MySqlConnection connection = new MySqlConnection(connectionString))
                     {
-                        using (MySqlDataReader reader = command.ExecuteReader())
+                        connection.Open();
+                        using (MySqlCommand command = new MySqlCommand(query, connection))
                         {
-                            List<ActParticipante> eventos = new List<ActParticipante>();
-                            while (reader.Read())
+                            using (MySqlDataReader reader = command.ExecuteReader())
                             {
-                                ActParticipante eve = new ActParticipante
+                                List<ActParticipante> eventos = new List<ActParticipante>();
+                                while (reader.Read())
                                 {
-                                    Id = Convert.ToInt32(reader["Id"]),
-                                    IdTransaccion = Convert.ToInt32(reader["IdTransaccion"]),
-                                    FechaInicio = Convert.ToDateTime(reader["FechaInicio"]),
-                                    FechaFinalizacion = Convert.ToDateTime(reader["FechaFinalizacion"]),
-                                    FechaGeneracion = Convert.ToDateTime(reader["FechaGeneracion"]),
-                                    ParticipantesId = reader["Destino"].ToString(),
-                                    ParticipantesNombre = reader["ParticipantesNombre"].ToString(),
-                                    Estado = reader["Estado"].ToString(),
-                                };
-                                eventos.Add(eve);
+                                    ActParticipante eve = new ActParticipante
+                                    {
+                                        Id = Convert.ToInt32(reader["Id"]),
+                                        IdTransaccion = Convert.ToInt32(reader["IdTransaccion"]),
+                                        FechaInicio = Convert.ToDateTime(reader["FechaInicio"]),
+                                        FechaFinalizacion = Convert.ToDateTime(reader["FechaFinalizacion"]),
+                                        FechaGeneracion = Convert.ToDateTime(reader["FechaGeneracion"]),
+                                        ParticipantesId = reader["Destino"].ToString(),
+                                        ParticipantesNombre = reader["ParticipantesNombre"].ToString(),
+                                        Estado = reader["Estado"].ToString(),
+                                    };
+                                    eventos.Add(eve);
+                                }
+                                return eventos;
                             }
-                            return eventos;
                         }
                     }
                 }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Hubo un error en la consulta y en la optencion de los datos del evento");
+                    Console.WriteLine("Detalles del error: " + ex.Message);
+                    return null;
+                }
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Hubo un error en la consulta y en la optencion de los datos del evento");
-                Console.WriteLine("Detalles del error: " + ex.Message);
-                return null;
-            }
-        }
 
+        }
     }
-}

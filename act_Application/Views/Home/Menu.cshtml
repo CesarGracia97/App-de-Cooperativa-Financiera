@@ -1,4 +1,5 @@
-﻿@using act_Application.Data.Data;
+﻿@model IEnumerable<act_Application.Models.Sistema.ViewModels.Home_VM>
+@using act_Application.Data.Data;
 @{
     ViewBag.Title = "Home";
 
@@ -55,10 +56,17 @@
             <div class="fila-infr">
                 @if(TotalEventos > 0)
                 {
-                    <button class="btn-participante">Participar</button>
+                    @foreach (var eventos in Model)
+                    {
+                        <form asp-action="Participar">
+                            <input type="hidden" asp-for="@eventos.Participante.Id" name="IdP" id="IdP" />
+                            <button type="submit" class="btn-participante" data-notification-id="@eventos.Participante.Id">Participar</button>
+                        </form>
+                    }
+                    
                 }else
                 {
-                    <label>Por el Momento no hay Eventos para Participar</label>
+                    <label>Por el Momento no hay Eventos el cual participar</label>
                 }
             </div>
         </div>
