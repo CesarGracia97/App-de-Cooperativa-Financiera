@@ -173,10 +173,12 @@ FOREIGN KEY (IdAportaciones) REFERENCES act_Aportaciones(Id);
 CREATE TABLE `act_Participantes` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
   `IdTransaccion` int(11) NOT NULL,
+  `IdUser` int(11) NOT NULL COMMENT 'Esta Columna es la kue identifica al dueño de la transaccion con la Participacion, y se relaciona con la tabla usuario.',
   `FechaInicio` date NOT NULL,
   `FechaFinalizacion` date NOT NULL,
   `FechaGeneracion` date NOT NULL,
-  `Participantes` varchar(100) NOT NULL,
+  `ParticipantesId` varchar(100) NOT NULL,
+  `ParticipantesNombre` varchar(10000) NOT NULL,
   `Estado` varchar(45) NOT NULL,
   PRIMARY KEY (`Id`),
   UNIQUE KEY `Id_UNIQUE` (`Id`)
@@ -185,6 +187,9 @@ CREATE TABLE `act_Participantes` (
 ALTER TABLE act_Participantes
 ADD CONSTRAINT fk_Participantes_Transacciones
 FOREIGN KEY (IdTransaccion) REFERENCES act_Transacciones(Id);
+ALTER TABLE act_Participantes
+ADD CONSTRAINT fk_Participantes_User
+FOREIGN KEY (IdUser) REFERENCES act_User(Id);
 
 /*Tabla de Destino*/
 CREATE TABLE `desarrollo`.`act_CuentaDestino` (
