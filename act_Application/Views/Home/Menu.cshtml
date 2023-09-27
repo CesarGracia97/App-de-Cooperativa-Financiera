@@ -2,9 +2,6 @@
 @using act_Application.Data.Data;
 @{
     ViewBag.Title = "Home";
-
-    var eventosRepository = new EventosRepository();
-    int TotalEventos = eventosRepository.GetTotalEventos();
 }
 <head>
     <meta charset="utf-8" />
@@ -54,20 +51,10 @@
                 </div>
             </div>
             <div class="fila-infr">
-                @if(TotalEventos > 0)
-                {
-                    @foreach (var eventos in Model)
-                    {
-                        <form asp-action="Participar">
-                            <input type="hidden" asp-for="@eventos.Participante.Id" name="IdP" id="IdP" />
-                            <button type="submit" class="btn-participante" data-notification-id="@eventos.Participante.Id">Participar</button>
-                        </form>
-                    }
-                    
-                }else
-                {
-                    <label>Por el Momento no hay Eventos el cual participar</label>
-                }
+                <form asp-action="Participar">
+                    <input type="hidden" name="IdP" id="IdP" />
+                    <button type="submit" class="btn-participante" >Participar</button>
+                </form>
             </div>
         </div>
 

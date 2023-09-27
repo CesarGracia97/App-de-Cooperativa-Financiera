@@ -27,21 +27,7 @@ namespace act_Application.Controllers.General
         [Authorize]
         public IActionResult Menu()
         {
-            try
-            {
-                var metodoeventos = new MetodoEventos();
-                var eventos = metodoeventos.GetDataEventos();
-                var viewModelList = eventos.Select(evento => new Home_VM
-                {
-                    Participante = evento
-                });
-                return View(viewModelList);
-            }
-            catch(Exception ex)
-            {
-                Console.WriteLine("Se produjo un error al Cargar los Datos del ViewModel: " + ex.Message);
-                return RedirectToAction("Error", "Home");
-            }
+            return View();
         }
 
         public IActionResult Error()
