@@ -25,14 +25,35 @@ namespace act_Application.Controllers.General
         }
 
         [Authorize]
-        [Authorize]
         public IActionResult Menu()
         {
-            Home_VM viewModel = new Home_VM();
+            EventosRepository eventosRepository = new EventosRepository();
+            var eventosData = eventosRepository.GetDataEventos();
 
-            return View(viewModel);
+            // Verifica si la obtención de datos fue exitosa
+            if (eventosData.TotalEventos >= 0)
+            {
+                List<Home_VM> viewModelList = new List<Home_VM>();
+                foreach (var evento in eventosData.Eventos)
+                {
+                    Home_VM viewModel = new Home_VM
+                    {
+                        Participante = evento,  // Asigna los datos del evento a la propiedad correspondiente de Home_VM
+                                                // Otras asignaciones aquí según tus necesidades
+                    };
+
+                    viewModelList.Add(viewModel);
+                }
+
+                // Pasa la lista de Home_VM a la vista
+                return View(viewModelList);
+            }
+            else
+            {
+
+                return RedirectToAction("Error", "Home");
+            }
         }
-
 
         public IActionResult Error()
         {

@@ -56,10 +56,20 @@
             <div class="fila-infr">
                 @if(contadorEventos > 0)
                 {
-                    <form asp-action="Participar">
-                        <input type="hidden" name="IdP" id="IdP" />
-                        <button type="submit" class="btn-participante">Participar</button>
-                    </form>
+                    @foreach (var participante in Model)
+                    {
+                        <div class="content-formulario">
+                            <form asp-action="Participar">
+                                <input type="hidden" name="IdP" asp-for="@participante.Participante.Id" />
+                                <button type="submit" class="btn-participante">Participar</button>
+                            </form>
+                        </div>
+                    }
+
+                    @if (!Model.Any())
+                    {
+                        <label>Por el momento no hay eventos para participar</label>
+                    }
                 }
                 else
                 {
