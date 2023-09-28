@@ -2,6 +2,9 @@
 @using act_Application.Data.Data;
 @{
     ViewBag.Title = "Home";
+
+    var eventosRepository = new EventosRepository();
+    int contadorEventos = eventosRepository.GetDataEventos().TotalEventos;
 }
 <head>
     <meta charset="utf-8" />
@@ -51,38 +54,20 @@
                 </div>
             </div>
             <div class="fila-infr">
-                <form asp-action="Participar">
-                    <input type="hidden" name="IdP" id="IdP" />
-                    <button type="submit" class="btn-participante" >Participar</button>
-                </form>
+                @if(contadorEventos > 0)
+                {
+                    <form asp-action="Participar">
+                        <input type="hidden" name="IdP" id="IdP" />
+                        <button type="submit" class="btn-participante">Participar</button>
+                    </form>
+                }
+                else
+                {
+                    <label>Por el momento no hay eventos para participar</label>
+                }
+
             </div>
         </div>
 
     </div>
 </body>
-
-<!-- 
-<div class="text-center">
-    <div class="alert alert-success">
-        <h1>Menu</h1>
-        <h2>Bienvenido, @User.Identity.Name!</h2>
-        @if (User.HasClaim("Rol", "Administrador"))
-        {
-            <p>Tienes el rol de Administrador.</p>
-        }
-        else if (User.HasClaim("Rol", "Socio"))
-        {
-            <p>Bienvenido Usuario.</p>
-        }
-        else if (User.HasClaim("Rol", "Referido"))
-        {
-            <p>Bienvenido Usuario.</p>
-        }
-        else
-        {
-            <p>Tu rol no está definido o no tiene permisos asignados.</p>
-        }
-    </div>
-</div>
--->
-

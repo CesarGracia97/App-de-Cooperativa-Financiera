@@ -15,6 +15,7 @@ namespace act_Application.Models.Sistema.ViewModels
             Transacciones = new ActTransaccione();
 
             Cuotas = new ActCuota();
+
         }
         public ActAportacione Aportaciones { get; set; }
 

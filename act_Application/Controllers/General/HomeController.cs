@@ -25,10 +25,14 @@ namespace act_Application.Controllers.General
         }
 
         [Authorize]
+        [Authorize]
         public IActionResult Menu()
         {
-            return View();
+            Home_VM viewModel = new Home_VM();
+
+            return View(viewModel);
         }
+
 
         public IActionResult Error()
         {
@@ -97,7 +101,6 @@ namespace act_Application.Controllers.General
             return View(actParticipante);
 
         }
-
 
         public bool ActParticipantesExist(int id)
         {
