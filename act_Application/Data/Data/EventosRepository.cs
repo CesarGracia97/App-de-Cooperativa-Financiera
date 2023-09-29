@@ -7,7 +7,7 @@ namespace act_Application.Data.Data
     public class EventosRepository
     {
         public int TotalEventos { get; set; }
-        public List<ActParticipante> Eventos { get; set; }
+        public List<ActEvento> Eventos { get; set; }
 
         public EventosRepository GetDataEventos()
         {
@@ -28,7 +28,7 @@ namespace act_Application.Data.Data
                         if (reader.Read())
                         {
                             result.TotalEventos = Convert.ToInt32(reader["TotalEventos"]);
-                            List<ActParticipante> eventos = new List<ActParticipante>();
+                            List<ActEvento> eventos = new List<ActEvento>();
 
 
                             /*He desarrollado tantos programas, trantos proyectos, trabajos y ninguno me ha hecho sentir tan antusiasmado como el kue kuiero desarrollar
@@ -41,7 +41,7 @@ namespace act_Application.Data.Data
 
                             do
                             {
-                                ActParticipante eve = new ActParticipante
+                                ActEvento eve = new ActEvento
                                 {
                                     Id = Convert.ToInt32(reader["Id"]),
                                     IdTransaccion = Convert.ToInt32(reader["IdTransaccion"]),
@@ -54,6 +54,9 @@ namespace act_Application.Data.Data
                                     NombreUsuario = reader["NombreUsuario"].ToString()
                                 };
                                 eventos.Add(eve);
+                                TransaccionesRepository transacciones = new TransaccionesRepository();
+                                transacciones.GetTransaccionPorId(eve.IdTransaccion);
+
                             } while (reader.Read());
 
                             result.Eventos = eventos;

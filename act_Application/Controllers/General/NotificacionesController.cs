@@ -35,7 +35,7 @@ namespace act_Application.Controllers.General
                     {
                         Notificaciones = notificacion,
                         Transacciones = _context.ActTransacciones.FirstOrDefault(t => t.Id == notificacion.IdTransacciones),
-                        Participante = _context.ActParticipantes.FirstOrDefault(t => t.Id != notificacion.IdTransacciones)
+                        Eventos = _context.ActEventos.FirstOrDefault(t => t.Id == notificacion.IdTransacciones)
                     });
 
                     return View(viewModelList);
@@ -105,7 +105,7 @@ namespace act_Application.Controllers.General
 
                 try
                 {
-                    var metodoNotificacion = new MetodoNotificaciones(); // Crear una instancia de MetodoNotificaciones
+                    var metodoNotificacion = new TransaccionesRepository(); // Crear una instancia de MetodoNotificaciones
                     var transaccionOriginal = metodoNotificacion.GetTransaccionPorId(Id); // Llamar al método desde la instancia
                     if (transaccionOriginal == null)
                     {
@@ -122,7 +122,7 @@ namespace act_Application.Controllers.General
                     actTransaccione.TipoCuota = transaccionOriginal.TipoCuota;
                     actTransaccione.Estado = "PENDIENTE REFERENTE";
                     actTransaccione.FechaGeneracion = transaccionOriginal.FechaGeneracion;
-                    int idParticipantes = await CrearParticipaciones(Id, transaccionOriginal.IdUser,FechaInicio, FechaFinalizacion, new ActParticipante());
+                    int idParticipantes = await CrearParticipaciones(Id, transaccionOriginal.IdUser,FechaInicio, FechaFinalizacion, new ActEvento());
                     if (idParticipantes != -1)
                     {
                         actTransaccione.IdParticipantes = idParticipantes;
@@ -215,7 +215,7 @@ namespace act_Application.Controllers.General
 
 
         [HttpPost][ValidateAntiForgeryToken][Authorize(Policy = "AdminOnly")]
-        public async Task<IActionResult> EditTDenegado (int Id, string Descripcion, [Bind("Id,Razon,IdUser,Valor,Estado,FechaEntregaDinero,FechaPagoTotalPrestamo,FechaIniCoutaPrestamo,TipoCuota,IdParticipantes,FechaGeneracion")] ActTransaccione actTransaccione) //Metodo para Transaccion Evaluada y Denegada.
+        public async Task<IActionResult> EditTDenegado(int Id, string Descripcion, [Bind("Id,Razon,IdUser,Valor,Estado,FechaEntregaDinero,FechaPagoTotalPrestamo,FechaIniCoutaPrestamo,TipoCuota,IdParticipantes,FechaGeneracion")] ActTransaccione actTransaccione) //Metodo para Transaccion Evaluada y Denegada.
         {
             if (Id != actTransaccione.Id)
             {
@@ -227,7 +227,7 @@ namespace act_Application.Controllers.General
                 string razon;
                 try
                 {
-                    var metodoNotificacion = new MetodoNotificaciones();
+                    var metodoNotificacion = new TransaccionesRepository ();
                     var transaccionOriginal = metodoNotificacion.GetTransaccionPorId(Id);
 
                     if (transaccionOriginal == null)
@@ -284,7 +284,7 @@ namespace act_Application.Controllers.General
                 string Razon, Descripcion;
                 try
                 {
-                    var metodoNotificacion = new MetodoNotificaciones(); // Crear una instancia de MetodoNotificaciones
+                    var metodoNotificacion = new TransaccionesRepository(); // Crear una instancia de MetodoNotificaciones
                     var transaccionOriginal = metodoNotificacion.GetTransaccionPorId(Id); // Llamar al método desde la instancia
 
                     if (transaccionOriginal == null)
@@ -322,7 +322,7 @@ namespace act_Application.Controllers.General
                         throw;
                     }
                 }
-                await EditParticipacion(actTransaccione.IdParticipantes, "CONCURSO", new ActParticipante());
+                await EditParticipacion(actTransaccione.IdParticipantes, "CONCURSO", new ActEvento());
                 await CrearNotificacion(actTransaccione.Id, 0, 0, "ADMINISTRADOR", Razon, Descripcion, new ActNotificacione());
                 return RedirectToAction("Menu", "Home");// Puedes redirigir a donde desees después de la edición exitosa
             }
@@ -345,8 +345,8 @@ namespace act_Application.Controllers.General
                 string Razon, Descripcion;
                 try
                 {
-                    var metodoNotificacion = new MetodoNotificaciones(); // Crear una instancia de MetodoNotificaciones
-                    var transaccionOriginal = metodoNotificacion.GetTransaccionPorId(Id); // Llamar al método desde la instancia
+                    var metodoTransRepo = new TransaccionesRepository(); // Crear una instancia de MetodoNotificaciones
+                    var transaccionOriginal = metodoTransRepo.GetTransaccionPorId(Id); // Llamar al método desde la instancia
 
                     if (transaccionOriginal == null)
                     {
@@ -380,7 +380,7 @@ namespace act_Application.Controllers.General
                         throw;
                     }
                 }
-                await EditParticipacion(actTransaccione.IdParticipantes, "DENEGADO", new ActParticipante());
+                await EditParticipacion(actTransaccione.IdParticipantes, "DENEGADO", new ActEvento());
                 await CrearNotificacion(actTransaccione.Id, 0, 0, "ADMINISTRADOR", Razon, Descripcion, new ActNotificacione());
                 return RedirectToAction("Menu", "Home");
             }
@@ -391,7 +391,7 @@ namespace act_Application.Controllers.General
 
         private async Task<List<DateTime>> CrearCuotas(int IdTransaccion, DateTime FechaPagoTotalPrestamo, [Bind("Id,IdUser,IdTransaccion,ValorCuota,FechaCuota,Estado")] ActCuota actCuota)
         {
-            var metodoNotificacion = new MetodoNotificaciones();
+            var metodoNotificacion = new TransaccionesRepository();
             var transaccionOriginal = metodoNotificacion.GetTransaccionPorId(IdTransaccion);
 
             if (transaccionOriginal == null)
@@ -429,7 +429,7 @@ namespace act_Application.Controllers.General
             return fechasDeCuotas;
         }
 
-        private async Task<int> CrearParticipaciones(int IdTransaccion, int IdUser, DateTime FechaInicio, DateTime FechaFinalizacion, [Bind("Id,IdTransaccion,Estado,FechaInicio,FechaFinalizacion,FechaGeneracion,ParticipantesId,ParticipantesNombre,IdUser")] ActParticipante actParticipante)
+        private async Task<int> CrearParticipaciones(int IdTransaccion, int IdUser, DateTime FechaInicio, DateTime FechaFinalizacion, [Bind("Id,IdTransaccion,Estado,FechaInicio,FechaFinalizacion,FechaGeneracion,ParticipantesId,ParticipantesNombre,IdUser")] ActEvento actParticipante)
         {
             try
             {
@@ -463,12 +463,12 @@ namespace act_Application.Controllers.General
         }
 
 
-        private async Task<IActionResult> EditParticipacion(int Id, string Estado, [Bind("Id,IdTransaccion,Estado,FechaInicio,FechaFinalizacion,FechaGeneracion,ParticipantesId,ParticipantesNombre,IdUser")] ActParticipante actParticipante)
+        private async Task<IActionResult> EditParticipacion(int Id, string Estado, [Bind("Id,IdTransaccion,Estado,FechaInicio,FechaFinalizacion,FechaGeneracion,ParticipantesId,ParticipantesNombre,IdUser")] ActEvento actParticipante)
         {
             actParticipante.Id = Id;
             if (Id != actParticipante.Id)
             {
-                Console.WriteLine("Fallo la verificacion de Datos de la Edicion del Participante");
+                Console.WriteLine("Fallo la verificacion de Datos de la Edicion del Eventos");
                 return RedirectToAction("Error", "Home");
             }
             if (ModelState.IsValid)

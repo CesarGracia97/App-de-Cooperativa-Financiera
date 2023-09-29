@@ -41,6 +41,10 @@
       "PackagePath": "staticwebassets\\css\\General\\Home\\Footer\\Footer.css"
     },
     {
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\css\\General\\Home\\Footer\\Modal.css",
+      "PackagePath": "staticwebassets\\css\\General\\Home\\Footer\\Modal.css"
+    },
+    {
       "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\css\\General\\Home\\Main\\Main.css",
       "PackagePath": "staticwebassets\\css\\General\\Home\\Main\\Main.css"
     },
@@ -115,6 +119,10 @@
     {
       "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\js\\Login\\MsjCorreoValidacionLogin.js",
       "PackagePath": "staticwebassets\\js\\Login\\MsjCorreoValidacionLogin.js"
+    },
+    {
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\js\\Menu\\Eventos\\Eventos.js",
+      "PackagePath": "staticwebassets\\js\\Menu\\Eventos\\Eventos.js"
     },
     {
       "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\js\\Multa\\MsjMulta.js",

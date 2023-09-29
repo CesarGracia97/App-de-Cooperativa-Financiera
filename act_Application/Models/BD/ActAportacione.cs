@@ -35,6 +35,7 @@ public partial class ActAportacione
     public string CuentaDestino { get; set; }
 
     public string BancoDestino { get; set; }
+
     [NotMapped]
     public string NombreUsuario { get; set; }
 

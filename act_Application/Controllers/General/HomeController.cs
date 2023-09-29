@@ -10,6 +10,7 @@ using MySql.Data.MySqlClient;
 using Microsoft.EntityFrameworkCore;
 using act_Application.Data.Data;
 using System.Security.Claims;
+using System.Linq;
 
 namespace act_Application.Controllers.General
 {
@@ -38,8 +39,8 @@ namespace act_Application.Controllers.General
                 {
                     Home_VM viewModel = new Home_VM
                     {
-                        Participante = evento,  // Asigna los datos del evento a la propiedad correspondiente de Home_VM
-                                                // Otras asignaciones aquí según tus necesidades
+                        Eventos = evento,  // Asigna los datos del evento a la propiedad correspondiente de Home_VM
+                        Transacciones = _context.ActTransacciones.FirstOrDefault(t => t.Id == evento.IdTransaccion)
                     };
 
                     viewModelList.Add(viewModel);
@@ -67,12 +68,12 @@ namespace act_Application.Controllers.General
             return RedirectToAction("Index", "Login");
         }
 
-        public async Task<IActionResult> Participar(int IdP, [Bind("Id,IdTransaccion,Estado,FechaInicio,FechaFinalizacion,FechaGeneracion,ParticipantesId,ParticipantesNombre")] ActParticipante actParticipante)
+        public async Task<IActionResult> Participar(int IdP, [Bind("Id,IdTransaccion,Estado,FechaInicio,FechaFinalizacion,FechaGeneracion,ParticipantesId,ParticipantesNombre")] ActEvento actParticipante)
         {
             actParticipante.Id = IdP;
             if (IdP != actParticipante.Id)
             {
-                Console.WriteLine("Fallo la verificacion de Datos de la Edicion del Participante");
+                Console.WriteLine("Fallo la verificacion de Datos de la Edicion del Eventos");
                 return RedirectToAction("Error", "Home");
             }
             if (ModelState.IsValid)

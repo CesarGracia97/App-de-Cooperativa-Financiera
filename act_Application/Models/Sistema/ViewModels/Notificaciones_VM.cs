@@ -10,7 +10,7 @@ namespace act_Application.Models.Sistema.ViewModels
             Transacciones = new ActTransaccione();
             Cuotas = new ActCuota();
             Aportaciones = new ActAportacione();
-            Participante = new ActParticipante();
+            Eventos = new ActEvento();
         }
 
         public ActNotificacione Notificaciones { get; set; }
@@ -21,6 +21,6 @@ namespace act_Application.Models.Sistema.ViewModels
 
         public ActAportacione Aportaciones { get; set; }
 
-        public ActParticipante Participante { get; set; }
+        public ActEvento Eventos { get; set; }
     }
 }

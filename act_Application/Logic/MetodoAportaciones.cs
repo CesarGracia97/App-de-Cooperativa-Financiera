@@ -80,35 +80,5 @@ namespace act_Application.Logic
             return aportaciones;
         }
     
-        public List<ActCuentaDestino> ObtenerElementos()
-        {
-            string connectionString = AppSettingsHelper.GetConnectionString();
-            string DestinoQuery = ConfigReader.GetQuery("SelectDestino");
-
-            List <ActCuentaDestino> destinos = new List<ActCuentaDestino>();
-
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
-            {
-                using (MySqlCommand cmd = new MySqlCommand(DestinoQuery, connection))
-                {
-                    cmd.CommandType = CommandType.Text;
-
-                    connection.Open();
-
-                    using (MySqlDataReader rd = cmd.ExecuteReader())
-                    {
-                        var DestinoElement = rd.Cast<IDataRecord>().Select(r => new
-                        {
-                            Id = Convert.ToInt32(r["Id"]),
-                            Nombre = r["Razon"].ToString(),
-                            Valor = Convert.ToSingle(r["Valor"])
-                         }).ToList();
-                    }
-                }
-            }
-
-            return destinos;
-
-        }
     }
 }

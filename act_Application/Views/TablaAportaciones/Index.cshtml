@@ -6,7 +6,8 @@
     ViewData["Title"] = "Tabla de Aportaciones";
 
     var aportacionRepository = new AportacionRepository();
-    int totalAportaciones = aportacionRepository.GetTotalAportaciones();
+    //int totalAportaciones = aportacionRepository.GetTotalAportaciones();
+    int totalAportaciones = aportacionRepository.GetDataAportaciones().TotalAportaciones;
 }
 <header>
     <meta charset="UTF-8">

@@ -7,7 +7,7 @@ namespace act_Application.Models.BD;
 /// <summary>
 /// Tabla de Participantes/Garantes de Prestamo
 /// </summary>
-public partial class ActParticipante
+public partial class ActEvento
 {
     public int Id { get; set; }
 

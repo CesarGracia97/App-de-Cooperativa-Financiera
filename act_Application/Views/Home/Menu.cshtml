@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="/css/General/Home/Profile/cardProfile.css" />
     <link rel="stylesheet" href="/css/General/Home/Main/Main.css" />
     <link rel="stylesheet" href="/css/General/Home/Footer/Footer.css" />
+    <link rel="stylesheet" href="/css/General/Home/Footer/Modal.css" />
+    <script src="/js/Menu/Eventos/Eventos.js"></script>
 </head>
 <body>
     <div class="grid-container">
@@ -56,11 +58,21 @@
             <div class="fila-infr">
                 @if(contadorEventos > 0)
                 {
-                    @foreach (var participante in Model.Select(vm => vm.Participante))
+                    @foreach (var evento in Model)
                     {
-                        <div class="content-formulario" id="btn-evento-@participante.Id" data-participante-id="@participante.Id">
-                            <button type="submit" class="btn-participante">Participar</button>
-                        </div>
+                        @if(evento.Eventos.Estado =="CONCURSO")
+                        {
+                            <div class="content-formulario" id="btn-evento-@evento.Eventos.Id" data-evento-id="@evento.Eventos.Id">
+                                <button type="submit" class="btn-participante">Participar</button>
+                            </div>
+
+                            <div id="myModal" class="modal">
+                                <div class="modal-content">
+                                    <span class="close" onclick="closeModal()">&times;</span>
+                                    <p>Soy una ventana modal</p>
+                                </div>
+                            </div>
+                        }
                     }
                 }
                 else

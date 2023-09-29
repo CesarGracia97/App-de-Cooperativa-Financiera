@@ -97,14 +97,14 @@
                                                 <span asp-validation-for="@notificacionAdmin.Transacciones.FechaPagoTotalPrestamo" class="text-danger"></span>
                                             </div>
                                             <div class="form-group">
-                                                <label asp-for="@notificacionAdmin.Participante.FechaInicio" class="control-label">Fecha Inicio de Inscripcion de Garantes</label>
-                                                <input asp-for="@notificacionAdmin.Participante.FechaInicio" required type="date" class="input-date" name="FechaInicio" id="FechaInicio" min="@fechaactual" />
-                                                <span asp-validation-for="@notificacionAdmin.Participante.FechaInicio" class="text-danger"></span>
+                                                <label asp-for="@notificacionAdmin.Eventos.FechaInicio" class="control-label">Fecha Inicio de Inscripcion de Garantes</label>
+                                                <input asp-for="@notificacionAdmin.Eventos.FechaInicio" required type="date" class="input-date" name="FechaInicio" id="FechaInicio" min="@fechaactual" />
+                                                <span asp-validation-for="@notificacionAdmin.Eventos.FechaInicio" class="text-danger"></span>
                                             </div>
                                             <div class="form-group">
-                                                <label asp-for="@notificacionAdmin.Participante.FechaFinalizacion" class="control-label">Fecha Finalizacion de Inscripcion de Garantes</label>
-                                                <input asp-for="@notificacionAdmin.Participante.FechaFinalizacion" required type="date" class="input-date" name="FechaFinalizacion" id="FechaFinalizacion" min="@fechaactual" />
-                                                <span asp-validation-for="@notificacionAdmin.Participante.FechaFinalizacion" class="text-danger"></span>
+                                                <label asp-for="@notificacionAdmin.Eventos.FechaFinalizacion" class="control-label">Fecha Finalizacion de Inscripcion de Garantes</label>
+                                                <input asp-for="@notificacionAdmin.Eventos.FechaFinalizacion" required type="date" class="input-date" name="FechaFinalizacion" id="FechaFinalizacion" min="@fechaactual" />
+                                                <span asp-validation-for="@notificacionAdmin.Eventos.FechaFinalizacion" class="text-danger"></span>
                                             </div>
                                             <div class="container-modal-btn">
                                                 <button type="submit" data-notification-id="@notificacionAdmin.Notificaciones.Id" class="save-button">Guardar</button>

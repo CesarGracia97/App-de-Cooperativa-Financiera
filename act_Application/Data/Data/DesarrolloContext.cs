@@ -26,7 +26,7 @@ public partial class DesarrolloContext : DbContext
 
     public virtual DbSet<ActNotificacione> ActNotificaciones { get; set; }
 
-    public virtual DbSet<ActParticipante> ActParticipantes { get; set; }
+    public virtual DbSet<ActEvento> ActEventos { get; set; }
 
     public virtual DbSet<ActRol> ActRols { get; set; }
 
@@ -150,11 +150,11 @@ public partial class DesarrolloContext : DbContext
             entity.Property(e => e.Razon).HasMaxLength(90);
         });
 
-        modelBuilder.Entity<ActParticipante>(entity =>
+        modelBuilder.Entity<ActEvento>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PRIMARY");
 
-            entity.ToTable("act_Participantes", tb => tb.HasComment("Tabla de ParticipantesId/Garantes de Prestamo"));
+            entity.ToTable("act_Eventos", tb => tb.HasComment("Tabla de ParticipantesId/Garantes de Prestamo"));
 
             entity.HasIndex(e => e.Id, "Id_UNIQUE").IsUnique();
 

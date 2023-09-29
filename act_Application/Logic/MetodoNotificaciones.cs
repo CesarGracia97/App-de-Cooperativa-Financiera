@@ -1,4 +1,5 @@
-﻿using act_Application.Helper;
+﻿using act_Application.Data.Data;
+using act_Application.Helper;
 using act_Application.Models.BD;
 using MySql.Data.MySqlClient;
 
@@ -35,7 +36,8 @@ namespace act_Application.Logic
                                     IdCuotas = Convert.ToInt32(reader["IdCuotas"])
                                 };
                                 notificacionesAdmin.Add(notificacion);
-                                GetTransaccionPorId(notificacion.IdTransacciones);
+                                TransaccionesRepository transacciones = new TransaccionesRepository();
+                                transacciones.GetTransaccionPorId(notificacion.IdTransacciones);
                             }
                             return notificacionesAdmin;
                         }
@@ -81,7 +83,8 @@ namespace act_Application.Logic
                                     
                                 };
                                 notificacionesUser.Add(notificacion);
-                                GetTransaccionPorId(notificacion.IdTransacciones);
+                                TransaccionesRepository transaccion = new TransaccionesRepository();
+                                transaccion.GetTransaccionPorId(notificacion.IdTransacciones);
                             }
                             return notificacionesUser;
                         }
@@ -96,53 +99,7 @@ namespace act_Application.Logic
             }
         }
 
-        public ActTransaccione GetTransaccionPorId(int idTransacciones) //Consulta para obtener todos los datos de una transaccion especifica
-        {
-            string connectionString = AppSettingsHelper.GetConnectionString();
-            try
-            {
-                string query = ConfigReader.GetQuery("SelecInfoTransacciones");
-                using (MySqlConnection connection = new MySqlConnection(connectionString))
-                {
-                    connection.Open();
-                    using (MySqlCommand command = new MySqlCommand(query, connection))
-                    {
-                        command.Parameters.AddWithValue("@IdTransacciones", idTransacciones);
-                        using (MySqlDataReader reader = command.ExecuteReader())
-                        {
-                            if (reader.Read())
-                            {
-                                ActTransaccione transaccion = new ActTransaccione
-                                {
-                                    Id = Convert.ToInt32(reader["Id"]),
-                                    Razon = reader["Razon"].ToString(),
-                                    IdUser = Convert.ToInt32(reader["IdUser"]),
-                                    Valor = Convert.ToDecimal(reader["Valor"]),
-                                    Estado = reader["Estado"].ToString(),
-                                    FechaEntregaDinero = Convert.ToDateTime(reader["FechaEntregaDinero"]),
-                                    FechaPagoTotalPrestamo = Convert.ToDateTime(reader["FechaPagoTotalPrestamo"]),
-                                    FechaIniCoutaPrestamo = Convert.ToDateTime(reader["FechaIniCoutaPrestamo"]),
-                                    TipoCuota = reader["TipoCuota"].ToString(),
-                                    IdParticipantes = Convert.ToInt32(reader["IdParticipantes"]),
-                                    FechaGeneracion = Convert.ToDateTime(reader["FechaEntregaDinero"])
-                                };
-                                return transaccion;
-                            }
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Hubo un error en la consulta de la transacción");
-                Console.WriteLine("Detalles del error: " + ex.Message);
-            }
-
-            return null;
-        }
-
-
-        public ActParticipante GetRegistroParticipante (int Id)
+        public ActEvento GetRegistroParticipante (int Id)
         {
             string connectionString = AppSettingsHelper.GetConnectionString();
             try
@@ -158,7 +115,7 @@ namespace act_Application.Logic
                         {
                             if (reader.Read())
                             {
-                                ActParticipante transaccion = new ActParticipante
+                                ActEvento transaccion = new ActEvento
                                 {
                                     Id = Convert.ToInt32(reader["Id"]),
                                     FechaInicio = Convert.ToDateTime(reader["FechaInicio"]),

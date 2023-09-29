@@ -8,7 +8,7 @@ namespace act_Application.Models.Sistema.ViewModels
 
             Aportaciones = new ActAportacione();
 
-            Participante = new ActParticipante();
+            Eventos = new ActEvento();
 
             Multa = new ActMulta();
 
@@ -19,7 +19,7 @@ namespace act_Application.Models.Sistema.ViewModels
         }
         public ActAportacione Aportaciones { get; set; }
 
-        public ActParticipante Participante { get; set; }
+        public ActEvento Eventos { get; set; }
 
         public ActMulta Multa { get; set; }
 

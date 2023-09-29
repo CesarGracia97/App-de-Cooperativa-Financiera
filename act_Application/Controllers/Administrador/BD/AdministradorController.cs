@@ -473,10 +473,10 @@ namespace act_Application.Controllers.Administrador.BD
 
         public async Task<IActionResult> AdminParticipantes()
         {
-            return View(await _context.ActParticipantes.ToListAsync());
+            return View(await _context.ActEventos.ToListAsync());
         }
 
-        // GET: ActParticipantes/Create
+        // GET: ActEventos/Create
         public IActionResult CreateParticipantes()
         {
             return View();
@@ -484,7 +484,7 @@ namespace act_Application.Controllers.Administrador.BD
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateParticipantes([Bind("Id,IdTransaccion,FechaInicio,FechaFinalizacion,FechaGeneracion,ParticipantesId,Estado")] ActParticipante actParticipante)
+        public async Task<IActionResult> CreateParticipantes([Bind("Id,IdTransaccion,FechaInicio,FechaFinalizacion,FechaGeneracion,ParticipantesId,Estado")] ActEvento actParticipante)
         {
             if (ModelState.IsValid)
             {
@@ -497,12 +497,12 @@ namespace act_Application.Controllers.Administrador.BD
 
         public async Task<IActionResult> EditParticipantes(int? id)
         {
-            if (id == null || _context.ActParticipantes == null)
+            if (id == null || _context.ActEventos == null)
             {
                 return NotFound();
             }
 
-            var actParticipante = await _context.ActParticipantes.FindAsync(id);
+            var actParticipante = await _context.ActEventos.FindAsync(id);
             if (actParticipante == null)
             {
                 return NotFound();
@@ -512,7 +512,7 @@ namespace act_Application.Controllers.Administrador.BD
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditParticipantes(int id, [Bind("Id,IdTransaccion,FechaInicio,FechaFinalizacion,FechaGeneracion,ParticipantesId,Estado")] ActParticipante actParticipante)
+        public async Task<IActionResult> EditParticipantes(int id, [Bind("Id,IdTransaccion,FechaInicio,FechaFinalizacion,FechaGeneracion,ParticipantesId,Estado")] ActEvento actParticipante)
         {
             if (id != actParticipante.Id)
             {
@@ -544,12 +544,12 @@ namespace act_Application.Controllers.Administrador.BD
 
         public async Task<IActionResult> DeleteParticipantes(int? id)
         {
-            if (id == null || _context.ActParticipantes == null)
+            if (id == null || _context.ActEventos == null)
             {
                 return NotFound();
             }
 
-            var actParticipante = await _context.ActParticipantes
+            var actParticipante = await _context.ActEventos
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (actParticipante == null)
             {
@@ -563,14 +563,14 @@ namespace act_Application.Controllers.Administrador.BD
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmedParticipantes(int id)
         {
-            if (_context.ActParticipantes == null)
+            if (_context.ActEventos == null)
             {
-                return Problem("Entity set 'DesarrolloContext.ActParticipantes'  is null.");
+                return Problem("Entity set 'DesarrolloContext.ActEventos'  is null.");
             }
-            var actParticipante = await _context.ActParticipantes.FindAsync(id);
+            var actParticipante = await _context.ActEventos.FindAsync(id);
             if (actParticipante != null)
             {
-                _context.ActParticipantes.Remove(actParticipante);
+                _context.ActEventos.Remove(actParticipante);
             }
 
             await _context.SaveChangesAsync();
@@ -579,7 +579,7 @@ namespace act_Application.Controllers.Administrador.BD
 
         private bool ActParticipanteExists(int id)
         {
-            return _context.ActParticipantes.Any(e => e.Id == id);
+            return _context.ActEventos.Any(e => e.Id == id);
         }
 
 
