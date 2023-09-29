@@ -7,10 +7,11 @@
 
     var NotifiRepository = new NotificacionesRepository();
     var userIdClaim = User.Claims.FirstOrDefault(c => c.Type == "Id");
-    int TotalNotiAdmin = NotifiRepository.GetTotalNotificacionesAdministrador(), userId = -1, TotalNotiUser = -1;
+    int TotalNotiAdmin = NotifiRepository.GetTotalNotificacionesAdministrador()  /*NotifiRepository.GetDataNotitficacionesAdmin().TotalNotificacionesAdmin*/ , userId = -1, TotalNotiUser = -1;
 
     if (userIdClaim != null && int.TryParse(userIdClaim.Value, out userId))
     {
+        //TotalNotiUser = NotifiRepository.GetDataNotificacionesUser(userId).TotalNotificacionesUser;
         TotalNotiUser = NotifiRepository.GetTotalNotificacionesUsuario(userId);
     }
     DateTime fechaActual = DateTime.Now;
