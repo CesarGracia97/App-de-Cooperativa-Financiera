@@ -37,12 +37,12 @@
       "PackagePath": "staticwebassets\\css\\General\\Home\\Esqueleto\\Cuerpo.css"
     },
     {
-      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\css\\General\\Home\\Footer\\Footer.css",
-      "PackagePath": "staticwebassets\\css\\General\\Home\\Footer\\Footer.css"
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\css\\General\\Home\\Footer\\Eventos-modal.css",
+      "PackagePath": "staticwebassets\\css\\General\\Home\\Footer\\Eventos-modal.css"
     },
     {
-      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\css\\General\\Home\\Footer\\Modal.css",
-      "PackagePath": "staticwebassets\\css\\General\\Home\\Footer\\Modal.css"
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\css\\General\\Home\\Footer\\Footer.css",
+      "PackagePath": "staticwebassets\\css\\General\\Home\\Footer\\Footer.css"
     },
     {
       "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\css\\General\\Home\\Main\\Main.css",

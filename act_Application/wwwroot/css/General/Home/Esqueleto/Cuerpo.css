@@ -70,35 +70,6 @@
     border-radius: 8px 9px;
 }
 
-.item1:hover {
-    background-color: var(--primary-color);
-    transition: var(--tran-03);
-}
-
-.item2:hover {
-    background-color: var(--primary-color);
-    transition: var(--tran-03);
-}
-
-.item3:hover {
-    background-color: var(--primary-color);
-    transition: var(--tran-03);
-}
-
-.item4:hover {
-    background-color: var(--primary-color);
-    transition: var(--tran-03);
-}
-
-.item5:hover {
-    background-color: var(--primary-color);
-    transition: var(--tran-03);
-}
-
-.item6:hover {
-    background-color: var(--primary-color);
-    transition: var(--tran-03);
-}
 
 @media screen and (max-width: 850px) {
 

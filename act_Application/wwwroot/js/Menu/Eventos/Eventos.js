@@ -1,11 +1,16 @@
-﻿// Función para mostrar el modal
-function showModal(eventoId) {
-    var modal = document.getElementById('myModal');
-    modal.style.display = 'block';
-}
+﻿document.addEventListener("DOMContentLoaded", function () {
+    // Oculta la ventana modal por defecto
+    $("#eventos-modal").hide();
 
-// Función para ocultar el modal
-function closeModal() {
-    var modal = document.getElementById('myModal');
-    modal.style.display = 'none';
-}
+    // Cuando se hace clic en el botón con la clase 'btn-participante'
+    $("#btn-participante").click(function () {
+        // Muestra la ventana modal
+        $("#eventos-modal").fadeIn();
+    });
+
+    // Cuando se hace clic en el enlace con la clase 'close-modal'
+    $(".close-modal").click(function () {
+        // Oculta la ventana modal
+        $("#eventos-modal").fadeOut();
+    });
+});

@@ -13,7 +13,9 @@
     <link rel="stylesheet" href="/css/General/Home/Profile/cardProfile.css" />
     <link rel="stylesheet" href="/css/General/Home/Main/Main.css" />
     <link rel="stylesheet" href="/css/General/Home/Footer/Footer.css" />
-    <link rel="stylesheet" href="/css/General/Home/Footer/Modal.css" />
+    <link rel="stylesheet" href="/css/General/Home/Footer/Eventos-modal.css" />
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="/js/Menu/Eventos/Eventos.js"></script>
 </head>
 <body>
@@ -62,14 +64,15 @@
                     {
                         @if(evento.Eventos.Estado =="CONCURSO")
                         {
-                            <div class="content-formulario" id="btn-evento-@evento.Eventos.Id" data-evento-id="@evento.Eventos.Id">
-                                <button type="submit" class="btn-participante">Participar</button>
+                            <div class="content-formulario">
+                                <button type="submit" class="btn-participante" id="btn-participante">Participar</button>
                             </div>
 
-                            <div id="myModal" class="modal">
+                            <div class="eventos-modal" id="eventos-modal">
                                 <div class="modal-content">
-                                    <span class="close" onclick="closeModal()">&times;</span>
+                                    <h2>Soy el título de la ventana Modal</h2>
                                     <p>Soy una ventana modal</p>
+                                    <a href="" class="close-modal">Cerrar</a>
                                 </div>
                             </div>
                         }
