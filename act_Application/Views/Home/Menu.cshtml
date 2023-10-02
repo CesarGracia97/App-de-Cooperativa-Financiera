@@ -70,8 +70,11 @@
 
                             <div class="eventos-modal" id="eventos-modal">
                                 <div class="modal-content">
-                                    <h2>Soy el título de la ventana Modal</h2>
-                                    <p>Soy una ventana modal</p>
+                                    <h2>Evento de Participacion #@evento.Eventos.Id</h2>
+                                    <p>Nombre del Usuario Referido kue pide el Prestamo: @evento.Eventos.NombreUsuario</p>
+                                    <p>Cantidad a pedio de Prestamo: @evento.Transacciones.Valor</p>
+                                    <p>Tipo de Cuota: @evento.Transacciones.TipoCuota</p>
+                                    <p>Fecha de Pago de Deuda: @evento.Transacciones.FechaPagoTotalPrestamo.ToString("dd-MMMM-yyyy")</p>
                                     <a href="" class="close-modal">Cerrar</a>
                                 </div>
                             </div>
