@@ -1,12 +1,11 @@
 ﻿/* Estilos para item6 */
 .item6 {
     display: flex;
-    align-items:center;
+    align-items: center;
     flex-direction: column;
-    align-content:center;
-    justify-content:center;
+    align-content: center;
+    justify-content: center;
     justify-items: center;
-
 }
 
 /* Estilos para fila-supr */
@@ -18,15 +17,13 @@
     padding-top: 5px;
     width: 35%;
     height: 50%;
-
 }
 
 /* Estilos para fs-titulo */
 .fs-t1 {
-    justify-items:center;
-    text-align:center;
+    justify-items: center;
+    text-align: center;
     font-size: 12px;
-
 }
 
 /* Estilos para fila-infr */
@@ -36,7 +33,7 @@
     display: flex;
     justify-content: center;
     justify-items: center;
-    align-items:center;
+    align-items: center;
     padding-top: 5px;
     padding-bottom: 15px;
 }
@@ -52,6 +49,8 @@
     transition: background-color 0.3s;
     width: 120px;
     height: 45px;
+    margin-right: 7.5px;
+    margin-left: 7.5px;
 }
 
     .btn-participante:hover {
@@ -61,7 +60,7 @@
 @media screen and (max-width: 850px) {
     .item6 {
         padding-left: 10px;
-        padding-right:10px;
+        padding-right: 10px;
     }
 
     .btn-participante {

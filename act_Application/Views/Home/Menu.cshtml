@@ -12,11 +12,11 @@
     <link rel="stylesheet" href="/css/General/Home/Esqueleto/Esqueleto.css" />
     <link rel="stylesheet" href="/css/General/Home/Profile/cardProfile.css" />
     <link rel="stylesheet" href="/css/General/Home/Main/Main.css" />
-    <link rel="stylesheet" href="/css/General/Home/Footer/Footer.css" />
+    <link rel="stylesheet" href="/css/General/Home/Footer/Botones-Footer.css" />
     <link rel="stylesheet" href="/css/General/Home/Footer/Eventos-modal.css" />
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="/js/Menu/Eventos/Eventos.js"></script>
+    <script src="/js/Menu/Eventos/Evento.js"></script>
 </head>
 <body>
     <div class="grid-container">
@@ -65,10 +65,10 @@
                         @if(evento.Eventos.Estado =="CONCURSO")
                         {
                             <div class="content-formulario">
-                                <button type="submit" class="btn-participante" id="btn-participante">Participar</button>
+                                <button type="submit" class="btn-participante" id="btn-participante">Evento #@evento.Eventos.Id </button>
                             </div>
 
-                            <div class="eventos-modal" id="eventos-modal">
+                            <div class="eventos-modal">
                                 <div class="modal-content">
                                     <div class="modal-supr">
                                         <h2 class="modal-evento-titulo">Evento de Participacion #@evento.Eventos.Id</h2>
@@ -77,7 +77,7 @@
                                         <p class="modal-parrafo">Tipo de Cuota: @evento.Transacciones.TipoCuota</p>
                                         <p class="modal-parrafo">Fecha de Pago de Deuda: @evento.Transacciones.FechaPagoTotalPrestamo.ToString("dd-MMMM-yyyy")</p>
                                     </div>
-                                    <div class="modal-infr">
+                                    <div class="modal-infr" id="modal-infr-@evento.Eventos.Id">
                                         <form asp-action="Participar">
                                             <input type="hidden" asp-for="@evento.Eventos.Id" id="IdP" name="IdP"/>
                                             <button class="add-participante" type="submit">Participar</button>

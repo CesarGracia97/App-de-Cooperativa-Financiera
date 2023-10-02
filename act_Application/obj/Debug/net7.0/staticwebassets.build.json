@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "rqY/7YcwEK6IEAowYyVf9v9OmiF6KTwuI2NqaF/NJJc=",
+  "Hash": "rJOMEG8e72X2v/L0UaRMclx/+G3d7+p+RMw+7Y7lY0o=",
   "Source": "act_Application",
   "BasePath": "_content/act_Application",
   "Mode": "Default",
@@ -204,6 +204,23 @@
       "OriginalItemSpec": "wwwroot\\css\\General\\Home\\Esqueleto\\Esqueleto.css"
     },
     {
+      "Identity": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\css\\General\\Home\\Footer\\Botones-Footer.css",
+      "SourceId": "act_Application",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\",
+      "BasePath": "_content/act_Application",
+      "RelativePath": "css/General/Home/Footer/Botones-Footer.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\General\\Home\\Footer\\Botones-Footer.css"
+    },
+    {
       "Identity": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\css\\General\\Home\\Footer\\Eventos-modal.css",
       "SourceId": "act_Application",
       "SourceType": "Discovered",
@@ -219,23 +236,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\General\\Home\\Footer\\Eventos-modal.css"
-    },
-    {
-      "Identity": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\css\\General\\Home\\Footer\\Footer.css",
-      "SourceId": "act_Application",
-      "SourceType": "Discovered",
-      "ContentRoot": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\",
-      "BasePath": "_content/act_Application",
-      "RelativePath": "css/General/Home/Footer/Footer.css",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\css\\General\\Home\\Footer\\Footer.css"
     },
     {
       "Identity": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\css\\General\\Home\\Main\\Main.css",
@@ -593,6 +593,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\Login\\MsjCorreoValidacionLogin.js"
+    },
+    {
+      "Identity": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\js\\Menu\\Eventos\\Evento.js",
+      "SourceId": "act_Application",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\",
+      "BasePath": "_content/act_Application",
+      "RelativePath": "js/Menu/Eventos/Evento.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\Menu\\Eventos\\Evento.js"
     },
     {
       "Identity": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\js\\Menu\\Eventos\\Eventos.js",
