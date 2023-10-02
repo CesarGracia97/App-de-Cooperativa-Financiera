@@ -68,10 +68,10 @@ namespace act_Application.Controllers.General
             return RedirectToAction("Index", "Login");
         }
 
-        public async Task<IActionResult> Participar(int IdP, [Bind("Id,IdTransaccion,Estado,FechaInicio,FechaFinalizacion,FechaGeneracion,ParticipantesId,ParticipantesNombre")] ActEvento actParticipante)
+        public async Task<IActionResult> Participar(int IdP, [Bind("Id,IdTransaccion,Estado,FechaInicio,FechaFinalizacion,FechaGeneracion,ParticipantesId,ParticipantesNombre")] ActEvento actEvento)
         {
-            actParticipante.Id = IdP;
-            if (IdP != actParticipante.Id)
+            actEvento.Id = IdP;
+            if (IdP != actEvento.Id)
             {
                 Console.WriteLine("Fallo la verificacion de Datos de la Edicion del Eventos");
                 return RedirectToAction("Error", "Home");
@@ -94,15 +94,16 @@ namespace act_Application.Controllers.General
                     {
                         var userIdentificacion = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value;
 
-                        actParticipante.FechaInicio = RparticipantesOriginal.FechaInicio;
-                        actParticipante.FechaFinalizacion = RparticipantesOriginal.FechaFinalizacion;
-                        actParticipante.FechaGeneracion = RparticipantesOriginal.FechaGeneracion;
-                        actParticipante.ParticipantesId = userId.ToString() + ", ";
-                        actParticipante.ParticipantesNombre = userIdentificacion + ", ";
-                        actParticipante.IdTransaccion = RparticipantesOriginal.IdTransaccion;
-                        actParticipante.Estado = RparticipantesOriginal.Estado;
+                        actEvento.IdUser = RparticipantesOriginal.IdUser;
+                        actEvento.FechaInicio = RparticipantesOriginal.FechaInicio;
+                        actEvento.FechaFinalizacion = RparticipantesOriginal.FechaFinalizacion;
+                        actEvento.FechaGeneracion = RparticipantesOriginal.FechaGeneracion;
+                        actEvento.ParticipantesId = userId.ToString() + ", ";
+                        actEvento.ParticipantesNombre = userIdentificacion + ", ";
+                        actEvento.IdTransaccion = RparticipantesOriginal.IdTransaccion;
+                        actEvento.Estado = RparticipantesOriginal.Estado;
 
-                        _context.Update(actParticipante);
+                        _context.Update(actEvento);
                         await _context.SaveChangesAsync();
                     }
 
@@ -110,7 +111,7 @@ namespace act_Application.Controllers.General
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ActParticipantesExist(actParticipante.Id))
+                    if (!ActParticipantesExist(actEvento.Id))
                     {
                         return RedirectToAction("Error", "Home");
                     }
@@ -119,8 +120,9 @@ namespace act_Application.Controllers.General
                         throw;
                     }
                 }
+                return RedirectToAction("Menu", "Home");
             }
-            return View(actParticipante);
+            return View(actEvento);
 
         }
 

@@ -9,7 +9,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/css/General/Home/Esqueleto/Cuerpo.css" />
+    <link rel="stylesheet" href="/css/General/Home/Esqueleto/Esqueleto.css" />
     <link rel="stylesheet" href="/css/General/Home/Profile/cardProfile.css" />
     <link rel="stylesheet" href="/css/General/Home/Main/Main.css" />
     <link rel="stylesheet" href="/css/General/Home/Footer/Footer.css" />
@@ -70,12 +70,21 @@
 
                             <div class="eventos-modal" id="eventos-modal">
                                 <div class="modal-content">
-                                    <h2>Evento de Participacion #@evento.Eventos.Id</h2>
-                                    <p>Nombre del Usuario Referido kue pide el Prestamo: @evento.Eventos.NombreUsuario</p>
-                                    <p>Cantidad a pedio de Prestamo: @evento.Transacciones.Valor</p>
-                                    <p>Tipo de Cuota: @evento.Transacciones.TipoCuota</p>
-                                    <p>Fecha de Pago de Deuda: @evento.Transacciones.FechaPagoTotalPrestamo.ToString("dd-MMMM-yyyy")</p>
-                                    <a href="" class="close-modal">Cerrar</a>
+                                    <div class="modal-supr">
+                                        <h2 class="modal-evento-titulo">Evento de Participacion #@evento.Eventos.Id</h2>
+                                        <p class="modal-parrafo">Nombre Referido Dueño de la Transaccion: @evento.Eventos.NombreUsuario</p>
+                                        <p class="modal-parrafo">Valor del Prestamo: @evento.Transacciones.Valor</p>
+                                        <p class="modal-parrafo">Tipo de Cuota: @evento.Transacciones.TipoCuota</p>
+                                        <p class="modal-parrafo">Fecha de Pago de Deuda: @evento.Transacciones.FechaPagoTotalPrestamo.ToString("dd-MMMM-yyyy")</p>
+                                    </div>
+                                    <div class="modal-infr">
+                                        <form asp-action="Participar">
+                                            <input type="hidden" asp-for="@evento.Eventos.Id" id="IdP" name="IdP"/>
+                                            <button class="add-participante" type="submit">Participar</button>
+                                            <a href="" class="close-modal">Cerrar</a>
+                                        </form>
+
+                                    </div>
                                 </div>
                             </div>
                         }

@@ -5,8 +5,8 @@
     "SelectRol": "SELECT * FROM act_Rol WHERE Id = @IdRol",
 
     "SelectAportaciones": "SELECT TotalAportaciones.Total AS TotalAportaciones, a.Id, a.Razon, a.Valor, a.IdUser, a.FechaAportacion, a.Aprobacion, u.NombreYapellido AS NombreUsuario FROM act_Aportaciones a INNER JOIN act_User u ON a.IdUser = u.Id CROSS JOIN (SELECT COUNT(*) AS Total FROM act_Aportaciones) AS TotalAportaciones",
-    
-    
+
+
     "SelectExistenciaAportaciones": "SELECT COUNT(*) FROM act_Aportaciones",
     "SelectAportantes": "SELECT a.*, u.NombreYApellido AS NombreUsuario FROM act_Aportaciones a INNER JOIN act_User u ON a.IdUser = u.Id",
     "SelectEmail": "SELECT Correo FROM act_User Where Id =1",
@@ -23,6 +23,6 @@
     "SelectParticipantes": "SELECT * FROM act_Eventos WHERE Id = @Id",
     "SelectParticipantesExist": "SELECT COUNT(*) AS existe FROM act_Eventos WHERE Id = @Id",
     "SelectDestino": "SELECT Id, NumeroCuenta, NombreBanco FROM act_CuentaDestino",
-    "SelectEvents": "SELECT COUNT(*) AS TotalEventos, p.Id, p.IdTransaccion, p.FechaInicio, p.FechaFinalizacion, p.FechaGeneracion, p.ParticipantesId, p.ParticipantesNombre, p.Estado, u.NombreYApellido AS NombreUsuario FROM act_Eventos p INNER JOIN act_User u ON p.IdUser = u.Id WHERE p.Estado = 'CONCURSO'"
+    "SelectEvents": "SELECT COUNT(*) AS TotalEventos, x.Id, x.IdTransaccion, x.FechaInicio, x.FechaFinalizacion, x.FechaGeneracion, x.ParticipantesId, x.ParticipantesNombre, x.Estado, u.NombreYApellido AS NombreUsuario FROM act_Eventos x INNER JOIN act_User u ON x.IdUser = u.Id WHERE x.Estado = 'CONCURSO'"
   }
 }

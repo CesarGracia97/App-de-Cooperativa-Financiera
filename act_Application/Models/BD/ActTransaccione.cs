@@ -10,13 +10,13 @@ public partial class ActTransaccione
 {
     public int Id { get; set; }
 
-    public string Razon { get; set; } = null!;
+    public string Razon { get; set; }
 
     public int IdUser { get; set; }
 
     public decimal Valor { get; set; }
 
-    public string Estado { get; set; } = null!;
+    public string Estado { get; set; }
 
     public DateTime FechaEntregaDinero { get; set; }
 
@@ -26,7 +26,7 @@ public partial class ActTransaccione
 
     public DateTime FechaGeneracion { get; set; }
 
-    public string TipoCuota { get; set; } = null!;
+    public string TipoCuota { get; set; }
 
     public int IdParticipantes { get; set; }
 }

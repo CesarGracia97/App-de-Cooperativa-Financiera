@@ -18,6 +18,7 @@
     text-align: center;
     position: relative; /* Añade esto */
     animation: slideDown 0.5s;
+    width: 50%;
 }
 
 .close-modal {
@@ -43,3 +44,48 @@
         top: 50%; /* Cambia esto a 50% para que aparezca en el centro */
     }
 }
+
+/* Estilo para el h2 en el modal */
+.modal-evento-titulo {
+    font-weight: bold; /* Negrilla para el h2 */
+}
+
+/* Estilo para los párrafos (p) en el modal */
+.modal-parrafo {
+    font-size: 9px; /* Tamaño de fuente 9px */
+    font-weight: normal; /* Sin negrilla */
+}
+
+/* Estilo para el contenedor modal-infr y los elementos dentro de él */
+.modal-infr {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Estilo para el botón "Participar" */
+.add-participante {
+    background-color: blue; /* Color de fondo azul */
+    color: white; /* Color de texto blanco */
+    border: 1px solid white; /* Borde blanco */
+    border-radius: 5px; /* Bordes redondeados */
+    padding: 5px 10px; /* Espaciado interno */
+    cursor: pointer;
+    transition: background-color 0.3s; /* Efecto de transición */
+}
+
+    .add-participante:hover {
+        background-color: lightblue; /* Color de fondo celeste al pasar el mouse */
+    }
+
+/* Estilo para el botón "Cerrar" */
+.close-modal {
+    margin-left: 20px; /* Separación de 20px desde el botón "Participar" */
+    color: white; /* Color de texto blanco */
+    text-decoration: none; /* Quitar subrayado */
+    cursor: pointer;
+}
+
+    .close-modal:hover {
+        text-decoration: underline; /* Subrayado al pasar el mouse */
+    }

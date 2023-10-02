@@ -37,6 +37,10 @@
       "PackagePath": "staticwebassets\\css\\General\\Home\\Esqueleto\\Cuerpo.css"
     },
     {
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\css\\General\\Home\\Esqueleto\\Esqueleto.css",
+      "PackagePath": "staticwebassets\\css\\General\\Home\\Esqueleto\\Esqueleto.css"
+    },
+    {
       "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\css\\General\\Home\\Footer\\Eventos-modal.css",
       "PackagePath": "staticwebassets\\css\\General\\Home\\Footer\\Eventos-modal.css"
     },
