@@ -45,8 +45,8 @@
       "PackagePath": "staticwebassets\\css\\General\\Home\\Footer\\Botones-Footer.css"
     },
     {
-      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\css\\General\\Home\\Footer\\Eventos-modal.css",
-      "PackagePath": "staticwebassets\\css\\General\\Home\\Footer\\Eventos-modal.css"
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\css\\General\\Home\\Footer\\VentanaModal.css",
+      "PackagePath": "staticwebassets\\css\\General\\Home\\Footer\\VentanaModal.css"
     },
     {
       "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\css\\General\\Home\\Main\\Main.css",
@@ -123,10 +123,6 @@
     {
       "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\js\\Login\\MsjCorreoValidacionLogin.js",
       "PackagePath": "staticwebassets\\js\\Login\\MsjCorreoValidacionLogin.js"
-    },
-    {
-      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\js\\Menu\\Eventos\\Evento.js",
-      "PackagePath": "staticwebassets\\js\\Menu\\Eventos\\Evento.js"
     },
     {
       "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\js\\Menu\\Eventos\\Eventos.js",

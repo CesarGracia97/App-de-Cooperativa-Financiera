@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "rJOMEG8e72X2v/L0UaRMclx/+G3d7+p+RMw+7Y7lY0o=",
+  "Hash": "WOLxLISWEKKBHbNQOYU41bFlkTNLRE+ywDRSL2l+bO4=",
   "Source": "act_Application",
   "BasePath": "_content/act_Application",
   "Mode": "Default",
@@ -221,12 +221,12 @@
       "OriginalItemSpec": "wwwroot\\css\\General\\Home\\Footer\\Botones-Footer.css"
     },
     {
-      "Identity": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\css\\General\\Home\\Footer\\Eventos-modal.css",
+      "Identity": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\css\\General\\Home\\Footer\\VentanaModal.css",
       "SourceId": "act_Application",
       "SourceType": "Discovered",
       "ContentRoot": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\",
       "BasePath": "_content/act_Application",
-      "RelativePath": "css/General/Home/Footer/Eventos-modal.css",
+      "RelativePath": "css/General/Home/Footer/VentanaModal.css",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -235,7 +235,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\css\\General\\Home\\Footer\\Eventos-modal.css"
+      "OriginalItemSpec": "wwwroot\\css\\General\\Home\\Footer\\VentanaModal.css"
     },
     {
       "Identity": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\css\\General\\Home\\Main\\Main.css",
@@ -593,23 +593,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\Login\\MsjCorreoValidacionLogin.js"
-    },
-    {
-      "Identity": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\js\\Menu\\Eventos\\Evento.js",
-      "SourceId": "act_Application",
-      "SourceType": "Discovered",
-      "ContentRoot": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\",
-      "BasePath": "_content/act_Application",
-      "RelativePath": "js/Menu/Eventos/Evento.js",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\js\\Menu\\Eventos\\Evento.js"
     },
     {
       "Identity": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\js\\Menu\\Eventos\\Eventos.js",
