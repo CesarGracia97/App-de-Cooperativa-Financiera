@@ -1,30 +1,32 @@
 {
   "format": 1,
   "restore": {
-    "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\act_Application.csproj": {}
+    "C:\\Users\\cgracia\\source\\repos\\CesarGracia97\\act_Application\\act_Application\\act_Application.csproj": {}
   },
   "projects": {
-    "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\act_Application.csproj": {
+    "C:\\Users\\cgracia\\source\\repos\\CesarGracia97\\act_Application\\act_Application\\act_Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\act_Application.csproj",
+        "projectUniqueName": "C:\\Users\\cgracia\\source\\repos\\CesarGracia97\\act_Application\\act_Application\\act_Application.csproj",
         "projectName": "act_Application",
-        "projectPath": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\act_Application.csproj",
-        "packagesPath": "C:\\Users\\cesar.gracia\\.nuget\\packages\\",
-        "outputPath": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\obj\\",
+        "projectPath": "C:\\Users\\cgracia\\source\\repos\\CesarGracia97\\act_Application\\act_Application\\act_Application.csproj",
+        "packagesPath": "C:\\Users\\cgracia\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\cgracia\\source\\repos\\CesarGracia97\\act_Application\\act_Application\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "E:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\cesar.gracia\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "E:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config"
+          "C:\\Users\\cgracia\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
         ],
         "sources": {
-          "E:\\Program Files\\dotnet\\library-packs": {},
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -93,7 +95,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "E:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
         }
       }
     }

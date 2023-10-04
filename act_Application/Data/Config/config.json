@@ -5,6 +5,9 @@
     "SelectRol": "SELECT * FROM act_Rol WHERE Id = @IdRol",
     "SelectEmail": "SELECT Correo FROM act_User Where Id =1",
     "SelectDestino": "SELECT Id, NumeroCuenta, NombreBanco FROM act_CuentaDestino",
+
+    "Cont_Y_Cons": "Queries de Conteo de Datos y Consulta de Datos",
+
     "SelectEvents": "SELECT (SELECT COUNT(*) FROM act_Eventos WHERE Estado = 'CONCURSO') AS TotalEventos, x.Id, x.IdTransaccion, x.FechaInicio, x.FechaFinalizacion, x.FechaGeneracion, x.ParticipantesId, x.ParticipantesNombre, x.Estado, u.NombreYApellido AS NombreUsuario FROM act_Eventos x INNER JOIN act_User u ON x.IdUser = u.Id WHERE x.Estado = 'CONCURSO'",
     "SelectAportaciones": "SELECT (SELECT COUNT(*) FROM act_Aportaciones) AS TotalAportaciones, a.Id, a.Razon, a.Valor, a.IdUser, a.FechaAportacion, a.Aprobacion, u.NombreYapellido AS NombreUsuario FROM act_Aportaciones a INNER JOIN act_User u ON a.IdUser = u.Id",
     "SelectMultas": "SELECT (SELECT COUNT(*) FROM act_Multas) AS TotalMultas, a.Id, a.IdUser, a.Valor, a.FechaMulta,  u.NombreYApellido AS NombreUsuario FROM act_Multas a INNER JOIN act_User u ON a.IdUser = u.Id",
@@ -19,7 +22,6 @@
 
     "En Restructuracion": "Estos queries estan en fase de modificion de antiguos metodos",
     "SelectParticipantes": "SELECT * FROM act_Eventos WHERE Id = @Id",
-    "SelectParticipantesExist": "SELECT COUNT(*) AS existe FROM act_Eventos WHERE Id = @Id",
 
     "SelectExistenciaAportaciones": "SELECT COUNT(*) FROM act_Aportaciones",
     "SelectAportantes": "SELECT a.*, u.NombreYApellido AS NombreUsuario FROM act_Aportaciones a INNER JOIN act_User u ON a.IdUser = u.Id",

@@ -74,7 +74,5 @@ namespace act_Application.Data.Data
 
             return result;
         }
-
     }
-
 }

@@ -101,7 +101,7 @@ namespace act_Application.Controllers.General
 
             if (ModelState.IsValid)
             {
-                string razon, Descripcion, DescripcionC="";
+                string razon="", Descripcion="", DescripcionC="";
 
                 try
                 {
@@ -151,16 +151,10 @@ namespace act_Application.Controllers.General
                     Descripcion = DescripcionC;
 
                 }
-                catch (DbUpdateConcurrencyException)
+                catch (DbUpdateConcurrencyException ex)
                 {
-                    if (!ActTransaccionesExists(actTransaccione.Id))
-                    {
-                        return RedirectToAction("Error", "Home");
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    Console.WriteLine("Hubo un problema al actualizar el registro de la transaccion confirmada.");
+                    Console.WriteLine("Detalles del error: " + ex.Message);
                 }
 
                 await CrearNotificacion(actTransaccione.Id, 0, 0, actTransaccione.IdUser.ToString(), razon, Descripcion,  new ActNotificacione());
@@ -221,10 +215,9 @@ namespace act_Application.Controllers.General
             {
                 return RedirectToAction("Error", "Home");
             }
-
             if (ModelState.IsValid)
             {
-                string razon;
+                string razon = "";
                 try
                 {
                     var metodoNotificacion = new TransaccionesRepository ();
@@ -252,16 +245,10 @@ namespace act_Application.Controllers.General
                     razon = "PETICION DE PRESTAMO DENEGADA";
 
                 }
-                catch (DbUpdateConcurrencyException)
+                catch (DbUpdateConcurrencyException ex)
                 {
-                    if (!ActTransaccionesExists(actTransaccione.Id))
-                    {
-                        return RedirectToAction("Error", "Home");
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    Console.WriteLine("Hubo un problema al actualizar el registro de la transaccion Denegada por el Admin.");
+                    Console.WriteLine("Detalles del error: " + ex.Message);
                 }
                 await CrearNotificacion(actTransaccione.Id, 0, 0, actTransaccione.IdUser.ToString(), razon, Descripcion, new ActNotificacione());
                 return RedirectToAction("Menu", "Home");
@@ -281,7 +268,7 @@ namespace act_Application.Controllers.General
 
             if (ModelState.IsValid)
             {
-                string Razon, Descripcion;
+                string Razon = "", Descripcion = "";
                 try
                 {
                     var metodoNotificacion = new TransaccionesRepository(); // Crear una instancia de MetodoNotificaciones
@@ -311,16 +298,10 @@ namespace act_Application.Controllers.General
 
 
                 }
-                catch (DbUpdateConcurrencyException)
+                catch (DbUpdateConcurrencyException ex)
                 {
-                    if (!ActTransaccionesExists(actTransaccione.Id))
-                    {
-                        return RedirectToAction("Error", "Home");
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    Console.WriteLine("Hubo un problema al actualizar el registro en la participacion del Evento.");
+                    Console.WriteLine("Detalles del error: " + ex.Message);
                 }
                 await EditParticipacion(actTransaccione.IdParticipantes, "CONCURSO", new ActEvento());
                 await CrearNotificacion(actTransaccione.Id, 0, 0, "ADMINISTRADOR", Razon, Descripcion, new ActNotificacione());
@@ -342,7 +323,7 @@ namespace act_Application.Controllers.General
 
             if (ModelState.IsValid)
             {
-                string Razon, Descripcion;
+                string Razon ="", Descripcion ="";
                 try
                 {
                     var metodoTransRepo = new TransaccionesRepository(); // Crear una instancia de MetodoNotificaciones
@@ -369,16 +350,10 @@ namespace act_Application.Controllers.General
 
 
                 }
-                catch (DbUpdateConcurrencyException)
+                catch (DbUpdateConcurrencyException ex)
                 {
-                    if (!ActTransaccionesExists(actTransaccione.Id))
-                    {
-                        return RedirectToAction("Error", "Home");
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    Console.WriteLine("Hubo un problema al actualizar el registro de la transaccion Rechazada por el Referente.");
+                    Console.WriteLine("Detalles del error: " + ex.Message);
                 }
                 await EditParticipacion(actTransaccione.IdParticipantes, "DENEGADO", new ActEvento());
                 await CrearNotificacion(actTransaccione.Id, 0, 0, "ADMINISTRADOR", Razon, Descripcion, new ActNotificacione());
@@ -497,78 +472,13 @@ namespace act_Application.Controllers.General
                     _context.Update(actParticipante);
                     await _context.SaveChangesAsync();
                 }
-                catch (DbUpdateConcurrencyException)
+                catch (DbUpdateConcurrencyException ex)
                 {
-                    if (!ActParticipantesExist(actParticipante.Id))
-                    {
-                        return RedirectToAction("Error", "Home");
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    Console.WriteLine("Hubo un problema al actualizar el registro en la participacion del Evento.");
+                    Console.WriteLine("Detalles del error: " + ex.Message);
                 }
             }
             return View(actParticipante);
-        }
-
-        public bool ActTransaccionesExists(int id) //Verifica la existencia de una Transaccion en Especifico 
-        {
-            string connectionString = AppSettingsHelper.GetConnectionString();
-
-            try
-            {
-                using (MySqlConnection connection = new MySqlConnection(connectionString))
-                {
-                    connection.Open();
-                    string query = ConfigReader.GetQuery("SelectExistTransancion"); ;
-
-                    using (MySqlCommand command = new MySqlCommand(query, connection))
-                    {
-                        command.Parameters.AddWithValue("@Id", id);
-                        object result = command.ExecuteScalar();
-                        int count = Convert.ToInt32(result);
-
-                        return count > 0;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Hubo un error al verificar la existencia del registro.");
-                Console.WriteLine("Detalles del error: " + ex.Message);
-                return false;
-            }
-        }
-
-
-        public bool ActParticipantesExist (int id)
-        {
-            string connectionString = AppSettingsHelper.GetConnectionString();
-
-            try
-            {
-                using (MySqlConnection connection = new MySqlConnection(connectionString))
-                {
-                    connection.Open();
-                    string query = ConfigReader.GetQuery("SelectParticipantesExist"); ;
-
-                    using (MySqlCommand command = new MySqlCommand(query, connection))
-                    {
-                        command.Parameters.AddWithValue("@IdTransaccion", id);
-                        object result = command.ExecuteScalar();
-                        int count = Convert.ToInt32(result);
-
-                        return count > 0;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Hubo un error al verificar la existencia del registro de la participacion.");
-                Console.WriteLine("Detalles del error: " + ex.Message);
-                return false;
-            }
         }
     }
 }

@@ -109,51 +109,15 @@ namespace act_Application.Controllers.General
 
 
                 }
-                catch (DbUpdateConcurrencyException)
+                catch (DbUpdateConcurrencyException ex)
                 {
-                    if (!ActParticipantesExist(actEvento.Id))
-                    {
-                        return RedirectToAction("Error", "Home");
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    Console.WriteLine("Hubo un problema al actualizar el registro en la participacion del Evento.");
+                    Console.WriteLine("Detalles del error: " + ex.Message);
                 }
                 return RedirectToAction("Menu", "Home");
             }
             return View(actEvento);
 
         }
-
-        public bool ActParticipantesExist(int id)
-        {
-            string connectionString = AppSettingsHelper.GetConnectionString();
-
-            try
-            {
-                using (MySqlConnection connection = new MySqlConnection(connectionString))
-                {
-                    connection.Open();
-                    string query = ConfigReader.GetQuery("SelectParticipantesExist"); ;
-
-                    using (MySqlCommand command = new MySqlCommand(query, connection))
-                    {
-                        command.Parameters.AddWithValue("@IdTransaccion", id);
-                        object result = command.ExecuteScalar();
-                        int count = Convert.ToInt32(result);
-
-                        return count > 0;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Hubo un error al verificar la existencia del registro de la participacion.");
-                Console.WriteLine("Detalles del error: " + ex.Message);
-                return false;
-            }
-        }
-
     }
 }

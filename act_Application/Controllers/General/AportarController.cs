@@ -116,10 +116,5 @@ namespace act_Application.Controllers.General
             }
             return View(actAportacione);
         }
-
-        private bool ActAportacioneExists(int id)
-        {
-          return (_context.ActAportaciones?.Any(e => e.Id == id)).GetValueOrDefault();
-        }
     }
 }
