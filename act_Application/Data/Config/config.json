@@ -3,26 +3,39 @@
     "SelectUser": "SELECT * FROM act_User WHERE Correo = @Correo AND Contrasena = @Contrasena",
     "SelectUserRole": "SELECT IdRol FROM act_RolUser WHERE IdUser = @IdUser",
     "SelectRol": "SELECT * FROM act_Rol WHERE Id = @IdRol",
-
-    "SelectAportaciones": "SELECT TotalAportaciones.Total AS TotalAportaciones, a.Id, a.Razon, a.Valor, a.IdUser, a.FechaAportacion, a.Aprobacion, u.NombreYapellido AS NombreUsuario FROM act_Aportaciones a INNER JOIN act_User u ON a.IdUser = u.Id CROSS JOIN (SELECT COUNT(*) AS Total FROM act_Aportaciones) AS TotalAportaciones",
-
-
-    "SelectExistenciaAportaciones": "SELECT COUNT(*) FROM act_Aportaciones",
-    "SelectAportantes": "SELECT a.*, u.NombreYApellido AS NombreUsuario FROM act_Aportaciones a INNER JOIN act_User u ON a.IdUser = u.Id",
     "SelectEmail": "SELECT Correo FROM act_User Where Id =1",
-    "SelectExistenciaMultas": "SELECT COUNT(*) FROM act_Multas",
-    "SelectMultados": "SELECT a.*, u.NombreYApellido AS NombreUsuario FROM act_Multas a INNER JOIN act_User u ON a.IdUser = u.Id",
-    "SelectExistenciaNotifiAdmin": "SELECT COUNT(*) AS TotalRegistros FROM act_Notificaciones WHERE Destino = 'ADMINISTRADOR'",
-    "SelectNotifiAdmin": "SELECT * FROM act_Notificaciones WHERE Destino = 'ADMINISTRADOR'",
     "SelecInfoTransacciones": "SELECT * FROM act_Transacciones WHERE Id = @IdTransacciones",
     "SelectExistTransancion": "SELECT COUNT(*) AS existe FROM act_Transacciones WHERE Id = @Id",
-    "SelectExistenciaNotifiUsuario": "SELECT COUNT(*) AS TotalRegistros FROM act_Notificaciones WHERE Destino = @Id",
     "SelectNotificiacionIdTrans": "SELECT IdUser FROM act_Notificaciones Where IdTransacciones = @Id",
-    "SelectNotifiUser": "SELECT * FROM act_Notificaciones WHERE Destino = @Id",
     "SelectExistNotificacion": "SELECT COUNT(*) AS existe FROM act_Notificaciones WHERE Id = @Id",
     "SelectParticipantes": "SELECT * FROM act_Eventos WHERE Id = @Id",
     "SelectParticipantesExist": "SELECT COUNT(*) AS existe FROM act_Eventos WHERE Id = @Id",
     "SelectDestino": "SELECT Id, NumeroCuenta, NombreBanco FROM act_CuentaDestino",
-    "SelectEvents": "SELECT (SELECT COUNT(*) FROM act_Eventos WHERE Estado = 'CONCURSO') AS TotalEventos, x.Id, x.IdTransaccion, x.FechaInicio, x.FechaFinalizacion, x.FechaGeneracion, x.ParticipantesId, x.ParticipantesNombre, x.Estado, u.NombreYApellido AS NombreUsuario FROM act_Eventos x INNER JOIN act_User u ON x.IdUser = u.Id WHERE x.Estado = 'CONCURSO'"
+    "SelectEvents": "SELECT (SELECT COUNT(*) FROM act_Eventos WHERE Estado = 'CONCURSO') AS TotalEventos, x.Id, x.IdTransaccion, x.FechaInicio, x.FechaFinalizacion, x.FechaGeneracion, x.ParticipantesId, x.ParticipantesNombre, x.Estado, u.NombreYApellido AS NombreUsuario FROM act_Eventos x INNER JOIN act_User u ON x.IdUser = u.Id WHERE x.Estado = 'CONCURSO'",
+    "SelectAportaciones": "SELECT (SELECT COUNT(*) FROM act_Aportaciones) AS TotalAportaciones, a.Id, a.Razon, a.Valor, a.IdUser, a.FechaAportacion, a.Aprobacion, u.NombreYapellido AS NombreUsuario FROM act_Aportaciones a INNER JOIN act_User u ON a.IdUser = u.Id",
+    "SelectMultas": "SELECT (SELECT COUNT(*) FROM act_Multas) AS TotalMultas, a.Id, a.IdUser, a.Valor, a.FechaMulta,  u.NombreYApellido AS NombreUsuario FROM act_Multas a INNER JOIN act_User u ON a.IdUser = u.Id",
+    "SelectAdminNotificacion": "SELECT (SELECT COUNT(*) FROM act_Notificaciones WHERE Destino = 'ADMINISTRADOR') AS TotalNotificacionesAdmin, a.* FROM act_Notificaciones a WHERE a.Destino ='ADMINISTRADOR'",
+    "SelectUserNotificacion": "SELECT (SELECT COUNT(*) FROM act_Notificaciones WHERE Destino = @Id) AS TotalNotificacionesUser, a.* FROM act_Notificaciones a WHERE Destino = @Id",
+
+
+
+
+    "SelectExistenciaAportaciones": "SELECT COUNT(*) FROM act_Aportaciones",
+    "SelectAportantes": "SELECT a.*, u.NombreYApellido AS NombreUsuario FROM act_Aportaciones a INNER JOIN act_User u ON a.IdUser = u.Id",
+
+
+
+
+    "SelectExistenciaMultas": "SELECT COUNT(*) FROM act_Multas",
+    "SelectMultados": "SELECT a.*, u.NombreYApellido AS NombreUsuario FROM act_Multas a INNER JOIN act_User u ON a.IdUser = u.Id",
+
+    "SelectExistenciaNotifiAdmin": "SELECT COUNT(*) AS TotalRegistros FROM act_Notificaciones WHERE Destino = 'ADMINISTRADOR'",
+    "SelectNotifiAdmin": "SELECT * FROM act_Notificaciones WHERE Destino = 'ADMINISTRADOR'",
+
+
+    "SelectExistenciaNotifiUsuario": "SELECT COUNT(*) AS TotalRegistros FROM act_Notificaciones WHERE Destino = @Id",
+    "SelectNotifiUser": "SELECT * FROM act_Notificaciones WHERE Destino = @Id"
+
+
   }
 }

@@ -67,7 +67,6 @@
                         @if(evento.Eventos.Estado =="CONCURSO")
                         {
                             var valorVisualizacion = new MetodoVisualizacion();
-
                             var userIdClaim = User.Claims.FirstOrDefault(c => c.Type == "Id");
                             @if (userIdClaim != null && int.TryParse(userIdClaim.Value, out int userId))
                             {
@@ -93,7 +92,6 @@
                                                     <button class="add-participante" type="submit" data-event-id="@evento.Eventos.Id">Participar</button>
                                                     <a href="" class="close-modal" data-event-id="@evento.Eventos.Id">Cerrar</a>
                                                 </form>
-
                                             </div>
                                         </div>
                                     </div>
