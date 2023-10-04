@@ -15,7 +15,7 @@ namespace act_Application.Data.Data
             MultaRepository result = new MultaRepository();
             try
             {
-                string query = ConfigReader.GetQuery("");
+                string query = ConfigReader.GetQuery("SelectMultas");
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
                     connection.Open();

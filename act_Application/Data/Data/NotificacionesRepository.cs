@@ -18,7 +18,7 @@ namespace act_Application.Data.Data
             NotificacionesRepository result = new NotificacionesRepository();
             try
             {
-                string query = ConfigReader.GetQuery("");
+                string query = ConfigReader.GetQuery("SelectAdminNotificacion");
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
                     connection.Open();
@@ -71,7 +71,7 @@ namespace act_Application.Data.Data
             NotificacionesRepository result = new NotificacionesRepository();
             try
             {
-                string query = ConfigReader.GetQuery("");
+                string query = ConfigReader.GetQuery("SelectUserNotificacion");
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
                     connection.Open();
