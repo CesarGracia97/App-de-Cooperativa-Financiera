@@ -1,6 +1,7 @@
 ﻿using act_Application.Helper;
 using act_Application.Models.BD;
 using MySql.Data.MySqlClient;
+using System.Data;
 using System.Security.Claims;
 
 namespace act_Application.Data.Data
@@ -8,32 +9,70 @@ namespace act_Application.Data.Data
     public class NotificacionesRepository
     {
 
-        public int TotalNotificacionesAdmin { get; set; }
-        public int TotalNotificacionesUser { get; set; }
-        public List<ActNotificacione> Notificaciones { get; set; }
-
-        public NotificacionesRepository GetDataNotitficacionesAdmin()
+        public bool GetExistNotificacionesAdmin()
         {
             string connectionString = AppSettingsHelper.GetConnectionString();
-            NotificacionesRepository result = new NotificacionesRepository();
+            string notificacionesQuery = ConfigReader.GetQuery("SelectAdminNotificacion");
+            int totalNotificaciones = 0;
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                using (MySqlCommand cmd = new MySqlCommand(notificacionesQuery, connection))
+                {
+                    cmd.CommandType = CommandType.Text;
+                    connection.Open();
+                    using (MySqlDataReader rd = cmd.ExecuteReader())
+                    {
+                        if (rd.Read()) // Avanzar al primer registro
+                        {
+                            totalNotificaciones = Convert.ToInt32(rd["TotalNotificaciones"]);
+                        }
+                    }
+                }
+            }
+            return totalNotificaciones > 0;
+        }
+
+        public bool GetExistNotificacionesUser(int userId)
+        {
+            string connectionString = AppSettingsHelper.GetConnectionString();
+            string notificacionesQuery = ConfigReader.GetQuery("SelectUserNotificacion");
+            int totalNotificaciones = 0;
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                using (MySqlCommand cmd = new MySqlCommand(notificacionesQuery, connection))
+                {
+                    cmd.CommandType = CommandType.Text;
+                    cmd.Parameters.AddWithValue("@Id", userId);
+                    connection.Open();
+                    using (MySqlDataReader rd = cmd.ExecuteReader())
+                    {
+                        if (rd.Read()) // Avanzar al primer registro
+                        {
+                            totalNotificaciones = Convert.ToInt32(rd["TotalNotificaciones"]);
+                        }
+                    }
+                }
+            }
+            return totalNotificaciones > 0;
+        }
+
+        public IEnumerable<ActNotificacione> GetDataNotificacionesAdmin() //Consulta para obtener todos los datos de las notificacionesAdmin del administrador
+        {
+            string connectionString = AppSettingsHelper.GetConnectionString();
             try
             {
                 string query = ConfigReader.GetQuery("SelectAdminNotificacion");
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
                     connection.Open();
-
                     using (MySqlCommand command = new MySqlCommand(query, connection))
-                    using (MySqlDataReader reader = command.ExecuteReader())
                     {
-                        if (reader.Read())
+                        using (MySqlDataReader reader = command.ExecuteReader())
                         {
-                            result.TotalNotificacionesAdmin = Convert.ToInt32(reader["TotalNotificaciones"]);
-                            List<ActNotificacione> multas = new List<ActNotificacione>();
-
-                            do
+                            List<ActNotificacione> notificacionesAdmin = new List<ActNotificacione>();
+                            while (reader.Read())
                             {
-                                ActNotificacione mul = new ActNotificacione
+                                ActNotificacione notificacion = new ActNotificacione
                                 {
                                     Id = Convert.ToInt32(reader["Id"]),
                                     IdUser = Convert.ToInt32(reader["IdUser"]),
@@ -45,49 +84,41 @@ namespace act_Application.Data.Data
                                     IdAportaciones = Convert.ToInt32(reader["IdAportaciones"]),
                                     IdCuotas = Convert.ToInt32(reader["IdCuotas"])
                                 };
-                                multas.Add(mul);
-
-                            } while (reader.Read());
-
-                            result.Notificaciones = multas;
+                                notificacionesAdmin.Add(notificacion);
+                                TransaccionesRepository transacciones = new TransaccionesRepository();
+                                transacciones.GetTransaccionPorId(notificacion.IdTransacciones);
+                            }
+                            return notificacionesAdmin;
                         }
                     }
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Hubo un error en la consulta de los datos de notificacion del Administrador.");
+                Console.WriteLine("Hubo un error en la consulta de notificacionesUser");
                 Console.WriteLine("Detalles del error: " + ex.Message);
-                result.TotalNotificacionesAdmin = -1; // Valor negativo para indicar un error
-                result.Notificaciones = null;
+                return null;
             }
-            return result;
         }
 
-
-        public NotificacionesRepository GetDataNotificacionesUser(int userId)
+        public IEnumerable<ActNotificacione> GetDataNotificacionesUser(int userId) //Consulta para obtener todos los datos de las notificacionesUser del administrador
         {
             string connectionString = AppSettingsHelper.GetConnectionString();
-            NotificacionesRepository result = new NotificacionesRepository();
             try
             {
                 string query = ConfigReader.GetQuery("SelectUserNotificacion");
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
                     connection.Open();
-
                     using (MySqlCommand command = new MySqlCommand(query, connection))
-                    using (MySqlDataReader reader = command.ExecuteReader())
                     {
                         command.Parameters.AddWithValue("@Id", userId);
-                        if (reader.Read())
+                        using (MySqlDataReader reader = command.ExecuteReader())
                         {
-                            result.TotalNotificacionesAdmin = Convert.ToInt32(reader["TotalNotificaciones"]);
-                            List<ActNotificacione> multas = new List<ActNotificacione>();
-
-                            do
+                            List<ActNotificacione> notificacionesUser = new List<ActNotificacione>();
+                            while (reader.Read())
                             {
-                                ActNotificacione mul = new ActNotificacione
+                                ActNotificacione notificacion = new ActNotificacione
                                 {
                                     Id = Convert.ToInt32(reader["Id"]),
                                     IdUser = Convert.ToInt32(reader["IdUser"]),
@@ -97,76 +128,25 @@ namespace act_Application.Data.Data
                                     Destino = reader["Destino"].ToString(),
                                     IdTransacciones = Convert.ToInt32(reader["IdTransacciones"]),
                                     IdAportaciones = Convert.ToInt32(reader["IdAportaciones"]),
-                                    IdCuotas = Convert.ToInt32(reader["IdCuotas"])
+                                    IdCuotas = Convert.ToInt32(reader["IdCuotas"]),
+
                                 };
-                                multas.Add(mul);
-
-                            } while (reader.Read());
-
-                            result.Notificaciones = multas;
+                                notificacionesUser.Add(notificacion);
+                                TransaccionesRepository transaccion = new TransaccionesRepository();
+                                transaccion.GetTransaccionPorId(notificacion.IdTransacciones);
+                            }
+                            return notificacionesUser;
                         }
                     }
                 }
-
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Hubo En la consulta de las Notificaciones del Usuario");
+                Console.WriteLine("Hubo un error en la consulta de notificacionesUser");
                 Console.WriteLine("Detalles del error: " + ex.Message);
-                result.TotalNotificacionesAdmin = -1; // Valor negativo para indicar un error
-                result.Notificaciones = null;
-            }
-            return result;
-        }
-
-
-        public int GetTotalNotificacionesAdministrador()
-        {
-            string connectionString = AppSettingsHelper.GetConnectionString();
-            try
-            {
-                string query = ConfigReader.GetQuery("SelectExistenciaNotifiAdmin");
-                using (MySqlConnection connection = new MySqlConnection(connectionString))
-                {
-                    connection.Open();
-                    using (MySqlCommand command = new MySqlCommand(query, connection))
-                    {
-                        int count = Convert.ToInt32(command.ExecuteScalar());
-                        return count;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Hubo En la consulta de la Notificacion del Administrador");
-                Console.WriteLine("Detalles del error: " + ex.Message);
-                return -1;
+                return null;
             }
         }
-        
-        public int GetTotalNotificacionesUsuario(int userId)
-        {
-            string connectionString = AppSettingsHelper.GetConnectionString();
-            try
-            {
-                string query = ConfigReader.GetQuery("SelectExistenciaNotifiUsuario");
-                using (MySqlConnection connection = new MySqlConnection(connectionString))
-                {
-                    connection.Open();
-                    using (MySqlCommand command = new MySqlCommand(query, connection))
-                    {
-                        command.Parameters.AddWithValue("@Id", userId); // Pasar el ID del usuario como parámetro
-                        int count = Convert.ToInt32(command.ExecuteScalar());
-                        return count;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Hubo un error en la consulta de notificaciones del usuario");
-                Console.WriteLine("Detalles del error: " + ex.Message);
-                return -1;
-            }
-        }
+    
     }
 }

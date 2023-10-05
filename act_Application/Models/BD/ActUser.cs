@@ -31,4 +31,7 @@ public partial class ActUser
     public byte[] FotoPerfil { get; set; }
 
     public int Activo { get; set; }
+
+    [NotMapped]
+    public int IdRol { get; set; }
 }

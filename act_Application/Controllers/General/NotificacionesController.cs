@@ -29,8 +29,8 @@ namespace act_Application.Controllers.General
 
                 if (User.HasClaim("Rol", "Administrador"))
                 {
-                    var metodoNotificacion = new MetodoNotificaciones();
-                    var notificaciones = metodoNotificacion.GetNotificacionesAdministrador();
+                    var notificacionesRepository = new NotificacionesRepository();
+                    var notificaciones = notificacionesRepository.GetDataNotificacionesAdmin();
                     var viewModelList = notificaciones.Select(notificacion => new Notificaciones_VM
                     {
                         Notificaciones = notificacion,
@@ -46,7 +46,7 @@ namespace act_Application.Controllers.General
                 {
                     if (!User.HasClaim("Rol", "Administrador") && (User.HasClaim("Rol", "Socio") || User.HasClaim("Rol", "Referido")))
                     {
-                        var metodoNotificacion = new MetodoNotificaciones();
+                        var notificacionesRepository = new NotificacionesRepository();
                         var userIdClaim = User.Claims.FirstOrDefault(c => c.Type == "Id");
                         int Bandera = 0;
 
@@ -55,7 +55,7 @@ namespace act_Application.Controllers.General
                             Bandera = userId;
                         }
 
-                        var notificaciones = metodoNotificacion.GetNotificacionesUsuario(Bandera);
+                        var notificaciones = notificacionesRepository.GetDataNotificacionesUser(Bandera);
 
                         var viewModelList = notificaciones.Select(notificacion => new Notificaciones_VM
                         {
@@ -450,8 +450,8 @@ namespace act_Application.Controllers.General
             {
                 try
                 {
-                    var metodoNotificacion = new MetodoNotificaciones();
-                    var RparticipantesOriginal = metodoNotificacion.GetRegistroParticipante(Id);
+                    var eventoRepository = new EventosRepository();
+                    var RparticipantesOriginal = eventoRepository.GetDataEventoPorId(Id);
 
                     if (RparticipantesOriginal == null)
                     {

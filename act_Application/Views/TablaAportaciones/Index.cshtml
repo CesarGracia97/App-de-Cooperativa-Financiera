@@ -1,13 +1,10 @@
 ﻿@model IEnumerable<act_Application.Models.BD.ActAportacione>;
 @using System.Globalization;
 @using act_Application.Data;
-@using act_Application.Models.BD;
 @{
     ViewData["Title"] = "Tabla de Aportaciones";
-
-    var aportacionRepository = new AportacionRepository();
-    //int totalAportaciones = aportacionRepository.GetTotalAportaciones();
-    int totalAportaciones = aportacionRepository.GetDataAportaciones().TotalAportaciones;
+    var aportacionesRepository = new AportacionRepository();
+    bool condicion = aportacionesRepository.GetExistAportaciones();
 }
 <header>
     <meta charset="UTF-8">
@@ -20,7 +17,7 @@
         <h1>Tabla de Aportaciones</h1>
         <hr />
         <div class="table-container">
-            @if (totalAportaciones > 0)
+            @if (condicion == true)
             {
                 <table class="aportacion-table">
                     <thead>

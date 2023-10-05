@@ -6,14 +6,17 @@
     ViewData["Title"] = "Notificaciones";
 
     var NotifiRepository = new NotificacionesRepository();
-    var userIdClaim = User.Claims.FirstOrDefault(c => c.Type == "Id");
-    int TotalNotiAdmin = NotifiRepository.GetTotalNotificacionesAdministrador()  /*NotifiRepository.GetDataNotitficacionesAdmin().TotalNotificacionesAdmin*/ , userId = -1, TotalNotiUser = -1;
 
+    bool condicionAdmin = NotifiRepository.GetExistNotificacionesAdmin();
+    bool condicionUser = false;
+    var userIdClaim = User.Claims.FirstOrDefault(c => c.Type == "Id");
+    int userId = -1;
     if (userIdClaim != null && int.TryParse(userIdClaim.Value, out userId))
     {
-        //TotalNotiUser = NotifiRepository.GetDataNotificacionesUser(userId).TotalNotificacionesUser;
-        TotalNotiUser = NotifiRepository.GetTotalNotificacionesUsuario(userId);
+        condicionUser = NotifiRepository.GetExistNotificacionesUser(userId);
     }
+
+    //Variables de Vista
     DateTime fechaActual = DateTime.Now;
     string fechaactual = fechaActual.ToString("yyyy-MM-dd");
     DateTime minDateP = DateTime.Now.AddDays(46);
@@ -32,7 +35,7 @@
         <h1>Notificaciones</h1>
         @if (User.HasClaim("Rol", "Administrador"))
         {
-            @if (TotalNotiAdmin > 0)
+            @if (condicionAdmin == true)
             {
                 <div class="content-notif">
                     @foreach (var notificacionAdmin in Model)
@@ -164,7 +167,7 @@
         {
             @if (!User.HasClaim("Rol", "Administrador") && (User.HasClaim("Rol", "Socio") || User.HasClaim("Rol", "Referido")))
             {
-                @if (TotalNotiUser > 0)
+                @if (condicionUser == true)
                 {
                     <div class="content-notif">
                         @foreach (var notificacionUser in Model)

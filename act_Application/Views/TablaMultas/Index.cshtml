@@ -1,12 +1,11 @@
 ﻿@using System.Globalization;
 @using act_Application.Data.Data;
-@using act_Application.Models.BD;
 @model IEnumerable<act_Application.Models.BD.ActMulta>;
 @{
     ViewData["Title"] = "Tabla de Multas";
 
     var multaRepository = new MultaRepository();
-    int totalMultas = multaRepository.GetTotalMultas();
+    bool condicion = multaRepository.GetExistMultas();
 }
 <header>
     <meta charset="UTF-8">
@@ -19,7 +18,7 @@
         <h1>Tabla de Multas</h1>
         <hr />
         <div class="table-container">
-            @if (totalMultas > 0)
+            @if (condicion == true)
             {
                 <table class="multa-table">
                     <thead>

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Text;
 using System.Security.Cryptography;
 using act_Application.Models.BD;
+using act_Application.Data.Data;
 
 namespace act_Application.Controllers.General
 {
@@ -32,16 +33,15 @@ namespace act_Application.Controllers.General
 
             string hashedPassword = HashPassword(Contrasena);
 
-            ActUser objeto = new MetodoLogeo().EncontrarUser(Correo, hashedPassword);
+            ActUser objeto = new UsuarioRepository().GetDataUser(Correo, hashedPassword);
             var claims = new List<Claim>();
 
             if (objeto.NombreYapellido != null)
             {
                 // Obtener la información del rol usando el método DatosRolesUser
-                MetodoLogeo metodoLogeo = new MetodoLogeo();
-                int IdRol = metodoLogeo.ObtenerIdRolUsuario(objeto.Id);
+                UsuarioRepository usuarioRepository = new UsuarioRepository();
 
-                ActRol objetoRol = metodoLogeo.DatosRolesUser(IdRol);
+                ActRol objetoRol = usuarioRepository.GetDataRolUser(objeto.IdRol);
 
                 if (objetoRol != null)
                 {
@@ -50,7 +50,6 @@ namespace act_Application.Controllers.General
                     claims.Add(new Claim("CI", objeto.Cedula));
                     claims.Add(new Claim("Id", objeto.Id.ToString()));
                     claims.Add(new Claim("Rol", objetoRol.NombreRol));
-                    claims.Add(new Claim("IdRol", IdRol.ToString()));
                     claims.Add(new Claim("TipoUsuario", objeto.TipoUser));
                 }
 

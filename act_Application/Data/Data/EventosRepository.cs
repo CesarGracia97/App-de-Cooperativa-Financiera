@@ -1,6 +1,7 @@
 ﻿using act_Application.Helper;
 using act_Application.Models.BD;
 using MySql.Data.MySqlClient;
+using MySqlX.XDevAPI.Common;
 
 namespace act_Application.Data.Data
 {
@@ -13,7 +14,6 @@ namespace act_Application.Data.Data
         {
             string connectionString = AppSettingsHelper.GetConnectionString();
             EventosRepository result = new EventosRepository();
-
             try
             {
                 string query = ConfigReader.GetQuery("SelectEvents");
@@ -23,14 +23,13 @@ namespace act_Application.Data.Data
                     connection.Open();
 
                     using (MySqlCommand command = new MySqlCommand(query, connection))
+
                     using (MySqlDataReader reader = command.ExecuteReader())
                     {
                         if (reader.Read())
                         {
                             result.TotalEventos = Convert.ToInt32(reader["TotalEventos"]);
                             List<ActEvento> eventos = new List<ActEvento>();
-
-
                             /*He desarrollado tantos programas, trantos proyectos, trabajos y ninguno me ha hecho sentir tan antusiasmado como el kue kuiero desarrollar
                              contigo a mi lado, uno al kue kuiero poner de nombre "Relacion eterna". Uno donde ambos nos apoyemos, trabajemos, tengamos funciones iterativas
                              kue permitan el desarrollo y evolucion mutua como una Inteligencia Artificar de tipo Red Neuronal. Donde podamos crecer y resolver problemas 
@@ -38,7 +37,6 @@ namespace act_Application.Data.Data
                              Y donde kuiero kue creemos un futuro juntos como, kue fusionemos nuestras pasiones, sueños, deseos, metas, anhelos, fortalezas, debilidades
                              miedos, valores y sobre todo nuestros espiritus y creemos algo unico similar al universo en donde tu alma y la mia converjan en armonia 
                              como objetos a la espera de una union funcionalmente activa.*/
-
                             do
                             {
                                 ActEvento eve = new ActEvento
@@ -73,6 +71,49 @@ namespace act_Application.Data.Data
             }
 
             return result;
+        }
+
+        public ActEvento GetDataEventoPorId(int Id)
+        {
+            string connectionString = AppSettingsHelper.GetConnectionString();
+            try
+            {
+                string query = ConfigReader.GetQuery("SelectEventoId");
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                {
+                    connection.Open();
+                    using (MySqlCommand command = new MySqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@Id", Id);
+                        using (MySqlDataReader reader = command.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                ActEvento transaccion = new ActEvento
+                                {
+                                    Id = Convert.ToInt32(reader["Id"]),
+                                    FechaInicio = Convert.ToDateTime(reader["FechaInicio"]),
+                                    FechaFinalizacion = Convert.ToDateTime(reader["FechaFinalizacion"]),
+                                    FechaGeneracion = Convert.ToDateTime(reader["FechaGeneracion"]),
+                                    ParticipantesId = reader["ParticipantesId"].ToString(),
+                                    ParticipantesNombre = reader["ParticipantesNombre"].ToString(),
+                                    Estado = reader["Estado"].ToString(),
+                                    IdTransaccion = Convert.ToInt32(reader["IdTransaccion"])
+                                };
+                                return transaccion;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Hubo un error en la consulta de la transacción");
+                Console.WriteLine("Detalles del error: " + ex.Message);
+            }
+
+            return null;
+
         }
     }
 }

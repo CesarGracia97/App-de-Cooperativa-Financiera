@@ -1,7 +1,4 @@
-﻿using act_Application.Models.Sistema.ViewModels;
-using System.Security.Claims;
-
-namespace act_Application.Logic
+﻿namespace act_Application.Logic
 {
     public class MetodoVisualizacion
     {

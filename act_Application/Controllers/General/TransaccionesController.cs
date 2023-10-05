@@ -7,8 +7,6 @@ using System.Net.Mail;
 using System.Net;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.EntityFrameworkCore;
-using Org.BouncyCastle.Crypto;
 using act_Application.Models.Sistema.Complementos;
 
 namespace act_Application.Controllers.General

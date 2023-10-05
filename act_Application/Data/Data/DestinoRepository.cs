@@ -2,14 +2,13 @@
 using act_Application.Models.BD;
 using MySql.Data.MySqlClient;
 
-namespace act_Application.Logic
+namespace act_Application.Data.Data
 {
-    public class MetodoDestino
+    public class DestinoRepository
     {
-        public class ObetnerDestinos
+        public class Repositorio
         {
-
-            public List<ActCuentaDestino> ObtenerTodosLosRegistros()
+            public List<ActCuentaDestino> GetDataDestinos()
             {
                 string connectionString = AppSettingsHelper.GetConnectionString();
                 string Query = ConfigReader.GetQuery("SelectDestino");

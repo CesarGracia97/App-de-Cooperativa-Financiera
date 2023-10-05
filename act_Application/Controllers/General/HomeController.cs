@@ -80,8 +80,8 @@ namespace act_Application.Controllers.General
             {
                 try
                 {
-                    var metodoNotificacion = new MetodoNotificaciones();
-                    var RparticipantesOriginal = metodoNotificacion.GetRegistroParticipante(IdP);
+                    var eventoRepository = new EventosRepository();
+                    var RparticipantesOriginal = eventoRepository.GetDataEventoPorId(IdP);
 
                     if (RparticipantesOriginal == null)
                     {

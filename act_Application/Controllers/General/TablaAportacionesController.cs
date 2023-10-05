@@ -1,4 +1,4 @@
-﻿using act_Application.Logic;
+﻿using act_Application.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,8 +9,8 @@ namespace act_Application.Controllers.General
         [Authorize(Policy = "AdminSocioOnly")]
         public IActionResult Index()
         {
-            var metodoAportaciones = new MetodoAportaciones();
-            var aportaciones = metodoAportaciones.ObtenerAportaciones();
+            var aportacionesRepository = new AportacionRepository();
+            var aportaciones = aportacionesRepository.GetDataAportaciones();
 
             return View(aportaciones);
         }

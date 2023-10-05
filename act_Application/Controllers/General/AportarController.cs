@@ -44,8 +44,8 @@ namespace act_Application.Controllers.General
             ViewData["ItemsNBanco"] = ObtenerItemsNBanco();
             ViewData["ItemsRazon"] = ObtenerItemsRazon();
 
-            MetodoDestino.ObetnerDestinos obetnerDestinos = new MetodoDestino.ObetnerDestinos();
-            List<ActCuentaDestino> cbDestinos = obetnerDestinos.ObtenerTodosLosRegistros();
+            DestinoRepository.Repositorio obtenerDestino = new DestinoRepository.Repositorio();
+            List<ActCuentaDestino> cbDestinos = obtenerDestino.GetDataDestinos();
 
             // Estructurar las listas para las opciones del banco destino
             var itemCuentaBancoDestino = cbDestinos.Select(cuenta =>

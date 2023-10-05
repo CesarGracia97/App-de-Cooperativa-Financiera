@@ -1,85 +1,99 @@
 ﻿using act_Application.Helper;
 using act_Application.Models.BD;
 using MySql.Data.MySqlClient;
+using System.Data;
 
 namespace act_Application.Data.Data
 {
     public class MultaRepository
     {
-        public int TotalMultas { get; set; }
-        public List<ActMulta> Multas { get; set; }
-
-        public MultaRepository GetDataMulta()
+        public bool GetExistMultas()
         {
             string connectionString = AppSettingsHelper.GetConnectionString();
-            MultaRepository result = new MultaRepository();
-            try
+            string MultaQuery = ConfigReader.GetQuery("SelectMultas");
+
+            int totalMultas = 0; // Variable para almacenar el valor de TotalAportaciones
+
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
-                string query = ConfigReader.GetQuery("SelectMultas");
-                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                using (MySqlCommand cmd = new MySqlCommand(MultaQuery, connection))
                 {
+                    cmd.CommandType = CommandType.Text;
+
                     connection.Open();
 
-                    using (MySqlCommand command = new MySqlCommand(query, connection))
-                    using (MySqlDataReader reader = command.ExecuteReader())
+                    using (MySqlDataReader rd = cmd.ExecuteReader())
                     {
-                        if (reader.Read())
+                        if (rd.Read()) // Avanzar al primer registro
                         {
-                            result.TotalMultas = Convert.ToInt32(reader["TotalMultas"]);
-                            List<ActMulta> multas = new List<ActMulta>();
-
-                            do
-                            {
-                                ActMulta mul = new ActMulta
-                                {
-                                    Id = Convert.ToInt32(reader["Id"]),
-                                    IdUser = Convert.ToInt32(reader["IdUser"]),
-                                    Valor = Convert.ToDecimal(reader["Valor"]),
-                                    NombreUsuario = reader["Razon"].ToString(),
-                                    FechaMulta = Convert.ToDateTime(reader["FechaMulta"])
-                                };
-                                multas.Add(mul);
-                            } while (reader.Read());
-
-                            result.Multas = multas;
-
+                            totalMultas = Convert.ToInt32(rd["TotalMultas"]);
                         }
                     }
                 }
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Hubo un error en la consulta de las aportaciones.");
-                Console.WriteLine("Detalles del error: " + ex.Message);
-                result.TotalMultas = -1; // Valor negativo para indicar un error
-                result.Multas = null;
-            }
-            return result;
-
+            // Si totalAportaciones es mayor que 0, devuelve true, de lo contrario, devuelve false.
+            return totalMultas > 0;
         }
 
-        public int GetTotalMultas()
+        public List<ActMulta> GetDataMultas()
         {
             string connectionString = AppSettingsHelper.GetConnectionString();
-            try
+            string multasQuery = ConfigReader.GetQuery("SelectMultas");
+
+            List<ActMulta> multas = new List<ActMulta>();
+
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
-                string query = ConfigReader.GetQuery("SelectExistenciaMultas"); // Asegúrate de tener la consulta SQL correcta para obtener la existencia de multas
-                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                using (MySqlCommand cmd = new MySqlCommand(multasQuery, connection))
                 {
+                    cmd.CommandType = CommandType.Text;
+
                     connection.Open();
-                    using (MySqlCommand command = new MySqlCommand(query, connection))
+
+                    using (MySqlDataReader rd = cmd.ExecuteReader())
                     {
-                        int count = Convert.ToInt32(command.ExecuteScalar());
-                        return count;
+                        var multasPorUsuario = rd.Cast<IDataRecord>()
+                            .Select(r => new
+                            {
+                                Id = Convert.ToInt32(r["Id"]),
+                                IdUser = Convert.ToInt32(r["IdUser"]),
+                                Valor = Convert.ToDecimal(r["Valor"]),
+                                FechaMulta = Convert.ToDateTime(r["FechaMulta"]),
+                                NombreUsuario = r["NombreUsuario"].ToString()
+                            })
+                            .ToList();
+
+                        var multasAgrupadas = multasPorUsuario
+                            .GroupBy(m => new { m.NombreUsuario, m.FechaMulta.Month }) // Agrupamos por NombreUsuario y Mes
+                            .ToList();
+
+                        foreach (var group in multasAgrupadas)
+                        {
+                            var multa = new ActMulta
+                            {
+                                Id = group.First().Id,
+                                IdUser = group.First().IdUser,
+                                FechaMulta = group.First().FechaMulta,
+                                NombreUsuario = group.Key.NombreUsuario
+                            };
+
+                            multa.NumeroMultas = group.Count();
+                            multa.DetallesMulta = group.Select(a => new DetalleMulta
+                            {
+                                Valor = (decimal)a.Valor,
+                                FechaMulta = a.FechaMulta,
+                                Cuadrante = a.FechaMulta.Day <= 15 ? 1 : 2
+                            }).ToList();
+
+                            // Calculamos el valor total de las multas en el mes
+                            multa.Valor = group.Sum(m => m.Valor);
+
+                            multas.Add(multa);
+                        }
                     }
                 }
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Hubo un problema al momento de  realizar la consulta de la Multa");
-                Console.WriteLine("Detalles del error: " + ex.Message);
-                return -1; // Valor negativo para indicar un error
-            }
+            return multas;
         }
     }
 }
