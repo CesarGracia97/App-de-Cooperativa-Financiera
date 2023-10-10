@@ -9,9 +9,9 @@
     "SelectMultas": "SELECT (SELECT COUNT(*) FROM act_Multas) AS TotalMultas, a.Id, a.IdUser, a.Valor, a.FechaMulta,  u.NombreYApellido AS NombreUsuario FROM act_Multas a INNER JOIN act_User u ON a.IdUser = u.Id",
     "SelectAdminNotificacion": "SELECT (SELECT COUNT(*) FROM act_Notificaciones WHERE Destino = 'ADMINISTRADOR') AS TotalNotificaciones, a.* FROM act_Notificaciones a WHERE a.Destino ='ADMINISTRADOR'",
     "SelectUserNotificacion": "SELECT (SELECT COUNT(*) FROM act_Notificaciones WHERE Destino = @Id) AS TotalNotificaciones, a.* FROM act_Notificaciones a WHERE Destino = @Id",
-    "SelecTransaccionesUsuario": "SELECT (SELECT COUNT(*) FROM act_Transacciones WHERE Id = @Id) AS TotalTransacciones, a.* FROM act_Transacciones a WHERE Id = @Id",
-    "SelectEventosUsuario": "SELECT (SELECT COUNT(*) FROM act_Eventos WHERE Id = @Id) AS TotalEventos, a.* FROM act_Eventos a WHERE Id = @Id",
-    "SelectAportacionesUsuario": "SELECT (SELECT COUNT(*) FROM  act_Aportaciones WHERE IdUser=@IdUser) AS TotalAportaciones, a.Id, a.Valor, a.Aprobacion, a.NBanco FROM act_Aportaciones a WHERE a.IdUser =@IdUser",
-    "SelectMultasusuario": "SELECT (SELECT COUNT(*) FROM act_Multas WHERE IdUser =@IdUser) AS TotalMultas, a.Id, a.Valor, a.Aprobacion FROM act_Multas a WHERE a.IdUser=@IdUser"
+    "SelecTransaccionesUser": "SELECT (SELECT COUNT(*) FROM act_Transacciones WHERE Id = @Id) AS TotalTransacciones, a.* FROM act_Transacciones a WHERE Id = @Id",
+    "SelectEventosUser": "SELECT (SELECT COUNT(*) FROM act_Eventos WHERE Id = @Id) AS TotalEventos, a.* FROM act_Eventos a WHERE Id = @Id",
+    "SelectAportacionesUser": "SELECT (SELECT COUNT(*) FROM  act_Aportaciones WHERE IdUser=@IdUser) AS TotalAportaciones, a.Id, a.Valor, a.Aprobacion, a.NBanco FROM act_Aportaciones a WHERE a.IdUser =@IdUser",
+    "SelectMultasUser": "SELECT (SELECT COUNT(*) FROM act_Multas WHERE IdUser =@IdUser) AS TotalMultas, a.Id, a.Valor, a.Aprobacion FROM act_Multas a WHERE a.IdUser=@IdUser"
   }
 }

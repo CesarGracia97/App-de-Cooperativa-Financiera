@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "1AF/mC8G5IakzDVUZ/+5wp0Q0GKbiVBXlgLSrU8n/W0=",
+  "Hash": "hzpAVe47kKo4e/V9oFATJ8GPZ6PU4fv/QRDfyQT2Z+o=",
   "Source": "act_Application",
   "BasePath": "_content/act_Application",
   "Mode": "Default",
@@ -204,12 +204,12 @@
       "OriginalItemSpec": "wwwroot\\css\\General\\Home\\Esqueleto\\Esqueleto.css"
     },
     {
-      "Identity": "C:\\Users\\cgracia\\source\\repos\\CesarGracia97\\act_Application\\act_Application\\wwwroot\\css\\General\\Home\\Footer\\Botones-Footer.css",
+      "Identity": "C:\\Users\\cgracia\\source\\repos\\CesarGracia97\\act_Application\\act_Application\\wwwroot\\css\\General\\Home\\Eventos\\Eventos.css",
       "SourceId": "act_Application",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\cgracia\\source\\repos\\CesarGracia97\\act_Application\\act_Application\\wwwroot\\",
       "BasePath": "_content/act_Application",
-      "RelativePath": "css/General/Home/Footer/Botones-Footer.css",
+      "RelativePath": "css/General/Home/Eventos/Eventos.css",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -218,15 +218,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\css\\General\\Home\\Footer\\Botones-Footer.css"
+      "OriginalItemSpec": "wwwroot\\css\\General\\Home\\Eventos\\Eventos.css"
     },
     {
-      "Identity": "C:\\Users\\cgracia\\source\\repos\\CesarGracia97\\act_Application\\act_Application\\wwwroot\\css\\General\\Home\\Footer\\VentanaModal.css",
+      "Identity": "C:\\Users\\cgracia\\source\\repos\\CesarGracia97\\act_Application\\act_Application\\wwwroot\\css\\General\\Home\\Eventos\\VentanaModal.css",
       "SourceId": "act_Application",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\cgracia\\source\\repos\\CesarGracia97\\act_Application\\act_Application\\wwwroot\\",
       "BasePath": "_content/act_Application",
-      "RelativePath": "css/General/Home/Footer/VentanaModal.css",
+      "RelativePath": "css/General/Home/Eventos/VentanaModal.css",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -235,7 +235,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\css\\General\\Home\\Footer\\VentanaModal.css"
+      "OriginalItemSpec": "wwwroot\\css\\General\\Home\\Eventos\\VentanaModal.css"
     },
     {
       "Identity": "C:\\Users\\cgracia\\source\\repos\\CesarGracia97\\act_Application\\act_Application\\wwwroot\\css\\General\\Home\\Main\\Main.css",
@@ -272,23 +272,6 @@
       "OriginalItemSpec": "wwwroot\\css\\General\\Home\\Main\\TablaMain.css"
     },
     {
-      "Identity": "C:\\Users\\cgracia\\source\\repos\\CesarGracia97\\act_Application\\act_Application\\wwwroot\\css\\General\\Home\\Notification\\Notificacion.css",
-      "SourceId": "act_Application",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\cgracia\\source\\repos\\CesarGracia97\\act_Application\\act_Application\\wwwroot\\",
-      "BasePath": "_content/act_Application",
-      "RelativePath": "css/General/Home/Notification/Notificacion.css",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\css\\General\\Home\\Notification\\Notificacion.css"
-    },
-    {
       "Identity": "C:\\Users\\cgracia\\source\\repos\\CesarGracia97\\act_Application\\act_Application\\wwwroot\\css\\General\\Home\\Profile\\cardProfile.css",
       "SourceId": "act_Application",
       "SourceType": "Discovered",
@@ -304,6 +287,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\General\\Home\\Profile\\cardProfile.css"
+    },
+    {
+      "Identity": "C:\\Users\\cgracia\\source\\repos\\CesarGracia97\\act_Application\\act_Application\\wwwroot\\css\\General\\Home\\Transaccion\\Transacciones.css",
+      "SourceId": "act_Application",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\cgracia\\source\\repos\\CesarGracia97\\act_Application\\act_Application\\wwwroot\\",
+      "BasePath": "_content/act_Application",
+      "RelativePath": "css/General/Home/Transaccion/Transacciones.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\General\\Home\\Transaccion\\Transacciones.css"
     },
     {
       "Identity": "C:\\Users\\cgracia\\source\\repos\\CesarGracia97\\act_Application\\act_Application\\wwwroot\\css\\General\\Login\\Login.css",
@@ -627,6 +627,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\Menu\\Eventos\\Eventos.js"
+    },
+    {
+      "Identity": "C:\\Users\\cgracia\\source\\repos\\CesarGracia97\\act_Application\\act_Application\\wwwroot\\js\\Menu\\Localizacion\\localizacion.js",
+      "SourceId": "act_Application",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\cgracia\\source\\repos\\CesarGracia97\\act_Application\\act_Application\\wwwroot\\",
+      "BasePath": "_content/act_Application",
+      "RelativePath": "js/Menu/Localizacion/localizacion.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\Menu\\Localizacion\\localizacion.js"
     },
     {
       "Identity": "C:\\Users\\cgracia\\source\\repos\\CesarGracia97\\act_Application\\act_Application\\wwwroot\\js\\Multa\\MsjMulta.js",

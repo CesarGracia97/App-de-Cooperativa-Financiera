@@ -1,5 +1,6 @@
 ﻿using act_Application.Helper;
 using act_Application.Models.BD;
+using act_Application.Models.Sistema.Complementos;
 using MySql.Data.MySqlClient;
 using System.Data;
 
@@ -99,7 +100,7 @@ namespace act_Application.Data.Data
         public bool GetExistMultasUser(int IdUser)
         {
             string connectionString = AppSettingsHelper.GetConnectionString();
-            string aportacionesQuery = ConfigReader.GetQuery("SelectAportacionesUser");
+            string aportacionesQuery = ConfigReader.GetQuery("SelectMultasUser");
 
             int totalMultas = 0;
 
@@ -121,33 +122,35 @@ namespace act_Application.Data.Data
             return totalMultas > 0;
         }
 
-        public ActMulta GetDataMultasUser(int IdUser)
+        public List<DetallesMultasUser> GetDataMultasUser(int IdUser)
         {
             string connectionString = AppSettingsHelper.GetConnectionString();
-            string aportacionesQuery = ConfigReader.GetQuery("SelectAportacionesUser");
+            string multasQuery = ConfigReader.GetQuery("SelectMultasUser");
+
+            List<DetallesMultasUser> multas = new List<DetallesMultasUser>();
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
                 connection.Open();
-                using (MySqlCommand command = new MySqlCommand(aportacionesQuery, connection))
+                using (MySqlCommand command = new MySqlCommand(multasQuery, connection))
                 {
                     command.Parameters.AddWithValue("@IdUser", IdUser);
                     using (MySqlDataReader reader = command.ExecuteReader())
                     {
-                        if (reader.Read())
+                        while (reader.Read())
                         {
-                            ActMulta aportacione = new ActMulta
+                            DetallesMultasUser multa = new DetallesMultasUser
                             {
                                 Id = Convert.ToInt32(reader["Id"]),
                                 Valor = Convert.ToDecimal(reader["Valor"]),
                                 Aprobacion = reader["Aprobacion"].ToString()
                             };
-                            return aportacione;
+                            multas.Add(multa);
                         }
                     }
                 }
             }
-            return null;
+            return multas;
         }
     }
 }

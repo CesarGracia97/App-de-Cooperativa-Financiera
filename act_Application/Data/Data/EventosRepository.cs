@@ -78,7 +78,7 @@ namespace act_Application.Data.Data
             string connectionString = AppSettingsHelper.GetConnectionString();
             try
             {
-                string query = ConfigReader.GetQuery("SelectEventosUsuario");
+                string query = ConfigReader.GetQuery("SelectEventosUser");
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
                     connection.Open();

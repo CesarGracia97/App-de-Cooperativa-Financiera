@@ -30,11 +30,11 @@ namespace act_Application.Controllers.General
         {
             EventosRepository eventosRepository = new EventosRepository();
             var eventosData = eventosRepository.GetDataEventos();
-
+            List<Home_VM> viewModelList = new List<Home_VM>();
+            viewModelList = null;
             // Verifica si la obtención de datos fue exitosa
-            if (eventosData.TotalEventos >= 0)
+            if (eventosData.TotalEventos > 0)
             {
-                List<Home_VM> viewModelList = new List<Home_VM>();
                 foreach (var evento in eventosData.Eventos)
                 {
                     Home_VM viewModel = new Home_VM
@@ -49,11 +49,7 @@ namespace act_Application.Controllers.General
                 // Pasa la lista de Home_VM a la vista
                 return View(viewModelList);
             }
-            else
-            {
-
-                return RedirectToAction("Error", "Home");
-            }
+            return View(viewModelList);
         }
 
         public IActionResult Error()

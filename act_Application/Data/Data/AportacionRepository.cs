@@ -1,7 +1,9 @@
 ﻿using act_Application.Helper;
 using act_Application.Models.BD;
+using act_Application.Models.Sistema.Complementos;
 using MySql.Data.MySqlClient;
 using MySqlX.XDevAPI.Common;
+using System.Collections.Generic;
 using System.Data;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
@@ -60,7 +62,7 @@ namespace act_Application.Data
                             {
                                 Id = Convert.ToInt32(r["Id"]),
                                 Razon = r["Razon"].ToString(),
-                                Valor = Convert.ToSingle(r["Valor"]),
+                                Valor = Convert.ToDecimal(r["Valor"]),
                                 IdUser = Convert.ToInt32(r["IdUser"]),
                                 FechaAportacion = Convert.ToDateTime(r["FechaAportacion"]),
                                 Aprobacion = r["Aprobacion"].ToString(),
@@ -134,10 +136,12 @@ namespace act_Application.Data
             return totalAportaciones > 0;
         }
 
-        public ActAportacione GetDataAportacionesUser(int IdUser)
+        public List<DetallesAportacionesUser> GetDataAportacionesUser(int IdUser)
         {
             string connectionString = AppSettingsHelper.GetConnectionString();
             string aportacionesQuery = ConfigReader.GetQuery("SelectAportacionesUser");
+
+            List <DetallesAportacionesUser> aportaciones = new List<DetallesAportacionesUser>();
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
@@ -147,21 +151,21 @@ namespace act_Application.Data
                     command.Parameters.AddWithValue("@IdUser", IdUser);
                     using (MySqlDataReader reader = command.ExecuteReader())
                     {
-                        if (reader.Read())
+                        while (reader.Read())
                         {
-                            ActAportacione aportacione = new ActAportacione
+                            DetallesAportacionesUser aportacione = new DetallesAportacionesUser
                             {
                                 Id = Convert.ToInt32(reader["Id"]),
                                 Valor = Convert.ToDecimal(reader["Valor"]),
                                 Aprobacion = reader["Aprobacion"].ToString(),
                                 Nbanco = reader["NBanco"].ToString(),
                             };
-                            return aportacione;
+                            aportaciones.Add(aportacione);
                         }
                     }
                 }
             }
-            return null;
+            return aportaciones;
         }
     }
 }

@@ -41,12 +41,12 @@
       "PackagePath": "staticwebassets\\css\\General\\Home\\Esqueleto\\Esqueleto.css"
     },
     {
-      "Id": "C:\\Users\\cgracia\\source\\repos\\CesarGracia97\\act_Application\\act_Application\\wwwroot\\css\\General\\Home\\Footer\\Botones-Footer.css",
-      "PackagePath": "staticwebassets\\css\\General\\Home\\Footer\\Botones-Footer.css"
+      "Id": "C:\\Users\\cgracia\\source\\repos\\CesarGracia97\\act_Application\\act_Application\\wwwroot\\css\\General\\Home\\Eventos\\Eventos.css",
+      "PackagePath": "staticwebassets\\css\\General\\Home\\Eventos\\Eventos.css"
     },
     {
-      "Id": "C:\\Users\\cgracia\\source\\repos\\CesarGracia97\\act_Application\\act_Application\\wwwroot\\css\\General\\Home\\Footer\\VentanaModal.css",
-      "PackagePath": "staticwebassets\\css\\General\\Home\\Footer\\VentanaModal.css"
+      "Id": "C:\\Users\\cgracia\\source\\repos\\CesarGracia97\\act_Application\\act_Application\\wwwroot\\css\\General\\Home\\Eventos\\VentanaModal.css",
+      "PackagePath": "staticwebassets\\css\\General\\Home\\Eventos\\VentanaModal.css"
     },
     {
       "Id": "C:\\Users\\cgracia\\source\\repos\\CesarGracia97\\act_Application\\act_Application\\wwwroot\\css\\General\\Home\\Main\\Main.css",
@@ -57,12 +57,12 @@
       "PackagePath": "staticwebassets\\css\\General\\Home\\Main\\TablaMain.css"
     },
     {
-      "Id": "C:\\Users\\cgracia\\source\\repos\\CesarGracia97\\act_Application\\act_Application\\wwwroot\\css\\General\\Home\\Notification\\Notificacion.css",
-      "PackagePath": "staticwebassets\\css\\General\\Home\\Notification\\Notificacion.css"
-    },
-    {
       "Id": "C:\\Users\\cgracia\\source\\repos\\CesarGracia97\\act_Application\\act_Application\\wwwroot\\css\\General\\Home\\Profile\\cardProfile.css",
       "PackagePath": "staticwebassets\\css\\General\\Home\\Profile\\cardProfile.css"
+    },
+    {
+      "Id": "C:\\Users\\cgracia\\source\\repos\\CesarGracia97\\act_Application\\act_Application\\wwwroot\\css\\General\\Home\\Transaccion\\Transacciones.css",
+      "PackagePath": "staticwebassets\\css\\General\\Home\\Transaccion\\Transacciones.css"
     },
     {
       "Id": "C:\\Users\\cgracia\\source\\repos\\CesarGracia97\\act_Application\\act_Application\\wwwroot\\css\\General\\Login\\Login.css",
@@ -131,6 +131,10 @@
     {
       "Id": "C:\\Users\\cgracia\\source\\repos\\CesarGracia97\\act_Application\\act_Application\\wwwroot\\js\\Menu\\Eventos\\Eventos.js",
       "PackagePath": "staticwebassets\\js\\Menu\\Eventos\\Eventos.js"
+    },
+    {
+      "Id": "C:\\Users\\cgracia\\source\\repos\\CesarGracia97\\act_Application\\act_Application\\wwwroot\\js\\Menu\\Localizacion\\localizacion.js",
+      "PackagePath": "staticwebassets\\js\\Menu\\Localizacion\\localizacion.js"
     },
     {
       "Id": "C:\\Users\\cgracia\\source\\repos\\CesarGracia97\\act_Application\\act_Application\\wwwroot\\js\\Multa\\MsjMulta.js",
