@@ -120,6 +120,7 @@ public partial class DesarrolloContext : DbContext
             entity.Property(e => e.IdUser).HasColumnType("int(11)");
             entity.Property(e => e.Porcentaje).HasPrecision(10);
             entity.Property(e => e.Valor).HasPrecision(10);
+            entity.Property(e => e.Aprobacion).HasMaxLength(45);
         });
 
         modelBuilder.Entity<ActNotificacione>(entity =>

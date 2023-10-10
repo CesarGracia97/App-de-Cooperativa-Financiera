@@ -25,6 +25,8 @@ public partial class ActMulta
 
     public int Cuadrante2 { get; set; }
 
+    public string Aprobacion { get; set; }
+
     [NotMapped]
     public string NombreUsuario { get; set; }
 

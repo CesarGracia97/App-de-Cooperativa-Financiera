@@ -3,6 +3,7 @@ using act_Application.Models.BD;
 using MySql.Data.MySqlClient;
 using MySqlX.XDevAPI.Common;
 using System.Data;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace act_Application.Data
 {
@@ -106,6 +107,61 @@ namespace act_Application.Data
             }
 
             return aportaciones;
+        }
+
+        public bool GetExistApotacionesUser(int IdUser)
+        {
+            string connectionString = AppSettingsHelper.GetConnectionString();
+            string aportacionesQuery = ConfigReader.GetQuery("SelectAportacionesUser");
+
+            int totalAportaciones = 0;
+
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                connection.Open();
+                using (MySqlCommand command = new MySqlCommand(aportacionesQuery, connection))
+                {
+                    command.Parameters.AddWithValue("@IdUser", IdUser);
+                    using (MySqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            totalAportaciones = Convert.ToInt32(reader["TotalAportaciones"]);
+                        }
+                    }
+                }
+            }
+            return totalAportaciones > 0;
+        }
+
+        public ActAportacione GetDataAportacionesUser(int IdUser)
+        {
+            string connectionString = AppSettingsHelper.GetConnectionString();
+            string aportacionesQuery = ConfigReader.GetQuery("SelectAportacionesUser");
+
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                connection.Open();
+                using (MySqlCommand command = new MySqlCommand(aportacionesQuery, connection))
+                {
+                    command.Parameters.AddWithValue("@IdUser", IdUser);
+                    using (MySqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            ActAportacione aportacione = new ActAportacione
+                            {
+                                Id = Convert.ToInt32(reader["Id"]),
+                                Valor = Convert.ToDecimal(reader["Valor"]),
+                                Aprobacion = reader["Aprobacion"].ToString(),
+                                Nbanco = reader["NBanco"].ToString(),
+                            };
+                            return aportacione;
+                        }
+                    }
+                }
+            }
+            return null;
         }
     }
 }

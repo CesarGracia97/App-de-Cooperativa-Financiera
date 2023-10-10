@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "gGxm0srKoKZfaU10wRpYcQA56A0Mi32yHcwtppGAGso=",
+  "Hash": "1AF/mC8G5IakzDVUZ/+5wp0Q0GKbiVBXlgLSrU8n/W0=",
   "Source": "act_Application",
   "BasePath": "_content/act_Application",
   "Mode": "Default",
@@ -253,6 +253,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\General\\Home\\Main\\Main.css"
+    },
+    {
+      "Identity": "C:\\Users\\cgracia\\source\\repos\\CesarGracia97\\act_Application\\act_Application\\wwwroot\\css\\General\\Home\\Main\\TablaMain.css",
+      "SourceId": "act_Application",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\cgracia\\source\\repos\\CesarGracia97\\act_Application\\act_Application\\wwwroot\\",
+      "BasePath": "_content/act_Application",
+      "RelativePath": "css/General/Home/Main/TablaMain.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\General\\Home\\Main\\TablaMain.css"
     },
     {
       "Identity": "C:\\Users\\cgracia\\source\\repos\\CesarGracia97\\act_Application\\act_Application\\wwwroot\\css\\General\\Home\\Notification\\Notificacion.css",

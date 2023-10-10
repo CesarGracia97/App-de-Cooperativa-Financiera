@@ -6,15 +6,18 @@
 
     var eventosRepository = new EventosRepository();
     int contadorEventos = eventosRepository.GetDataEventos().TotalEventos;
+    var valorVisualizacion = new MetodoVisualizacion();
+    var userIdClaim = User.Claims.FirstOrDefault(c => c.Type == "Id");
 }
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/css/General/Home/Esqueleto/Esqueleto.css" />
     <link rel="stylesheet" href="/css/General/Home/Profile/cardProfile.css" />
-    <link rel="stylesheet" href="/css/General/Home/Main/Main.css" />
+    <link rel="stylesheet" href="/css/General/Home/Main/TablaMain.css" />
     <link rel="stylesheet" href="/css/General/Home/Footer/Botones-Footer.css" />
     <link rel="stylesheet" href="/css/General/Home/Footer/VentanaModal.css" />
+    <link rel="stylesheet" href="/css/General/Home/Date-Place/DatePlace.css" />
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="/js/Menu/Eventos/Eventos.js"></script>
@@ -34,22 +37,34 @@
             </div>
         </div>
         <div class="item2">
-            <label class="item2-title">item2</label>
+            <label class="item2-title">Fecha Actual: </label>
         </div>
         <div class="item3">
-            <label class="item3-title">item3</label>
+            <label class="item3-title">Ubicacion Actual: </label>
         </div>
         <div class="item4">
-            <label class="item4-title">item4</label>
+            <label class="item4-title">Transacciones:  </label>
         </div>
         <div class="item5">
             <table class="main">
                 <tr>
-                    <td class="col-aport">Contenido Aportaciones</td>
-                    <td class="col-mult">Contenido Multas</td>
+                    <td class="col-aport">
+                        <label class="Taportacioes">Total de Aportaciones: </label>
+                        <label class="Vaportacioes" >Valor de Aportaciones: </label>
+                        <label class="CbancariaUsadas">Banco mas Usado: </label>
+                        <label class="Aaprobadas">Aportaciones Aprobadas</label>
+                    </td>
+                    <td class="col-mult">
+                        <label class="TMultas">Total de Multas: </label>
+                        <label class="VMultas">Valor de Multas: </label>
+                        <label class="MCanceladas">Multas Canceladas: </label>
+                        <label class="MFaltantes">Multas Restantes: </label>
+                    </td>
                 </tr>
                 <tr>
-                    <td class="col-part" colspan="2">Contenido Parte</td>
+                    <td class="col-part" colspan="2">
+                        <label class="TEvent">Total de Eventos Participados</label>
+                    </td>
                 </tr>
             </table>
         </div>
@@ -66,8 +81,7 @@
                     {
                         @if(evento.Eventos.Estado =="CONCURSO")
                         {
-                            var valorVisualizacion = new MetodoVisualizacion();
-                            var userIdClaim = User.Claims.FirstOrDefault(c => c.Type == "Id");
+
                             @if (userIdClaim != null && int.TryParse(userIdClaim.Value, out int userId))
                             {
                                 var userIdentificacion = User.Claims.FirstOrDefault(c => c.Type == System.Security.Claims.ClaimTypes.Name)?.Value;

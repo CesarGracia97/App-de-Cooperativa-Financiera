@@ -1,0 +1,37 @@
+﻿/* CSS para la tabla dentro de item5 */
+.item5 {
+    padding: 15px 15px 15px 15px;
+}
+
+.main {
+    margin: 4px;
+    width: 100%;
+    border-collapse: collapse;
+    background-color: transparent;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 50px;
+}
+
+    .main tr {
+        background-color: rgba(255, 255, 255, 0.9); /* Fondo con opacidad */
+    }
+
+    .main td {
+        border: 5px;
+        margin: 5px;
+        padding: 10px;
+        text-align: center;
+        border-radius: 8px;
+        width: 50%;
+    }
+
+.col-aport label,
+.col-mult label {
+    font-size: 10pt;
+}
+
+.col-aport label,
+.col-mult label {
+    display: flex;
+    margin-bottom: 5px; /* Puedes ajustar el valor según tus preferencias */
+}

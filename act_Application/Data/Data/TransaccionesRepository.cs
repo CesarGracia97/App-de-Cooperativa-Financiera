@@ -12,13 +12,13 @@ namespace act_Application.Data.Data
             string connectionString = AppSettingsHelper.GetConnectionString();
             try
             {
-                string query = ConfigReader.GetQuery("SelecInfoTransacciones");
+                string query = ConfigReader.GetQuery("SelectTransaccionesUsuario");
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
                     connection.Open();
                     using (MySqlCommand command = new MySqlCommand(query, connection))
                     {
-                        command.Parameters.AddWithValue("@IdTransacciones", idTransacciones);
+                        command.Parameters.AddWithValue("@Id", idTransacciones);
                         using (MySqlDataReader reader = command.ExecuteReader())
                         {
                             if (reader.Read())

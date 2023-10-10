@@ -95,5 +95,59 @@ namespace act_Application.Data.Data
             }
             return multas;
         }
+    
+        public bool GetExistMultasUser(int IdUser)
+        {
+            string connectionString = AppSettingsHelper.GetConnectionString();
+            string aportacionesQuery = ConfigReader.GetQuery("SelectAportacionesUser");
+
+            int totalMultas = 0;
+
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                connection.Open();
+                using (MySqlCommand command = new MySqlCommand(aportacionesQuery, connection))
+                {
+                    command.Parameters.AddWithValue("@IdUser", IdUser);
+                    using (MySqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            totalMultas = Convert.ToInt32(reader["TotalMultas"]);
+                        }
+                    }
+                }
+            }
+            return totalMultas > 0;
+        }
+
+        public ActMulta GetDataMultasUser(int IdUser)
+        {
+            string connectionString = AppSettingsHelper.GetConnectionString();
+            string aportacionesQuery = ConfigReader.GetQuery("SelectAportacionesUser");
+
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                connection.Open();
+                using (MySqlCommand command = new MySqlCommand(aportacionesQuery, connection))
+                {
+                    command.Parameters.AddWithValue("@IdUser", IdUser);
+                    using (MySqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            ActMulta aportacione = new ActMulta
+                            {
+                                Id = Convert.ToInt32(reader["Id"]),
+                                Valor = Convert.ToDecimal(reader["Valor"]),
+                                Aprobacion = reader["Aprobacion"].ToString()
+                            };
+                            return aportacione;
+                        }
+                    }
+                }
+            }
+            return null;
+        }
     }
 }
