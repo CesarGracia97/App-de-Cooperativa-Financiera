@@ -122,12 +122,13 @@ namespace act_Application.Data.Data
             return totalMultas > 0;
         }
 
-        public List<DetallesMultasUser> GetDataMultasUser(int IdUser)
+        public List<DetallesMultasUsers> GetDataMultasUser(int IdUser)
         {
             string connectionString = AppSettingsHelper.GetConnectionString();
             string multasQuery = ConfigReader.GetQuery("SelectMultasUser");
 
-            List<DetallesMultasUser> multas = new List<DetallesMultasUser>();
+            List<DetallesMultasUsers> multas = new List<DetallesMultasUsers>();
+            DetallesMultasUsers detallesMultas = new DetallesMultasUsers();
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
@@ -139,17 +140,29 @@ namespace act_Application.Data.Data
                     {
                         while (reader.Read())
                         {
-                            DetallesMultasUser multa = new DetallesMultasUser
+                            detallesMultas.TotalMultas = Convert.ToInt32(reader["TotalMultas"]);
+                            detallesMultas.TotalAprobados = Convert.ToInt32(reader["TotalAprobados"]);
+                        }
+
+                        multas.Add(detallesMultas); // Agrega el objeto con el total de multas
+
+                        reader.NextResult(); // Mueve al siguiente resultado
+
+                        while (reader.Read())
+                        {
+                            DetallesMultasUsers.DetallesMultasUser multa = new DetallesMultasUsers.DetallesMultasUser
                             {
                                 Id = Convert.ToInt32(reader["Id"]),
                                 Valor = Convert.ToDecimal(reader["Valor"]),
                                 Aprobacion = reader["Aprobacion"].ToString()
                             };
-                            multas.Add(multa);
+
+                            detallesMultas.Detalles.Add(multa); // Agrega el detalle de la multa
                         }
                     }
                 }
             }
+
             return multas;
         }
     }

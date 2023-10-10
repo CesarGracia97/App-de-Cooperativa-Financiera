@@ -136,12 +136,13 @@ namespace act_Application.Data
             return totalAportaciones > 0;
         }
 
-        public List<DetallesAportacionesUser> GetDataAportacionesUser(int IdUser)
+        public List<DetallesAportacionesUsers> GetDataAportacionesUser(int IdUser)
         {
             string connectionString = AppSettingsHelper.GetConnectionString();
             string aportacionesQuery = ConfigReader.GetQuery("SelectAportacionesUser");
 
-            List <DetallesAportacionesUser> aportaciones = new List<DetallesAportacionesUser>();
+            List <DetallesAportacionesUsers> aportaciones = new List<DetallesAportacionesUsers>();
+            DetallesAportacionesUsers detallesAportaciones = new DetallesAportacionesUsers();
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
@@ -153,14 +154,21 @@ namespace act_Application.Data
                     {
                         while (reader.Read())
                         {
-                            DetallesAportacionesUser aportacione = new DetallesAportacionesUser
+                            detallesAportaciones.TotalAportaciones = Convert.ToInt32(reader["TotalAportaciones"]);
+                            detallesAportaciones.TotalAprobados = Convert.ToInt32(reader["TotalAprobados"]);
+                        }
+                        aportaciones.Add(detallesAportaciones);
+                        reader.NextResult(); // Mueve al siguiente resultado
+
+                        while (reader.Read())
+                        {
+                            DetallesAportacionesUsers.DetallesAportacionesUser aportacion = new DetallesAportacionesUsers.DetallesAportacionesUser
                             {
                                 Id = Convert.ToInt32(reader["Id"]),
                                 Valor = Convert.ToDecimal(reader["Valor"]),
                                 Aprobacion = reader["Aprobacion"].ToString(),
-                                Nbanco = reader["NBanco"].ToString(),
+                                Nbanco = reader["Nbanco"].ToString()
                             };
-                            aportaciones.Add(aportacione);
                         }
                     }
                 }
