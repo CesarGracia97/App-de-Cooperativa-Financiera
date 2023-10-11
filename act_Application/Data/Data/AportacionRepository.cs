@@ -163,7 +163,7 @@ namespace act_Application.Data
                         decimal aportacionesAcumuladas = 0;
                         while (reader.Read())
                         {
-                            DetallesAportacionesUsers.DetallesAportacionesUser aportacion = new DetallesAportacionesUsers.DetallesAportacionesUser
+                            DetallesAportacionesUsers.DetallesPorAportacion aportacion = new DetallesAportacionesUsers.DetallesPorAportacion
                             {
                                 Id = Convert.ToInt32(reader["Id"]),
                                 Valor = Convert.ToDecimal(reader["Valor"]),

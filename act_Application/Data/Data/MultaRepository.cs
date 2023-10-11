@@ -150,7 +150,7 @@ namespace act_Application.Data.Data
 
                         while (reader.Read())
                         {
-                            DetallesMultasUsers.DetallesMultasUser multa = new DetallesMultasUsers.DetallesMultasUser
+                            DetallesMultasUsers.DetallesPorMulta multa = new DetallesMultasUsers.DetallesPorMulta
                             {
                                 Id = Convert.ToInt32(reader["Id"]),
                                 Valor = Convert.ToDecimal(reader["Valor"]),

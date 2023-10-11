@@ -53,36 +53,39 @@
             </div>
             <div class="item5">
                 <table class="main">
-                    <tr>
-                        <td class="col-aport">
-                            @if (aportacionRepository.GetExistApotacionesUser(userId) == true)
-                            {
-                                <label class="Taportacioes">Total de Aportaciones: </label>
-                                <label class="Aaprobadas">Aportaciones Aprobadas: </label>
-                                <label class="Aaprobadas">Aportaciones En Espera: </label>
-                                <label class="Vaportacioes">Valor de Aportaciones Totales: </label>
-                                <label class="CbancariaUsadas">Banco mas Usado: </label>
+                    @foreach(var item in Model)
+                    {
+                        <tr>
+                            <td class="col-aport">
+                                @if (aportacionRepository.GetExistApotacionesUser(userId) == true)
+                                {
+                                    <label class="Taportacioes">Total de Aportaciones:@item.AportacionesUser.TotalAportaciones </label>
+                                    <label class="Aaprobadas">Aportaciones Aprobadas: </label>
+                                    <label class="Aaprobadas">Aportaciones En Espera: </label>
+                                    <label class="Vaportacioes">Valor de Aportaciones Totales:</label>
+                                    <label class="CbancariaUsadas">Banco mas Usado: </label>
 
-                            }
-                            else
-                            {
-                                <label>No presentas datos de Aportaciones</label>
-                            }
-                        </td>
-                        <td class="col-mult">
-                            @if(multaRepository.GetExistMultasUser(userId) == true)
-                            {
-                                <label class="TMultas">Total de Multas: </label>
-                                <label class="VMultas">Valor de Multas: </label>
-                                <label class="MCanceladas">Multas Canceladas: </label>
-                                <label class="MFaltantes">Multas Restantes: </label>
-                            }
-                            else
-                            {
-                                <label>No presentas datos de Multas</label>
-                            }
-                        </td>
-                    </tr>
+                                }
+                                else
+                                {
+                                    <label>No presentas datos de Aportaciones</label>
+                                }
+                            </td>
+                            <td class="col-mult">
+                                @if (multaRepository.GetExistMultasUser(userId) == true)
+                                {
+                                    <label class="TMultas">Total de Multas: </label>
+                                    <label class="MCanceladas">Multas Canceladas: </label>
+                                    <label class="VMultas">Valor de Multas: </label>
+                                }
+                                else
+                                {
+                                    <label>No presentas datos de Multas</label>
+                                }
+                            </td>
+                        </tr>
+
+                    }
                     <tr>
                         <td class="col-part" colspan="2">
                             <label class="TEvent">Total de Eventos Participados</label>

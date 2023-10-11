@@ -11,6 +11,8 @@ using Microsoft.EntityFrameworkCore;
 using act_Application.Data.Data;
 using System.Security.Claims;
 using System.Linq;
+using act_Application.Data;
+using static act_Application.Models.Sistema.Complementos.DetallesAportacionesUsers;
 
 namespace act_Application.Controllers.General
 {
@@ -28,30 +30,55 @@ namespace act_Application.Controllers.General
         [Authorize]
         public IActionResult Menu()
         {
-            EventosRepository eventosRepository = new EventosRepository();
-            var eventosData = eventosRepository.GetDataEventos();
-            List<Home_VM> viewModelList = new List<Home_VM>();
-            viewModelList = null;
-            // Verifica si la obtención de datos fue exitosa
-            if (eventosData.TotalEventos > 0)
+            var userIdClaim = User.Claims.FirstOrDefault(c => c.Type == "Id");
+            if (userIdClaim != null && int.TryParse(userIdClaim.Value, out int userId))
             {
-                foreach (var evento in eventosData.Eventos)
+                AportacionRepository aportacionRepository = new AportacionRepository();
+                MultaRepository multaRepository = new MultaRepository();
+                var multaUserList = multaRepository.GetDataMultasUser(userId);
+                var aportacionesUserList = aportacionRepository.GetDataAportacionesUser(userId);
+                var multaUser = multaUserList.FirstOrDefault();
+                var aportacionesUser = aportacionesUserList.FirstOrDefault();
+
+                EventosRepository eventosRepository = new EventosRepository();
+                var eventosData = eventosRepository.GetDataEventos();
+                List<Home_VM> viewModelList = new List<Home_VM>();
+
+                // Verifica si la obtención de datos fue exitosa
+                if (eventosRepository != null && aportacionesUserList.Count > 0)
                 {
-                    Home_VM viewModel = new Home_VM
+                    foreach (var evento in eventosData.Eventos)
                     {
-                        Eventos = evento,  // Asigna los datos del evento a la propiedad correspondiente de Home_VM
-                        Transacciones = _context.ActTransacciones.FirstOrDefault(t => t.Id == evento.IdTransaccion)
-                    };
+                        Home_VM viewModel = new Home_VM
+                        {
+                            Eventos = evento,
+                            Transacciones = _context.ActTransacciones.FirstOrDefault(t => t.Id == evento.IdTransaccion),
+                            AportacionesUser = new Models.Sistema.Complementos.DetallesAportacionesUsers
+                            {
+                                AportacionesAcumuladas = aportacionesUser.AportacionesAcumuladas,
+                                TotalAportaciones = aportacionesUser.TotalAportaciones,
+                                TotalAprobados = aportacionesUser.TotalAprobados,
+                                TotalEspera = aportacionesUser.TotalEspera
+                            },
+                            MultaUser = new Models.Sistema.Complementos.DetallesMultasUsers
+                            {
+                                MultasAcumuladas = multaUser.MultasAcumuladas,
+                                TotalMultas = multaUser.TotalMultas,
+                                TotalCancelados = multaUser.TotalCancelados
 
-                    viewModelList.Add(viewModel);
+                            }
+                        };
+
+                        viewModelList.Add(viewModel);
+                    }
+
+                    // Pasa la lista de Home_VM a la vista
+                    return View(viewModelList);
                 }
-
-                // Pasa la lista de Home_VM a la vista
-                return View(viewModelList);
             }
-            return View(viewModelList);
-        }
 
+            return View(new List<Home_VM>()); // Devuelve una lista vacía si no se cumple la condición
+        }
         public IActionResult Error()
         {
             return View();

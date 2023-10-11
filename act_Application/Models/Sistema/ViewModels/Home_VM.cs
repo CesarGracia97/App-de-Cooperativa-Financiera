@@ -9,9 +9,9 @@ namespace act_Application.Models.Sistema.ViewModels
 
             AportacionesUser = new DetallesAportacionesUsers();
 
-            Eventos = new ActEvento();
-
             MultaUser = new DetallesMultasUsers();
+
+            Eventos = new ActEvento();
 
             Transacciones = new ActTransaccione();
 
@@ -19,13 +19,9 @@ namespace act_Application.Models.Sistema.ViewModels
 
         }
         public DetallesAportacionesUsers AportacionesUser { get; set; }
-
-        public ActEvento Eventos { get; set; }
-
         public DetallesMultasUsers MultaUser { get; set; }
-
+        public ActEvento Eventos { get; set; }
         public ActTransaccione Transacciones { get; set; }
-
         public ActCuota Cuotas { get; set; }
     }
 }

@@ -67,7 +67,7 @@ namespace act_Application.Controllers.General
                 }
                 catch(Exception ex)
                 {
-                    Thread.Sleep(5000);
+                    Thread.Sleep(1000);
                     Console.WriteLine("Hubo un problema al enviar la notificación por correo electrónico.");
                     Console.WriteLine("Detalles del error: " + ex.Message);
                 }
