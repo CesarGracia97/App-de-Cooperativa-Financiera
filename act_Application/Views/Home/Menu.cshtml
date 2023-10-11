@@ -26,7 +26,6 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="/js/Menu/Eventos/Eventos.js"></script>
     <script src="/js/Menu/Localizacion/localizacion.js"></script>
-
 </head>
 <body>
     @if (userIdClaim != null && int.TryParse(userIdClaim.Value, out int userId))
@@ -59,9 +58,11 @@
                             @if (aportacionRepository.GetExistApotacionesUser(userId) == true)
                             {
                                 <label class="Taportacioes">Total de Aportaciones: </label>
-                                <label class="Vaportacioes">Valor de Aportaciones: </label>
+                                <label class="Aaprobadas">Aportaciones Aprobadas: </label>
+                                <label class="Aaprobadas">Aportaciones En Espera: </label>
+                                <label class="Vaportacioes">Valor de Aportaciones Totales: </label>
                                 <label class="CbancariaUsadas">Banco mas Usado: </label>
-                                <label class="Aaprobadas">Aportaciones Aprobadas</label>
+
                             }
                             else
                             {

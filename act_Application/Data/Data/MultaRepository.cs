@@ -100,14 +100,14 @@ namespace act_Application.Data.Data
         public bool GetExistMultasUser(int IdUser)
         {
             string connectionString = AppSettingsHelper.GetConnectionString();
-            string aportacionesQuery = ConfigReader.GetQuery("SelectMultasUser");
+            string multaQuery = ConfigReader.GetQuery("SelectMultasUser");
 
             int totalMultas = 0;
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
                 connection.Open();
-                using (MySqlCommand command = new MySqlCommand(aportacionesQuery, connection))
+                using (MySqlCommand command = new MySqlCommand(multaQuery, connection))
                 {
                     command.Parameters.AddWithValue("@IdUser", IdUser);
                     using (MySqlDataReader reader = command.ExecuteReader())
@@ -141,12 +141,12 @@ namespace act_Application.Data.Data
                         while (reader.Read())
                         {
                             detallesMultas.TotalMultas = Convert.ToInt32(reader["TotalMultas"]);
-                            detallesMultas.TotalAprobados = Convert.ToInt32(reader["TotalAprobados"]);
+                            detallesMultas.TotalCancelados = Convert.ToInt32(reader["TotalCancelados"]);
                         }
 
-                        multas.Add(detallesMultas); // Agrega el objeto con el total de multas
-
                         reader.NextResult(); // Mueve al siguiente resultado
+
+                        decimal multasAcumuladas = 0;
 
                         while (reader.Read())
                         {
@@ -156,13 +156,14 @@ namespace act_Application.Data.Data
                                 Valor = Convert.ToDecimal(reader["Valor"]),
                                 Aprobacion = reader["Aprobacion"].ToString()
                             };
-
-                            detallesMultas.Detalles.Add(multa); // Agrega el detalle de la multa
+                            detallesMultas.Detalles.Add(multa);
+                            multasAcumuladas += multa.Valor;
                         }
+                        detallesMultas.MultasAcumuladas = multasAcumuladas;
                     }
                 }
             }
-
+            multas.Add(detallesMultas); 
             return multas;
         }
     }

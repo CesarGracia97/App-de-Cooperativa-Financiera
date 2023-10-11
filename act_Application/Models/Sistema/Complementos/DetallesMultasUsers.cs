@@ -9,8 +9,8 @@
             public string Aprobacion { get; set; }
         }
         public List<DetallesMultasUser> Detalles { get; set; }
+        public decimal MultasAcumuladas { get; set; }
         public int TotalMultas {  get; set; }
-        public int TotalAprobados {  get; set; }
-
+        public int TotalCancelados {  get; set; }
     }
 }

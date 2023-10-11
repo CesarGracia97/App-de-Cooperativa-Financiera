@@ -141,7 +141,7 @@ namespace act_Application.Data
             string connectionString = AppSettingsHelper.GetConnectionString();
             string aportacionesQuery = ConfigReader.GetQuery("SelectAportacionesUser");
 
-            List <DetallesAportacionesUsers> aportaciones = new List<DetallesAportacionesUsers>();
+            List<DetallesAportacionesUsers> aportaciones = new List<DetallesAportacionesUsers>();
             DetallesAportacionesUsers detallesAportaciones = new DetallesAportacionesUsers();
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
@@ -156,10 +156,11 @@ namespace act_Application.Data
                         {
                             detallesAportaciones.TotalAportaciones = Convert.ToInt32(reader["TotalAportaciones"]);
                             detallesAportaciones.TotalAprobados = Convert.ToInt32(reader["TotalAprobados"]);
+                            detallesAportaciones.TotalEspera = Convert.ToInt32(reader["TotalEspera"]);
                         }
-                        aportaciones.Add(detallesAportaciones);
-                        reader.NextResult(); // Mueve al siguiente resultado
 
+                        reader.NextResult(); 
+                        decimal aportacionesAcumuladas = 0;
                         while (reader.Read())
                         {
                             DetallesAportacionesUsers.DetallesAportacionesUser aportacion = new DetallesAportacionesUsers.DetallesAportacionesUser
@@ -169,10 +170,16 @@ namespace act_Application.Data
                                 Aprobacion = reader["Aprobacion"].ToString(),
                                 Nbanco = reader["Nbanco"].ToString()
                             };
+
+                            detallesAportaciones.Detalles.Add(aportacion);
+                            aportacionesAcumuladas += aportacion.Valor;
                         }
+                        detallesAportaciones.AportacionesAcumuladas = aportacionesAcumuladas;
                     }
                 }
             }
+
+            aportaciones.Add(detallesAportaciones);
             return aportaciones;
         }
     }

@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
@@ -10,9 +10,13 @@
 
   <ItemGroup>
     <Compile Remove="Controllers\Administrador\Sistema\**" />
+    <Compile Remove="sql\**" />
     <Content Remove="Controllers\Administrador\Sistema\**" />
+    <Content Remove="sql\**" />
     <EmbeddedResource Remove="Controllers\Administrador\Sistema\**" />
+    <EmbeddedResource Remove="sql\**" />
     <None Remove="Controllers\Administrador\Sistema\**" />
+    <None Remove="sql\**" />
   </ItemGroup>
 
   <ItemGroup>
