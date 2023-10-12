@@ -6,7 +6,6 @@
     ViewBag.Title = "Home";
 
     var eventosRepository = new EventosRepository();
-    int contadorEventos = eventosRepository.GetDataEventos().TotalEventos;
     var valorVisualizacion = new MetodoVisualizacion();
     var aportacionRepository = new AportacionRepository();
     var multaRepository = new MultaRepository();
@@ -53,39 +52,42 @@
             </div>
             <div class="item5">
                 <table class="main">
-                    @foreach(var item in Model)
-                    {
                         <tr>
                             <td class="col-aport">
-                                @if (aportacionRepository.GetExistApotacionesUser(userId) == true)
+                            @if(aportacionRepository.GetExistApotacionesUser(userId) == true)
+                            {
+                                var firstModel = Model.FirstOrDefault();
+                                if (firstModel != null)
                                 {
-                                    <label class="Taportacioes">Total de Aportaciones:@item.AportacionesUser.TotalAportaciones </label>
-                                    <label class="Aaprobadas">Aportaciones Aprobadas: </label>
-                                    <label class="Aaprobadas">Aportaciones En Espera: </label>
-                                    <label class="Vaportacioes">Valor de Aportaciones Totales:</label>
+                                    <label class="Taportacioes">Total de Aportaciones: @firstModel.AportacionesUser.TotalAportaciones</label>
+                                    <label class="Aaprobadas">Aportaciones Aprobadas: @firstModel.AportacionesUser.TotalAprobados</label>
+                                    <label class="Aaprobadas">Aportaciones En Espera: @firstModel.AportacionesUser.TotalEspera</label>
+                                    <label class="Vaportacioes">Valor de Aportaciones Totales: @firstModel.AportacionesUser.AportacionesAcumuladas</label>
                                     <label class="CbancariaUsadas">Banco mas Usado: </label>
-
                                 }
-                                else
-                                {
-                                    <label>No presentas datos de Aportaciones</label>
-                                }
+                            }
+                            else
+                            {
+                                <label>Por el Momento no tienes Aportaciones Realizadas</label>
+                            }
                             </td>
                             <td class="col-mult">
-                                @if (multaRepository.GetExistMultasUser(userId) == true)
+                            @if(multaRepository.GetExistMultasUser(userId) == true)
+                            {
+                                var firstModel = Model.FirstOrDefault();
+                                if (firstModel != null)
                                 {
-                                    <label class="TMultas">Total de Multas: </label>
-                                    <label class="MCanceladas">Multas Canceladas: </label>
-                                    <label class="VMultas">Valor de Multas: </label>
+                                    <label class="TMultas">Total de Multas: @firstModel.MultaUser.TotalMultas</label>
+                                    <label class="MCanceladas">Multas Canceladas: @firstModel.MultaUser.TotalCancelados</label>
+                                    <label class="VMultas">Valor de Multas: @firstModel.MultaUser.MultasAcumuladas</label>
                                 }
-                                else
-                                {
-                                    <label>No presentas datos de Multas</label>
-                                }
+                            }
+                            else
+                            {
+                                <label>Por el Momento no presentas Multas</label>
+                            }
                             </td>
                         </tr>
-
-                    }
                     <tr>
                         <td class="col-part" colspan="2">
                             <label class="TEvent">Total de Eventos Participados</label>
@@ -100,11 +102,11 @@
                     </div>
                 </div>
                 <div class="fila-infr">
-                    @if (contadorEventos > 0)
+                    @if (eventosRepository.GetExistEventos() == true)
                     {
                         @foreach (var evento in Model)
                         {
-                            @if (evento.Eventos.Estado == "CONCURSO")
+                            @if (userId != evento.Eventos.IdUser && evento.Eventos.Estado == "CONCURSO")
                             {
                                 var userIdentificacion = User.Claims.FirstOrDefault(c => c.Type == System.Security.Claims.ClaimTypes.Name)?.Value;
                                 @if (valorVisualizacion.CondicionVisualizacion(userId, userIdentificacion, evento.Eventos.ParticipantesNombre, evento.Eventos.ParticipantesId) == true)

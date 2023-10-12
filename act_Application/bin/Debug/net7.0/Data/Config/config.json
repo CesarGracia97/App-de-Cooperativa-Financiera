@@ -1,15 +1,15 @@
 ﻿{
   "Queries": {
-    "SelecUsuario": "SELECT u.Id, u.Cedula, u.Correo, u.NombreYApellido, u.Celular, u.TipoUser, r.IdRol FROM act_User u LEFT JOIN act_RolUser r ON u.Id = r.IdUser WHERE u.Correo = @Correo AND u.Contrasena = @Contrasena",
+    "SelectUsuario": "SELECT u.Id, u.Cedula, u.Correo, u.NombreYApellido, u.Celular, u.TipoUser, r.IdRol FROM act_User u LEFT JOIN act_RolUser r ON u.Id = r.IdUser WHERE u.Correo = @Correo AND u.Contrasena = @Contrasena",
     "SelectRol": "SELECT * FROM act_Rol WHERE Id = @IdRol",
     "SelectEmail": "SELECT Correo FROM act_User Where Id =1",
     "SelectDestino": "SELECT Id, NumeroCuenta, NombreBanco FROM act_CuentaDestino",
-    "SelectEvents": "SELECT (SELECT COUNT(*) FROM act_Eventos WHERE Estado = 'CONCURSO') AS TotalEventos, x.Id, x.IdTransaccion, x.FechaInicio, x.FechaFinalizacion, x.FechaGeneracion, x.ParticipantesId, x.ParticipantesNombre, x.Estado, u.NombreYApellido AS NombreUsuario FROM act_Eventos x INNER JOIN act_User u ON x.IdUser = u.Id WHERE x.Estado = 'CONCURSO'",
+    "SelectEvents": "SELECT (SELECT COUNT(*) FROM act_Eventos WHERE Estado = 'CONCURSO') AS TotalEventos, x.Id, x.IdUser, x.IdTransaccion, x.FechaInicio, x.FechaFinalizacion, x.FechaGeneracion, x.ParticipantesId, x.ParticipantesNombre, x.Estado, u.NombreYApellido AS NombreUsuario FROM act_Eventos x INNER JOIN act_User u ON x.IdUser = u.Id WHERE x.Estado = 'CONCURSO'",
     "SelectAportaciones": "SELECT (SELECT COUNT(*) FROM act_Aportaciones) AS TotalAportaciones, a.Id, a.Razon, a.Valor, a.IdUser, a.FechaAportacion, a.Aprobacion, a.CapturaPantalla, u.NombreYapellido AS NombreUsuario FROM act_Aportaciones a INNER JOIN act_User u ON a.IdUser = u.Id",
     "SelectMultas": "SELECT (SELECT COUNT(*) FROM act_Multas) AS TotalMultas, a.Id, a.IdUser, a.Valor, a.FechaMulta,  u.NombreYApellido AS NombreUsuario FROM act_Multas a INNER JOIN act_User u ON a.IdUser = u.Id",
     "SelectAdminNotificacion": "SELECT (SELECT COUNT(*) FROM act_Notificaciones WHERE Destino = 'ADMINISTRADOR') AS TotalNotificaciones, a.* FROM act_Notificaciones a WHERE a.Destino ='ADMINISTRADOR'",
     "SelectUserNotificacion": "SELECT (SELECT COUNT(*) FROM act_Notificaciones WHERE Destino = @Id) AS TotalNotificaciones, a.* FROM act_Notificaciones a WHERE Destino = @Id",
-    "SelecTransaccionesUser": "SELECT (SELECT COUNT(*) FROM act_Transacciones WHERE Id = @Id) AS TotalTransacciones, a.* FROM act_Transacciones a WHERE Id = @Id",
+    "SelectTransaccionesUser": "SELECT (SELECT COUNT(*) FROM act_Transacciones WHERE Id = @Id) AS TotalTransacciones, a.* FROM act_Transacciones a WHERE Id = @Id",
     "SelectEventosUser": "SELECT (SELECT COUNT(*) FROM act_Eventos WHERE Id = @Id) AS TotalEventos, a.* FROM act_Eventos a WHERE Id = @Id",
     "SelectAportacionesUser": "SELECT (SELECT COUNT(*) FROM  act_Aportaciones WHERE IdUser = @IdUser) AS TotalAportaciones, (SELECT COUNT(*) FROM  act_Aportaciones WHERE Aprobacion='APROBADO' AND IdUser = @IdUser) AS TotalAprobados, (SELECT COUNT(*) FROM  act_Aportaciones WHERE Aprobacion='EN ESPERA' AND IdUser = @IdUser) AS TotalEspera, a.Id, a.Valor, a.Aprobacion, a.NBanco FROM act_Aportaciones a WHERE a.IdUser = @IdUser",
     "SelectMultasUser": "SELECT (SELECT COUNT(*) FROM act_Multas WHERE IdUser = @IdUser) AS TotalMultas, (SELECT COUNT(*) FROM act_Multas WHERE Aprobacion='CANCELADO' AND IdUser = @IdUser) AS TotalCancelados, a.Id, a.Valor, a.Aprobacion FROM act_Multas a WHERE a.IdUser=@IdUser"

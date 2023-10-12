@@ -138,18 +138,11 @@ namespace act_Application.Data.Data
                     command.Parameters.AddWithValue("@IdUser", IdUser);
                     using (MySqlDataReader reader = command.ExecuteReader())
                     {
+                        decimal multasAcumuladas = 0;
                         while (reader.Read())
                         {
                             detallesMultas.TotalMultas = Convert.ToInt32(reader["TotalMultas"]);
                             detallesMultas.TotalCancelados = Convert.ToInt32(reader["TotalCancelados"]);
-                        }
-
-                        reader.NextResult(); // Mueve al siguiente resultado
-
-                        decimal multasAcumuladas = 0;
-
-                        while (reader.Read())
-                        {
                             DetallesMultasUsers.DetallesPorMulta multa = new DetallesMultasUsers.DetallesPorMulta
                             {
                                 Id = Convert.ToInt32(reader["Id"]),

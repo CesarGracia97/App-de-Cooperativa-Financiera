@@ -152,17 +152,12 @@ namespace act_Application.Data
                     command.Parameters.AddWithValue("@IdUser", IdUser);
                     using (MySqlDataReader reader = command.ExecuteReader())
                     {
+                        decimal aportacionesAcumuladas = 0;
                         while (reader.Read())
                         {
                             detallesAportaciones.TotalAportaciones = Convert.ToInt32(reader["TotalAportaciones"]);
                             detallesAportaciones.TotalAprobados = Convert.ToInt32(reader["TotalAprobados"]);
                             detallesAportaciones.TotalEspera = Convert.ToInt32(reader["TotalEspera"]);
-                        }
-
-                        reader.NextResult(); 
-                        decimal aportacionesAcumuladas = 0;
-                        while (reader.Read())
-                        {
                             DetallesAportacionesUsers.DetallesPorAportacion aportacion = new DetallesAportacionesUsers.DetallesPorAportacion
                             {
                                 Id = Convert.ToInt32(reader["Id"]),
@@ -170,7 +165,6 @@ namespace act_Application.Data
                                 Aprobacion = reader["Aprobacion"].ToString(),
                                 Nbanco = reader["Nbanco"].ToString()
                             };
-
                             detallesAportaciones.Detalles.Add(aportacion);
                             aportacionesAcumuladas += aportacion.Valor;
                         }

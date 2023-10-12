@@ -2,13 +2,41 @@
 using act_Application.Models.BD;
 using MySql.Data.MySqlClient;
 using MySqlX.XDevAPI.Common;
+using System.Data;
 
 namespace act_Application.Data.Data
 {
     public class EventosRepository
     {
-        public int TotalEventos { get; set; }
         public List<ActEvento> Eventos { get; set; }
+
+        public bool GetExistEventos()
+        {
+            string connectionString = AppSettingsHelper.GetConnectionString();
+            string eventosQuery = ConfigReader.GetQuery("SelectEvents");
+
+            int totalAportaciones = 0; // Variable para almacenar el valor de TotalAportaciones
+
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                using (MySqlCommand cmd = new MySqlCommand(eventosQuery, connection))
+                {
+                    cmd.CommandType = CommandType.Text;
+
+                    connection.Open();
+
+                    using (MySqlDataReader rd = cmd.ExecuteReader())
+                    {
+                        if (rd.Read()) // Avanzar al primer registro
+                        {
+                            totalAportaciones = Convert.ToInt32(rd["TotalEventos"]);
+                        }
+                    }
+                }
+            }
+            // Si totalAportaciones es mayor que 0, devuelve true, de lo contrario, devuelve false.
+            return totalAportaciones > 0;
+        }
 
         public EventosRepository GetDataEventos()
         {
@@ -28,7 +56,6 @@ namespace act_Application.Data.Data
                     {
                         if (reader.Read())
                         {
-                            result.TotalEventos = Convert.ToInt32(reader["TotalEventos"]);
                             List<ActEvento> eventos = new List<ActEvento>();
                             /*He desarrollado tantos programas, trantos proyectos, trabajos y ninguno me ha hecho sentir tan antusiasmado como el kue kuiero desarrollar
                              contigo a mi lado, uno al kue kuiero poner de nombre "Relacion eterna". Uno donde ambos nos apoyemos, trabajemos, tengamos funciones iterativas
@@ -42,6 +69,7 @@ namespace act_Application.Data.Data
                                 ActEvento eve = new ActEvento
                                 {
                                     Id = Convert.ToInt32(reader["Id"]),
+                                    IdUser = Convert.ToInt32(reader["IdUser"]),
                                     IdTransaccion = Convert.ToInt32(reader["IdTransaccion"]),
                                     FechaInicio = Convert.ToDateTime(reader["FechaInicio"]),
                                     FechaFinalizacion = Convert.ToDateTime(reader["FechaFinalizacion"]),
@@ -66,7 +94,6 @@ namespace act_Application.Data.Data
             {
                 Console.WriteLine("Hubo un error en la consulta de eventos.");
                 Console.WriteLine("Detalles del error: " + ex.Message);
-                result.TotalEventos = -1; // Valor negativo para indicar un error
                 result.Eventos = null;
             }
 

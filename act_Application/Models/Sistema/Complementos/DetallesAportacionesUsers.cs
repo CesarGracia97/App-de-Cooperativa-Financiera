@@ -14,5 +14,9 @@
         public int TotalAportaciones {  get; set; }
         public int TotalAprobados { get; set; }
         public int TotalEspera { get; set; }
+        public DetallesAportacionesUsers()
+        {
+            Detalles = new List<DetallesPorAportacion>();
+        }
     }
 }

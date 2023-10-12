@@ -12,5 +12,9 @@
         public decimal MultasAcumuladas { get; set; }
         public int TotalMultas {  get; set; }
         public int TotalCancelados {  get; set; }
+        public DetallesMultasUsers()
+        {
+            Detalles = new List<DetallesPorMulta>();
+        }
     }
 }

@@ -10,7 +10,7 @@ namespace act_Application.Data.Data
         public ActUser GetDataUser(string Correo, string Contrasena)
         {
             string connectionString = AppSettingsHelper.GetConnectionString();
-            string userQuery = ConfigReader.GetQuery("SelecUsuario");
+            string userQuery = ConfigReader.GetQuery("SelectUsuario");
 
             ActUser objeto = new ActUser();
 

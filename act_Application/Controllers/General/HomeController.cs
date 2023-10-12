@@ -33,51 +33,65 @@ namespace act_Application.Controllers.General
             var userIdClaim = User.Claims.FirstOrDefault(c => c.Type == "Id");
             if (userIdClaim != null && int.TryParse(userIdClaim.Value, out int userId))
             {
+                List<Home_VM> viewModelList = new List<Home_VM>();
+
                 AportacionRepository aportacionRepository = new AportacionRepository();
+                var aportacionesUserList = aportacionRepository.GetDataAportacionesUser(userId);
+                var aportacionesUser = aportacionesUserList.FirstOrDefault();
+                Models.Sistema.Complementos.DetallesAportacionesUsers aportacionesUserVM = null;
+
+                if (aportacionRepository.GetExistApotacionesUser(userId) == true)
+                {
+                    aportacionesUserVM = new Models.Sistema.Complementos.DetallesAportacionesUsers
+                    {
+                        AportacionesAcumuladas = aportacionesUser.AportacionesAcumuladas,
+                        TotalAportaciones = aportacionesUser.TotalAportaciones,
+                        TotalAprobados = aportacionesUser.TotalAprobados,
+                        TotalEspera = aportacionesUser.TotalEspera
+                    };
+                }
+
                 MultaRepository multaRepository = new MultaRepository();
                 var multaUserList = multaRepository.GetDataMultasUser(userId);
-                var aportacionesUserList = aportacionRepository.GetDataAportacionesUser(userId);
                 var multaUser = multaUserList.FirstOrDefault();
-                var aportacionesUser = aportacionesUserList.FirstOrDefault();
+                Models.Sistema.Complementos.DetallesMultasUsers multaUserVM = null;
+
+                if (multaRepository.GetExistMultasUser(userId) == true)
+                {
+                    multaUserVM = new Models.Sistema.Complementos.DetallesMultasUsers
+                    {
+                        MultasAcumuladas = multaUser.MultasAcumuladas,
+                        TotalMultas = multaUser.TotalMultas,
+                        TotalCancelados = multaUser.TotalCancelados
+                    };
+                }
 
                 EventosRepository eventosRepository = new EventosRepository();
                 var eventosData = eventosRepository.GetDataEventos();
-                List<Home_VM> viewModelList = new List<Home_VM>();
 
-                // Verifica si la obtención de datos fue exitosa
-                if (eventosRepository != null && aportacionesUserList.Count > 0)
+                if (eventosRepository.GetExistEventos() == true)
                 {
                     foreach (var evento in eventosData.Eventos)
                     {
                         Home_VM viewModel = new Home_VM
                         {
                             Eventos = evento,
-                            Transacciones = _context.ActTransacciones.FirstOrDefault(t => t.Id == evento.IdTransaccion),
-                            AportacionesUser = new Models.Sistema.Complementos.DetallesAportacionesUsers
-                            {
-                                AportacionesAcumuladas = aportacionesUser.AportacionesAcumuladas,
-                                TotalAportaciones = aportacionesUser.TotalAportaciones,
-                                TotalAprobados = aportacionesUser.TotalAprobados,
-                                TotalEspera = aportacionesUser.TotalEspera
-                            },
-                            MultaUser = new Models.Sistema.Complementos.DetallesMultasUsers
-                            {
-                                MultasAcumuladas = multaUser.MultasAcumuladas,
-                                TotalMultas = multaUser.TotalMultas,
-                                TotalCancelados = multaUser.TotalCancelados
-
-                            }
+                            Transacciones = _context.ActTransacciones.FirstOrDefault(t => t.Id == evento.IdTransaccion)
                         };
 
                         viewModelList.Add(viewModel);
                     }
 
-                    // Pasa la lista de Home_VM a la vista
-                    return View(viewModelList);
+                    // Agregar información de AportacionesUser y MultaUser a todas las instancias de Home_VM
+                    foreach (var viewModel in viewModelList)
+                    {
+                        viewModel.AportacionesUser = aportacionesUserVM;
+                        viewModel.MultaUser = multaUserVM;
+                    }
                 }
+                return View(viewModelList);
             }
-
-            return View(new List<Home_VM>()); // Devuelve una lista vacía si no se cumple la condición
+            return View(new List<Home_VM>());
         }
         public IActionResult Error()
         {
