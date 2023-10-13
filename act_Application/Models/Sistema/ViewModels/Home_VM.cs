@@ -8,16 +8,14 @@ namespace act_Application.Models.Sistema.ViewModels
         public Home_VM() {
 
             AportacionesUser = new DetallesAportacionesUsers();
-
             MultaUser = new DetallesMultasUsers();
-
-            Eventos = new ActEvento();
-
+            TransaccionesUser = new DetallesTransaccionesUsers();
             Transacciones = new ActTransaccione();
-
+            Eventos = new ActEvento();
             Cuotas = new ActCuota();
 
         }
+        public DetallesTransaccionesUsers TransaccionesUser { get; set; }
         public DetallesAportacionesUsers AportacionesUser { get; set; }
         public DetallesMultasUsers MultaUser { get; set; }
         public ActEvento Eventos { get; set; }

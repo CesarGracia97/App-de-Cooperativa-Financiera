@@ -66,6 +66,23 @@ namespace act_Application.Controllers.General
                     };
                 }
 
+                TransaccionesRepository transaccionesRepository = new TransaccionesRepository();
+                var transaccionesUserList = transaccionesRepository.GetDataTransaccionesUser(userId);
+                var transaccionUser = transaccionesUserList.FirstOrDefault();
+                Models.Sistema.Complementos.DetallesTransaccionesUsers transaccionesUserVM = null;
+
+                if(transaccionesRepository.GetExistTransaccionesUser(userId) == true)
+                {
+                    transaccionesUserVM = new Models.Sistema.Complementos.DetallesTransaccionesUsers {
+                        TotalTransacciones = transaccionUser.TotalTransacciones,
+                        TotalAprobado = transaccionUser.TotalAprobado,
+                        TotalCuotas = transaccionUser.TotalCuotas,
+                        TotalPagoUnico = transaccionUser.TotalPagoUnico,
+                        TotalRechazado = transaccionUser.TotalRechazado,
+                        ValorTotalPrestado = transaccionUser.ValorTotalPrestado
+                    };
+                }
+
                 EventosRepository eventosRepository = new EventosRepository();
                 var eventosData = eventosRepository.GetDataEventos();
 
@@ -81,13 +98,13 @@ namespace act_Application.Controllers.General
 
                         viewModelList.Add(viewModel);
                     }
+                }
 
-                    // Agregar información de AportacionesUser y MultaUser a todas las instancias de Home_VM
-                    foreach (var viewModel in viewModelList)
-                    {
-                        viewModel.AportacionesUser = aportacionesUserVM;
-                        viewModel.MultaUser = multaUserVM;
-                    }
+                foreach (var viewModel in viewModelList)
+                {
+                    viewModel.AportacionesUser = aportacionesUserVM;
+                    viewModel.MultaUser = multaUserVM;
+                    viewModel.TransaccionesUser = transaccionesUserVM;
                 }
                 return View(viewModelList);
             }

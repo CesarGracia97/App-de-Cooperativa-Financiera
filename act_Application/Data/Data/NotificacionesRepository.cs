@@ -86,7 +86,7 @@ namespace act_Application.Data.Data
                                 };
                                 notificacionesAdmin.Add(notificacion);
                                 TransaccionesRepository transacciones = new TransaccionesRepository();
-                                transacciones.GetTransaccionPorId(notificacion.IdTransacciones);
+                                transacciones.GetDataTransaccionId(notificacion.IdTransacciones);
                             }
                             return notificacionesAdmin;
                         }
@@ -133,7 +133,7 @@ namespace act_Application.Data.Data
                                 };
                                 notificacionesUser.Add(notificacion);
                                 TransaccionesRepository transaccion = new TransaccionesRepository();
-                                transaccion.GetTransaccionPorId(notificacion.IdTransacciones);
+                                transaccion.GetDataTransaccionId(notificacion.IdTransacciones);
                             }
                             return notificacionesUser;
                         }

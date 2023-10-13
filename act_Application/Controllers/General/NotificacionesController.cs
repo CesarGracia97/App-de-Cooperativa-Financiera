@@ -106,7 +106,7 @@ namespace act_Application.Controllers.General
                 try
                 {
                     var metodoNotificacion = new TransaccionesRepository(); // Crear una instancia de MetodoNotificaciones
-                    var transaccionOriginal = metodoNotificacion.GetTransaccionPorId(Id); // Llamar al método desde la instancia
+                    var transaccionOriginal = metodoNotificacion.GetDataTransaccionId(Id); // Llamar al método desde la instancia
                     if (transaccionOriginal == null)
                     {
                         Console.WriteLine("Hubo un problema al momento de comprobar la nulidad de la Transaccion en el Confirmado");
@@ -221,7 +221,7 @@ namespace act_Application.Controllers.General
                 try
                 {
                     var metodoNotificacion = new TransaccionesRepository ();
-                    var transaccionOriginal = metodoNotificacion.GetTransaccionPorId(Id);
+                    var transaccionOriginal = metodoNotificacion.GetDataTransaccionId(Id);
 
                     if (transaccionOriginal == null)
                     {
@@ -272,7 +272,7 @@ namespace act_Application.Controllers.General
                 try
                 {
                     var metodoNotificacion = new TransaccionesRepository(); // Crear una instancia de MetodoNotificaciones
-                    var transaccionOriginal = metodoNotificacion.GetTransaccionPorId(Id); // Llamar al método desde la instancia
+                    var transaccionOriginal = metodoNotificacion.GetDataTransaccionId(Id); // Llamar al método desde la instancia
 
                     if (transaccionOriginal == null)
                     {
@@ -327,7 +327,7 @@ namespace act_Application.Controllers.General
                 try
                 {
                     var metodoTransRepo = new TransaccionesRepository(); // Crear una instancia de MetodoNotificaciones
-                    var transaccionOriginal = metodoTransRepo.GetTransaccionPorId(Id); // Llamar al método desde la instancia
+                    var transaccionOriginal = metodoTransRepo.GetDataTransaccionId(Id); // Llamar al método desde la instancia
 
                     if (transaccionOriginal == null)
                     {
@@ -367,11 +367,11 @@ namespace act_Application.Controllers.General
         private async Task<List<DateTime>> CrearCuotas(int IdTransaccion, DateTime FechaPagoTotalPrestamo, [Bind("Id,IdUser,IdTransaccion,ValorCuota,FechaCuota,Estado")] ActCuota actCuota)
         {
             var metodoNotificacion = new TransaccionesRepository();
-            var transaccionOriginal = metodoNotificacion.GetTransaccionPorId(IdTransaccion);
+            var transaccionOriginal = metodoNotificacion.GetDataTransaccionId(IdTransaccion);
 
             if (transaccionOriginal == null)
             {
-                Console.WriteLine("Hubo un error al verificar la existencia del registro en GetTransaccionPorId(IdTransaccion)");
+                Console.WriteLine("Hubo un error al verificar la existencia del registro en GetDataTransaccionId(IdTransaccion)");
             }
             int numeroDeCuotas = (FechaPagoTotalPrestamo.Year - transaccionOriginal.FechaIniCoutaPrestamo.Year) * 12 +
                 FechaPagoTotalPrestamo.Month - transaccionOriginal.FechaIniCoutaPrestamo.Month + 1;

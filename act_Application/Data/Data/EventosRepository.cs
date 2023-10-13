@@ -81,7 +81,7 @@ namespace act_Application.Data.Data
                                 };
                                 eventos.Add(eve);
                                 TransaccionesRepository transacciones = new TransaccionesRepository();
-                                transacciones.GetTransaccionPorId(eve.IdTransaccion);
+                                transacciones.GetDataTransaccionId(eve.IdTransaccion);
 
                             } while (reader.Read());
 
