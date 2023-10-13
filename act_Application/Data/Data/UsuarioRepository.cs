@@ -1,6 +1,7 @@
 ﻿using act_Application.Helper;
 using act_Application.Models.BD;
 using MySql.Data.MySqlClient;
+using System;
 using System.Data;
 
 namespace act_Application.Data.Data
@@ -30,12 +31,13 @@ namespace act_Application.Data.Data
                     {
                         objeto = new ActUser()
                         {
-                            Id = rd.GetInt32(rd.GetOrdinal("Id")),
-                            Cedula = rd["Cedula"].ToString(),
-                            Correo = rd["Correo"].ToString(),
-                            NombreYapellido = rd["NombreYApellido"].ToString(),
-                            TipoUser = rd["TipoUser"].ToString(),
-                            IdRol = rd.GetInt32(rd.GetOrdinal("IdRol")),
+                            Id = Convert.ToInt32(rd["Id"]),
+                            Cedula = Convert.ToString(rd["Cedula"]),
+                            Correo = Convert.ToString(rd["Correo"]),
+                            NombreYapellido = Convert.ToString(rd["NombreYApellido"]),
+                            TipoUser = Convert.ToString(rd["TipoUser"]),
+                            IdRol = Convert.ToInt32(rd["IdRol"]),
+                            Activo = Convert.ToInt32(rd["Activo"])
                         };
 
                     }

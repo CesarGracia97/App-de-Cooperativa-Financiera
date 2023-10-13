@@ -26,9 +26,9 @@ namespace act_Application.Data.Data
                         {
                             ActCuentaDestino cuentaDestino = new ActCuentaDestino
                             {
-                                Id = reader.GetInt32("Id"),
-                                NumeroCuenta = reader.GetString("NumeroCuenta"),
-                                NombreBanco = reader.GetString("NombreBanco")
+                                Id = Convert.ToInt32(reader["Id"]),
+                                NumeroCuenta = Convert.ToString(reader["NumeroCuenta"]),
+                                NombreBanco = Convert.ToString(reader["NombreBanco"])
                             };
 
                             cuentasDestino.Add(cuentaDestino);

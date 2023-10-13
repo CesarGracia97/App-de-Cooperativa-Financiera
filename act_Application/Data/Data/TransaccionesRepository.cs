@@ -27,14 +27,14 @@ namespace act_Application.Data.Data
                                 ActTransaccione transaccion = new ActTransaccione
                                 {
                                     Id = Convert.ToInt32(reader["Id"]),
-                                    Razon = reader["Razon"].ToString(),
+                                    Razon = Convert.ToString(reader["Razon"]),
                                     IdUser = Convert.ToInt32(reader["IdUser"]),
                                     Valor = Convert.ToDecimal(reader["Valor"]),
-                                    Estado = reader["Estado"].ToString(),
+                                    Estado = Convert.ToString(reader["Estado"]),
                                     FechaEntregaDinero = Convert.ToDateTime(reader["FechaEntregaDinero"]),
                                     FechaPagoTotalPrestamo = Convert.ToDateTime(reader["FechaPagoTotalPrestamo"]),
                                     FechaIniCoutaPrestamo = Convert.ToDateTime(reader["FechaIniCoutaPrestamo"]),
-                                    TipoCuota = reader["TipoCuota"].ToString(),
+                                    TipoCuota = Convert.ToString(reader["TipoCuota"]),
                                     IdParticipantes = Convert.ToInt32(reader["IdParticipantes"]),
                                     FechaGeneracion = Convert.ToDateTime(reader["FechaEntregaDinero"])
                                 };

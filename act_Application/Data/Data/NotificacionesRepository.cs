@@ -76,10 +76,10 @@ namespace act_Application.Data.Data
                                 {
                                     Id = Convert.ToInt32(reader["Id"]),
                                     IdUser = Convert.ToInt32(reader["IdUser"]),
-                                    Razon = reader["Razon"].ToString(),
-                                    Descripcion = reader["Descripcion"].ToString(),
+                                    Razon = Convert.ToString(reader["Razon"]),
+                                    Descripcion = Convert.ToString(reader["Descripcion"]),
                                     FechaNotificacion = Convert.ToDateTime(reader["FechaNotificacion"]),
-                                    Destino = reader["Destino"].ToString(),
+                                    Destino = Convert.ToString(reader["Destino"]),
                                     IdTransacciones = Convert.ToInt32(reader["IdTransacciones"]),
                                     IdAportaciones = Convert.ToInt32(reader["IdAportaciones"]),
                                     IdCuotas = Convert.ToInt32(reader["IdCuotas"])
@@ -122,10 +122,10 @@ namespace act_Application.Data.Data
                                 {
                                     Id = Convert.ToInt32(reader["Id"]),
                                     IdUser = Convert.ToInt32(reader["IdUser"]),
-                                    Razon = reader["Razon"].ToString(),
-                                    Descripcion = reader["Descripcion"].ToString(),
+                                    Razon = Convert.ToString(reader["Razon"]),
+                                    Descripcion = Convert.ToString(reader["Descripcion"]),
                                     FechaNotificacion = Convert.ToDateTime(reader["FechaNotificacion"]),
-                                    Destino = reader["Destino"].ToString(),
+                                    Destino = Convert.ToString(reader["Destino"]),
                                     IdTransacciones = Convert.ToInt32(reader["IdTransacciones"]),
                                     IdAportaciones = Convert.ToInt32(reader["IdAportaciones"]),
                                     IdCuotas = Convert.ToInt32(reader["IdCuotas"]),

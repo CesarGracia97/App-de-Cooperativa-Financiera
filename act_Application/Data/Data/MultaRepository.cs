@@ -60,7 +60,7 @@ namespace act_Application.Data.Data
                                 IdUser = Convert.ToInt32(r["IdUser"]),
                                 Valor = Convert.ToDecimal(r["Valor"]),
                                 FechaMulta = Convert.ToDateTime(r["FechaMulta"]),
-                                NombreUsuario = r["NombreUsuario"].ToString()
+                                NombreUsuario = Convert.ToString(r["NombreUsuario"])
                             })
                             .ToList();
 

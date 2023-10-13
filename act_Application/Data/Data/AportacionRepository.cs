@@ -61,13 +61,13 @@ namespace act_Application.Data
                             .Select(r => new
                             {
                                 Id = Convert.ToInt32(r["Id"]),
-                                Razon = r["Razon"].ToString(),
+                                Razon = Convert.ToString(r["Razon"]),
                                 Valor = Convert.ToDecimal(r["Valor"]),
                                 IdUser = Convert.ToInt32(r["IdUser"]),
                                 FechaAportacion = Convert.ToDateTime(r["FechaAportacion"]),
-                                Aprobacion = r["Aprobacion"].ToString(),
+                                Aprobacion = Convert.ToString(r["Aprobacion"]),
                                 CapturaPantalla = r.IsDBNull(r.GetOrdinal("CapturaPantalla")) ? null : (byte[])r["CapturaPantalla"],
-                                NombreUsuario = r["NombreUsuario"].ToString()
+                                NombreUsuario = Convert.ToString(r["NombreUsuario"]),
 
                             })
                             .ToList();
@@ -162,8 +162,8 @@ namespace act_Application.Data
                             {
                                 Id = Convert.ToInt32(reader["Id"]),
                                 Valor = Convert.ToDecimal(reader["Valor"]),
-                                Aprobacion = reader["Aprobacion"].ToString(),
-                                Nbanco = reader["Nbanco"].ToString()
+                                Aprobacion = Convert.ToString(reader["Aprobacion"]),
+                                Nbanco = Convert.ToString(reader["Nbanco"])
                             };
                             detallesAportaciones.Detalles.Add(aportacion);
                             aportacionesAcumuladas += aportacion.Valor;

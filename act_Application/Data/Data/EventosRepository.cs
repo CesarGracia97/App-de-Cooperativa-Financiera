@@ -74,10 +74,10 @@ namespace act_Application.Data.Data
                                     FechaInicio = Convert.ToDateTime(reader["FechaInicio"]),
                                     FechaFinalizacion = Convert.ToDateTime(reader["FechaFinalizacion"]),
                                     FechaGeneracion = Convert.ToDateTime(reader["FechaGeneracion"]),
-                                    ParticipantesId = reader["ParticipantesId"].ToString(),
-                                    ParticipantesNombre = reader["ParticipantesNombre"].ToString(),
-                                    Estado = reader["Estado"].ToString(),
-                                    NombreUsuario = reader["NombreUsuario"].ToString()
+                                    ParticipantesId = Convert.ToString(reader["ParticipantesId"]),
+                                    ParticipantesNombre = Convert.ToString(reader["ParticipantesNombre"]),
+                                    Estado = Convert.ToString(reader["Estado"]),
+                                    NombreUsuario = Convert.ToString(reader["NombreUsuario"])
                                 };
                                 eventos.Add(eve);
                                 TransaccionesRepository transacciones = new TransaccionesRepository();
@@ -122,8 +122,8 @@ namespace act_Application.Data.Data
                                     FechaInicio = Convert.ToDateTime(reader["FechaInicio"]),
                                     FechaFinalizacion = Convert.ToDateTime(reader["FechaFinalizacion"]),
                                     FechaGeneracion = Convert.ToDateTime(reader["FechaGeneracion"]),
-                                    ParticipantesId = reader["ParticipantesId"].ToString(),
-                                    ParticipantesNombre = reader["ParticipantesNombre"].ToString(),
+                                    ParticipantesId = Convert.ToString(reader["ParticipantesId"]),
+                                    ParticipantesNombre = Convert.ToString(reader["ParticipantesNombre"]),
                                     Estado = reader["Estado"].ToString(),
                                     IdTransaccion = Convert.ToInt32(reader["IdTransaccion"])
                                 };
