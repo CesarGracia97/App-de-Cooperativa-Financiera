@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "hzpAVe47kKo4e/V9oFATJ8GPZ6PU4fv/QRDfyQT2Z+o=",
+  "Hash": "T0Qk9rL69wVA7SRGlFWdeNqodsa3IwP9QtoSvxUt+Lc=",
   "Source": "act_Application",
   "BasePath": "_content/act_Application",
   "Mode": "Default",
@@ -153,12 +153,12 @@
       "OriginalItemSpec": "wwwroot\\css\\General\\Complementos\\ventanModal.css"
     },
     {
-      "Identity": "C:\\Users\\cgracia\\source\\repos\\CesarGracia97\\act_Application\\act_Application\\wwwroot\\css\\General\\Home\\Date-Place\\DatePlace.css",
+      "Identity": "C:\\Users\\cgracia\\source\\repos\\CesarGracia97\\act_Application\\act_Application\\wwwroot\\css\\General\\Home\\Date-Place\\item2item3.css",
       "SourceId": "act_Application",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\cgracia\\source\\repos\\CesarGracia97\\act_Application\\act_Application\\wwwroot\\",
       "BasePath": "_content/act_Application",
-      "RelativePath": "css/General/Home/Date-Place/DatePlace.css",
+      "RelativePath": "css/General/Home/Date-Place/item2item3.css",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -167,24 +167,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\css\\General\\Home\\Date-Place\\DatePlace.css"
-    },
-    {
-      "Identity": "C:\\Users\\cgracia\\source\\repos\\CesarGracia97\\act_Application\\act_Application\\wwwroot\\css\\General\\Home\\Esqueleto\\Cuerpo.css",
-      "SourceId": "act_Application",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\cgracia\\source\\repos\\CesarGracia97\\act_Application\\act_Application\\wwwroot\\",
-      "BasePath": "_content/act_Application",
-      "RelativePath": "css/General/Home/Esqueleto/Cuerpo.css",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\css\\General\\Home\\Esqueleto\\Cuerpo.css"
+      "OriginalItemSpec": "wwwroot\\css\\General\\Home\\Date-Place\\item2item3.css"
     },
     {
       "Identity": "C:\\Users\\cgracia\\source\\repos\\CesarGracia97\\act_Application\\act_Application\\wwwroot\\css\\General\\Home\\Esqueleto\\Esqueleto.css",
@@ -204,12 +187,12 @@
       "OriginalItemSpec": "wwwroot\\css\\General\\Home\\Esqueleto\\Esqueleto.css"
     },
     {
-      "Identity": "C:\\Users\\cgracia\\source\\repos\\CesarGracia97\\act_Application\\act_Application\\wwwroot\\css\\General\\Home\\Eventos\\Eventos.css",
+      "Identity": "C:\\Users\\cgracia\\source\\repos\\CesarGracia97\\act_Application\\act_Application\\wwwroot\\css\\General\\Home\\Eventos\\item6.css",
       "SourceId": "act_Application",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\cgracia\\source\\repos\\CesarGracia97\\act_Application\\act_Application\\wwwroot\\",
       "BasePath": "_content/act_Application",
-      "RelativePath": "css/General/Home/Eventos/Eventos.css",
+      "RelativePath": "css/General/Home/Eventos/item6.css",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -218,15 +201,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\css\\General\\Home\\Eventos\\Eventos.css"
+      "OriginalItemSpec": "wwwroot\\css\\General\\Home\\Eventos\\item6.css"
     },
     {
-      "Identity": "C:\\Users\\cgracia\\source\\repos\\CesarGracia97\\act_Application\\act_Application\\wwwroot\\css\\General\\Home\\Eventos\\VentanaModal.css",
+      "Identity": "C:\\Users\\cgracia\\source\\repos\\CesarGracia97\\act_Application\\act_Application\\wwwroot\\css\\General\\Home\\Eventos\\item6VM.css",
       "SourceId": "act_Application",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\cgracia\\source\\repos\\CesarGracia97\\act_Application\\act_Application\\wwwroot\\",
       "BasePath": "_content/act_Application",
-      "RelativePath": "css/General/Home/Eventos/VentanaModal.css",
+      "RelativePath": "css/General/Home/Eventos/item6VM.css",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -235,15 +218,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\css\\General\\Home\\Eventos\\VentanaModal.css"
+      "OriginalItemSpec": "wwwroot\\css\\General\\Home\\Eventos\\item6VM.css"
     },
     {
-      "Identity": "C:\\Users\\cgracia\\source\\repos\\CesarGracia97\\act_Application\\act_Application\\wwwroot\\css\\General\\Home\\Main\\Main.css",
+      "Identity": "C:\\Users\\cgracia\\source\\repos\\CesarGracia97\\act_Application\\act_Application\\wwwroot\\css\\General\\Home\\Main\\item5.css",
       "SourceId": "act_Application",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\cgracia\\source\\repos\\CesarGracia97\\act_Application\\act_Application\\wwwroot\\",
       "BasePath": "_content/act_Application",
-      "RelativePath": "css/General/Home/Main/Main.css",
+      "RelativePath": "css/General/Home/Main/item5.css",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -252,15 +235,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\css\\General\\Home\\Main\\Main.css"
+      "OriginalItemSpec": "wwwroot\\css\\General\\Home\\Main\\item5.css"
     },
     {
-      "Identity": "C:\\Users\\cgracia\\source\\repos\\CesarGracia97\\act_Application\\act_Application\\wwwroot\\css\\General\\Home\\Main\\TablaMain.css",
+      "Identity": "C:\\Users\\cgracia\\source\\repos\\CesarGracia97\\act_Application\\act_Application\\wwwroot\\css\\General\\Home\\Profile\\item1.css",
       "SourceId": "act_Application",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\cgracia\\source\\repos\\CesarGracia97\\act_Application\\act_Application\\wwwroot\\",
       "BasePath": "_content/act_Application",
-      "RelativePath": "css/General/Home/Main/TablaMain.css",
+      "RelativePath": "css/General/Home/Profile/item1.css",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -269,15 +252,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\css\\General\\Home\\Main\\TablaMain.css"
+      "OriginalItemSpec": "wwwroot\\css\\General\\Home\\Profile\\item1.css"
     },
     {
-      "Identity": "C:\\Users\\cgracia\\source\\repos\\CesarGracia97\\act_Application\\act_Application\\wwwroot\\css\\General\\Home\\Profile\\cardProfile.css",
+      "Identity": "C:\\Users\\cgracia\\source\\repos\\CesarGracia97\\act_Application\\act_Application\\wwwroot\\css\\General\\Home\\Transaccion\\item4.css",
       "SourceId": "act_Application",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\cgracia\\source\\repos\\CesarGracia97\\act_Application\\act_Application\\wwwroot\\",
       "BasePath": "_content/act_Application",
-      "RelativePath": "css/General/Home/Profile/cardProfile.css",
+      "RelativePath": "css/General/Home/Transaccion/item4.css",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -286,24 +269,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\css\\General\\Home\\Profile\\cardProfile.css"
-    },
-    {
-      "Identity": "C:\\Users\\cgracia\\source\\repos\\CesarGracia97\\act_Application\\act_Application\\wwwroot\\css\\General\\Home\\Transaccion\\Transacciones.css",
-      "SourceId": "act_Application",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\cgracia\\source\\repos\\CesarGracia97\\act_Application\\act_Application\\wwwroot\\",
-      "BasePath": "_content/act_Application",
-      "RelativePath": "css/General/Home/Transaccion/Transacciones.css",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\css\\General\\Home\\Transaccion\\Transacciones.css"
+      "OriginalItemSpec": "wwwroot\\css\\General\\Home\\Transaccion\\item4.css"
     },
     {
       "Identity": "C:\\Users\\cgracia\\source\\repos\\CesarGracia97\\act_Application\\act_Application\\wwwroot\\css\\General\\Login\\Login.css",
