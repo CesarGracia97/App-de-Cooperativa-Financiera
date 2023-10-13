@@ -79,7 +79,8 @@ namespace act_Application.Controllers.General
                         TotalCuotas = transaccionUser.TotalCuotas,
                         TotalPagoUnico = transaccionUser.TotalPagoUnico,
                         TotalRechazado = transaccionUser.TotalRechazado,
-                        ValorTotalPrestado = transaccionUser.ValorTotalPrestado
+                        ValorTotalPrestado = transaccionUser.ValorTotalPrestado,
+                        TotalPendiente = transaccionUser.TotalPendiente
                     };
                 }
 

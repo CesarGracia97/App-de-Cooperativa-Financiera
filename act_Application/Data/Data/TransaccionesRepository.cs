@@ -102,6 +102,7 @@ namespace act_Application.Data.Data
                             detallesTransacciones.TotalPagoUnico = Convert.ToInt32(reader["TotalPagoUnico"]);
                             detallesTransacciones.TotalAprobado = Convert.ToInt32(reader["TotalAprobado"]);
                             detallesTransacciones.TotalRechazado = Convert.ToInt32(reader["TotalRechazado"]);
+                            detallesTransacciones.TotalPendiente = Convert.ToInt32(reader["TotalPendiente"]);
                             DetallesTransaccionesUsers.DetallesPorTransaccion transaccion = new DetallesTransaccionesUsers.DetallesPorTransaccion
                             {
                                 Id = Convert.ToInt32(reader["Id"]),

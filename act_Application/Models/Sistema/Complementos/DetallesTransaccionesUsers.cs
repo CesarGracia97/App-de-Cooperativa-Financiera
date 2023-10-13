@@ -14,6 +14,7 @@
         public int TotalCuotas { get; set; }
         public int TotalPagoUnico { get; set; }
         public int TotalAprobado { get; set; }
+        public int TotalPendiente { get; set; }
         public int TotalRechazado { get; set; }
         public decimal ValorTotalPrestado {  get; set; }
         public DetallesTransaccionesUsers()

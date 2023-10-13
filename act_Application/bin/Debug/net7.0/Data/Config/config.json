@@ -1,6 +1,6 @@
 ﻿{
   "Queries": {
-    "SelectUsuario": "SELECT u.Id, u.Cedula, u.Correo, u.NombreYApellido, u.Celular, u.TipoUser, r.IdRol FROM act_User u LEFT JOIN act_RolUser r ON u.Id = r.IdUser WHERE u.Correo = @Correo AND u.Contrasena = @Contrasena",
+    "SelectUsuario": "SELECT u.Id, u.Cedula, u.Correo, u.NombreYApellido, u.Celular, u.TipoUser, u.Activo, r.IdRol FROM act_User u LEFT JOIN act_RolUser r ON u.Id = r.IdUser WHERE u.Correo = @Correo AND u.Contrasena = @Contrasena",
     "SelectRol": "SELECT * FROM act_Rol WHERE Id = @IdRol",
     "SelectEmail": "SELECT Correo FROM act_User Where Id =1",
     "SelectDestino": "SELECT Id, NumeroCuenta, NombreBanco FROM act_CuentaDestino",
