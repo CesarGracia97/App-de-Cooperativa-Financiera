@@ -27,7 +27,7 @@ CREATE TABLE `act_User` (
 
 ALTER TABLE act_User
 ADD CONSTRAINT fk_Socio_User
-ADD FOREIGN KEY (IdSocio) REFERENCES act_User(Id);
+FOREIGN KEY (IdSocio) REFERENCES act_User(Id);
 
 /*Tabla Roles*/
 CREATE TABLE `act_Rol` (
@@ -46,15 +46,15 @@ CREATE TABLE `act_RolUser` (
   `IdUser` int(11) NOT NULL,
   `IdRol` int(11) NOT NULL,
   PRIMARY KEY (`Id`),
-  UNIQUE KEY `Id_UNIQUE` (`Id`),
+  UNIQUE KEY `Id_UNIQUE` (`Id`)
 ) COMMENT='Tabla Relacion Rol Usuario';
 
 ALTER TABLE act_RolUser
 ADD CONSTRAINT fk_RolUser_User
-ADD FOREIGN KEY (IdUser) REFERENCES act_User(Id);
+FOREIGN KEY (IdUser) REFERENCES act_User(Id);
 ALTER TABLE act_RolUser_Rol
 ADD CONSTRAINT fk_Socio_User
-ADD FOREIGN KEY (IdRol) REFERENCES act_Rol(Id);
+FOREIGN KEY (IdRol) REFERENCES act_Rol(Id);
 
 /*Tabla de Aportaciones*/
 CREATE TABLE `act_Aportaciones` (
@@ -115,12 +115,34 @@ CREATE TABLE `act_Transacciones` (
   UNIQUE KEY `Id_UNIQUE` (`Id`)
 ) COMMENT='Operaciones de Referentes';
 
+/*Tabla de Garantes*/
+CREATE TABLE `act_Eventos` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `IdTransaccion` int(11) NOT NULL,
+  `IdUser` int(11) NOT NULL COMMENT 'Esta Columna es la kue identifica al dueño de la transaccion con la Participacion, y se relaciona con la tabla usuario.',
+  `FechaInicio` date NOT NULL,
+  `FechaFinalizacion` date NOT NULL,
+  `FechaGeneracion` date NOT NULL,
+  `ParticipantesId` varchar(100) NOT NULL,
+  `ParticipantesNombre` varchar(10000) NOT NULL,
+  `Estado` varchar(45) NOT NULL,
+  PRIMARY KEY (`Id`),
+  UNIQUE KEY `Id_UNIQUE` (`Id`)
+) COMMENT='Tabla de Participantes/Garantes de Prestamo';
+
 ALTER TABLE act_Transacciones
 ADD CONSTRAINT fk_Transacciones_User
 FOREIGN KEY (IdUser) REFERENCES act_User(Id);
 ALTER TABLE act_Transacciones
-ADD CONSTRAINT fk_Transacciones_Participantes
-FOREIGN KEY (IdParticipantes) REFERENCES act_Participantes(Id);
+ADD CONSTRAINT fk_Transacciones_Eventos
+FOREIGN KEY (IdParticipantes) REFERENCES act_Eventos(Id); 
+
+ALTER TABLE act_Eventos
+ADD CONSTRAINT fk_Eventos_Transacciones
+FOREIGN KEY (IdTransaccion) REFERENCES act_Transacciones(Id);
+ALTER TABLE act_Eventos
+ADD CONSTRAINT fk_Eventos_User
+FOREIGN KEY (IdUser) REFERENCES act_User(Id);
 
 /*Tabla Cuotas*/
 CREATE TABLE `act_Cuotas` (
@@ -168,28 +190,6 @@ FOREIGN KEY (IdCuotas) REFERENCES act_Cuotas(Id);
 ALTER TABLE act_Notificaciones
 ADD CONSTRAINT fk_Notificaciones_Aportaciones
 FOREIGN KEY (IdAportaciones) REFERENCES act_Aportaciones(Id);
-
-/*Tabla de Garantes*/
-CREATE TABLE `act_Participantes` (
-  `Id` int(11) NOT NULL AUTO_INCREMENT,
-  `IdTransaccion` int(11) NOT NULL,
-  `IdUser` int(11) NOT NULL COMMENT 'Esta Columna es la kue identifica al dueño de la transaccion con la Participacion, y se relaciona con la tabla usuario.',
-  `FechaInicio` date NOT NULL,
-  `FechaFinalizacion` date NOT NULL,
-  `FechaGeneracion` date NOT NULL,
-  `ParticipantesId` varchar(100) NOT NULL,
-  `ParticipantesNombre` varchar(10000) NOT NULL,
-  `Estado` varchar(45) NOT NULL,
-  PRIMARY KEY (`Id`),
-  UNIQUE KEY `Id_UNIQUE` (`Id`)
-) COMMENT='Tabla de Participantes/Garantes de Prestamo';
-
-ALTER TABLE act_Participantes
-ADD CONSTRAINT fk_Participantes_Transacciones
-FOREIGN KEY (IdTransaccion) REFERENCES act_Transacciones(Id);
-ALTER TABLE act_Participantes
-ADD CONSTRAINT fk_Participantes_User
-FOREIGN KEY (IdUser) REFERENCES act_User(Id);
 
 /*Tabla de Destino*/
 CREATE TABLE `desarrollo`.`act_CuentaDestino` (

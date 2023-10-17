@@ -17,5 +17,7 @@ services:
       MYSQL_PASSWORD: cgarcia
     volumes:
       - ./sql:/docker-entrypoint-initdb.d
+      - ./my.cnf:/etc/mysql/my.cnf # Monta el archivo my.cnf en el contenedor
     ports:
       - "3306:3306"
+
