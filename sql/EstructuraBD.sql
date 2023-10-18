@@ -6,7 +6,7 @@ Scaffold-DbContext "server=192.168.21.193; port=3306; database=desarrollo; uid=c
 */
 
 CREATE DATABASE `desarrollo`;
-
+USE desarrollo;
 /*Tabla de Usuarios*/
 CREATE TABLE `act_User` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
@@ -18,18 +18,15 @@ CREATE TABLE `act_User` (
   `TipoUser` varchar(45) NOT NULL,
   `IdSocio` int(11) NOT NULL,
   `Activo` int(1) NOT NULL,
-  `FotoPerfil` longblob NOT NULL,
+  `FotoPerfil` longblob NULL, 
   PRIMARY KEY (`Id`),
   UNIQUE KEY `Id_UNIQUE` (`Id`),
   UNIQUE KEY `Cedula_UNIQUE` (`Cedula`),
   UNIQUE KEY `Correo_UNIQUE` (`Correo`)
 ) COMMENT='Tabla de Usuarios';
 
-ALTER TABLE act_User
-ADD CONSTRAINT fk_Socio_User
-FOREIGN KEY (IdSocio) REFERENCES act_User(Id);
-
 /*Tabla Roles*/
+USE desarrollo;
 CREATE TABLE `act_Rol` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
   `NombreRol` varchar(45) NOT NULL,
@@ -39,8 +36,8 @@ CREATE TABLE `act_Rol` (
   UNIQUE KEY `NombreRol_UNIQUE` (`NombreRol`)
 ) COMMENT='Tabla de Roles';
 
-
 /*Tabla de Roles de Usuario*/
+USE desarrollo;
 CREATE TABLE `act_RolUser` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
   `IdUser` int(11) NOT NULL,
@@ -49,14 +46,8 @@ CREATE TABLE `act_RolUser` (
   UNIQUE KEY `Id_UNIQUE` (`Id`)
 ) COMMENT='Tabla Relacion Rol Usuario';
 
-ALTER TABLE act_RolUser
-ADD CONSTRAINT fk_RolUser_User
-FOREIGN KEY (IdUser) REFERENCES act_User(Id);
-ALTER TABLE act_RolUser_Rol
-ADD CONSTRAINT fk_Socio_User
-FOREIGN KEY (IdRol) REFERENCES act_Rol(Id);
-
 /*Tabla de Aportaciones*/
+USE desarrollo;
 CREATE TABLE `act_Aportaciones` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
   `Razon` varchar(45) NOT NULL,
@@ -73,11 +64,8 @@ CREATE TABLE `act_Aportaciones` (
   UNIQUE KEY `Id_UNIQUE` (`Id`)
 ) COMMENT='Aportaciones ec';
 
-ALTER TABLE act_Aportaciones
-ADD CONSTRAINT fk_Aportaciones_User
-FOREIGN KEY (IdUser) REFERENCES act_User(Id);
-
 /*Tabla de Multas*/
+USE desarrollo;
 CREATE TABLE `act_Multas` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
   `IdUser` int(11) NOT NULL,
@@ -91,14 +79,8 @@ CREATE TABLE `act_Multas` (
   UNIQUE KEY `Id_UNIQUE` (`Id`)
 ) COMMENT='Tabla de Multas';
 
-ALTER TABLE act_Multas
-ADD CONSTRAINT fk_Multas_User
-FOREIGN KEY (IdUser) REFERENCES act_User(Id);
-ALTER TABLE act_Multas
-ADD CONSTRAINT fk_Multas_Aportaciones
-FOREIGN KEY (IdAportacion) REFERENCES act_User(Id);
-
  /*Tabla de Transacciones*/
+ USE desarrollo;
 CREATE TABLE `act_Transacciones` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
   `Razon` varchar(45) NOT NULL,
@@ -116,6 +98,7 @@ CREATE TABLE `act_Transacciones` (
 ) COMMENT='Operaciones de Referentes';
 
 /*Tabla de Garantes*/
+USE desarrollo;
 CREATE TABLE `act_Eventos` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
   `IdTransaccion` int(11) NOT NULL,
@@ -130,21 +113,8 @@ CREATE TABLE `act_Eventos` (
   UNIQUE KEY `Id_UNIQUE` (`Id`)
 ) COMMENT='Tabla de Participantes/Garantes de Prestamo';
 
-ALTER TABLE act_Transacciones
-ADD CONSTRAINT fk_Transacciones_User
-FOREIGN KEY (IdUser) REFERENCES act_User(Id);
-ALTER TABLE act_Transacciones
-ADD CONSTRAINT fk_Transacciones_Eventos
-FOREIGN KEY (IdParticipantes) REFERENCES act_Eventos(Id); 
-
-ALTER TABLE act_Eventos
-ADD CONSTRAINT fk_Eventos_Transacciones
-FOREIGN KEY (IdTransaccion) REFERENCES act_Transacciones(Id);
-ALTER TABLE act_Eventos
-ADD CONSTRAINT fk_Eventos_User
-FOREIGN KEY (IdUser) REFERENCES act_User(Id);
-
 /*Tabla Cuotas*/
+USE desarrollo;
 CREATE TABLE `act_Cuotas` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
   `ValorCuota` decimal(10,2) NOT NULL,
@@ -155,14 +125,8 @@ CREATE TABLE `act_Cuotas` (
   PRIMARY KEY (`Id`)
 ) COMMENT='Tabla de Cuotas, aqui se almacena el Id del Usuario, el Id d';
 
-ALTER TABLE act_Cuotas
-ADD CONSTRAINT fk_Cuotas_User
-FOREIGN KEY (IdUser) REFERENCES act_User(Id);
-ALTER TABLE act_Cuotas
-ADD CONSTRAINT fk_Cuotas_Transacciones
-FOREIGN KEY (IdTransaccion) REFERENCES act_Transacciones(Id);
-
 /*Tabla de Notificaciones*/
+USE desarrollo;
 CREATE TABLE `act_Notificaciones` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
   `IdUser` int(11) NOT NULL,
@@ -178,20 +142,8 @@ CREATE TABLE `act_Notificaciones` (
   UNIQUE KEY `idact_Notificaciones_UNIQUE` (`Id`)
 ) COMMENT='Tabla de Notificaciones';
 
-ALTER TABLE act_Notificaciones
-ADD CONSTRAINT fk_Notificaciones_User
-FOREIGN KEY (IdUser) REFERENCES act_User(Id);
-ALTER TABLE act_Notificaciones
-ADD CONSTRAINT fk_Notificaciones_Transacciones
-FOREIGN KEY (IdTransacciones) REFERENCES act_Transacciones(Id);
-ALTER TABLE act_Notificaciones
-ADD CONSTRAINT fk_Notificaciones_Cuotas
-FOREIGN KEY (IdCuotas) REFERENCES act_Cuotas(Id);
-ALTER TABLE act_Notificaciones
-ADD CONSTRAINT fk_Notificaciones_Aportaciones
-FOREIGN KEY (IdAportaciones) REFERENCES act_Aportaciones(Id);
-
 /*Tabla de Destino*/
+USE desarrollo;
 CREATE TABLE `desarrollo`.`act_CuentaDestino` (
   `Id` INT NOT NULL AUTO_INCREMENT,
   `NumeroCuenta` VARCHAR(12) NOT NULL,
@@ -204,6 +156,7 @@ CREATE TABLE `desarrollo`.`act_CuentaDestino` (
 COMMENT = 'Cuentas Bancarias de Destino';
 
 /*Tabla de Consultas*/
+USE desarrollo;
 CREATE TABLE `desarrollo`.`act_Querys` (
   `Id` INT NOT NULL,
   `Query` VARCHAR(2000) NOT NULL,
@@ -212,30 +165,113 @@ CREATE TABLE `desarrollo`.`act_Querys` (
   PRIMARY KEY (`Id`))
 COMMENT = 'Querys para consultas';
 
+
+/*Inyeccion de datos*/
 /*Datos Usuario*/
-INSERT INTO `desarrollo`.`act_User` (`Id`, `Cedula`, `Correo`, `NombreYApellido`, `Celular`, `Contrasena`, `TipoUser`, `IdSocio`, `Activo`) VALUES ('1', '0803262252', 'ces.ze.97@gmail.com', 'CESAR GRACIA GALLON', '0990344916', 'c775e7b757ede630cd0aa1113bd102661ab38829ca52a6422ab782862f268646', 'Administrador', '0', ?, '1');
-INSERT INTO `desarrollo`.`act_User` (`Id`, `Cedula`, `Correo`, `NombreYApellido`, `Celular`, `Contrasena`, `TipoUser`, `IdSocio`, `Activo`) VALUES ('2', '0914256029', 'hhmirandac@gmail.com', 'HECTOR MIRANDA', '0996188315', 'c775e7b757ede630cd0aa1113bd102661ab38829ca52a6422ab782862f268646', 'Socio', '0', ?, '1');
-INSERT INTO `desarrollo`.`act_User` (`Id`, `Cedula`, `Correo`, `NombreYApellido`, `Celular`, `Contrasena`, `TipoUser`, `IdSocio`, `Activo`) VALUES ('3', '1723553507', 'bmejia@xtrim.com.ec', 'LUCIA BLANCA MEDINA MEJIA', '0998400582', 'c775e7b757ede630cd0aa1113bd102661ab38829ca52a6422ab782862f268646', 'Socio', '0', ?, '1');
-INSERT INTO `desarrollo`.`act_User` (`Id`, `Cedula`, `Correo`, `NombreYApellido`, `Celular`, `Contrasena`, `TipoUser`, `IdSocio`, `Activo`) VALUES ('4', '1710333046', 'smunoz@tvcable.com.ec', 'SANDRA MUÑOZ', '0995092596', 'c775e7b757ede630cd0aa1113bd102661ab38829ca52a6422ab782862f268646', 'Socio', '0', ?, '1');
-INSERT INTO `desarrollo`.`act_User` (`Id`, `Cedula`, `Correo`, `NombreYApellido`, `Celular`, `Contrasena`, `TipoUser`, `IdSocio`, `Activo`) VALUES ('5', '1711608156', 'vpinto@tvcable.com.ec', 'VERONICA PINTO', '0992598575', 'c775e7b757ede630cd0aa1113bd102661ab38829ca52a6422ab782862f268646', 'Socio', '0', ?, '1');
-INSERT INTO `desarrollo`.`act_User` (`Id`, `Cedula`, `Correo`, `NombreYApellido`, `Celular`, `Contrasena`, `TipoUser`, `IdSocio`, `Activo`) VALUES ('6', '0801355017', 'gortiz@tvcable.com.ec', 'GRACIELA ORTIZ', '0995009860', 'c775e7b757ede630cd0aa1113bd102661ab38829ca52a6422ab782862f268646', 'Socio', '0', ?, '1');
-INSERT INTO `desarrollo`.`act_User` (`Id`, `Cedula`, `Correo`, `NombreYApellido`, `Celular`, `Contrasena`, `TipoUser`, `IdSocio`, `Activo`) VALUES ('7', '1714562327', 'asalgado@tvcable.com.ec', 'ANDRES SALGADO', '0998673542', 'c775e7b757ede630cd0aa1113bd102661ab38829ca52a6422ab782862f268646', 'Socio', '0', ?, '1');
-INSERT INTO `desarrollo`.`act_User` (`Id`, `Cedula`, `Correo`, `NombreYApellido`, `Celular`, `Contrasena`, `TipoUser`, `IdSocio`, `Activo`) VALUES ('8', '1002256533', 'dbuitron@tvcable.com.ec', 'DIEGO BUITRON', '0994161746', 'c775e7b757ede630cd0aa1113bd102661ab38829ca52a6422ab782862f268646', 'Referido', '7', ?, '1');
+USE desarrollo; INSERT INTO `desarrollo`.`act_User` (`Id`, `Cedula`, `Correo`, `NombreYApellido`, `Celular`, `Contrasena`, `TipoUser`, `IdSocio`,`FotoPerfil`, `Activo`) VALUES ('1', '0803262252', 'ces.ze.97@gmail.com', 'CESAR GRACIA GALLON', '0990344916', 'c775e7b757ede630cd0aa1113bd102661ab38829ca52a6422ab782862f268646', 'Administrador', '0', NULL, '1');
+USE desarrollo; INSERT INTO `desarrollo`.`act_User` (`Id`, `Cedula`, `Correo`, `NombreYApellido`, `Celular`, `Contrasena`, `TipoUser`, `IdSocio`,`FotoPerfil`, `Activo`) VALUES ('2', '0914256029', 'hhmirandac@gmail.com', 'HECTOR MIRANDA', '0996188315', 'c775e7b757ede630cd0aa1113bd102661ab38829ca52a6422ab782862f268646', 'Socio', '0', NULL, '1');
+USE desarrollo; INSERT INTO `desarrollo`.`act_User` (`Id`, `Cedula`, `Correo`, `NombreYApellido`, `Celular`, `Contrasena`, `TipoUser`, `IdSocio`,`FotoPerfil`, `Activo`) VALUES ('3', '1723553507', 'bmejia@xtrim.com.ec', 'LUCIA BLANCA MEDINA MEJIA', '0998400582', 'c775e7b757ede630cd0aa1113bd102661ab38829ca52a6422ab782862f268646', 'Socio', '0', NULL, '1');
+USE desarrollo; INSERT INTO `desarrollo`.`act_User` (`Id`, `Cedula`, `Correo`, `NombreYApellido`, `Celular`, `Contrasena`, `TipoUser`, `IdSocio`,`FotoPerfil`, `Activo`) VALUES ('4', '1710333046', 'smunoz@tvcable.com.ec', 'SANDRA MUÑOZ', '0995092596', 'c775e7b757ede630cd0aa1113bd102661ab38829ca52a6422ab782862f268646', 'Socio', '0', NULL, '1');
+USE desarrollo; INSERT INTO `desarrollo`.`act_User` (`Id`, `Cedula`, `Correo`, `NombreYApellido`, `Celular`, `Contrasena`, `TipoUser`, `IdSocio`,`FotoPerfil`, `Activo`) VALUES ('5', '1711608156', 'vpinto@tvcable.com.ec', 'VERONICA PINTO', '0992598575', 'c775e7b757ede630cd0aa1113bd102661ab38829ca52a6422ab782862f268646', 'Socio', '0', NULL, '1');
+USE desarrollo; INSERT INTO `desarrollo`.`act_User` (`Id`, `Cedula`, `Correo`, `NombreYApellido`, `Celular`, `Contrasena`, `TipoUser`, `IdSocio`,`FotoPerfil`, `Activo`) VALUES ('6', '0801355017', 'gortiz@tvcable.com.ec', 'GRACIELA ORTIZ', '0995009860', 'c775e7b757ede630cd0aa1113bd102661ab38829ca52a6422ab782862f268646', 'Socio', '0', NULL, '1');
+USE desarrollo; INSERT INTO `desarrollo`.`act_User` (`Id`, `Cedula`, `Correo`, `NombreYApellido`, `Celular`, `Contrasena`, `TipoUser`, `IdSocio`,`FotoPerfil`, `Activo`) VALUES ('7', '1714562327', 'asalgado@tvcable.com.ec', 'ANDRES SALGADO', '0998673542', 'c775e7b757ede630cd0aa1113bd102661ab38829ca52a6422ab782862f268646', 'Socio', '0', NULL, '1');
+USE desarrollo; INSERT INTO `desarrollo`.`act_User` (`Id`, `Cedula`, `Correo`, `NombreYApellido`, `Celular`, `Contrasena`, `TipoUser`, `IdSocio`,`FotoPerfil`, `Activo`) VALUES ('8', '1002256533', 'dbuitron@tvcable.com.ec', 'DIEGO BUITRON', '0994161746', 'c775e7b757ede630cd0aa1113bd102661ab38829ca52a6422ab782862f268646', 'Referido', '7', NULL, '1');
 /*Datos Rol*/
-INSERT INTO `desarrollo`.`act_Rol` (`Id`, `NombreRol`, `DescripcionRol`) VALUES ('1', 'Administrador', 'Rol con acceso total al sistema');
-INSERT INTO `desarrollo`.`act_Rol` (`Id`, `NombreRol`, `DescripcionRol`) VALUES ('2', 'Socio', 'Rol con permisos limitados');
-INSERT INTO `desarrollo`.`act_Rol` (`Id`, `NombreRol`, `DescripcionRol`) VALUES ('3', 'Referido', 'Rol con permisos limitados como Referido');
+USE desarrollo; INSERT INTO `desarrollo`.`act_Rol` (`Id`, `NombreRol`, `DescripcionRol`) VALUES ('1', 'Administrador', 'Rol con acceso total al sistema');
+USE desarrollo; INSERT INTO `desarrollo`.`act_Rol` (`Id`, `NombreRol`, `DescripcionRol`) VALUES ('2', 'Socio', 'Rol con permisos limitados');
+USE desarrollo; INSERT INTO `desarrollo`.`act_Rol` (`Id`, `NombreRol`, `DescripcionRol`) VALUES ('3', 'Referido', 'Rol con permisos limitados como Referido');
 /*Datos Roles*/
-INSERT INTO `desarrollo`.`act_RolUser` (`Id`, `IdUser`, `IdRol`) VALUES ('1', '1', '1');
-INSERT INTO `desarrollo`.`act_RolUser` (`Id`, `IdUser`, `IdRol`) VALUES ('2', '2', '1');
-INSERT INTO `desarrollo`.`act_RolUser` (`Id`, `IdUser`, `IdRol`) VALUES ('3', '3', '2');
-INSERT INTO `desarrollo`.`act_RolUser` (`Id`, `IdUser`, `IdRol`) VALUES ('4', '4', '2');
-INSERT INTO `desarrollo`.`act_RolUser` (`Id`, `IdUser`, `IdRol`) VALUES ('5', '5', '2');
-INSERT INTO `desarrollo`.`act_RolUser` (`Id`, `IdUser`, `IdRol`) VALUES ('6', '6', '2');
-INSERT INTO `desarrollo`.`act_RolUser` (`Id`, `IdUser`, `IdRol`) VALUES ('7', '7', '2');
-INSERT INTO `desarrollo`.`act_RolUser` (`Id`, `IdUser`, `IdRol`) VALUES ('8', '8', '3');
+USE desarrollo; INSERT INTO `desarrollo`.`act_RolUser` (`Id`, `IdUser`, `IdRol`) VALUES ('1', '1', '1');
+USE desarrollo; INSERT INTO `desarrollo`.`act_RolUser` (`Id`, `IdUser`, `IdRol`) VALUES ('2', '2', '1');
+USE desarrollo; INSERT INTO `desarrollo`.`act_RolUser` (`Id`, `IdUser`, `IdRol`) VALUES ('3', '3', '2');
+USE desarrollo; INSERT INTO `desarrollo`.`act_RolUser` (`Id`, `IdUser`, `IdRol`) VALUES ('4', '4', '2');
+USE desarrollo; INSERT INTO `desarrollo`.`act_RolUser` (`Id`, `IdUser`, `IdRol`) VALUES ('5', '5', '2');
+USE desarrollo; INSERT INTO `desarrollo`.`act_RolUser` (`Id`, `IdUser`, `IdRol`) VALUES ('6', '6', '2');
+USE desarrollo; INSERT INTO `desarrollo`.`act_RolUser` (`Id`, `IdUser`, `IdRol`) VALUES ('7', '7', '2');
+USE desarrollo; INSERT INTO `desarrollo`.`act_RolUser` (`Id`, `IdUser`, `IdRol`) VALUES ('8', '8', '3');
 /*Datos Destino de Cuenta*/
-INSERT INTO `desarrollo`.`act_CuentaDestino` (`Id`, `NumeroCuenta`, `NombreBanco`, `DuenoCuenta`, `Detalles`) VALUES ('1', '123456789012', 'Banco Pichincha', 'Cesar Gracia', 'Cuenta Emergente');
-INSERT INTO `desarrollo`.`act_CuentaDestino` (`Id`, `NumeroCuenta`, `NombreBanco`, `DuenoCuenta`, `Detalles`) VALUES ('2', '210987654321', 'Banco Guayaquil', 'Steeven Gallon', 'Cuenta Principal');
-INSERT INTO `desarrollo`.`act_CuentaDestino` (`Id`, `NumeroCuenta`, `NombreBanco`, `DuenoCuenta`, `Detalles`) VALUES ('3', '012345678912', 'Produbanco', 'Leonel Diaz', 'Cuenta Respaldo');
-INSERT INTO `desarrollo`.`act_CuentaDestino` (`Id`, `NumeroCuenta`, `NombreBanco`, `DuenoCuenta`, `Detalles`) VALUES ('4', '12345678', 'Banco del Austro', 'Hector Hernandez', 'Cuenta Secundaria');
+USE desarrollo; INSERT INTO `desarrollo`.`act_CuentaDestino` (`Id`, `NumeroCuenta`, `NombreBanco`, `DuenoCuenta`, `Detalles`) VALUES ('1', '123456789012', 'Banco Pichincha', 'Cesar Gracia', 'Cuenta Emergente');
+USE desarrollo; INSERT INTO `desarrollo`.`act_CuentaDestino` (`Id`, `NumeroCuenta`, `NombreBanco`, `DuenoCuenta`, `Detalles`) VALUES ('2', '210987654321', 'Banco Guayaquil', 'Steeven Gallon', 'Cuenta Principal');
+USE desarrollo; INSERT INTO `desarrollo`.`act_CuentaDestino` (`Id`, `NumeroCuenta`, `NombreBanco`, `DuenoCuenta`, `Detalles`) VALUES ('3', '012345678912', 'Produbanco', 'Leonel Diaz', 'Cuenta Respaldo');
+USE desarrollo; INSERT INTO `desarrollo`.`act_CuentaDestino` (`Id`, `NumeroCuenta`, `NombreBanco`, `DuenoCuenta`, `Detalles`) VALUES ('4', '12345678', 'Banco del Austro', 'Hector Hernandez', 'Cuenta Secundaria');
+
+
+/*Relaciones*/
+/*Usuario-Usuario*/
+USE desarrollo; 
+ALTER TABLE act_User
+ADD CONSTRAINT fk_Socio_User
+FOREIGN KEY (IdSocio) REFERENCES act_User(Id);
+
+/*Usuario-Rol-RolUsuario*/
+USE desarrollo; 
+ALTER TABLE act_RolUser
+ADD CONSTRAINT fk_RolUser_User
+FOREIGN KEY (IdUser) REFERENCES act_User(Id);
+USE desarrollo; 
+ALTER TABLE act_RolUser_Rol
+ADD CONSTRAINT fk_Socio_User
+FOREIGN KEY (IdRol) REFERENCES act_Rol(Id);
+
+/*Aportaciones-Usuario*/
+USE desarrollo; 
+ALTER TABLE act_Aportaciones
+ADD CONSTRAINT fk_Aportaciones_User
+FOREIGN KEY (IdUser) REFERENCES act_User(Id);
+
+/*Multas-Usuario-Aportaciones*/
+USE desarrollo; 
+ALTER TABLE act_Multas
+ADD CONSTRAINT fk_Multas_User
+FOREIGN KEY (IdUser) REFERENCES act_User(Id);
+USE desarrollo; 
+ALTER TABLE act_Multas
+ADD CONSTRAINT fk_Multas_Aportaciones
+FOREIGN KEY (IdAportacion) REFERENCES act_User(Id);
+
+/*Transaccuibes-Eventos-Usuario*/
+USE desarrollo; 
+ALTER TABLE act_Transacciones
+ADD CONSTRAINT fk_Transacciones_User
+FOREIGN KEY (IdUser) REFERENCES act_User(Id);
+USE desarrollo; 
+ALTER TABLE act_Transacciones
+ADD CONSTRAINT fk_Transacciones_Eventos
+FOREIGN KEY (IdParticipantes) REFERENCES act_Eventos(Id); 
+
+USE desarrollo; 
+ALTER TABLE act_Eventos
+ADD CONSTRAINT fk_Eventos_Transacciones
+FOREIGN KEY (IdTransaccion) REFERENCES act_Transacciones(Id);
+USE desarrollo; 
+ALTER TABLE act_Eventos
+ADD CONSTRAINT fk_Eventos_User
+FOREIGN KEY (IdUser) REFERENCES act_User(Id);
+
+/*Cuotas-Usuario_Transacciones*/
+USE desarrollo; 
+ALTER TABLE act_Cuotas
+ADD CONSTRAINT fk_Cuotas_User
+FOREIGN KEY (IdUser) REFERENCES act_User(Id);
+USE desarrollo; 
+ALTER TABLE act_Cuotas
+ADD CONSTRAINT fk_Cuotas_Transacciones
+FOREIGN KEY (IdTransaccion) REFERENCES act_Transacciones(Id);
+
+/*Notificiones-Usuario-Transacciones-Cuotas-Aportaciones*/
+USE desarrollo; 
+ALTER TABLE act_Notificaciones
+ADD CONSTRAINT fk_Notificaciones_User
+FOREIGN KEY (IdUser) REFERENCES act_User(Id);
+USE desarrollo; 
+ALTER TABLE act_Notificaciones
+ADD CONSTRAINT fk_Notificaciones_Transacciones
+FOREIGN KEY (IdTransacciones) REFERENCES act_Transacciones(Id);
+USE desarrollo; 
+ALTER TABLE act_Notificaciones
+ADD CONSTRAINT fk_Notificaciones_Cuotas
+FOREIGN KEY (IdCuotas) REFERENCES act_Cuotas(Id);
+USE desarrollo; 
+ALTER TABLE act_Notificaciones
+ADD CONSTRAINT fk_Notificaciones_Aportaciones
+FOREIGN KEY (IdAportaciones) REFERENCES act_Aportaciones(Id);
