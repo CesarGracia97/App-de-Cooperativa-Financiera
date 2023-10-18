@@ -212,3 +212,30 @@ CREATE TABLE `desarrollo`.`act_Querys` (
   PRIMARY KEY (`Id`))
 COMMENT = 'Querys para consultas';
 
+/*Datos Usuario*/
+INSERT INTO `desarrollo`.`act_User` (`Id`, `Cedula`, `Correo`, `NombreYApellido`, `Celular`, `Contrasena`, `TipoUser`, `IdSocio`, `Activo`) VALUES ('1', '0803262252', 'ces.ze.97@gmail.com', 'CESAR GRACIA GALLON', '0990344916', 'c775e7b757ede630cd0aa1113bd102661ab38829ca52a6422ab782862f268646', 'Administrador', '0', ?, '1');
+INSERT INTO `desarrollo`.`act_User` (`Id`, `Cedula`, `Correo`, `NombreYApellido`, `Celular`, `Contrasena`, `TipoUser`, `IdSocio`, `Activo`) VALUES ('2', '0914256029', 'hhmirandac@gmail.com', 'HECTOR MIRANDA', '0996188315', 'c775e7b757ede630cd0aa1113bd102661ab38829ca52a6422ab782862f268646', 'Socio', '0', ?, '1');
+INSERT INTO `desarrollo`.`act_User` (`Id`, `Cedula`, `Correo`, `NombreYApellido`, `Celular`, `Contrasena`, `TipoUser`, `IdSocio`, `Activo`) VALUES ('3', '1723553507', 'bmejia@xtrim.com.ec', 'LUCIA BLANCA MEDINA MEJIA', '0998400582', 'c775e7b757ede630cd0aa1113bd102661ab38829ca52a6422ab782862f268646', 'Socio', '0', ?, '1');
+INSERT INTO `desarrollo`.`act_User` (`Id`, `Cedula`, `Correo`, `NombreYApellido`, `Celular`, `Contrasena`, `TipoUser`, `IdSocio`, `Activo`) VALUES ('4', '1710333046', 'smunoz@tvcable.com.ec', 'SANDRA MUÑOZ', '0995092596', 'c775e7b757ede630cd0aa1113bd102661ab38829ca52a6422ab782862f268646', 'Socio', '0', ?, '1');
+INSERT INTO `desarrollo`.`act_User` (`Id`, `Cedula`, `Correo`, `NombreYApellido`, `Celular`, `Contrasena`, `TipoUser`, `IdSocio`, `Activo`) VALUES ('5', '1711608156', 'vpinto@tvcable.com.ec', 'VERONICA PINTO', '0992598575', 'c775e7b757ede630cd0aa1113bd102661ab38829ca52a6422ab782862f268646', 'Socio', '0', ?, '1');
+INSERT INTO `desarrollo`.`act_User` (`Id`, `Cedula`, `Correo`, `NombreYApellido`, `Celular`, `Contrasena`, `TipoUser`, `IdSocio`, `Activo`) VALUES ('6', '0801355017', 'gortiz@tvcable.com.ec', 'GRACIELA ORTIZ', '0995009860', 'c775e7b757ede630cd0aa1113bd102661ab38829ca52a6422ab782862f268646', 'Socio', '0', ?, '1');
+INSERT INTO `desarrollo`.`act_User` (`Id`, `Cedula`, `Correo`, `NombreYApellido`, `Celular`, `Contrasena`, `TipoUser`, `IdSocio`, `Activo`) VALUES ('7', '1714562327', 'asalgado@tvcable.com.ec', 'ANDRES SALGADO', '0998673542', 'c775e7b757ede630cd0aa1113bd102661ab38829ca52a6422ab782862f268646', 'Socio', '0', ?, '1');
+INSERT INTO `desarrollo`.`act_User` (`Id`, `Cedula`, `Correo`, `NombreYApellido`, `Celular`, `Contrasena`, `TipoUser`, `IdSocio`, `Activo`) VALUES ('8', '1002256533', 'dbuitron@tvcable.com.ec', 'DIEGO BUITRON', '0994161746', 'c775e7b757ede630cd0aa1113bd102661ab38829ca52a6422ab782862f268646', 'Referido', '7', ?, '1');
+/*Datos Rol*/
+INSERT INTO `desarrollo`.`act_Rol` (`Id`, `NombreRol`, `DescripcionRol`) VALUES ('1', 'Administrador', 'Rol con acceso total al sistema');
+INSERT INTO `desarrollo`.`act_Rol` (`Id`, `NombreRol`, `DescripcionRol`) VALUES ('2', 'Socio', 'Rol con permisos limitados');
+INSERT INTO `desarrollo`.`act_Rol` (`Id`, `NombreRol`, `DescripcionRol`) VALUES ('3', 'Referido', 'Rol con permisos limitados como Referido');
+/*Datos Roles*/
+INSERT INTO `desarrollo`.`act_RolUser` (`Id`, `IdUser`, `IdRol`) VALUES ('1', '1', '1');
+INSERT INTO `desarrollo`.`act_RolUser` (`Id`, `IdUser`, `IdRol`) VALUES ('2', '2', '1');
+INSERT INTO `desarrollo`.`act_RolUser` (`Id`, `IdUser`, `IdRol`) VALUES ('3', '3', '2');
+INSERT INTO `desarrollo`.`act_RolUser` (`Id`, `IdUser`, `IdRol`) VALUES ('4', '4', '2');
+INSERT INTO `desarrollo`.`act_RolUser` (`Id`, `IdUser`, `IdRol`) VALUES ('5', '5', '2');
+INSERT INTO `desarrollo`.`act_RolUser` (`Id`, `IdUser`, `IdRol`) VALUES ('6', '6', '2');
+INSERT INTO `desarrollo`.`act_RolUser` (`Id`, `IdUser`, `IdRol`) VALUES ('7', '7', '2');
+INSERT INTO `desarrollo`.`act_RolUser` (`Id`, `IdUser`, `IdRol`) VALUES ('8', '8', '3');
+/*Datos Destino de Cuenta*/
+INSERT INTO `desarrollo`.`act_CuentaDestino` (`Id`, `NumeroCuenta`, `NombreBanco`, `DuenoCuenta`, `Detalles`) VALUES ('1', '123456789012', 'Banco Pichincha', 'Cesar Gracia', 'Cuenta Emergente');
+INSERT INTO `desarrollo`.`act_CuentaDestino` (`Id`, `NumeroCuenta`, `NombreBanco`, `DuenoCuenta`, `Detalles`) VALUES ('2', '210987654321', 'Banco Guayaquil', 'Steeven Gallon', 'Cuenta Principal');
+INSERT INTO `desarrollo`.`act_CuentaDestino` (`Id`, `NumeroCuenta`, `NombreBanco`, `DuenoCuenta`, `Detalles`) VALUES ('3', '012345678912', 'Produbanco', 'Leonel Diaz', 'Cuenta Respaldo');
+INSERT INTO `desarrollo`.`act_CuentaDestino` (`Id`, `NumeroCuenta`, `NombreBanco`, `DuenoCuenta`, `Detalles`) VALUES ('4', '12345678', 'Banco del Austro', 'Hector Hernandez', 'Cuenta Secundaria');

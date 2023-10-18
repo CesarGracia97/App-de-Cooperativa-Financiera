@@ -1,14 +1,12 @@
 version: '3'
 services:
-  app:
+  act_application:
     build:
       context: ./act_Application
       dockerfile: Dockerfile
     ports:
       - "80:80"
-    depends_on:
-      - db
-  db:
+  bd_application:
     image: mysql:latest
     environment:
       MYSQL_ROOT_PASSWORD: CSGxtrim.2023mmxsun5ZXL
