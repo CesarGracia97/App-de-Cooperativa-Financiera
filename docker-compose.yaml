@@ -1,14 +1,13 @@
 version: '3'
 services:
   app_application:
+    image: ${DOCKER_REGISTRY-}app_application
     container_name: app_net7
     build:
-      context: ./act_Application
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: act_Application/Dockerfile
     ports:
-      - "8080:80"
-    depends_on:
-      - bd_application
+      - 80:80
   bd_application:
     image: mysql:latest
     container_name: bd_act_mysql

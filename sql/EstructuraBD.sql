@@ -75,6 +75,7 @@ CREATE TABLE `act_Multas` (
   `IdAportacion` int(11) NOT NULL,
   `Cuadrante1` int(1) NOT NULL,
   `Cuadrante2` int(1) NOT NULL,
+  `Aprobacion` varchar(10) NOT NULL,
   PRIMARY KEY (`Id`),
   UNIQUE KEY `Id_UNIQUE` (`Id`)
 ) COMMENT='Tabla de Multas';
@@ -209,7 +210,7 @@ ALTER TABLE act_RolUser
 ADD CONSTRAINT fk_RolUser_User
 FOREIGN KEY (IdUser) REFERENCES act_User(Id);
 USE desarrollo; 
-ALTER TABLE act_RolUser_Rol
+ALTER TABLE act_RolUser
 ADD CONSTRAINT fk_Socio_User
 FOREIGN KEY (IdRol) REFERENCES act_Rol(Id);
 
