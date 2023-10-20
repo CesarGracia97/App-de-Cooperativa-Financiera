@@ -1,0 +1,3 @@
+#Comando Docker
+docker build -t app_net7:1.0 -f act_Application/Dockerfile .
+docker run --name act_Application -d -p 8080:80 app_net7:1.0  
