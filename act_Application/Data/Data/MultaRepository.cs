@@ -147,7 +147,7 @@ namespace act_Application.Data.Data
                             {
                                 Id = Convert.ToInt32(reader["Id"]),
                                 Valor = Convert.ToDecimal(reader["Valor"]),
-                                Aprobacion = reader["Aprobacion"].ToString()
+                                Aprobacion = Convert.ToString(reader["Aprobacion"])
                             };
                             detallesMultas.Detalles.Add(multa);
                             multasAcumuladas += multa.Valor;
