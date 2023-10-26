@@ -104,6 +104,7 @@ namespace act_Application.Controllers.General
 
                     _context.Add(actAportacione);
                     await _context.SaveChangesAsync();
+                    await Liquidaciones(actAportacione.IdUser, actAportacione.Valor, new ActLiquidacione(), new ActHistorialLiquidacione());
                     return RedirectToAction("Menu", "Home");
                 }
                 else
@@ -114,6 +115,11 @@ namespace act_Application.Controllers.General
                 }
             }
             return View(actAportacione);
+        }
+
+        public async Task Liquidaciones (int IdSocio, decimal Aportaciones, [Bind ("Id,IdSocio,AportacionesId,InteresAportaciones,PrestamosId,InteresesPrestamos,InteresGlobalPrestamos,InteresGlobalAportaciones")] ActLiquidacione actliquidacione, [Bind("Id,IdSocio,FechaRegistro,AportacionesId,InteresAportaciones,PrestamosId,InteresesPrestamos,InteresGlobalPrestamos,InteresGlobalAportaciones")] ActHistorialLiquidacione actHistorialLiquidacione)
+        {
+
         }
     }
 }

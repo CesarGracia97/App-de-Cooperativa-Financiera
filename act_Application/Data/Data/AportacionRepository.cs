@@ -176,5 +176,30 @@ namespace act_Application.Data
             aportaciones.Add(detallesAportaciones);
             return aportaciones;
         }
+
+        public bool ExistenciaLiquidacion(int IdUser)
+        {
+            string connectionString = AppSettingsHelper.GetConnectionString();
+            string liquidacionQuery = ConfigReader.GetQuery("SelectLiquidacion");
+
+            int totalLiquidaciones = 0;
+
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                connection.Open();
+                using (MySqlCommand command = new MySqlCommand(liquidacionQuery, connection))
+                {
+                    command.Parameters.AddWithValue("@IdUser", IdUser);
+                    using (MySqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            totalLiquidaciones = Convert.ToInt32(reader["ExisteLiquidacion"]);
+                        }
+                    }
+                }
+            }
+            return totalLiquidaciones > 0;
+        }
     }
 }
