@@ -45,33 +45,59 @@ public partial class DesarrolloContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<ActLiquidacione>(entity => 
+        modelBuilder.Entity<ActLiquidacione>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PRIMARY");
 
-            entity.ToTable("act_Liquidaciones", tb => tb.HasComment("Liquidaciones"));
+            entity.ToTable("act_Liquidaciones", tb => tb.HasComment("Porcentaje de Aportaciones."));
 
-             
+            entity.HasIndex(e => e.IdSocio, "IdSocio_UNIQUE").IsUnique();
 
+            entity.Property(e => e.Id).HasColumnType("int(11)");
             entity.Property(e => e.AportacionesId).HasMaxLength(200);
+            entity.Property(e => e.IdSocio).HasColumnType("int(11)");
+            entity.Property(e => e.InteresAportaciones).HasPrecision(10);
+            entity.Property(e => e.InteresGlobalAportaciones).HasPrecision(10);
+            entity.Property(e => e.InteresGlobalPrestamos).HasPrecision(10);
+            entity.Property(e => e.InteresesPrestamos).HasPrecision(10);
+            entity.Property(e => e.PrestamosId).HasMaxLength(200);
         });
 
         modelBuilder.Entity<ActHistorialLiquidacione>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PRIMARY");
 
-            entity.ToTable("act_HistorialLiquidaciones", tb => tb.HasComment("Liquidaciones Historial"));
+            entity.ToTable("act_HistorialLiquidaciones");
 
             entity.HasIndex(e => e.Id, "Id_UNIQUE").IsUnique();
+
+            entity.HasIndex(e => e.IdSocio, "fk_HistorialLiquidaciones_User");
+
+            entity.Property(e => e.Id).HasColumnType("int(10) unsigned");
+            entity.Property(e => e.AportacionesId).HasMaxLength(100);
+            entity.Property(e => e.FechaRegistro).HasColumnType("datetime");
+            entity.Property(e => e.IdSocio).HasColumnType("int(11)");
+            entity.Property(e => e.InteresAportaciones).HasPrecision(10);
+            entity.Property(e => e.InteresGlobalAportaciones).HasPrecision(10);
+            entity.Property(e => e.InteresGlobalPrestamos).HasPrecision(10);
+            entity.Property(e => e.InteresesPrestamos).HasPrecision(10);
+            entity.Property(e => e.PrestamosId).HasMaxLength(100);
         });
 
         modelBuilder.Entity<ActPorcentaje>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PRIMARY");
 
-            entity.ToTable("act_Porcentajes", tb => tb.HasComment("Porcentajes"));
+            entity.ToTable("act_Porcentaje");
 
             entity.HasIndex(e => e.Id, "Id_UNIQUE").IsUnique();
+
+            entity.Property(e => e.Id).HasColumnType("int(10) unsigned");
+            entity.Property(e => e.Categoria).HasMaxLength(45);
+            entity.Property(e => e.Condicion).HasMaxLength(200);
+            entity.Property(e => e.Porcentaje).HasPrecision(10);
+            entity.Property(e => e.Razon).HasMaxLength(45);
+            entity.Property(e => e.Target).HasMaxLength(45);
         });
 
         modelBuilder.Entity<ActAportacione>(entity =>

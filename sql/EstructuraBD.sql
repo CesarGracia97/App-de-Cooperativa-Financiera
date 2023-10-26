@@ -1,5 +1,6 @@
 /*Si se gace mal forzarlo a como sea*/
-/*Scaffold-DbContext "server=192.168.21.193; port=3306; database=desarrollo; uid=cgarcia; password=cgarcia;" MySql.EntityFrameworkCore -OutputDir Models -Force
+/*
+Scaffold-DbContext "server=192.168.21.193; port=3306; database=desarrollo; uid=cgarcia; password=cgarcia;" MySql.EntityFrameworkCore -OutputDir "Models/BD/" -Force
 
 Scaffold-DbContext "server=192.168.21.193; port=3306; database=desarrollo; uid=cgarcia; password=cgarcia;" MySql.EntityFrameworkCore -OutputDir "Models/BD/"
 */
@@ -311,3 +312,13 @@ USE desarrollo;
 ALTER TABLE act_Notificaciones
 ADD CONSTRAINT fk_Notificaciones_Aportaciones
 FOREIGN KEY (IdAportaciones) REFERENCES act_Aportaciones(Id);
+
+/*Liquidaciones-Usuario-Historial*/
+USE desarrollo; 
+ALTER TABLE act_Liquidaciones
+ADD CONSTRAINT fk_Liquidaciones_User
+FOREIGN KEY (IdSocio) REFERENCES act_User(Id);
+USE desarrollo; 
+ALTER TABLE act_HistorialLiquidaciones
+ADD CONSTRAINT fk_HistorialLiquidaciones_User
+FOREIGN KEY (IdSocio) REFERENCES act_User(Id);

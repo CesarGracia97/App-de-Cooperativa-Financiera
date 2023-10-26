@@ -7,7 +7,7 @@
         public string AportacionesId { get; set; }
         public decimal InteresAportaciones { get; set; }
         public string PrestamosId { get; set; }
-        public decimal InteresPrestamos { get; set; }
+        public decimal InteresesPrestamos { get; set; }
         public decimal InteresGlobalPrestamos { get; set; }
         public decimal InteresGlobalAportaciones { get; set; }
     }
