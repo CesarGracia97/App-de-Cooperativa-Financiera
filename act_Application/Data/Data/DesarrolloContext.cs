@@ -18,6 +18,12 @@ public partial class DesarrolloContext : DbContext
 
     public virtual DbSet<ActAportacione> ActAportaciones { get; set; }
 
+    public virtual DbSet<ActLiquidacione> ActLiquidaciones { get; set; }
+
+    public virtual DbSet<ActHistorialLiquidacione> ActHistorialLiquidaciones { get; set; }
+
+    public virtual DbSet<ActPorcentaje> ActPorcentajes {  get; set; }
+
     public virtual DbSet<ActCuentaDestino> ActCuentaDestinos { get; set; }
 
     public virtual DbSet<ActCuota> ActCuotas { get; set; }
@@ -39,6 +45,35 @@ public partial class DesarrolloContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<ActLiquidacione>(entity => 
+        {
+            entity.HasKey(e => e.Id).HasName("PRIMARY");
+
+            entity.ToTable("act_Liquidaciones", tb => tb.HasComment("Liquidaciones"));
+
+             
+
+            entity.Property(e => e.AportacionesId).HasMaxLength(200);
+        });
+
+        modelBuilder.Entity<ActHistorialLiquidacione>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PRIMARY");
+
+            entity.ToTable("act_HistorialLiquidaciones", tb => tb.HasComment("Liquidaciones Historial"));
+
+            entity.HasIndex(e => e.Id, "Id_UNIQUE").IsUnique();
+        });
+
+        modelBuilder.Entity<ActPorcentaje>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PRIMARY");
+
+            entity.ToTable("act_Porcentajes", tb => tb.HasComment("Porcentajes"));
+
+            entity.HasIndex(e => e.Id, "Id_UNIQUE").IsUnique();
+        });
+
         modelBuilder.Entity<ActAportacione>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PRIMARY");

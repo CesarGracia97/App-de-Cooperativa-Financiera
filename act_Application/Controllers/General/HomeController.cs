@@ -2,17 +2,12 @@
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using act_Application.Logic;
 using act_Application.Models.BD;
 using act_Application.Models.Sistema.ViewModels;
-using act_Application.Helper;
-using MySql.Data.MySqlClient;
 using Microsoft.EntityFrameworkCore;
 using act_Application.Data.Data;
 using System.Security.Claims;
-using System.Linq;
 using act_Application.Data;
-using static act_Application.Models.Sistema.Complementos.DetallesAportacionesUsers;
 
 namespace act_Application.Controllers.General
 {

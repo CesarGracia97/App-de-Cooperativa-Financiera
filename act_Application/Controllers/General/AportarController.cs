@@ -92,7 +92,6 @@ namespace act_Application.Controllers.General
                         }
                     }
 
-
                     if (imagen != null && imagen.Length > 0)
                     {
                         using (var ms = new MemoryStream())

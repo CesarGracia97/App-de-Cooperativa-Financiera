@@ -1,11 +1,10 @@
 /*Si se gace mal forzarlo a como sea*/
 /*Scaffold-DbContext "server=192.168.21.193; port=3306; database=desarrollo; uid=cgarcia; password=cgarcia;" MySql.EntityFrameworkCore -OutputDir Models -Force
 
-
 Scaffold-DbContext "server=192.168.21.193; port=3306; database=desarrollo; uid=cgarcia; password=cgarcia;" MySql.EntityFrameworkCore -OutputDir "Models/BD/"
 */
 
-CREATE DATABASE `desarrollo`;
+/**/CREATE DATABASE `desarrollo`;
 USE desarrollo;
 /*Tabla de Usuarios*/
 CREATE TABLE `act_User` (
@@ -166,6 +165,42 @@ CREATE TABLE `desarrollo`.`act_Querys` (
   PRIMARY KEY (`Id`))
 COMMENT = 'Querys para consultas';
 
+USE desarrollo;
+CREATE TABLE `desarrollo`.`act_Liquidaciones` (
+  `Id` INT NOT NULL AUTO_INCREMENT,
+  `IdSocio` INT NOT NULL,
+  `AportacionesId` VARCHAR(200) NOT NULL,
+  `InteresAportaciones` DECIMAL(10,2) NOT NULL,
+  `PrestamosId` VARCHAR(200) NOT NULL,
+  `InteresesPrestamos` DECIMAL(10,2) NOT NULL,
+  `InteresGlobalAportaciones` DECIMAL(10,2) NOT NULL,
+  `InteresGlobalPrestamos` DECIMAL(10,2) NOT NULL,
+  PRIMARY KEY (`Id`),
+  UNIQUE INDEX `IdSocio_UNIQUE` (`IdSocio` ASC))
+COMMENT = 'Porcentaje de Aportaciones.';
+
+CREATE TABLE `desarrollo`.`act_HistorialLiquidaciones` (
+  `Id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `IdSocio` INT NOT NULL,
+  `FechaRegistro` DATETIME NOT NULL,
+  `AportacionesId` VARCHAR(100) NOT NULL,
+  `InteresAportaciones` DECIMAL(10,2) NOT NULL,
+  `PrestamosId` VARCHAR(100) NOT NULL,
+  `InteresesPrestamos` DECIMAL(10,2) NOT NULL,
+  `InteresGlobalAportaciones` DECIMAL(10,2) NOT NULL,
+  `InteresGlobalPrestamos` DECIMAL(10,2) NOT NULL,
+  PRIMARY KEY (`Id`),
+  UNIQUE INDEX `Id_UNIQUE` (`Id` ASC));
+
+CREATE TABLE `desarrollo`.`act_Porcentaje` (
+  `Id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `Categoria` VARCHAR(45) NOT NULL,
+  `Target` VARCHAR(45) NOT NULL,
+  `Porcentaje` DECIMAL(10,2) NOT NULL,
+  `Razon` VARCHAR(45) NOT NULL,
+  `Condicion` VARCHAR(200) NOT NULL,
+  PRIMARY KEY (`Id`),
+  UNIQUE INDEX `Id_UNIQUE` (`Id` ASC));
 
 /*Inyeccion de datos*/
 /*Datos Usuario*/
