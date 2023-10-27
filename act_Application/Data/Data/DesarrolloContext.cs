@@ -271,11 +271,11 @@ public partial class DesarrolloContext : DbContext
         {
             entity.HasKey(e => e.Id).HasName("PRIMARY");
 
-            entity.ToTable("act_Transacciones", tb => tb.HasComment("Operaciones de Referentes"));
+            entity.ToTable("act_Prestamos", tb => tb.HasComment("Operaciones de Referentes"));
 
             entity.HasIndex(e => e.Id, "Id_UNIQUE").IsUnique();
 
-            entity.HasIndex(e => e.IdParticipantes, "fk_Transacciones_Participantes");
+            entity.HasIndex(e => e.IdParticipantes, "fk_Prestamos_Participantes");
 
             entity.HasIndex(e => e.IdUser, "fk_Transacciones_User");
 
