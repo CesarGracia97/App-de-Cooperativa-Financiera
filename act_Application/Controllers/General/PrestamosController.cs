@@ -11,11 +11,11 @@ using act_Application.Models.Sistema.Complementos;
 
 namespace act_Application.Controllers.General
 {
-    public class TransaccionesController : Controller
+    public class PrestamosController : Controller
     {
         private readonly DesarrolloContext _context;
 
-        public TransaccionesController(DesarrolloContext context)
+        public PrestamosController(DesarrolloContext context)
         {
             _context = context;
         }
@@ -44,7 +44,7 @@ namespace act_Application.Controllers.General
 
         //Datos directos kue se obtiene por las listas
         [Authorize(Policy = "AdminReferenteOnly")]
-        public IActionResult Transacciones()
+        public IActionResult Prestamos()
         {
             ViewData["ItemsRazon"] = ObtenerItemsRazon();
             ViewData["ItemsCuota"] = ObtenerItemsCuota();
@@ -54,7 +54,7 @@ namespace act_Application.Controllers.General
 
         /*Crea una solicitud de prestamo*/
         [Authorize(Policy = "AdminReferenteOnly")][HttpPost][ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Razon,IdUser,Valor,Estado,FechPagoTotalPrestamo,FechaEntregaDinero,FechaIniCoutaPrestamo,TipoCuota,IdParticipantes,FechaGeneracion")] ActTransaccione actTransaccione)
+        public async Task<IActionResult> Create([Bind("Id,Razon,IdUser,Valor,Estado,FechPagoTotalPrestamo,FechaEntregaDinero,FechaIniCoutaPrestamo,TipoCuota,IdParticipantes,FechaGeneracion")] ActPrestamo actPrestamos)
         {
             if (ModelState.IsValid)
             {
@@ -66,22 +66,22 @@ namespace act_Application.Controllers.General
                     var userCI = User.Claims.FirstOrDefault(c => c.Type == "CI")?.Value;
 
                     // Establecer las propiedades que deben agregarse automáticamente
-                    actTransaccione.IdUser = userId;
-                    actTransaccione.FechaPagoTotalPrestamo = DateTime.MinValue;
-                    actTransaccione.Estado = "PENDIENTE ADMIN";
-                    actTransaccione.FechaGeneracion = DateTime.Now;
-                    actTransaccione.IdParticipantes = 0;
-                    _context.Add(actTransaccione);
+                    actPrestamos.IdUser = userId;
+                    actPrestamos.FechaPagoTotalPrestamo = DateTime.MinValue;
+                    actPrestamos.Estado = "PENDIENTE ADMIN";
+                    actPrestamos.FechaGeneracion = DateTime.Now;
+                    actPrestamos.IdParticipantes = 0;
+                    _context.Add(actPrestamos);
 
                     await _context.SaveChangesAsync();
 
                     try
                     {
-                        string Descripcion = $"El usuario {userIdentificacion} con Correo {userEmail} y C.I. {userCI} esta solicitando un prestamo de $ {actTransaccione.Valor} USD," +
-                                                $"con fecha de entrega para el dia {actTransaccione.FechaEntregaDinero}, e inicio de pago de la deuda para el dia {actTransaccione.FechaIniCoutaPrestamo}\n" +
-                                                $"Estado: {actTransaccione.Estado}\n" + $"Tipo de Cuota: {actTransaccione.TipoCuota}";
+                        string Descripcion = $"El usuario {userIdentificacion} con Correo {userEmail} y C.I. {userCI} esta solicitando un prestamo de $ {actPrestamos.Valor} USD," +
+                                                $"con fecha de entrega para el dia {actPrestamos.FechaEntregaDinero}, e inicio de pago de la deuda para el dia {actPrestamos.FechaIniCoutaPrestamo}\n" +
+                                                $"Estado: {actPrestamos.Estado}\n" + $"Tipo de Cuota: {actPrestamos.TipoCuota}";
 
-                        await CrearNotificacion(actTransaccione.Razon, Descripcion, actTransaccione.Id, new ActNotificacione());
+                        await CrearNotificacion(actPrestamos.Razon, Descripcion, actPrestamos.Id, new ActNotificacione());
                         await EnviarCorreoAdmin(Descripcion);
                         await EnviarCorreoUsuario(Descripcion);
                     }
@@ -100,12 +100,12 @@ namespace act_Application.Controllers.General
                     Console.WriteLine("Fallo el guardado");
                 }
             }
-            return View(actTransaccione);
+            return View(actPrestamos);
         }
 
 
         /*Crea un nuevo registro de Notificacion*/
-        private async Task CrearNotificacion(string razon, string descripcion, int idTransaccion, [Bind("Id,IdUser,Razon,Descripcion,FechaNotificacion,Destino,IdTransacciones,IdAportaciones,IdCuotas")] ActNotificacione actNotificacione)
+        private async Task CrearNotificacion(string razon, string descripcion, int idTransaccion, [Bind("Id,IdUser,Razon,Descripcion,FechaNotificacion,Destino,IdPrestamo,IdAportaciones,IdCuotas")] ActNotificacione actNotificacione)
         {
             var userIdClaim = User.Claims.FirstOrDefault(c => c.Type == "Id");
             if (userIdClaim != null && int.TryParse(userIdClaim.Value, out int userId))
@@ -115,7 +115,7 @@ namespace act_Application.Controllers.General
                 actNotificacione.Descripcion = descripcion;
                 actNotificacione.FechaNotificacion = DateTime.Now;
                 actNotificacione.Destino = "ADMINISTRADOR";
-                actNotificacione.IdTransacciones = idTransaccion;
+                actNotificacione.IdPrestamo = idTransaccion;
                 actNotificacione.IdCuotas = 0;
                 actNotificacione.IdAportaciones = 0;
 

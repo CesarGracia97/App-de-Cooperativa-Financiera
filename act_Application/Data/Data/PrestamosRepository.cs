@@ -5,26 +5,26 @@ using MySql.Data.MySqlClient;
 
 namespace act_Application.Data.Data
 {
-    public class TransaccionesRepository
+    public class PrestamosRepository
     {
 
-        public ActTransaccione GetDataTransaccionId(int idTransacciones) //Consulta para obtener todos los datos de una transaccion especifica
+        public ActPrestamo GetDataPrestamoId(int idPrestamos) //Consulta para obtener todos los datos de una transaccion especifica
         {
             string connectionString = AppSettingsHelper.GetConnectionString();
             try
             {
-                string query = ConfigReader.GetQuery("SelectTransaccionId");
+                string query = ConfigReader.GetQuery("SelectPrestamoId");
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
                     connection.Open();
                     using (MySqlCommand command = new MySqlCommand(query, connection))
                     {
-                        command.Parameters.AddWithValue("@Id", idTransacciones);
+                        command.Parameters.AddWithValue("@Id", idPrestamos);
                         using (MySqlDataReader reader = command.ExecuteReader())
                         {
                             if (reader.Read())
                             {
-                                ActTransaccione transaccion = new ActTransaccione
+                                ActPrestamo transaccion = new ActPrestamo
                                 {
                                     Id = Convert.ToInt32(reader["Id"]),
                                     Razon = Convert.ToString(reader["Razon"]),
@@ -53,43 +53,43 @@ namespace act_Application.Data.Data
             return null;
         }
 
-        public bool GetExistTransaccionesUser(int IdUser)
+        public bool GetExistPrestamosUser(int IdUser)
         {
             string connectionString = AppSettingsHelper.GetConnectionString();
-            string transaccionesQuery = ConfigReader.GetQuery("SelectTransaccionesUser");
+            string prestamosQuery = ConfigReader.GetQuery("SelectPrestamosUser");
 
-            int totalTransacciones = 0;
+            int totalPrestamos = 0;
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
                 connection.Open();
-                using (MySqlCommand command = new MySqlCommand(transaccionesQuery, connection))
+                using (MySqlCommand command = new MySqlCommand(prestamosQuery, connection))
                 {
                     command.Parameters.AddWithValue("@IdUser", IdUser);
                     using (MySqlDataReader reader = command.ExecuteReader())
                     {
                         if (reader.Read())
                         {
-                            totalTransacciones = Convert.ToInt32(reader["TotalTransacciones"]);
+                            totalPrestamos = Convert.ToInt32(reader["TotalPrestamos"]);
                         }
                     }
                 }
             }
-            return totalTransacciones > 0;
+            return totalPrestamos > 0;
         }
 
-        public List<DetallesTransaccionesUsers> GetDataTransaccionesUser(int IdUser)
+        public List<DetallesPrestamosUsers> GetDataPrestamosUser(int IdUser)
         {
             string connectionString = AppSettingsHelper.GetConnectionString();
-            string transaccionesQuery = ConfigReader.GetQuery("SelectTransaccionesUser");
+            string prestamosQuery = ConfigReader.GetQuery("SelectPrestamosUser");
 
-            List<DetallesTransaccionesUsers> transacciones = new List<DetallesTransaccionesUsers>();
-            DetallesTransaccionesUsers detallesTransacciones = new DetallesTransaccionesUsers();
+            List<DetallesPrestamosUsers> prestamos = new List<DetallesPrestamosUsers>();
+            DetallesPrestamosUsers detallesPrestamos = new DetallesPrestamosUsers();
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
                 connection.Open();
-                using (MySqlCommand command = new MySqlCommand(transaccionesQuery, connection))
+                using (MySqlCommand command = new MySqlCommand(prestamosQuery, connection))
                 {
                     command.Parameters.AddWithValue("@IdUser", IdUser);
                     using (MySqlDataReader reader = command.ExecuteReader())
@@ -97,28 +97,28 @@ namespace act_Application.Data.Data
                         decimal valorTotalPrestado = 0;
                         while (reader.Read())
                         {
-                            detallesTransacciones.TotalTransacciones = Convert.ToInt32(reader["TotalTransacciones"]);
-                            detallesTransacciones.TotalCuotas = Convert.ToInt32(reader["TotalCuota"]);
-                            detallesTransacciones.TotalPagoUnico = Convert.ToInt32(reader["TotalPagoUnico"]);
-                            detallesTransacciones.TotalAprobado = Convert.ToInt32(reader["TotalAprobado"]);
-                            detallesTransacciones.TotalRechazado = Convert.ToInt32(reader["TotalRechazado"]);
-                            detallesTransacciones.TotalPendiente = Convert.ToInt32(reader["TotalPendiente"]);
-                            DetallesTransaccionesUsers.DetallesPorTransaccion transaccion = new DetallesTransaccionesUsers.DetallesPorTransaccion
+                            detallesPrestamos.TotalPrestamos = Convert.ToInt32(reader["TotalPrestamos"]);
+                            detallesPrestamos.TotalCuotas = Convert.ToInt32(reader["TotalCuota"]);
+                            detallesPrestamos.TotalPagoUnico = Convert.ToInt32(reader["TotalPagoUnico"]);
+                            detallesPrestamos.TotalAprobado = Convert.ToInt32(reader["TotalAprobado"]);
+                            detallesPrestamos.TotalRechazado = Convert.ToInt32(reader["TotalRechazado"]);
+                            detallesPrestamos.TotalPendiente = Convert.ToInt32(reader["TotalPendiente"]);
+                            DetallesPrestamosUsers.DetallesPorPrestamo prestamo = new DetallesPrestamosUsers.DetallesPorPrestamo
                             {
                                 Id = Convert.ToInt32(reader["Id"]),
                                 Valor = Convert.ToDecimal(reader["Valor"]),
                                 Razon = reader["Razon"].ToString(),
                                 Estado = reader["Estado"].ToString()
                             };
-                            detallesTransacciones.Detalles.Add(transaccion);
-                            valorTotalPrestado += transaccion.Valor;
+                            detallesPrestamos.Detalles.Add(prestamo);
+                            valorTotalPrestado += prestamo.Valor;
                         }
-                        detallesTransacciones.ValorTotalPrestado = valorTotalPrestado;
+                        detallesPrestamos.ValorTotalPrestado = valorTotalPrestado;
                     }
                 }
             }
-            transacciones.Add(detallesTransacciones);
-            return transacciones;
+            prestamos.Add(detallesPrestamos);
+            return prestamos;
         }
 
     }

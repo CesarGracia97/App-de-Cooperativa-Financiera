@@ -7,7 +7,7 @@ namespace act_Application.Models.Sistema.ViewModels
         public Notificaciones_VM()
         {
             Notificaciones = new ActNotificacione();
-            Transacciones = new ActTransaccione();
+            Transacciones = new ActPrestamo();
             Cuotas = new ActCuota();
             Aportaciones = new ActAportacione();
             Eventos = new ActEvento();
@@ -15,7 +15,7 @@ namespace act_Application.Models.Sistema.ViewModels
 
         public ActNotificacione Notificaciones { get; set; }
 
-        public ActTransaccione Transacciones { get; set; }
+        public ActPrestamo Transacciones { get; set; }
 
         public ActCuota Cuotas { get; set; }
 

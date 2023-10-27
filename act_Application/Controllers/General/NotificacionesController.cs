@@ -34,8 +34,8 @@ namespace act_Application.Controllers.General
                     var viewModelList = notificaciones.Select(notificacion => new Notificaciones_VM
                     {
                         Notificaciones = notificacion,
-                        Transacciones = _context.ActTransacciones.FirstOrDefault(t => t.Id == notificacion.IdTransacciones),
-                        Eventos = _context.ActEventos.FirstOrDefault(t => t.Id == notificacion.IdTransacciones)
+                        Transacciones = _context.ActPrestamos.FirstOrDefault(t => t.Id == notificacion.IdPrestamo),
+                        Eventos = _context.ActEventos.FirstOrDefault(t => t.Id == notificacion.IdPrestamo)
                     });
 
                     return View(viewModelList);
@@ -60,7 +60,7 @@ namespace act_Application.Controllers.General
                         var viewModelList = notificaciones.Select(notificacion => new Notificaciones_VM
                         {
                             Notificaciones = notificacion,
-                            Transacciones = _context.ActTransacciones.FirstOrDefault(t => t.Id == notificacion.IdTransacciones)
+                            Transacciones = _context.ActPrestamos.FirstOrDefault(t => t.Id == notificacion.IdPrestamo)
                         });
 
 
@@ -91,7 +91,7 @@ namespace act_Application.Controllers.General
 
         
         [HttpPost][ValidateAntiForgeryToken][Authorize(Policy = "AdminOnly")]
-        public async Task<IActionResult> EditTConfirmado (int Id, DateTime FechaPagoTotalPrestamo, DateTime FechaInicio, DateTime FechaFinalizacion, [Bind("Id,Razon,IdUser,Valor,Estado,FechaEntregaDinero,FechaPagoTotalPrestamo,FechaIniCoutaPrestamo,TipoCuota,IdParticipantes,FechaGeneracion")] ActTransaccione actTransaccione) //Metodo para Transaccion Evaluada y confirmada.
+        public async Task<IActionResult> EditTConfirmado (int Id, DateTime FechaPagoTotalPrestamo, DateTime FechaInicio, DateTime FechaFinalizacion, [Bind("Id,Razon,IdUser,Valor,Estado,FechaEntregaDinero,FechaPagoTotalPrestamo,FechaIniCoutaPrestamo,TipoCuota,IdParticipantes,FechaGeneracion")] ActPrestamo actTransaccione) //Metodo para Transaccion Evaluada y confirmada.
         {
             if (Id != actTransaccione.Id)
             {
@@ -105,8 +105,8 @@ namespace act_Application.Controllers.General
 
                 try
                 {
-                    var metodoNotificacion = new TransaccionesRepository(); // Crear una instancia de MetodoNotificaciones
-                    var transaccionOriginal = metodoNotificacion.GetDataTransaccionId(Id); // Llamar al método desde la instancia
+                    var metodoNotificacion = new PrestamosRepository(); // Crear una instancia de MetodoNotificaciones
+                    var transaccionOriginal = metodoNotificacion.GetDataPrestamoId(Id); // Llamar al método desde la instancia
                     if (transaccionOriginal == null)
                     {
                         Console.WriteLine("Hubo un problema al momento de comprobar la nulidad de la Transaccion en el Confirmado");
@@ -164,7 +164,7 @@ namespace act_Application.Controllers.General
         }
 
 
-        private async Task CrearNotificacion(int idTransaccion, int IdCuota, int IdAportacion, string Destino, string Razon, string Descripcion, [Bind("Id,IdUser,Razon,Descripcion,FechaNotificacion,Destino,IdTransacciones,IdAportaciones,IdCuotas")] ActNotificacione actNotificacione) //Metodo para crear una nueva Notificacion en BD y notificacion al Usuario Remitente
+        private async Task CrearNotificacion(int idTransaccion, int IdCuota, int IdAportacion, string Destino, string Razon, string Descripcion, [Bind("Id,IdUser,Razon,Descripcion,FechaNotificacion,Destino,IdPrestamo,IdAportaciones,IdCuotas")] ActNotificacione actNotificacione) //Metodo para crear una nueva Notificacion en BD y notificacion al Usuario Remitente
         {
             var userIdClaim = User.Claims.FirstOrDefault(c => c.Type == "Id");
             if (userIdClaim != null && int.TryParse(userIdClaim.Value, out int userId))
@@ -175,11 +175,11 @@ namespace act_Application.Controllers.General
                 actNotificacione.FechaNotificacion = DateTime.Now;
                 actNotificacione.Destino = Destino;
                 if(idTransaccion > 0)  {
-                    actNotificacione.IdTransacciones = idTransaccion;
+                    actNotificacione.IdPrestamo = idTransaccion;
                 }
                 else
                 {
-                    actNotificacione.IdTransacciones = 0;
+                    actNotificacione.IdPrestamo = 0;
                 }
                 if(IdAportacion > 0){
                     actNotificacione.IdAportaciones = IdAportacion;
@@ -209,7 +209,7 @@ namespace act_Application.Controllers.General
 
 
         [HttpPost][ValidateAntiForgeryToken][Authorize(Policy = "AdminOnly")]
-        public async Task<IActionResult> EditTDenegado(int Id, string Descripcion, [Bind("Id,Razon,IdUser,Valor,Estado,FechaEntregaDinero,FechaPagoTotalPrestamo,FechaIniCoutaPrestamo,TipoCuota,IdParticipantes,FechaGeneracion")] ActTransaccione actTransaccione) //Metodo para Transaccion Evaluada y Denegada.
+        public async Task<IActionResult> EditTDenegado(int Id, string Descripcion, [Bind("Id,Razon,IdUser,Valor,Estado,FechaEntregaDinero,FechaPagoTotalPrestamo,FechaIniCoutaPrestamo,TipoCuota,IdParticipantes,FechaGeneracion")] ActPrestamo actTransaccione) //Metodo para Transaccion Evaluada y Denegada.
         {
             if (Id != actTransaccione.Id)
             {
@@ -220,8 +220,8 @@ namespace act_Application.Controllers.General
                 string razon = "";
                 try
                 {
-                    var metodoNotificacion = new TransaccionesRepository ();
-                    var transaccionOriginal = metodoNotificacion.GetDataTransaccionId(Id);
+                    var metodoNotificacion = new PrestamosRepository ();
+                    var transaccionOriginal = metodoNotificacion.GetDataPrestamoId(Id);
 
                     if (transaccionOriginal == null)
                     {
@@ -258,7 +258,7 @@ namespace act_Application.Controllers.General
 
         
         [HttpPost][ValidateAntiForgeryToken][Authorize(Policy = "AdminReferenteOnly")]
-        public async Task<IActionResult> AceptarReferente (int Id, [Bind("Id,Razon,IdUser,Valor,Estado,FechaEntregaDinero,FechaPagoTotalPrestamo,FechaIniCoutaPrestamo,TipoCuota,IdParticipantes,FechaGeneracion,")] ActTransaccione actTransaccione)
+        public async Task<IActionResult> AceptarReferente (int Id, [Bind("Id,Razon,IdUser,Valor,Estado,FechaEntregaDinero,FechaPagoTotalPrestamo,FechaIniCoutaPrestamo,TipoCuota,IdParticipantes,FechaGeneracion,")] ActPrestamo actTransaccione)
         {
             if (Id != actTransaccione.Id)
             {
@@ -271,8 +271,8 @@ namespace act_Application.Controllers.General
                 string Razon = "", Descripcion = "";
                 try
                 {
-                    var metodoNotificacion = new TransaccionesRepository(); // Crear una instancia de MetodoNotificaciones
-                    var transaccionOriginal = metodoNotificacion.GetDataTransaccionId(Id); // Llamar al método desde la instancia
+                    var metodoNotificacion = new PrestamosRepository(); // Crear una instancia de MetodoNotificaciones
+                    var transaccionOriginal = metodoNotificacion.GetDataPrestamoId(Id); // Llamar al método desde la instancia
 
                     if (transaccionOriginal == null)
                     {
@@ -313,7 +313,7 @@ namespace act_Application.Controllers.General
 
 
         [HttpPost][ValidateAntiForgeryToken][Authorize(Policy = "AdminReferenteOnly")]
-        public async Task <IActionResult> RechazarReferente (int Id, [Bind("Id,Razon,IdUser,Valor,Estado,FechaEntregaDinero,FechaPagoTotalPrestamo,FechaIniCoutaPrestamo,TipoCuota,IdParticipantes,FechaGeneracion")] ActTransaccione actTransaccione)
+        public async Task <IActionResult> RechazarReferente (int Id, [Bind("Id,Razon,IdUser,Valor,Estado,FechaEntregaDinero,FechaPagoTotalPrestamo,FechaIniCoutaPrestamo,TipoCuota,IdParticipantes,FechaGeneracion")] ActPrestamo actTransaccione)
         {
             if (Id != actTransaccione.Id)
             {
@@ -326,8 +326,8 @@ namespace act_Application.Controllers.General
                 string Razon ="", Descripcion ="";
                 try
                 {
-                    var metodoTransRepo = new TransaccionesRepository(); // Crear una instancia de MetodoNotificaciones
-                    var transaccionOriginal = metodoTransRepo.GetDataTransaccionId(Id); // Llamar al método desde la instancia
+                    var metodoTransRepo = new PrestamosRepository(); // Crear una instancia de MetodoNotificaciones
+                    var transaccionOriginal = metodoTransRepo.GetDataPrestamoId(Id); // Llamar al método desde la instancia
 
                     if (transaccionOriginal == null)
                     {
@@ -364,14 +364,14 @@ namespace act_Application.Controllers.General
         }
 
 
-        private async Task<List<DateTime>> CrearCuotas(int IdTransaccion, DateTime FechaPagoTotalPrestamo, [Bind("Id,IdUser,IdTransaccion,ValorCuota,FechaCuota,Estado")] ActCuota actCuota)
+        private async Task<List<DateTime>> CrearCuotas(int IdTransaccion, DateTime FechaPagoTotalPrestamo, [Bind("Id,IdUser,IdPrestamo,ValorCuota,FechaCuota,Estado")] ActCuota actCuota)
         {
-            var metodoNotificacion = new TransaccionesRepository();
-            var transaccionOriginal = metodoNotificacion.GetDataTransaccionId(IdTransaccion);
+            var metodoNotificacion = new PrestamosRepository();
+            var transaccionOriginal = metodoNotificacion.GetDataPrestamoId(IdTransaccion);
 
             if (transaccionOriginal == null)
             {
-                Console.WriteLine("Hubo un error al verificar la existencia del registro en GetDataTransaccionId(IdTransaccion)");
+                Console.WriteLine("Hubo un error al verificar la existencia del registro en GetDataPrestamoId(IdPrestamo)");
             }
             int numeroDeCuotas = (FechaPagoTotalPrestamo.Year - transaccionOriginal.FechaIniCoutaPrestamo.Year) * 12 +
                 FechaPagoTotalPrestamo.Month - transaccionOriginal.FechaIniCoutaPrestamo.Month + 1;
@@ -389,7 +389,7 @@ namespace act_Application.Controllers.General
                 var cuota = new ActCuota
                 {
                     IdUser = transaccionOriginal.IdUser,
-                    IdTransaccion = IdTransaccion,
+                    IdPrestamo = IdTransaccion,
                     ValorCuota = valorDeCuota,
                     FechaCuota = fechaDeCuota,
                     Estado = "PENDIENTE DE PAGO"
@@ -404,7 +404,7 @@ namespace act_Application.Controllers.General
             return fechasDeCuotas;
         }
 
-        private async Task<int> CrearParticipaciones(int IdTransaccion, int IdUser, DateTime FechaInicio, DateTime FechaFinalizacion, [Bind("Id,IdTransaccion,Estado,FechaInicio,FechaFinalizacion,FechaGeneracion,ParticipantesId,ParticipantesNombre,IdUser")] ActEvento actParticipante)
+        private async Task<int> CrearParticipaciones(int IdTransaccion, int IdUser, DateTime FechaInicio, DateTime FechaFinalizacion, [Bind("Id,IdPrestamo,Estado,FechaInicio,FechaFinalizacion,FechaGeneracion,ParticipantesId,ParticipantesNombre,IdUser")] ActEvento actParticipante)
         {
             try
             {
@@ -415,7 +415,7 @@ namespace act_Application.Controllers.General
                     actParticipante.FechaGeneracion = DateTime.Now;
                     actParticipante.ParticipantesId = "";
                     actParticipante.ParticipantesNombre = "";
-                    actParticipante.IdTransaccion = IdTransaccion;
+                    actParticipante.IdPrestamo = IdTransaccion;
                     actParticipante.IdUser = IdUser;
                     actParticipante.Estado = "PENDIENTE";
                     /*ESTADOS:  PENDIENTE (ESESPERA DE LA RESPUESTA DEL USUARIO NO ADMIN).
@@ -438,7 +438,7 @@ namespace act_Application.Controllers.General
         }
 
 
-        private async Task<IActionResult> EditParticipacion(int Id, string Estado, [Bind("Id,IdTransaccion,Estado,FechaInicio,FechaFinalizacion,FechaGeneracion,ParticipantesId,ParticipantesNombre,IdUser")] ActEvento actParticipante)
+        private async Task<IActionResult> EditParticipacion(int Id, string Estado, [Bind("Id,IdPrestamo,Estado,FechaInicio,FechaFinalizacion,FechaGeneracion,ParticipantesId,ParticipantesNombre,IdUser")] ActEvento actParticipante)
         {
             actParticipante.Id = Id;
             if (Id != actParticipante.Id)
@@ -464,7 +464,7 @@ namespace act_Application.Controllers.General
                     actParticipante.FechaGeneracion = RparticipantesOriginal.FechaGeneracion;
                     actParticipante.ParticipantesId = RparticipantesOriginal.ParticipantesId;
                     actParticipante.ParticipantesNombre = RparticipantesOriginal.ParticipantesNombre;
-                    actParticipante.IdTransaccion = RparticipantesOriginal.IdTransaccion;
+                    actParticipante.IdPrestamo = RparticipantesOriginal.IdPrestamo;
                     actParticipante.Estado = Estado;
                     actParticipante.IdUser = RparticipantesOriginal.IdUser;
 

@@ -70,7 +70,7 @@ namespace act_Application.Data.Data
                                 {
                                     Id = Convert.ToInt32(reader["Id"]),
                                     IdUser = Convert.ToInt32(reader["IdUser"]),
-                                    IdTransaccion = Convert.ToInt32(reader["IdTransaccion"]),
+                                    IdPrestamo = Convert.ToInt32(reader["IdPrestamo"]),
                                     FechaInicio = Convert.ToDateTime(reader["FechaInicio"]),
                                     FechaFinalizacion = Convert.ToDateTime(reader["FechaFinalizacion"]),
                                     FechaGeneracion = Convert.ToDateTime(reader["FechaGeneracion"]),
@@ -80,8 +80,8 @@ namespace act_Application.Data.Data
                                     NombreUsuario = Convert.ToString(reader["NombreUsuario"])
                                 };
                                 eventos.Add(eve);
-                                TransaccionesRepository transacciones = new TransaccionesRepository();
-                                transacciones.GetDataTransaccionId(eve.IdTransaccion);
+                                PrestamosRepository prestamos = new PrestamosRepository();
+                                prestamos.GetDataPrestamoId(eve.IdPrestamo);
 
                             } while (reader.Read());
 
@@ -116,7 +116,7 @@ namespace act_Application.Data.Data
                         {
                             if (reader.Read())
                             {
-                                ActEvento transaccion = new ActEvento
+                                ActEvento eventos = new ActEvento
                                 {
                                     Id = Convert.ToInt32(reader["Id"]),
                                     FechaInicio = Convert.ToDateTime(reader["FechaInicio"]),
@@ -125,9 +125,9 @@ namespace act_Application.Data.Data
                                     ParticipantesId = Convert.ToString(reader["ParticipantesId"]),
                                     ParticipantesNombre = Convert.ToString(reader["ParticipantesNombre"]),
                                     Estado = reader["Estado"].ToString(),
-                                    IdTransaccion = Convert.ToInt32(reader["IdTransaccion"])
+                                    IdPrestamo = Convert.ToInt32(reader["IdPrestamo"])
                                 };
-                                return transaccion;
+                                return eventos;
                             }
                         }
                     }
@@ -135,7 +135,7 @@ namespace act_Application.Data.Data
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Hubo un error en la consulta de la transacción");
+                Console.WriteLine("Hubo un error en la consulta del evento del Usuario");
                 Console.WriteLine("Detalles del error: " + ex.Message);
             }
 

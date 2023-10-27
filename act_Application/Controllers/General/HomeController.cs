@@ -61,15 +61,15 @@ namespace act_Application.Controllers.General
                     };
                 }
 
-                TransaccionesRepository transaccionesRepository = new TransaccionesRepository();
-                var transaccionesUserList = transaccionesRepository.GetDataTransaccionesUser(userId);
+                PrestamosRepository transaccionesRepository = new PrestamosRepository();
+                var transaccionesUserList = transaccionesRepository.GetDataPrestamosUser(userId);
                 var transaccionUser = transaccionesUserList.FirstOrDefault();
-                Models.Sistema.Complementos.DetallesTransaccionesUsers transaccionesUserVM = null;
+                Models.Sistema.Complementos.DetallesPrestamosUsers transaccionesUserVM = null;
 
-                if(transaccionesRepository.GetExistTransaccionesUser(userId) == true)
+                if(transaccionesRepository.GetExistPrestamosUser(userId) == true)
                 {
-                    transaccionesUserVM = new Models.Sistema.Complementos.DetallesTransaccionesUsers {
-                        TotalTransacciones = transaccionUser.TotalTransacciones,
+                    transaccionesUserVM = new Models.Sistema.Complementos.DetallesPrestamosUsers {
+                        TotalPrestamos = transaccionUser.TotalPrestamos,
                         TotalAprobado = transaccionUser.TotalAprobado,
                         TotalCuotas = transaccionUser.TotalCuotas,
                         TotalPagoUnico = transaccionUser.TotalPagoUnico,
@@ -89,7 +89,7 @@ namespace act_Application.Controllers.General
                         Home_VM viewModel = new Home_VM
                         {
                             Eventos = evento,
-                            Transacciones = _context.ActTransacciones.FirstOrDefault(t => t.Id == evento.IdTransaccion)
+                            Transacciones = _context.ActPrestamos.FirstOrDefault(t => t.Id == evento.IdPrestamo)
                         };
 
                         viewModelList.Add(viewModel);
@@ -100,7 +100,7 @@ namespace act_Application.Controllers.General
                 {
                     viewModel.AportacionesUser = aportacionesUserVM;
                     viewModel.MultaUser = multaUserVM;
-                    viewModel.TransaccionesUser = transaccionesUserVM;
+                    viewModel.PrestamosUser = transaccionesUserVM;
                 }
                 return View(viewModelList);
             }
@@ -118,7 +118,7 @@ namespace act_Application.Controllers.General
             return RedirectToAction("Index", "Login");
         }
 
-        public async Task<IActionResult> Participar(int IdP, [Bind("Id,IdTransaccion,Estado,FechaInicio,FechaFinalizacion,FechaGeneracion,ParticipantesId,ParticipantesNombre")] ActEvento actEvento)
+        public async Task<IActionResult> Participar(int IdP, [Bind("Id,IdPrestamo,Estado,FechaInicio,FechaFinalizacion,FechaGeneracion,ParticipantesId,ParticipantesNombre")] ActEvento actEvento)
         {
             actEvento.Id = IdP;
             if (IdP != actEvento.Id)
@@ -150,7 +150,7 @@ namespace act_Application.Controllers.General
                         actEvento.FechaGeneracion = RparticipantesOriginal.FechaGeneracion;
                         actEvento.ParticipantesId = userId.ToString() + ", ";
                         actEvento.ParticipantesNombre = userIdentificacion + ", ";
-                        actEvento.IdTransaccion = RparticipantesOriginal.IdTransaccion;
+                        actEvento.IdPrestamo = RparticipantesOriginal.IdPrestamo;
                         actEvento.Estado = RparticipantesOriginal.Estado;
 
                         _context.Update(actEvento);

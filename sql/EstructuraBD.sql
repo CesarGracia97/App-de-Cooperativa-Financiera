@@ -167,31 +167,28 @@ CREATE TABLE `desarrollo`.`act_Querys` (
 COMMENT = 'Querys para consultas';
 
 USE desarrollo;
-CREATE TABLE `desarrollo`.`act_Liquidaciones` (
-  `Id` INT NOT NULL AUTO_INCREMENT,
-  `IdSocio` INT NOT NULL,
-  `AportacionesId` VARCHAR(200) NOT NULL,
-  `InteresAportaciones` DECIMAL(10,2) NOT NULL,
-  `PrestamosId` VARCHAR(200) NOT NULL,
-  `InteresesPrestamos` DECIMAL(10,2) NOT NULL,
-  `InteresGlobalAportaciones` DECIMAL(10,2) NOT NULL,
-  `InteresGlobalPrestamos` DECIMAL(10,2) NOT NULL,
-  PRIMARY KEY (`Id`),
-  UNIQUE INDEX `IdSocio_UNIQUE` (`IdSocio` ASC))
-COMMENT = 'Porcentaje de Aportaciones.';
 
-CREATE TABLE `desarrollo`.`act_HistorialLiquidaciones` (
-  `Id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `IdSocio` INT NOT NULL,
-  `FechaRegistro` DATETIME NOT NULL,
-  `AportacionesId` VARCHAR(100) NOT NULL,
-  `InteresAportaciones` DECIMAL(10,2) NOT NULL,
-  `PrestamosId` VARCHAR(100) NOT NULL,
-  `InteresesPrestamos` DECIMAL(10,2) NOT NULL,
-  `InteresGlobalAportaciones` DECIMAL(10,2) NOT NULL,
-  `InteresGlobalPrestamos` DECIMAL(10,2) NOT NULL,
+CREATE TABLE `desarrollo`.`act_AportacionesAC` (
+  `Id` INT NOT NULL AUTO_INCREMENT,
+  `IdUser` INT NOT NULL,
+  `AportacionesIds` VARCHAR(200) NOT NULL,
+  `ValorAC` DECIMAL(10,2) NOT NULL,
+  `LiquidacionTotal` DECIMAL(10,2) NULL,
   PRIMARY KEY (`Id`),
-  UNIQUE INDEX `Id_UNIQUE` (`Id` ASC));
+  UNIQUE INDEX `Id_UNIQUE` (`Id` ASC),
+  UNIQUE INDEX `IdUser_UNIQUE` (`IdUser` ASC))
+COMMENT = 'Tabla de Liquidacion de Aportes. AportacionesAC';
+
+CREATE TABLE `desarrollo`.`act_MultasAC` (
+  `Id` INT NOT NULL AUTO_INCREMENT,
+  `IdUser` INT NOT NULL,
+  `MultasIds` VARCHAR(200) NOT NULL,
+  `ValorAC` DECIMAL(10,2) NOT NULL,
+  `LiquidacionTotal` DECIMAL(10,2) NULL,
+  PRIMARY KEY (`Id`),
+  UNIQUE INDEX `Id_UNIQUE` (`Id` ASC),
+  UNIQUE INDEX `IdUser_UNIQUE` (`IdUser` ASC))
+COMMENT = 'Tabla de Liquidacion de Multas. MultasAC';
 
 CREATE TABLE `desarrollo`.`act_Porcentaje` (
   `Id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -202,6 +199,12 @@ CREATE TABLE `desarrollo`.`act_Porcentaje` (
   `Condicion` VARCHAR(200) NOT NULL,
   PRIMARY KEY (`Id`),
   UNIQUE INDEX `Id_UNIQUE` (`Id` ASC));
+
+  CREATE TABLE `desarrollo`.`act_LAPMT` (
+  `Id` INT NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`Id`),
+  UNIQUE INDEX `Id_UNIQUE` (`Id` ASC))
+  COMMENT = 'Tabla Relacion:Liquidacion,Aportes,Prestamos,Multas,Usuario' ;
 
 /*Inyeccion de datos*/
 /*Datos Usuario*/

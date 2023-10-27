@@ -80,13 +80,13 @@ namespace act_Application.Data.Data
                                     Descripcion = Convert.ToString(reader["Descripcion"]),
                                     FechaNotificacion = Convert.ToDateTime(reader["FechaNotificacion"]),
                                     Destino = Convert.ToString(reader["Destino"]),
-                                    IdTransacciones = Convert.ToInt32(reader["IdTransacciones"]),
+                                    IdPrestamo = Convert.ToInt32(reader["IdPrestamo"]),
                                     IdAportaciones = Convert.ToInt32(reader["IdAportaciones"]),
                                     IdCuotas = Convert.ToInt32(reader["IdCuotas"])
                                 };
                                 notificacionesAdmin.Add(notificacion);
-                                TransaccionesRepository transacciones = new TransaccionesRepository();
-                                transacciones.GetDataTransaccionId(notificacion.IdTransacciones);
+                                PrestamosRepository prestamos = new PrestamosRepository();
+                                prestamos.GetDataPrestamoId(notificacion.IdPrestamo);
                             }
                             return notificacionesAdmin;
                         }
@@ -126,14 +126,14 @@ namespace act_Application.Data.Data
                                     Descripcion = Convert.ToString(reader["Descripcion"]),
                                     FechaNotificacion = Convert.ToDateTime(reader["FechaNotificacion"]),
                                     Destino = Convert.ToString(reader["Destino"]),
-                                    IdTransacciones = Convert.ToInt32(reader["IdTransacciones"]),
+                                    IdPrestamo = Convert.ToInt32(reader["IdPrestamo"]),
                                     IdAportaciones = Convert.ToInt32(reader["IdAportaciones"]),
                                     IdCuotas = Convert.ToInt32(reader["IdCuotas"]),
 
                                 };
                                 notificacionesUser.Add(notificacion);
-                                TransaccionesRepository transaccion = new TransaccionesRepository();
-                                transaccion.GetDataTransaccionId(notificacion.IdTransacciones);
+                                PrestamosRepository prestamo = new PrestamosRepository();
+                                prestamo.GetDataPrestamoId(notificacion.IdPrestamo);
                             }
                             return notificacionesUser;
                         }

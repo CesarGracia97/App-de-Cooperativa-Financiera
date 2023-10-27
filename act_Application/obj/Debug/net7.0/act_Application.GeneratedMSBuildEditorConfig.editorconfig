@@ -180,6 +180,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTm90aWZpY2FjaW9uZXNcTm90aWZpY2FjaW9uLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/cgracia/source/repos/CesarGracia97/act_Application/act_Application/Views/Prestamos/Prestamos.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJlc3RhbW9zXFByZXN0YW1vcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/cgracia/source/repos/CesarGracia97/act_Application/act_Application/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -194,10 +198,6 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/cgracia/source/repos/CesarGracia97/act_Application/act_Application/Views/TablaMultas/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFibGFNdWx0YXNcSW5kZXguY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/cgracia/source/repos/CesarGracia97/act_Application/act_Application/Views/Transacciones/Transacciones.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVHJhbnNhY2Npb25lc1xUcmFuc2FjY2lvbmVzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/cgracia/source/repos/CesarGracia97/act_Application/act_Application/Views/_ViewImports.cshtml]

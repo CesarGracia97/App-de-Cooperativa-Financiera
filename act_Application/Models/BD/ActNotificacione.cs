@@ -20,7 +20,7 @@ public partial class ActNotificacione
 
     public string Destino { get; set; } = null!;
 
-    public int IdTransacciones { get; set; }
+    public int IdPrestamo { get; set; }
 
     public int IdAportaciones { get; set; }
 

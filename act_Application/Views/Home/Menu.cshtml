@@ -9,7 +9,7 @@
     var valorVisualizacion = new MetodoVisualizacion();
     var aportacionRepository = new AportacionRepository();
     var multaRepository = new MultaRepository();
-    var transaccionesRepository = new TransaccionesRepository();
+    var transaccionesRepository = new PrestamosRepository();
     var userIdClaim = User.Claims.FirstOrDefault(c => c.Type == "Id");
 }
 <head>
@@ -51,17 +51,17 @@
             <div class="item4">
                 <label>Transacciones</label>
                 <div class="trans-container">
-                    @if(transaccionesRepository.GetExistTransaccionesUser(userId) == true)
+                    @if(transaccionesRepository.GetExistPrestamosUser(userId) == true)
                     {
                         var firstModel = Model.FirstOrDefault();
                         if(firstModel != null)
                         {
-                            <p>Total de Prestamos: @firstModel.TransaccionesUser.TotalTransacciones</p>
-                            <p>Total de Prestamos Aprobados: @firstModel.TransaccionesUser.TotalAprobado</p>
-                            <p>Total de Prestamos Pendientes: @firstModel.TransaccionesUser.TotalPendiente</p>
-                            <p>Total de Prestamos Rechazados: @firstModel.TransaccionesUser.TotalRechazado</p>
+                            <p>Total de Prestamos: @firstModel.PrestamosUser.TotalPrestamos</p>
+                            <p>Total de Prestamos Aprobados: @firstModel.PrestamosUser.TotalAprobado</p>
+                            <p>Total de Prestamos Pendientes: @firstModel.PrestamosUser.TotalPendiente</p>
+                            <p>Total de Prestamos Rechazados: @firstModel.PrestamosUser.TotalRechazado</p>
                             <hr />
-                            <p>Valor de Prestamos Acumulados: @firstModel.TransaccionesUser.ValorTotalPrestado</p>
+                            <p>Valor de Prestamos Acumulados: @firstModel.PrestamosUser.ValorTotalPrestado</p>
                         }
                         else
                         {

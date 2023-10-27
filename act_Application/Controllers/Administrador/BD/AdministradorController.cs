@@ -144,7 +144,7 @@ namespace act_Application.Controllers.Administrador.BD
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateCuotas([Bind("Id,ValorCuota,FechaCuota,Estado,IdUser,IdTransaccion")] ActCuota actCuota)
+        public async Task<IActionResult> CreateCuotas([Bind("Id,ValorCuota,FechaCuota,Estado,IdUser,IdPrestamo")] ActCuota actCuota)
         {
             if (ModelState.IsValid)
             {
@@ -172,7 +172,7 @@ namespace act_Application.Controllers.Administrador.BD
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditCuotas(int id, [Bind("Id,ValorCuota,FechaCuota,Estado,IdUser,IdTransaccion")] ActCuota actCuota)
+        public async Task<IActionResult> EditCuotas(int id, [Bind("Id,ValorCuota,FechaCuota,Estado,IdUser,IdPrestamo")] ActCuota actCuota)
         {
             if (id != actCuota.Id)
             {
@@ -370,7 +370,7 @@ namespace act_Application.Controllers.Administrador.BD
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateNotificaciones([Bind("Id,IdUser,Razon,Descripcion,FechaNotificacion,Destino,IdTransacciones,IdAportaciones,IdCuotas,Visto")] ActNotificacione actNotificacione)
+        public async Task<IActionResult> CreateNotificaciones([Bind("Id,IdUser,Razon,Descripcion,FechaNotificacion,Destino,IdPrestamo,IdAportaciones,IdCuotas,Visto")] ActNotificacione actNotificacione)
         {
             if (ModelState.IsValid)
             {
@@ -398,7 +398,7 @@ namespace act_Application.Controllers.Administrador.BD
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditNotificaciones(int id, [Bind("Id,IdUser,Razon,Descripcion,FechaNotificacion,Destino,IdTransacciones,IdAportaciones,IdCuotas,Visto")] ActNotificacione actNotificacione)
+        public async Task<IActionResult> EditNotificaciones(int id, [Bind("Id,IdUser,Razon,Descripcion,FechaNotificacion,Destino,IdPrestamo,IdAportaciones,IdCuotas,Visto")] ActNotificacione actNotificacione)
         {
             if (id != actNotificacione.Id)
             {
@@ -484,7 +484,7 @@ namespace act_Application.Controllers.Administrador.BD
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateParticipantes([Bind("Id,IdTransaccion,FechaInicio,FechaFinalizacion,FechaGeneracion,ParticipantesId,Estado")] ActEvento actParticipante)
+        public async Task<IActionResult> CreateParticipantes([Bind("Id,IdPrestamo,FechaInicio,FechaFinalizacion,FechaGeneracion,ParticipantesId,Estado")] ActEvento actParticipante)
         {
             if (ModelState.IsValid)
             {
@@ -512,7 +512,7 @@ namespace act_Application.Controllers.Administrador.BD
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditParticipantes(int id, [Bind("Id,IdTransaccion,FechaInicio,FechaFinalizacion,FechaGeneracion,ParticipantesId,Estado")] ActEvento actParticipante)
+        public async Task<IActionResult> EditParticipantes(int id, [Bind("Id,IdPrestamo,FechaInicio,FechaFinalizacion,FechaGeneracion,ParticipantesId,Estado")] ActEvento actParticipante)
         {
             if (id != actParticipante.Id)
             {
@@ -813,7 +813,7 @@ namespace act_Application.Controllers.Administrador.BD
 
         public async Task<IActionResult> AdminTransacciones()
         {
-            return View(await _context.ActTransacciones.ToListAsync());
+            return View(await _context.ActPrestamos.ToListAsync());
         }
 
         public IActionResult CreateTransacciones()
@@ -823,7 +823,7 @@ namespace act_Application.Controllers.Administrador.BD
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateTransacciones([Bind("Id,Razon,IdUser,Valor,Estado,FechaEntregaDinero,FechaPagoTotalPrestamo,FechaIniCoutaPrestamo,FechaGeneracion,TipoCuota,IdParticipantes")] ActTransaccione actTransaccione)
+        public async Task<IActionResult> CreateTransacciones([Bind("Id,Razon,IdUser,Valor,Estado,FechaEntregaDinero,FechaPagoTotalPrestamo,FechaIniCoutaPrestamo,FechaGeneracion,TipoCuota,IdParticipantes")] ActPrestamo actTransaccione)
         {
             if (ModelState.IsValid)
             {
@@ -836,12 +836,12 @@ namespace act_Application.Controllers.Administrador.BD
 
         public async Task<IActionResult> EditTransacciones(int? id)
         {
-            if (id == null || _context.ActTransacciones == null)
+            if (id == null || _context.ActPrestamos == null)
             {
                 return NotFound();
             }
 
-            var actTransaccione = await _context.ActTransacciones.FindAsync(id);
+            var actTransaccione = await _context.ActPrestamos.FindAsync(id);
             if (actTransaccione == null)
             {
                 return NotFound();
@@ -851,7 +851,7 @@ namespace act_Application.Controllers.Administrador.BD
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditTransacciones(int id, [Bind("Id,Razon,IdUser,Valor,Estado,FechaEntregaDinero,FechaPagoTotalPrestamo,FechaIniCoutaPrestamo,FechaGeneracion,TipoCuota,IdParticipantes")] ActTransaccione actTransaccione)
+        public async Task<IActionResult> EditTransacciones(int id, [Bind("Id,Razon,IdUser,Valor,Estado,FechaEntregaDinero,FechaPagoTotalPrestamo,FechaIniCoutaPrestamo,FechaGeneracion,TipoCuota,IdParticipantes")] ActPrestamo actTransaccione)
         {
             if (id != actTransaccione.Id)
             {
@@ -883,12 +883,12 @@ namespace act_Application.Controllers.Administrador.BD
 
         public async Task<IActionResult> DeleteTransacciones(int? id)
         {
-            if (id == null || _context.ActTransacciones == null)
+            if (id == null || _context.ActPrestamos == null)
             {
                 return NotFound();
             }
 
-            var actTransaccione = await _context.ActTransacciones
+            var actTransaccione = await _context.ActPrestamos
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (actTransaccione == null)
             {
@@ -902,14 +902,14 @@ namespace act_Application.Controllers.Administrador.BD
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmedTransacciones(int id)
         {
-            if (_context.ActTransacciones == null)
+            if (_context.ActPrestamos == null)
             {
-                return Problem("Entity set 'DesarrolloContext.ActTransacciones'  is null.");
+                return Problem("Entity set 'DesarrolloContext.ActPrestamos'  is null.");
             }
-            var actTransaccione = await _context.ActTransacciones.FindAsync(id);
+            var actTransaccione = await _context.ActPrestamos.FindAsync(id);
             if (actTransaccione != null)
             {
-                _context.ActTransacciones.Remove(actTransaccione);
+                _context.ActPrestamos.Remove(actTransaccione);
             }
 
             await _context.SaveChangesAsync();
@@ -918,7 +918,7 @@ namespace act_Application.Controllers.Administrador.BD
 
         private bool ActTransaccioneExists(int id)
         {
-            return _context.ActTransacciones.Any(e => e.Id == id);
+            return _context.ActPrestamos.Any(e => e.Id == id);
         }
 
 

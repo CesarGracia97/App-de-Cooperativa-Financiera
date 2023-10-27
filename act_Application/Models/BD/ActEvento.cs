@@ -13,7 +13,7 @@ public partial class ActEvento
 
     public int IdUser { get; set; }
 
-    public int IdTransaccion { get; set; }
+    public int IdPrestamo { get; set; }
 
     public DateTime FechaInicio { get; set; }
 

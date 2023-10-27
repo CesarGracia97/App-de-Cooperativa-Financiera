@@ -38,7 +38,7 @@ public partial class DesarrolloContext : DbContext
 
     public virtual DbSet<ActRolUser> ActRolUsers { get; set; }
 
-    public virtual DbSet<ActTransaccione> ActTransacciones { get; set; }
+    public virtual DbSet<ActPrestamo> ActPrestamos { get; set; }
 
     public virtual DbSet<ActUser> ActUsers { get; set; }
 
@@ -149,14 +149,14 @@ public partial class DesarrolloContext : DbContext
 
             entity.ToTable("act_Cuotas", tb => tb.HasComment("Tabla de Cuotas, aqui se almacena el Id del Usuario, el Id d"));
 
-            entity.HasIndex(e => e.IdTransaccion, "fk_Cuotas_Transacciones");
+            entity.HasIndex(e => e.IdPrestamo, "fk_Cuotas_Transacciones");
 
             entity.HasIndex(e => e.IdUser, "fk_Cuotas_User");
 
             entity.Property(e => e.Id).HasColumnType("int(11)");
             entity.Property(e => e.Estado).HasMaxLength(45);
             entity.Property(e => e.FechaCuota).HasColumnType("datetime");
-            entity.Property(e => e.IdTransaccion).HasColumnType("int(11)");
+            entity.Property(e => e.IdPrestamo).HasColumnType("int(11)");
             entity.Property(e => e.IdUser).HasColumnType("int(11)");
             entity.Property(e => e.ValorCuota).HasPrecision(10);
         });
@@ -194,7 +194,7 @@ public partial class DesarrolloContext : DbContext
 
             entity.HasIndex(e => e.IdCuotas, "fk_Notificaciones_Cuotas");
 
-            entity.HasIndex(e => e.IdTransacciones, "fk_Notificaciones_Transacciones");
+            entity.HasIndex(e => e.IdPrestamo, "fk_Notificaciones_Transacciones");
 
             entity.HasIndex(e => e.IdUser, "fk_Notificaciones_User");
 
@@ -206,7 +206,7 @@ public partial class DesarrolloContext : DbContext
             entity.Property(e => e.FechaNotificacion).HasColumnType("datetime");
             entity.Property(e => e.IdAportaciones).HasColumnType("int(11)");
             entity.Property(e => e.IdCuotas).HasColumnType("int(11)");
-            entity.Property(e => e.IdTransacciones).HasColumnType("int(11)");
+            entity.Property(e => e.IdPrestamo).HasColumnType("int(11)");
             entity.Property(e => e.IdUser).HasColumnType("int(11)");
             entity.Property(e => e.Visto).HasColumnType("int(1)");
             entity.Property(e => e.Razon).HasMaxLength(90);
@@ -220,7 +220,7 @@ public partial class DesarrolloContext : DbContext
 
             entity.HasIndex(e => e.Id, "Id_UNIQUE").IsUnique();
 
-            entity.HasIndex(e => e.IdTransaccion, "fk_Participantes_Transacciones");
+            entity.HasIndex(e => e.IdPrestamo, "fk_Participantes_Transacciones");
 
             entity.HasIndex(e => e.IdUser, "fk_Participantes_User");
 
@@ -230,7 +230,7 @@ public partial class DesarrolloContext : DbContext
             entity.Property(e => e.FechaFinalizacion).HasColumnType("date");
             entity.Property(e => e.FechaGeneracion).HasColumnType("date");
             entity.Property(e => e.FechaInicio).HasColumnType("date");
-            entity.Property(e => e.IdTransaccion).HasColumnType("int(11)");
+            entity.Property(e => e.IdPrestamo).HasColumnType("int(11)");
             entity.Property(e => e.ParticipantesId).HasMaxLength(100);
             entity.Property(e => e.ParticipantesNombre).HasMaxLength(10000);
         });
@@ -267,7 +267,7 @@ public partial class DesarrolloContext : DbContext
             entity.Property(e => e.IdUser).HasColumnType("int(11)");
         });
 
-        modelBuilder.Entity<ActTransaccione>(entity =>
+        modelBuilder.Entity<ActPrestamo>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PRIMARY");
 

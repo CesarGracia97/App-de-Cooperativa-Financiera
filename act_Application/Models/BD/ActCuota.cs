@@ -18,5 +18,5 @@ public partial class ActCuota
 
     public int IdUser { get; set; }
 
-    public int IdTransaccion { get; set; }
+    public int IdPrestamo { get; set; }
 }

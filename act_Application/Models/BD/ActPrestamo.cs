@@ -6,7 +6,7 @@ namespace act_Application.Models.BD;
 /// <summary>
 /// Operaciones de Referentes
 /// </summary>
-public partial class ActTransaccione
+public partial class ActPrestamo
 {
     public int Id { get; set; }
 
