@@ -26,7 +26,7 @@ public partial class DesarrolloContext : DbContext
 
     public virtual DbSet<ActEvento> ActEventos { get; set; }
 
-    public virtual DbSet<ActLapmt> ActLapmts { get; set; }
+    public virtual DbSet<ActLaptm> ActLapmts { get; set; }
 
     public virtual DbSet<ActMulta> ActMultas { get; set; }
 
@@ -37,8 +37,6 @@ public partial class DesarrolloContext : DbContext
     public virtual DbSet<ActPorcentaje> ActPorcentajes { get; set; }
 
     public virtual DbSet<ActPrestamo> ActPrestamos { get; set; }
-
-    public virtual DbSet<ActQuery> ActQuerys { get; set; }
 
     public virtual DbSet<ActRol> ActRols { get; set; }
 
@@ -105,8 +103,6 @@ public partial class DesarrolloContext : DbContext
             entity.HasIndex(e => e.NumeroCuenta, "NumeroCuenta_UNIQUE").IsUnique();
 
             entity.Property(e => e.Id).HasColumnType("int(11)");
-            entity.Property(e => e.Detalles).HasMaxLength(900);
-            entity.Property(e => e.DuenoCuenta).HasMaxLength(45);
             entity.Property(e => e.NombreBanco).HasMaxLength(45);
             entity.Property(e => e.NumeroCuenta).HasMaxLength(12);
         });
@@ -117,14 +113,14 @@ public partial class DesarrolloContext : DbContext
 
             entity.ToTable("act_Cuotas", tb => tb.HasComment("Tabla de Cuotas, aqui se almacena el Id del Usuario, el Id d"));
 
-            entity.HasIndex(e => e.IdTransaccion, "fk_Cuotas_Transacciones");
+            entity.HasIndex(e => e.IdPrestamo, "fk_Cuotas_Prestamos");
 
             entity.HasIndex(e => e.IdUser, "fk_Cuotas_User");
 
             entity.Property(e => e.Id).HasColumnType("int(11)");
             entity.Property(e => e.Estado).HasMaxLength(45);
             entity.Property(e => e.FechaCuota).HasColumnType("datetime");
-            entity.Property(e => e.IdTransaccion).HasColumnType("int(11)");
+            entity.Property(e => e.IdPrestamo).HasColumnType("int(11)");
             entity.Property(e => e.IdUser).HasColumnType("int(11)");
             entity.Property(e => e.ValorCuota).HasPrecision(10);
         });
@@ -292,20 +288,6 @@ public partial class DesarrolloContext : DbContext
             entity.Property(e => e.Razon).HasMaxLength(45);
             entity.Property(e => e.TipoCuota).HasMaxLength(45);
             entity.Property(e => e.Valor).HasPrecision(10);
-        });
-
-        modelBuilder.Entity<ActQuery>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PRIMARY");
-
-            entity.ToTable("act_Querys", tb => tb.HasComment("Querys para consultas"));
-
-            entity.HasIndex(e => e.Id, "Id_UNIQUE").IsUnique();
-
-            entity.Property(e => e.Id).HasColumnType("int(11)");
-            entity.Property(e => e.Descripcion).HasMaxLength(5000);
-            entity.Property(e => e.NombreQuery).HasMaxLength(60);
-            entity.Property(e => e.Query).HasMaxLength(2000);
         });
 
         modelBuilder.Entity<ActRol>(entity =>

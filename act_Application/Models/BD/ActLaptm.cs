@@ -6,7 +6,7 @@ namespace act_Application.Models.BD;
 /// <summary>
 /// Tabla Relacion:Liquidacion,Aportes,Prestamos,Multas,Usuario
 /// </summary>
-public partial class ActLapmt
+public partial class ActLaptm
 {
     public int Id { get; set; }
 
