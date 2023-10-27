@@ -200,7 +200,7 @@ CREATE TABLE `desarrollo`.`act_Porcentaje` (
   PRIMARY KEY (`Id`),
   UNIQUE INDEX `Id_UNIQUE` (`Id` ASC));
 
-  CREATE TABLE `desarrollo`.`act_LAPMT` (
+  CREATE TABLE `desarrollo`.`act_LAPTMR` (
   `Id` INT NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`Id`),
   UNIQUE INDEX `Id_UNIQUE` (`Id` ASC))
