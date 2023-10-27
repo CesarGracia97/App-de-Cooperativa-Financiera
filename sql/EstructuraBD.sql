@@ -80,9 +80,9 @@ CREATE TABLE `act_Multas` (
   UNIQUE KEY `Id_UNIQUE` (`Id`)
 ) COMMENT='Tabla de Multas';
 
- /*Tabla de Transacciones*/
+ /*Tabla de Prestamos*/
  USE desarrollo;
-CREATE TABLE `act_Transacciones` (
+CREATE TABLE `act_Prestamos` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
   `Razon` varchar(45) NOT NULL,
   `IdUser` int(11) NOT NULL,
@@ -102,7 +102,7 @@ CREATE TABLE `act_Transacciones` (
 USE desarrollo;
 CREATE TABLE `act_Eventos` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
-  `IdTransaccion` int(11) NOT NULL,
+  `IdPrestamo` int(11) NOT NULL,
   `IdUser` int(11) NOT NULL COMMENT 'Esta Columna es la kue identifica al dueño de la transaccion con la Participacion, y se relaciona con la tabla usuario.',
   `FechaInicio` date NOT NULL,
   `FechaFinalizacion` date NOT NULL,
@@ -136,7 +136,7 @@ CREATE TABLE `act_Notificaciones` (
   `FechaNotificacion` datetime NOT NULL,
   `Destino` varchar(13) NOT NULL,
   `Visto` int(1) NOT NULL,
-  `IdTransacciones` int(11) NOT NULL,
+  `IdPrestamo` int(11) NOT NULL,
   `IdAportaciones` int(11) NOT NULL,
   `IdCuotas` int(11) NOT NULL,
   PRIMARY KEY (`Id`),
@@ -271,42 +271,42 @@ FOREIGN KEY (IdAportacion) REFERENCES act_User(Id);
 
 /*Transaccuibes-Eventos-Usuario*/
 USE desarrollo; 
-ALTER TABLE act_Transacciones
-ADD CONSTRAINT fk_Transacciones_User
+ALTER TABLE act_Prestamos
+ADD CONSTRAINT fk_Prestamos_User
 FOREIGN KEY (IdUser) REFERENCES act_User(Id);
 USE desarrollo; 
-ALTER TABLE act_Transacciones
-ADD CONSTRAINT fk_Transacciones_Eventos
+ALTER TABLE act_Prestamos
+ADD CONSTRAINT fk_Prestamos_Eventos
 FOREIGN KEY (IdParticipantes) REFERENCES act_Eventos(Id); 
 
 USE desarrollo; 
 ALTER TABLE act_Eventos
-ADD CONSTRAINT fk_Eventos_Transacciones
-FOREIGN KEY (IdTransaccion) REFERENCES act_Transacciones(Id);
+ADD CONSTRAINT fk_Eventos_Prestamos
+FOREIGN KEY (IdPrestamo) REFERENCES act_Prestamos(Id);
 USE desarrollo; 
 ALTER TABLE act_Eventos
 ADD CONSTRAINT fk_Eventos_User
 FOREIGN KEY (IdUser) REFERENCES act_User(Id);
 
-/*Cuotas-Usuario_Transacciones*/
+/*Cuotas-Usuario_Prestamos*/
 USE desarrollo; 
 ALTER TABLE act_Cuotas
 ADD CONSTRAINT fk_Cuotas_User
 FOREIGN KEY (IdUser) REFERENCES act_User(Id);
 USE desarrollo; 
 ALTER TABLE act_Cuotas
-ADD CONSTRAINT fk_Cuotas_Transacciones
-FOREIGN KEY (IdTransaccion) REFERENCES act_Transacciones(Id);
+ADD CONSTRAINT fk_Cuotas_Prestamos
+FOREIGN KEY (IdPrestamo) REFERENCES act_Prestamos(Id);
 
-/*Notificiones-Usuario-Transacciones-Cuotas-Aportaciones*/
+/*Notificiones-Usuario-Prestamos-Cuotas-Aportaciones*/
 USE desarrollo; 
 ALTER TABLE act_Notificaciones
 ADD CONSTRAINT fk_Notificaciones_User
 FOREIGN KEY (IdUser) REFERENCES act_User(Id);
 USE desarrollo; 
 ALTER TABLE act_Notificaciones
-ADD CONSTRAINT fk_Notificaciones_Transacciones
-FOREIGN KEY (IdTransacciones) REFERENCES act_Transacciones(Id);
+ADD CONSTRAINT fk_Notificaciones_Prestamos
+FOREIGN KEY (IdPrestamo) REFERENCES act_Prestamos(Id);
 USE desarrollo; 
 ALTER TABLE act_Notificaciones
 ADD CONSTRAINT fk_Notificaciones_Cuotas
