@@ -43,6 +43,12 @@ public partial class DesarrolloContext : DbContext
     public virtual DbSet<ActRolUser> ActRolUsers { get; set; }
 
     public virtual DbSet<ActUser> ActUsers { get; set; }
+
+    public virtual DbSet<ActEscenario> ActEscenarios { get; set; }
+
+    public virtual DbSet<ActTablaPorcentajePrestamo> ActTablaPorcentajePrestamos { get; set; }
+
+    public virtual DbSet<ActTipoPorcentaje> ActTipoPorcentajes { get; set; }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<ActAportacione>(entity =>
@@ -247,20 +253,70 @@ public partial class DesarrolloContext : DbContext
             entity.Property(e => e.Visto).HasColumnType("int(1)");
         });
 
+        modelBuilder.Entity<ActEscenario>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PRIMARY");
+
+            entity.ToTable("act_Escenarios");
+
+            entity.HasIndex(e => e.Id, "Id_UNIQUE").IsUnique();
+
+            entity.Property(e => e.Id).HasColumnType("int(11)");
+            entity.Property(e => e.Escenario).HasMaxLength(200);
+        });
+
+        modelBuilder.Entity<ActTablaPorcentajePrestamo>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PRIMARY");
+
+            entity.ToTable("act_TablaPorcentajePrestamos");
+
+            entity.HasIndex(e => e.Id, "Id_UNIQUE").IsUnique();
+
+            entity.HasIndex(e => e.EscenarioId, "fk_TablaPorcentajePrestamos_Escenarios");
+
+            entity.HasIndex(e => e.TipoPorcentajeId, "fk_TablaPorcentajePrestamos_TipoPorcentaje");
+
+            entity.Property(e => e.Id).HasColumnType("int(11)");
+            entity.Property(e => e.EscenarioId).HasColumnType("int(11)");
+            entity.Property(e => e.TipoPorcentajeId).HasColumnType("int(11)");
+        });
+
+        modelBuilder.Entity<ActTipoPorcentaje>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PRIMARY");
+
+            entity.ToTable("act_TipoPorcentaje");
+
+            entity.HasIndex(e => e.Id, "Id_UNIQUE").IsUnique();
+
+            entity.HasIndex(e => e.PorcentajeId, "fk_TipoPorcentaje_Porcentaje");
+
+            entity.Property(e => e.Id).HasColumnType("int(11)");
+            entity.Property(e => e.NombreTipoPorcentaje).HasMaxLength(100);
+            entity.Property(e => e.PorcentajeId).HasColumnType("int(11)");
+        });
+
         modelBuilder.Entity<ActPorcentaje>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PRIMARY");
 
-            entity.ToTable("act_Porcentaje");
+            entity.ToTable("act_Porcentajes");
 
             entity.HasIndex(e => e.Id, "Id_UNIQUE").IsUnique();
 
-            entity.Property(e => e.Id).HasColumnType("int(10) unsigned");
-            entity.Property(e => e.Categoria).HasMaxLength(45);
-            entity.Property(e => e.Condicion).HasMaxLength(200);
+            entity.HasIndex(e => e.EscenarioId, "fk_Porcentaje_Escenario");
+
+            entity.HasIndex(e => e.TipoPorcentajeId, "fk_Porcentaje_TipoPorcentaje");
+
+            entity.Property(e => e.Id).HasColumnType("int(11)");
+            entity.Property(e => e.EscenarioId).HasColumnType("int(11)");
             entity.Property(e => e.Porcentaje).HasPrecision(10);
-            entity.Property(e => e.Razon).HasMaxLength(45);
-            entity.Property(e => e.Target).HasMaxLength(45);
+            entity.Property(e => e.Tipo).HasMaxLength(45);
+            entity.Property(e => e.TipoPorcentajeId).HasColumnType("int(11)");
+            entity.Property(e => e.Vporcentaje)
+                .HasMaxLength(45)
+                .HasColumnName("VPorcentaje");
         });
 
         modelBuilder.Entity<ActPrestamo>(entity =>

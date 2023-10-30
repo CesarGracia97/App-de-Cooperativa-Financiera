@@ -1,12 +1,19 @@
-﻿namespace act_Application.Models.BD
+﻿using System;
+using System.Collections.Generic;
+
+namespace act_Application.Models.BD;
+
+public partial class ActPorcentaje
 {
-    public partial class ActPorcentaje
-    {
-        public int Id { get; set; }
-        public string Categoria { get; set; }
-        public string Target { get; set; }
-        public decimal Porcentaje { get; set; }
-        public string Razon { get; set; }
-        public string Condicion { get; set; }
-    }
+    public int Id { get; set; }
+
+    public int TipoPorcentajeId { get; set; }
+
+    public int EscenarioId { get; set; }
+
+    public string Tipo { get; set; }
+
+    public decimal Porcentaje { get; set; }
+
+    public string Vporcentaje { get; set; }
 }
