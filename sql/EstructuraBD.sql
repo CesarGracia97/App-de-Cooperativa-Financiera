@@ -174,6 +174,7 @@ CREATE TABLE `desarrollo`.`act_AportacionesAC` (
   `AportacionesIds` VARCHAR(200) NOT NULL,
   `ValorAC` DECIMAL(10,2) NOT NULL,
   `LiquidacionTotal` DECIMAL(10,2) NULL,
+  `NAportaciones` INT(11) NOT NULL,
   PRIMARY KEY (`Id`),
   UNIQUE INDEX `Id_UNIQUE` (`Id` ASC),
   UNIQUE INDEX `IdUser_UNIQUE` (`IdUser` ASC))
@@ -185,6 +186,7 @@ CREATE TABLE `desarrollo`.`act_MultasAC` (
   `MultasIds` VARCHAR(200) NOT NULL,
   `ValorAC` DECIMAL(10,2) NOT NULL,
   `LiquidacionTotal` DECIMAL(10,2) NULL,
+  `NMultas` INT(11) NOT NULL,
   PRIMARY KEY (`Id`),
   UNIQUE INDEX `Id_UNIQUE` (`Id` ASC),
   UNIQUE INDEX `IdUser_UNIQUE` (`IdUser` ASC))
