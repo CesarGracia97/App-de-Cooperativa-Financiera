@@ -192,15 +192,18 @@ CREATE TABLE `desarrollo`.`act_MultasAC` (
   UNIQUE INDEX `IdUser_UNIQUE` (`IdUser` ASC))
 COMMENT = 'Tabla de Liquidacion de Multas. MultasAC';
 
-CREATE TABLE `desarrollo`.`act_Porcentaje` (
-  `Id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `Categoria` VARCHAR(45) NOT NULL,
-  `Target` VARCHAR(45) NOT NULL,
-  `Porcentaje` DECIMAL(10,2) NOT NULL,
-  `Razon` VARCHAR(45) NOT NULL,
-  `Condicion` VARCHAR(200) NOT NULL,
+CREATE TABLE `desarrollo`.`act_TablaPorcentajePrestamos` (
+  `Id` INT NOT NULL AUTO_INCREMENT,
+  `EscenarioId` INT NOT NULL,
+  `TipoPorcentajeId` INT NOT NULL,
   PRIMARY KEY (`Id`),
   UNIQUE INDEX `Id_UNIQUE` (`Id` ASC));
+
+
+CREATE TABLE `desarrollo`.`act_Escenarios` (
+  `Id` INT NOT NULL,
+  `Escenario` VARCHAR(200) NULL,
+  PRIMARY KEY (`Id`));
 
   CREATE TABLE `desarrollo`.`act_LAPTMR` (
   `Id` INT NOT NULL AUTO_INCREMENT,
