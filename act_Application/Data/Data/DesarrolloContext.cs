@@ -87,9 +87,8 @@ public partial class DesarrolloContext : DbContext
             entity.Property(e => e.AportacionesIds).HasMaxLength(200);
             entity.Property(e => e.IdUser).HasColumnType("int(11)");
             entity.Property(e => e.LiquidacionTotal).HasPrecision(10);
-            entity.Property(e => e.ValorAc)
-                .HasPrecision(10)
-                .HasColumnName("ValorAC");
+            entity.Property(e => e.ValorAc).HasPrecision(10).HasColumnName("ValorAC");
+            entity.Property(e => e.NAportaciones).HasColumnType("int(11)");
         });
 
         modelBuilder.Entity<ActCuentaDestino>(entity =>
@@ -216,9 +215,8 @@ public partial class DesarrolloContext : DbContext
             entity.Property(e => e.IdUser).HasColumnType("int(11)");
             entity.Property(e => e.LiquidacionTotal).HasPrecision(10);
             entity.Property(e => e.MultasIds).HasMaxLength(200);
-            entity.Property(e => e.ValorAc)
-                .HasPrecision(10)
-                .HasColumnName("ValorAC");
+            entity.Property(e => e.ValorAc).HasPrecision(10) .HasColumnName("ValorAC");
+            entity.Property(e => e.NMultas).HasColumnType("int(11)");
         });
 
         modelBuilder.Entity<ActNotificacione>(entity =>

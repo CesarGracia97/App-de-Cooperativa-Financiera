@@ -6,14 +6,11 @@
     public partial class ActMultasAc
     {
         public int Id { get; set; }
-
         public int IdUser { get; set; }
-
-        public string MultasIds { get; set; } = null!;
-
+        public string MultasIds { get; set; }
         public decimal ValorAc { get; set; }
-
         public decimal? LiquidacionTotal { get; set; }
+        public int NMultas { get; set; }
     }
 
 }
