@@ -413,3 +413,13 @@ USE desarrollo;
 ALTER TABLE act_TipoPorcentaje
 ADD CONSTRAINT fk_TipoPorcentaje_Porcentaje
 FOREIGN KEY (PorcentajeId) REFERENCES act_Porcentaje(Id);
+/*Porcentaje - Tipo Porcentaje*/
+USE desarrollo;
+ALTER TABLE act_Porcentajes
+ADD CONSTRAINT fk_Porcentaje_TipoPorcentaje
+FOREIGN KEY (TipoPorcentajeId) REFERENCES act_TipoPorcentaje(Id);
+/*Porcentaje - Escenario*/
+USE desarrollo;
+ALTER TABLE act_Porcentajes
+ADD CONSTRAINT fk_Porcentaje_Escenario
+FOREIGN KEY (EscenarioId) REFERENCES act_Escenarios(Id);
