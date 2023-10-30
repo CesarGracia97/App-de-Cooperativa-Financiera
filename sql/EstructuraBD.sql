@@ -291,6 +291,21 @@ USE desarrollo ; INSERT INTO `desarrollo`.`act_Porcentajes`(`Id`, `TipoPorcentaj
 USE desarrollo; INSERT INTO `desarrollo`.`act_TipoPorcentaje` (`Id`, `TipodePorcentajeId`, `NombreTipoPorcentaje`) VALUE ('1', '1', 'PORCENTAJE SOCIO SIN GARANTE');
 USE desarrollo; INSERT INTO `desarrollo`.`act_TipoPorcentaje` (`Id`, `TipodePorcentajeId`, `NombreTipoPorcentaje`) VALUE ('2', '2', 'PORCENTAJE SOCIO GARANTE');
 USE desarrollo; INSERT INTO `desarrollo`.`act_TipoPorcentaje` (`Id`, `TipodePorcentajeId`, `NombreTipoPorcentaje`) VALUE ('3', '3', 'PORCENTAJE NO SOCIO');
+/*Datos de Escenarios*/
+USE desarrollo; INSERT INTO `desarrollo`.`act_Escenarios` (`Id`, `Escenario`) VALUES ('1', 'Sin atraso');
+USE desarrollo; INSERT INTO `desarrollo`.`act_Escenarios` (`Id`, `Escenario`) VALUES ('2', 'Sin atraso');
+USE desarrollo; INSERT INTO `desarrollo`.`act_Escenarios` (`Id`, `Escenario`) VALUES ('3', 'Primer atraso de pago de intereses (día 31)');
+USE desarrollo; INSERT INTO `desarrollo`.`act_Escenarios` (`Id`, `Escenario`) VALUES ('4', 'Segundo atraso consecutivo de pago de intereses en adelante (día 61)');
+/*Tablas de porcentaje*/
+USE desarrollo; INSERT INTO `desarrollo`.`act_TablaPorcentajePrestamos`(`Id`, `EscenarioId`, `TipoPorcentajeId`) VALUES ('1', '1', '1');
+USE desarrollo; INSERT INTO `desarrollo`.`act_TablaPorcentajePrestamos`(`Id`, `EscenarioId`, `TipoPorcentajeId`) VALUES ('2', '1', '2');
+USE desarrollo; INSERT INTO `desarrollo`.`act_TablaPorcentajePrestamos`(`Id`, `EscenarioId`, `TipoPorcentajeId`) VALUES ('3', '1', '3');
+USE desarrollo; INSERT INTO `desarrollo`.`act_TablaPorcentajePrestamos`(`Id`, `EscenarioId`, `TipoPorcentajeId`) VALUES ('4', '2', '1');
+USE desarrollo; INSERT INTO `desarrollo`.`act_TablaPorcentajePrestamos`(`Id`, `EscenarioId`, `TipoPorcentajeId`) VALUES ('5', '2', '2');
+USE desarrollo; INSERT INTO `desarrollo`.`act_TablaPorcentajePrestamos`(`Id`, `EscenarioId`, `TipoPorcentajeId`) VALUES ('6', '2', '3');
+USE desarrollo; INSERT INTO `desarrollo`.`act_TablaPorcentajePrestamos`(`Id`, `EscenarioId`, `TipoPorcentajeId`) VALUES ('7', '3', '1');
+USE desarrollo; INSERT INTO `desarrollo`.`act_TablaPorcentajePrestamos`(`Id`, `EscenarioId`, `TipoPorcentajeId`) VALUES ('8', '3', '2');
+USE desarrollo; INSERT INTO `desarrollo`.`act_TablaPorcentajePrestamos`(`Id`, `EscenarioId`, `TipoPorcentajeId`) VALUES ('9', '3', '3');
 
 
 /*Relaciones*/
