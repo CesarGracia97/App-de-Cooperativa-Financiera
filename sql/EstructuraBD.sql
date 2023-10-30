@@ -206,7 +206,7 @@ CREATE TABLE `desarrollo`.`act_Escenarios` (
 
 CREATE TABLE `desarrollo`.`act_TipoPorcentaje` (
   `Id` INT NOT NULL AUTO_INCREMENT,
-  `TipodePorcentajeId` INT NOT NULL,
+  `PorcentajeId` INT NOT NULL,
   `NombreTipoPorcentaje` VARCHAR(100) NOT NULL,
   PRIMARY KEY (`Id`),
   UNIQUE INDEX `Id_UNIQUE` (`Id` ASC));
@@ -408,3 +408,8 @@ USE desarrollo;
 ALTER TABLE act_TablaPorcentajePrestamos
 ADD CONSTRAINT fk_TablaPorcentajePrestamos_TipoPorcentaje
 FOREIGN KEY (TipoPorcentajeId) REFERENCES act_TipoPorcentaje(Id);
+/*Tipo Porcentaje - Porcentaje*/
+USE desarrollo; 
+ALTER TABLE act_TipoPorcentaje
+ADD CONSTRAINT fk_TipoPorcentaje_Porcentaje
+FOREIGN KEY (PorcentajeId) REFERENCES act_Porcentaje(Id);
