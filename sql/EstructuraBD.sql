@@ -397,3 +397,14 @@ USE desarrollo;
 ALTER TABLE act_HistorialLiquidaciones
 ADD CONSTRAINT fk_HistorialLiquidaciones_User
 FOREIGN KEY (IdSocio) REFERENCES act_User(Id);
+
+/*Tabla Porcentaje - Prestamos*/
+USE desarrollo; 
+ALTER TABLE act_TablaPorcentajePrestamos
+ADD CONSTRAINT fk_TablaPorcentajePrestamos_Escenarios
+FOREIGN KEY (EscenarioId) REFERENCES act_Escenarios(Id);
+/*Tabla Porcentaje - Tipo Porcentaje*/
+USE desarrollo; 
+ALTER TABLE act_TablaPorcentajePrestamos
+ADD CONSTRAINT fk_TablaPorcentajePrestamos_TipoPorcentaje
+FOREIGN KEY (TipoPorcentajeId) REFERENCES act_TipoPorcentaje(Id);
