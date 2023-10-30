@@ -287,6 +287,10 @@ USE desarrollo ; INSERT INTO `desarrollo`.`act_Porcentajes`(`Id`, `TipoPorcentaj
 USE desarrollo ; INSERT INTO `desarrollo`.`act_Porcentajes`(`Id`, `TipoPorcentajeId`, `EscenarioId`, `Tipo`, `Porcentaje`, `VPorcentaje`) VALUES ('25', '3', '3', 'TOTAL', '14.00', '14.0%');
 USE desarrollo ; INSERT INTO `desarrollo`.`act_Porcentajes`(`Id`, `TipoPorcentajeId`, `EscenarioId`, `Tipo`, `Porcentaje`, `VPorcentaje`) VALUES ('26', '3', '3', 'GARANTE', '2.40', '2.40%');
 USE desarrollo ; INSERT INTO `desarrollo`.`act_Porcentajes`(`Id`, `TipoPorcentajeId`, `EscenarioId`, `Tipo`, `Porcentaje`, `VPorcentaje`) VALUES ('27', '3', '3', 'GRUPO', '11.60', '11.6%');
+/*Datos de Tipos de Porcentaje*/
+USE desarrollo; INSERT INTO `desarrollo`.`act_TipoPorcentaje` (`Id`, `TipodePorcentajeId`, `NombreTipoPorcentaje`) VALUE ('1', '1', 'PORCENTAJE SOCIO SIN GARANTE');
+USE desarrollo; INSERT INTO `desarrollo`.`act_TipoPorcentaje` (`Id`, `TipodePorcentajeId`, `NombreTipoPorcentaje`) VALUE ('2', '2', 'PORCENTAJE SOCIO GARANTE');
+USE desarrollo; INSERT INTO `desarrollo`.`act_TipoPorcentaje` (`Id`, `TipodePorcentajeId`, `NombreTipoPorcentaje`) VALUE ('3', '3', 'PORCENTAJE NO SOCIO');
 
 
 /*Relaciones*/
