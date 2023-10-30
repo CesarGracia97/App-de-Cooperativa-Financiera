@@ -199,13 +199,29 @@ CREATE TABLE `desarrollo`.`act_TablaPorcentajePrestamos` (
   PRIMARY KEY (`Id`),
   UNIQUE INDEX `Id_UNIQUE` (`Id` ASC));
 
-
 CREATE TABLE `desarrollo`.`act_Escenarios` (
   `Id` INT NOT NULL,
   `Escenario` VARCHAR(200) NULL,
   PRIMARY KEY (`Id`));
 
-  CREATE TABLE `desarrollo`.`act_LAPTMR` (
+CREATE TABLE `desarrollo`.`act_TipoPorcentaje` (
+  `Id` INT NOT NULL AUTO_INCREMENT,
+  `TipodePorcentajeId` INT NOT NULL,
+  `NombreTipoPorcentaje` VARCHAR(100) NOT NULL,
+  PRIMARY KEY (`Id`),
+  UNIQUE INDEX `Id_UNIQUE` (`Id` ASC));
+
+CREATE TABLE `desarrollo`.`act_Porcentajes` (
+  `Id` INT NOT NULL AUTO_INCREMENT,
+  `TipoPorcentajeId` INT NOT NULL,
+  `EscenarioId` INT(11) NOT NULL,
+  `Tipo` VARCHAR(45) NOT NULL,
+  `Porcentaje` DECIMAL(10,2) NOT NULL,
+  `VPorcentaje` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`Id`),
+  UNIQUE INDEX `Id_UNIQUE` (`Id` ASC));
+
+CREATE TABLE `desarrollo`.`act_LAPTMR` (
   `Id` INT NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`Id`),
   UNIQUE INDEX `Id_UNIQUE` (`Id` ASC))
@@ -239,6 +255,10 @@ USE desarrollo; INSERT INTO `desarrollo`.`act_CuentaDestino` (`Id`, `NumeroCuent
 USE desarrollo; INSERT INTO `desarrollo`.`act_CuentaDestino` (`Id`, `NumeroCuenta`, `NombreBanco`, `DuenoCuenta`, `Detalles`) VALUES ('2', '210987654321', 'Banco Guayaquil', 'Steeven Gallon', 'Cuenta Principal');
 USE desarrollo; INSERT INTO `desarrollo`.`act_CuentaDestino` (`Id`, `NumeroCuenta`, `NombreBanco`, `DuenoCuenta`, `Detalles`) VALUES ('3', '012345678912', 'Produbanco', 'Leonel Diaz', 'Cuenta Respaldo');
 USE desarrollo; INSERT INTO `desarrollo`.`act_CuentaDestino` (`Id`, `NumeroCuenta`, `NombreBanco`, `DuenoCuenta`, `Detalles`) VALUES ('4', '12345678', 'Banco del Austro', 'Hector Hernandez', 'Cuenta Secundaria');
+
+INSERT INTO `desarrollo`.`act_TipoPorcentaje` (`TipodePorcentajeId`, `NombreTipoPorcentaje`) VALUES ('1', 'PORCENTAJE SOCIO SIN GARANTE');
+INSERT INTO `desarrollo`.`act_TipoPorcentaje` (`TipodePorcentajeId`, `NombreTipoPorcentaje`) VALUES ('2', 'PORCENTAJE SOCIO GARANTE');
+INSERT INTO `desarrollo`.`act_TipoPorcentaje` (`TipodePorcentajeId`, `NombreTipoPorcentaje`) VALUES ('3', 'PORCENTAJE NO SOCIO');
 
 
 /*Relaciones*/
