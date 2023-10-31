@@ -9,7 +9,10 @@ services:
     ports:
       - 80:80
   bd_application:
-    image: mysql:latest
+    build:
+      context: .
+      dockerfile: sql/Dockerfile
+    image: custom-mysql:latest
     container_name: bd_act_mysql
     environment:
       MYSQL_ROOT_PASSWORD: CSGxtrim.2023mmxsun5ZXL
