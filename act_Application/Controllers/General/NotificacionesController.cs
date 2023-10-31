@@ -7,6 +7,7 @@ using act_Application.Logic;
 using act_Application.Helper;
 using MySql.Data.MySqlClient;
 using act_Application.Models.Sistema.ViewModels;
+using act_Application.Data.Config;
 
 namespace act_Application.Controllers.General
 {

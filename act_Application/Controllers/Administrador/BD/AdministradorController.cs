@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using act_Application.Data.Data;
 using act_Application.Models.BD;
+using act_Application.Data.Config;
 
 namespace act_Application.Controllers.Administrador.BD
 {

@@ -8,6 +8,7 @@ using System.Net;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using act_Application.Models.Sistema.Complementos;
+using act_Application.Data.Config;
 
 namespace act_Application.Controllers.General
 {
