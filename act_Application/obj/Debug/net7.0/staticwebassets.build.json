@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "yKaq93FVIeZuDSm+wWS9NOOHduBMfR4rbcfQeHs6VRs=",
+  "Hash": "DxWnkZpk+7zpqszA9O3N7HO4tuvh8fxlZxGpWv/hpW4=",
   "Source": "act_Application",
   "BasePath": "_content/act_Application",
   "Mode": "Default",
@@ -85,6 +85,23 @@
       "OriginalItemSpec": "wwwroot\\css\\General\\Login\\Login.css"
     },
     {
+      "Identity": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\css\\General\\Login\\Registro.css",
+      "SourceId": "act_Application",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\",
+      "BasePath": "_content/act_Application",
+      "RelativePath": "css/General/Login/Registro.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\General\\Login\\Registro.css"
+    },
+    {
       "Identity": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\favicon.ico",
       "SourceId": "act_Application",
       "SourceType": "Discovered",
@@ -134,6 +151,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\General\\Login\\MsjCorreoValidacionLogin.js"
+    },
+    {
+      "Identity": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\js\\General\\Login\\Registro.js",
+      "SourceId": "act_Application",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\",
+      "BasePath": "_content/act_Application",
+      "RelativePath": "js/General/Login/Registro.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\General\\Login\\Registro.js"
     },
     {
       "Identity": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",

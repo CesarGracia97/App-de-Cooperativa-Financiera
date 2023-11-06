@@ -13,6 +13,10 @@
       "PackagePath": "staticwebassets\\css\\General\\Login\\Login.css"
     },
     {
+      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\css\\General\\Login\\Registro.css",
+      "PackagePath": "staticwebassets\\css\\General\\Login\\Registro.css"
+    },
+    {
       "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\favicon.ico",
       "PackagePath": "staticwebassets\\favicon.ico"
     },
@@ -23,6 +27,10 @@
     {
       "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\js\\General\\Login\\MsjCorreoValidacionLogin.js",
       "PackagePath": "staticwebassets\\js\\General\\Login\\MsjCorreoValidacionLogin.js"
+    },
+    {
+      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\js\\General\\Login\\Registro.js",
+      "PackagePath": "staticwebassets\\js\\General\\Login\\Registro.js"
     },
     {
       "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\lib\\bootstrap\\LICENSE",

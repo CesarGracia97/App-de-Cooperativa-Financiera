@@ -92,5 +92,9 @@ namespace act_Application.Controllers.General
                 return builder.ToString();
             }
         }
+        public IActionResult Registrarse()
+        {
+            return View();
+        }
     }
 }
