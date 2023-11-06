@@ -1,181 +1,49 @@
 ﻿<!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - act_Application</title>
-    <link rel="stylesheet" href="/css/General/Complementos/navBar.css" />
-    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet' />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/act_Application.styles.css" asp-append-version="true" />
 </head>
 <body>
     <header>
-    </header>
-    <nav class="sidebar close">
-        <header>
-            <div class="image-text">
-                <span class="image">
-                    <img src="/img/SdXLogo.png" alt="Logo">
-                </span>
-
-                <div class="text logo-text">
-                    <span class="name">Coop XXhj</span>
-                    <span class="profession">@User.Identity.Name</span>
-                    <span class="tipousuario">@User.FindFirst("TipoUsuario")?.Value</span>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">act_Application</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        </li>
+                    </ul>
                 </div>
             </div>
-
-            <i class='bx bx-chevron-right toggle'></i>
-        </header>
-
-        <div class="menu-bar">
-            <div class="menu">
-                <ul>
-                    <li class="search-box">
-                        <i class='bx bx-search icon'></i>
-                        <input type="text" placeholder="Search...">
-                    </li>
-                </ul>
-                <ul class="menu-links">
-                    @if (User.HasClaim("Rol", "Administrador") || User.HasClaim("Rol", "Socio") || User.HasClaim("Rol", "Referido"))
-                    {
-                        @if (User.HasClaim("Rol", "Administrador"))
-                        {
-                            <li class="nav-link">
-                                <button id="adminButton" type="button" class="toggle-button">
-                                    <i class='bx bx-home-alt icon'></i>
-                                    <span class="text nav-text">Administracion</span>
-                                </button>
-                            </li>
-                            <li class="nav-link hidden-item">
-                                <a href="~/Administrador/AdminCuotas">
-                                    <i class='bx bx-table icon'></i>
-                                    <span class="text nav-text">T.Cuotas</span>
-                                </a>
-                            </li>
-                            <li class="nav-link hidden-item">
-                                <a href="~/Administrador/AdminNotificaciones">
-                                    <i class='bx bx-table icon'></i>
-                                    <span class="text nav-text">T. Notificaciones</span>
-                                </a>
-                            </li>
-                            <li class="nav-link hidden-item">
-                                <a href="~/Administrador/AdminUsuarios">
-                                    <i class='bx bx-table icon'></i>
-                                    <span class="text nav-text">T. Usuarios</span>
-                                </a>
-                            </li>
-                            <li class="nav-link hidden-item">
-                                <a href="~/Administrador/AdminRoles">
-                                    <i class='bx bx-table icon'></i>
-                                    <span class="text nav-text">T. Roles</span>
-                                </a>
-                            </li>
-                            <li class="nav-link hidden-item">
-                                <a href="~/Administrador/AdminRolesUser">
-                                    <i class='bx bx-table icon'></i>
-                                    <span class="text nav-text">T. Roles y Usuarios</span>
-                                </a>
-                            </li>
-                            <li class="nav-link hidden-item">
-                                <a href="~/Administrador/AdminAportaciones">
-                                    <i class='bx bx-table icon'></i>
-                                    <span class="text nav-text">T. Aportaciones</span>
-                                </a>
-                            </li>
-                            <li class="nav-link hidden-item">
-                                <a href="~/Administrador/AdminTransacciones">
-                                    <i class='bx bx-table icon'></i>
-                                    <span class="text nav-text">T. Transacciones</span>
-                                </a>
-                            </li>
-                            <li class="nav-link hidden-item">
-                                <a href="~/Administrador/AdminMultas">
-                                    <i class='bx bx-table icon'></i>
-                                    <span class="text nav-text">T. Multas</span>
-                                </a>
-                            </li>
-                        }
-
-                        @if (User.HasClaim("Rol", "Administrador") || User.HasClaim("Rol", "Socio"))
-                        {
-                            <li class="nav-link">
-                                <a href="~/Aportar/Aportar">
-                                    <i class='bx bx-money icon'></i>
-                                    <span class="text nav-text">Aportar</span>
-                                </a>
-                            </li>
-
-                            <li class="nav-link">
-                                <a href="~/TablaAportaciones/Index">
-                                    <i class='bx bx-table icon'></i>
-                                    <span class="text nav-text">Tabla de Aportacion</span>
-                                </a>
-                            </li>
-
-                            <li class="nav-link">
-                                <a href="~/TablaMultas/Index">
-                                    <i class='bx bx-window-close icon'></i>
-                                    <span class="text nav-text">Tabla de Multas</span>
-                                </a>
-                            </li>
-                        }
-
-                        @if (User.HasClaim("Rol", "Administrador") || User.HasClaim("Rol", "Referido"))
-                        {
-                            <li class="nav-link">
-                                <a href="~/Transacciones/Transacciones">
-                                    <i class='bx bx-money-withdraw icon'></i>
-                                    <span class="text nav-text">Peticiones</span>
-                                </a>
-                            </li>
-                        }
-
-                        <li class="nav-link">
-                            <a href="~/Notificaciones/Notificacion">
-                                <i class='bx bx-bell icon'></i>
-                                <span class="text nav-text">Notificationes</span>
-                            </a>
-                        </li>
-                    }
-                </ul>
-            </div>
-
-            <div class="bottom-content">
-                <ul>
-                    <li class="Logout-cerrarsesion">
-                        <a id="btn-CerrarSesion" href="@Url.Action("CerrarSesion", "Home")">
-                            <i class='bx bx-log-out icon'></i>
-                            <span class="text nav-text">Logout</span>
-                        </a>
-                    </li>
-
-                    <li class="mode">
-                        <div class="sun-moon">
-                            <i class='bx bx-moon icon moon'></i>
-                            <i class='bx bx-sun icon sun'></i>
-                        </div>
-                        <span class="mode-text text">Dark mode</span>
-
-                        <div class="toggle-switch">
-                            <span class="switch"></span>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </div>
-
-    </nav>
-
-    <section class="home">
-        <div class="content-container">
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
             @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2023 - act_Application - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
-    </section>
+    </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="/js/_Layout/navBar.js"></script>
-    <script src="/js/_Layout/Logout.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
-
