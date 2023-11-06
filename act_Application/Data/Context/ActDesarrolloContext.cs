@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using act_Application.Models.BD;
+﻿using act_Application.Models.BD;
 using Microsoft.EntityFrameworkCore;
 
 namespace act_Application.Data.Context;

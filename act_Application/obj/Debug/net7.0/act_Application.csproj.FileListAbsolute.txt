@@ -62,3 +62,6 @@ C:\Users\cgracia\source\repos\act_Application\act_Application\obj\Debug\net7.0\a
 C:\Users\cgracia\source\repos\act_Application\act_Application\obj\Debug\net7.0\act_Application.genruntimeconfig.cache
 C:\Users\cgracia\source\repos\act_Application\act_Application\obj\Debug\net7.0\ref\act_Application.dll
 C:\Users\cgracia\source\repos\act_Application\act_Application\bin\Debug\net7.0\MySql.EntityFrameworkCore.dll
+C:\Users\cgracia\source\repos\act_Application\act_Application\bin\Debug\net7.0\Data\Config\config.json
+C:\Users\cgracia\source\repos\act_Application\act_Application\bin\Debug\net7.0\Data\Config\smtp.json
+C:\Users\cgracia\source\repos\act_Application\act_Application\bin\Debug\net7.0\Newtonsoft.Json.dll
