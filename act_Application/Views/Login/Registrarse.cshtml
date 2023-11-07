@@ -20,7 +20,7 @@
     <div class="container">
         <header>Registro</header>
 
-        <form action="#">
+        <form asp-action="Registrarse">
             <div class="form first">
                 <div class="details personal">
                     <span class="title">Informacion</span>
@@ -28,43 +28,43 @@
                     <div class="fields">
                         <div class="input-field">
                             <label>Nombre y Apellidos</label>
-                            <input type="text" placeholder="Registre sus Nombres y Apellidos" required>
+                            <input asp-for="User.NombreYapellido"type="text" placeholder="Registre sus Nombres y Apellidos" required />
                         </div>
 
                         <div class="input-field">
                             <label>Cedula de Identidad</label>
-                            <input type="number" placeholder="Registra tu Cedula" required>
+                            <input asp-for="User.Cedula" type="number" placeholder="Registra tu Cedula" required />
                         </div>
 
                         <div class="input-field">
                             <label>Email</label>
-                            <input type="text" placeholder="Registra tu email" required>
+                            <input asp-for="User.Correo" type="text" placeholder="Registra tu email" required />
                         </div>
 
                         <div class="input-field">
                             <label>Contraseña</label>
-                            <input type="password" placeholder="Registra tu Contraseña" required>
-                        </div>
-
-                        <div class="input-field">
-                            <label>Referido</label>
-                            <input type="text" placeholder="Registra tu Contraseña" required>
+                            <input type="password" placeholder="Registra tu Contraseña" name="Contrasena" required />
                         </div>
 
                         <div class="input-field">
                             <label>Referente</label>
-                            <select required>
+                            <select asp-for="User.IdSocio" required>
                                 <option value="">Selecciona al Usuario del cual eres Referido</option>
                                 @foreach (var item in Model.ListaDeUsuarios)
                                 {
-                                    <option value="@item.Id">@item.Id - @item.Usuario</option>
+                                    <option value="@item.Id"> - @item.Usuario</option>
                                 }
                             </select>
+                        </div>
+
+                        <div class="input-field">
+                            <label>Foto de Perfil</label>
+                            <input asp-for="User.FotoPerfil" type="file" accept=".jpg, .png" required />
                         </div>
                     </div>
                 </div>
                 <button class="sumbit">
-                    <span class="btnText">Submit</span>
+                    <span class="btnText">Registrarse</span>
                     <i class="uil uil-navigator"></i>
                 </button>
             </div>

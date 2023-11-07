@@ -1,4 +1,5 @@
-﻿using act_Application.Models.Sistema.Complementos;
+﻿using act_Application.Models.BD;
+using act_Application.Models.Sistema.Complementos;
 
 namespace act_Application.Models.Sistema.ViewModel
 {
@@ -6,7 +7,9 @@ namespace act_Application.Models.Sistema.ViewModel
     {
         public Registro_VM()
         {
+            User = new ActUser();
         }
         public List<UserList> ListaDeUsuarios { get; set; }
+        public ActUser User { get; set; }
     }
 }

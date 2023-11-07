@@ -119,5 +119,20 @@ namespace act_Application.Controllers.General
 
             return View(viewModel);
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Registrarse(string Contrasena, [Bind("Id,Cedula,Correo,NombreYApellido,Celular,Contrasena,TipoUser,IdSocio,FotoPerfil,Estado")] ActUser actUser)
+        {
+            if (ModelState.IsValid)
+            {
+                actUser.Contrasena = HashPassword(Contrasena);
+                actUser.TipoUser = "En Espera";         //4 ESTADOS =  Administrador, Socio, Referido, En Espera
+                actUser.Estado = "EN EVALUACION";       //4 ESTADO = ACTIVO, INACTIVO, EN EVALUACION, NEGADO.
+                _context.Add(actUser);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Index","Login");
+            }
+            return View(actUser);
+        }
     }
 }

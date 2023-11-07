@@ -95,7 +95,7 @@ form.secActive .form.first {
 
 form .fields .input-field {
     display: flex;
-    width: calc(100% / 3 - 15px);
+    width: calc(100% / 2 - 15px);
     flex-direction: column;
     margin: 4px 0;
 }
@@ -116,6 +116,11 @@ form .fields .input-field {
     padding: 0 15px;
     height: 42px;
     margin: 8px 0;
+}
+
+.fotoperfil {
+    padding: 20px 0px 0px 0px;
+    margin: 20px 0px 0px 0px;
 }
 
     .input-field input :focus,

@@ -1,8 +1,7 @@
 ﻿using System.Data;
 using MySql.Data.MySqlClient;
-using act_Application.Helper;
 
-namespace act_Application.Services
+namespace act_Application.Helper
 {
     public class CorreoHelper
     {
