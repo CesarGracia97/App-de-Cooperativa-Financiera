@@ -1,5 +1,6 @@
 ﻿using act_Application.Helper;
 using act_Application.Models.BD;
+using act_Application.Models.Sistema;
 using MySql.Data.MySqlClient;
 using System;
 using System.Data;
@@ -78,12 +79,12 @@ namespace act_Application.Data.Data
 
             return objetoRol;
         }
-        public List<ActUser> GetDataListUser()
+        public List<UserList> GetDataListUser()
         {
             string connectionString = AppSettingsHelper.GetConnectionString();
             string Query = ConfigReader.GetQuery("SelectListUser");
 
-            List<ActUser> users = new List<ActUser>();
+            List<UserList> users = new List<UserList>();
 
             using (MySqlConnection conexion = new MySqlConnection(connectionString))
             {
@@ -95,10 +96,10 @@ namespace act_Application.Data.Data
                 {
                     while (reader.Read())
                     {
-                        ActUser user = new ActUser()
+                        UserList user = new UserList()
                         {
                             Id = Convert.ToInt32(reader["Id"]),
-                            NombreYapellido = Convert.ToString(reader["NombreYApellido"])
+                            Usuario = Convert.ToString(reader["NombreYApellido"])
                         };
                         users.Add(user);
                     }

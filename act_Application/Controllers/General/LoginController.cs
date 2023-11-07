@@ -7,6 +7,7 @@ using System.Text;
 using System.Security.Cryptography;
 using act_Application.Models.BD;
 using act_Application.Data.Data;
+using act_Application.Models.Sistema;
 
 namespace act_Application.Controllers.General
 {
@@ -94,7 +95,17 @@ namespace act_Application.Controllers.General
         }
         public IActionResult Registrarse()
         {
-            return View();
+            UsuarioRepository usuarioRepository = new UsuarioRepository();
+            List<UserList> listUsuarios = usuarioRepository.GetDataListUser();
+
+            var itemListUsuarios = listUsuarios.Select(usuarios =>
+            new
+            {
+                Value = $"{usuarios.Id}",
+                Text = $"{usuarios.Usuario}"
+            }).ToList();
+
+            return View(itemListUsuarios);
         }
     }
 }
