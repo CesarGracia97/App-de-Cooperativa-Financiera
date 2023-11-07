@@ -119,9 +119,8 @@ namespace act_Application.Controllers.General
 
             return View(viewModel);
         }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Registrarse(string Contrasena, [Bind("Id,Cedula,Correo,NombreYApellido,Celular,Contrasena,TipoUser,IdSocio,FotoPerfil,Estado")] ActUser actUser)
+        [HttpPost][ValidateAntiForgeryToken]
+        public async Task<IActionResult> Registro(string Contrasena, [Bind("Id,Cedula,Correo,NombreYApellido,Celular,Contrasena,TipoUser,IdSocio,FotoPerfil,Estado")] ActUser actUser)
         {
             if (ModelState.IsValid)
             {
