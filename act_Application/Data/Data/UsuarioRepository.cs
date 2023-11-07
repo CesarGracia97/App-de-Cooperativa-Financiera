@@ -78,5 +78,33 @@ namespace act_Application.Data.Data
 
             return objetoRol;
         }
+        public List<ActUser> GetDataListUser()
+        {
+            string connectionString = AppSettingsHelper.GetConnectionString();
+            string Query = ConfigReader.GetQuery("SelectListUser");
+
+            List<ActUser> users = new List<ActUser>();
+
+            using (MySqlConnection conexion = new MySqlConnection(connectionString))
+            {
+                conexion.Open();
+
+                MySqlCommand cmd = new MySqlCommand(Query, conexion);
+
+                using (MySqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        ActUser user = new ActUser()
+                        {
+                            Id = Convert.ToInt32(reader["Id"]),
+                            NombreYapellido = Convert.ToString(reader["NombreYApellido"])
+                        };
+                        users.Add(user);
+                    }
+                }
+            }
+            return users;
+        }
     }
 }

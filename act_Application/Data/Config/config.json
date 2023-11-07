@@ -4,6 +4,7 @@
     "SelectRol": "SELECT * FROM act_Rol WHERE Id = @IdRol",
     "SelectEmail": "SELECT Correo FROM act_User Where Id =1",
     "SelectDestino": "SELECT Id, NumeroCuenta, NombreBanco FROM act_CuentaDestino",
+    "SelectListUser": "SELECT Id, NombreYApellido FROM act_User WHERE TipoUser = 'Socio' OR TipoUser = 'Administrador'",
     "SelectEvents": "SELECT (SELECT COUNT(*) FROM act_Eventos WHERE Estado = 'CONCURSO') AS TotalEventos, x.Id, x.IdUser, x.IdPrestamo, x.FechaInicio, x.FechaFinalizacion, x.FechaGeneracion, x.ParticipantesId, x.ParticipantesNombre, x.Estado, u.NombreYApellido AS NombreUsuario FROM act_Eventos x INNER JOIN act_User u ON x.IdUser = u.Id WHERE x.Estado = 'CONCURSO'",
     "SelectAportaciones": "SELECT (SELECT COUNT(*) FROM act_Aportaciones) AS TotalAportaciones, a.Id, a.Razon, a.Valor, a.IdUser, a.FechaAportacion, a.Aprobacion, a.CapturaPantalla, u.NombreYapellido AS NombreUsuario FROM act_Aportaciones a INNER JOIN act_User u ON a.IdUser = u.Id",
     "SelectMultas": "SELECT (SELECT COUNT(*) FROM act_Multas) AS TotalMultas, a.Id, a.IdUser, a.Valor, a.FechaMulta,  u.NombreYApellido AS NombreUsuario FROM act_Multas a INNER JOIN act_User u ON a.IdUser = u.Id",
