@@ -1,4 +1,5 @@
-﻿@{
+﻿@model act_Application.Models.Sistema.ViewModel.Registro_VM;
+@{
     ViewData["Title"] = "Registrarse";
     Layout = null;
 }
@@ -51,8 +52,14 @@
                         </div>
 
                         <div class="input-field">
-                            <label>Occupation</label>
-                            <input type="text" placeholder="Enter your ccupation" required>
+                            <label>Referente</label>
+                            <select required>
+                                <option value="">Selecciona al Usuario del cual eres Referido</option>
+                                @foreach (var item in Model.ListaDeUsuarios)
+                                {
+                                    <option value="@item.Id">@item.Id - @item.Usuario</option>
+                                }
+                            </select>
                         </div>
                     </div>
                 </div>

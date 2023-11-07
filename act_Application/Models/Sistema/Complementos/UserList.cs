@@ -1,4 +1,4 @@
-﻿namespace act_Application.Models.Sistema
+﻿namespace act_Application.Models.Sistema.Complementos
 {
     public partial class UserList
     {

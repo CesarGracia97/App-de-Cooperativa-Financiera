@@ -7,12 +7,19 @@ using System.Text;
 using System.Security.Cryptography;
 using act_Application.Models.BD;
 using act_Application.Data.Data;
-using act_Application.Models.Sistema;
+using act_Application.Models.Sistema.Complementos;
+using act_Application.Models.Sistema.ViewModel;
+using act_Application.Data.Context;
 
 namespace act_Application.Controllers.General
 {
     public class LoginController : Controller
     {
+        private readonly ActDesarrolloContext _context;
+        public LoginController(ActDesarrolloContext context)
+        {
+            _context = context;
+        }
         public IActionResult Index()
         {
             return View();
@@ -105,7 +112,12 @@ namespace act_Application.Controllers.General
                 Text = $"{usuarios.Usuario}"
             }).ToList();
 
-            return View(itemListUsuarios);
+            var viewModel = new Registro_VM
+            {
+                ListaDeUsuarios = listUsuarios
+            };
+
+            return View(viewModel);
         }
     }
 }
