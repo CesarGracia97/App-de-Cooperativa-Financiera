@@ -19,49 +19,62 @@
         <header>Registro</header>
 
         <form asp-action="Registro" method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form first">
                 <div class="details personal">
                     <span class="title">Informacion</span>
 
                     <div class="fields">
                         <div class="input-field">
-                            <label>Nombre y Apellidos</label>
-                            <input asp-for="User.NombreYapellido"type="text" placeholder="Registre sus Nombres y Apellidos" required />
+                            <label asp-for="User.NombreYapellido">Nombre y Apellidos</label>
+                            <input asp-for="User.NombreYapellido" type="text" name="NombreYapellido" placeholder="Registre sus Nombres y Apellidos" required />
+                            <span asp-validation-for="User.NombreYapellido" class="text-danger"></span>
                         </div>
 
                         <div class="input-field">
-                            <label>Cedula de Identidad</label>
-                            <input asp-for="User.Cedula" type="number" placeholder="Registra tu Cedula" required />
+                            <label asp-for="User.Cedula">Cedula de Identidad</label>
+                            <input asp-for="User.Cedula" type="number" name="Cedula" placeholder="Registra tu Cedula" required />
+                            <span asp-validation-for="User.Cedula" class="text-danger"></span>
                         </div>
 
                         <div class="input-field">
-                            <label>Email</label>
-                            <input asp-for="User.Correo" type="text" placeholder="Registra tu email" required />
+                            <label asp-for="User.Correo">Email</label>
+                            <input asp-for="User.Correo" type="text" name="Correo" placeholder="Registra tu email" required />
+                            <span asp-validation-for="User.Correo" class="text-danger"></span>
                         </div>
 
                         <div class="input-field">
-                            <label>Contraseña</label>
-                            <input type="password" placeholder="Registra tu Contraseña" name="Contrasena" required />
+                            <label asp-for="User.Contrasena">Contraseña</label>
+                            <input asp-for="User.Contrasena" type="password" placeholder="Registra tu Contraseña" name="Contrasena" required />
+                            <span asp-validation-for="User.Contrasena" class="text-danger"></span>
                         </div>
 
                         <div class="input-field">
-                            <label>Referente</label>
-                            <select asp-for="User.IdSocio" required>
+                            <label asp-for="User.Celular">Celular</label>
+                            <input asp-for="User.Celular" type="number" placeholder="Registra tu Celular" name="Celular" required />
+                            <span asp-validation-for="User.Celular" class="text-danger"></span>
+                        </div>
+
+                        <div class="input-field">
+                            <label asp-for="User.IdSocio">Referente</label>
+                            <select asp-for="User.IdSocio" name="IdSocio" required>
                                 <option value="">Selecciona al Usuario del cual eres Referido</option>
                                 @foreach (var item in Model.ListaDeUsuarios)
                                 {
                                     <option value="@item.Id"> - @item.Usuario</option>
                                 }
                             </select>
+                            <span asp-validation-for="User.IdSocio" class="text-danger"></span>
                         </div>
 
                         <div class="input-field">
-                            <label>Foto de Perfil</label>
-                            <input asp-for="User.FotoPerfil" type="file" accept=".jpg, .png" required />
+                            <label asp-for="User.FotoPerfil">Foto de Perfil</label>
+                            <input asp-for="User.FotoPerfil" name="FotoPerfil" type="file" accept=".jpg, .png" required />
+                            <span asp-validation-for="User.FotoPerfil" class="text-danger"></span>
                         </div>
                     </div>
                 </div>
-                <button class="sumbit">
+                <button class="sumbit" type="submit">
                     <span class="btnText">Registrarse</span>
                     <i class="uil uil-navigator"></i>
                 </button>
@@ -69,6 +82,5 @@
         </form>
     </div>
 
-    <script src="/js/General/Login/Registro.js"></script>
 </body>
 </html>

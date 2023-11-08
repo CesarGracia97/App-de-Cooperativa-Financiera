@@ -120,11 +120,26 @@ namespace act_Application.Controllers.General
             return View(viewModel);
         }
         [HttpPost][ValidateAntiForgeryToken]
-        public async Task<IActionResult> Registro(string Contrasena, [Bind("Id,Cedula,Correo,NombreYApellido,Celular,Contrasena,TipoUser,IdSocio,FotoPerfil,Estado")] ActUser actUser)
+        public async Task<IActionResult> Registro(string NombreYapellido, string Cedula, string Correo, string Contrasena, int IdSocio, string Celular, [FromForm] IFormFile FotoPerfil, [Bind("Id,Cedula,Correo,NombreYApellido,Celular,Contrasena,TipoUser,IdSocio,FotoPerfil,Estado")] ActUser actUser)
         {
             if (ModelState.IsValid)
             {
+                actUser.Cedula = Cedula;
+                actUser.NombreYapellido = NombreYapellido;
+                actUser.Correo = Correo;
                 actUser.Contrasena = HashPassword(Contrasena);
+                actUser.IdSocio = IdSocio;
+                actUser.Celular = Celular;
+                
+                if(FotoPerfil != null &&  FotoPerfil.Length > 0)
+                {
+                    using (var ms = new MemoryStream())
+                    {
+                        await FotoPerfil.CopyToAsync(ms);
+                        var bytes = ms.ToArray();
+                        actUser.FotoPerfil = bytes;
+                    }
+                }
                 actUser.TipoUser = "En Espera";         //4 ESTADOS =  Administrador, Socio, Referido, En Espera
                 actUser.Estado = "EN EVALUACION";       //4 ESTADO = ACTIVO, INACTIVO, EN EVALUACION, NEGADO.
                 _context.Add(actUser);
