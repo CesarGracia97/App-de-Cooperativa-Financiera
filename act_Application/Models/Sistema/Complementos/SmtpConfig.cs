@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace act_Application.Models.Sistema
+namespace act_Application.Models.Sistema.Complementos
 {
     public class SmtpConfig
     {

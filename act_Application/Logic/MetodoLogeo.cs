@@ -2,8 +2,8 @@
 using System.Net.Mail;
 using System.Net;
 using act_Application.Models.BD;
-using act_Application.Models.Sistema;
 using act_Application.Helper;
+using act_Application.Models.Sistema.Complementos;
 
 namespace act_Application.Logic
 {
@@ -23,7 +23,7 @@ namespace act_Application.Logic
         }
         public void EnviarNotificacionInicioSesion(ActUser usuario)
         {
-            SmtpConfig smtpConfig = SmtpConfig.LoadConfig("Data/Config/smtpconfig.json");
+            SmtpConfig smtpConfig = SmtpConfig.LoadConfig("Data/Config/smtp.json");
             string correoDestino = CorreoHelper.ObtenerCorreoDestino(); // Obtener el correo de destino dinámicamente
 
             using (SmtpClient smtpClient = new SmtpClient(smtpConfig.Server, smtpConfig.Port))

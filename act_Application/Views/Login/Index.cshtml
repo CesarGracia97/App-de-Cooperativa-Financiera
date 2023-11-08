@@ -54,4 +54,16 @@
         </div>
     </div>
 
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <script>
+            $(document).ready(function () {
+                var errorMessage = '@TempData["ErrorMessage"]';
+                if (errorMessage) {
+                    $('#myModal p').text(errorMessage);
+                    $('#myModal').modal('show');
+                }
+            });
+        </script>
+    }
 </body>

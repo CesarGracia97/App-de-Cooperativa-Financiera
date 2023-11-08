@@ -54,6 +54,7 @@ CREATE TABLE `act_desarrollo`.`act_RolUser` (
 USE act_desarrollo; INSERT INTO `act_desarrollo`.`act_Rol` (`Id`, `NombreRol`, `DescripcionRol`) VALUES ('1', 'Administrador', 'Rol con acceso total al sistema');
 USE act_desarrollo; INSERT INTO `act_desarrollo`.`act_Rol` (`Id`, `NombreRol`, `DescripcionRol`) VALUES ('2', 'Socio', 'Rol con permisos limitados');
 USE act_desarrollo; INSERT INTO `act_desarrollo`.`act_Rol` (`Id`, `NombreRol`, `DescripcionRol`) VALUES ('3', 'Referido', 'Rol con permisos limitados como Referido');
+USE act_desarrollo; INSERT INTO `act_desarrollo`.`act_Rol` (`Id`, `NombreRol`, `DescripcionRol`) VALUES ('4', 'En Espera', 'Usuario Nuevo sin roles');
 
 #Datos Roles Usuario
 USE act_desarrollo; INSERT INTO `act_desarrollo`.`act_RolUser` (`Id`, `IdUser`, `IdRol`) VALUES ('1', '1', '1');
@@ -68,3 +69,16 @@ USE act_desarrollo; INSERT INTO `act_desarrollo`.`act_RolUser` (`Id`, `IdUser`, 
 #Relaciones
 USE act_desarrollo;  ALTER TABLE act_RolUser ADD CONSTRAINT fk_RolUser_User FOREIGN KEY (IdUser) REFERENCES act_User(Id);
 USE act_desarrollo;  ALTER TABLE act_RolUser ADD CONSTRAINT fk_Socio_User FOREIGN KEY (IdRol) REFERENCES act_Rol(Id);
+
+USE act_desarrollo;
+DELIMITER $$
+CREATE TRIGGER tr_NuevoUsuarioRol
+AFTER INSERT ON act_User
+FOR EACH ROW
+BEGIN
+    INSERT INTO act_RolUser (IdUser, IdRol)
+    VALUES (NEW.Id, 4);
+END;
+$$
+DELIMITER ;
+

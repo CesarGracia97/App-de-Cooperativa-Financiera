@@ -27,12 +27,12 @@ namespace act_Application.Controllers.General
         [HttpPost]
         public IActionResult Index(string Correo, string Contrasena)
         {
-
-            if (!ModelState.IsValid) // Verificacion desde la Tabla Modelo
+            if (!ModelState.IsValid)
             {
-                return View(); // Confirmacion de Error
+                return View();
             }
-            if (!new MetodoLogeo().ValidarCorreo(Correo)) //Validacion desde la incersion de datos
+
+            if (!new MetodoLogeo().ValidarCorreo(Correo))
             {
                 ViewBag.ErrorMessage = "Caracteres especiales o formato de correo incorrecto detectado, corríjalo por favor.";
                 ViewBag.ShowErrorMessage = true;
@@ -44,49 +44,67 @@ namespace act_Application.Controllers.General
             ActUser objeto = new UsuarioRepository().GetDataUser(Correo, hashedPassword);
             var claims = new List<Claim>();
 
-            if (objeto.NombreYapellido != null)
+            if (objeto != null)
             {
-                // Obtener la información del rol usando el método DatosRolesUser
-                UsuarioRepository usuarioRepository = new UsuarioRepository();
-
-                ActRol objetoRol = usuarioRepository.GetDataRolUser(objeto.IdRol);
-
-                if (objetoRol != null)
+                if (objeto.NombreYapellido != null)
                 {
-                    claims.Add(new Claim(ClaimTypes.Name, objeto.NombreYapellido));
-                    claims.Add(new Claim(ClaimTypes.Email, objeto.Correo));
-                    claims.Add(new Claim("CI", objeto.Cedula));
-                    claims.Add(new Claim("Id", objeto.Id.ToString()));
-                    claims.Add(new Claim("IdRol", objeto.IdRol.ToString()));
-                    claims.Add(new Claim("Rol", objetoRol.NombreRol));
-                    claims.Add(new Claim("TipoUsuario", objeto.TipoUser));
+                    UsuarioRepository usuarioRepository = new UsuarioRepository();
+
+                    ActRol objetoRol = usuarioRepository.GetDataRolUser(objeto.IdRol);
+
+                    if (objetoRol != null)
+                    {
+                        claims.Add(new Claim(ClaimTypes.Name, objeto.NombreYapellido));
+                        claims.Add(new Claim(ClaimTypes.Email, objeto.Correo));
+                        claims.Add(new Claim("CI", objeto.Cedula));
+                        claims.Add(new Claim("Id", objeto.Id.ToString()));
+                        claims.Add(new Claim("IdRol", objeto.IdRol.ToString()));
+                        claims.Add(new Claim("Rol", objetoRol.NombreRol));
+                        claims.Add(new Claim("TipoUsuario", objeto.TipoUser));
+                    }
+
+                    var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                    var authProperties = new AuthenticationProperties();
+
+                    HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), authProperties);
+            
+                    try
+                    {
+                        new MetodoLogeo().EnviarNotificacionInicioSesion(objeto);
+                    }
+                    catch (Exception ex)
+                    {
+                        Thread.Sleep(1000);
+                        Console.WriteLine("Hubo un problema al enviar la notificación por correo electrónico.");
+                        Console.WriteLine("Detalles del error: " + ex.Message);
+                    }
+
+                    if (objeto.Estado == "ACTIVO")
+                    {
+                        return RedirectToAction("Index", "Home");
+                    }
+                    else if (objeto.Estado == "INACTIVO")
+                    {
+                        TempData["ErrorMessage"] = "Su cuenta se encuentra Inactiva, comuníquese con los Administradores para su Reactivación.";
+                    }
+                    else if (objeto.Estado == "EN EVALUACION")
+                    {
+                        TempData["ErrorMessage"] = "Su cuenta se encuentra en periodo de Evaluación, espere hasta recibir el correo de confirmación o negación de su cuenta. El mensaje le llegará al correo que nos proporcionó.";
+                    }
+                    else if (objeto.Estado == "DENEGADO")
+                    {
+                        TempData["ErrorMessage"] = "Su cuenta fue denegada.";
+                    }
                 }
-
-                var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-                var authProperties = new AuthenticationProperties
-                {
-                    //ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(16)
-                };
-
-                HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), authProperties);
-                try
-                {
-                    new MetodoLogeo().EnviarNotificacionInicioSesion(objeto);
-                }
-                catch (Exception ex)
-                {
-                    Thread.Sleep(1000);
-                    Console.WriteLine("Hubo un problema al enviar la notificación por correo electrónico.");
-                    Console.WriteLine("Detalles del error: " + ex.Message);
-                }
-                return RedirectToAction("Menu", "Home");
             }
             else
             {
-                return RedirectToAction("Index", "Login", new { error = "Contraseña incorrecta" });
+                TempData["ErrorMessage"] = "Contraseña incorrecta";
             }
 
+            return RedirectToAction("Index", "Login");
         }
+        
         public string HashPassword(string password)
         {
             using (var sha256 = SHA256.Create())
