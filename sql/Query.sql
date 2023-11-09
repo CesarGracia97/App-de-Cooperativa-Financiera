@@ -82,3 +82,16 @@ BEGIN
 END;
 $$
 DELIMITER ;
+
+CREATE TABLE `act_desarrollo`.`act_Notificaciones` (
+  `Id` INT NOT NULL AUTO_INCREMENT,
+  `IdActividad` VARCHAR(45) NOT NULL,
+  `FechaGeneracion` DATETIME NOT NULL,
+  `Razon` VARCHAR(200) NOT NULL,
+  `Descripcion` VARCHAR(5000) NOT NULL,
+  `Destino` VARCHAR(45) NOT NULL,
+  `Visto` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`Id`),
+  UNIQUE INDEX `Id_UNIQUE` (`Id` ASC),
+  UNIQUE INDEX `IdActividad_UNIQUE` (`IdActividad` ASC))
+  COMMENT = 'Tabla de Notificaciones';

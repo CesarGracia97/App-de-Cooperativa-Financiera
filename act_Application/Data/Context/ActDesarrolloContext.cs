@@ -1,5 +1,6 @@
 ﻿using act_Application.Models.BD;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Cryptography.X509Certificates;
 
 namespace act_Application.Data.Context;
 
@@ -20,8 +21,22 @@ public partial class ActDesarrolloContext : DbContext
 
     public virtual DbSet<ActUser> ActUsers { get; set; }
 
+    public virtual DbSet<ActNotificacione> ActNotificaciones { get; set; }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<ActNotificacione>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PRIMARY");
+
+            entity.ToTable("act_Notificaciones", tb => tb.HasComment("Tabla de Notificaciones"));
+
+            entity.HasIndex(e => e.Id, "Id_UNIQUE").IsUnique();
+            entity.Property(e => e.IdActividad).HasMaxLength(45);
+            entity.Property(e => e.FechaGeneracion).HasColumnType("date");
+            entity.Property(e => e.IdActividad).HasMaxLength(45);
+        });
+
         modelBuilder.Entity<ActRol>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PRIMARY");
