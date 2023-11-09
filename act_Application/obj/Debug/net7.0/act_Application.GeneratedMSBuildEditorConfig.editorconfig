@@ -24,6 +24,22 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/cgracia/source/repos/act_Application/act_Application/Views/Login/CSE.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9naW5cQ1NFLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/cgracia/source/repos/act_Application/act_Application/Views/Login/Cuenta_Denegada.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9naW5cQ3VlbnRhX0RlbmVnYWRhLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/cgracia/source/repos/act_Application/act_Application/Views/Login/Cuenta_en_Evaluacion.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9naW5cQ3VlbnRhX2VuX0V2YWx1YWNpb24uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/cgracia/source/repos/act_Application/act_Application/Views/Login/Cuenta_Inactiva.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9naW5cQ3VlbnRhX0luYWN0aXZhLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/cgracia/source/repos/act_Application/act_Application/Views/Login/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9naW5cSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -34,6 +50,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/cgracia/source/repos/act_Application/act_Application/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/cgracia/source/repos/act_Application/act_Application/Views/Shared/_Layout2.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQyLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/cgracia/source/repos/act_Application/act_Application/Views/Shared/_ValidationScriptsPartial.cshtml]

@@ -2,5 +2,11 @@
     ViewData["Title"] = "Privacy Policy";
 }
 <h1>@ViewData["Title"]</h1>
+<script>
+    // Redirigir a la vista "Index" del controlador "Login" después de 5 segundos
+    setTimeout(function () {
+        window.location.href = '@Url.Action("Index", "Login")';
+    }, 5000); // 5000 milisegundos = 5 segundos
+</script>
 
 <p>Use this page to detail your site's privacy policy.</p>

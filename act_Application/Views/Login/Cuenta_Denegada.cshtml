@@ -1,0 +1,13 @@
+@{
+    ViewData["Title"] = "Estado de Cuenta";
+    Layout = "/Views/Shared/_Layout2.cshtml";
+}
+<h1>@ViewData["Title"]</h1>
+<script>
+    // Redirigir a la vista "Index" del controlador "Login" después de 5 segundos
+    setTimeout(function () {
+        window.location.href = '@Url.Action("Index", "Login")';
+    }, 5000); // 5000 milisegundos = 5 segundos
+</script>
+
+<p>Cuenta no fue Aprobada.</p>

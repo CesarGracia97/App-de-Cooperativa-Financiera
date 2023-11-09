@@ -1,0 +1,14 @@
+@{
+    ViewData["Title"] = "Estado de Cuenta";
+    Layout = "/Views/Shared/_Layout2.cshtml";
+}
+<h1>@ViewData["Title"]</h1>
+<script>
+    // Redirigir a la vista "Index" del controlador "Login" después de 5 segundos
+    setTimeout(function () {
+        window.location.href = '@Url.Action("Index", "Login")';
+    }, 15000); // 5000 milisegundos = 5 segundos
+</script>
+
+<p>Tu cuenta fue recientemente creada, se encuentra aun en periodo de Evaluacion. 
+    Te notificaremos sobre su cambio de estado pronto por medio del Correo que nos proporcionaste.</p>

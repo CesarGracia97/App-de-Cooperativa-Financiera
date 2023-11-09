@@ -46,6 +46,23 @@ namespace act_Application.Controllers.General
 
             if (objeto != null)
             {
+                if (objeto.Estado != "ACTIVO")
+                {
+                    string mensaje = string.Empty;
+
+                    // Establecer el mensaje según el estado del usuario
+                    switch (objeto.Estado)
+                    {
+                        case "INACTIVO":
+                            return RedirectToAction("Cuenta_Inactiva", "Login");
+                        case "DENEGADO":
+                            return RedirectToAction("Cuenta_Denegada", "Login");
+                        case "EN EVALUACION":
+                            return RedirectToAction("Cuenta_en_Evaluacion", "Login");
+                        default:
+                            return RedirectToAction("CSE", "Login");
+                    }
+                }
                 if (objeto.NombreYapellido != null)
                 {
                     UsuarioRepository usuarioRepository = new UsuarioRepository();
@@ -67,7 +84,7 @@ namespace act_Application.Controllers.General
                     var authProperties = new AuthenticationProperties();
 
                     HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), authProperties);
-            
+
                     try
                     {
                         new MetodoLogeo().EnviarNotificacionInicioSesion(objeto);
@@ -77,23 +94,7 @@ namespace act_Application.Controllers.General
                         Thread.Sleep(1000);
                         Console.WriteLine("Hubo un problema al enviar la notificación por correo electrónico.");
                         Console.WriteLine("Detalles del error: " + ex.Message);
-                    }
-
-                    if (objeto.Estado == "ACTIVO")
-                    {
                         return RedirectToAction("Index", "Home");
-                    }
-                    else if (objeto.Estado == "INACTIVO")
-                    {
-                        TempData["ErrorMessage"] = "Su cuenta se encuentra Inactiva, comuníquese con los Administradores para su Reactivación.";
-                    }
-                    else if (objeto.Estado == "EN EVALUACION")
-                    {
-                        TempData["ErrorMessage"] = "Su cuenta se encuentra en periodo de Evaluación, espere hasta recibir el correo de confirmación o negación de su cuenta. El mensaje le llegará al correo que nos proporcionó.";
-                    }
-                    else if (objeto.Estado == "DENEGADO")
-                    {
-                        TempData["ErrorMessage"] = "Su cuenta fue denegada.";
                     }
                 }
             }
@@ -104,7 +105,7 @@ namespace act_Application.Controllers.General
 
             return RedirectToAction("Index", "Login");
         }
-        
+
         public string HashPassword(string password)
         {
             using (var sha256 = SHA256.Create())
@@ -137,7 +138,8 @@ namespace act_Application.Controllers.General
 
             return View(viewModel);
         }
-        [HttpPost][ValidateAntiForgeryToken]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Registro(string NombreYapellido, string Cedula, string Correo, string Contrasena, int IdSocio, string Celular, [FromForm] IFormFile FotoPerfil, [Bind("Id,Cedula,Correo,NombreYApellido,Celular,Contrasena,TipoUser,IdSocio,FotoPerfil,Estado")] ActUser actUser)
         {
             if (ModelState.IsValid)
@@ -148,8 +150,8 @@ namespace act_Application.Controllers.General
                 actUser.Contrasena = HashPassword(Contrasena);
                 actUser.IdSocio = IdSocio;
                 actUser.Celular = Celular;
-                
-                if(FotoPerfil != null &&  FotoPerfil.Length > 0)
+
+                if (FotoPerfil != null && FotoPerfil.Length > 0)
                 {
                     using (var ms = new MemoryStream())
                     {
@@ -162,9 +164,25 @@ namespace act_Application.Controllers.General
                 actUser.Estado = "EN EVALUACION";       //4 ESTADO = ACTIVO, INACTIVO, EN EVALUACION, NEGADO.
                 _context.Add(actUser);
                 await _context.SaveChangesAsync();
-                return RedirectToAction("Index","Login");
+                return RedirectToAction("Index", "Login");
             }
             return View(actUser);
+        }
+        public IActionResult Cuenta_en_Evaluacion()
+        {
+            return View();
+        }
+        public IActionResult Cuenta_Denegada()
+        {
+            return View();
+        }
+        public IActionResult Cuenta_Inactiva()
+        {
+            return View();
+        }
+        public IActionResult CSE()
+        {
+            return View();
         }
     }
 }

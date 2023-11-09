@@ -1,6 +1,7 @@
 /*Scaffold-DbContext "server=192.168.21.193; port=3306; database=act_desarrollo; uid=cgarcia; password=cgarcia;" MySql.EntityFrameworkCore -OutputDir "Models/BD/" -Force*/
 
 CREATE DATABASE act_desarrollo;
+
 #Tabla de usuario
 CREATE TABLE `act_desarrollo`.`act_User` (
   `Id` INT NOT NULL AUTO_INCREMENT,
@@ -81,4 +82,3 @@ BEGIN
 END;
 $$
 DELIMITER ;
-
