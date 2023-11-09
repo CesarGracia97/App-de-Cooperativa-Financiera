@@ -34,7 +34,10 @@ public partial class ActDesarrolloContext : DbContext
             entity.HasIndex(e => e.Id, "Id_UNIQUE").IsUnique();
             entity.Property(e => e.IdActividad).HasMaxLength(45);
             entity.Property(e => e.FechaGeneracion).HasColumnType("date");
-            entity.Property(e => e.IdActividad).HasMaxLength(45);
+            entity.Property(e => e.Razon).HasMaxLength(200);
+            entity.Property(e => e.Descripcion).HasMaxLength(5000);
+            entity.Property(e => e.Destino).HasMaxLength(45);
+            entity.Property(e => e.Visto).HasMaxLength(45);
         });
 
         modelBuilder.Entity<ActRol>(entity =>
