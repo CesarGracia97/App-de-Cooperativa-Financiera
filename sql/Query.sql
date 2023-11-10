@@ -124,35 +124,77 @@ CREATE TABLE `act_desarrollo`.`act_Aportaciones` (
   UNIQUE INDEX `IdApor_UNIQUE` (`IdApor` ASC))
 COMMENT = 'Tabla de Aportaciones';
 
-#TRIGGER IdApor Automatico
+# TRIGGER IdApor Automatico
 USE act_desarrollo;
-DELIMITER //
-
+DELIMITER 
+//
 CREATE TRIGGER GeneradorIdApor
 BEFORE INSERT ON act_Aportaciones
 FOR EACH ROW
 BEGIN
     DECLARE last_id INT;
-
-    -- Buscar el último Id de la tabla
+    # Buscar el último Id de la tabla
     SELECT Id INTO last_id
     FROM act_Aportaciones
     ORDER BY Id DESC
     LIMIT 1;
-
-    -- Verificar si existe un registro anterior
+    # Verificar si existe un registro anterior
     IF last_id IS NULL THEN
-        -- No hay registros anteriores, asignar APOR-1
+        # Sin registros anteriores, asignar APOR-1
         SET NEW.IdApor = 'APOR-1';
     ELSE
-        -- Hay registros anteriores, calcular nuevo valor para IdApor
+        # Hay registros anteriores, calcular nuevo valor para IdApor
         SET NEW.IdApor = CONCAT('APOR-', last_id + 1);
     END IF;
 END;
-
 //
-
 DELIMITER ;
 
+#Relaciones 
 USE act_desarrollo; ALTER TABLE act_Aportaciones ADD CONSTRAINT fk_Aportaciones_User FOREIGN KEY (IdUser) REFERENCES act_User(Id);
 USE act_desarrollo; ALTER TABLE act_Aportaciones ADD CONSTRAINT fk_Aportaciones_Notificaciones FOREIGN KEY (IdApor) REFERENCES act_Notificaciones(IdActividad);
+
+#Tabla de Prestamos
+CREATE TABLE `act_desarrollo`.`act_Prestamos` (
+  `Id` INT(11) NOT NULL AUTO_INCREMENT,
+  `IdPres` VARCHAR(45) NULL,
+  `IdUser` INT(11) NOT NULL,
+  `IdEvento` INT(11) NOT NULL,
+  `Valor` DECIMAL(10,2) NOT NULL,
+  `FechaGeneracion` DATE NOT NULL,
+  `FechaEntregaDinero` DATE NOT NULL,
+  `FechaInicioPagoCuotas` DATE NOT NULL,
+  `FechaPagoTotalPrestamo` DATE NOT NULL,
+  `TipoCuota` VARCHAR(45) NOT NULL,
+  `Estado` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`Id`),
+  UNIQUE INDEX `Id_UNIQUE` (`Id` ASC),
+  UNIQUE INDEX `IdPres_UNIQUE` (`IdPres` ASC))
+COMMENT = 'Tabla de Prestamos';
+
+#TRIGGER IdPres Automatico
+CREATE DEFINER=`cgarcia`@`%` TRIGGER GeneradorIdPres
+BEFORE INSERT ON act_Prestamos
+FOR EACH ROW
+BEGIN
+    DECLARE last_id INT;
+
+    # Buscar el último Id de la tabla
+    SELECT Id INTO last_id
+    FROM act_Prestamos
+    ORDER BY Id DESC
+    LIMIT 1;
+
+    # Verificar si existe un registro anterior
+    IF last_id IS NULL THEN
+        -- No hay registros anteriores, asignar APOR-1
+        SET NEW.IdPres = 'PRES-1';
+    ELSE
+        -- Hay registros anteriores, calcular nuevo valor para IdApor
+        SET NEW.IdPres = CONCAT('PRES-', last_id + 1);
+    END IF;
+END
+
+USE act_desarrollo; ALTER TABLE act_Prestamos ADD CONSTRAINT fk_Prestamos_User FOREIGN KEY (IdUser) REFERENCES act_User(Id);
+USE act_desarrollo; ALTER TABLE act_Prestamos ADD CONSTRAINT fk_Prestamos_Notificaciones FOREIGN KEY (IdPres) REFERENCES act_Notificaciones(IdActividad);
+
