@@ -30,6 +30,27 @@ public partial class ActDesarrolloContext : DbContext
 
         modelBuilder.Entity<ActAportacione>(entity =>
         {
+            entity.HasKey(e => e.Id).HasName("PRIMARY");
+
+            entity.ToTable("act_Aportaciones", tb => tb.HasComment("Tabla de Aportaciones"));
+
+            entity.HasIndex(e => e.Id, "Id_UNIQUE").IsUnique();
+            entity.HasIndex(e => e.IdApor, "IdApor_UNIQUE").IsUnique();
+
+            entity.HasIndex(e => e.IdApor, "fk_Aportaciones_Notificaciones");
+            entity.HasIndex(e => e.IdUser, "fk_Aportaciones_User");
+
+            entity.Property(e => e.Id).HasColumnType("int(11)");
+            entity.Property(e => e.IdApor).HasMaxLength(45);
+            entity.Property(e => e.IdUser).HasColumnType("int(11)");
+            entity.Property(e => e.FechaAportacion).HasColumnType("date");
+            entity.Property(e => e.Cuadrante).HasMaxLength(45);
+            entity.Property(e => e.Valor).HasPrecision(10);
+            entity.Property(e => e.NBancoOrigen).HasMaxLength(45);
+            entity.Property(e => e.CBancoOrigen).HasMaxLength(45);
+            entity.Property(e => e.NBancoDestino).HasMaxLength(45);
+            entity.Property(e => e.CBancoDestino).HasMaxLength(45);
+            entity.Property(e => e.Aprobacion).HasMaxLength(45);
 
         });
 
@@ -40,6 +61,13 @@ public partial class ActDesarrolloContext : DbContext
             entity.ToTable("act_Notificaciones", tb => tb.HasComment("Tabla de Notificaciones"));
 
             entity.HasIndex(e => e.Id, "Id_UNIQUE").IsUnique();
+            entity.HasIndex(e => e.IdActividad, "IdActividad_UNIQUE").IsUnique();
+
+            entity.HasIndex(e => e.IdUser, "fk_Notificaciones_User");
+            entity.HasIndex(e => e.IdActividad, "fk_Notificaciones_NewUser");
+            entity.HasIndex(e => e.IdActividad, "fk_Notificaciones_Aportaciones");
+
+
             entity.Property(e => e.IdUser).HasColumnType("int(11)");
             entity.Property(e => e.IdActividad).HasMaxLength(45);
             entity.Property(e => e.FechaGeneracion).HasColumnType("date");
@@ -73,7 +101,6 @@ public partial class ActDesarrolloContext : DbContext
             entity.HasIndex(e => e.Id, "Id_UNIQUE").IsUnique();
 
             entity.HasIndex(e => e.IdUser, "fk_RolUser_User");
-
             entity.HasIndex(e => e.IdRol, "fk_Socio_User");
 
             entity.Property(e => e.Id).HasColumnType("int(11)");
