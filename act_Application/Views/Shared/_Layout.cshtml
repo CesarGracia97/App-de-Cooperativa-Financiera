@@ -14,7 +14,7 @@
         <header>
             <div class="image-text">
                 <span class="image">
-                    <img src="/img/SdXLogo.png" alt="Logo">
+                    <img src="/img/Logo.png" alt="Logo">
                 </span>
 
                 <div class="text logo-text">
@@ -47,49 +47,49 @@
                                 </button>
                             </li>
                             <li class="nav-link hidden-item">
-                                <a href="~/Administrador/AdminCuotas">
+                                <a href="#">
                                     <i class='bx bx-table icon'></i>
                                     <span class="text nav-text">T.Cuotas</span>
                                 </a>
                             </li>
                             <li class="nav-link hidden-item">
-                                <a href="~/Administrador/AdminNotificaciones">
+                                <a href="#">
                                     <i class='bx bx-table icon'></i>
                                     <span class="text nav-text">T. Notificaciones</span>
                                 </a>
                             </li>
                             <li class="nav-link hidden-item">
-                                <a href="~/Administrador/AdminUsuarios">
+                                <a href="#">
                                     <i class='bx bx-table icon'></i>
                                     <span class="text nav-text">T. Usuarios</span>
                                 </a>
                             </li>
                             <li class="nav-link hidden-item">
-                                <a href="~/Administrador/AdminRoles">
+                                <a href="#">
                                     <i class='bx bx-table icon'></i>
                                     <span class="text nav-text">T. Roles</span>
                                 </a>
                             </li>
                             <li class="nav-link hidden-item">
-                                <a href="~/Administrador/AdminRolesUser">
+                                <a href="#">
                                     <i class='bx bx-table icon'></i>
                                     <span class="text nav-text">T. Roles y Usuarios</span>
                                 </a>
                             </li>
                             <li class="nav-link hidden-item">
-                                <a href="~/Administrador/AdminAportaciones">
+                                <a href="#">
                                     <i class='bx bx-table icon'></i>
                                     <span class="text nav-text">T. Aportaciones</span>
                                 </a>
                             </li>
                             <li class="nav-link hidden-item">
-                                <a href="~/Administrador/AdminTransacciones">
+                                <a href="#">
                                     <i class='bx bx-table icon'></i>
                                     <span class="text nav-text">T. Transacciones</span>
                                 </a>
                             </li>
                             <li class="nav-link hidden-item">
-                                <a href="~/Administrador/AdminMultas">
+                                <a href="#">
                                     <i class='bx bx-table icon'></i>
                                     <span class="text nav-text">T. Multas</span>
                                 </a>
@@ -99,21 +99,21 @@
                         @if (User.HasClaim("Rol", "Administrador") || User.HasClaim("Rol", "Socio"))
                         {
                             <li class="nav-link">
-                                <a href="~/Aportar/Aportar">
+                                <a href="#">
                                     <i class='bx bx-money icon'></i>
                                     <span class="text nav-text">Aportar</span>
                                 </a>
                             </li>
 
                             <li class="nav-link">
-                                <a href="~/TablaAportaciones/Index">
+                                <a href="#">
                                     <i class='bx bx-table icon'></i>
                                     <span class="text nav-text">Tabla de Aportacion</span>
                                 </a>
                             </li>
 
                             <li class="nav-link">
-                                <a href="~/TablaMultas/Index">
+                                <a href="#">
                                     <i class='bx bx-window-close icon'></i>
                                     <span class="text nav-text">Tabla de Multas</span>
                                 </a>
@@ -123,7 +123,7 @@
                         @if (User.HasClaim("Rol", "Administrador") || User.HasClaim("Rol", "Referido"))
                         {
                             <li class="nav-link">
-                                <a href="~/Transacciones/Transacciones">
+                                <a href="#">
                                     <i class='bx bx-money-withdraw icon'></i>
                                     <span class="text nav-text">Peticiones</span>
                                 </a>
@@ -131,7 +131,7 @@
                         }
 
                         <li class="nav-link">
-                            <a href="~/Notificaciones/Notificacion">
+                            <a href="#">
                                 <i class='bx bx-bell icon'></i>
                                 <span class="text nav-text">Notificationes</span>
                             </a>
@@ -173,8 +173,8 @@
     </section>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="/js/_Layout/navBar.js"></script>
-    <script src="/js/_Layout/Logout.js"></script>
+    <script src="/js/General/Shared/_Layout/Layout.js"></script>
+    <script src="/js/General/Shared/_Layout/Logout.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
