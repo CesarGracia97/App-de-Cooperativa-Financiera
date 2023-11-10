@@ -17,6 +17,8 @@ public partial class ActDesarrolloContext : DbContext
 
     public virtual DbSet<ActAportacione> ActAportaciones { get; set; }
 
+    public virtual DbSet<ActPrestamo> ActPrestamos { get; set; }
+
     public virtual DbSet<ActRol> ActRols { get; set; }
 
     public virtual DbSet<ActRolUser> ActRolUsers { get; set; }
@@ -67,7 +69,6 @@ public partial class ActDesarrolloContext : DbContext
             entity.HasIndex(e => e.IdActividad, "fk_Notificaciones_NewUser");
             entity.HasIndex(e => e.IdActividad, "fk_Notificaciones_Aportaciones");
 
-
             entity.Property(e => e.IdUser).HasColumnType("int(11)");
             entity.Property(e => e.IdActividad).HasMaxLength(45);
             entity.Property(e => e.FechaGeneracion).HasColumnType("date");
@@ -75,6 +76,11 @@ public partial class ActDesarrolloContext : DbContext
             entity.Property(e => e.Descripcion).HasMaxLength(5000);
             entity.Property(e => e.Destino).HasMaxLength(45);
             entity.Property(e => e.Visto).HasMaxLength(45);
+        });
+
+        modelBuilder.Entity<ActPrestamo>(entity =>
+        {
+
         });
 
         modelBuilder.Entity<ActRol>(entity =>

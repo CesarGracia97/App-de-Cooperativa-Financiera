@@ -125,10 +125,7 @@ CREATE TABLE `act_desarrollo`.`act_Aportaciones` (
 COMMENT = 'Tabla de Aportaciones';
 
 # TRIGGER IdApor Automatico
-USE act_desarrollo;
-DELIMITER 
-//
-CREATE TRIGGER GeneradorIdApor
+CREATE DEFINER=`cgarcia`@`%` TRIGGER GeneradorIdApor
 BEFORE INSERT ON act_Aportaciones
 FOR EACH ROW
 BEGIN
@@ -146,9 +143,7 @@ BEGIN
         # Hay registros anteriores, calcular nuevo valor para IdApor
         SET NEW.IdApor = CONCAT('APOR-', last_id + 1);
     END IF;
-END;
-//
-DELIMITER ;
+END
 
 #Relaciones 
 USE act_desarrollo; ALTER TABLE act_Aportaciones ADD CONSTRAINT fk_Aportaciones_User FOREIGN KEY (IdUser) REFERENCES act_User(Id);
