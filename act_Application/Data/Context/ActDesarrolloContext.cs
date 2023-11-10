@@ -15,6 +15,8 @@ public partial class ActDesarrolloContext : DbContext
     {
     }
 
+    public virtual DbSet<ActAportacione> ActAportaciones { get; set; }
+
     public virtual DbSet<ActRol> ActRols { get; set; }
 
     public virtual DbSet<ActRolUser> ActRolUsers { get; set; }
@@ -25,6 +27,12 @@ public partial class ActDesarrolloContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+
+        modelBuilder.Entity<ActAportacione>(entity =>
+        {
+
+        });
+
         modelBuilder.Entity<ActNotificacione>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PRIMARY");
