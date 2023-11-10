@@ -32,6 +32,7 @@ public partial class ActDesarrolloContext : DbContext
             entity.ToTable("act_Notificaciones", tb => tb.HasComment("Tabla de Notificaciones"));
 
             entity.HasIndex(e => e.Id, "Id_UNIQUE").IsUnique();
+            entity.Property(e => e.IdUser).HasColumnType("int(11)");
             entity.Property(e => e.IdActividad).HasMaxLength(45);
             entity.Property(e => e.FechaGeneracion).HasColumnType("date");
             entity.Property(e => e.Razon).HasMaxLength(200);

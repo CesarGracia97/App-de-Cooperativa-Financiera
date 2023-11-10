@@ -3,6 +3,7 @@
     public partial class ActNotificacione
     {
         public int Id { set; get; }
+        public int IdUser {  set; get; }
         public string IdActividad { set; get; } 
         public DateTime FechaGeneracion { set; get; }
         public string Razon { set; get; }

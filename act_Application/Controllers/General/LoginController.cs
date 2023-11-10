@@ -10,6 +10,7 @@ using act_Application.Data.Data;
 using act_Application.Models.Sistema.Complementos;
 using act_Application.Models.Sistema.ViewModel;
 using act_Application.Data.Context;
+using act_Application.Services;
 
 namespace act_Application.Controllers.General
 {
@@ -105,7 +106,6 @@ namespace act_Application.Controllers.General
 
             return RedirectToAction("Index", "Login");
         }
-
         public string HashPassword(string password)
         {
             using (var sha256 = SHA256.Create())
@@ -144,6 +144,9 @@ namespace act_Application.Controllers.General
         {
             if (ModelState.IsValid)
             {
+                string Razon = "Nuevo Usuario Registrado - Peticion de Adminision";
+                string Descripcion = string.Empty;
+                string Destino = "TODOS";
                 actUser.Cedula = Cedula;
                 actUser.NombreYapellido = NombreYapellido;
                 actUser.Correo = Correo;
@@ -163,6 +166,10 @@ namespace act_Application.Controllers.General
                 actUser.TipoUser = "En Espera";         //4 ESTADOS =  Administrador, Socio, Referido, En Espera
                 actUser.Estado = "EN EVALUACION";       //4 ESTADO = ACTIVO, INACTIVO, EN EVALUACION, NEGADO.
                 _context.Add(actUser);
+                Descripcion = $"La Persona de nombre {actUser.NombreYapellido} y C.I. {actUser.Cedula}, con Id de Referente {actUser.IdSocio} ha mandado una peticion de Adminicion a la Organizacion";
+                NotificacionesServices notificacion = new NotificacionesServices(_context);
+                await notificacion.CrearNotificacion(1, actUser.Cedula, Razon, Descripcion, Destino, new ActNotificacione());
+
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index", "Login");
             }

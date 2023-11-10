@@ -15,7 +15,8 @@ CREATE TABLE `act_desarrollo`.`act_User` (
   `FotoPerfil` LONGBLOB NULL,
   `Estado` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`Id`),
-  UNIQUE INDEX `Id_UNIQUE` (`Id` ASC))
+  UNIQUE INDEX `Id_UNIQUE` (`Id` ASC),
+  UNIQUE INDEX `Cedula_UNIQUE` (`Cedula` ASC))
 COMMENT = 'Tabla de Usuarios';
 
 #Inyeccion de Datos
@@ -47,8 +48,9 @@ CREATE TABLE `act_desarrollo`.`act_RolUser` (
   `IdUser` int(11) NOT NULL,
   `IdRol` int(11) NOT NULL,
   PRIMARY KEY (`Id`),
-  UNIQUE KEY `Id_UNIQUE` (`Id`)
-) COMMENT='Tabla Relacion Rol Usuario';
+  UNIQUE KEY `Id_UNIQUE` (`Id`),
+  UNIQUE INDEX `IdUser_UNIQUE` (`IdUser` ASC))
+COMMENT='Tabla Relacion Rol Usuario';
 
 #Inyeccion de datos
 #Datos Rol
@@ -83,8 +85,10 @@ END;
 $$
 DELIMITER ;
 
+#Tabla de Notificaciones
 CREATE TABLE `act_desarrollo`.`act_Notificaciones` (
   `Id` INT NOT NULL AUTO_INCREMENT,
+  `IdUser` INT NOT NULL,
   `IdActividad` VARCHAR(45) NOT NULL,
   `FechaGeneracion` DATETIME NOT NULL,
   `Razon` VARCHAR(200) NOT NULL,
@@ -95,3 +99,7 @@ CREATE TABLE `act_desarrollo`.`act_Notificaciones` (
   UNIQUE INDEX `Id_UNIQUE` (`Id` ASC),
   UNIQUE INDEX `IdActividad_UNIQUE` (`IdActividad` ASC))
   COMMENT = 'Tabla de Notificaciones';
+
+#Realcion Notificaciones Usuario (Peticion de Adminision)
+USE act_desarrollo; ALTER TABLE act_Notificaciones ADD CONSTRAINT fk_Notificaciones_User FOREIGN KEY (IdActividad) REFERENCES act_User(Cedula);
+
