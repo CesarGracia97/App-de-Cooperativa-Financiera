@@ -102,7 +102,6 @@ public partial class ActDesarrolloContext : DbContext
             entity.Property(e => e.FechaPagoTotalPrestamo).HasColumnType("date");
             entity.Property(e => e.TipoCuota).HasMaxLength(45);
             entity.Property(e => e.Estado).HasMaxLength(45);
-
         });
 
         modelBuilder.Entity<ActRol>(entity =>
