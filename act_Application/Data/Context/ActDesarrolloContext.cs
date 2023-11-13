@@ -80,6 +80,28 @@ public partial class ActDesarrolloContext : DbContext
 
         modelBuilder.Entity<ActPrestamo>(entity =>
         {
+            entity.HasKey(e => e.Id).HasName("PRIMARY");
+
+            entity.ToTable("act_Prestamos", tb => tb.HasComment("Tabla de presatmos"));
+
+            entity.HasIndex(e => e.Id, "Id_UNIQUE").IsUnique();
+            entity.HasIndex(e => e.IdPres, "IdPres_UNIQUE").IsUnique();
+            entity.HasIndex(e => e.IdEvento, "IdPres_UNIQUE").IsUnique();
+
+            entity.HasIndex(e => e.IdUser, "fk_Prestamos_User");
+            entity.HasIndex(e => e.IdPres, "fk_Prestamos_Notificaciones");
+            entity.HasIndex(e => e.IdEvento, "fk_Prestamos_Eventos");
+
+            entity.Property(e => e.IdUser).HasColumnType("int(11)");
+            entity.Property(e => e.IdPres).HasMaxLength(45);
+            entity.Property(e => e.IdEvento).HasColumnType("int(11)");
+            entity.Property(e => e.Valor).HasPrecision(10);
+            entity.Property(e => e.FechaGeneracion).HasColumnType("date");
+            entity.Property(e => e.FechaEntregaDinero).HasColumnType("date");
+            entity.Property(e => e.FechaInicioPagoCuotas).HasColumnType("date");
+            entity.Property(e => e.FechaPagoTotalPrestamo).HasColumnType("date");
+            entity.Property(e => e.TipoCuota).HasMaxLength(45);
+            entity.Property(e => e.Estado).HasMaxLength(45);
 
         });
 

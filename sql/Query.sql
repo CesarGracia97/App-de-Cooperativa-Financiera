@@ -193,3 +193,126 @@ END
 USE act_desarrollo; ALTER TABLE act_Prestamos ADD CONSTRAINT fk_Prestamos_User FOREIGN KEY (IdUser) REFERENCES act_User(Id);
 USE act_desarrollo; ALTER TABLE act_Prestamos ADD CONSTRAINT fk_Prestamos_Notificaciones FOREIGN KEY (IdPres) REFERENCES act_Notificaciones(IdActividad);
 
+CREATE TABLE `act_desarrollo`.`act_Cuotas` (
+  `Id` INT NOT NULL AUTO_INCREMENT,
+  `IdCuot` VARCHAR(45) NOT NULL,
+  `IdUser` INT NOT NULL,
+  `IdPrestamo` INT NOT NULL,
+  `FechaCuota` DATE NOT NULL,
+  `ValorCuota` DECIMAL(10,2) NOT NULL,
+  `Estado` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`Id`),
+  UNIQUE INDEX `Id_UNIQUE` (`Id` ASC),
+  UNIQUE INDEX `IdCuot_UNIQUE` (`IdCuot` ASC))
+COMMENT = 'Tabla de Cuotas';
+
+CREATE DEFINER=`cgarcia`@`%` TRIGGER GeneradorIdCuot
+BEFORE INSERT ON act_Cuotas
+FOR EACH ROW
+BEGIN
+    DECLARE last_id INT;
+
+    # Buscar el último Id de la tabla
+    SELECT Id INTO last_id
+    FROM act_Cuotas
+    ORDER BY Id DESC
+    LIMIT 1;
+
+    # Verificar si existe un registro anterior
+    IF last_id IS NULL THEN
+        -- No hay registros anteriores, asignar APOR-1
+        SET NEW.IdCuot = 'Cuot-1';
+    ELSE
+        -- Hay registros anteriores, calcular nuevo valor para IdApor
+        SET NEW.IdCuot = CONCAT('Cuot-', last_id + 1);
+    END IF;
+END
+
+USE act_desarrollo; ALTER TABLE act_Cuotas ADD CONSTRAINT fk_Cuotas_User FOREIGN KEY (IdUser) REFERENCES act_User(Id);
+USE act_desarrollo; ALTER TABLE act_Cuotas ADD CONSTRAINT fk_Cuotas_Notificaciones FOREIGN KEY (IdCuot) REFERENCES act_Notificaciones(IdActividad);
+USE act_desarrollo; ALTER TABLE act_Cuotas ADD CONSTRAINT fk_Cuotas_Prestamos FOREIGN KEY (IdPrestamo) REFERENCES act_Prestamos(Id);
+
+CREATE TABLE `act_desarrollo`.`act_Eventos` (
+  `Id` INT NOT NULL AUTO_INCREMENT,
+  `IdEven` VARCHAR(45) NOT NULL,
+  `IdPrestamo` INT NOT NULL,
+  `IdUser` INT NOT NULL,
+  `ParticipantesId` VARCHAR(200) NOT NULL,
+  `NombresPId` VARCHAR(2000) NOT NULL,
+  `FechaGeneracion` DATE NOT NULL,
+  `FechaInicio` DATE NOT NULL,
+  `FechaFinalizacion` DATE NOT NULL,
+  `Estado` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`Id`),
+  UNIQUE INDEX `Id_UNIQUE` (`Id` ASC),
+  UNIQUE INDEX `IdEven_UNIQUE` (`IdEven` ASC),
+  UNIQUE INDEX `IdPrestamo_UNIQUE` (`IdPrestamo` ASC))
+COMMENT = 'Tabla de Eventos';
+
+#TRIGGER IdEven Automatico
+CREATE DEFINER=`cgarcia`@`%` TRIGGER GeneradorIdEven
+BEFORE INSERT ON act_Eventos
+FOR EACH ROW
+BEGIN
+    DECLARE last_id INT;
+
+    # Buscar el último Id de la tabla
+    SELECT Id INTO last_id
+    FROM act_Eventos
+    ORDER BY Id DESC
+    LIMIT 1;
+
+    # Verificar si existe un registro anterior
+    IF last_id IS NULL THEN
+        -- No hay registros anteriores, asignar APOR-1
+        SET NEW.IdEven = 'EVEN-1';
+    ELSE
+        -- Hay registros anteriores, calcular nuevo valor para IdApor
+        SET NEW.IdEven = CONCAT('EVEN-', last_id + 1);
+    END IF;
+END
+
+USE act_desarrollo; ALTER TABLE act_Eventos ADD CONSTRAINT fk_Eventos_User FOREIGN KEY (IdUser) REFERENCES act_User(Id);
+USE act_desarrollo; ALTER TABLE act_Eventos ADD CONSTRAINT fk_Eventos_Notificaciones FOREIGN KEY (IdEven) REFERENCES act_Notificaciones(IdActividad);
+USE act_desarrollo; ALTER TABLE act_Eventos ADD CONSTRAINT fk_Eventos_Prestamos FOREIGN KEY (IdPrestamo) REFERENCES act_Prestamos(Id);
+
+CREATE TABLE `act_desarrollo`.`act_Multas` (
+  `Id` INT NOT NULL AUTO_INCREMENT,
+  `IdMult` VARCHAR(45) NOT NULL,
+  `IdUser` INT NOT NULL,
+  `FechaGeneracion` DATE NOT NULL,
+  `Cuadrante` VARCHAR(45) NOT NULL,
+  `Razon` VARCHAR(200) NOT NULL,
+  `Valor` DECIMAL(10,2) NOT NULL,
+  `Estado` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`Id`),
+  UNIQUE INDEX `Id_UNIQUE` (`Id` ASC),
+  UNIQUE INDEX `IdMult_UNIQUE` (`IdMult` ASC))
+COMMENT = 'Tabla de Multas';
+
+#TRIGGER IdEven Automatico
+CREATE DEFINER=`cgarcia`@`%` TRIGGER GeneradorIdMult
+BEFORE INSERT ON act_Multas
+FOR EACH ROW
+BEGIN
+    DECLARE last_id INT;
+
+    # Buscar el último Id de la tabla
+    SELECT Id INTO last_id
+    FROM act_Multas
+    ORDER BY Id DESC
+    LIMIT 1;
+
+    # Verificar si existe un registro anterior
+    IF last_id IS NULL THEN
+        -- No hay registros anteriores, asignar APOR-1
+        SET NEW.IdMult = 'MULT-1';
+    ELSE
+        -- Hay registros anteriores, calcular nuevo valor para IdApor
+        SET NEW.IdMult = CONCAT('MULT-', last_id + 1);
+    END IF;
+END
+
+USE act_desarrollo; ALTER TABLE act_Multas ADD CONSTRAINT fk_Multas_User FOREIGN KEY (IdUser) REFERENCES act_User(Id);
+USE act_desarrollo; ALTER TABLE act_Multas ADD CONSTRAINT fk_Multas_Notificaciones FOREIGN KEY (IdMult) REFERENCES act_Notificaciones(IdActividad);
+
