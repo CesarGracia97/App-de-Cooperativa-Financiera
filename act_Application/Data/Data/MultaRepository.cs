@@ -57,15 +57,19 @@ namespace act_Application.Data.Data
                             .Select(r => new
                             {
                                 Id = Convert.ToInt32(r["Id"]),
+                                IdMult = Convert.ToString(r["IdMult"]),
                                 IdUser = Convert.ToInt32(r["IdUser"]),
+                                FechaGeneracion = Convert.ToDateTime(r["FechaGeneracion"]),
+                                Cuadrante = Convert.ToString(r["Cuadrante"]),
+                                Razon = Convert.ToString(r["Razon"]),
                                 Valor = Convert.ToDecimal(r["Valor"]),
-                                FechaMulta = Convert.ToDateTime(r["FechaMulta"]),
+                                Estado = Convert.ToString(r["Estado"]),
                                 NombreUsuario = Convert.ToString(r["NombreUsuario"])
                             })
                             .ToList();
 
                         var multasAgrupadas = multasPorUsuario
-                            .GroupBy(m => new { m.NombreUsuario, m.FechaMulta.Month }) // Agrupamos por NombreUsuario y Mes
+                            .GroupBy(m => new { m.NombreUsuario, m.FechaGeneracion.Month }) // Agrupamos por NombreUsuario y Mes
                             .ToList();
 
                         foreach (var group in multasAgrupadas)
@@ -74,7 +78,7 @@ namespace act_Application.Data.Data
                             {
                                 Id = group.First().Id,
                                 IdUser = group.First().IdUser,
-                                FechaMulta = group.First().FechaMulta,
+                                FechaGeneracion = group.First().FechaGeneracion,
                                 NombreUsuario = group.Key.NombreUsuario
                             };
 
@@ -82,8 +86,8 @@ namespace act_Application.Data.Data
                             multa.DetallesMulta = group.Select(a => new DetalleMulta
                             {
                                 Valor = (decimal)a.Valor,
-                                FechaMulta = a.FechaMulta,
-                                Cuadrante = a.FechaMulta.Day <= 15 ? 1 : 2
+                                FechaMulta = a.FechaGeneracion,
+                                Cuadrante = a.FechaGeneracion.Day <= 15 ? 1 : 2
                             }).ToList();
 
                             // Calculamos el valor total de las multas en el mes

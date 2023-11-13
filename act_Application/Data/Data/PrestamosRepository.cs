@@ -27,16 +27,16 @@ namespace act_Application.Data.Data
                                 ActPrestamo transaccion = new ActPrestamo
                                 {
                                     Id = Convert.ToInt32(reader["Id"]),
-                                    Razon = Convert.ToString(reader["Razon"]),
+                                    IdPres = Convert.ToString(reader["IdPres"]),
                                     IdUser = Convert.ToInt32(reader["IdUser"]),
+                                    IdEvento = Convert.ToInt32(reader["IdEvento"]),
                                     Valor = Convert.ToDecimal(reader["Valor"]),
-                                    Estado = Convert.ToString(reader["Estado"]),
+                                    FechaGeneracion = Convert.ToDateTime(reader["FechaGeneracion"]),
                                     FechaEntregaDinero = Convert.ToDateTime(reader["FechaEntregaDinero"]),
+                                    FechaInicioPagoCuotas = Convert.ToDateTime(reader["FechaIniCoutaPrestamo"]),
                                     FechaPagoTotalPrestamo = Convert.ToDateTime(reader["FechaPagoTotalPrestamo"]),
-                                    FechaIniCoutaPrestamo = Convert.ToDateTime(reader["FechaIniCoutaPrestamo"]),
                                     TipoCuota = Convert.ToString(reader["TipoCuota"]),
-                                    IdParticipantes = Convert.ToInt32(reader["IdParticipantes"]),
-                                    FechaGeneracion = Convert.ToDateTime(reader["FechaEntregaDinero"])
+                                    Estado = Convert.ToString(reader["Estado"])
                                 };
                                 return transaccion;
                             }

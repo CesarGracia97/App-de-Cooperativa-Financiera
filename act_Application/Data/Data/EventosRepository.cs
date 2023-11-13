@@ -75,7 +75,7 @@ namespace act_Application.Data.Data
                                     FechaFinalizacion = Convert.ToDateTime(reader["FechaFinalizacion"]),
                                     FechaGeneracion = Convert.ToDateTime(reader["FechaGeneracion"]),
                                     ParticipantesId = Convert.ToString(reader["ParticipantesId"]),
-                                    ParticipantesNombre = Convert.ToString(reader["ParticipantesNombre"]),
+                                    NombresPId = Convert.ToString(reader["NombresPId"]),
                                     Estado = Convert.ToString(reader["Estado"]),
                                     NombreUsuario = Convert.ToString(reader["NombreUsuario"])
                                 };
@@ -123,7 +123,7 @@ namespace act_Application.Data.Data
                                     FechaFinalizacion = Convert.ToDateTime(reader["FechaFinalizacion"]),
                                     FechaGeneracion = Convert.ToDateTime(reader["FechaGeneracion"]),
                                     ParticipantesId = Convert.ToString(reader["ParticipantesId"]),
-                                    ParticipantesNombre = Convert.ToString(reader["ParticipantesNombre"]),
+                                    NombresPId = Convert.ToString(reader["NombresPId"]),
                                     Estado = reader["Estado"].ToString(),
                                     IdPrestamo = Convert.ToInt32(reader["IdPrestamo"])
                                 };
