@@ -61,7 +61,7 @@ public partial class ActDesarrolloContext : DbContext
             entity.Property(e => e.CBancoOrigen).HasMaxLength(45);
             entity.Property(e => e.NBancoDestino).HasMaxLength(45);
             entity.Property(e => e.CBancoDestino).HasMaxLength(45);
-            entity.Property(e => e.Aprobacion).HasMaxLength(45);
+            entity.Property(e => e.Estado).HasMaxLength(45);
 
         });
 

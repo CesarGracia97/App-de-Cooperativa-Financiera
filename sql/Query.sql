@@ -199,6 +199,7 @@ CREATE TABLE `act_desarrollo`.`act_Cuotas` (
   `IdUser` INT NOT NULL,
   `IdPrestamo` INT NOT NULL,
   `FechaCuota` DATE NOT NULL,
+  `FechaPago` DATE NULL,
   `ValorCuota` DECIMAL(10,2) NOT NULL,
   `Estado` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`Id`),

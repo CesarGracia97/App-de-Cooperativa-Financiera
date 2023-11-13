@@ -13,7 +13,7 @@
         public string NBancoDestino { get; set; }
         public string CBancoDestino { get; set; }
         public byte[] CapturaPantalla { get; set; }
-        public string Aprobacion { get; set; }
+        public string Estado { get; set; }
 
     }
 }
