@@ -316,3 +316,13 @@ END
 USE act_desarrollo; ALTER TABLE act_Multas ADD CONSTRAINT fk_Multas_User FOREIGN KEY (IdUser) REFERENCES act_User(Id);
 USE act_desarrollo; ALTER TABLE act_Multas ADD CONSTRAINT fk_Multas_Notificaciones FOREIGN KEY (IdMult) REFERENCES act_Notificaciones(IdActividad);
 
+CREATE TABLE `act_desarrollo`.`act_CuentasDestino` (
+  `Id` INT NOT NULL AUTO_INCREMENT,
+  `NumeroCuentaB` VARCHAR(45) NOT NULL,
+  `NombreBanco` VARCHAR(45) NOT NULL,
+  `DuenoCuentaB` VARCHAR(45) NOT NULL,
+  `Detalles` VARCHAR(90) NOT NULL,
+  PRIMARY KEY (`Id`),
+  UNIQUE INDEX `Id_UNIQUE` (`Id` ASC))
+COMMENT = 'Tabla de CB Destino';
+
