@@ -1,8 +1,10 @@
-﻿using act_Application.Data.Context;
+﻿using act_Application.Data;
+using act_Application.Data.Context;
 using act_Application.Logic.ComplementosLogicos;
 using act_Application.Models.BD;
 using act_Application.Services;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace act_Application.Controllers.General
 {
@@ -25,6 +27,10 @@ namespace act_Application.Controllers.General
                 var userIdClaim = User.Claims.FirstOrDefault(c => c.Type == "Id");
                 if (userIdClaim != null && int.TryParse(userIdClaim.Value, out int userId))
                 {
+                    //
+                    var userIdentificacion = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value;
+
+                    //
                     actAportacione.IdUser = userId; 
                     actAportacione.FechaAportacion = DateTime.Now;
                     ObtenerCuadrante obj = new ObtenerCuadrante();
@@ -45,7 +51,9 @@ namespace act_Application.Controllers.General
                     }
                     _context.Add(actAportacione);
                     await _context.SaveChangesAsync();
-                    _nservices.CrearNotificacion(2,actAportacione.IdUser,);
+                    AportacionRepository aobj = new AportacionRepository();
+                    string Descripcion = $"El Usuario {userIdentificacion} (Usuario Id {userId}) a realizado un Aporte de {actAportacione.Valor} el dia {actAportacione.FechaAportacion}.";
+                    await _nservices.CrearNotificacion(2, aobj.GetLastIdApor(actAportacione.IdUser),"Aporte", Descripcion,"ADMINISTRADOR", new ActNotificacione());
                     return RedirectToAction("Index", "Home");
                 }
             }

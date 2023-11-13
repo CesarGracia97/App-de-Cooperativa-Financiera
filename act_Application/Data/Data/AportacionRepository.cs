@@ -11,7 +11,6 @@ namespace act_Application.Data
 {
     public class AportacionRepository
     {
-
         public bool GetExistAportaciones()
         {
             string connectionString = AppSettingsHelper.GetConnectionString();
@@ -65,7 +64,7 @@ namespace act_Application.Data
                                 Valor = Convert.ToDecimal(r["Valor"]),
                                 IdUser = Convert.ToInt32(r["IdUser"]),
                                 FechaAportacion = Convert.ToDateTime(r["FechaAportacion"]),
-                                Aprobacion = Convert.ToString(r["Aprobacion"]),
+                                Estado = Convert.ToString(r["Estado"]),
                                 CapturaPantalla = r.IsDBNull(r.GetOrdinal("CapturaPantalla")) ? null : (byte[])r["CapturaPantalla"],
                                 NombreUsuario = Convert.ToString(r["NombreUsuario"]),
 
@@ -81,10 +80,9 @@ namespace act_Application.Data
                             var aportacion = new ActAportacione
                             {
                                 Id = group.First().Id,
-                                Razon = group.First().Razon,
                                 IdUser = group.First().IdUser,
                                 FechaAportacion = group.First().FechaAportacion,
-                                Aprobacion = group.First().Aprobacion,
+                                Estado = group.First().Estado,
                                 CapturaPantalla = group.First().CapturaPantalla,
                                 NombreUsuario = group.Key.NombreUsuario
 
@@ -177,29 +175,30 @@ namespace act_Application.Data
             return aportaciones;
         }
 
-        public bool ExistenciaLiquidacion(int IdUser)
+        public string GetLastIdApor (int IdUser)
         {
             string connectionString = AppSettingsHelper.GetConnectionString();
-            string liquidacionQuery = ConfigReader.GetQuery("SelectLiquidacion");
-
-            int totalLiquidaciones = 0;
+            string aportacionesQuery = ConfigReader.GetQuery("SelectLastIdAporUser");
+            List<ActAportacione> aportaciones = new List<ActAportacione>();
+            string IdA = string.Empty;
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
                 connection.Open();
-                using (MySqlCommand command = new MySqlCommand(liquidacionQuery, connection))
+                using (MySqlCommand command = new MySqlCommand(aportacionesQuery, connection))
                 {
                     command.Parameters.AddWithValue("@IdUser", IdUser);
                     using (MySqlDataReader reader = command.ExecuteReader())
                     {
                         if (reader.Read())
                         {
-                            totalLiquidaciones = Convert.ToInt32(reader["ExisteLiquidacion"]);
+                            IdA = Convert.ToString(reader["IdApor"]);
                         }
                     }
                 }
             }
-            return totalLiquidaciones > 0;
+            return IdA;
+
         }
     }
 }
