@@ -339,3 +339,14 @@ CREATE TABLE `act_desarrollo`.`act_CuentasDestino` (
   UNIQUE INDEX `Id_UNIQUE` (`Id` ASC))
 COMMENT = 'Tabla de CB Destino';
 
+CREATE TABLE `act_desarrollo`.`act_CapturasPantalla` (
+  `Id` INT NOT NULL AUTO_INCREMENT,
+  `IdUser` INT NOT NULL,
+  `Origen` VARCHAR(45) NOT NULL,
+  `IdOrigenCaptura` INT NOT NULL,
+  `CapturaPantalla` LONGBLOB NOT NULL,
+  PRIMARY KEY (`Id`),
+  UNIQUE INDEX `Id_UNIQUE` (`Id` ASC))
+COMMENT = 'Tabla de Capturas de pantalla';
+
+
