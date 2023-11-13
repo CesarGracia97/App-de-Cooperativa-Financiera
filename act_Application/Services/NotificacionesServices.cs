@@ -7,7 +7,6 @@ namespace act_Application.Services
     public class NotificacionesServices
     {
         private readonly ActDesarrolloContext _context;
-
         public NotificacionesServices(ActDesarrolloContext context)
         {
             _context = context;

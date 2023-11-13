@@ -1,29 +1,67 @@
-﻿using act_Application.Models.BD;
+﻿using act_Application.Data.Context;
+using act_Application.Logic.ComplementosLogicos;
+using act_Application.Models.BD;
+using act_Application.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace act_Application.Controllers.General
 {
     public class TransaccionesController : Controller
     {
+        private readonly ActDesarrolloContext _context;
+        private readonly NotificacionesServices _nservices;
+        public TransaccionesController(ActDesarrolloContext context)
+        {
+            _context = context;
+        }
         public IActionResult Transaccion()
         {
             return View();
         }
-        public async Task<IActionResult> Aporte([Bind("Id,IdApor,IdUser,Cuadrante,Valor,NBancoOrigen,CBancoOrigen,NBancoDestino,CBancoDestino,CapturaPantalla,Estado")]ActAportacione actAportacione)
+        public async Task<IActionResult> Aporte(decimal Valor, string NBancoOrigen, string CBancoOrigen, string NBancoDestino, string CBancoDestino, [FromForm] IFormFile CapturaPantalla, [Bind("Id,IdApor,IdUser,FechaAportacion,Cuadrante,Valor,NBancoOrigen,CBancoOrigen,NBancoDestino,CBancoDestino,CapturaPantalla,Estado")] ActAportacione actAportacione)
         {
+            if (ModelState.IsValid)
+            {
+                var userIdClaim = User.Claims.FirstOrDefault(c => c.Type == "Id");
+                if (userIdClaim != null && int.TryParse(userIdClaim.Value, out int userId))
+                {
+                    actAportacione.IdUser = userId; 
+                    actAportacione.FechaAportacion = DateTime.Now;
+                    ObtenerCuadrante obj = new ObtenerCuadrante();
+                    actAportacione.Cuadrante = obj.Cuadrante(DateTime.Now);
+                    actAportacione.Valor = Valor;
+                    actAportacione.NBancoOrigen = NBancoOrigen;
+                    actAportacione.CBancoOrigen = CBancoOrigen;
+                    actAportacione.NBancoDestino = NBancoDestino;
+                    actAportacione.CBancoDestino = CBancoDestino;
+                    if (CapturaPantalla != null && CapturaPantalla.Length > 0)
+                    {
+                        using (var ms = new MemoryStream())
+                        {
+                            await CapturaPantalla.CopyToAsync(ms);
+                            var bytes = ms.ToArray();
+                            actAportacione.CapturaPantalla = bytes; // Asigna los bytes de la imagen a la propiedad CapturaPantalla
+                        }
+                    }
+                    _context.Add(actAportacione);
+                    await _context.SaveChangesAsync();
+                    _nservices.CrearNotificacion(2,actAportacione.IdUser,);
+                    return RedirectToAction("Index", "Home");
+                }
+            }
             return View(actAportacione);
         }
-        public async Task<IActionResult> PagoCuota([Bind("Id,IdCuot,")]ActCuota actCuota)
+        public async Task<IActionResult> PagoCuota([Bind("Id,IdCuot,IdUser,IdPrestamo,FechaCuota,FechaPago,Valor,Estado")] ActCuota actCuota)
         {
             return View(actCuota);
         }
-        public async Task<IActionResult> Prestamo()
+        public async Task<IActionResult> Prestamo([Bind("Id,IdPres,IdUser,IdEvento,Valor,FechaGeneracion,FechaEntregaDinero,FechaInicioPagoCuotas,FechaPagoTotalPrestamo,TipoCuota,Estado")] ActPrestamo actPrestamo)
         {
-
+            return View(actPrestamo);
         }
-        public async Task<IActionResult> PagoMulta()
+        public async Task<IActionResult> PagoMulta([Bind("Id,IdMult,IdUser,FechaGeneracion,Cuadrante,Razon,Valor,Estado")]ActMulta actMulta)
         {
-
+            return View(actMulta);
         }
     }
 }

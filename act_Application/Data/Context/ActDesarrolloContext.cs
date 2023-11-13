@@ -96,6 +96,7 @@ public partial class ActDesarrolloContext : DbContext
             entity.Property(e => e.IdUser).HasColumnType("int(11)");
             entity.Property(e => e.IdPrestamo).HasColumnType("int(11)");
             entity.Property(e => e.FechaCuota).HasColumnType("date");
+            entity.Property(e => e.FechaPago).HasColumnType("date");
             entity.Property(e => e.Valor).HasPrecision(10);
             entity.Property(e => e.Estado).HasMaxLength(45);
         });

@@ -7,6 +7,7 @@
         public int IdUser { get; set; }
         public int IdPrestamo { get; set; }
         public DateTime FechaCuota {  get; set; }
+        public DateTime Fechapago { get; set; }
         public decimal Valor {  get; set; }
         public string Estado {  get; set; }
     }
