@@ -3,7 +3,7 @@
     public partial class ActCuentaDestino
     {
         public int Id {  get; set; }
-        public string NombreCuentaB {  get; set; }
+        public string NumeroCuentaB {  get; set; }
         public string NombreBanco {  get; set; }
     }
 }

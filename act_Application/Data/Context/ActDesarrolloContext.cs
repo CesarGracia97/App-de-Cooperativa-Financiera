@@ -1,4 +1,5 @@
 ﻿using act_Application.Models.BD;
+using act_Application.Models.Sistema.Complementos;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Cryptography.X509Certificates;
 
@@ -17,6 +18,16 @@ public partial class ActDesarrolloContext : DbContext
 
     public virtual DbSet<ActAportacione> ActAportaciones { get; set; }
 
+    public virtual DbSet<ActCuentaDestino> ActCuentaDestinos { get; set; }
+
+    public virtual DbSet<ActCuota> ActCuotas { get; set; }
+
+    public virtual DbSet<ActEvento> ActEventos { get; set; }
+
+    public virtual DbSet<ActMulta> ActMultas { get; set; }
+
+    public virtual DbSet<ActNotificacione> ActNotificaciones { get; set; }
+
     public virtual DbSet<ActPrestamo> ActPrestamos { get; set; }
 
     public virtual DbSet<ActRol> ActRols { get; set; }
@@ -24,8 +35,6 @@ public partial class ActDesarrolloContext : DbContext
     public virtual DbSet<ActRolUser> ActRolUsers { get; set; }
 
     public virtual DbSet<ActUser> ActUsers { get; set; }
-
-    public virtual DbSet<ActNotificacione> ActNotificaciones { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -56,6 +65,89 @@ public partial class ActDesarrolloContext : DbContext
 
         });
 
+        modelBuilder.Entity<ActCuentaDestino>(entity => 
+        {
+            entity.HasKey(e => e.Id).HasName("PRIMARY");
+
+            entity.ToTable("act_CuentaDestino", tb => tb.HasComment("Tabla de CB"));
+
+            entity.HasIndex(e => e.Id, "Id_UNIQUE").IsUnique();
+
+            entity.Property(e => e.Id).HasColumnType("int(11)");
+            entity.Property(e => e.NumeroCuentaB).HasMaxLength(45);
+            entity.Property(e => e.NombreBanco).HasMaxLength(45);
+        });
+
+        modelBuilder.Entity<ActCuota>(entity => 
+        {
+            entity.HasKey(e => e.Id).HasName("PRIMARY");
+
+            entity.ToTable("act_Cuotas", tb => tb.HasComment("Tabla de Cuotas"));
+
+            entity.HasIndex(e => e.Id, "Id_UNIQUE").IsUnique();
+            entity.HasIndex(e => e.IdCuot, "IdCuot_UNIQUE").IsUnique();
+
+            entity.HasIndex(e => e.IdUser, "fk_Cuotas_User");
+            entity.HasIndex(e => e.IdCuot, "fk_Cuotas_Notificaciones");
+            entity.HasIndex(e => e.IdPrestamo, "fk_Cuotas_Prestamos");
+
+            entity.Property(e => e.Id).HasColumnType("int(11)");
+            entity.Property(e => e.IdCuot).HasMaxLength(45);
+            entity.Property(e => e.IdUser).HasColumnType("int(11)");
+            entity.Property(e => e.IdPrestamo).HasColumnType("int(11)");
+            entity.Property(e => e.FechaCuota).HasColumnType("date");
+            entity.Property(e => e.Valor).HasPrecision(10);
+            entity.Property(e => e.Estado).HasMaxLength(45);
+        });
+
+        modelBuilder.Entity<ActEvento>(entity => 
+        {
+            entity.HasKey(e => e.Id).HasName("PRIMARY");
+
+            entity.ToTable("act_Eventos", tb => tb.HasComment("Tabla de Eventos"));
+
+            entity.HasIndex(e => e.Id, "Id_UNIQUE").IsUnique();
+            entity.HasIndex(e => e.IdEven, "IdEven_UNIQUE").IsUnique();
+            entity.HasIndex(e => e.IdPrestamo, "IdPrestamo_UNIQUE").IsUnique();
+
+            entity.HasIndex(e => e.IdUser, "fk_Eventos_User");
+            entity.HasIndex(e => e.IdEven, "fk_Eventos_Notificaciones");
+            entity.HasIndex(e => e.IdPrestamo, "fk_Eventos_Prestamos");
+
+            entity.Property(e => e.Id).HasColumnType("int(11)");
+            entity.Property(e => e.IdEven).HasMaxLength(45);
+            entity.Property(e => e.IdUser).HasColumnType("int(11)");
+            entity.Property(e => e.IdPrestamo).HasColumnType("int(11)");
+            entity.Property(e => e.ParticipantesId).HasMaxLength(200);
+            entity.Property(e => e.NombresPId).HasMaxLength(2000);
+            entity.Property(e => e.FechaGeneracion).HasColumnType("date");
+            entity.Property(e => e.FechaInicio).HasColumnType("date");
+            entity.Property(e => e.FechaFinalizacion).HasColumnType("date");
+            entity.Property(e => e.Estado).HasMaxLength(45);
+        });
+
+        modelBuilder.Entity<ActMulta>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PRIMARY");
+
+            entity.ToTable("act_Multas", tb => tb.HasComment("Tabla de Multas"));
+
+            entity.HasIndex(e => e.Id, "Id_UNIQUE").IsUnique();
+            entity.HasIndex(e => e.IdMult, "IdMult_UNIQUE").IsUnique();
+
+            entity.HasIndex(e => e.IdUser, "fk_Multas_User");
+            entity.HasIndex(e => e.IdMult, "fk_Multas_Notificaciones");
+
+            entity.Property(e => e.Id).HasColumnType("int(11)");
+            entity.Property(e => e.IdMult).HasMaxLength(45);
+            entity.Property(e => e.IdUser).HasColumnType("int(11)");
+            entity.Property(e => e.FechaGeneracion).HasColumnType("date");
+            entity.Property(e => e.Cuadrante).HasMaxLength(45);
+            entity.Property(e => e.Razon).HasMaxLength(45);
+            entity.Property(e => e.Valor).HasPrecision(10);
+            entity.Property(e => e.Estado).HasMaxLength(45);
+        });
+
         modelBuilder.Entity<ActNotificacione>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PRIMARY");
@@ -69,6 +161,7 @@ public partial class ActDesarrolloContext : DbContext
             entity.HasIndex(e => e.IdActividad, "fk_Notificaciones_NewUser");
             entity.HasIndex(e => e.IdActividad, "fk_Notificaciones_Aportaciones");
 
+            entity.Property(e => e.Id).HasColumnType("int(11)");
             entity.Property(e => e.IdUser).HasColumnType("int(11)");
             entity.Property(e => e.IdActividad).HasMaxLength(45);
             entity.Property(e => e.FechaGeneracion).HasColumnType("date");
@@ -92,6 +185,7 @@ public partial class ActDesarrolloContext : DbContext
             entity.HasIndex(e => e.IdPres, "fk_Prestamos_Notificaciones");
             entity.HasIndex(e => e.IdEvento, "fk_Prestamos_Eventos");
 
+            entity.Property(e => e.Id).HasColumnType("int(11)");
             entity.Property(e => e.IdUser).HasColumnType("int(11)");
             entity.Property(e => e.IdPres).HasMaxLength(45);
             entity.Property(e => e.IdEvento).HasColumnType("int(11)");
