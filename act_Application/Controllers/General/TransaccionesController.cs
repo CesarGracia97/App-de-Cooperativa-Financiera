@@ -59,8 +59,16 @@ namespace act_Application.Controllers.General
             }
             return View(actAportacione);
         }
-        public async Task<IActionResult> PagoCuota([Bind("Id,IdCuot,IdUser,IdPrestamo,FechaCuota,FechaPago,Valor,Estado")] ActCuota actCuota)
+        public async Task<IActionResult> PagoCuota(int Id, decimal Valor, [Bind("Id,IdCuot,IdUser,IdPrestamo,FechaCuota,FechaPago,Valor,Estado")] ActCuota actCuota)
         {
+            if (Id != actCuota.Id)
+            {
+                return RedirectToAction("Error", "Home");
+            }
+            if (ModelState.IsValid)
+            {
+
+            }
             return View(actCuota);
         }
         public async Task<IActionResult> Prestamo([Bind("Id,IdPres,IdUser,IdEvento,Valor,FechaGeneracion,FechaEntregaDinero,FechaInicioPagoCuotas,FechaPagoTotalPrestamo,TipoCuota,Estado")] ActPrestamo actPrestamo)

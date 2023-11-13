@@ -1,4 +1,5 @@
-﻿using System.Security.Policy;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.Security.Policy;
 
 namespace act_Application.Models.BD
 {
@@ -14,5 +15,7 @@ namespace act_Application.Models.BD
         public  DateTime FechaInicio {  get; set; }
         public DateTime FechaFinalizacion {  get; set; }
         public string Estado {  get; set; }
+        [NotMapped]
+        public string NombreUsuario { get; set; }
     }
 }
