@@ -62,7 +62,7 @@ namespace act_Application.Controllers.General
             }
             return View(actAportacione);
         }
-        public async Task<IActionResult> PagoCuota(int Id, decimal Valor, string CBancoOrigen, string NBancoOrigen,string CBancoDestino, string NBancoDestino, [Bind("Id,IdCuot,IdUser,IdPrestamo,FechaCuota,FechaPago,Valor,Estado,FechaPago,CBancoOrigen,NBancoOrigen,CBancoDestino,NBancoDestino,HistorialValores,CapturaPantalla")] ActCuota actCuota)
+        public async Task<IActionResult> PagoCuota(int Id, decimal Valor, string CBancoOrigen, string NBancoOrigen,string CBancoDestino, string NBancoDestino, [FromForm] IFormFile CapturaPantalla, [Bind("Id,IdCuot,IdUser,IdPrestamo,FechaCuota,FechaPago,Valor,Estado,FechaPago,CBancoOrigen,NBancoOrigen,CBancoDestino,NBancoDestino,HistorialValores,CapturaPantalla")] ActCuota actCuota)
         {
             if (Id != actCuota.Id)
             {
@@ -85,7 +85,7 @@ namespace act_Application.Controllers.General
                         actCuota.IdPrestamo = cuotOriginal.IdPrestamo;
                         actCuota.FechaGeneracion = cuotOriginal.FechaGeneracion;
                         actCuota.FechaCuota = cuotOriginal.FechaCuota;
-                        if (cuotOriginal.Valor - Valor == 0)
+                        if (cuotOriginal.Valor - Valor <= 0)
                         {
                             actCuota.Valor = 0;
                             actCuota.Estado = "CUOTA CANCELADA";
@@ -100,12 +100,12 @@ namespace act_Application.Controllers.General
                         {
                             actCuota.Valor = cuotOriginal.Valor - Valor;
                             actCuota.Estado = cuotOriginal.Estado;
-                            actCuota.FechaPago = DateTime.Now.ToString() + ", ";
-                            actCuota.CBancoOrigen = CBancoOrigen + ", ";
-                            actCuota.NBancoOrigen = NBancoOrigen + ", ";
-                            actCuota.CBancoDestino = CBancoDestino + ", ";
-                            actCuota.NBancoDestino = NBancoDestino + ", ";
-                            actCuota.HistorialValores = Valor.ToString() + ", ";
+                            actCuota.FechaPago = DateTime.Now.ToString() + ",";
+                            actCuota.CBancoOrigen = CBancoOrigen + ",";
+                            actCuota.NBancoOrigen = NBancoOrigen + ",";
+                            actCuota.CBancoDestino = CBancoDestino + ",";
+                            actCuota.NBancoDestino = NBancoDestino + ",";
+                            actCuota.HistorialValores = Valor.ToString() + ",";
                         }
 
                     }

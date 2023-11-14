@@ -195,7 +195,7 @@ USE act_desarrollo; ALTER TABLE act_Prestamos ADD CONSTRAINT fk_Prestamos_Notifi
 
 CREATE TABLE `act_desarrollo`.`act_Cuotas` (
   `Id` INT NOT NULL AUTO_INCREMENT,
-  `IdCuot` VARCHAR(45) NOT NULL,
+  `IdCuot` VARCHAR(45) NULL,
   `IdUser` INT NOT NULL,
   `IdPrestamo` INT NOT NULL,
   `FechaCuota` DATE NOT NULL,
@@ -242,7 +242,7 @@ USE act_desarrollo; ALTER TABLE act_Cuotas ADD CONSTRAINT fk_Cuotas_Prestamos FO
 
 CREATE TABLE `act_desarrollo`.`act_Eventos` (
   `Id` INT NOT NULL AUTO_INCREMENT,
-  `IdEven` VARCHAR(45) NOT NULL,
+  `IdEven` VARCHAR(45) NULL,
   `IdPrestamo` INT NOT NULL,
   `IdUser` INT NOT NULL,
   `ParticipantesId` VARCHAR(200) NOT NULL,
@@ -286,7 +286,7 @@ USE act_desarrollo; ALTER TABLE act_Eventos ADD CONSTRAINT fk_Eventos_Prestamos 
 
 CREATE TABLE `act_desarrollo`.`act_Multas` (
   `Id` INT NOT NULL AUTO_INCREMENT,
-  `IdMult` VARCHAR(45) NOT NULL,
+  `IdMult` VARCHAR(45) NULL,
   `IdUser` INT NOT NULL,
   `FechaGeneracion` DATE NOT NULL,
   `Cuadrante` VARCHAR(45) NOT NULL,
