@@ -18,6 +18,8 @@ public partial class ActDesarrolloContext : DbContext
 
     public virtual DbSet<ActAportacione> ActAportaciones { get; set; }
 
+    public virtual DbSet<ActCapturasPantalla> ActCapturasPantallas { get; set; }
+
     public virtual DbSet<ActCuentaDestino> ActCuentaDestinos { get; set; }
 
     public virtual DbSet<ActCuota> ActCuotas { get; set; }
@@ -65,6 +67,20 @@ public partial class ActDesarrolloContext : DbContext
 
         });
 
+        modelBuilder.Entity<ActCapturasPantalla>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PRIMARY");
+
+            entity.ToTable("act_CapturaPantallas", tb => tb.HasComment("Capturas de pantalla"));
+
+            entity.HasIndex(e => e.Id, "Id_UNIQUE").IsUnique();
+
+            entity.Property(e => e.Id).HasColumnType("int(11)");
+            entity.Property(e => e.IdUser).HasColumnType("int(11)");
+            entity.Property(e => e.Origen).HasMaxLength(45);
+            entity.Property(e => e.IdOrigenCaptura).HasColumnType("int(11)");
+        });
+
         modelBuilder.Entity<ActCuentaDestino>(entity => 
         {
             entity.HasKey(e => e.Id).HasName("PRIMARY");
@@ -95,10 +111,17 @@ public partial class ActDesarrolloContext : DbContext
             entity.Property(e => e.IdCuot).HasMaxLength(45);
             entity.Property(e => e.IdUser).HasColumnType("int(11)");
             entity.Property(e => e.IdPrestamo).HasColumnType("int(11)");
+            entity.Property(e => e.FechaGeneracion).HasColumnType("date");
             entity.Property(e => e.FechaCuota).HasColumnType("date");
-            entity.Property(e => e.FechaPago).HasColumnType("date");
             entity.Property(e => e.Valor).HasPrecision(10);
             entity.Property(e => e.Estado).HasMaxLength(45);
+            entity.Property(e => e.FechaPago).HasMaxLength(500);
+            entity.Property(e => e.CBancoOrigen).HasMaxLength(500);
+            entity.Property(e => e.NBancoOrigen).HasMaxLength(500);
+            entity.Property(e => e.CBancoDestino).HasMaxLength(500);
+            entity.Property(e => e.NBancoDestino).HasMaxLength(500);
+            entity.Property(e => e.HistorialValores).HasMaxLength(500);
+            entity.Property(e => e.CapturaPantalla).HasMaxLength(500);
         });
 
         modelBuilder.Entity<ActEvento>(entity => 
@@ -147,6 +170,13 @@ public partial class ActDesarrolloContext : DbContext
             entity.Property(e => e.Razon).HasMaxLength(45);
             entity.Property(e => e.Valor).HasPrecision(10);
             entity.Property(e => e.Estado).HasMaxLength(45);
+            entity.Property(e => e.FechaPago).HasMaxLength(500);
+            entity.Property(e => e.CBancoOrigen).HasMaxLength(500);
+            entity.Property(e => e.NBancoOrigen).HasMaxLength(500);
+            entity.Property(e => e.CBancoDestino).HasMaxLength(500);
+            entity.Property(e => e.NBancoDestino).HasMaxLength(500);
+            entity.Property(e => e.HistorialValores).HasMaxLength(500);
+            entity.Property(e => e.CapturaPantalla).HasMaxLength(500);
         });
 
         modelBuilder.Entity<ActNotificacione>(entity =>
