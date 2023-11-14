@@ -64,6 +64,13 @@ namespace act_Application.Data.Data
                                 Razon = Convert.ToString(r["Razon"]),
                                 Valor = Convert.ToDecimal(r["Valor"]),
                                 Estado = Convert.ToString(r["Estado"]),
+                                FechaPago = Convert.ToString(r["FechaPago"]),
+                                CBancoOrigen = Convert.ToString(r["CBancoOrigen"]),
+                                NBancoOrigen = Convert.ToString(r["NBancoOrigen"]),
+                                CBancoDestino = Convert.ToString(r["CBancoDestino"]),
+                                NBancoDestino = Convert.ToString(r["NBancoDestino"]),
+                                HisotiralValores = Convert.ToString(r["HisotiralValores"]),
+                                CapturaPantalla = Convert.ToString(r["CapturaPantalla"]),
                                 NombreUsuario = Convert.ToString(r["NombreUsuario"])
                             })
                             .ToList();
