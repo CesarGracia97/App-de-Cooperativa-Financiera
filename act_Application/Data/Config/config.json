@@ -18,7 +18,7 @@
     "SelectMultasUser": "SELECT (SELECT COUNT(*) FROM act_Multas WHERE IdUser = @IdUser) AS TotalMultas, (SELECT COUNT(*) FROM act_Multas WHERE Aprobacion='CANCELADO' AND IdUser = @IdUser) AS TotalCancelados, a.* FROM act_Multas a WHERE a.IdUser=@IdUser"
   },
   "Assistant": {
-    "SelectLastIdAporUser": "SELECT IdApor FROM act_Aportaciones WHERE IdUser =@IdUser ORDER BY Id DESC LIMIT 1"
-
+    "SelectLastIdAporUser": "SELECT IdApor FROM act_Aportaciones WHERE IdUser = @IdUser ORDER BY Id DESC LIMIT 1",
+    "SelectLastCoutaIdUser": "SELECT Id FROM act_Cuotas WHERE IdUser = @IdUser ORDER BY Id DESC LIMIT 1 "
   }
 }

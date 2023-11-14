@@ -15,6 +15,7 @@ namespace act_Application.Controllers.General
     {
         private readonly ActDesarrolloContext _context;
         private readonly NotificacionesServices _nservices;
+        private readonly CapturaDePantallaServices _cpservices;
         public TransaccionesController(ActDesarrolloContext context)
         {
             _context = context;
@@ -32,7 +33,6 @@ namespace act_Application.Controllers.General
                 {
                     //
                     var userIdentificacion = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value;
-
                     //
                     actAportacione.IdUser = userId; 
                     actAportacione.FechaAportacion = DateTime.Now;
@@ -56,7 +56,7 @@ namespace act_Application.Controllers.General
                     await _context.SaveChangesAsync();
                     AportacionRepository aobj = new AportacionRepository();
                     string Descripcion = $"El Usuario {userIdentificacion} (Usuario Id {userId}) a realizado un Aporte de {actAportacione.Valor} el dia {actAportacione.FechaAportacion}.";
-                    await _nservices.CrearNotificacion(2, aobj.GetLastIdApor(actAportacione.IdUser),"Aporte", Descripcion,"ADMINISTRADOR", new ActNotificacione());
+                    await _nservices.CrearNotificacion( 2, userId, aobj.GetLastIdApor(actAportacione.IdUser),"Aporte", Descripcion,"ADMINISTRADOR", new ActNotificacione());
                     return RedirectToAction("Index", "Home");
                 }
             }
@@ -75,12 +75,18 @@ namespace act_Application.Controllers.General
                     var userIdClaim = User.Claims.FirstOrDefault(c => c.Type == "Id");
                     if (userIdClaim != null && int.TryParse(userIdClaim.Value, out int userId))
                     {
+                        //
+                        var userIdentificacion = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value;
+                        //
                         var obj = new CuotaRepository();
                         var cuotOriginal = obj.GetDataCuotasId(userId);
                         if (cuotOriginal == null)
                         {
                             return RedirectToAction("Error", "Home");
                         }
+
+                        string Descripcion = string.Empty;
+
                         actCuota.IdUser = userId;
                         actCuota.IdPrestamo = cuotOriginal.IdPrestamo;
                         actCuota.FechaGeneracion = cuotOriginal.FechaGeneracion;
@@ -95,6 +101,9 @@ namespace act_Application.Controllers.General
                             actCuota.CBancoDestino = CBancoDestino;
                             actCuota.NBancoDestino = NBancoDestino;
                             actCuota.HistorialValores = Valor.ToString();
+
+                            Descripcion = $"El Usuario {userIdentificacion} a Realizado un PAGO DE CUOTA el dia {DateTime.Now}, cuyo valor es de ${Valor}, dejando el valor de la CUOTA INICIAL en 0. La CUOTA a sido PAGADA (CANCELADA).";
+
                         }
                         else if (cuotOriginal.Valor - Valor > 0)
                         {
@@ -106,8 +115,16 @@ namespace act_Application.Controllers.General
                             actCuota.CBancoDestino = CBancoDestino + ",";
                             actCuota.NBancoDestino = NBancoDestino + ",";
                             actCuota.HistorialValores = Valor.ToString() + ",";
-                        }
 
+                            Descripcion = $"El Usuario {userIdentificacion} a Realizado un PAGO DE CUOTA el dia {DateTime.Now}, cuyo valor es de ${Valor}, dejando un valor residual de ${cuotOriginal.Valor - Valor}. La CUOTA sigue estando PENDIENTE. ";
+
+
+                        }
+                        _context.Update(actCuota);
+                        await _context.SaveChangesAsync();
+                        await _nservices.CrearNotificacion( 3, userId, cuotOriginal.IdCuot, "PAGO DE CUOTA", Descripcion, "ADMINISTRADOR", new ActNotificacione());
+                        CuotaRepository cobj = new CuotaRepository();
+                        await _cpservices.SubirCapturaDePantalla( userId, "PAGO DE CUOTA", cobj.GetLastCoutaId(userId), CapturaPantalla, new ActCapturasPantalla());
                     }
 
                 }

@@ -11,31 +11,81 @@ namespace act_Application.Services
         {
             _context = context;
         }
-        public async Task CrearNotificacion(int opcion, string IdActividad, string Razon, string Descripcion, string Destino, [Bind("Id,IdActividad,FechaGeneracion,Razon,Descripcion,Destino,Visto")] ActNotificacione actNotificacione)
+        public async Task CrearNotificacion(int opcion, int IdUser, string IdActividad, string Razon, string Descripcion, string Destino, [Bind("Id,IdActividad,FechaGeneracion,Razon,Descripcion,Destino,Visto")] ActNotificacione actNotificacione)
         {
             switch (opcion)
             {
                 case 1:
                     //Si es Nuevo Usuario.
-                    actNotificacione.IdUser = 0; // ES 0 AL TRATARSE DE ALGUIEN QUE NO SE ENCUENTRA EN EL SISTEMA.
+                    actNotificacione.IdUser = IdUser;
                     actNotificacione.IdActividad = IdActividad;
                     actNotificacione.FechaGeneracion = DateTime.Now;
-                    actNotificacione.Razon = Razon;
+                    actNotificacione.Razon = $"| NUSER-{IdActividad} | {Razon}";
                     actNotificacione.Descripcion = Descripcion;
                     actNotificacione.Destino = Destino;
                     actNotificacione.Visto = "";
-
                     _context.Add(actNotificacione);
                     await _context.SaveChangesAsync();
-
                     break;
                 case 2:
                     //Si es una Transaccion de Aportacion
-
+                    actNotificacione.IdUser = IdUser;
+                    actNotificacione.IdActividad = IdActividad;
+                    actNotificacione.FechaGeneracion = DateTime.Now;
+                    actNotificacione.Razon = $"| {IdActividad} | {Razon}";
+                    actNotificacione.Descripcion = Descripcion;
+                    actNotificacione.Destino = Destino;
+                    actNotificacione.Visto = "";
+                    _context.Add(actNotificacione);
+                    await _context.SaveChangesAsync();
                     break;
                 case 3:
                     //Si es una Transaccion de Pago de Cuotas
-
+                    actNotificacione.IdUser = IdUser;
+                    actNotificacione.IdActividad = IdActividad;
+                    actNotificacione.FechaGeneracion = DateTime.Now;
+                    actNotificacione.Razon = $"| {IdActividad} | {Razon}";
+                    actNotificacione.Descripcion = Descripcion;
+                    actNotificacione.Destino = Destino;
+                    actNotificacione.Visto = "";
+                    _context.Add(actNotificacione);
+                    await _context.SaveChangesAsync();
+                    break;
+                case 4:
+                    //Si es una Transaccion de Pago de Multas
+                    actNotificacione.IdUser = IdUser;
+                    actNotificacione.IdActividad = IdActividad;
+                    actNotificacione.FechaGeneracion = DateTime.Now;
+                    actNotificacione.Razon = $"| {IdActividad} | {Razon}";
+                    actNotificacione.Descripcion = Descripcion;
+                    actNotificacione.Destino = Destino;
+                    actNotificacione.Visto = "";
+                    _context.Add(actNotificacione);
+                    await _context.SaveChangesAsync();
+                    break;
+                case 5:
+                    //Si es una Transaccion de Prestamo
+                    actNotificacione.IdUser = IdUser;
+                    actNotificacione.IdActividad = IdActividad;
+                    actNotificacione.FechaGeneracion = DateTime.Now;
+                    actNotificacione.Razon = $"| {IdActividad} | {Razon}";
+                    actNotificacione.Descripcion = Descripcion;
+                    actNotificacione.Destino = Destino;
+                    actNotificacione.Visto = "";
+                    _context.Add(actNotificacione);
+                    await _context.SaveChangesAsync();
+                    break;
+                case 6:
+                    //Si es una participacion de Evento de Prestamo
+                    actNotificacione.IdUser = IdUser;
+                    actNotificacione.IdActividad = IdActividad;
+                    actNotificacione.FechaGeneracion = DateTime.Now;
+                    actNotificacione.Razon = $"| {IdActividad} | {Razon}";
+                    actNotificacione.Descripcion = Descripcion;
+                    actNotificacione.Destino = Destino;
+                    actNotificacione.Visto = "";
+                    _context.Add(actNotificacione);
+                    await _context.SaveChangesAsync();
                     break;
                 default:
                     break;

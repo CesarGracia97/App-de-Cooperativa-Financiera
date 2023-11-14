@@ -168,7 +168,7 @@ namespace act_Application.Controllers.General
                 _context.Add(actUser);
                 Descripcion = $"La Persona de nombre {actUser.NombreYapellido} y C.I. {actUser.Cedula}, con Id de Referente {actUser.IdSocio} ha mandado una peticion de Adminicion a la Organizacion";
                 NotificacionesServices notificacion = new NotificacionesServices(_context);
-                await notificacion.CrearNotificacion(1, actUser.Cedula, Razon, Descripcion, Destino, new ActNotificacione());
+                await notificacion.CrearNotificacion( 1, 0, actUser.Cedula, Razon, Descripcion, Destino, new ActNotificacione());
 
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index", "Login");
