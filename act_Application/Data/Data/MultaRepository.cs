@@ -11,7 +11,7 @@ namespace act_Application.Data.Data
         public bool GetExistMultas()
         {
             string connectionString = AppSettingsHelper.GetConnectionString();
-            string MultaQuery = ConfigReader.GetQuery("SelectMultas");
+            string MultaQuery = ConfigReader.GetQuery(1, "SelectMultas");
 
             int totalMultas = 0; // Variable para almacenar el valor de TotalAportaciones
 
@@ -39,7 +39,7 @@ namespace act_Application.Data.Data
         public List<ActMulta> GetDataMultas()
         {
             string connectionString = AppSettingsHelper.GetConnectionString();
-            string multasQuery = ConfigReader.GetQuery("SelectMultas");
+            string multasQuery = ConfigReader.GetQuery(1, "SelectMultas");
 
             List<ActMulta> multas = new List<ActMulta>();
 
@@ -111,7 +111,7 @@ namespace act_Application.Data.Data
         public bool GetExistMultasUser(int IdUser)
         {
             string connectionString = AppSettingsHelper.GetConnectionString();
-            string multaQuery = ConfigReader.GetQuery("SelectMultasUser");
+            string multaQuery = ConfigReader.GetQuery(1, "SelectMultasUser");
 
             int totalMultas = 0;
 
@@ -136,7 +136,7 @@ namespace act_Application.Data.Data
         public List<DetallesMultasUsers> GetDataMultasUser(int IdUser)
         {
             string connectionString = AppSettingsHelper.GetConnectionString();
-            string multasQuery = ConfigReader.GetQuery("SelectMultasUser");
+            string multasQuery = ConfigReader.GetQuery(1, "SelectMultasUser");
 
             List<DetallesMultasUsers> multas = new List<DetallesMultasUsers>();
             DetallesMultasUsers detallesMultas = new DetallesMultasUsers();

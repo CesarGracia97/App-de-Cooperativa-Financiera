@@ -13,7 +13,7 @@ namespace act_Application.Data.Data
             string connectionString = AppSettingsHelper.GetConnectionString();
             try
             {
-                string query = ConfigReader.GetQuery("SelectPrestamoId");
+                string query = ConfigReader.GetQuery(1, "SelectPrestamoId");
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
                     connection.Open();
@@ -56,7 +56,7 @@ namespace act_Application.Data.Data
         public bool GetExistPrestamosUser(int IdUser)
         {
             string connectionString = AppSettingsHelper.GetConnectionString();
-            string prestamosQuery = ConfigReader.GetQuery("SelectPrestamosUser");
+            string prestamosQuery = ConfigReader.GetQuery(1, "SelectPrestamosUser");
 
             int totalPrestamos = 0;
 
@@ -81,7 +81,7 @@ namespace act_Application.Data.Data
         public List<DetallesPrestamosUsers> GetDataPrestamosUser(int IdUser)
         {
             string connectionString = AppSettingsHelper.GetConnectionString();
-            string prestamosQuery = ConfigReader.GetQuery("SelectPrestamosUser");
+            string prestamosQuery = ConfigReader.GetQuery(1, "SelectPrestamosUser");
 
             List<DetallesPrestamosUsers> prestamos = new List<DetallesPrestamosUsers>();
             DetallesPrestamosUsers detallesPrestamos = new DetallesPrestamosUsers();

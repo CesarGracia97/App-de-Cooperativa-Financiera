@@ -8,7 +8,7 @@ namespace act_Application.Helper
         public static string ObtenerCorreoDestino()
         {
             string connectionString = AppSettingsHelper.GetConnectionString();
-            string emailQuery = ConfigReader.GetQuery("SelectEmail");
+            string emailQuery = ConfigReader.GetQuery(1, "SelectEmail");
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {

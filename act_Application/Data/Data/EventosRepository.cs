@@ -13,7 +13,7 @@ namespace act_Application.Data.Data
         public bool GetExistEventos()
         {
             string connectionString = AppSettingsHelper.GetConnectionString();
-            string eventosQuery = ConfigReader.GetQuery("SelectEvents");
+            string eventosQuery = ConfigReader.GetQuery(1, "SelectEvents");
 
             int totalAportaciones = 0; // Variable para almacenar el valor de TotalAportaciones
 
@@ -44,7 +44,7 @@ namespace act_Application.Data.Data
             EventosRepository result = new EventosRepository();
             try
             {
-                string query = ConfigReader.GetQuery("SelectEvents");
+                string query = ConfigReader.GetQuery(1, "SelectEvents");
 
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
@@ -105,7 +105,7 @@ namespace act_Application.Data.Data
             string connectionString = AppSettingsHelper.GetConnectionString();
             try
             {
-                string query = ConfigReader.GetQuery("SelectEventosUser");
+                string query = ConfigReader.GetQuery(1, "SelectEventosUser");
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
                     connection.Open();

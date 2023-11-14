@@ -11,7 +11,7 @@ namespace act_Application.Data.Data
         public ActUser GetDataUser(string Correo, string Contrasena)
         {
             string connectionString = AppSettingsHelper.GetConnectionString();
-            string userQuery = ConfigReader.GetQuery("SelectUsuario");
+            string userQuery = ConfigReader.GetQuery(1, "SelectUsuario");
 
             ActUser objeto = new ActUser();
 
@@ -48,7 +48,7 @@ namespace act_Application.Data.Data
         public ActRol GetDataRolUser(int idRol)
         {
             string connectionString = AppSettingsHelper.GetConnectionString();
-            string roleQuery = ConfigReader.GetQuery("SelectRol"); ;
+            string roleQuery = ConfigReader.GetQuery(1, "SelectRol"); ;
 
             ActRol objetoRol = null;
 
@@ -81,7 +81,7 @@ namespace act_Application.Data.Data
         public List<UserList> GetDataListUser()
         {
             string connectionString = AppSettingsHelper.GetConnectionString();
-            string Query = ConfigReader.GetQuery("SelectListUser");
+            string Query = ConfigReader.GetQuery(1, "SelectListUser");
 
             List<UserList> users = new List<UserList>();
 

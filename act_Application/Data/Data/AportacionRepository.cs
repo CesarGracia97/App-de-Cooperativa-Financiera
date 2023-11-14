@@ -14,7 +14,7 @@ namespace act_Application.Data
         public bool GetExistAportaciones()
         {
             string connectionString = AppSettingsHelper.GetConnectionString();
-            string aportacionesQuery = ConfigReader.GetQuery("SelectAportaciones");
+            string aportacionesQuery = ConfigReader.GetQuery(1,"SelectAportaciones");
 
             int totalAportaciones = 0; // Variable para almacenar el valor de TotalAportaciones
 
@@ -42,7 +42,7 @@ namespace act_Application.Data
         public List<ActAportacione> GetDataAportaciones()
         {
             string connectionString = AppSettingsHelper.GetConnectionString();
-            string aportacionesQuery = ConfigReader.GetQuery("SelectAportaciones");
+            string aportacionesQuery = ConfigReader.GetQuery(1, "SelectAportaciones");
 
             List<ActAportacione> aportaciones = new List<ActAportacione>();
 
@@ -112,7 +112,7 @@ namespace act_Application.Data
         public bool GetExistApotacionesUser(int IdUser)
         {
             string connectionString = AppSettingsHelper.GetConnectionString();
-            string aportacionesQuery = ConfigReader.GetQuery("SelectAportacionesUser");
+            string aportacionesQuery = ConfigReader.GetQuery(1, "SelectAportacionesUser");
 
             int totalAportaciones = 0;
 
@@ -137,7 +137,7 @@ namespace act_Application.Data
         public List<DetallesAportacionesUsers> GetDataAportacionesUser(int IdUser)
         {
             string connectionString = AppSettingsHelper.GetConnectionString();
-            string aportacionesQuery = ConfigReader.GetQuery("SelectAportacionesUser");
+            string aportacionesQuery = ConfigReader.GetQuery(1,"SelectAportacionesUser");
 
             List<DetallesAportacionesUsers> aportaciones = new List<DetallesAportacionesUsers>();
             DetallesAportacionesUsers detallesAportaciones = new DetallesAportacionesUsers();
@@ -178,7 +178,7 @@ namespace act_Application.Data
         public string GetLastIdApor (int IdUser)
         {
             string connectionString = AppSettingsHelper.GetConnectionString();
-            string aportacionesQuery = ConfigReader.GetQuery("SelectLastIdAporUser");
+            string aportacionesQuery = ConfigReader.GetQuery(2, "SelectLastIdAporUser");
             List<ActAportacione> aportaciones = new List<ActAportacione>();
             string IdA = string.Empty;
 

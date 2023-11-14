@@ -12,7 +12,7 @@ namespace act_Application.Data.Data
             string connectionString = AppSettingsHelper.GetConnectionString();
             try
             {
-                string Query = ConfigReader.GetQuery("SelectCoutasUser");
+                string Query = ConfigReader.GetQuery(1, "SelectCoutasUser");
 
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {

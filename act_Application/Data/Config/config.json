@@ -15,7 +15,10 @@
     "SelectEventosUser": "SELECT (SELECT COUNT(*) FROM act_Eventos WHERE Id = @Id) AS TotalEventos, a.* FROM act_Eventos a WHERE Id = @Id",
     "SelectCoutasUser": "SELECT *.a FROM act_Cuotas a WHERE IdUser = @IdUser AND Estado = 'PENDIENTE'",
     "SelectAportacionesUser": "SELECT (SELECT COUNT(*) FROM  act_Aportaciones WHERE IdUser = @IdUser) AS TotalAportaciones, (SELECT COUNT(*) FROM  act_Aportaciones WHERE Aprobacion='APROBADO' AND IdUser = @IdUser) AS TotalAprobados, (SELECT COUNT(*) FROM  act_Aportaciones WHERE Aprobacion='EN ESPERA' AND IdUser = @IdUser) AS TotalEspera, a.* FROM act_Aportaciones a WHERE a.IdUser = @IdUser",
-    "SelectMultasUser": "SELECT (SELECT COUNT(*) FROM act_Multas WHERE IdUser = @IdUser) AS TotalMultas, (SELECT COUNT(*) FROM act_Multas WHERE Aprobacion='CANCELADO' AND IdUser = @IdUser) AS TotalCancelados, a.* FROM act_Multas a WHERE a.IdUser=@IdUser",
+    "SelectMultasUser": "SELECT (SELECT COUNT(*) FROM act_Multas WHERE IdUser = @IdUser) AS TotalMultas, (SELECT COUNT(*) FROM act_Multas WHERE Aprobacion='CANCELADO' AND IdUser = @IdUser) AS TotalCancelados, a.* FROM act_Multas a WHERE a.IdUser=@IdUser"
+  },
+  "Assistant": {
     "SelectLastIdAporUser": "SELECT IdApor FROM act_Aportaciones WHERE IdUser =@IdUser ORDER BY Id DESC LIMIT 1"
+
   }
 }

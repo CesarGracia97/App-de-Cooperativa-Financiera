@@ -11,7 +11,7 @@ namespace act_Application.Data.Data
             public List<ActCuentaDestino> GetDataDestinos()
             {
                 string connectionString = AppSettingsHelper.GetConnectionString();
-                string Query = ConfigReader.GetQuery("SelectDestino");
+                string Query = ConfigReader.GetQuery(1, "SelectDestino");
                 List<ActCuentaDestino> cuentasDestino = new List<ActCuentaDestino>();
 
                 using (MySqlConnection conexion = new MySqlConnection(connectionString))
