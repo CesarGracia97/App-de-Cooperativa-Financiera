@@ -79,7 +79,7 @@ namespace act_Application.Controllers.General
                         var userIdentificacion = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value;
                         //
                         var obj = new CuotaRepository();
-                        var cuotOriginal = obj.GetDataCuotasId(userId);
+                        var cuotOriginal = obj.GetDataCuotasUser(userId);
                         if (cuotOriginal == null)
                         {
                             return RedirectToAction("Error", "Home");
@@ -124,7 +124,7 @@ namespace act_Application.Controllers.General
                         await _context.SaveChangesAsync();
                         await _nservices.CrearNotificacion( 3, userId, cuotOriginal.IdCuot, "PAGO DE CUOTA", Descripcion, "ADMINISTRADOR", new ActNotificacione());
                         CuotaRepository cobj = new CuotaRepository();
-                        await _cpservices.SubirCapturaDePantalla( userId, "PAGO DE CUOTA", cobj.GetLastCoutaId(userId), CapturaPantalla, new ActCapturasPantalla());
+                        await _cpservices.SubirCapturaDePantalla( userId, "act_Cuotas", Id, CapturaPantalla, new ActCapturasPantalla());
                     }
 
                 }

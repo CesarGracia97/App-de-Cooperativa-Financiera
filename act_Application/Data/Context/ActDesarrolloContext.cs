@@ -210,7 +210,7 @@ public partial class ActDesarrolloContext : DbContext
 
             entity.HasIndex(e => e.Id, "Id_UNIQUE").IsUnique();
             entity.HasIndex(e => e.IdPres, "IdPres_UNIQUE").IsUnique();
-            entity.HasIndex(e => e.IdEvento, "IdPres_UNIQUE").IsUnique();
+            entity.HasIndex(e => e.IdEvento, "IdEvento_UNIQUE").IsUnique();
 
             entity.HasIndex(e => e.IdUser, "fk_Prestamos_User");
             entity.HasIndex(e => e.IdPres, "fk_Prestamos_Notificaciones");

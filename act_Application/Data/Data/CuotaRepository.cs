@@ -7,7 +7,7 @@ namespace act_Application.Data.Data
 {
     public class CuotaRepository
     {
-        public ActCuota GetDataCuotasId(int IdUser)
+        public ActCuota GetDataCuotasUser(int IdUser)
         {
             string connectionString = AppSettingsHelper.GetConnectionString();
             try
@@ -18,7 +18,7 @@ namespace act_Application.Data.Data
                 {
                     string query = Query;
                     MySqlCommand cmd = new MySqlCommand(query, connection);
-                    cmd.Parameters.AddWithValue("@IdUse", IdUser);
+                    cmd.Parameters.AddWithValue("@IdUser", IdUser);
                     cmd.CommandType = CommandType.Text;
 
                     connection.Open();
@@ -59,13 +59,65 @@ namespace act_Application.Data.Data
             }
             return null;
         }
-        public int GetLastCoutaId(int IdUser)
+        public ActCuota GetIdDataCuotaUser(int Id)
+        {
+            string connectionString = AppSettingsHelper.GetConnectionString();
+            try
+            {
+                string Query = ConfigReader.GetQuery(1, "SelectIdCuota");
+
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                {
+                    string query = Query;
+                    MySqlCommand cmd = new MySqlCommand(query, connection);
+                    cmd.Parameters.AddWithValue("@Id", Id);
+                    cmd.CommandType = CommandType.Text;
+
+                    connection.Open();
+
+                    using (MySqlDataReader rd = cmd.ExecuteReader())
+                    {
+                        if (rd.Read())
+                        {
+                            ActCuota obj = new ActCuota
+                            {
+                                Id = Convert.ToInt32(rd["Id"]),
+                                IdCuot = Convert.ToString(rd["IdCuot"]),
+                                IdUser = Convert.ToInt32(rd["IdUser"]),
+                                IdPrestamo = Convert.ToInt32(rd["IdPrestamo"]),
+                                FechaGeneracion = Convert.ToDateTime(rd["FechaGeneracion"]),
+                                FechaCuota = Convert.ToDateTime(rd["FechaCuota"]),
+                                Valor = Convert.ToDecimal(rd["Valor"]),
+                                Estado = Convert.ToString(rd["Estado"]),
+                                FechaPago = Convert.ToString(rd["CBancoOrigen"]),
+                                CBancoOrigen = Convert.ToString(rd["CBancoOrigen"]),
+                                NBancoOrigen = Convert.ToString(rd["NBancoOrigen"]),
+                                CBancoDestino = Convert.ToString(rd["CBancoDestino"]),
+                                NBancoDestino = Convert.ToString(rd["NBancoDestino"]),
+                                HistorialValores = Convert.ToString(rd["HistorialValores"]),
+                                CapturaPantalla = Convert.ToString(rd["CapturaPantalla"])
+                            };
+
+                            return obj;
+                        }
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Hubo un error en la consulta de Cuotas");
+                Console.WriteLine("Detalles del error: " + ex.Message);
+            }
+            return null;
+        }
+        public int GetLastIdCouta(int IdUser)
         {
             string connectionString = AppSettingsHelper.GetConnectionString();
             int Id = -1; 
             try
             {
-                string Query = ConfigReader.GetQuery(2, "SelectLastCoutaIdUser");
+                string Query = ConfigReader.GetQuery(2, "SelectLastIdCoutaUser");
 
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {

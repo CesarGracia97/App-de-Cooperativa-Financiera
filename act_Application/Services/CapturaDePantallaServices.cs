@@ -1,6 +1,8 @@
 ﻿using act_Application.Data.Context;
+using act_Application.Data.Data;
 using act_Application.Models.BD;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace act_Application.Services
 {
@@ -27,6 +29,16 @@ namespace act_Application.Services
             }
             _context.Add(actCapturasPantalla);
             await _context.SaveChangesAsync();
+        }
+        public async Task ActualizarIdCapturaPantallaUser(int IdCapturaPantalla, [Bind("Id,IdCuot,IdUser,IdPrestamo,FechaCuota,FechaPago,Valor,Estado,FechaPago,CBancoOrigen,NBancoOrigen,CBancoDestino,NBancoDestino,HistorialValores,CapturaPantalla")] ActCuota actCuota)
+        {
+
+            var obj = new CuotaRepository();
+            var cuotOriginal = obj.GetDataCuotasId(userId);
+            if (cuotOriginal == null)
+            {
+                
+            }
         }
     }
 }
