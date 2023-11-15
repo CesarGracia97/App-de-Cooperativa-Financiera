@@ -62,7 +62,7 @@ namespace act_Application.Controllers.General
             }
             return View(actAportacione);
         }
-        public async Task<IActionResult> PagoCuota(int Id, decimal Valor, string CBancoOrigen, string NBancoOrigen,string CBancoDestino, string NBancoDestino, [FromForm] IFormFile CapturaPantalla, [Bind("Id,IdCuot,IdUser,IdPrestamo,FechaCuota,FechaPago,Valor,Estado,FechaPago,CBancoOrigen,NBancoOrigen,CBancoDestino,NBancoDestino,HistorialValores,CapturaPantalla")] ActCuota actCuota)
+        public async Task<IActionResult> PagoCuota(int Id, decimal Valor, string CBancoOrigen, string NBancoOrigen,string CBancoDestino, string NBancoDestino, [FromForm] IFormFile CapturaPantalla, [Bind("Id,IdCuot,IdUser,IdPrestamo,FechaCuota,Valor,Estado,FechaPago,CBancoOrigen,NBancoOrigen,CBancoDestino,NBancoDestino,HistorialValores,CapturaPantalla")] ActCuota actCuota)
         {
             if (Id != actCuota.Id)
             {
@@ -79,7 +79,7 @@ namespace act_Application.Controllers.General
                         var userIdentificacion = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value;
                         //
                         var obj = new CuotaRepository();
-                        var cuotOriginal = obj.GetDataCuotasUser(userId);
+                        var cuotOriginal = obj.GetIdDataCuotaUser(Id);
                         if (cuotOriginal == null)
                         {
                             return RedirectToAction("Error", "Home");
@@ -96,11 +96,11 @@ namespace act_Application.Controllers.General
                             actCuota.Valor = 0;
                             actCuota.Estado = "CUOTA CANCELADA";
                             actCuota.FechaPago = DateTime.Now.ToString();
-                            actCuota.CBancoOrigen = CBancoOrigen;
-                            actCuota.NBancoOrigen = NBancoOrigen;
-                            actCuota.CBancoDestino = CBancoDestino;
-                            actCuota.NBancoDestino = NBancoDestino;
-                            actCuota.HistorialValores = Valor.ToString();
+                            actCuota.CBancoOrigen = cuotOriginal.CBancoOrigen + CBancoOrigen;
+                            actCuota.NBancoOrigen = cuotOriginal.NBancoOrigen + NBancoOrigen;
+                            actCuota.CBancoDestino = cuotOriginal.CBancoDestino + CBancoDestino;
+                            actCuota.NBancoDestino = cuotOriginal.NBancoDestino + NBancoDestino;
+                            actCuota.HistorialValores = cuotOriginal.HistorialValores +  Valor.ToString();
 
                             Descripcion = $"El Usuario {userIdentificacion} a Realizado un PAGO DE CUOTA el dia {DateTime.Now}, cuyo valor es de ${Valor}, dejando el valor de la CUOTA INICIAL en 0. La CUOTA a sido PAGADA (CANCELADA).";
 
@@ -109,12 +109,12 @@ namespace act_Application.Controllers.General
                         {
                             actCuota.Valor = cuotOriginal.Valor - Valor;
                             actCuota.Estado = cuotOriginal.Estado;
-                            actCuota.FechaPago = DateTime.Now.ToString() + ",";
-                            actCuota.CBancoOrigen = CBancoOrigen + ",";
-                            actCuota.NBancoOrigen = NBancoOrigen + ",";
-                            actCuota.CBancoDestino = CBancoDestino + ",";
-                            actCuota.NBancoDestino = NBancoDestino + ",";
-                            actCuota.HistorialValores = Valor.ToString() + ",";
+                            actCuota.FechaPago = cuotOriginal.FechaPago + DateTime.Now.ToString() + ",";
+                            actCuota.CBancoOrigen = cuotOriginal.CBancoOrigen + CBancoOrigen + ",";
+                            actCuota.NBancoOrigen = cuotOriginal.NBancoOrigen + NBancoOrigen + ",";
+                            actCuota.CBancoDestino = cuotOriginal.CBancoDestino + CBancoDestino + ",";
+                            actCuota.NBancoDestino = cuotOriginal.NBancoDestino + NBancoDestino + ",";
+                            actCuota.HistorialValores = cuotOriginal.HistorialValores + Valor.ToString() + ",";
 
                             Descripcion = $"El Usuario {userIdentificacion} a Realizado un PAGO DE CUOTA el dia {DateTime.Now}, cuyo valor es de ${Valor}, dejando un valor residual de ${cuotOriginal.Valor - Valor}. La CUOTA sigue estando PENDIENTE. ";
 
