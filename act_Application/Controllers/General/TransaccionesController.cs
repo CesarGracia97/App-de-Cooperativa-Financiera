@@ -125,6 +125,8 @@ namespace act_Application.Controllers.General
                         await _nservices.CrearNotificacion( 3, userId, cuotOriginal.IdCuot, "PAGO DE CUOTA", Descripcion, "ADMINISTRADOR", new ActNotificacione());
                         CuotaRepository cobj = new CuotaRepository();
                         await _cpservices.SubirCapturaDePantalla( userId, "act_Cuotas", Id, CapturaPantalla, new ActCapturasPantalla());
+                        CapturaPantallaRepository capobj = new CapturaPantallaRepository();
+                        await _cpservices.ActualizarIdCapturaPantallaUser(Id, capobj.GetDataCapturaPantallaLastIdUser(userId), new ActCuota());
                     }
 
                 }

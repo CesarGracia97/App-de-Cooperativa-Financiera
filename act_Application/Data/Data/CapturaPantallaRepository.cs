@@ -12,13 +12,13 @@ namespace act_Application.Data.Data
             int Id = -1;
             try
             {
-                string Query = ConfigReader.GetQuery(2, "SelectLastCoutaIdUser");
+                string Query = ConfigReader.GetQuery(2, "SelectLastIdCapturaPantallaUser");
 
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
                     string query = Query;
                     MySqlCommand cmd = new MySqlCommand(query, connection);
-                    cmd.Parameters.AddWithValue("@IdUse", IdUser);
+                    cmd.Parameters.AddWithValue("@IdUser", IdUser);
                     cmd.CommandType = CommandType.Text;
 
                     connection.Open();

@@ -50,7 +50,10 @@ namespace act_Application.Services
                     actCuota.NBancoOrigen = cuotOriginal.NBancoOrigen;
                     actCuota.CBancoDestino = cuotOriginal.CBancoDestino;
                     actCuota.NBancoDestino = cuotOriginal.NBancoDestino;
-
+                    actCuota.HistorialValores = cuotOriginal.HistorialValores;
+                    actCuota.CapturaPantalla = cuotOriginal.CapturaPantalla + IdCapturaPantalla + ",";
+                    _context.Update(actCuota);
+                    await _context.SaveChangesAsync();
                 }
             }
             catch (DbUpdateConcurrencyException ex)
