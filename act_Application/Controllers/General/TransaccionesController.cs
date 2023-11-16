@@ -147,6 +147,12 @@ namespace act_Application.Controllers.General
                     var userIdClaim = User.Claims.FirstOrDefault(c => c.Type == "Id");
                     if (userIdClaim != null && int.TryParse(userIdClaim.Value, out int IdUser))
                     {
+                        //
+                        var userIdentificacion = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value;
+                        var userEmail = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
+                        var userCI = User.Claims.FirstOrDefault(c => c.Type == "CI")?.Value;
+                        //
+
                         actPrestamo.IdUser = IdUser;
                         actPrestamo.Valor = Valor;
                         actPrestamo.FechaGeneracion = DateTime.Now;
@@ -157,7 +163,11 @@ namespace act_Application.Controllers.General
                         actPrestamo.Estado = "PENDIENTE A";
                         _context.Add(actPrestamo);
                         await _context.SaveChangesAsync();
-                        await _nservices.CrearNotificacion(4, IdUser, cuotOriginal.IdCuot, "PETICION DE PRESTAMO", Descripcion, "ADMINISTRADOR", new ActNotificacione());
+                        string Descripcion = $"El usuario {userIdentificacion} con C.I. {userCI} esta solicitando un prestamo de $ {actPrestamo.Valor} USD," +
+                                                $"con fecha de entrega para el dia {actPrestamo.FechaEntregaDinero}, e inicio de pago de la deuda para el dia {actPrestamo.FechaInicioPagoCuotas}\n" +
+                                                $"Estado: {actPrestamo.Estado}\n" + $"Tipo de Cuota: {actPrestamo.TipoCuota}";
+                        PrestamosRepository pobj = new PrestamosRepository();
+                        await _nservices.CrearNotificacion(4, IdUser, pobj.H_GetLastIdPres(IdUser), "PETICION DE PRESTAMO", Descripcion, "ADMINISTRADOR", new ActNotificacione());
 
                     }
                 }
@@ -171,6 +181,7 @@ namespace act_Application.Controllers.General
         }
         public async Task<IActionResult> PagoMulta([Bind("Id,IdMult,IdUser,FechaGeneracion,Cuadrante,Razon,Valor,Estado")]ActMulta actMulta)
         {
+
             return View(actMulta);
         }
     }
