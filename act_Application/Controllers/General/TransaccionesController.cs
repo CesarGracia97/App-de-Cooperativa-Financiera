@@ -56,7 +56,7 @@ namespace act_Application.Controllers.General
                     await _context.SaveChangesAsync();
                     AportacionRepository aobj = new AportacionRepository();
                     string Descripcion = $"El Usuario {userIdentificacion} (Usuario Id {userId}) a realizado un Aporte de {actAportacione.Valor} el dia {actAportacione.FechaAportacion}.";
-                    await _nservices.CrearNotificacion( 2, userId, aobj.GetLastIdApor(actAportacione.IdUser),"Aporte", Descripcion,"ADMINISTRADOR", new ActNotificacione());
+                    await _nservices.CrearNotificacion( 2, userId, aobj.H_GetLastIdApor(actAportacione.IdUser),"Aporte", Descripcion,"ADMINISTRADOR", new ActNotificacione());
                     return RedirectToAction("Index", "Home");
                 }
             }
@@ -126,7 +126,7 @@ namespace act_Application.Controllers.General
                         CuotaRepository cobj = new CuotaRepository();
                         await _cpservices.SubirCapturaDePantalla( userId, "act_Cuotas", Id, CapturaPantalla, new ActCapturasPantalla());
                         CapturaPantallaRepository capobj = new CapturaPantallaRepository();
-                        await _cpservices.ActualizarIdCapturaPantallaUser(Id, capobj.GetDataCapturaPantallaLastIdUser(userId), new ActCuota());
+                        await _cpservices.ActualizarIdCapturaPantallaUser(Id, capobj.H_GetDataCapturaPantallaLastIdUser(userId), new ActCuota());
                     }
 
                 }
@@ -157,6 +157,8 @@ namespace act_Application.Controllers.General
                         actPrestamo.Estado = "PENDIENTE A";
                         _context.Add(actPrestamo);
                         await _context.SaveChangesAsync();
+                        await _nservices.CrearNotificacion(4, IdUser, cuotOriginal.IdCuot, "PETICION DE PRESTAMO", Descripcion, "ADMINISTRADOR", new ActNotificacione());
+
                     }
                 }
                 catch (DbUpdateConcurrencyException ex)

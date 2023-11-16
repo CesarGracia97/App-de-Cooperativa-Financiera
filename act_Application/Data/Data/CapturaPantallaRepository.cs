@@ -6,7 +6,7 @@ namespace act_Application.Data.Data
 {
     public class CapturaPantallaRepository
     {
-        public int GetDataCapturaPantallaLastIdUser(int IdUser)
+        public int H_GetDataCapturaPantallaLastIdUser(int IdUser)
         {
             string connectionString = AppSettingsHelper.GetConnectionString();
             int Id = -1;

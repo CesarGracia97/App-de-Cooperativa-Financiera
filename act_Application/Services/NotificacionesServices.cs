@@ -52,7 +52,7 @@ namespace act_Application.Services
                     await _context.SaveChangesAsync();
                     break;
                 case 4:
-                    //Si es una Transaccion de Pago de Multas
+                    //Si es una Transaccion de Prestamo
                     actNotificacione.IdUser = IdUser;
                     actNotificacione.IdActividad = IdActividad;
                     actNotificacione.FechaGeneracion = DateTime.Now;
@@ -64,7 +64,7 @@ namespace act_Application.Services
                     await _context.SaveChangesAsync();
                     break;
                 case 5:
-                    //Si es una Transaccion de Prestamo
+                    //Si es una Transaccion de Pago de Multas
                     actNotificacione.IdUser = IdUser;
                     actNotificacione.IdActividad = IdActividad;
                     actNotificacione.FechaGeneracion = DateTime.Now;

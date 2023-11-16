@@ -29,7 +29,6 @@ namespace act_Application.Data.Data
                                     Id = Convert.ToInt32(reader["Id"]),
                                     IdPres = Convert.ToString(reader["IdPres"]),
                                     IdUser = Convert.ToInt32(reader["IdUser"]),
-                                    IdEvento = Convert.ToInt32(reader["IdEvento"]),
                                     Valor = Convert.ToDecimal(reader["Valor"]),
                                     FechaGeneracion = Convert.ToDateTime(reader["FechaGeneracion"]),
                                     FechaEntregaDinero = Convert.ToDateTime(reader["FechaEntregaDinero"]),
@@ -119,6 +118,30 @@ namespace act_Application.Data.Data
             }
             prestamos.Add(detallesPrestamos);
             return prestamos;
+        }
+        public string H_GetLastIdPres(int IdUser)
+        {
+            string connectionString = AppSettingsHelper.GetConnectionString();
+            string aportacionesQuery = ConfigReader.GetQuery(2, "SelectLastIdPresUser");
+            List<ActAportacione> aportaciones = new List<ActAportacione>();
+            string IdA = string.Empty;
+
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                connection.Open();
+                using (MySqlCommand command = new MySqlCommand(aportacionesQuery, connection))
+                {
+                    command.Parameters.AddWithValue("@IdUser", IdUser);
+                    using (MySqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            IdA = Convert.ToString(reader["IdPres"]);
+                        }
+                    }
+                }
+            }
+            return IdA;
         }
 
     }

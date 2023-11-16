@@ -111,7 +111,7 @@ namespace act_Application.Data.Data
             }
             return null;
         }
-        public int GetLastIdCouta(int IdUser)
+        public int H_GetLastIdCouta(int IdUser)
         {
             string connectionString = AppSettingsHelper.GetConnectionString();
             int Id = -1; 

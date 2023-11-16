@@ -172,7 +172,7 @@ namespace act_Application.Data
             return aportaciones;
         }
 
-        public string GetLastIdApor (int IdUser)
+        public string H_GetLastIdApor (int IdUser)
         {
             string connectionString = AppSettingsHelper.GetConnectionString();
             string aportacionesQuery = ConfigReader.GetQuery(2, "SelectLastIdAporUser");
@@ -195,7 +195,6 @@ namespace act_Application.Data
                 }
             }
             return IdA;
-
         }
     }
 }
