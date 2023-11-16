@@ -3,6 +3,7 @@ using act_Application.Models.BD;
 using act_Application.Models.Sistema.Complementos;
 using MySql.Data.MySqlClient;
 using System.Data;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace act_Application.Data.Data
 {
@@ -107,7 +108,56 @@ namespace act_Application.Data.Data
             }
             return multas;
         }
+        public ActMulta GetDataIdMultaUser(int Id, int IdUser)
+        {
+            string connectionString = AppSettingsHelper.GetConnectionString();
+            try
+            {
+                string Query = ConfigReader.GetQuery(1, "SelectIdMultaUser");
 
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                {
+                    MySqlCommand cmd = new MySqlCommand(Query, connection);
+                    cmd.Parameters.AddWithValue("@IdUser", IdUser);
+                    cmd.Parameters.AddWithValue("@Id", Id);
+                    cmd.CommandType = CommandType.Text;
+
+                    connection.Open();
+
+                    using (MySqlDataReader rd = cmd.ExecuteReader())
+                    {
+                        while (rd.Read())
+                        {
+                            ActMulta obj = new ActMulta
+                            {
+                                Id = Convert.ToInt32(rd["Id"]),
+                                IdMult = Convert.ToString(rd["IdMult"]),
+                                IdUser = Convert.ToInt32(rd["IdUser"]),
+                                FechaGeneracion = Convert.ToDateTime(rd["FechaGeneracion"]),
+                                Cuadrante = Convert.ToString(rd["Cuadrante"]),
+                                Razon = Convert.ToString(rd["Razon"]),
+                                Valor = Convert.ToDecimal(rd["Valor"]),
+                                Estado = Convert.ToString(rd["Estado"]),
+                                FechaPago = Convert.ToString(rd["CBancoOrigen"]),
+                                CBancoOrigen = Convert.ToString(rd["CBancoOrigen"]),
+                                NBancoOrigen = Convert.ToString(rd["NBancoOrigen"]),
+                                CBancoDestino = Convert.ToString(rd["CBancoDestino"]),
+                                NBancoDestino = Convert.ToString(rd["NBancoDestino"]),
+                                HistorialValores = Convert.ToString(rd["HistorialValores"]),
+                                CapturaPantalla = Convert.ToString(rd["CapturaPantalla"])
+                            };
+                            return obj;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Hubo un error en la consulta de Multas");
+                Console.WriteLine("Detalles del error: " + ex.Message);
+            }
+            return null;
+        }
         public bool GetExistMultasUser(int IdUser)
         {
             string connectionString = AppSettingsHelper.GetConnectionString();
@@ -133,6 +183,7 @@ namespace act_Application.Data.Data
             return totalMultas > 0;
         }
 
+        /*
         public List<DetallesMultasUsers> GetDataMultasUser(int IdUser)
         {
             string connectionString = AppSettingsHelper.GetConnectionString();
@@ -170,5 +221,6 @@ namespace act_Application.Data.Data
             multas.Add(detallesMultas);
             return multas;
         }
+        */
     }
 }

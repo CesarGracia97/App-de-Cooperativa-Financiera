@@ -45,12 +45,10 @@ namespace act_Application.Data.Data
                                 HistorialValores = Convert.ToString(rd["HistorialValores"]),
                                 CapturaPantalla = Convert.ToString(rd["CapturaPantalla"])
                             };
-
                             return obj;
                         }
                     }
                 }
-
             }
             catch (Exception ex)
             {

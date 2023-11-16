@@ -16,14 +16,15 @@
     "SelectCoutasUser": "SELECT *.a FROM act_Cuotas a WHERE IdUser = @IdUser AND Estado = 'PENDIENTE'",
     "SelectIdCoutas": "SELECT *.a FROM act_Cuotas a WHERE Id = @Id",
     "SelectAportacionesUser": "SELECT (SELECT COUNT(*) FROM  act_Aportaciones WHERE IdUser = @IdUser) AS TotalAportaciones, (SELECT COUNT(*) FROM  act_Aportaciones WHERE Aprobacion='APROBADO' AND IdUser = @IdUser) AS TotalAprobados, (SELECT COUNT(*) FROM  act_Aportaciones WHERE Aprobacion='EN ESPERA' AND IdUser = @IdUser) AS TotalEspera, a.* FROM act_Aportaciones a WHERE a.IdUser = @IdUser",
-    "SelectMultasUser": "SELECT (SELECT COUNT(*) FROM act_Multas WHERE IdUser = @IdUser) AS TotalMultas, (SELECT COUNT(*) FROM act_Multas WHERE Aprobacion='CANCELADO' AND IdUser = @IdUser) AS TotalCancelados, a.* FROM act_Multas a WHERE a.IdUser=@IdUser"
+    "SelectMultasUser": "SELECT (SELECT COUNT(*) FROM act_Multas WHERE IdUser = @IdUser) AS TotalMultas, (SELECT COUNT(*) FROM act_Multas WHERE Estado='CANCELADO' AND IdUser = @IdUser) AS TotalCancelados, a.* FROM act_Multas a WHERE a.IdUser = @IdUser",
+    "SelectIdMultaUser": "SELECT * FROM act_Multas WHERE Id = @Id AND  IdUser = @IdUser "
   },
   "Assistant": {
     "SelectLastIdAporUser": "SELECT IdApor FROM act_Aportaciones WHERE IdUser = @IdUser ORDER BY Id DESC LIMIT 1",
     "SelectLastIdPresUser": "SELECT IdPres FROM act_Prestamos WHERE IdUser = @IdUser ORDER BY Id DESC LIMIT 1",
     "SelectLastIdMultUser": "SELECT IdMult FROM act_Multas WHERE IdUser = @IdUser ORDER BY Id DESC LIMIT 1",
     "SelectLastIdCoutaUser": "SELECT Id FROM act_Cuotas WHERE IdUser = @IdUser ORDER BY Id DESC LIMIT 1",
-    "SelectLastIdMultaUser": "SELECT Id FROM act_Cuotas WHERE IdUser = @IdUser ORDER BY Id DESC LIMIT 1",
+    "SelectLastIdMultaUser": "SELECT Id FROM act_Multas WHERE IdUser = @IdUser ORDER BY Id DESC LIMIT 1",
     "SelectLastIdCapturaPantallaUser": "SELECT Id FROM act_CapturasPantalla WHERE IdUser = @IdUser ORDER BY Id DESC LIMIT 1"
   }
 }
