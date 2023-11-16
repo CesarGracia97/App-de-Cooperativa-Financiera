@@ -56,8 +56,11 @@ namespace act_Application.Controllers.General
                     _context.Add(actAportacione);
                     await _context.SaveChangesAsync();
                     AportacionRepository aobj = new AportacionRepository();
-                    string Descripcion = $"El Usuario {userIdentificacion} (Usuario Id {userId}) a realizado un Aporte de {actAportacione.Valor} el dia {actAportacione.FechaAportacion}.";
-                    await _nservices.CrearNotificacion( 2, userId, aobj.H_GetLastIdApor(actAportacione.IdUser),"Aporte", Descripcion,"ADMINISTRADOR", new ActNotificacione());
+                    string DescripcionA = $"El Usuario {userIdentificacion} (Usuario Id {userId}) a realizado un Aporte de {actAportacione.Valor} el dia {actAportacione.FechaAportacion}.";
+                    string DescripcionU = $"Haz  realizado un Aporte de {actAportacione.Valor} el dia {actAportacione.FechaAportacion}.";
+                    await _nservices.CrearNotificacion( 2, userId, aobj.H_GetLastIdApor(actAportacione.IdUser),"Aporte", DescripcionA,"ADMINISTRADOR", new ActNotificacione());
+                    var essA = new EmailSendServices().EnviarCorreoAdmin(2, DescripcionA);
+                    var essU = new EmailSendServices().EnviarCorreoUsuario(userId, 3, DescripcionU);
                     return RedirectToAction("Index", "Home");
                 }
             }
@@ -86,7 +89,7 @@ namespace act_Application.Controllers.General
                             return RedirectToAction("Error", "Home");
                         }
 
-                        string Descripcion = string.Empty;
+                        string DescripcionA = string.Empty, DescripcionU = string.Empty;
 
                         actCuota.IdUser = userId;
                         actCuota.IdPrestamo = cuotOriginal.IdPrestamo;
@@ -103,8 +106,11 @@ namespace act_Application.Controllers.General
                             actCuota.NBancoDestino = cuotOriginal.NBancoDestino + NBancoDestino;
                             actCuota.HistorialValores = cuotOriginal.HistorialValores +  Valor.ToString();
 
-                            Descripcion = $"El Usuario {userIdentificacion} a Realizado un PAGO DE CUOTA el dia {DateTime.Now}, cuyo valor es de ${Valor}. La CUOTA a sido PAGADA COMPLETAMENTE (CANCELADA).";
+                            DescripcionA = $"El Usuario {userIdentificacion} a Realizado un PAGO DE CUOTA el dia {DateTime.Now}, cuyo valor es de ${Valor}. La CUOTA a sido PAGADA COMPLETAMENTE (CANCELADA).";
+                            DescripcionU = $"Haz Realizado un PAGO DE CUOTA el dia {DateTime.Now}, cuyo valor es de ${Valor}. La CUOTA a sido PAGADA COMPLETAMENTE (CANCELADA).";
 
+                            var essA = new EmailSendServices().EnviarCorreoAdmin( 5, DescripcionA);
+                            var essU = new EmailSendServices().EnviarCorreoUsuario(userId, 5, DescripcionU);
                         }
                         else if (cuotOriginal.Valor - Valor > 0)
                         {
@@ -117,16 +123,18 @@ namespace act_Application.Controllers.General
                             actCuota.NBancoDestino = cuotOriginal.NBancoDestino + NBancoDestino + ",";
                             actCuota.HistorialValores = cuotOriginal.HistorialValores + Valor.ToString() + ",";
 
-                            Descripcion = $"El Usuario {userIdentificacion} a Realizado un PAGO DE CUOTA el dia {DateTime.Now}, cuyo valor es de ${Valor}, dejando un valor residual de ${cuotOriginal.Valor - Valor}. La CUOTA sigue estando PENDIENTE. ";
-
-
+                            DescripcionA = $"El Usuario {userIdentificacion} a Realizado un PAGO DE CUOTA el dia {DateTime.Now}, cuyo valor es de ${Valor}, dejando un valor residual de ${cuotOriginal.Valor - Valor}. La CUOTA sigue estando PENDIENTE. ";
+                            DescripcionU = $"Haz Realizado un PAGO DE CUOTA el dia {DateTime.Now}, cuyo valor es de ${Valor}, dejando un valor residual de ${cuotOriginal.Valor - Valor}. La CUOTA sigue estando PENDIENTE. ";
+                            var essA = new EmailSendServices().EnviarCorreoAdmin( 6, DescripcionA);
+                            var essU = new EmailSendServices().EnviarCorreoUsuario(userId, 4, DescripcionU);
                         }
                         _context.Update(actCuota);
                         await _context.SaveChangesAsync();
-                        await _nservices.CrearNotificacion( 3, userId, cuotOriginal.IdCuot, "PAGO DE CUOTA", Descripcion, "ADMINISTRADOR", new ActNotificacione());
+                        await _nservices.CrearNotificacion( 3, userId, cuotOriginal.IdCuot, "PAGO DE CUOTA", DescripcionA, "ADMINISTRADOR", new ActNotificacione());
                         await _cpservices.SubirCapturaDePantalla( userId, "act_Cuotas", Id, CapturaPantalla, new ActCapturasPantalla());
                         CapturaPantallaRepository capobj = new CapturaPantallaRepository();
                         await _cpservices.ActualizarIdCapturaPantallaUser( 1, Id, capobj.H_GetDataCapturaPantallaLastIdUser(userId), new ActCuota(), new ActMulta());
+
                     }
 
                 }
@@ -152,6 +160,7 @@ namespace act_Application.Controllers.General
                         var userEmail = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
                         var userCI = User.Claims.FirstOrDefault(c => c.Type == "CI")?.Value;
                         //
+                        string DescripcionA = string.Empty, DescripcionU = string.Empty;
 
                         actPrestamo.IdUser = IdUser;
                         actPrestamo.Valor = Valor;
@@ -163,12 +172,18 @@ namespace act_Application.Controllers.General
                         actPrestamo.Estado = "PENDIENTE A";
                         _context.Add(actPrestamo);
                         await _context.SaveChangesAsync();
-                        string Descripcion = $"El usuario {userIdentificacion} con C.I. {userCI} esta solicitando un prestamo de $ {actPrestamo.Valor} USD," +
+                        DescripcionA = $"El usuario {userIdentificacion} con C.I. {userCI} esta solicitando un prestamo de $ {actPrestamo.Valor} USD," +
                                                 $"con fecha de entrega para el dia {actPrestamo.FechaEntregaDinero}, e inicio de pago de la deuda para el dia {actPrestamo.FechaInicioPagoCuotas}\n" +
-                                                $"Estado: {actPrestamo.Estado}\n" + $"Tipo de Cuota: {actPrestamo.TipoCuota}";
+                                                $"Estado: {actPrestamo.Estado}\n" + 
+                                                $"Tipo de Cuota: {actPrestamo.TipoCuota}";
+                        DescripcionU = $"Haz solicitado un prestamo de $ {actPrestamo.Valor} USD, con fecha de entrega para el dia {actPrestamo.FechaEntregaDinero}," +
+                                                $" e inicio de pago de la deuda para el dia {actPrestamo.FechaInicioPagoCuotas}" +
+                                                $"\nEstado: {actPrestamo.Estado}" +
+                                                $"\nTipo de Cuota: {actPrestamo.TipoCuota}";
                         PrestamosRepository pobj = new PrestamosRepository();
-                        await _nservices.CrearNotificacion(4, IdUser, pobj.H_GetLastIdPres(IdUser), "PETICION DE PRESTAMO", Descripcion, "ADMINISTRADOR", new ActNotificacione());
-
+                        await _nservices.CrearNotificacion(4, IdUser, pobj.H_GetLastIdPres(IdUser), "PETICION DE PRESTAMO", DescripcionA, "ADMINISTRADOR", new ActNotificacione());
+                        var essA = new EmailSendServices().EnviarCorreoAdmin(7, DescripcionA);
+                        var essU = new EmailSendServices().EnviarCorreoUsuario(IdUser, 1, DescripcionU);
                     }
                 }
                 catch (DbUpdateConcurrencyException ex)
@@ -202,7 +217,7 @@ namespace act_Application.Controllers.General
                             return RedirectToAction("Error", "Home");
                         }
 
-                        string Descripcion = string.Empty;
+                        string DescripcionA = string.Empty, DescripcionU = string.Empty;
 
                         actMulta.IdMult = multOriginal.IdMult;
                         actMulta.IdUser = multOriginal.IdUser;
@@ -220,7 +235,10 @@ namespace act_Application.Controllers.General
                             actMulta.CBancoDestino = multOriginal.CBancoDestino + CBancoDestino + ",";
                             actMulta.HistorialValores = multOriginal.HistorialValores + Valor.ToString();
 
-                            Descripcion = $"El Usuario {userIdentificacion} a Realizado un PAGO DE MULTA el dia {DateTime.Now}, cuyo valor es de ${Valor}. La MULTA a sido PAGADA COMPLETAMENTE (CANCELADA)."; ;
+                            DescripcionA = $"El Usuario {userIdentificacion} a Realizado un PAGO DE MULTA el dia {DateTime.Now}, cuyo valor es de ${Valor}. La MULTA a sido PAGADA COMPLETAMENTE (CANCELADA).";
+                            DescripcionU = $"Haz  Realizado un PAGO DE MULTA el dia {DateTime.Now}, cuyo valor es de ${Valor}. La MULTA a sido PAGADA COMPLETAMENTE (CANCELADA)."; 
+                            var essA = new EmailSendServices().EnviarCorreoAdmin(3, DescripcionA);
+                            var essU = new EmailSendServices().EnviarCorreoUsuario(IdUser, 5, DescripcionU);
                         }
                         else if (multOriginal.Valor - Valor > 0)
                         {
@@ -233,12 +251,15 @@ namespace act_Application.Controllers.General
                             actMulta.CBancoDestino = multOriginal.CBancoDestino + CBancoDestino + ",";
                             actMulta.HistorialValores = multOriginal.HistorialValores + Valor.ToString() + ",";
 
-                            Descripcion = $"El Usuario {userIdentificacion} a Realizado un PAGO DE MULTA el dia {DateTime.Now}, cuyo valor es de ${Valor}, dejando un valor residual de ${multOriginal.Valor - Valor}. La MULTA sigue estando PENDIENTE. ";
+                            DescripcionA = $"El Usuario {userIdentificacion} a Realizado un PAGO DE MULTA el dia {DateTime.Now}, cuyo valor es de ${Valor}, dejando un valor residual de ${multOriginal.Valor - Valor}. La MULTA sigue estando PENDIENTE. ";
+                            DescripcionU = $"El Usuario {userIdentificacion} a Realizado un PAGO DE MULTA el dia {DateTime.Now}, cuyo valor es de ${Valor}. La MULTA a sido PAGADA COMPLETAMENTE (CANCELADA).";
+                            var essA = new EmailSendServices().EnviarCorreoAdmin(6, DescripcionA);
+                            var essU = new EmailSendServices().EnviarCorreoUsuario(IdUser, 4, DescripcionU);
                         }
                         _context.Update(actMulta);
                         await _context.SaveChangesAsync();
 
-                        await _nservices.CrearNotificacion(5, IdUser, multOriginal.IdMult, "PAGO DE MULTA", Descripcion, "ADMINISTRADOR", new ActNotificacione());
+                        await _nservices.CrearNotificacion(5, IdUser, multOriginal.IdMult, "PAGO DE MULTA", DescripcionA, "ADMINISTRADOR", new ActNotificacione());
                         await _cpservices.SubirCapturaDePantalla(IdUser, "act_Multas", Id, CapturaPantalla, new ActCapturasPantalla());
                         CapturaPantallaRepository capobj = new CapturaPantallaRepository();
                         await _cpservices.ActualizarIdCapturaPantallaUser(2, Id, capobj.H_GetDataCapturaPantallaLastIdUser(IdUser), new ActCuota(), new ActMulta());

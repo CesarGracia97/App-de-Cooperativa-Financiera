@@ -10,7 +10,7 @@ namespace act_Application.Services
     public class EmailSendServices
     {
         /*Envia la solicitud de prestamo*/
-        public async Task EnviarCorreoAdmin(int opcion, int IdUser, string Descripcion)
+        public async Task EnviarCorreoAdmin(int opcion, string Descripcion)
         {
             string correoDestino = CorreoHelper.ObtenerCorreoDestino(), subject = string.Empty, body = string.Empty;
             switch (opcion)
@@ -78,13 +78,35 @@ namespace act_Application.Services
                 {
                     case 1:
                         //Solicitud de Prestamos Fase 1
-                        subject = "act - Application: Solicitud de Prestamo (FASE 1)";
+                        subject = "act - Application: Solicitud de Prestamo (FASE 1) ({DateTime.Now})";
                         break;
                     case 2:
                         //Solicitud de Prestamos Fase 2
-                        subject = "act - Application: Solicitud de Prestamo (FASE 2)";
+                        subject = "act - Application: Solicitud de Prestamo (FASE 2) ({DateTime.Now})";
                         break;
                     case 3:
+                        //Movimiento de Aportacion
+                        subject = $"act - Application: Aportacion Reciente ({DateTime.Now})";
+                        break;
+                    case 4:
+                        //Abono de Multa.
+                        subject = $"act - Application: Abono de Multa Reciente ({DateTime.Now})";
+                        break;
+                    case 5:
+                        //Cancelacion de Multa
+                        subject = $"act - Application: Cancelacion de Multa ({DateTime.Now})";
+                        break;
+                    case 6:
+                        //Abono de Cuota
+                        subject = $"act - Application: Abono de Cuota Reciente ({DateTime.Now})";
+                        break;
+                    case 7:
+                        //Cancelacion de Cuota
+                        subject = $"act - Application: Cancelacion de Cuota  ({DateTime.Now})";
+                        break;
+                    case 8:
+                        //Garante de Participacion
+                        subject = $"act - Application: Garante de Participacion ({DateTime.Now})";
                         break;
                     default:
                         Console.WriteLine("EnviarCorreoUsuario - EmailSendServices. Opcion inexistente");
