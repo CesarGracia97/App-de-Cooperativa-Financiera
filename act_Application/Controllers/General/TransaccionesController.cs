@@ -124,10 +124,9 @@ namespace act_Application.Controllers.General
                         _context.Update(actCuota);
                         await _context.SaveChangesAsync();
                         await _nservices.CrearNotificacion( 3, userId, cuotOriginal.IdCuot, "PAGO DE CUOTA", Descripcion, "ADMINISTRADOR", new ActNotificacione());
-                        CuotaRepository cobj = new CuotaRepository();
                         await _cpservices.SubirCapturaDePantalla( userId, "act_Cuotas", Id, CapturaPantalla, new ActCapturasPantalla());
                         CapturaPantallaRepository capobj = new CapturaPantallaRepository();
-                        await _cpservices.ActualizarIdCapturaPantallaUser(Id, capobj.H_GetDataCapturaPantallaLastIdUser(userId), new ActCuota());
+                        await _cpservices.ActualizarIdCapturaPantallaUser( 1, Id, capobj.H_GetDataCapturaPantallaLastIdUser(userId), new ActCuota(), new ActMulta());
                     }
 
                 }
@@ -197,7 +196,7 @@ namespace act_Application.Controllers.General
                         var userIdentificacion = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value;
                         //
                         var mobj = new MultaRepository();
-                        var multOriginal = mobj.GetDataIdMultaUser(Id, IdUser);
+                        var multOriginal = mobj.GetDataIdMultaUser(Id);
                         if (multOriginal == null)
                         {
                             return RedirectToAction("Error", "Home");
@@ -240,8 +239,9 @@ namespace act_Application.Controllers.General
                         await _context.SaveChangesAsync();
 
                         await _nservices.CrearNotificacion(5, IdUser, multOriginal.IdMult, "PAGO DE MULTA", Descripcion, "ADMINISTRADOR", new ActNotificacione());
-                        CuotaRepository cobj = new CuotaRepository();
                         await _cpservices.SubirCapturaDePantalla(IdUser, "act_Multas", Id, CapturaPantalla, new ActCapturasPantalla());
+                        CapturaPantallaRepository capobj = new CapturaPantallaRepository();
+                        await _cpservices.ActualizarIdCapturaPantallaUser(2, Id, capobj.H_GetDataCapturaPantallaLastIdUser(IdUser), new ActCuota(), new ActMulta());
                     }
 
                 }

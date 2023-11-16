@@ -108,7 +108,7 @@ namespace act_Application.Data.Data
             }
             return multas;
         }
-        public ActMulta GetDataIdMultaUser(int Id, int IdUser)
+        public ActMulta GetDataIdMultaUser(int Id)
         {
             string connectionString = AppSettingsHelper.GetConnectionString();
             try
@@ -118,7 +118,6 @@ namespace act_Application.Data.Data
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
                     MySqlCommand cmd = new MySqlCommand(Query, connection);
-                    cmd.Parameters.AddWithValue("@IdUser", IdUser);
                     cmd.Parameters.AddWithValue("@Id", Id);
                     cmd.CommandType = CommandType.Text;
 

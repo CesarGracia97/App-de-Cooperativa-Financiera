@@ -88,6 +88,7 @@ namespace act_Application.Services
                     await _context.SaveChangesAsync();
                     break;
                 default:
+                    Console.WriteLine("opcion Inexistente");
                     break;
             }
         }
