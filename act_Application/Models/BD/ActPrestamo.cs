@@ -4,7 +4,6 @@ public partial class ActPrestamo
     public int Id { get; set; }
     public string IdPres { get; set; }
     public int IdUser { get; set; }
-    public int IdEvento { get; set; }
     public decimal Valor { get; set; }
     public DateTime FechaGeneracion { get; set; }
     public DateTime FechaEntregaDinero { get; set; }

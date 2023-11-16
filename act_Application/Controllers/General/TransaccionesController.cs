@@ -102,7 +102,7 @@ namespace act_Application.Controllers.General
                             actCuota.NBancoDestino = cuotOriginal.NBancoDestino + NBancoDestino;
                             actCuota.HistorialValores = cuotOriginal.HistorialValores +  Valor.ToString();
 
-                            Descripcion = $"El Usuario {userIdentificacion} a Realizado un PAGO DE CUOTA el dia {DateTime.Now}, cuyo valor es de ${Valor}, dejando el valor de la CUOTA INICIAL en 0. La CUOTA a sido PAGADA (CANCELADA).";
+                            Descripcion = $"El Usuario {userIdentificacion} a Realizado un PAGO DE CUOTA el dia {DateTime.Now}, cuyo valor es de ${Valor}. La CUOTA a sido PAGADA COMPLETAMENTE (CANCELADA).";
 
                         }
                         else if (cuotOriginal.Valor - Valor > 0)
@@ -138,8 +138,33 @@ namespace act_Application.Controllers.General
             }
             return View(actCuota);
         }
-        public async Task<IActionResult> Prestamo([Bind("Id,IdPres,IdUser,IdEvento,Valor,FechaGeneracion,FechaEntregaDinero,FechaInicioPagoCuotas,FechaPagoTotalPrestamo,TipoCuota,Estado")] ActPrestamo actPrestamo)
+        public async Task<IActionResult> Prestamo(decimal Valor, DateTime FechaEntrgaDinero, DateTime FechaInicioPagoCuotas, string  TipoCuota, [Bind("Id,IdPres,IdUser,Valor,FechaGeneracion,FechaEntregaDinero,FechaInicioPagoCuotas,FechaPagoTotalPrestamo,TipoCuota,Estado")] ActPrestamo actPrestamo)
         {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var userIdClaim = User.Claims.FirstOrDefault(c => c.Type == "Id");
+                    if (userIdClaim != null && int.TryParse(userIdClaim.Value, out int IdUser))
+                    {
+                        actPrestamo.IdUser = IdUser;
+                        actPrestamo.Valor = Valor;
+                        actPrestamo.FechaGeneracion = DateTime.Now;
+                        actPrestamo.FechaEntregaDinero = FechaEntrgaDinero;
+                        actPrestamo.FechaInicioPagoCuotas = FechaInicioPagoCuotas;
+                        actPrestamo.FechaPagoTotalPrestamo = DateTime.MinValue;
+                        actPrestamo.TipoCuota = TipoCuota;
+                        actPrestamo.Estado = "PENDIENTE A";
+                        _context.Add(actPrestamo);
+                        await _context.SaveChangesAsync();
+                    }
+                }
+                catch (DbUpdateConcurrencyException ex)
+                {
+                    Console.WriteLine("Hubo un problema al crear la peticion de Prestamo.");
+                    Console.WriteLine("Detalles del error: " + ex.Message);
+                }
+            }
             return View(actPrestamo);
         }
         public async Task<IActionResult> PagoMulta([Bind("Id,IdMult,IdUser,FechaGeneracion,Cuadrante,Razon,Valor,Estado")]ActMulta actMulta)

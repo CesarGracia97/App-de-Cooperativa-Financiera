@@ -153,8 +153,7 @@ USE act_desarrollo; ALTER TABLE act_Aportaciones ADD CONSTRAINT fk_Aportaciones_
 CREATE TABLE `act_desarrollo`.`act_Prestamos` (
   `Id` INT(11) NOT NULL AUTO_INCREMENT,
   `IdPres` VARCHAR(45) NULL,
-  `IdUser` INT(11) NOT NULL,
-  `IdEvento` INT(11) NOT NULL,
+  `IdUser` INT(11) NOT NULL,  
   `Valor` DECIMAL(10,2) NOT NULL,
   `FechaGeneracion` DATE NOT NULL,
   `FechaEntregaDinero` DATE NOT NULL,

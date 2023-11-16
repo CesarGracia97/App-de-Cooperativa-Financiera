@@ -210,16 +210,13 @@ public partial class ActDesarrolloContext : DbContext
 
             entity.HasIndex(e => e.Id, "Id_UNIQUE").IsUnique();
             entity.HasIndex(e => e.IdPres, "IdPres_UNIQUE").IsUnique();
-            entity.HasIndex(e => e.IdEvento, "IdEvento_UNIQUE").IsUnique();
 
             entity.HasIndex(e => e.IdUser, "fk_Prestamos_User");
             entity.HasIndex(e => e.IdPres, "fk_Prestamos_Notificaciones");
-            entity.HasIndex(e => e.IdEvento, "fk_Prestamos_Eventos");
 
             entity.Property(e => e.Id).HasColumnType("int(11)");
             entity.Property(e => e.IdUser).HasColumnType("int(11)");
             entity.Property(e => e.IdPres).HasMaxLength(45);
-            entity.Property(e => e.IdEvento).HasColumnType("int(11)");
             entity.Property(e => e.Valor).HasPrecision(10);
             entity.Property(e => e.FechaGeneracion).HasColumnType("date");
             entity.Property(e => e.FechaEntregaDinero).HasColumnType("date");
