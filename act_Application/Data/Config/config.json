@@ -25,6 +25,7 @@
     "SelectLastIdMultUser": "SELECT IdMult FROM act_Multas WHERE IdUser = @IdUser ORDER BY Id DESC LIMIT 1",
     "SelectLastIdCoutaUser": "SELECT Id FROM act_Cuotas WHERE IdUser = @IdUser ORDER BY Id DESC LIMIT 1",
     "SelectLastIdMultaUser": "SELECT Id FROM act_Multas WHERE IdUser = @IdUser ORDER BY Id DESC LIMIT 1",
-    "SelectLastIdCapturaPantallaUser": "SELECT Id FROM act_CapturasPantalla WHERE IdUser = @IdUser ORDER BY Id DESC LIMIT 1"
+    "SelectLastIdCapturaPantallaUser": "SELECT Id FROM act_CapturasPantalla WHERE IdUser = @IdUser ORDER BY Id DESC LIMIT 1",
+    "SelectCorreoUser":  "SELECT Correo FROM act_User WHERE IdU = @IdUser"
   }
 }
