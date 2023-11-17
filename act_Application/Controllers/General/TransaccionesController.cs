@@ -77,7 +77,7 @@ namespace act_Application.Controllers.General
                 try
                 {
                     var userIdClaim = User.Claims.FirstOrDefault(c => c.Type == "Id");
-                    if (userIdClaim != null && int.TryParse(userIdClaim.Value, out int userId))
+                    if (userIdClaim != null && int.TryParse(userIdClaim.Value, out int IdUser))
                     {
                         //
                         var userIdentificacion = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value;
@@ -91,7 +91,7 @@ namespace act_Application.Controllers.General
 
                         string DescripcionA = string.Empty, DescripcionU = string.Empty;
 
-                        actCuota.IdUser = userId;
+                        actCuota.IdUser = IdUser;
                         actCuota.IdPrestamo = cuotOriginal.IdPrestamo;
                         actCuota.FechaGeneracion = cuotOriginal.FechaGeneracion;
                         actCuota.FechaCuota = cuotOriginal.FechaCuota;
@@ -110,7 +110,7 @@ namespace act_Application.Controllers.General
                             DescripcionU = $"Haz Realizado un PAGO DE CUOTA el dia {DateTime.Now}, cuyo valor es de ${Valor}. La CUOTA a sido PAGADA COMPLETAMENTE (CANCELADA).";
 
                             var essA = new EmailSendServices().EnviarCorreoAdmin( 5, DescripcionA);
-                            var essU = new EmailSendServices().EnviarCorreoUsuario(userId, 5, DescripcionU);
+                            var essU = new EmailSendServices().EnviarCorreoUsuario(IdUser, 5, DescripcionU);
                         }
                         else if (cuotOriginal.Valor - Valor > 0)
                         {
@@ -126,14 +126,14 @@ namespace act_Application.Controllers.General
                             DescripcionA = $"El Usuario {userIdentificacion} a Realizado un PAGO DE CUOTA el dia {DateTime.Now}, cuyo valor es de ${Valor}, dejando un valor residual de ${cuotOriginal.Valor - Valor}. La CUOTA sigue estando PENDIENTE. ";
                             DescripcionU = $"Haz Realizado un PAGO DE CUOTA el dia {DateTime.Now}, cuyo valor es de ${Valor}, dejando un valor residual de ${cuotOriginal.Valor - Valor}. La CUOTA sigue estando PENDIENTE. ";
                             var essA = new EmailSendServices().EnviarCorreoAdmin( 6, DescripcionA);
-                            var essU = new EmailSendServices().EnviarCorreoUsuario(userId, 4, DescripcionU);
+                            var essU = new EmailSendServices().EnviarCorreoUsuario(IdUser, 4, DescripcionU);
                         }
                         _context.Update(actCuota);
                         await _context.SaveChangesAsync();
-                        await _nservices.CrearNotificacion( 3, userId, cuotOriginal.IdCuot, "PAGO DE CUOTA", DescripcionA, "ADMINISTRADOR", new ActNotificacione());
-                        await _cpservices.SubirCapturaDePantalla( userId, "act_Cuotas", Id, CapturaPantalla, new ActCapturasPantalla());
+                        await _nservices.CrearNotificacion( 3, IdUser, cuotOriginal.IdCuot, "PAGO DE CUOTA", DescripcionA, "ADMINISTRADOR", new ActNotificacione());
+                        await _cpservices.SubirCapturaDePantalla( IdUser, "act_Cuotas", Id, CapturaPantalla, new ActCapturasPantalla());
                         CapturaPantallaRepository capobj = new CapturaPantallaRepository();
-                        await _cpservices.ActualizarIdCapturaPantallaUser( 1, Id, capobj.H_GetDataCapturaPantallaLastIdUser(userId), new ActCuota(), new ActMulta());
+                        await _cpservices.ActualizarIdCapturaPantallaUser( 1, Id, capobj.H_GetDataCapturaPantallaLastIdUser(IdUser), new ActCuota(), new ActMulta());
 
                     }
 
