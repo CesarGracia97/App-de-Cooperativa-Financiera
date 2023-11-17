@@ -2,6 +2,7 @@
 using act_Application.Data.Data;
 using act_Application.Models;
 using act_Application.Models.BD;
+using act_Application.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
@@ -12,6 +13,7 @@ namespace act_Application.Controllers.General
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly NotificacionesServices _nservices;
         private readonly ActDesarrolloContext _context;
         public HomeController(ILogger<HomeController> logger)
         {
@@ -57,16 +59,23 @@ namespace act_Application.Controllers.General
                         //
                         actEvento.IdEven = eobj.IdEven;
                         actEvento.IdPrestamo = eobj.IdPrestamo;
-                        actEvento.IdUser = IdUser;
+                        actEvento.IdUser = actEvento.IdUser;
                         actEvento.ParticipantesId = eobj.ParticipantesId + IdUser.ToString() + ",";
                         actEvento.NombresPId = eobj.NombresPId + userIdentificacion + ",";
                         actEvento.FechaGeneracion = eobj.FechaGeneracion;
                         actEvento.FechaInicio = eobj.FechaInicio;
                         actEvento.FechaFinalizacion = eobj.FechaFinalizacion;
                         actEvento.Estado = eobj.Estado;
+                        string Razon = $"Un Usuario a decidio Participar";
+                        string DescripcionU = $"El Usuario a {userIdentificacion} a decidido participar como tu Garante en el evento de participacion de Garantes de tu Solicitud de Prestamo ID: {actEvento.IdPrestamo}." +
+                                            $"\nSolcitud Realizada el dia {DateTime.Now}";
+                        await _nservices.CrearNotificacion(6, IdUser, actEvento.IdEven, Razon, DescripcionU, actEvento.IdUser.ToString(), new ActNotificacione());
+                        var essU = new EmailSendServices().EnviarCorreoUsuario(actEvento.IdUser, 8, DescripcionU); //IdUser apuntado al usuario dueño del evento del Prestamo para que este enterado.
                     }
                     _context.Update(actEvento);
                     await _context.SaveChangesAsync();
+
+
                     return RedirectToAction("Index", "Home");
                 }
                 catch (DbUpdateConcurrencyException ex)

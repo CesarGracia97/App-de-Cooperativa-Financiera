@@ -6,9 +6,7 @@ using act_Application.Models.BD;
 using act_Application.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Net.NetworkInformation;
 using System.Security.Claims;
-using System.Security.Cryptography;
 
 namespace act_Application.Controllers.General
 {
@@ -60,7 +58,6 @@ namespace act_Application.Controllers.General
                     string DescripcionU = $"Haz  realizado un Aporte de {actAportacione.Valor} el dia {actAportacione.FechaAportacion}.";
                     await _nservices.CrearNotificacion( 2, userId, aobj.H_GetLastIdApor(actAportacione.IdUser),"Aporte", DescripcionA,"ADMINISTRADOR", new ActNotificacione());
                     var essA = new EmailSendServices().EnviarCorreoAdmin(2, DescripcionA);
-                    var essU = new EmailSendServices().EnviarCorreoUsuario(userId, 3, DescripcionU);
                     return RedirectToAction("Index", "Home");
                 }
             }
