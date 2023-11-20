@@ -49,8 +49,6 @@ builder.Services.AddAuthorization(options =>
 
 var app = builder.Build();
 
-builder.AddHostedService<MyBackgroundService>();
-
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
@@ -74,28 +72,3 @@ app.MapControllerRoute(
 RolesInitializer.CreateRoles(app);
 
 app.Run();
-
-public class MyBackgroundService : BackgroundService
-{
-    private readonly ILogger<MyBackgroundService> _logger;
-
-    public MyBackgroundService(ILogger<MyBackgroundService> logger)
-    {
-        _logger = logger;
-    }
-
-    protected override async Task ExecuteAsync(CancellationToken stoppingToken)
-    {
-        _logger.LogInformation("El servicio en segundo plano ha comenzado.");
-
-        while (!stoppingToken.IsCancellationRequested)
-        {
-            // Coloca aquí el código que deseas que se ejecute cada 5 minutos
-            _logger.LogInformation("Este código se ejecuta cada 5 minutos - {0}", DateTime.Now);
-
-            await Task.Delay(TimeSpan.FromMinutes(5), stoppingToken);
-        }
-
-        _logger.LogInformation("El servicio en segundo plano se ha detenido.");
-    }
-}
