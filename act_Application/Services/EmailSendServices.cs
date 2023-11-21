@@ -108,6 +108,9 @@ namespace act_Application.Services
                         //Garante de Participacion
                         subject = $"act - Application: Garante de Participacion ({DateTime.Now})";
                         break;
+                    case 9:
+                        subject = $"act - Application: Aplicacion de Multa ({DateTime.Now})";
+                        break;
                     default:
                         Console.WriteLine("EnviarCorreoUsuario - EmailSendServices. Opcion inexistente");
                         break;

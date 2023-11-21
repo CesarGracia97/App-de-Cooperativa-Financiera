@@ -15,7 +15,7 @@ namespace act_Application.Services.ServiciosAutomaticos
             _context = context;
             _timer = timer;
         }
-        public void GeneradorMultas(object state)
+        public async void GeneradorMultas(object state)
         {
             var cobj = new CuotaRepository();
             List<ActCuota> cuotas = cobj.A_GetDateCuotasAll();
@@ -25,7 +25,14 @@ namespace act_Application.Services.ServiciosAutomaticos
                 {
                     if(DateTime.Now > cuotas[i].FechaCuota)
                     {
-                        if (cuotas[i].Valor )
+                        if (cuotas[i].Valor > 0)
+                        {
+                            await MandarMulta(cuotas[i].Id, cuotas[i].IdUser, new ActMulta());
+                        }
+                        else
+                        {
+
+                        }
                     }
                 }
             }
@@ -47,7 +54,7 @@ namespace act_Application.Services.ServiciosAutomaticos
         {
             _timer?.Dispose();
         }
-        private async Task MandarMulta(int Id, [Bind()] ActMulta actMulta)
+        private async Task MandarMulta(int Id, int IdUser, [Bind()] ActMulta actMulta)
         {
             _context.Add(actMulta);
             await _context.SaveChangesAsync();
