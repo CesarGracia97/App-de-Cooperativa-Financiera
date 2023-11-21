@@ -1,4 +1,6 @@
-﻿namespace act_Application.Models.BD;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace act_Application.Models.BD;
 public partial class ActCuota
 {
     public int Id { get; set; }
@@ -16,4 +18,6 @@ public partial class ActCuota
     public string NBancoDestino { get; set; }
     public string HistorialValores { get; set; }
     public string CapturaPantalla { get; set; }
+    [NotMapped]
+    public string NombreDueño { get; set; }
 }

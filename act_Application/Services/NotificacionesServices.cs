@@ -87,6 +87,18 @@ namespace act_Application.Services
                     _context.Add(actNotificacione);
                     await _context.SaveChangesAsync();
                     break;
+                case 7:
+                    //Si es una Generacion de Multa
+                    actNotificacione.IdUser = IdUser;
+                    actNotificacione.IdActividad = IdActividad;
+                    actNotificacione.FechaGeneracion = DateTime.Now;
+                    actNotificacione.Razon = $"| {IdActividad} | {Razon}";
+                    actNotificacione.Descripcion = Descripcion;
+                    actNotificacione.Destino = Destino;
+                    actNotificacione.Visto = "";
+                    _context.Add(actNotificacione);
+                    await _context.SaveChangesAsync();
+                    break;
                 default:
                     Console.WriteLine("opcion Inexistente");
                     break;

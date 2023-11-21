@@ -1,13 +1,14 @@
 ﻿using act_Application.Data.Context;
 using act_Application.Data.Data;
-using act_Application.Helper;
 using act_Application.Models.BD;
 using Microsoft.AspNetCore.Mvc;
+using static Microsoft.ApplicationInsights.MetricDimensionNames.TelemetryContext;
 
 namespace act_Application.Services.ServiciosAutomaticos
 {
     public class SAGeneradorMultas : IHostedService
     {
+        private readonly NotificacionesServices _nservices;
         private readonly ActDesarrolloContext _context;
         private Timer _timer;
         public SAGeneradorMultas(ActDesarrolloContext context, Timer timer)
@@ -27,7 +28,9 @@ namespace act_Application.Services.ServiciosAutomaticos
                     {
                         if (cuotas[i].Valor > 0)
                         {
-                            await MandarMulta(cuotas[i].Id, cuotas[i].IdUser, new ActMulta());
+                            string Descripcion = "";
+                            await MandarMulta( cuotas[i].Id, cuotas[i].IdUser, cuotas[i].IdCuot, new ActMulta());
+                            await _nservices.CrearNotificacion(7, cuotas[i].IdUser, cuotas[i].IdCuot, "Aplicacion de Multa por Impago de Cuota", Descripcion, cuotas[i].IdUser.ToString(), new ActNotificacione());
                         }
                         else
                         {
@@ -54,7 +57,7 @@ namespace act_Application.Services.ServiciosAutomaticos
         {
             _timer?.Dispose();
         }
-        private async Task MandarMulta(int Id, int IdUser, [Bind()] ActMulta actMulta)
+        private async Task MandarMulta(int Id, int IdUser, string Razon, [Bind()] ActMulta actMulta)
         {
             _context.Add(actMulta);
             await _context.SaveChangesAsync();

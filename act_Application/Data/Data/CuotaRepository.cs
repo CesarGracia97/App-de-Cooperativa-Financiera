@@ -166,9 +166,10 @@ namespace act_Application.Data.Data
                         {
                             Id = Convert.ToInt32(rd["Id"]),
                             IdUser = Convert.ToInt32(rd["IdUser"]),
+                            IdCuot = Convert.ToString(rd["IdCuot"]),
                             FechaCuota = Convert.ToDateTime(rd["FechaCuota"]),
-                            Valor = Convert.ToDecimal(rd["Valor"])
-
+                            Valor = Convert.ToDecimal(rd["Valor"]),
+                            NombreDueño = Convert.ToString(rd["NombreYApellido"])
                         };
                         cuotasList.Add(obj);
                     }
