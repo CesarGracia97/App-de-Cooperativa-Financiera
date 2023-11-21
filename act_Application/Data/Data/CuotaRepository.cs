@@ -112,7 +112,7 @@ namespace act_Application.Data.Data
         public int H_GetLastIdCouta(int IdUser)
         {
             string connectionString = AppSettingsHelper.GetConnectionString();
-            int Id = -1; 
+            int Id = -1;
             try
             {
                 string Query = ConfigReader.GetQuery(2, "SelectLastIdCoutaUser");
@@ -142,6 +142,25 @@ namespace act_Application.Data.Data
                 Console.WriteLine("Detalles del error: " + ex.Message);
             }
             return Id;
+        }
+        public ActCuota GetDateCuotasAll()
+        {
+            string connectionString = AppSettingsHelper.GetConnectionString();
+            try
+            {
+                string Query = ConfigReader.GetQuery(3, "SelectDateCuotasAll");
+
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                {
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"GetDateCuotasAll - Error \n");
+                Console.WriteLine($"Detalles del error: " + ex.Message);
+            }
+            return null;
         }
     }
 }

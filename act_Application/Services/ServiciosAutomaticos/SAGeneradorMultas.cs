@@ -6,8 +6,7 @@ namespace act_Application.Services.ServiciosAutomaticos
     {
         public void GeneradorMultas(object state)
         {
-            string connectionString = AppSettingsHelper.GetConnectionString();
-            string Query = ConfigReader.GetQuery(1, "SelectAportaciones");
+
         }
         private Timer _timer;
 
