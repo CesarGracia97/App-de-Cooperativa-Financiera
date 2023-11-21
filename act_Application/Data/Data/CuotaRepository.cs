@@ -145,9 +145,10 @@ namespace act_Application.Data.Data
             }
             return Id;
         }
-        public ActCuota A_GetDateCuotasAll()
+        public List<ActCuota> A_GetDateCuotasAll()
         {
             string connectionString = AppSettingsHelper.GetConnectionString();
+            List<ActCuota> cuotasList = new List<ActCuota>();
             try
             {
                 string Query = ConfigReader.GetQuery(3, "SelectDateCuotasAll");
@@ -169,8 +170,9 @@ namespace act_Application.Data.Data
                             Valor = Convert.ToDecimal(rd["Valor"])
 
                         };
-                        return obj;
+                        cuotasList.Add(obj);
                     }
+                    return cuotasList;
                 }
             }
             catch (Exception ex)
