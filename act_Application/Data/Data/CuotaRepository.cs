@@ -2,6 +2,8 @@
 using act_Application.Models.BD;
 using MySql.Data.MySqlClient;
 using System.Data;
+using static Microsoft.ApplicationInsights.MetricDimensionNames.TelemetryContext;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace act_Application.Data.Data
 {
@@ -143,7 +145,7 @@ namespace act_Application.Data.Data
             }
             return Id;
         }
-        public ActCuota GetDateCuotasAll()
+        public ActCuota A_GetDateCuotasAll()
         {
             string connectionString = AppSettingsHelper.GetConnectionString();
             try
@@ -152,12 +154,28 @@ namespace act_Application.Data.Data
 
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
+                    MySqlCommand cmd = new MySqlCommand(Query, connection);
+                    cmd.CommandType = CommandType.Text;
 
+                    connection.Open();
+
+                    using (MySqlDataReader rd = cmd.ExecuteReader())
+                    {
+                        ActCuota obj = new ActCuota
+                        {
+                            Id = Convert.ToInt32(rd["Id"]),
+                            IdUser = Convert.ToInt32(rd["IdUser"]),
+                            FechaCuota = Convert.ToDateTime(rd["FechaCuota"]),
+                            Valor = Convert.ToDecimal(rd["Valor"])
+
+                        };
+                        return obj;
+                    }
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"GetDateCuotasAll - Error \n");
+                Console.WriteLine($"A_GetDateCuotasAll - Error \n");
                 Console.WriteLine($"Detalles del error: " + ex.Message);
             }
             return null;

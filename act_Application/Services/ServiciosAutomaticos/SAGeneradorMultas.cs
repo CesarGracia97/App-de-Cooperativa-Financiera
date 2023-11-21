@@ -1,4 +1,5 @@
-﻿using act_Application.Helper;
+﻿using act_Application.Data.Data;
+using act_Application.Helper;
 
 namespace act_Application.Services.ServiciosAutomaticos
 {
@@ -6,7 +7,7 @@ namespace act_Application.Services.ServiciosAutomaticos
     {
         public void GeneradorMultas(object state)
         {
-
+            var cobj = new CuotaRepository().A_GetDateCuotasAll();
         }
         private Timer _timer;
 
