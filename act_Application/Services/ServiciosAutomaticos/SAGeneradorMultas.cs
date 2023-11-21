@@ -28,7 +28,8 @@ namespace act_Application.Services.ServiciosAutomaticos
                     {
                         if (cuotas[i].Valor > 0)
                         {
-                            string Descripcion = "";
+                            string Descripcion = $"Señor Usuario {cuotas[i].NombreDueño}, se le a Aplicado una multa a Razon del impago de la Cuota puesta para el dia {cuotas[i].FechaCuota}." +
+                                $"\nPor favor pagar la Multa y la cuota lo mas pronto posible para evitar que aumente el valor de la sancion.";
                             await MandarMulta( cuotas[i].Id, cuotas[i].IdUser, cuotas[i].IdCuot, new ActMulta());
                             await _nservices.CrearNotificacion(7, cuotas[i].IdUser, cuotas[i].IdCuot, "Aplicacion de Multa por Impago de Cuota", Descripcion, cuotas[i].IdUser.ToString(), new ActNotificacione());
                         }

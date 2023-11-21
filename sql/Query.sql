@@ -350,4 +350,15 @@ CREATE TABLE `act_desarrollo`.`act_CapturasPantalla` (
   UNIQUE INDEX `Id_UNIQUE` (`Id` ASC))
 COMMENT = 'Tabla de Capturas de pantalla';
 
+/**/
+CREATE TABLE `act_desarrollo`.`act_Intereses` (
+  `Id` INT NOT NULL AUTO_INCREMENT,
+  `IdUser` INT NULL,
+  `IdPersonalizado` VARCHAR(45) NULL,
+  `Porcentaje` VARCHAR(45) NULL,
+  `Valor` DECIMAL NULL,
+  `Estado` VARCHAR(45) NULL,
+  PRIMARY KEY (`Id`),
+  UNIQUE INDEX `Id_UNIQUE` (`Id` ASC))
+COMMENT = 'Tabla de Intereses';
 
