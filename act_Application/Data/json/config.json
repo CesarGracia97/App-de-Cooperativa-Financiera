@@ -29,6 +29,6 @@
     "SelectCorreoUser": "SELECT Correo FROM act_User WHERE IdU = @IdUser"
   },
   "Automatic": {
-
+    "SelecDateCuotasAll": "SELECT a.Id, a.IdUser, a.FechaCuota FROM act_Cuotas WHERE Estado = 'PENDIENTE'"  
   }
 }
