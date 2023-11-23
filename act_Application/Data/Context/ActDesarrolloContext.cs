@@ -36,6 +36,8 @@ public partial class ActDesarrolloContext : DbContext
 
     public virtual DbSet<ActRolUser> ActRolUsers { get; set; }
 
+    public virtual DbSet<ActTablaInteres> ActTablaInteres { get; set; }
+
     public virtual DbSet<ActUser> ActUsers { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -255,6 +257,20 @@ public partial class ActDesarrolloContext : DbContext
             entity.Property(e => e.Id).HasColumnType("int(11)");
             entity.Property(e => e.IdRol).HasColumnType("int(11)");
             entity.Property(e => e.IdUser).HasColumnType("int(11)");
+        });
+
+        modelBuilder.Entity<ActTablaInteres>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PRIMARY");
+
+            entity.ToTable("act_User", tb => tb.HasComment("Tabla de Intereses"));
+
+            entity.Property(e => e.Id).HasColumnType("int(11)");
+            entity.Property(e => e.IdUser).HasColumnType("int(11)");
+            entity.Property(e => e.IdPersonalizado).HasMaxLength(45);
+            entity.Property(e => e.Porcentaje).HasMaxLength(45);
+            entity.Property(e => e.Valor).HasPrecision(10);
+            entity.Property(e => e.Estado).HasMaxLength(45);
         });
 
         modelBuilder.Entity<ActUser>(entity =>
