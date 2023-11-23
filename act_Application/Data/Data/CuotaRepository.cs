@@ -171,7 +171,7 @@ namespace act_Application.Data.Data
                             FechaCuota = Convert.ToDateTime(rd["FechaCuota"]),
                             Valor = Convert.ToDecimal(rd["Valor"]),
                             NombreDueño = Convert.ToString(rd["NombreYApellido"]),
-                            TipoUsuario = Convert.ToString(rd["TipoUsuario"])
+                            TipoUsuario = Convert.ToString(rd["TipoUser"])
                         };
                         cuotasList.Add(obj);
                     }
