@@ -70,13 +70,29 @@ namespace act_Application.Services.ServiciosAutomaticos
             var erobj = new EventosRepository().A_GetParticipantesPrestamo(IdPrestamo);
             bool opobj = new ObtenerParticipantes().NombresParticipantes(erobj.NombresPId);
             decimal porcentaje =0m;
-            if (opobj && TipoUsuario == "Socio")
+            if (TipoUsuario == "Socio" || TipoUsuario == "Administrador")
             {
+                if (opobj)
+                {
+
+                }
+                else
+                {
+
+                }
                 //Si participa alguien
                 porcentaje = 3m;
             }
             else if (!opobj && TipoUsuario == "Referido")
             {
+                if (opobj)
+                {
+
+                }
+                else
+                {
+
+                }
                 //No participa nadie
                 porcentaje = 0.03m;
             }
