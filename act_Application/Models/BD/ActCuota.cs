@@ -20,4 +20,6 @@ public partial class ActCuota
     public string CapturaPantalla { get; set; }
     [NotMapped]
     public string NombreDueño { get; set; }
+    [NotMapped]
+    public string TipoUsuario { get; set; }
 }

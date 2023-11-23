@@ -170,7 +170,8 @@ namespace act_Application.Data.Data
                             IdCuot = Convert.ToString(rd["IdCuot"]),
                             FechaCuota = Convert.ToDateTime(rd["FechaCuota"]),
                             Valor = Convert.ToDecimal(rd["Valor"]),
-                            NombreDueño = Convert.ToString(rd["NombreYApellido"])
+                            NombreDueño = Convert.ToString(rd["NombreYApellido"]),
+                            TipoUsuario = Convert.ToString(rd["TipoUsuario"])
                         };
                         cuotasList.Add(obj);
                     }

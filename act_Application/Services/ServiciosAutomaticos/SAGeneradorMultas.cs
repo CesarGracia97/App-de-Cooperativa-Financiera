@@ -73,7 +73,7 @@ namespace act_Application.Services.ServiciosAutomaticos
             if (opobj)
             {
                 //Si participa alguien
-                porcentaje = 0.03m;
+                porcentaje = 0.m;
             }
             else
             {
