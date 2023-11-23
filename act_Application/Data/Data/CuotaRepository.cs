@@ -165,6 +165,7 @@ namespace act_Application.Data.Data
                         ActCuota obj = new ActCuota
                         {
                             Id = Convert.ToInt32(rd["Id"]),
+                            IdPrestamo = Convert.ToInt32(rd["IdPrestamo"]),
                             IdUser = Convert.ToInt32(rd["IdUser"]),
                             IdCuot = Convert.ToString(rd["IdCuot"]),
                             FechaCuota = Convert.ToDateTime(rd["FechaCuota"]),

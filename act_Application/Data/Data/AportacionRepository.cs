@@ -35,7 +35,20 @@ namespace act_Application.Data
             // Si totalAportaciones es mayor que 0, devuelve true, de lo contrario, devuelve false.
             return totalAportaciones > 0;
         }
-
+        /*He desarrollado tantos programas, trantos proyectos, trabajos y ninguno me ha hecho sentir tan antusiasmado como el kue kuiero desarrollar
+         contigo a mi lado, uno al kue kuiero poner de nombre "Relacion eterna". Uno donde ambos nos apoyemos, trabajemos, tengamos funciones iterativas
+         kue permitan el desarrollo y evolucion mutua como una Inteligencia Artificar de tipo Red Neuronal. Donde podamos crecer y resolver problemas 
+         propios y congregados. Donde podamos crecer juntos profesionalmente en tu carrera y yo en la mia como Servidores de Base de Datos enlazados
+         Y donde kuiero kue creemos un futuro juntos como, kue fusionemos nuestras pasiones, sueños, deseos, metas, anhelos, fortalezas, debilidades
+         miedos, valores y sobre todo nuestros espiritus y creemos algo unico similar al universo en donde tu alma y la mia converjan en armonia 
+         como objetos a la espera de una union funcionalmente activa.*/
+        
+        /*Se que ahora las cosas estan complicadas, y que esto se lo puede ver muy enogorroso que la noche se la ve muy oscura y espeza, pero se que podras ver un bonito
+         Amanecer, podremos ver juntos un bonito amanecer. La vida nos pone pruebas todo el tiempo y nuestro primer deber superarlas, y esta es la primera gran prueba
+         que tienes y que se que la superaras. Demuestra quien eres, demuestra de lo que estas hecha. Destruye a todo aquel que atente contra ti y crea lo que en tus sueños
+         habita. Despues no volveras a ser la misma pero renaceras como un ser nuevo, alguien etereo. Yo creo en eso y no solo volveras a tu Prime... Seras mejor
+         que el Prime que obtuviste anteriormente. 
+         */
         public List<ActAportacione> GetDataAportaciones()
         {
             string connectionString = AppSettingsHelper.GetConnectionString();
