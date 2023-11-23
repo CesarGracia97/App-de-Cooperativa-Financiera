@@ -356,7 +356,9 @@ CREATE TABLE `act_desarrollo`.`act_Intereses` (
   `IdUser` INT NULL,
   `IdPersonalizado` VARCHAR(45) NULL,
   `Porcentaje` VARCHAR(45) NULL,
-  `Valor` DECIMAL NULL,
+  `Valor` DECIMAL(10,0) NULL,
+  `ValorGarante` DECIMAL(10,0) NULL,
+  `ValorTodos` DECIMAL(10,0) NULL,
   `Estado` VARCHAR(45) NULL,
   PRIMARY KEY (`Id`),
   UNIQUE INDEX `Id_UNIQUE` (`Id` ASC))
