@@ -7,4 +7,6 @@ public partial class ActTablaInteres
     public string Porcentaje { get; set; }
     public decimal Valor { get; set; }
     public string Estado { get; set; }
+    public decimal ValorGarante { get; set; }
+    public decimal ValorTodos { get; set; }
 }
