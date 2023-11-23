@@ -2,6 +2,7 @@
 using act_Application.Data.Data;
 using act_Application.Logic.ComplementosLogicos;
 using act_Application.Models.BD;
+using act_Application.Services;
 using Microsoft.AspNetCore.Mvc;
 using static Microsoft.ApplicationInsights.MetricDimensionNames.TelemetryContext;
 
