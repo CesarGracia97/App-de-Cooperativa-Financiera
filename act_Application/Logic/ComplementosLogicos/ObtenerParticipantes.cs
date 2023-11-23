@@ -2,7 +2,7 @@
 {
     public class ObtenerParticipantes
     {
-        public bool NombresParticipantes(string NombresPId)
+        public bool NombresParticipantes(string ParticipantesId, string NombresPId)
         {
             return false;
         }

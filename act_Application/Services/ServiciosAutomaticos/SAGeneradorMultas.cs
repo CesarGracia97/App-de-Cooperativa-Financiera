@@ -68,7 +68,7 @@ namespace act_Application.Services.ServiciosAutomaticos
             actMulta.Cuadrante = ocobj.Cuadrante(DateTime.Now);
             actMulta.Razon = Razon;
             //var erobj = new EventosRepository().A_GetParticipantesPrestamo(IdPrestamo);
-            //bool opobj = new ObtenerParticipantes().NombresParticipantes(erobj.NombresPId);
+            //bool opobj = new ObtenerParticipantes().NombresParticipantes(erobj.ParticipantesId, erobj.NombresPId);
             decimal porcentaje =0m;
             if (TipoUsuario == "Socio" || TipoUsuario == "Administrador")
             {
