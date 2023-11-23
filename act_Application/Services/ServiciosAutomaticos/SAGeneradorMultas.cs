@@ -69,13 +69,13 @@ namespace act_Application.Services.ServiciosAutomaticos
             actMulta.Razon = Razon;
             var erobj = new EventosRepository().A_GetParticipantesPrestamo(IdPrestamo);
             bool opobj = new ObtenerParticipantes().NombresParticipantes(erobj.NombresPId);
-            decimal porcentaje;
-            if (opobj)
+            decimal porcentaje =0m;
+            if (opobj && TipoUsuario == "Socio")
             {
                 //Si participa alguien
-                porcentaje = 0.m;
+                porcentaje = 3m;
             }
-            else
+            else if (!opobj && TipoUsuario == "Referido")
             {
                 //No participa nadie
                 porcentaje = 0.03m;
