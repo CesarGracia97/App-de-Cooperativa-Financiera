@@ -67,6 +67,7 @@ namespace act_Application.Services.ServiciosAutomaticos
             ObtenerCuadrante ocobj = new ObtenerCuadrante();
             actMulta.Cuadrante = ocobj.Cuadrante(DateTime.Now);
             actMulta.Razon = Razon;
+            if()
             decimal porcentaje = 0.03m;
             actMulta.Valor = Valor * porcentaje;
             actMulta.Estado = "ACTIVO";

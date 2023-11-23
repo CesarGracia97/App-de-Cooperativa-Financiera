@@ -142,5 +142,40 @@ namespace act_Application.Data.Data
             return null;
 
         }
+        public ActEvento A_GetParticipantesPrestamo(int IdPrestamo)
+        {
+            string connectionString = AppSettingsHelper.GetConnectionString();
+            try
+            {
+                string query = ConfigReader.GetQuery(3, "SelectParticipantesPrestamo");
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                {
+                    connection.Open();
+                    using (MySqlCommand command = new MySqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@IdPrestamo", IdPrestamo);
+                        using (MySqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                ActEvento obj = new ActEvento 
+                                {
+                                    Id = Convert.ToInt32(reader["Id"]),
+                                    ParticipantesId = Convert.ToString(reader["ParticipantesId"])
+                                };
+                                return obj;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("A_GetParticipantesPrestam | Error");
+                Console.WriteLine("Detalles del error: " + ex.Message);
+            }
+            return null;
+        }
+
     }
 }
