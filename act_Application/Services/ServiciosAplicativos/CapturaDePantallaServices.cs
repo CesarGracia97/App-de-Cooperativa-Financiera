@@ -3,9 +3,8 @@ using act_Application.Data.Data;
 using act_Application.Models.BD;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Security.Claims;
 
-namespace act_Application.Services
+namespace act_Application.Services.ServiciosAplicativos
 {
     public class CapturaDePantallaServices
     {
@@ -14,7 +13,7 @@ namespace act_Application.Services
         {
             _context = context;
         }
-        public async Task SubirCapturaDePantalla( int IdUser, string Origen, int IdOrigenCaptura, [FromForm] IFormFile CapturaPantalla, [Bind("Id,IdUser,Origen,IdOrigen,CapturaPantalla")] ActCapturasPantalla actCapturasPantalla)
+        public async Task SubirCapturaDePantalla(int IdUser, string Origen, int IdOrigenCaptura, [FromForm] IFormFile CapturaPantalla, [Bind("Id,IdUser,Origen,IdOrigen,CapturaPantalla")] ActCapturasPantalla actCapturasPantalla)
         {
             actCapturasPantalla.IdUser = IdUser;
             actCapturasPantalla.Origen = Origen;
@@ -73,7 +72,7 @@ namespace act_Application.Services
                     {
                         var obj = new MultaRepository();
                         var multOriginal = obj.GetDataIdMultaUser(Id);
-                        if( multOriginal != null)
+                        if (multOriginal != null)
                         {
                             actMulta.Id = multOriginal.Id;
                             actMulta.IdMult = multOriginal.IdMult;
@@ -105,4 +104,5 @@ namespace act_Application.Services
             }
         }
     }
+
 }

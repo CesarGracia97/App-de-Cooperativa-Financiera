@@ -1,11 +1,10 @@
-﻿using act_Application.Helper;
+﻿using act_Application.Data.Data;
+using act_Application.Helper;
 using act_Application.Models.Sistema.Complementos;
 using System.Net.Mail;
 using System.Net;
-using System.Security.Claims;
-using act_Application.Data.Data;
 
-namespace act_Application.Services
+namespace act_Application.Services.ServiciosAplicativos
 {
     public class EmailSendServices
     {
@@ -20,7 +19,7 @@ namespace act_Application.Services
                     subject = "act - Application: Solicitud de Ingreso.";
                     body = Descripcion;
                     break;
-                 case 2:
+                case 2:
                     //Aportaciones
                     subject = "act - Application: Aportacion Reciente.";
                     body = Descripcion;

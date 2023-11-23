@@ -2,7 +2,7 @@
 using act_Application.Models.BD;
 using Microsoft.AspNetCore.Mvc;
 
-namespace act_Application.Services
+namespace act_Application.Services.ServiciosAplicativos
 {
     public class NotificacionesServices
     {
