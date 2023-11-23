@@ -67,34 +67,46 @@ namespace act_Application.Services.ServiciosAutomaticos
             ObtenerCuadrante ocobj = new ObtenerCuadrante();
             actMulta.Cuadrante = ocobj.Cuadrante(DateTime.Now);
             actMulta.Razon = Razon;
-            var erobj = new EventosRepository().A_GetParticipantesPrestamo(IdPrestamo);
-            bool opobj = new ObtenerParticipantes().NombresParticipantes(erobj.NombresPId);
+            //var erobj = new EventosRepository().A_GetParticipantesPrestamo(IdPrestamo);
+            //bool opobj = new ObtenerParticipantes().NombresParticipantes(erobj.NombresPId);
             decimal porcentaje =0m;
             if (TipoUsuario == "Socio" || TipoUsuario == "Administrador")
             {
-                if (opobj)
-                {
-
-                }
-                else
-                {
-
-                }
-                //Si participa alguien
-                porcentaje = 3m;
-            }
-            else if (!opobj && TipoUsuario == "Referido")
-            {
-                if (opobj)
-                {
-
-                }
-                else
-                {
-
-                }
-                //No participa nadie
                 porcentaje = 0.03m;
+                /*
+                if (opobj)
+                {
+                    //Socio o Admin Si participa alguien
+                    porcentaje = 0.03m;
+                }
+                */
+                /*
+                else
+                {
+                    //Socio o AdminNo participa nadie
+                    porcentaje = 0.03m;
+                }
+                */
+
+            }
+            else if (TipoUsuario == "Referido")
+            {
+                porcentaje = 0.10m;
+                /*
+                if (opobj)
+                {
+                    //Referido Si participa alguien
+                    porcentaje = 0.10m;
+                }
+                */
+                /*
+                 else
+                {
+                    //Referido No participa nadie
+                    porcentaje = 0.10m;
+                }
+                */
+
             }
 
             actMulta.Valor = Valor * porcentaje;
