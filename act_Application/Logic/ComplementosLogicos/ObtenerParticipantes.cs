@@ -4,7 +4,16 @@
     {
         public bool NombresParticipantes(string ParticipantesId, string NombresPId)
         {
-            return false;
+            var nombresParticipantes = NombresPId.Split(","); 
+            var idsParticipantes = ParticipantesId.Split(",");
+            if (nombresParticipantes.Length > 0 && idsParticipantes.Length > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }
