@@ -32,7 +32,7 @@ namespace act_Application.Services.ServiciosAutomaticos
                             string Descripcion = $"Señor Usuario {cuotas[i].NombreDueño}, se le a Aplicado una multa a Razon del impago de la Cuota puesta para el dia {cuotas[i].FechaCuota}." +
                                 $"\nPor favor pagar la Multa y la cuota lo mas pronto posible para evitar que aumente el valor de la sancion.";
                             string Razon = $"ID:{cuotas[i].IdCuot} - IMPAGO CUOTAS ";
-                            await MandarMulta( cuotas[i].Id, cuotas[i].IdUser, Razon, cuotas[i].Valor, new ActMulta());
+                            await MandarMulta( cuotas[i].Id, cuotas[i].IdPrestamo, cuotas[i].IdUser, Razon, cuotas[i].Valor, new ActMulta());
                             await _nservices.CrearNotificacion(7, cuotas[i].IdUser, cuotas[i].IdCuot, "Aplicacion de Multa por Impago de Cuota", Descripcion, cuotas[i].IdUser.ToString(), new ActNotificacione());
                         }
                         else
@@ -60,15 +60,27 @@ namespace act_Application.Services.ServiciosAutomaticos
         {
             _timer?.Dispose();
         }
-        private async Task MandarMulta(int Id, int IdUser, string Razon, decimal Valor, [Bind("Id,IdUser,FechaGeneracion,Cuadrante,Razon,Valor,Estado,FechaPago,CBancoOrigen,NBancoOrigen,CBancoDestino,NBancoDestino,HistorialValores,CapturaPantalla")] ActMulta actMulta)
+        private async Task MandarMulta(int Id, int IdPrestamo, int IdUser, string Razon, decimal Valor, [Bind("Id,IdUser,FechaGeneracion,Cuadrante,Razon,Valor,Estado,FechaPago,CBancoOrigen,NBancoOrigen,CBancoDestino,NBancoDestino,HistorialValores,CapturaPantalla")] ActMulta actMulta)
         {
             actMulta.IdUser = IdUser;
             actMulta.FechaGeneracion = DateTime.Now;
             ObtenerCuadrante ocobj = new ObtenerCuadrante();
             actMulta.Cuadrante = ocobj.Cuadrante(DateTime.Now);
             actMulta.Razon = Razon;
-            if()
-            decimal porcentaje = 0.03m;
+            var erobj = new EventosRepository().A_GetParticipantesPrestamo(IdPrestamo);
+            bool opobj = new ObtenerParticipantes().NombresParticipantes(erobj.NombresPId);
+            decimal porcentaje;
+            if (opobj)
+            {
+                //Si participa alguien
+                porcentaje = 0.03m;
+            }
+            else
+            {
+                //No participa nadie
+                porcentaje = 0.03m;
+            }
+
             actMulta.Valor = Valor * porcentaje;
             actMulta.Estado = "ACTIVO";
             _context.Add(actMulta);
