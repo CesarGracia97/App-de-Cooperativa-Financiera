@@ -2,8 +2,6 @@
 using act_Application.Models.BD;
 using MySql.Data.MySqlClient;
 using System.Data;
-using static Microsoft.ApplicationInsights.MetricDimensionNames.TelemetryContext;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace act_Application.Data.Data
 {

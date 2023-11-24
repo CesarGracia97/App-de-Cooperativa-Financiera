@@ -3,7 +3,6 @@ using act_Application.Models.BD;
 using act_Application.Models.Sistema.Complementos;
 using MySql.Data.MySqlClient;
 using System.Data;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace act_Application.Data.Data
 {

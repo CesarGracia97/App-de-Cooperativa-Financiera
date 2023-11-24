@@ -1,7 +1,6 @@
 ﻿using act_Application.Helper;
 using act_Application.Models.BD;
 using MySql.Data.MySqlClient;
-using MySqlX.XDevAPI.Common;
 using System.Data;
 
 namespace act_Application.Data.Data
