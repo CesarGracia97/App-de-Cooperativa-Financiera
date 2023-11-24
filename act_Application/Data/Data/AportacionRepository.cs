@@ -11,29 +11,39 @@ namespace act_Application.Data
         public bool GetExistAportaciones()
         {
             string connectionString = AppSettingsHelper.GetConnectionString();
-            string aportacionesQuery = ConfigReader.GetQuery(1,"SelectAportaciones");
-
-            int totalAportaciones = 0; // Variable para almacenar el valor de TotalAportaciones
-
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            try
             {
-                using (MySqlCommand cmd = new MySqlCommand(aportacionesQuery, connection))
+                string aportacionesQuery = ConfigReader.GetQuery(1, "SelectAportaciones");
+
+                int totalAportaciones = 0; // Variable para almacenar el valor de TotalAportaciones
+
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
-                    cmd.CommandType = CommandType.Text;
-
-                    connection.Open();
-
-                    using (MySqlDataReader rd = cmd.ExecuteReader())
+                    using (MySqlCommand cmd = new MySqlCommand(aportacionesQuery, connection))
                     {
-                        if (rd.Read()) // Avanzar al primer registro
+                        cmd.CommandType = CommandType.Text;
+
+                        connection.Open();
+
+                        using (MySqlDataReader rd = cmd.ExecuteReader())
                         {
-                            totalAportaciones = Convert.ToInt32(rd["TotalAportaciones"]);
+                            if (rd.Read()) // Avanzar al primer registro
+                            {
+                                totalAportaciones = Convert.ToInt32(rd["TotalAportaciones"]);
+                            }
                         }
                     }
                 }
+                // Si totalAportaciones es mayor que 0, devuelve true, de lo contrario, devuelve false.
+                return totalAportaciones > 0;
+
             }
-            // Si totalAportaciones es mayor que 0, devuelve true, de lo contrario, devuelve false.
-            return totalAportaciones > 0;
+            catch (Exception ex)
+            {
+                Console.WriteLine("GetExistAportaciones | Error.");
+                Console.WriteLine("Detalles del error: " + ex.Message);
+                return false;
+            }
         }
         /*He desarrollado tantos programas, trantos proyectos, trabajos y ninguno me ha hecho sentir tan antusiasmado como el kue kuiero desarrollar
          contigo a mi lado, uno al kue kuiero poner de nombre "Relacion eterna". Uno donde ambos nos apoyemos, trabajemos, tengamos funciones iterativas
@@ -42,7 +52,6 @@ namespace act_Application.Data
          Y donde kuiero kue creemos un futuro juntos como, kue fusionemos nuestras pasiones, sueños, deseos, metas, anhelos, fortalezas, debilidades
          miedos, valores y sobre todo nuestros espiritus y creemos algo unico similar al universo en donde tu alma y la mia converjan en armonia 
          como objetos a la espera de una union funcionalmente activa.*/
-        
         /*Se que ahora las cosas estan complicadas, y que esto se lo puede ver muy enogorroso que la noche se la ve muy oscura y espeza, pero se que podras ver un bonito
          Amanecer, podremos ver juntos un bonito amanecer. La vida nos pone pruebas todo el tiempo y nuestro primer deber superarlas, y esta es la primera gran prueba
          que tienes y que se que la superaras. Demuestra quien eres, demuestra de lo que estas hecha. Destruye a todo aquel que atente contra ti y crea lo que en tus sueños
@@ -52,162 +61,195 @@ namespace act_Application.Data
         public List<ActAportacione> GetDataAportaciones()
         {
             string connectionString = AppSettingsHelper.GetConnectionString();
-            string aportacionesQuery = ConfigReader.GetQuery(1, "SelectAportaciones");
-
-            List<ActAportacione> aportaciones = new List<ActAportacione>();
-
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            try
             {
-                using (MySqlCommand cmd = new MySqlCommand(aportacionesQuery, connection))
+                string aportacionesQuery = ConfigReader.GetQuery(1, "SelectAportaciones");
+
+                List<ActAportacione> aportaciones = new List<ActAportacione>();
+
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
-                    cmd.CommandType = CommandType.Text;
-
-                    connection.Open();
-
-                    using (MySqlDataReader rd = cmd.ExecuteReader())
+                    using (MySqlCommand cmd = new MySqlCommand(aportacionesQuery, connection))
                     {
-                        var aportacionesPorUsuario = rd.Cast<IDataRecord>()
-                            .Select(r => new
-                            {
-                                Id = Convert.ToInt32(r["Id"]),
-                                Razon = Convert.ToString(r["Razon"]),
-                                Valor = Convert.ToDecimal(r["Valor"]),
-                                IdUser = Convert.ToInt32(r["IdUser"]),
-                                FechaAportacion = Convert.ToDateTime(r["FechaAportacion"]),
-                                Estado = Convert.ToString(r["Estado"]),
-                                CapturaPantalla = r.IsDBNull(r.GetOrdinal("CapturaPantalla")) ? null : (byte[])r["CapturaPantalla"],
-                                NombreUsuario = Convert.ToString(r["NombreUsuario"]),
+                        cmd.CommandType = CommandType.Text;
 
-                            })
-                            .ToList();
+                        connection.Open();
 
-                        var aportacionesAgrupadas = aportacionesPorUsuario
-                            .GroupBy(a => new { a.NombreUsuario, a.FechaAportacion.Month }) // Agrupamos por NombreUsuario y Mes
-                            .ToList();
-
-                        foreach (var group in aportacionesAgrupadas)
+                        using (MySqlDataReader rd = cmd.ExecuteReader())
                         {
-                            var aportacion = new ActAportacione
+                            var aportacionesPorUsuario = rd.Cast<IDataRecord>()
+                                .Select(r => new
+                                {
+                                    Id = Convert.ToInt32(r["Id"]),
+                                    Razon = Convert.ToString(r["Razon"]),
+                                    Valor = Convert.ToDecimal(r["Valor"]),
+                                    IdUser = Convert.ToInt32(r["IdUser"]),
+                                    FechaAportacion = Convert.ToDateTime(r["FechaAportacion"]),
+                                    Estado = Convert.ToString(r["Estado"]),
+                                    CapturaPantalla = r.IsDBNull(r.GetOrdinal("CapturaPantalla")) ? null : (byte[])r["CapturaPantalla"],
+                                    NombreUsuario = Convert.ToString(r["NombreUsuario"]),
+
+                                })
+                                .ToList();
+
+                            var aportacionesAgrupadas = aportacionesPorUsuario
+                                .GroupBy(a => new { a.NombreUsuario, a.FechaAportacion.Month }) // Agrupamos por NombreUsuario y Mes
+                                .ToList();
+
+                            foreach (var group in aportacionesAgrupadas)
                             {
-                                Id = group.First().Id,
-                                IdUser = group.First().IdUser,
-                                FechaAportacion = group.First().FechaAportacion,
-                                Estado = group.First().Estado,
-                                CapturaPantalla = group.First().CapturaPantalla,
-                                NombreUsuario = group.Key.NombreUsuario
+                                var aportacion = new ActAportacione
+                                {
+                                    Id = group.First().Id,
+                                    IdUser = group.First().IdUser,
+                                    FechaAportacion = group.First().FechaAportacion,
+                                    Estado = group.First().Estado,
+                                    CapturaPantalla = group.First().CapturaPantalla,
+                                    NombreUsuario = group.Key.NombreUsuario
 
-                            };
+                                };
 
-                            // Calculamos el número de aportaciones y almacenamos detalles
-                            aportacion.NumeroAportaciones = group.Count();
-                            aportacion.DetallesAportaciones = group.Select(a => new DetalleAportacion
-                            {
-                                Valor = (decimal)a.Valor,
-                                FechaAportacion = a.FechaAportacion,
-                                Cuadrante = a.FechaAportacion.Day <= 15 ? 1 : 2
-                            }).ToList();
+                                // Calculamos el número de aportaciones y almacenamos detalles
+                                aportacion.NumeroAportaciones = group.Count();
+                                aportacion.DetallesAportaciones = group.Select(a => new DetalleAportacion
+                                {
+                                    Valor = (decimal)a.Valor,
+                                    FechaAportacion = a.FechaAportacion,
+                                    Cuadrante = a.FechaAportacion.Day <= 15 ? 1 : 2
+                                }).ToList();
 
-                            // Sumamos los valores para calcular la sumatoria total
-                            aportacion.Valor = group.Sum(a => (decimal)a.Valor);
+                                // Sumamos los valores para calcular la sumatoria total
+                                aportacion.Valor = group.Sum(a => (decimal)a.Valor);
 
-                            aportaciones.Add(aportacion);
+                                aportaciones.Add(aportacion);
+                            }
                         }
                     }
                 }
+
+                return aportaciones;
             }
-
-            return aportaciones;
+            catch (Exception ex)
+            {
+                Console.WriteLine("GetDataAportaciones | Error.");
+                Console.WriteLine("Detalles del error: " + ex.Message);
+                return null;
+            }
         }
-
         public bool GetExistApotacionesUser(int IdUser)
         {
             string connectionString = AppSettingsHelper.GetConnectionString();
-            string aportacionesQuery = ConfigReader.GetQuery(1, "SelectAportacionesUser");
-
-            int totalAportaciones = 0;
-
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            try
             {
-                connection.Open();
-                using (MySqlCommand command = new MySqlCommand(aportacionesQuery, connection))
+                string aportacionesQuery = ConfigReader.GetQuery(1, "SelectAportacionesUser");
+
+                int totalAportaciones = 0;
+
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
-                    command.Parameters.AddWithValue("@IdUser", IdUser);
-                    using (MySqlDataReader reader = command.ExecuteReader())
+                    connection.Open();
+                    using (MySqlCommand command = new MySqlCommand(aportacionesQuery, connection))
                     {
-                        if (reader.Read())
+                        command.Parameters.AddWithValue("@IdUser", IdUser);
+                        using (MySqlDataReader reader = command.ExecuteReader())
                         {
-                            totalAportaciones = Convert.ToInt32(reader["TotalAportaciones"]);
+                            if (reader.Read())
+                            {
+                                totalAportaciones = Convert.ToInt32(reader["TotalAportaciones"]);
+                            }
                         }
                     }
                 }
+                return totalAportaciones > 0;
             }
-            return totalAportaciones > 0;
+            catch (Exception ex)
+            {
+                Console.WriteLine("GetExistApotacionesUser | Error.");
+                Console.WriteLine("Detalles del error: " + ex.Message);
+                return false;
+            }
         }
-
         public List<DetallesAportacionesUsers> GetDataAportacionesUser(int IdUser)
         {
             string connectionString = AppSettingsHelper.GetConnectionString();
-            string aportacionesQuery = ConfigReader.GetQuery(1,"SelectAportacionesUser");
-
-            List<DetallesAportacionesUsers> aportaciones = new List<DetallesAportacionesUsers>();
-            DetallesAportacionesUsers detallesAportaciones = new DetallesAportacionesUsers();
-
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            try
             {
-                connection.Open();
-                using (MySqlCommand command = new MySqlCommand(aportacionesQuery, connection))
+                string Query = ConfigReader.GetQuery(1, "SelectAportacionesUser");
+
+                List<DetallesAportacionesUsers> aportaciones = new List<DetallesAportacionesUsers>();
+                DetallesAportacionesUsers detallesAportaciones = new DetallesAportacionesUsers();
+
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
-                    command.Parameters.AddWithValue("@IdUser", IdUser);
-                    using (MySqlDataReader reader = command.ExecuteReader())
+                    connection.Open();
+                    using (MySqlCommand command = new MySqlCommand(Query, connection))
                     {
-                        decimal aportacionesAcumuladas = 0;
-                        while (reader.Read())
+                        command.Parameters.AddWithValue("@IdUser", IdUser);
+                        using (MySqlDataReader reader = command.ExecuteReader())
                         {
-                            detallesAportaciones.TotalAportaciones = Convert.ToInt32(reader["TotalAportaciones"]);
-                            detallesAportaciones.TotalAprobados = Convert.ToInt32(reader["TotalAprobados"]);
-                            detallesAportaciones.TotalEspera = Convert.ToInt32(reader["TotalEspera"]);
-                            DetallesAportacionesUsers.DetallesPorAportacion aportacion = new DetallesAportacionesUsers.DetallesPorAportacion
+                            decimal aportacionesAcumuladas = 0;
+                            while (reader.Read())
                             {
-                                Id = Convert.ToInt32(reader["Id"]),
-                                Valor = Convert.ToDecimal(reader["Valor"]),
-                                Aprobacion = Convert.ToString(reader["Aprobacion"]),
-                                Nbanco = Convert.ToString(reader["Nbanco"])
-                            };
-                            detallesAportaciones.Detalles.Add(aportacion);
-                            aportacionesAcumuladas += aportacion.Valor;
+                                detallesAportaciones.TotalAportaciones = Convert.ToInt32(reader["TotalAportaciones"]);
+                                detallesAportaciones.TotalAprobados = Convert.ToInt32(reader["TotalAprobados"]);
+                                detallesAportaciones.TotalEspera = Convert.ToInt32(reader["TotalEspera"]);
+                                DetallesAportacionesUsers.DetallesPorAportacion aportacion = new DetallesAportacionesUsers.DetallesPorAportacion
+                                {
+                                    Id = Convert.ToInt32(reader["Id"]),
+                                    Valor = Convert.ToDecimal(reader["Valor"]),
+                                    Aprobacion = Convert.ToString(reader["Aprobacion"]),
+                                    Nbanco = Convert.ToString(reader["Nbanco"])
+                                };
+                                detallesAportaciones.Detalles.Add(aportacion);
+                                aportacionesAcumuladas += aportacion.Valor;
+                            }
+                            detallesAportaciones.AportacionesAcumuladas = aportacionesAcumuladas;
                         }
-                        detallesAportaciones.AportacionesAcumuladas = aportacionesAcumuladas;
                     }
                 }
+
+                aportaciones.Add(detallesAportaciones);
+                return aportaciones;
             }
-
-            aportaciones.Add(detallesAportaciones);
-            return aportaciones;
+            catch (Exception ex)
+            {
+                Console.WriteLine("GetDataAportacionesUser | Error.");
+                Console.WriteLine("Detalles del error: " + ex.Message);
+                return null;
+            }
         }
-
         public string H_GetLastIdApor (int IdUser)
         {
             string connectionString = AppSettingsHelper.GetConnectionString();
-            string aportacionesQuery = ConfigReader.GetQuery(2, "SelectLastIdAporUser");
-            List<ActAportacione> aportaciones = new List<ActAportacione>();
             string IdA = string.Empty;
-
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            try
             {
-                connection.Open();
-                using (MySqlCommand command = new MySqlCommand(aportacionesQuery, connection))
+                string Query = ConfigReader.GetQuery(2, "SelectLastIdAporUser");
+                List<ActAportacione> aportaciones = new List<ActAportacione>();
+
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
-                    command.Parameters.AddWithValue("@IdUser", IdUser);
-                    using (MySqlDataReader reader = command.ExecuteReader())
+                    connection.Open();
+                    using (MySqlCommand command = new MySqlCommand(Query, connection))
                     {
-                        if (reader.Read())
+                        command.Parameters.AddWithValue("@IdUser", IdUser);
+                        using (MySqlDataReader reader = command.ExecuteReader())
                         {
-                            IdA = Convert.ToString(reader["IdApor"]);
+                            if (reader.Read())
+                            {
+                                IdA = Convert.ToString(reader["IdApor"]);
+                            }
                         }
                     }
                 }
+                return IdA;
             }
-            return IdA;
+            catch (Exception ex)
+            {
+                Console.WriteLine("H_GetLastIdApor | Error.");
+                Console.WriteLine("Detalles del error: " + ex.Message);
+                return IdA;
+            }
         }
     }
 }
