@@ -35,7 +35,7 @@ namespace act_Application.Data.Data
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Hubo un error en la consulta del Ultimo Id de la Cuota");
+                Console.WriteLine("H_GetDataCapturaPantallaLastIdUser | Error.");
                 Console.WriteLine("Detalles del error: " + ex.Message);
             }
             return Id;
