@@ -68,27 +68,26 @@ namespace act_Application.Services.ServiciosAutomaticos
             ObtenerCuadrante ocobj = new ObtenerCuadrante();
             actMulta.Cuadrante = ocobj.Cuadrante(DateTime.Now);
             actMulta.Razon = Razon;
-            //var erobj = new EventosRepository().A_GetParticipantesPrestamo(IdPrestamo);
-            //bool opobj = new ObtenerParticipantes().NombresParticipantes(erobj.ParticipantesId, erobj.NombresPId);
+            var erobj = new EventosRepository().A_GetParticipantesPrestamo(IdPrestamo);
+            bool opobj = new ObtenerParticipantes().NombresParticipantes(erobj.ParticipantesId, erobj.NombresPId);
             decimal porcentaje =0m;
             if (TipoUsuario == "Socio" || TipoUsuario == "Administrador")
             {
                 porcentaje = 0.03m;
-                /*
                 if (opobj)
                 {
                     //Socio o Admin Si participa alguien
                     porcentaje = 0.03m;
+                    PorcentajeGarante = 0.0060m;
+                    PorcentajeTodos = 0.0180m;
                 }
-                */
-                /*
                 else
                 {
                     //Socio o AdminNo participa nadie
                     porcentaje = 0.03m;
+                    PorcentajeGarante = 0m;
+                    PorcentajeTodos = 0.03m;
                 }
-                */
-
             }
             else if (TipoUsuario == "Referido")
             {
@@ -107,13 +106,14 @@ namespace act_Application.Services.ServiciosAutomaticos
                     porcentaje = 0.10m;
                 }
                 */
-
+                PorcentajeGarante = 0.0240m;
+                PorcentajeTodos = 0.0360m;
             }
             actMulta.Valor = (Valor * porcentaje);
             actMulta.Estado = "ACTIVO";
             _context.Add(actMulta);
             await _context.SaveChangesAsync();
-            await _iservices.AddNewInteres(actMulta.IdUser, "act_Multas", actMulta.Valor, new ActTablaInteres());
+            await _iservices.AddNewInteres(actMulta.IdUser, "act_Multas", actMulta.Valor, PorcentajeGarante, PorcentajeTodos, new ActTablaInteres());
         }
     }
 }
