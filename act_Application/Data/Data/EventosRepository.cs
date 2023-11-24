@@ -9,35 +9,42 @@ namespace act_Application.Data.Data
     public class EventosRepository
     {
         public List<ActEvento> Eventos { get; set; }
-
         public bool GetExistEventos()
         {
             string connectionString = AppSettingsHelper.GetConnectionString();
-            string eventosQuery = ConfigReader.GetQuery(1, "SelectEvents");
-
-            int totalAportaciones = 0; // Variable para almacenar el valor de TotalAportaciones
-
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            try
             {
-                using (MySqlCommand cmd = new MySqlCommand(eventosQuery, connection))
+                string eventosQuery = ConfigReader.GetQuery(1, "SelectEvents");
+
+                int totalAportaciones = 0; // Variable para almacenar el valor de TotalAportaciones
+
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
-                    cmd.CommandType = CommandType.Text;
-
-                    connection.Open();
-
-                    using (MySqlDataReader rd = cmd.ExecuteReader())
+                    using (MySqlCommand cmd = new MySqlCommand(eventosQuery, connection))
                     {
-                        if (rd.Read()) // Avanzar al primer registro
+                        cmd.CommandType = CommandType.Text;
+
+                        connection.Open();
+
+                        using (MySqlDataReader rd = cmd.ExecuteReader())
                         {
-                            totalAportaciones = Convert.ToInt32(rd["TotalEventos"]);
+                            if (rd.Read()) // Avanzar al primer registro
+                            {
+                                totalAportaciones = Convert.ToInt32(rd["TotalEventos"]);
+                            }
                         }
                     }
                 }
+                // Si totalAportaciones es mayor que 0, devuelve true, de lo contrario, devuelve false.
+                return totalAportaciones > 0;
             }
-            // Si totalAportaciones es mayor que 0, devuelve true, de lo contrario, devuelve false.
-            return totalAportaciones > 0;
+            catch(Exception ex)
+            {
+                Console.WriteLine("GetExistEventos | Error.");
+                Console.WriteLine("Detalles del error: " + ex.Message);
+            }
+            return false;
         }
-
         public EventosRepository GetDataEventos()
         {
             string connectionString = AppSettingsHelper.GetConnectionString();
@@ -92,14 +99,13 @@ namespace act_Application.Data.Data
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Hubo un error en la consulta de eventos.");
+                Console.WriteLine("GetDataEventos | Error.");
                 Console.WriteLine("Detalles del error: " + ex.Message);
                 result.Eventos = null;
             }
 
             return result;
         }
-
         public ActEvento GetDataEventoPorId(int Id)
         {
             string connectionString = AppSettingsHelper.GetConnectionString();
@@ -135,10 +141,9 @@ namespace act_Application.Data.Data
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Hubo un error en la consulta del evento del Usuario");
+                Console.WriteLine("GetDataEventoPorId | Error.");
                 Console.WriteLine("Detalles del error: " + ex.Message);
             }
-
             return null;
 
         }
@@ -176,6 +181,5 @@ namespace act_Application.Data.Data
             }
             return null;
         }
-
     }
 }
