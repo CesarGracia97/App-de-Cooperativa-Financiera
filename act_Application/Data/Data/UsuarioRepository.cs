@@ -12,100 +12,127 @@ namespace act_Application.Data.Data
         public ActUser GetDataUser(string Correo, string Contrasena)
         {
             string connectionString = AppSettingsHelper.GetConnectionString();
-            string userQuery = ConfigReader.GetQuery(1, "SelectUsuario");
-
-            ActUser objeto = new ActUser();
-
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            try
             {
-                string query = userQuery;
-                MySqlCommand cmd = new MySqlCommand(query, connection);
-                cmd.Parameters.AddWithValue("@Correo", Correo);
-                cmd.Parameters.AddWithValue("@Contrasena", Contrasena);
-                cmd.CommandType = CommandType.Text;
+                string userQuery = ConfigReader.GetQuery(1, "SelectUsuario");
 
-                connection.Open();
+                ActUser objeto = new ActUser();
 
-                using (MySqlDataReader rd = cmd.ExecuteReader())
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
-                    while (rd.Read())
-                    {
-                        objeto = new ActUser()
-                        {
-                            Id = Convert.ToInt32(rd["Id"]),
-                            Cedula = Convert.ToString(rd["Cedula"]),
-                            Correo = Convert.ToString(rd["Correo"]),
-                            NombreYapellido = Convert.ToString(rd["NombreYApellido"]),
-                            TipoUser = Convert.ToString(rd["TipoUser"]),
-                            IdRol = Convert.ToInt32(rd["IdRol"]),
-                            Estado = Convert.ToString(rd["Estado"])
-                        };
-
-                    }
-                }
-            }
-            return objeto;
-        }
-        public ActRol GetDataRolUser(int idRol)
-        {
-            string connectionString = AppSettingsHelper.GetConnectionString();
-            string roleQuery = ConfigReader.GetQuery(1, "SelectRol"); ;
-
-            ActRol objetoRol = null;
-
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
-            {
-                using (MySqlCommand cmd = new MySqlCommand(roleQuery, connection))
-                {
-                    cmd.Parameters.AddWithValue("@IdRol", idRol);
+                    string query = userQuery;
+                    MySqlCommand cmd = new MySqlCommand(query, connection);
+                    cmd.Parameters.AddWithValue("@Correo", Correo);
+                    cmd.Parameters.AddWithValue("@Contrasena", Contrasena);
                     cmd.CommandType = CommandType.Text;
 
                     connection.Open();
 
                     using (MySqlDataReader rd = cmd.ExecuteReader())
                     {
-                        if (rd.Read())
+                        while (rd.Read())
                         {
-                            objetoRol = new ActRol()
+                            objeto = new ActUser()
                             {
-                                Id = rd.GetInt32("Id"),
-                                NombreRol = rd["NombreRol"].ToString(),
-                                DescripcionRol = rd["DescripcionRol"].ToString()
+                                Id = Convert.ToInt32(rd["Id"]),
+                                Cedula = Convert.ToString(rd["Cedula"]),
+                                Correo = Convert.ToString(rd["Correo"]),
+                                NombreYapellido = Convert.ToString(rd["NombreYApellido"]),
+                                TipoUser = Convert.ToString(rd["TipoUser"]),
+                                IdRol = Convert.ToInt32(rd["IdRol"]),
+                                Estado = Convert.ToString(rd["Estado"])
                             };
+
                         }
                     }
                 }
+                return objeto;
             }
+            catch(Exception ex)
+            {
+                Console.WriteLine("GetDataUser | Error.");
+                Console.WriteLine("Razon del Error: ", ex);
+            }
+            return null;
+        }
+        public ActRol GetDataRolUser(int idRol)
+        {
+            string connectionString = AppSettingsHelper.GetConnectionString();
+            try
+            {
+                string roleQuery = ConfigReader.GetQuery(1, "SelectRol"); ;
 
-            return objetoRol;
+                ActRol objetoRol = null;
+
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                {
+                    using (MySqlCommand cmd = new MySqlCommand(roleQuery, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@IdRol", idRol);
+                        cmd.CommandType = CommandType.Text;
+
+                        connection.Open();
+
+                        using (MySqlDataReader rd = cmd.ExecuteReader())
+                        {
+                            if (rd.Read())
+                            {
+                                objetoRol = new ActRol()
+                                {
+                                    Id = rd.GetInt32("Id"),
+                                    NombreRol = rd["NombreRol"].ToString(),
+                                    DescripcionRol = rd["DescripcionRol"].ToString()
+                                };
+                            }
+                        }
+                    }
+                }
+
+                return objetoRol;
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine("GetDataRolUser | Error.");
+                Console.WriteLine("Razon del Error: ", ex);
+            }
+            return null;
         }
         public List<UserList> GetDataListUser()
         {
             string connectionString = AppSettingsHelper.GetConnectionString();
-            string Query = ConfigReader.GetQuery(1, "SelectListUser");
-
-            List<UserList> users = new List<UserList>();
-
-            using (MySqlConnection conexion = new MySqlConnection(connectionString))
+            try
             {
-                conexion.Open();
+                string Query = ConfigReader.GetQuery(1, "SelectListUser");
 
-                MySqlCommand cmd = new MySqlCommand(Query, conexion);
+                List<UserList> users = new List<UserList>();
 
-                using (MySqlDataReader reader = cmd.ExecuteReader())
+                using (MySqlConnection conexion = new MySqlConnection(connectionString))
                 {
-                    while (reader.Read())
+                    conexion.Open();
+
+                    MySqlCommand cmd = new MySqlCommand(Query, conexion);
+
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
                     {
-                        UserList user = new UserList()
+                        while (reader.Read())
                         {
-                            Id = Convert.ToInt32(reader["Id"]),
-                            Usuario = Convert.ToString(reader["NombreYApellido"])
-                        };
-                        users.Add(user);
+                            UserList user = new UserList()
+                            {
+                                Id = Convert.ToInt32(reader["Id"]),
+                                Usuario = Convert.ToString(reader["NombreYApellido"])
+                            };
+                            users.Add(user);
+                        }
                     }
                 }
+                return users;
             }
-            return users;
+            catch(Exception ex)
+            {
+                Console.WriteLine("GetDataListUser | Error.");
+                Console.WriteLine("Razon del Error: ", ex);
+            }
+            return null;
         }
         public string CorreoUser(int IdUser)
         {
@@ -134,7 +161,7 @@ namespace act_Application.Data.Data
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Hubo un problema al actualizar el campo de Captura de Pantalla de Cuota.");
+                Console.WriteLine("CorreoUser | Error.");
                 Console.WriteLine("Razon del Error: ",ex);
             }
             return email;
