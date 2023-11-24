@@ -34,9 +34,20 @@ namespace act_Application.Services.ServiciosAutomaticos
                             string Descripcion = $"Señor Usuario {cuotas[i].NombreDueño}, se le a Aplicado una multa a Razon del impago de la Cuota puesta para el dia {cuotas[i].FechaCuota}." +
                                 $"\nPor favor pagar la Multa y la cuota lo mas pronto posible para evitar que aumente el valor de la sancion.";
                             string Razon = $"ID:{cuotas[i].IdCuot} - IMPAGO CUOTAS ";
-                            await MandarMulta(cuotas[i].Id, cuotas[i].IdPrestamo, cuotas[i].IdUser, cuotas[i].TipoUsuario, Razon, cuotas[i].Valor, new ActMulta());
+                            await MandarMulta( 1, cuotas[i].Id, cuotas[i].IdPrestamo, cuotas[i].IdUser, cuotas[i].TipoUsuario, Razon, cuotas[i].Valor, new ActMulta());
                             await _nservices.CrearNotificacion(7, cuotas[i].IdUser, cuotas[i].IdCuot, "Aplicacion de Multa por Impago de Cuota", Descripcion, cuotas[i].IdUser.ToString(), new ActNotificacione());
                         }
+                    }
+                    else if( DateTime.Now > cuotas[i].FechaCuota.AddDays(61))
+                    {
+                        //Parte para interes superior del 61 dias pendiente para la sig semana.
+                        string Descripcion = $"Señor Usuario {cuotas[i].NombreDueño}, el impago de la cuota a superado los 61 dias, se Aumento el valor de la multa " +
+                                             $"a Razon del impago a largo plazo de la Cuota establecida para el dia {cuotas[i].FechaCuota}." +
+                                             $"\nPor favor pagar la Multa y la cuota lo mas pronto posible para evitar que aumente el valor de la sancion.";
+                        string Razon = $"ID:{cuotas[i].IdCuot} - IMPAGO CUOTAS ";
+                        await MandarMulta(1, cuotas[i].Id, cuotas[i].IdPrestamo, cuotas[i].IdUser, cuotas[i].TipoUsuario, Razon, cuotas[i].Valor, new ActMulta());
+                        await _nservices.CrearNotificacion(7, cuotas[i].IdUser, cuotas[i].IdCuot, "Aplicacion de Multa por Impago de Cuota", Descripcion, cuotas[i].IdUser.ToString(), new ActNotificacione());
+
                     }
                 }
             }
@@ -58,7 +69,7 @@ namespace act_Application.Services.ServiciosAutomaticos
         {
             _timer?.Dispose();
         }
-        private async Task MandarMulta(int Id, int IdPrestamo, int IdUser, string TipoUsuario, string Razon, decimal Valor, [Bind("Id,IdUser,FechaGeneracion,Cuadrante,Razon,Valor,Estado,FechaPago,CBancoOrigen,NBancoOrigen,CBancoDestino,NBancoDestino,HistorialValores,CapturaPantalla")] ActMulta actMulta)
+        private async Task MandarMulta(int opcion, int Id, int IdPrestamo, int IdUser, string TipoUsuario, string Razon, decimal Valor, [Bind("Id,IdUser,FechaGeneracion,Cuadrante,Razon,Valor,Estado,FechaPago,CBancoOrigen,NBancoOrigen,CBancoDestino,NBancoDestino,HistorialValores,CapturaPantalla")] ActMulta actMulta)
         {
             decimal PorcentajeGarante = 0m;
             decimal PorcentajeTodos = 0m;
