@@ -42,8 +42,8 @@ namespace act_Application.Data.Data
             {
                 Console.WriteLine("GetExistMultas || Error");
                 Console.WriteLine("Razon del Error: " + ex.Message);
+                return false;
             }
-            return false;
         }
         public List<ActMulta> GetDataMultas()
         {
@@ -123,8 +123,8 @@ namespace act_Application.Data.Data
             {
                 Console.WriteLine("GetDataMultas || Error");
                 Console.WriteLine("Razon del Error: " + ex.Message);
+                return null;
             }
-            return null;
         }
         public ActMulta GetDataIdMultaUser(int Id)
         {
@@ -205,8 +205,8 @@ namespace act_Application.Data.Data
             {
                 Console.WriteLine("GetExistMultasUser || Error");
                 Console.WriteLine("Razon del Error: " + ex.Message);
+                return false;
             }
-            return false;
         }
         public int GetLastIdMultaData(int IdUser)
         {

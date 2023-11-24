@@ -142,8 +142,9 @@ namespace act_Application.Data.Data
             {
                 Console.WriteLine("H_GetLastIdCouta | Error. ");
                 Console.WriteLine("Detalles del error: " + ex.Message);
+                return Id;
             }
-            return Id;
+
         }
         public List<ActCuota> A_GetDateCuotasAll()
         {
@@ -182,8 +183,9 @@ namespace act_Application.Data.Data
             {
                 Console.WriteLine($"A_GetDateCuotasAll | Error \n");
                 Console.WriteLine($"Detalles del error: " + ex.Message);
+                return null;
             }
-            return null;
+
         }
     }
 }

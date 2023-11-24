@@ -45,8 +45,8 @@ namespace act_Application.Data.Data
                 {
                     Console.WriteLine("GetDataDestinos | Error");
                     Console.WriteLine("Detalles del error: " + ex.Message);
+                    return null;
                 }
-                return null;
             }
         }
     }

@@ -52,8 +52,8 @@ namespace act_Application.Data.Data
             {
                 Console.WriteLine("GetDataUser | Error.");
                 Console.WriteLine("Razon del Error: " + ex.Message);
+                return null;
             }
-            return null;
         }
         public ActRol GetDataRolUser(int idRol)
         {
@@ -94,8 +94,8 @@ namespace act_Application.Data.Data
             {
                 Console.WriteLine("GetDataRolUser | Error.");
                 Console.WriteLine("Razon del Error: " + ex.Message);
+                return null;
             }
-            return null;
         }
         public List<UserList> GetDataListUser()
         {
@@ -131,8 +131,8 @@ namespace act_Application.Data.Data
             {
                 Console.WriteLine("GetDataListUser | Error.");
                 Console.WriteLine("Razon del Error: " + ex.Message);
+                return null;
             }
-            return null;
         }
         public string CorreoUser(int IdUser)
         {
@@ -163,8 +163,8 @@ namespace act_Application.Data.Data
             {
                 Console.WriteLine("CorreoUser | Error.");
                 Console.WriteLine("Razon del Error: " + ex.Message);
+                return email;
             }
-            return email;
         }
     }
 }

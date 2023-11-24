@@ -37,9 +37,8 @@ namespace act_Application.Data.Data
             {
                 Console.WriteLine("H_GetDataCapturaPantallaLastIdUser | Error.");
                 Console.WriteLine("Detalles del error: " + ex.Message);
+                return Id;
             }
-            return Id;
-
         }
     }
 }

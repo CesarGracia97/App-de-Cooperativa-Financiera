@@ -47,7 +47,6 @@ namespace act_Application.Data.Data
                 Console.WriteLine("GetDataPrestamoId | Error.");
                 Console.WriteLine("Detalles del error: " + ex.Message);
             }
-
             return null;
         }
         public bool GetExistPrestamosUser(int IdUser)
@@ -80,8 +79,8 @@ namespace act_Application.Data.Data
             {
                 Console.WriteLine("GetExistPrestamosUser | Error.");
                 Console.WriteLine("Detalles del error: " + ex.Message);
+                return false;
             }
-            return false;
         }
         public List<DetallesPrestamosUsers> GetDataPrestamosUser(int IdUser)
         {
@@ -131,8 +130,8 @@ namespace act_Application.Data.Data
             {
                 Console.WriteLine("GetDataPrestamosUser | Error.");
                 Console.WriteLine("Detalles del error: " + ex.Message);
+                return null;
             }
-            return null;
         }
         public string H_GetLastIdPres(int IdUser)
         {
@@ -165,8 +164,8 @@ namespace act_Application.Data.Data
             {
                 Console.WriteLine("H_GetLastIdPres | Error.");
                 Console.WriteLine("Detalles del error: " + ex.Message);
+                return IdA;
             }
-            return IdA;
         }
     }
 }
