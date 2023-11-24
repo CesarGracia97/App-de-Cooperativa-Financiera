@@ -11,32 +11,42 @@ namespace act_Application.Data.Data
             public List<ActCuentaDestino> GetDataDestinos()
             {
                 string connectionString = AppSettingsHelper.GetConnectionString();
-                string Query = ConfigReader.GetQuery(1, "SelectDestino");
-                List<ActCuentaDestino> cuentasDestino = new List<ActCuentaDestino>();
-
-                using (MySqlConnection conexion = new MySqlConnection(connectionString))
+                try
                 {
-                    conexion.Open();
+                    string Query = ConfigReader.GetQuery(1, "SelectDestino");
+                    List<ActCuentaDestino> cuentasDestino = new List<ActCuentaDestino>();
 
-                    MySqlCommand cmd = new MySqlCommand(Query, conexion);
-
-                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    using (MySqlConnection conexion = new MySqlConnection(connectionString))
                     {
-                        while (reader.Read())
-                        {
-                            ActCuentaDestino cuentaDestino = new ActCuentaDestino
-                            {
-                                Id = Convert.ToInt32(reader["Id"]),
-                                NumeroCuentaB = Convert.ToString(reader["NumeroCuentaB"]),
-                                NombreBanco = Convert.ToString(reader["NombreBanco"])
-                            };
+                        conexion.Open();
 
-                            cuentasDestino.Add(cuentaDestino);
+                        MySqlCommand cmd = new MySqlCommand(Query, conexion);
+
+                        using (MySqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                ActCuentaDestino cuentaDestino = new ActCuentaDestino
+                                {
+                                    Id = Convert.ToInt32(reader["Id"]),
+                                    NumeroCuentaB = Convert.ToString(reader["NumeroCuentaB"]),
+                                    NombreBanco = Convert.ToString(reader["NombreBanco"])
+                                };
+
+                                cuentasDestino.Add(cuentaDestino);
+                            }
                         }
                     }
-                }
 
-                return cuentasDestino;
+                    return cuentasDestino;
+
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("GetDataDestinos | Error");
+                    Console.WriteLine("Detalles del error: " + ex.Message);
+                }
+                return null;
             }
         }
     }
