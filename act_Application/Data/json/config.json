@@ -30,6 +30,7 @@
   },
   "Automatic": {
     "SelectDateCuotasAll": "SELECT a.Id, a.IdPrestamo, a.IdUser, a.IdCuot, a.FechaCuota, a.Valor e.NombreYApellido e.TipoUser FROM act_Cuotas a JOIN act_User e ON a.IdUser = e.Id WHERE a.Estado = 'PENDIENTE'",
-    "SelectParticipantesPrestamo": "SELECT a.Id, a.ParticipantesId FROM act_Eventos a WHERE IdEstado = 'CONCURSO' AND IdPrestamo = @IdPrestamo"
+    "SelectParticipantesPrestamo": "SELECT a.Id, a.ParticipantesId FROM act_Eventos a WHERE IdEstado = 'CONCURSO' AND IdPrestamo = @IdPrestamo",
+    "SelectLastIdMultaUser": "SELECT Id FROM act_Multas WHERE IdUser = @IdUser ORDER BY Id DESC LIMIT 1"
   }
 }

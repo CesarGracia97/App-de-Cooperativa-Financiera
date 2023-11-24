@@ -45,7 +45,6 @@ namespace act_Application.Data.Data
             }
             return false;
         }
-
         public List<ActMulta> GetDataMultas()
         {
             string connectionString = AppSettingsHelper.GetConnectionString();
@@ -212,9 +211,10 @@ namespace act_Application.Data.Data
         public int GetLastIdMultaData(int IdUser)
         {
             int Id = -1;
+            string connectionString = AppSettingsHelper.GetConnectionString();
             try
             {
-
+                string multasQuery = ConfigReader.GetQuery(1, "SelectMultas");
             }
             catch (Exception ex)
             {
