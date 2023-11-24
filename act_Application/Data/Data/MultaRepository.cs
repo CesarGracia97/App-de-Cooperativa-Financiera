@@ -12,13 +12,13 @@ namespace act_Application.Data.Data
             string connectionString = AppSettingsHelper.GetConnectionString();
             try
             {
-                string MultaQuery = ConfigReader.GetQuery(1, "SelectMultas");
+                string Query = ConfigReader.GetQuery(1, "SelectMultas");
 
                 int totalMultas = 0; // Variable para almacenar el valor de TotalAportaciones
 
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
-                    using (MySqlCommand cmd = new MySqlCommand(MultaQuery, connection))
+                    using (MySqlCommand cmd = new MySqlCommand(Query, connection))
                     {
                         cmd.CommandType = CommandType.Text;
 
@@ -212,7 +212,24 @@ namespace act_Application.Data.Data
             string connectionString = AppSettingsHelper.GetConnectionString();
             try
             {
-                string multasQuery = ConfigReader.GetQuery(1, "SelectMultas");
+                string Query = ConfigReader.GetQuery(2, "SelectLastIdMultaUser");
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                {
+                    MySqlCommand cmd = new MySqlCommand(Query, connection);
+                    cmd.Parameters.AddWithValue("@IdUser", IdUser);
+                    cmd.CommandType = CommandType.Text;
+
+                    connection.Open();
+
+                    using (MySqlDataReader rd = cmd.ExecuteReader())
+                    {
+                        if (rd.Read())
+                        {
+                            Id = Convert.ToInt32(rd["Id"]);
+                        }
+                        return Id;
+                    }
+                }
             }
             catch (Exception ex)
             {
