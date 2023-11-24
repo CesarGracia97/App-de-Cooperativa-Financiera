@@ -12,13 +12,17 @@ namespace act_Application.Services.ServiciosAplicativos
         {
             context = _context;
         }
-        public async Task AddNewInteres(int IdUser, string torigen, decimal Valor, decimal PorcentajeGarante, decimal PorcentajeTodos [Bind("Id,IdUser,IdPersonnalizado,Valor,Estado,ValorGarante,ValorTodos,ValorActual")]ActTablaInteres actTablaInteres)
+        public async Task AddNewInteres(int IdUser, string torigen, decimal Valor, decimal PorcentajeGarante, decimal PorcentajeTodos, [Bind("Id,IdUser,IdPersonnalizado,Valor,Estado,ValorGarante,ValorTodos,ValorActual")]ActTablaInteres actTablaInteres)
         {
             int IdMultaUser = new MultaRepository().A_GetLastIdMultaData(IdUser);
             actTablaInteres.IdUser = IdUser;
             actTablaInteres.IdPersonalizado = torigen + "-" + IdMultaUser.ToString();
             actTablaInteres.Valor = Valor;
-            actTablaInteres.ValorGarante =
+            actTablaInteres.ValorGarante = Valor * PorcentajeGarante;
+            actTablaInteres.ValorTodos = Valor * PorcentajeTodos;
+            actTablaInteres.Estado = "PENDIENTE";
+            _context.Update(actTablaInteres);
+            await _context.SaveChangesAsync();
         }
     }
 }

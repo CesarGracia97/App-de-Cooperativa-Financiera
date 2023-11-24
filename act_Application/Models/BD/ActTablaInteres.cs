@@ -9,5 +9,4 @@ public partial class ActTablaInteres
     public string Estado { get; set; }
     public decimal ValorGarante { get; set; }
     public decimal ValorTodos { get; set; }
-    public decimal ValorActual { get; set; }
 }
