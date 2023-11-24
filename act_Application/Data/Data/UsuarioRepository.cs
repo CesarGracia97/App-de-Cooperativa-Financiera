@@ -51,7 +51,7 @@ namespace act_Application.Data.Data
             catch(Exception ex)
             {
                 Console.WriteLine("GetDataUser | Error.");
-                Console.WriteLine("Razon del Error: ", ex);
+                Console.WriteLine("Razon del Error: " + ex.Message);
             }
             return null;
         }
@@ -93,7 +93,7 @@ namespace act_Application.Data.Data
             catch(Exception ex)
             {
                 Console.WriteLine("GetDataRolUser | Error.");
-                Console.WriteLine("Razon del Error: ", ex);
+                Console.WriteLine("Razon del Error: " + ex.Message);
             }
             return null;
         }
@@ -130,7 +130,7 @@ namespace act_Application.Data.Data
             catch(Exception ex)
             {
                 Console.WriteLine("GetDataListUser | Error.");
-                Console.WriteLine("Razon del Error: ", ex);
+                Console.WriteLine("Razon del Error: " + ex.Message);
             }
             return null;
         }
@@ -162,7 +162,7 @@ namespace act_Application.Data.Data
             catch (Exception ex)
             {
                 Console.WriteLine("CorreoUser | Error.");
-                Console.WriteLine("Razon del Error: ",ex);
+                Console.WriteLine("Razon del Error: " + ex.Message);
             }
             return email;
         }

@@ -7,7 +7,6 @@ namespace act_Application.Data.Data
 {
     public class PrestamosRepository
     {
-
         public ActPrestamo GetDataPrestamoId(int idPrestamos) //Consulta para obtener todos los datos de una transaccion especifica
         {
             string connectionString = AppSettingsHelper.GetConnectionString();
@@ -51,7 +50,6 @@ namespace act_Application.Data.Data
 
             return null;
         }
-
         public bool GetExistPrestamosUser(int IdUser)
         {
             string connectionString = AppSettingsHelper.GetConnectionString();

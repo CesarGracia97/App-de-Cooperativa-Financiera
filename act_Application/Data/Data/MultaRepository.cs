@@ -41,7 +41,7 @@ namespace act_Application.Data.Data
             catch (Exception ex)
             {
                 Console.WriteLine("GetExistMultas || Error");
-                Console.WriteLine("Razon del Error: ", ex);
+                Console.WriteLine("Razon del Error: " + ex.Message);
             }
             return false;
         }
@@ -122,7 +122,7 @@ namespace act_Application.Data.Data
             catch (Exception ex)
             {
                 Console.WriteLine("GetDataMultas || Error");
-                Console.WriteLine("Razon del Error: ", ex);
+                Console.WriteLine("Razon del Error: " + ex.Message);
             }
             return null;
         }
@@ -204,7 +204,7 @@ namespace act_Application.Data.Data
             catch (Exception ex)
             {
                 Console.WriteLine("GetExistMultasUser || Error");
-                Console.WriteLine("Razon del Error: ", ex);
+                Console.WriteLine("Razon del Error: " + ex.Message);
             }
             return false;
         }
@@ -219,7 +219,7 @@ namespace act_Application.Data.Data
             catch (Exception ex)
             {
                 Console.WriteLine("GetLastIdMultaData || Error");
-                Console.WriteLine("Razon del Error: ", ex);
+                Console.WriteLine("Razon del Error: " + ex.Message);
             }
             return Id;
         }
