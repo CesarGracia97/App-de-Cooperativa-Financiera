@@ -11,6 +11,7 @@ namespace act_Application.Services.ServiciosAutomaticos
     public class SAGeneradorMultas : IHostedService
     {
         private readonly NotificacionesServices _nservices;
+        private readonly InteresesServices _iservices;
         private readonly ActDesarrolloContext _context;
         private Timer _timer;
         public SAGeneradorMultas(ActDesarrolloContext context, Timer timer)
@@ -24,7 +25,7 @@ namespace act_Application.Services.ServiciosAutomaticos
             List<ActCuota> cuotas = cobj.A_GetDateCuotasAll();
             for(int i =0; i < cuotas.Count; i++)
             {
-                if (cuotas[i].Estado == "PENDITE")
+                if (cuotas[i].Estado == "PENDIENTE")
                 {
                     if (DateTime.Now > cuotas[i].FechaCuota)
                     {
@@ -59,6 +60,9 @@ namespace act_Application.Services.ServiciosAutomaticos
         }
         private async Task MandarMulta(int Id, int IdPrestamo, int IdUser, string TipoUsuario, string Razon, decimal Valor, [Bind("Id,IdUser,FechaGeneracion,Cuadrante,Razon,Valor,Estado,FechaPago,CBancoOrigen,NBancoOrigen,CBancoDestino,NBancoDestino,HistorialValores,CapturaPantalla")] ActMulta actMulta)
         {
+            decimal PorcentajeGarante = 0m;
+            decimal PorcentajeTodos = 0m;
+
             actMulta.IdUser = IdUser;
             actMulta.FechaGeneracion = DateTime.Now;
             ObtenerCuadrante ocobj = new ObtenerCuadrante();
@@ -109,6 +113,7 @@ namespace act_Application.Services.ServiciosAutomaticos
             actMulta.Estado = "ACTIVO";
             _context.Add(actMulta);
             await _context.SaveChangesAsync();
+            await _iservices.AddNewInteres(actMulta.IdUser, "act_Multas", actMulta.Valor, new ActTablaInteres());
         }
     }
 }

@@ -206,7 +206,7 @@ namespace act_Application.Data.Data
                 return false;
             }
         }
-        public int GetLastIdMultaData(int IdUser)
+        public int A_GetLastIdMultaData(int IdUser)
         {
             int Id = -1;
             string connectionString = AppSettingsHelper.GetConnectionString();
