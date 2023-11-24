@@ -45,7 +45,7 @@ namespace act_Application.Data.Data
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Hubo un error en la consulta de la transacción");
+                Console.WriteLine("GetDataPrestamoId | Error.");
                 Console.WriteLine("Detalles del error: " + ex.Message);
             }
 
@@ -55,91 +55,118 @@ namespace act_Application.Data.Data
         public bool GetExistPrestamosUser(int IdUser)
         {
             string connectionString = AppSettingsHelper.GetConnectionString();
-            string prestamosQuery = ConfigReader.GetQuery(1, "SelectPrestamosUser");
-
-            int totalPrestamos = 0;
-
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            try
             {
-                connection.Open();
-                using (MySqlCommand command = new MySqlCommand(prestamosQuery, connection))
+                string Query = ConfigReader.GetQuery(1, "SelectPrestamosUser");
+
+                int totalPrestamos = 0;
+
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
-                    command.Parameters.AddWithValue("@IdUser", IdUser);
-                    using (MySqlDataReader reader = command.ExecuteReader())
+                    connection.Open();
+                    using (MySqlCommand command = new MySqlCommand(Query, connection))
                     {
-                        if (reader.Read())
+                        command.Parameters.AddWithValue("@IdUser", IdUser);
+                        using (MySqlDataReader reader = command.ExecuteReader())
                         {
-                            totalPrestamos = Convert.ToInt32(reader["TotalPrestamos"]);
+                            if (reader.Read())
+                            {
+                                totalPrestamos = Convert.ToInt32(reader["TotalPrestamos"]);
+                            }
                         }
                     }
                 }
+                return totalPrestamos > 0;
             }
-            return totalPrestamos > 0;
+            catch (Exception ex)
+            {
+                Console.WriteLine("GetExistPrestamosUser | Error.");
+                Console.WriteLine("Detalles del error: " + ex.Message);
+            }
+            return false;
         }
-
         public List<DetallesPrestamosUsers> GetDataPrestamosUser(int IdUser)
         {
             string connectionString = AppSettingsHelper.GetConnectionString();
-            string prestamosQuery = ConfigReader.GetQuery(1, "SelectPrestamosUser");
-
-            List<DetallesPrestamosUsers> prestamos = new List<DetallesPrestamosUsers>();
-            DetallesPrestamosUsers detallesPrestamos = new DetallesPrestamosUsers();
-
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            try
             {
-                connection.Open();
-                using (MySqlCommand command = new MySqlCommand(prestamosQuery, connection))
+                string Query = ConfigReader.GetQuery(1, "SelectPrestamosUser");
+
+                List<DetallesPrestamosUsers> prestamos = new List<DetallesPrestamosUsers>();
+                DetallesPrestamosUsers detallesPrestamos = new DetallesPrestamosUsers();
+
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
-                    command.Parameters.AddWithValue("@IdUser", IdUser);
-                    using (MySqlDataReader reader = command.ExecuteReader())
+                    connection.Open();
+                    using (MySqlCommand command = new MySqlCommand(Query, connection))
                     {
-                        decimal valorTotalPrestado = 0;
-                        while (reader.Read())
+                        command.Parameters.AddWithValue("@IdUser", IdUser);
+                        using (MySqlDataReader reader = command.ExecuteReader())
                         {
-                            detallesPrestamos.TotalPrestamos = Convert.ToInt32(reader["TotalPrestamos"]);
-                            detallesPrestamos.TotalCuotas = Convert.ToInt32(reader["TotalCuota"]);
-                            detallesPrestamos.TotalPagoUnico = Convert.ToInt32(reader["TotalPagoUnico"]);
-                            detallesPrestamos.TotalAprobado = Convert.ToInt32(reader["TotalAprobado"]);
-                            detallesPrestamos.TotalRechazado = Convert.ToInt32(reader["TotalRechazado"]);
-                            detallesPrestamos.TotalPendiente = Convert.ToInt32(reader["TotalPendiente"]);
-                            DetallesPrestamosUsers.DetallesPorPrestamo prestamo = new DetallesPrestamosUsers.DetallesPorPrestamo
+                            decimal valorTotalPrestado = 0;
+                            while (reader.Read())
                             {
-                                Id = Convert.ToInt32(reader["Id"]),
-                                Valor = Convert.ToDecimal(reader["Valor"]),
-                                Razon = reader["Razon"].ToString(),
-                                Estado = reader["Estado"].ToString()
-                            };
-                            detallesPrestamos.Detalles.Add(prestamo);
-                            valorTotalPrestado += prestamo.Valor;
+                                detallesPrestamos.TotalPrestamos = Convert.ToInt32(reader["TotalPrestamos"]);
+                                detallesPrestamos.TotalCuotas = Convert.ToInt32(reader["TotalCuota"]);
+                                detallesPrestamos.TotalPagoUnico = Convert.ToInt32(reader["TotalPagoUnico"]);
+                                detallesPrestamos.TotalAprobado = Convert.ToInt32(reader["TotalAprobado"]);
+                                detallesPrestamos.TotalRechazado = Convert.ToInt32(reader["TotalRechazado"]);
+                                detallesPrestamos.TotalPendiente = Convert.ToInt32(reader["TotalPendiente"]);
+                                DetallesPrestamosUsers.DetallesPorPrestamo prestamo = new DetallesPrestamosUsers.DetallesPorPrestamo
+                                {
+                                    Id = Convert.ToInt32(reader["Id"]),
+                                    Valor = Convert.ToDecimal(reader["Valor"]),
+                                    Razon = reader["Razon"].ToString(),
+                                    Estado = reader["Estado"].ToString()
+                                };
+                                detallesPrestamos.Detalles.Add(prestamo);
+                                valorTotalPrestado += prestamo.Valor;
+                            }
+                            detallesPrestamos.ValorTotalPrestado = valorTotalPrestado;
                         }
-                        detallesPrestamos.ValorTotalPrestado = valorTotalPrestado;
                     }
                 }
+                prestamos.Add(detallesPrestamos);
+                return prestamos;
             }
-            prestamos.Add(detallesPrestamos);
-            return prestamos;
+            catch (Exception ex)
+            {
+                Console.WriteLine("GetDataPrestamosUser | Error.");
+                Console.WriteLine("Detalles del error: " + ex.Message);
+            }
+            return null;
         }
         public string H_GetLastIdPres(int IdUser)
         {
             string connectionString = AppSettingsHelper.GetConnectionString();
-            string aportacionesQuery = ConfigReader.GetQuery(2, "SelectLastIdPresUser");
-            List<ActAportacione> aportaciones = new List<ActAportacione>();
             string IdA = string.Empty;
-
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            try
             {
-                connection.Open();
-                using (MySqlCommand command = new MySqlCommand(aportacionesQuery, connection))
+                string aportacionesQuery = ConfigReader.GetQuery(2, "SelectLastIdPresUser");
+                List<ActAportacione> aportaciones = new List<ActAportacione>();
+
+
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
-                    command.Parameters.AddWithValue("@IdUser", IdUser);
-                    using (MySqlDataReader reader = command.ExecuteReader())
+                    connection.Open();
+                    using (MySqlCommand command = new MySqlCommand(aportacionesQuery, connection))
                     {
-                        if (reader.Read())
+                        command.Parameters.AddWithValue("@IdUser", IdUser);
+                        using (MySqlDataReader reader = command.ExecuteReader())
                         {
-                            IdA = Convert.ToString(reader["IdPres"]);
+                            if (reader.Read())
+                            {
+                                IdA = Convert.ToString(reader["IdPres"]);
+                            }
                         }
                     }
                 }
+                return IdA;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("H_GetLastIdPres | Error.");
+                Console.WriteLine("Detalles del error: " + ex.Message);
             }
             return IdA;
         }
