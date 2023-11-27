@@ -57,7 +57,14 @@ namespace act_Application.Services.ServiciosAutomaticos
 
         public Task StartAsync(CancellationToken cancellationToken)
         {
-            _timer = new Timer(GeneradorMultas, null, TimeSpan.Zero, TimeSpan.FromSeconds(10));
+            // Calcular el tiempo hasta la próxima ejecución a la hora deseada (por ejemplo, a las 2:00 AM).
+            var now = DateTime.Now;
+            var desiredTime = new DateTime(now.Year, now.Month, now.Day, 0, 0, 0); // 0:00 AM
+            var initialDelay = desiredTime > now ? desiredTime - now : TimeSpan.FromHours(24) + (desiredTime - now);
+
+            // Configurar el temporizador para que se ejecute una vez al día a la hora deseada.
+            _timer = new Timer(GeneradorMultas, null, initialDelay, TimeSpan.FromHours(24));
+
             return Task.CompletedTask;
         }
 
