@@ -45,7 +45,7 @@ namespace act_Application.Services.ServiciosAutomaticos
                                              $"a Razon del impago a largo plazo de la Cuota establecida para el dia {cuotas[i].FechaCuota}." +
                                              $"\nPor favor pagar la Multa y la cuota lo mas pronto posible para evitar que aumente el valor de la sancion.";
                         string Razon = $"ID:{cuotas[i].IdCuot} - IMPAGO CUOTAS ";
-                        await MandarMulta(1, cuotas[i].Id, cuotas[i].IdPrestamo, cuotas[i].IdUser, cuotas[i].TipoUsuario, Razon, cuotas[i].Valor, new ActMulta());
+                        await MandarMulta(2, cuotas[i].Id, cuotas[i].IdPrestamo, cuotas[i].IdUser, cuotas[i].TipoUsuario, Razon, cuotas[i].Valor, new ActMulta());
                         await _nservices.CrearNotificacion(7, cuotas[i].IdUser, cuotas[i].IdCuot, "Aplicacion de Multa por Impago de Cuota", Descripcion, cuotas[i].IdUser.ToString(), new ActNotificacione());
 
                     }
@@ -81,45 +81,91 @@ namespace act_Application.Services.ServiciosAutomaticos
             actMulta.Razon = Razon;
             var erobj = new EventosRepository().A_GetParticipantesPrestamo(IdPrestamo);
             bool opobj = new ObtenerParticipantes().NombresParticipantes(erobj.ParticipantesId, erobj.NombresPId);
-            decimal porcentaje =0m;
-            if (TipoUsuario == "Socio" || TipoUsuario == "Administrador")
+            decimal porcentaje = 0m;
+            switch (opcion)
             {
-                porcentaje = 0.03m;
-                if (opobj)
-                {
-                    //Socio o Admin Si participa alguien
-                    porcentaje = 0.03m;
-                    PorcentajeGarante = 0.0060m;
-                    PorcentajeTodos = 0.0180m;
-                }
-                else
-                {
-                    //Socio o AdminNo participa nadie
-                    porcentaje = 0.03m;
-                    PorcentajeGarante = 0m;
-                    PorcentajeTodos = 0.03m;
-                }
+                case 1:
+                    if (TipoUsuario == "Socio" || TipoUsuario == "Administrador")
+                    {
+                        if (opobj)
+                        {
+                            //Socio o Admin Si participa alguien
+                            porcentaje = 0.03m;
+                            PorcentajeGarante = 0.0060m;
+                            PorcentajeTodos = 0.0180m;
+                        }
+                        else
+                        {
+                            //Socio o AdminNo participa nadie
+                            porcentaje = 0.03m;
+                            PorcentajeGarante = 0m;
+                            PorcentajeTodos = 0.03m;
+                        }
+                    }
+                    else if (TipoUsuario == "Referido")
+                    {
+                        porcentaje = 0.10m;
+                        /*
+                        if (opobj)
+                        {
+                            //Referido Si participa alguien
+                            porcentaje = 0.10m;
+                        }
+                        */
+                        /*
+                         else
+                        {
+                            //Referido No participa nadie
+                            porcentaje = 0.10m;
+                        }
+                        */
+                        PorcentajeGarante = 0.0240m;
+                        PorcentajeTodos = 0.0360m;
+                    }
+                    break;
+                case 2:
+                    if (TipoUsuario == "Socio" || TipoUsuario == "Administrador")
+                    {
+                        if (opobj)
+                        {
+                            //Socio o Admin Si participa alguien
+                            porcentaje = 0.06m;
+                            PorcentajeGarante = 0.060m;
+                            PorcentajeTodos = 0.0360m;
+                        }
+                        else
+                        {
+                            //Socio o AdminNo participa nadie
+                            porcentaje = 0.06m;
+                            PorcentajeGarante = 0m;
+                            PorcentajeTodos = 0.06m;
+                        }
+                    }
+                    else if (TipoUsuario == "Referido")
+                    {
+                        porcentaje = 0.14m;
+                        /*
+                        if (opobj)
+                        {
+                            //Referido Si participa alguien
+                            porcentaje = 0.10m;
+                        }
+                        */
+                        /*
+                         else
+                        {
+                            //Referido No participa nadie
+                            porcentaje = 0.10m;
+                        }
+                        */
+                        PorcentajeGarante = 0.0240m;
+                        PorcentajeTodos = 0.1160m;
+                    }
+                    break;
+                default:
+                    break;
             }
-            else if (TipoUsuario == "Referido")
-            {
-                porcentaje = 0.10m;
-                /*
-                if (opobj)
-                {
-                    //Referido Si participa alguien
-                    porcentaje = 0.10m;
-                }
-                */
-                /*
-                 else
-                {
-                    //Referido No participa nadie
-                    porcentaje = 0.10m;
-                }
-                */
-                PorcentajeGarante = 0.0240m;
-                PorcentajeTodos = 0.0360m;
-            }
+
             actMulta.Valor = (Valor * porcentaje);
             actMulta.Estado = "ACTIVO";
             _context.Add(actMulta);
