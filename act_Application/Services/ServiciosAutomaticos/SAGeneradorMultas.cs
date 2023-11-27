@@ -25,9 +25,10 @@ namespace act_Application.Services.ServiciosAutomaticos
             List<ActCuota> cuotas = cobj.A_GetDateCuotasAll();
             for(int i =0; i < cuotas.Count; i++)
             {
-                if (cuotas[i].Estado == "PENDIENTE")
+                if (cuotas[i].Estado == "PENDIENTE" || cuotas[i].Estado == "PENDIENTE M1")
                 {
-                    if (DateTime.Now > cuotas[i].FechaCuota)
+                    DateTime fechaLimiteSuperior = cuotas[i].FechaCuota.AddDays(61);
+                    if (DateTime.Now > cuotas[i].FechaCuota && DateTime.Now <= fechaLimiteSuperior && cuotas[i].Estado == "PENDIENTE")
                     {
                         if (cuotas[i].Valor > 0)
                         {
@@ -38,7 +39,7 @@ namespace act_Application.Services.ServiciosAutomaticos
                             await _nservices.CrearNotificacion(7, cuotas[i].IdUser, cuotas[i].IdCuot, "Aplicacion de Multa por Impago de Cuota", Descripcion, cuotas[i].IdUser.ToString(), new ActNotificacione());
                         }
                     }
-                    else if( DateTime.Now > cuotas[i].FechaCuota.AddDays(61))
+                    else if( DateTime.Now > fechaLimiteSuperior && cuotas[i].Estado == "PENDIENTE M1")
                     {
                         //Parte para interes superior del 61 dias pendiente para la sig semana.
                         string Descripcion = $"Señor Usuario {cuotas[i].NombreDueño}, el impago de la cuota a superado los 61 dias, se Aumento el valor de la multa " +
@@ -78,7 +79,7 @@ namespace act_Application.Services.ServiciosAutomaticos
             actMulta.FechaGeneracion = DateTime.Now;
             ObtenerCuadrante ocobj = new ObtenerCuadrante();
             actMulta.Cuadrante = ocobj.Cuadrante(DateTime.Now);
-            actMulta.Razon = Razon;
+            actMulta.Razon = "Cuota Id #: " + Id.ToString() + " | " + Razon;
             var erobj = new EventosRepository().A_GetParticipantesPrestamo(IdPrestamo);
             bool opobj = new ObtenerParticipantes().NombresParticipantes(erobj.ParticipantesId, erobj.NombresPId);
             decimal porcentaje = 0m;
@@ -163,6 +164,7 @@ namespace act_Application.Services.ServiciosAutomaticos
                     }
                     break;
                 default:
+                    Console.WriteLine("MandarMulta | Opcion Inexistente.");
                     break;
             }
 
