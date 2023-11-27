@@ -181,21 +181,46 @@ namespace act_Application.Data.Data
             List<ActEvento> eventos = new List<ActEvento>();
             try
             {
-                string Query = ConfigReader.GetQuery(3, "SelectParticipantesPrestamo");
+                string Query = ConfigReader.GetQuery(3, "SelectAllDateEventos");
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
-                    connection.Open();
-                    using (MySqlCommand command = new MySqlCommand(Query, connection))
-                    {
+                    MySqlCommand cmd = new MySqlCommand(Query, connection);
+                    cmd.CommandType = CommandType.Text;
 
+                    connection.Open();
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            ActEvento obj = MapToActEventos(reader);
+                            eventos.Add(obj);
+                        }
                     }
                 }
+                return eventos;
             }
             catch (Exception ex)
             {
                 Console.WriteLine("SA_AllDataEventos. | Error. ");
                 Console.WriteLine("Detalles del error: " + ex.Message);
+                return null;
             }
         }    
+        private ActEvento MapToActEventos(MySqlDataReader reader)
+        {
+            return new ActEvento 
+            {
+                Id = Convert.ToInt32(reader["Id"]),
+                IdEven = Convert.ToString(reader["IdEven"]),
+                IdPrestamo = Convert.ToInt32(reader["IdPrestamo"]),
+                IdUser = Convert.ToInt32(reader["IdUser"]),
+                ParticipantesId = Convert.ToString(reader["ParticipantesId"]),
+                NombresPId = Convert.ToString(reader["NombresPId"]),
+                FechaGeneracion = Convert.ToDateTime(reader["FechaGeneracion"]),
+                FechaInicio = Convert.ToDateTime(reader["FechaInicio"]),
+                FechaFinalizacion = Convert.ToDateTime(reader["FechaFinalizacion"]),
+                Estado = Convert.ToString(reader["Estado"])
+            };
+        }
     }
 }
