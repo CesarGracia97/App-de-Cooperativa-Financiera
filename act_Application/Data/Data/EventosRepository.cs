@@ -7,10 +7,10 @@ namespace act_Application.Data.Data
 {
     public class EventosRepository
     {
+        private readonly string connectionString = AppSettingsHelper.GetConnectionString();
         public List<ActEvento> Eventos { get; set; }
         public bool GetExistEventos()
         {
-            string connectionString = AppSettingsHelper.GetConnectionString();
             try
             {
                 string eventosQuery = ConfigReader.GetQuery(1, "SelectEvents");
@@ -46,7 +46,6 @@ namespace act_Application.Data.Data
         }
         public EventosRepository GetDataEventos()
         {
-            string connectionString = AppSettingsHelper.GetConnectionString();
             EventosRepository result = new EventosRepository();
             try
             {
@@ -144,9 +143,8 @@ namespace act_Application.Data.Data
             }
             return null;
         }
-        public ActEvento A_GetParticipantesPrestamo(int IdPrestamo)
+        public ActEvento Auto_GetParticipantesPrestamo(int IdPrestamo)
         {
-            string connectionString = AppSettingsHelper.GetConnectionString();
             try
             {
                 string query = ConfigReader.GetQuery(3, "SelectParticipantesPrestamo");
@@ -173,10 +171,31 @@ namespace act_Application.Data.Data
             }
             catch (Exception ex)
             {
-                Console.WriteLine("A_GetParticipantesPrestam | Error");
+                Console.WriteLine("Auto_GetParticipantesPrestam | Error");
                 Console.WriteLine("Detalles del error: " + ex.Message);
             }
             return null;
         }
+        public List<ActEvento> SA_AllDataEventos()
+        {
+            List<ActEvento> eventos = new List<ActEvento>();
+            try
+            {
+                string Query = ConfigReader.GetQuery(3, "SelectParticipantesPrestamo");
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                {
+                    connection.Open();
+                    using (MySqlCommand command = new MySqlCommand(Query, connection))
+                    {
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("SA_AllDataEventos. | Error. ");
+                Console.WriteLine("Detalles del error: " + ex.Message);
+            }
+        }    
     }
 }

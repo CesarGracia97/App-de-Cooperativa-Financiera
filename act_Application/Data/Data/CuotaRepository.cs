@@ -7,9 +7,9 @@ namespace act_Application.Data.Data
 {
     public class CuotaRepository
     {
+        private readonly string connectionString = AppSettingsHelper.GetConnectionString();
         public ActCuota GetDataCuotasUser(int IdUser)
         {
-            string connectionString = AppSettingsHelper.GetConnectionString();
             try
             {
                 string Query = ConfigReader.GetQuery(1, "SelectCoutasUser");
@@ -23,28 +23,11 @@ namespace act_Application.Data.Data
 
                     connection.Open();
 
-                    using (MySqlDataReader rd = cmd.ExecuteReader())
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
                     {
-                        while (rd.Read())
+                        while (reader.Read())
                         {
-                            ActCuota obj = new ActCuota
-                            {
-                                Id = Convert.ToInt32(rd["Id"]),
-                                IdCuot = Convert.ToString(rd["IdCuot"]),
-                                IdUser = Convert.ToInt32(rd["IdUser"]),
-                                IdPrestamo = Convert.ToInt32(rd["IdPrestamo"]),
-                                FechaGeneracion = Convert.ToDateTime(rd["FechaGeneracion"]),
-                                FechaCuota = Convert.ToDateTime(rd["FechaCuota"]),
-                                Valor = Convert.ToDecimal(rd["Valor"]),
-                                Estado = Convert.ToString(rd["Estado"]),
-                                FechaPago = Convert.ToString(rd["CBancoOrigen"]),
-                                CBancoOrigen = Convert.ToString(rd["CBancoOrigen"]),
-                                NBancoOrigen = Convert.ToString(rd["NBancoOrigen"]),
-                                CBancoDestino = Convert.ToString(rd["CBancoDestino"]),
-                                NBancoDestino = Convert.ToString(rd["NBancoDestino"]),
-                                HistorialValores = Convert.ToString(rd["HistorialValores"]),
-                                CapturaPantalla = Convert.ToString(rd["CapturaPantalla"])
-                            };
+                            ActCuota obj = MapToActCuota(reader);
                             return obj;
                         }
                     }
@@ -59,7 +42,6 @@ namespace act_Application.Data.Data
         }
         public ActCuota GetIdDataCuotaUser(int Id)
         {
-            string connectionString = AppSettingsHelper.GetConnectionString();
             try
             {
                 string Query = ConfigReader.GetQuery(1, "SelectIdCuota");
@@ -73,29 +55,11 @@ namespace act_Application.Data.Data
 
                     connection.Open();
 
-                    using (MySqlDataReader rd = cmd.ExecuteReader())
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
                     {
-                        if (rd.Read())
+                        while (reader.Read())
                         {
-                            ActCuota obj = new ActCuota
-                            {
-                                Id = Convert.ToInt32(rd["Id"]),
-                                IdCuot = Convert.ToString(rd["IdCuot"]),
-                                IdUser = Convert.ToInt32(rd["IdUser"]),
-                                IdPrestamo = Convert.ToInt32(rd["IdPrestamo"]),
-                                FechaGeneracion = Convert.ToDateTime(rd["FechaGeneracion"]),
-                                FechaCuota = Convert.ToDateTime(rd["FechaCuota"]),
-                                Valor = Convert.ToDecimal(rd["Valor"]),
-                                Estado = Convert.ToString(rd["Estado"]),
-                                FechaPago = Convert.ToString(rd["CBancoOrigen"]),
-                                CBancoOrigen = Convert.ToString(rd["CBancoOrigen"]),
-                                NBancoOrigen = Convert.ToString(rd["NBancoOrigen"]),
-                                CBancoDestino = Convert.ToString(rd["CBancoDestino"]),
-                                NBancoDestino = Convert.ToString(rd["NBancoDestino"]),
-                                HistorialValores = Convert.ToString(rd["HistorialValores"]),
-                                CapturaPantalla = Convert.ToString(rd["CapturaPantalla"])
-                            };
-
+                            ActCuota obj = MapToActCuota(reader);
                             return obj;
                         }
                     }
@@ -111,7 +75,6 @@ namespace act_Application.Data.Data
         }
         public int H_GetLastIdCouta(int IdUser)
         {
-            string connectionString = AppSettingsHelper.GetConnectionString();
             int Id = -1;
             try
             {
@@ -144,9 +107,8 @@ namespace act_Application.Data.Data
             }
 
         }
-        public List<ActCuota> A_GetDateCuotasAll()
+        public List<ActCuota> SA_GetDateCuotasAll()
         {
-            string connectionString = AppSettingsHelper.GetConnectionString();
             List<ActCuota> cuotasList = new List<ActCuota>();
             try
             {
@@ -159,31 +121,44 @@ namespace act_Application.Data.Data
 
                     connection.Open();
 
-                    using (MySqlDataReader rd = cmd.ExecuteReader())
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
                     {
-                        ActCuota obj = new ActCuota
+                        while (reader.Read())
                         {
-                            Id = Convert.ToInt32(rd["Id"]),
-                            IdPrestamo = Convert.ToInt32(rd["IdPrestamo"]),
-                            IdUser = Convert.ToInt32(rd["IdUser"]),
-                            IdCuot = Convert.ToString(rd["IdCuot"]),
-                            FechaCuota = Convert.ToDateTime(rd["FechaCuota"]),
-                            Valor = Convert.ToDecimal(rd["Valor"]),
-                            NombreDueño = Convert.ToString(rd["NombreYApellido"]),
-                            TipoUsuario = Convert.ToString(rd["TipoUser"])
-                        };
-                        cuotasList.Add(obj);
+                            ActCuota obj = MapToActCuota(reader);
+                            cuotasList.Add(obj);
+                        }
                     }
-                    return cuotasList;
                 }
+                return cuotasList;
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"A_GetDateCuotasAll | Error \n");
+                Console.WriteLine($"SA_GetDateCuotasAll | Error \n");
                 Console.WriteLine($"Detalles del error: " + ex.Message);
                 return null;
             }
-
+        }
+        private ActCuota MapToActCuota(MySqlDataReader reader)
+        {
+            return new ActCuota
+            {
+                Id = Convert.ToInt32(reader["Id"]),
+                IdCuot = Convert.ToString(reader["IdCuot"]),
+                IdUser = Convert.ToInt32(reader["IdUser"]),
+                IdPrestamo = Convert.ToInt32(reader["IdPrestamo"]),
+                FechaGeneracion = Convert.ToDateTime(reader["FechaGeneracion"]),
+                FechaCuota = Convert.ToDateTime(reader["FechaCuota"]),
+                Valor = Convert.ToDecimal(reader["Valor"]),
+                Estado = Convert.ToString(reader["Estado"]),
+                FechaPago = Convert.ToString(reader["CBancoOrigen"]),
+                CBancoOrigen = Convert.ToString(reader["CBancoOrigen"]),
+                NBancoOrigen = Convert.ToString(reader["NBancoOrigen"]),
+                CBancoDestino = Convert.ToString(reader["CBancoDestino"]),
+                NBancoDestino = Convert.ToString(reader["NBancoDestino"]),
+                HistorialValores = Convert.ToString(reader["HistorialValores"]),
+                CapturaPantalla = Convert.ToString(reader["CapturaPantalla"])
+            };
         }
     }
 }
