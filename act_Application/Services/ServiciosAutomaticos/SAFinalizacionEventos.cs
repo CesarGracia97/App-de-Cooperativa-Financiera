@@ -1,4 +1,6 @@
 ﻿using act_Application.Data.Context;
+using act_Application.Data.Data;
+using act_Application.Models.BD;
 using act_Application.Services.ServiciosAutomaticos;
 
 namespace act_Application.Services
@@ -19,7 +21,7 @@ namespace act_Application.Services
             var initialDelay = desiredTime > now ? desiredTime - now : TimeSpan.FromHours(24) + (desiredTime - now);
 
             // Configurar el temporizador para que se ejecute una vez al día a la hora deseada.
-            _timer = new Timer(FinalizarMulta, null, initialDelay, TimeSpan.FromHours(24));
+            _timer = new Timer(FinalizarEventos, null, initialDelay, TimeSpan.FromHours(24));
 
             return Task.CompletedTask;
         }
@@ -33,9 +35,20 @@ namespace act_Application.Services
         {
             _timer?.Dispose();
         }
-        public async void FinalizarMulta(object state)
+        public async void FinalizarEventos(object state)
         {
+            var erobj = new EventosRepository();
+            List<ActEvento> eventos = erobj.GetAllDataEventos();
+            for(int i = 0; i < eventos.Count; i++)
+            {
+                if (eventos[i].Estado == "CONCURSO")
+                {
+                    if(DateTime.Now >= eventos[i].FechaFinalizacion)
+                    {
 
+                    }
+                }
+            }
         }
     }
 }

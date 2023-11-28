@@ -273,7 +273,6 @@ public partial class ActDesarrolloContext : DbContext
             entity.Property(e => e.Estado).HasMaxLength(45);
             entity.Property(e => e.ValorGarante).HasPrecision(10);
             entity.Property(e => e.ValorTodos).HasPrecision(10);
-            entity.Property(e => e.ValorActual).HasPrecision(10);
         });
 
         modelBuilder.Entity<ActUser>(entity =>

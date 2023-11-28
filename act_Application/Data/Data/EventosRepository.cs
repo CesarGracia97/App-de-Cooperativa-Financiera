@@ -8,7 +8,6 @@ namespace act_Application.Data.Data
     public class EventosRepository
     {
         private readonly string connectionString = AppSettingsHelper.GetConnectionString();
-        public List<ActEvento> Eventos { get; set; }
         public bool GetExistEventos()
         {
             try
@@ -44,64 +43,47 @@ namespace act_Application.Data.Data
                 return false;
             }
         }
-        public EventosRepository GetDataEventos()
+        public List<ActEvento> GetAllDataEventos()
         {
-            EventosRepository result = new EventosRepository();
+            List<ActEvento> eventoList = new List<ActEvento>();
             try
             {
-                string query = ConfigReader.GetQuery(1, "SelectEvents");
+                string Query = ConfigReader.GetQuery(1, "SelectEvents");
 
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
                     connection.Open();
 
-                    using (MySqlCommand command = new MySqlCommand(query, connection))
+                    using (MySqlCommand command = new MySqlCommand(Query, connection))
 
                     using (MySqlDataReader reader = command.ExecuteReader())
                     {
-                        if (reader.Read())
+                        /*
+                         He desarrollado tantos programas, trantos proyectos, trabajos y ninguno me ha hecho sentir tan antusiasmado como el kue kuiero desarrollar
+                         contigo a mi lado, uno al kue kuiero poner de nombre "Relacion eterna". Uno donde ambos nos apoyemos, trabajemos, tengamos funciones iterativas
+                         kue permitan el desarrollo y evolucion mutua como una Inteligencia Artificar de tipo Red Neuronal. Donde podamos crecer y resolver problemas 
+                         propios y congregados. Donde podamos crecer juntos profesionalmente en tu carrera y yo en la mia como Servidores de Base de Datos enlazados
+                         Y donde kuiero kue creemos un futuro juntos como, kue fusionemos nuestras pasiones, sueños, deseos, metas, anhelos, fortalezas, debilidades
+                         miedos, valores y sobre todo nuestros espiritus y creemos algo unico similar al universo en donde tu alma y la mia converjan en armonia 
+                         como objetos a la espera de una union funcionalmente activa.
+                        */
+                        while (reader.Read())
                         {
-                            List<ActEvento> eventos = new List<ActEvento>();
-                            /*He desarrollado tantos programas, trantos proyectos, trabajos y ninguno me ha hecho sentir tan antusiasmado como el kue kuiero desarrollar
-                             contigo a mi lado, uno al kue kuiero poner de nombre "Relacion eterna". Uno donde ambos nos apoyemos, trabajemos, tengamos funciones iterativas
-                             kue permitan el desarrollo y evolucion mutua como una Inteligencia Artificar de tipo Red Neuronal. Donde podamos crecer y resolver problemas 
-                             propios y congregados. Donde podamos crecer juntos profesionalmente en tu carrera y yo en la mia como Servidores de Base de Datos enlazados
-                             Y donde kuiero kue creemos un futuro juntos como, kue fusionemos nuestras pasiones, sueños, deseos, metas, anhelos, fortalezas, debilidades
-                             miedos, valores y sobre todo nuestros espiritus y creemos algo unico similar al universo en donde tu alma y la mia converjan en armonia 
-                             como objetos a la espera de una union funcionalmente activa.*/
-                            do
-                            {
-                                ActEvento eve = new ActEvento
-                                {
-                                    Id = Convert.ToInt32(reader["Id"]),
-                                    IdUser = Convert.ToInt32(reader["IdUser"]),
-                                    IdPrestamo = Convert.ToInt32(reader["IdPrestamo"]),
-                                    FechaInicio = Convert.ToDateTime(reader["FechaInicio"]),
-                                    FechaFinalizacion = Convert.ToDateTime(reader["FechaFinalizacion"]),
-                                    FechaGeneracion = Convert.ToDateTime(reader["FechaGeneracion"]),
-                                    ParticipantesId = Convert.ToString(reader["ParticipantesId"]),
-                                    NombresPId = Convert.ToString(reader["NombresPId"]),
-                                    Estado = Convert.ToString(reader["Estado"]),
-                                    NombreUsuario = Convert.ToString(reader["NombreUsuario"])
-                                };
-                                eventos.Add(eve);
-                                PrestamosRepository prestamos = new PrestamosRepository();
-                                prestamos.GetDataPrestamoId(eve.IdPrestamo);
-
-                            } while (reader.Read());
-
-                            result.Eventos = eventos;
+                            ActEvento obj = MapToActEventos(reader);
+                            eventoList.Add(obj);
+                            var prestamos = new PrestamosRepository();
+                            prestamos.GetDataPrestamoId(obj.IdPrestamo);
                         }
                     }
                 }
+                return eventoList;
             }
             catch (Exception ex)
             {
-                Console.WriteLine("GetDataEventos | Error.");
+                Console.WriteLine("GetAllDataEventos | Error.");
                 Console.WriteLine("Detalles del error: " + ex.Message);
-                result.Eventos = null;
+                return null;
             }
-            return result;
         }
         public ActEvento GetDataEventoPorId(int Id)
         {
@@ -119,17 +101,7 @@ namespace act_Application.Data.Data
                         {
                             if (reader.Read())
                             {
-                                ActEvento eventos = new ActEvento
-                                {
-                                    Id = Convert.ToInt32(reader["Id"]),
-                                    FechaInicio = Convert.ToDateTime(reader["FechaInicio"]),
-                                    FechaFinalizacion = Convert.ToDateTime(reader["FechaFinalizacion"]),
-                                    FechaGeneracion = Convert.ToDateTime(reader["FechaGeneracion"]),
-                                    ParticipantesId = Convert.ToString(reader["ParticipantesId"]),
-                                    NombresPId = Convert.ToString(reader["NombresPId"]),
-                                    Estado = reader["Estado"].ToString(),
-                                    IdPrestamo = Convert.ToInt32(reader["IdPrestamo"])
-                                };
+                                ActEvento eventos = MapToActEventos(reader);
                                 return eventos;
                             }
                         }
@@ -158,11 +130,7 @@ namespace act_Application.Data.Data
                         {
                             while (reader.Read())
                             {
-                                ActEvento obj = new ActEvento 
-                                {
-                                    Id = Convert.ToInt32(reader["Id"]),
-                                    ParticipantesId = Convert.ToString(reader["ParticipantesId"])
-                                };
+                                ActEvento obj = MapToActEventos(reader);
                                 return obj;
                             }
                         }
@@ -176,36 +144,6 @@ namespace act_Application.Data.Data
             }
             return null;
         }
-        public List<ActEvento> SA_AllDataEventos()
-        {
-            List<ActEvento> eventos = new List<ActEvento>();
-            try
-            {
-                string Query = ConfigReader.GetQuery(3, "SelectAllDateEventos");
-                using (MySqlConnection connection = new MySqlConnection(connectionString))
-                {
-                    MySqlCommand cmd = new MySqlCommand(Query, connection);
-                    cmd.CommandType = CommandType.Text;
-
-                    connection.Open();
-                    using (MySqlDataReader reader = cmd.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            ActEvento obj = MapToActEventos(reader);
-                            eventos.Add(obj);
-                        }
-                    }
-                }
-                return eventos;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("SA_AllDataEventos. | Error. ");
-                Console.WriteLine("Detalles del error: " + ex.Message);
-                return null;
-            }
-        }    
         private ActEvento MapToActEventos(MySqlDataReader reader)
         {
             return new ActEvento 
@@ -219,7 +157,8 @@ namespace act_Application.Data.Data
                 FechaGeneracion = Convert.ToDateTime(reader["FechaGeneracion"]),
                 FechaInicio = Convert.ToDateTime(reader["FechaInicio"]),
                 FechaFinalizacion = Convert.ToDateTime(reader["FechaFinalizacion"]),
-                Estado = Convert.ToString(reader["Estado"])
+                Estado = Convert.ToString(reader["Estado"]),
+                NombreUsuario = Convert.ToString(reader["NombreUsuario"])
             };
         }
     }

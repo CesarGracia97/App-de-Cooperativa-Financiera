@@ -26,11 +26,10 @@
     "SelectLastIdCoutaUser": "SELECT Id FROM act_Cuotas WHERE IdUser = @IdUser ORDER BY Id DESC LIMIT 1",
     "SelectLastIdMultaUser": "SELECT Id FROM act_Multas WHERE IdUser = @IdUser ORDER BY Id DESC LIMIT 1",
     "SelectLastIdCapturaPantallaUser": "SELECT Id FROM act_CapturasPantalla WHERE IdUser = @IdUser AND Estado 'PENDIENTE' ORDER BY Id DESC LIMIT 1",
-    "SelectCorreoUser": "SELECT Correo FROM act_User WHERE IdU = @IdUser"
+    "SelectCorreoUser": "SELECT Correo FROM act_User WHERE Id = @IdUser"
   },
   "Automatic": {
     "SelectDateCuotasAll": "SELECT a.Id, a.IdPrestamo, a.IdUser, a.IdCuot, a.FechaCuota, a.Valor e.NombreYApellido e.TipoUser FROM act_Cuotas a JOIN act_User e ON a.IdUser = e.Id WHERE a.Estado = 'PENDIENTE' OR a.Estado = 'PENDIENTE M1'",
-    "SelectParticipantesPrestamo": "SELECT a.Id, a.ParticipantesId FROM act_Eventos a WHERE Estado = 'CONCURSO' AND IdPrestamo = @IdPrestamo",
-    "SelectAllDateEventos": "SELECT a.Id, a.FechaFinalizacion FROM act_Eventos a WHERE Estado = 'CONCURSO'"
+    "SelectParticipantesPrestamo": "SELECT a.Id, a.ParticipantesId FROM act_Eventos a WHERE Estado = 'CONCURSO' AND IdPrestamo = @IdPrestamo" 
   }
 }
