@@ -18,8 +18,8 @@
  -- Creacion de Eventos.
  -- Metodo Autonomo Automatico de Finalizacion de Eventos.
  -- Metodo Autonomo Automatico de Multas.
-# Objetivo 4 (Tablas de Liquidaciones)
+# Objetivo 4 (Vistas)
+ -- VIsta de Cada Parte del Aplicativo
+# Objetivo 5 (Tablas de Liquidaciones)
  -- Liquidaciones
-# Objetivo 5 (Vistas)
-
 # Objetivo 6 (Administrador)
