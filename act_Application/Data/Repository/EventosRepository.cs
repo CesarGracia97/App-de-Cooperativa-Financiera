@@ -87,7 +87,6 @@ namespace act_Application.Data.Repository
         }
         public ActEvento GetDataEventoPorId(int Id)
         {
-            string connectionString = AppSettingsHelper.GetConnectionString();
             try
             {
                 string query = ConfigReader.GetQuery(1, "SelectEventosUser");

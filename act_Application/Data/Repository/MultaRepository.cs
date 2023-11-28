@@ -7,9 +7,9 @@ namespace act_Application.Data.Repository
 {
     public class MultaRepository
     {
+        private readonly string connectionString = AppSettingsHelper.GetConnectionString();
         public bool GetExistMultas()
         {
-            string connectionString = AppSettingsHelper.GetConnectionString();
             try
             {
                 string Query = ConfigReader.GetQuery(1, "SelectMultas");
@@ -45,7 +45,6 @@ namespace act_Application.Data.Repository
         }
         public List<ActMulta> GetDataMultas()
         {
-            string connectionString = AppSettingsHelper.GetConnectionString();
             try
             {
                 string multasQuery = ConfigReader.GetQuery(1, "SelectMultas");
@@ -126,7 +125,6 @@ namespace act_Application.Data.Repository
         }
         public ActMulta GetDataIdMultaUser(int Id)
         {
-            string connectionString = AppSettingsHelper.GetConnectionString();
             try
             {
                 string Query = ConfigReader.GetQuery(1, "SelectIdMultaUser");
@@ -175,7 +173,6 @@ namespace act_Application.Data.Repository
         }
         public bool GetExistMultasUser(int IdUser)
         {
-            string connectionString = AppSettingsHelper.GetConnectionString();
             try
             {
                 string multaQuery = ConfigReader.GetQuery(1, "SelectMultasUser");
@@ -209,7 +206,6 @@ namespace act_Application.Data.Repository
         public int A_GetLastIdMultaData(int IdUser)
         {
             int Id = -1;
-            string connectionString = AppSettingsHelper.GetConnectionString();
             try
             {
                 string Query = ConfigReader.GetQuery(2, "SelectLastIdMultaUser");

@@ -8,9 +8,9 @@ namespace act_Application.Data.Repository
 {
     public class UsuarioRepository
     {
+        private readonly string connectionString = AppSettingsHelper.GetConnectionString();
         public ActUser GetDataUser(string Correo, string Contrasena)
         {
-            string connectionString = AppSettingsHelper.GetConnectionString();
             try
             {
                 string userQuery = ConfigReader.GetQuery(1, "SelectUsuario");
@@ -56,7 +56,6 @@ namespace act_Application.Data.Repository
         }
         public ActRol GetDataRolUser(int idRol)
         {
-            string connectionString = AppSettingsHelper.GetConnectionString();
             try
             {
                 string roleQuery = ConfigReader.GetQuery(1, "SelectRol"); ;
@@ -98,7 +97,6 @@ namespace act_Application.Data.Repository
         }
         public List<UserList> GetDataListUser()
         {
-            string connectionString = AppSettingsHelper.GetConnectionString();
             try
             {
                 string Query = ConfigReader.GetQuery(1, "SelectListUser");
@@ -136,7 +134,6 @@ namespace act_Application.Data.Repository
         public string CorreoUser(int IdUser)
         {
             string email = string.Empty;
-            string connectionString = AppSettingsHelper.GetConnectionString();
             try
             {
                 string Query = ConfigReader.GetQuery(2, "SelectCorreoUser");

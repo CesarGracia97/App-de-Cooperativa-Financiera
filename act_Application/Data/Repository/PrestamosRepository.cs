@@ -7,9 +7,9 @@ namespace act_Application.Data.Repository
 {
     public class PrestamosRepository
     {
+        private readonly string connectionString = AppSettingsHelper.GetConnectionString();
         public ActPrestamo GetDataPrestamoId(int idPrestamos) //Consulta para obtener todos los datos de una transaccion especifica
         {
-            string connectionString = AppSettingsHelper.GetConnectionString();
             try
             {
                 string query = ConfigReader.GetQuery(1, "SelectPrestamoId");
@@ -51,7 +51,6 @@ namespace act_Application.Data.Repository
         }
         public bool GetExistPrestamosUser(int IdUser)
         {
-            string connectionString = AppSettingsHelper.GetConnectionString();
             try
             {
                 string Query = ConfigReader.GetQuery(1, "SelectPrestamosUser");
@@ -84,7 +83,6 @@ namespace act_Application.Data.Repository
         }
         public List<DetallesPrestamosUsers> GetDataPrestamosUser(int IdUser)
         {
-            string connectionString = AppSettingsHelper.GetConnectionString();
             try
             {
                 string Query = ConfigReader.GetQuery(1, "SelectPrestamosUser");
@@ -135,7 +133,6 @@ namespace act_Application.Data.Repository
         }
         public string H_GetLastIdPres(int IdUser)
         {
-            string connectionString = AppSettingsHelper.GetConnectionString();
             string IdA = string.Empty;
             try
             {

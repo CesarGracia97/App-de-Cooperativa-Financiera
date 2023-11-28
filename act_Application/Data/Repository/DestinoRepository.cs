@@ -6,47 +6,44 @@ namespace act_Application.Data.Repository
 {
     public class DestinoRepository
     {
-        public class Repositorio
+        private readonly string connectionString = AppSettingsHelper.GetConnectionString();
+        public List<ActCuentaDestino> GetDataDestinos()
         {
-            public List<ActCuentaDestino> GetDataDestinos()
+            try
             {
-                string connectionString = AppSettingsHelper.GetConnectionString();
-                try
+                string Query = ConfigReader.GetQuery(1, "SelectDestino");
+                List<ActCuentaDestino> cuentasDestino = new List<ActCuentaDestino>();
+
+                using (MySqlConnection conexion = new MySqlConnection(connectionString))
                 {
-                    string Query = ConfigReader.GetQuery(1, "SelectDestino");
-                    List<ActCuentaDestino> cuentasDestino = new List<ActCuentaDestino>();
+                    conexion.Open();
 
-                    using (MySqlConnection conexion = new MySqlConnection(connectionString))
+                    MySqlCommand cmd = new MySqlCommand(Query, conexion);
+
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
                     {
-                        conexion.Open();
-
-                        MySqlCommand cmd = new MySqlCommand(Query, conexion);
-
-                        using (MySqlDataReader reader = cmd.ExecuteReader())
+                        while (reader.Read())
                         {
-                            while (reader.Read())
+                            ActCuentaDestino cuentaDestino = new ActCuentaDestino
                             {
-                                ActCuentaDestino cuentaDestino = new ActCuentaDestino
-                                {
-                                    Id = Convert.ToInt32(reader["Id"]),
-                                    NumeroCuentaB = Convert.ToString(reader["NumeroCuentaB"]),
-                                    NombreBanco = Convert.ToString(reader["NombreBanco"])
-                                };
+                                Id = Convert.ToInt32(reader["Id"]),
+                                NumeroCuentaB = Convert.ToString(reader["NumeroCuentaB"]),
+                                NombreBanco = Convert.ToString(reader["NombreBanco"])
+                            };
 
-                                cuentasDestino.Add(cuentaDestino);
-                            }
+                            cuentasDestino.Add(cuentaDestino);
                         }
                     }
-
-                    return cuentasDestino;
-
                 }
-                catch (Exception ex)
-                {
-                    Console.WriteLine("GetDataDestinos | Error");
-                    Console.WriteLine("Detalles del error: " + ex.Message);
-                    return null;
-                }
+
+                return cuentasDestino;
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("GetDataDestinos | Error");
+                Console.WriteLine("Detalles del error: " + ex.Message);
+                return null;
             }
         }
     }
