@@ -31,6 +31,7 @@ namespace act_Application.Services
         }
         public async void FinalizarEventos(object state)
         {
+            Console.WriteLine("FinalizarEventos | Funciona la funcion");
             var erobj = new EventosRepository();
             List<ActEvento> eventos = erobj.GetAllDataEventos();
             for (int i = 0; i < eventos.Count; i++)
@@ -60,7 +61,7 @@ namespace act_Application.Services
             catch (DbUpdateConcurrencyException ex)
             {
                 Console.WriteLine("ActualizarEstadoEvento | Error");
-                Console.WriteLine("Detalles del error: " + ex.Message);
+                Console.WriteLine("\nDetalles del error: " + ex.Message);
             }
         }
     }
