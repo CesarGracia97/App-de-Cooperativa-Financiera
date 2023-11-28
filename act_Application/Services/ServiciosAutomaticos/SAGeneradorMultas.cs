@@ -19,11 +19,28 @@ namespace act_Application.Services.ServiciosAutomaticos
             _context = context;
             _timer = timer;
         }
+        public Task StartAsync(CancellationToken cancellationToken)
+        {
+            var now = DateTime.Now;
+            var desiredTime = new DateTime(now.Year, now.Month, now.Day, 0, 0, 0); // 0:00 AM
+            var initialDelay = desiredTime > now ? desiredTime - now : TimeSpan.FromHours(24) + (desiredTime - now);
+            _timer = new Timer(GeneradorMultas, null, initialDelay, TimeSpan.FromHours(24));
+            return Task.CompletedTask;
+        }
+        public Task StopAsync(CancellationToken cancellationToken)
+        {
+            _timer?.Change(Timeout.Infinite, 0);
+            return Task.CompletedTask;
+        }
+        public void Dispose()
+        {
+            _timer?.Dispose();
+        }
         public async void GeneradorMultas(object state)
         {
             var cobj = new CuotaRepository();
             List<ActCuota> cuotas = cobj.SA_GetDateCuotasAll();
-            for(int i =0; i < cuotas.Count; i++)
+            for (int i = 0; i < cuotas.Count; i++)
             {
                 if (cuotas[i].Estado == "PENDIENTE" || cuotas[i].Estado == "PENDIENTE M1")
                 {
@@ -35,11 +52,11 @@ namespace act_Application.Services.ServiciosAutomaticos
                             string Descripcion = $"Señor Usuario {cuotas[i].NombreDueño}, se le a Aplicado una multa a Razon del impago de la Cuota puesta para el dia {cuotas[i].FechaCuota}." +
                                 $"\nPor favor pagar la Multa y la cuota lo mas pronto posible para evitar que aumente el valor de la sancion.";
                             string Razon = $"ID:{cuotas[i].IdCuot} - IMPAGO CUOTAS ";
-                            await MandarMulta( 1, cuotas[i].Id, cuotas[i].IdPrestamo, cuotas[i].IdUser, cuotas[i].TipoUsuario, Razon, cuotas[i].Valor, new ActMulta());
+                            await MandarMulta(1, cuotas[i].Id, cuotas[i].IdPrestamo, cuotas[i].IdUser, cuotas[i].TipoUsuario, Razon, cuotas[i].Valor, new ActMulta());
                             await _nservices.CrearNotificacion(7, cuotas[i].IdUser, cuotas[i].IdCuot, "Aplicacion de Multa por Impago de Cuota", Descripcion, cuotas[i].IdUser.ToString(), new ActNotificacione());
                         }
                     }
-                    else if( DateTime.Now > fechaLimiteSuperior && cuotas[i].Estado == "PENDIENTE M1")
+                    else if (DateTime.Now > fechaLimiteSuperior && cuotas[i].Estado == "PENDIENTE M1")
                     {
                         //Parte para interes superior del 61 dias pendiente para la sig semana.
                         string Descripcion = $"Señor Usuario {cuotas[i].NombreDueño}, el impago de la cuota a superado los 61 dias, se Aumento el valor de la multa " +
@@ -52,30 +69,6 @@ namespace act_Application.Services.ServiciosAutomaticos
                     }
                 }
             }
-        }
-
-
-        public Task StartAsync(CancellationToken cancellationToken)
-        {
-            // Calcular el tiempo hasta la próxima ejecución a la hora deseada (por ejemplo, a las 2:00 AM).
-            var now = DateTime.Now;
-            var desiredTime = new DateTime(now.Year, now.Month, now.Day, 0, 0, 0); // 0:00 AM
-            var initialDelay = desiredTime > now ? desiredTime - now : TimeSpan.FromHours(24) + (desiredTime - now);
-
-            // Configurar el temporizador para que se ejecute una vez al día a la hora deseada.
-            _timer = new Timer(GeneradorMultas, null, initialDelay, TimeSpan.FromHours(24));
-
-            return Task.CompletedTask;
-        }
-
-        public Task StopAsync(CancellationToken cancellationToken)
-        {
-            _timer?.Change(Timeout.Infinite, 0);
-            return Task.CompletedTask;
-        }
-        public void Dispose()
-        {
-            _timer?.Dispose();
         }
         private async Task MandarMulta(int opcion, int Id, int IdPrestamo, int IdUser, string TipoUsuario, string Razon, decimal Valor, [Bind("Id,IdUser,FechaGeneracion,Cuadrante,Razon,Valor,Estado,FechaPago,CBancoOrigen,NBancoOrigen,CBancoDestino,NBancoDestino,HistorialValores,CapturaPantalla")] ActMulta actMulta)
         {

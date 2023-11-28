@@ -2,8 +2,8 @@ using act_Application.Data.Data;
 using act_Application.Data.Context;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
-
-
+using act_Application.Services;
+using act_Application.Services.ServiciosAutomaticos;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,12 +11,14 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 //Cadena de conexion BD
-builder.Services.AddDbContext<ActDesarrolloContext>(options =>
-    options.UseMySQL(builder.Configuration.GetConnectionString("Cadena")));
+builder.Services.AddDbContext<ActDesarrolloContext>(options => options.UseMySQL(builder.Configuration.GetConnectionString("Cadena")));
+
+//Servicios en Segundo Plano
+builder.Services.AddHostedService<SAFinalizacionEventos>();
+builder.Services.AddHostedService<SAGeneradorMultas>();
 
 //Autenticacion
-builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-    .AddCookie(options =>
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options =>
     {
         //options.ExpireTimeSpan = TimeSpan.FromMinutes(16); // Tiempo de expiracion de sesion inactiva
     });

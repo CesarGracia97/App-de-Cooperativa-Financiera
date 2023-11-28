@@ -1,7 +1,6 @@
 ﻿using act_Application.Data.Context;
 using act_Application.Data.Data;
 using act_Application.Models.BD;
-using act_Application.Services.ServiciosAutomaticos;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
