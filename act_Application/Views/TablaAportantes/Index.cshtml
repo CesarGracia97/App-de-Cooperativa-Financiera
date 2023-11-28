@@ -1,0 +1,65 @@
+﻿@model IEnumerable<act_Application.Models.BD.ActAportacione>;
+@using System.Globalization;
+@using act_Application.Data;
+@{
+    ViewData["Title"] = "Tabla de Aportantes";
+    bool condicion = new AportacionRepository().GetExistAportaciones();
+
+}
+<header>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/General/Tablas/TablaAportaciones.css" />
+    <script src="~/js/Aportar/MsjAportar.js"> </script>
+</header>
+<body>
+    <div class="content-text">
+        <h1>Tabla de Aportaciones</h1>
+        <hr />
+        <div class="table-container">
+            @if (condicion == true)
+            {
+                <table class="aportacion-table">
+                    <thead>
+                        <tr>
+                            <th>Aportantes</th>
+                            @for (int i = 1; i <= 12; i++)
+                            {
+                                <th>@CultureInfo.CurrentCulture.DateTimeFormat.GetAbbreviatedMonthName(i)</th>
+                            }
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var aportacion in Model.GroupBy(ap => ap.NombreUsuario))
+                        {
+                            <tr>
+                                <td>@aportacion.Key</td>
+                                @for (int month = 1; month <= 12; month++)
+                                {
+                                    var usuarioAportacion = aportacion.FirstOrDefault(a => a.FechaAportacion.Month == month);
+                                    var valor = usuarioAportacion?.Valor ?? 0;
+                                    var detallesAportaciones = usuarioAportacion?.DetallesAportaciones;
+
+                                    var mensajeSinAportes = $"\"{aportacion.Key}\" no realizó aportes este mes";
+
+                                    var mensajeConAportes = detallesAportaciones != null && detallesAportaciones.Count > 1
+                                    ? $"Total de Aportaciones: {valor.ToString("N2")}.\n\"{aportacion.Key}\" realizó {detallesAportaciones.Count} aportaciones:\n{string.Join("\n", detallesAportaciones.Select((d, index) => $"{index + 1}. Fecha: {d.FechaAportacion.ToShortDateString()}  - Cuadrante {d.Cuadrante}, Valor: {d.Valor.ToString("N2")}"))}"
+                                    : $"\"{aportacion.Key}\" realizó una aportación: {valor.ToString("N2")}\nFecha: {usuarioAportacion?.FechaAportacion.ToShortDateString()} - Cuadrante {usuarioAportacion?.DetallesAportaciones.FirstOrDefault()?.Cuadrante}";
+                                    <td class="aportacion-cell"
+                                        data-mensaje-sin-aportes="@mensajeSinAportes"
+                                        data-mensaje-con-aportes="@mensajeConAportes">
+                                        @valor.ToString("N2")
+                                    </td>
+                                }
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <p>No hay datos disponibles.</p>
+            }
+        </div>
+    </div>
+</body>

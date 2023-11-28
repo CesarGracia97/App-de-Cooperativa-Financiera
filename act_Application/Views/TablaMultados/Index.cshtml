@@ -1,0 +1,64 @@
+﻿@using System.Globalization;
+@using act_Application.Data.Data;
+@model IEnumerable<act_Application.Models.BD.ActMulta>;
+@{
+    ViewData["Title"] = "Tabla de Multados";
+    bool condicion = new MultaRepository().GetExistMultas();
+}
+<header>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="~/js/Multa/MsjMulta.js"> </script>
+    <link rel="stylesheet" href="/css/General/Tablas/TablaMultas.css" />
+</header>
+<body>
+    <div class="content-text">
+        <h1>Tabla de Multas</h1>
+        <hr />
+        <div class="table-container">
+            @if (condicion == true)
+            {
+                <table class="multa-table">
+                    <thead>
+                        <tr>
+                            <th>Multados</th>
+                            @for (int i = 1; i <= 12; i++)
+                            {
+                                <th>@CultureInfo.CurrentCulture.DateTimeFormat.GetAbbreviatedMonthName(i)</th>
+                            }
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var multa in Model.GroupBy(m => m.NombreUsuario))
+                        {
+                            <tr>
+                                <td>@multa.Key</td>
+                                @for (int month = 1; month <= 12; month++)
+                                {
+                                    var usuarioMulta = multa.FirstOrDefault(a => a.FechaGeneracion.Month == month);
+                                    var valor = usuarioMulta?.Valor ?? 0;
+                                    var detallesMultas = usuarioMulta?.DetallesMulta;
+
+                                    var mensajeSinMultas = $"\"{multa.Key}\" no tiene Multas este mes";
+
+                                    var mensajeConMultas = detallesMultas != null && detallesMultas.Count > 1
+                                    ? $"Total de Multas: {valor.ToString("N2")}.\n\"{multa.Key}\" tiene {detallesMultas.Count} Multas:\n{string.Join("\n", detallesMultas.Select((d, index) => $"{index + 1}. Fecha: {d.FechaMulta.ToShortDateString()} - Cuadrante {d.Cuadrante}, Valor: {d.Valor.ToString("N2")}"))}"
+                                    : $"\"{multa.Key}\" tiene una Multa: {valor.ToString("N2")}\nFecha: {usuarioMulta?.FechaGeneracion.ToShortDateString()} - Cuadrante {usuarioMulta?.DetallesMulta.FirstOrDefault()?.Cuadrante}";
+                                    <td class="multa-cell"
+                                        data-mensaje-sin-multas="@mensajeSinMultas"
+                                        data-mensaje-con-multas="@mensajeConMultas">
+                                        @valor.ToString("N2")
+                                    </td>
+                                }
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <p>No hay datos disponibles.</p>
+            }
+        </div>
+    </div>
+</body>
