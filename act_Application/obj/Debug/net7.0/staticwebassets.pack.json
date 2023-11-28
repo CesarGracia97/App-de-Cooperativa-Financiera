@@ -21,6 +21,14 @@
       "PackagePath": "staticwebassets\\css\\General\\Shared\\_Layout.css"
     },
     {
+      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\css\\General\\Tablas\\T_Aportantes\\T_Aportantes.css",
+      "PackagePath": "staticwebassets\\css\\General\\Tablas\\T_Aportantes\\T_Aportantes.css"
+    },
+    {
+      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\css\\General\\Tablas\\T_Multados\\T_Multados.css",
+      "PackagePath": "staticwebassets\\css\\General\\Tablas\\T_Multados\\T_Multados.css"
+    },
+    {
       "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\favicon.ico",
       "PackagePath": "staticwebassets\\favicon.ico"
     },
@@ -47,6 +55,14 @@
     {
       "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\js\\General\\Shared\\_Layout\\Logout.js",
       "PackagePath": "staticwebassets\\js\\General\\Shared\\_Layout\\Logout.js"
+    },
+    {
+      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\js\\General\\Tablas\\T_Aportantes\\MSJ_TablAportantes.js",
+      "PackagePath": "staticwebassets\\js\\General\\Tablas\\T_Aportantes\\MSJ_TablAportantes.js"
+    },
+    {
+      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\js\\General\\Tablas\\T_Multados\\MSJ_TablMultados.js",
+      "PackagePath": "staticwebassets\\js\\General\\Tablas\\T_Multados\\MSJ_TablMultados.js"
     },
     {
       "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\lib\\bootstrap\\LICENSE",

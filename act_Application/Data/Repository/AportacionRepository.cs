@@ -4,7 +4,7 @@ using act_Application.Models.Sistema.Complementos;
 using MySql.Data.MySqlClient;
 using System.Data;
 
-namespace act_Application.Data
+namespace act_Application.Data.Repository
 {
     public class AportacionRepository
     {

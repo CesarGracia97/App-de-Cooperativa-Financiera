@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Text;
 using System.Security.Cryptography;
 using act_Application.Models.BD;
-using act_Application.Data.Data;
+using act_Application.Data.Repository;
 using act_Application.Models.Sistema.Complementos;
 using act_Application.Models.Sistema.ViewModel;
 using act_Application.Data.Context;

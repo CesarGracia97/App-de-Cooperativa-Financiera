@@ -1,4 +1,4 @@
-﻿using act_Application.Data.Data;
+﻿using act_Application.Data.Repository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

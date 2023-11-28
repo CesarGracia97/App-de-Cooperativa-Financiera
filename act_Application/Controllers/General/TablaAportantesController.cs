@@ -1,4 +1,4 @@
-﻿using act_Application.Data;
+﻿using act_Application.Data.Repository;
 using Microsoft.AspNetCore.Mvc;
 
 namespace act_Application.Controllers.General

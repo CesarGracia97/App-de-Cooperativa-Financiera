@@ -2,7 +2,7 @@
 using MySql.Data.MySqlClient;
 using System.Data;
 
-namespace act_Application.Data.Data
+namespace act_Application.Data.Repository
 {
     public class CapturaPantallaRepository
     {

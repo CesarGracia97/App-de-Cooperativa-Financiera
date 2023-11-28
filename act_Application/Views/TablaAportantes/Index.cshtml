@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<act_Application.Models.BD.ActAportacione>;
 @using System.Globalization;
-@using act_Application.Data;
+@using act_Application.Data.Repository;
 @{
     ViewData["Title"] = "Tabla de Aportantes";
     bool condicion = new AportacionRepository().GetExistAportaciones();

@@ -1,4 +1,4 @@
-﻿namespace act_Application.Data.Data;
+﻿namespace act_Application.Data.Repository;
 
 using act_Application.Data.Context;
 using act_Application.Models.BD;

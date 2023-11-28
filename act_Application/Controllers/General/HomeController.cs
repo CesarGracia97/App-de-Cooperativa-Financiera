@@ -1,5 +1,5 @@
 ﻿using act_Application.Data.Context;
-using act_Application.Data.Data;
+using act_Application.Data.Repository;
 using act_Application.Models;
 using act_Application.Models.BD;
 using act_Application.Services.ServiciosAplicativos;

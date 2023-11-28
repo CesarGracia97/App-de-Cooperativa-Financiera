@@ -2,7 +2,7 @@
 using act_Application.Models.Sistema.Complementos;
 using MySql.Data.MySqlClient;
 
-namespace act_Application.Data.Data
+namespace act_Application.Data.Repository
 {
     public class DestinoRepository
     {
