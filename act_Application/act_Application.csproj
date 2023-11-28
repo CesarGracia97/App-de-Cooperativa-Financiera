@@ -10,9 +10,17 @@
 
   <ItemGroup>
     <Compile Remove="Views\Administrador\**" />
+    <Compile Remove="wwwroot\css\Administrador\**" />
+    <Compile Remove="wwwroot\js\Administrador\**" />
     <Content Remove="Views\Administrador\**" />
+    <Content Remove="wwwroot\css\Administrador\**" />
+    <Content Remove="wwwroot\js\Administrador\**" />
     <EmbeddedResource Remove="Views\Administrador\**" />
+    <EmbeddedResource Remove="wwwroot\css\Administrador\**" />
+    <EmbeddedResource Remove="wwwroot\js\Administrador\**" />
     <None Remove="Views\Administrador\**" />
+    <None Remove="wwwroot\css\Administrador\**" />
+    <None Remove="wwwroot\js\Administrador\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -29,11 +37,6 @@
     <PackageReference Include="MySql.EntityFrameworkCore" Version="7.0.10" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="System.ServiceProcess.ServiceController" Version="8.0.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="wwwroot\css\Administrador\" />
-    <Folder Include="wwwroot\js\Administrador\" />
   </ItemGroup>
 
 </Project>

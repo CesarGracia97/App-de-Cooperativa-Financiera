@@ -1,0 +1,34 @@
+﻿h1, p, hr {
+    margin: 10px 0px 25px 25px;
+}
+
+.table-container {
+    overflow: scroll;
+    max-height: 385px;
+    margin-left: 25px;
+}
+
+.aportacion-table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+    .aportacion-table th, .aportacion-table td {
+        border: 1px solid black;
+        padding: 8px;
+        text-align: center;
+    }
+
+    .aportacion-table th {
+        background-color: #f2f2f2;
+    }
+
+/* Estilos para el modo oscuro */
+body.dark .content-text {
+    color: #ccc; /* Cambiar el color del texto en modo oscuro */
+}
+
+/* Estilos para el modo claro */
+body:not(.dark) .content-text {
+    color: #707070; /* Cambiar el color del texto en modo claro */
+}
