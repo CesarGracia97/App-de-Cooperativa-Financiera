@@ -2,6 +2,8 @@
 using act_Application.Data.Data;
 using act_Application.Models.BD;
 using act_Application.Services.ServiciosAutomaticos;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace act_Application.Services
 {
@@ -15,14 +17,7 @@ namespace act_Application.Services
         }
         public Task StartAsync(CancellationToken cancellationToken)
         {
-            // Calcular el tiempo hasta la próxima ejecución a la hora deseada (por ejemplo, a las 2:00 AM).
-            var now = DateTime.Now;
-            var desiredTime = new DateTime(now.Year, now.Month, now.Day, 0, 0, 0); // 0:00 AM
-            var initialDelay = desiredTime > now ? desiredTime - now : TimeSpan.FromHours(24) + (desiredTime - now);
-
-            // Configurar el temporizador para que se ejecute una vez al día a la hora deseada.
-            _timer = new Timer(FinalizarEventos, null, initialDelay, TimeSpan.FromHours(24));
-
+            _timer = new Timer(FinalizarEventos, null, TimeSpan.Zero, TimeSpan.FromSeconds(10));
             return Task.CompletedTask;
         }
 
@@ -39,15 +34,34 @@ namespace act_Application.Services
         {
             var erobj = new EventosRepository();
             List<ActEvento> eventos = erobj.GetAllDataEventos();
-            for(int i = 0; i < eventos.Count; i++)
+            for (int i = 0; i < eventos.Count; i++)
             {
                 if (eventos[i].Estado == "CONCURSO")
                 {
-                    if(DateTime.Now >= eventos[i].FechaFinalizacion)
+                    if (DateTime.Now >= eventos[i].FechaFinalizacion)
                     {
-
+                        await ActualizarEstadoEvento(eventos[i].Id, new ActEvento());
                     }
                 }
+            }
+        }
+        private async Task ActualizarEstadoEvento(int Id, [Bind("Id,IdEven,IdPrestamo,IdUser,ParticipantesId,NombresPId,FechaGeneracion,FechaInicio,FechaFinalizacion,Estado")] ActEvento actEvento)
+        {
+            if (Id != actEvento.Id)
+            {
+                Console.WriteLine("ActualizarEstadoEvento | Ocurrio un Error en la condicion de Comparacion Id = act.Id");
+            }
+            try
+            {
+                actEvento.Id = Id;
+                actEvento.Estado = "FINALIZADO";
+                _context.Update(actEvento);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException ex)
+            {
+                Console.WriteLine("ActualizarEstadoEvento | Error");
+                Console.WriteLine("Detalles del error: " + ex.Message);
             }
         }
     }
