@@ -6,18 +6,17 @@ namespace act_Application.Data.Repository
 {
     public class CapturaPantallaRepository
     {
+        private string connectionString = AppSettingsHelper.GetConnectionString();
         public int H_GetDataCapturaPantallaLastIdUser(int IdUser)
         {
-            string connectionString = AppSettingsHelper.GetConnectionString();
             int Id = -1;
             try
             {
-                string Query = ConfigReader.GetQuery(2, "SelectLastIdCapturaPantallaUser");
+                string Query = ConfigReader.GetQuery1( 2, "", "ASQ_SelectLastIdCapturaPantallaUser");
 
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
-                    string query = Query;
-                    MySqlCommand cmd = new MySqlCommand(query, connection);
+                    MySqlCommand cmd = new MySqlCommand(Query, connection);
                     cmd.Parameters.AddWithValue("@IdUser", IdUser);
                     cmd.CommandType = CommandType.Text;
 
