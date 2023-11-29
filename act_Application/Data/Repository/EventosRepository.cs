@@ -12,13 +12,13 @@ namespace act_Application.Data.Repository
         {
             try
             {
-                string eventosQuery = ConfigReader.GetQuery(1, "SelectEvents");
+                string Query = ConfigReader.GetQuery1( 1, "EVEN", "DBQE_SelectEventos");
 
                 int totalAportaciones = 0; // Variable para almacenar el valor de TotalAportaciones
 
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
-                    using (MySqlCommand cmd = new MySqlCommand(eventosQuery, connection))
+                    using (MySqlCommand cmd = new MySqlCommand(Query, connection))
                     {
                         cmd.CommandType = CommandType.Text;
 
@@ -48,7 +48,7 @@ namespace act_Application.Data.Repository
             List<ActEvento> eventoList = new List<ActEvento>();
             try
             {
-                string Query = ConfigReader.GetQuery(1, "SelectEvents");
+                string Query = ConfigReader.GetQuery1( 1, "EVEN", "DBQE_SelectEventos");
 
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
@@ -89,11 +89,11 @@ namespace act_Application.Data.Repository
         {
             try
             {
-                string query = ConfigReader.GetQuery(1, "SelectEventosUser");
+                string Query = ConfigReader.GetQuery1( 1, "EVEN", "DBQE_SelectEventosUser");
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
                     connection.Open();
-                    using (MySqlCommand command = new MySqlCommand(query, connection))
+                    using (MySqlCommand command = new MySqlCommand(Query, connection))
                     {
                         command.Parameters.AddWithValue("@Id", Id);
                         using (MySqlDataReader reader = command.ExecuteReader())
@@ -114,15 +114,15 @@ namespace act_Application.Data.Repository
             }
             return null;
         }
-        public ActEvento Auto_GetParticipantesPrestamo(int IdPrestamo)
+        public ActEvento Auto_GetParticipantesPrestamoEvento(int IdPrestamo)
         {
             try
             {
-                string query = ConfigReader.GetQuery(3, "SelectParticipantesPrestamo");
+                string Query = ConfigReader.GetQuery1( 3, "", "ATQ_SelectParticipantesPrestamoEvento");
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
                     connection.Open();
-                    using (MySqlCommand command = new MySqlCommand(query, connection))
+                    using (MySqlCommand command = new MySqlCommand(Query, connection))
                     {
                         command.Parameters.AddWithValue("@IdPrestamo", IdPrestamo);
                         using (MySqlDataReader reader = command.ExecuteReader())

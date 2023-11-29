@@ -80,7 +80,7 @@ namespace act_Application.Services.ServiciosAutomaticos
             ObtenerCuadrante ocobj = new ObtenerCuadrante();
             actMulta.Cuadrante = ocobj.Cuadrante(DateTime.Now);
             actMulta.Razon = "Cuota Id #: " + Id.ToString() + " | " + Razon;
-            var erobj = new EventosRepository().Auto_GetParticipantesPrestamo(IdPrestamo);
+            var erobj = new EventosRepository().Auto_GetParticipantesPrestamoEvento(IdPrestamo);
             bool opobj = new ObtenerParticipantes().NombresParticipantes(erobj.ParticipantesId, erobj.NombresPId);
             decimal porcentaje = 0m;
             switch (opcion)

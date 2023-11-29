@@ -11,7 +11,7 @@ namespace act_Application.Data.Repository
         {
             try
             {
-                string Query = ConfigReader.GetQuery(1, "SelectDestino");
+                string Query = ConfigReader.GetQuery1( 1,"DEST", "DBQD_SelectDestino");
                 List<ActCuentaDestino> cuentasDestino = new List<ActCuentaDestino>();
 
                 using (MySqlConnection conexion = new MySqlConnection(connectionString))
@@ -24,20 +24,12 @@ namespace act_Application.Data.Repository
                     {
                         while (reader.Read())
                         {
-                            ActCuentaDestino cuentaDestino = new ActCuentaDestino
-                            {
-                                Id = Convert.ToInt32(reader["Id"]),
-                                NumeroCuentaB = Convert.ToString(reader["NumeroCuentaB"]),
-                                NombreBanco = Convert.ToString(reader["NombreBanco"])
-                            };
-
+                            ActCuentaDestino cuentaDestino = MapToCuentaDestino(reader);
                             cuentasDestino.Add(cuentaDestino);
                         }
                     }
                 }
-
                 return cuentasDestino;
-
             }
             catch (Exception ex)
             {
@@ -45,6 +37,15 @@ namespace act_Application.Data.Repository
                 Console.WriteLine("Detalles del error: " + ex.Message);
                 return null;
             }
+        }
+        private ActCuentaDestino MapToCuentaDestino(MySqlDataReader reader)
+        {
+            return new ActCuentaDestino
+            {
+                Id = Convert.ToInt32(reader["Id"]),
+                NumeroCuentaB = Convert.ToString(reader["NumeroCuentaB"]),
+                NombreBanco = Convert.ToString(reader["NombreBanco"])
+            };
         }
     }
 }
