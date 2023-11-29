@@ -13,13 +13,13 @@ namespace act_Application.Data.Repository
         {
             try
             {
-                string aportacionesQuery = ConfigReader.GetQuery(1, "SelectAportaciones");
+                string Query = ConfigReader.GetQuery1( 1,"APOR", "DBQA_SelectAportaciones");
 
                 int totalAportaciones = 0; // Variable para almacenar el valor de TotalAportaciones
 
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
-                    using (MySqlCommand cmd = new MySqlCommand(aportacionesQuery, connection))
+                    using (MySqlCommand cmd = new MySqlCommand(Query, connection))
                     {
                         cmd.CommandType = CommandType.Text;
 
@@ -63,13 +63,13 @@ namespace act_Application.Data.Repository
         {
             try
             {
-                string aportacionesQuery = ConfigReader.GetQuery(1, "SelectAportaciones");
+                string Query = ConfigReader.GetQuery1( 1,"APOR", "DBQA_SelectAportaciones");
 
                 List<ActAportacione> aportaciones = new List<ActAportacione>();
 
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
-                    using (MySqlCommand cmd = new MySqlCommand(aportacionesQuery, connection))
+                    using (MySqlCommand cmd = new MySqlCommand(Query, connection))
                     {
                         cmd.CommandType = CommandType.Text;
 
@@ -140,14 +140,14 @@ namespace act_Application.Data.Repository
         {
             try
             {
-                string aportacionesQuery = ConfigReader.GetQuery(1, "SelectAportacionesUser");
+                string Query = ConfigReader.GetQuery1( 1, "APOR", "DBQA_SelectAportacionesUser");
 
                 int totalAportaciones = 0;
 
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
                     connection.Open();
-                    using (MySqlCommand command = new MySqlCommand(aportacionesQuery, connection))
+                    using (MySqlCommand command = new MySqlCommand(Query, connection))
                     {
                         command.Parameters.AddWithValue("@IdUser", IdUser);
                         using (MySqlDataReader reader = command.ExecuteReader())
@@ -172,7 +172,7 @@ namespace act_Application.Data.Repository
         {
             try
             {
-                string Query = ConfigReader.GetQuery(1, "SelectAportacionesUser");
+                string Query = ConfigReader.GetQuery1( 1, "APOR", "DBQA_SelectAportacionesUser");
 
                 List<DetallesAportacionesUsers> aportaciones = new List<DetallesAportacionesUsers>();
                 DetallesAportacionesUsers detallesAportaciones = new DetallesAportacionesUsers();
@@ -221,7 +221,7 @@ namespace act_Application.Data.Repository
             string IdA = string.Empty;
             try
             {
-                string Query = ConfigReader.GetQuery(2, "SelectLastIdAporUser");
+                string Query = ConfigReader.GetQuery1(2, "", "SelectLastIdAporUser");
                 List<ActAportacione> aportaciones = new List<ActAportacione>();
 
                 using (MySqlConnection connection = new MySqlConnection(connectionString))

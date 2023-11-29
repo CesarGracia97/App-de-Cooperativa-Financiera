@@ -66,7 +66,6 @@ namespace act_Application.Services.ServiciosAplicativos
             await EnviarCorreo(correoDestino, subject, body);
 
         }
-
         public async Task EnviarCorreoUsuario(int IdUser, int opcion, string Descripcion)
         {
             var uobj = new UsuarioRepository();
@@ -121,18 +120,15 @@ namespace act_Application.Services.ServiciosAplicativos
                 Console.WriteLine("EnviarCorreoUsuario - EmailSendServices. Error al obtener el Correo");
             }
         }
-
-
         /*Envia el Correo*/
-        public async Task EnviarCorreo(string destinatario, string asunto, string mensaje)
+        private async Task EnviarCorreo(string destinatario, string asunto, string mensaje)
         {
-            var smtpConfig = SmtpConfig.LoadConfig("Data/Config/config.json");
+            var smtpConfig = SmtpConfig.LoadConfig("Data/Config/smtpconfig.json");
 
             using (var smtpClient = new SmtpClient(smtpConfig.Server, smtpConfig.Port))
             {
                 smtpClient.Credentials = new NetworkCredential(smtpConfig.Username, smtpConfig.Password);
                 smtpClient.EnableSsl = true;
-
                 var mailMessage = new MailMessage
                 {
                     From = new MailAddress(smtpConfig.Username),
@@ -140,9 +136,7 @@ namespace act_Application.Services.ServiciosAplicativos
                     Body = mensaje,
                     IsBodyHtml = false
                 };
-
                 mailMessage.To.Add(destinatario);
-
                 await smtpClient.SendMailAsync(mailMessage);
             }
         }
