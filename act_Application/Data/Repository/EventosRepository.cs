@@ -12,7 +12,7 @@ namespace act_Application.Data.Repository
         {
             try
             {
-                string Query = ConfigReader.GetQuery1( 1, "EVEN", "DBQE_SelectEventos");
+                string Query = ConfigReader.GetQuery( 1, "EVEN", "DBQE_SelectEventos");
 
                 int totalAportaciones = 0; // Variable para almacenar el valor de TotalAportaciones
 
@@ -48,7 +48,7 @@ namespace act_Application.Data.Repository
             List<ActEvento> eventoList = new List<ActEvento>();
             try
             {
-                string Query = ConfigReader.GetQuery1( 1, "EVEN", "DBQE_SelectEventos");
+                string Query = ConfigReader.GetQuery( 1, "EVEN", "DBQE_SelectEventos");
 
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
@@ -89,7 +89,7 @@ namespace act_Application.Data.Repository
         {
             try
             {
-                string Query = ConfigReader.GetQuery1( 1, "EVEN", "DBQE_SelectEventosUser");
+                string Query = ConfigReader.GetQuery( 1, "EVEN", "DBQE_SelectEventosUser");
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
                     connection.Open();
@@ -118,7 +118,7 @@ namespace act_Application.Data.Repository
         {
             try
             {
-                string Query = ConfigReader.GetQuery1( 3, "", "ATQ_SelectParticipantesPrestamoEvento");
+                string Query = ConfigReader.GetQuery( 3, "", "ATQ_SelectParticipantesPrestamoEvento");
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
                     connection.Open();

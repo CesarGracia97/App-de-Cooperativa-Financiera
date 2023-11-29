@@ -11,7 +11,7 @@ namespace act_Application.Data.Repository
         {
             try
             {
-                string Query = ConfigReader.GetQuery1( 1,"DEST", "DBQD_SelectDestino");
+                string Query = ConfigReader.GetQuery( 1,"DEST", "DBQD_SelectDestino");
                 List<ActCuentaDestino> cuentasDestino = new List<ActCuentaDestino>();
 
                 using (MySqlConnection conexion = new MySqlConnection(connectionString))

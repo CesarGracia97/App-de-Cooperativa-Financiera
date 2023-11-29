@@ -13,7 +13,7 @@ namespace act_Application.Data.Repository
         {
             try
             {
-                string Query = ConfigReader.GetQuery1( 1,"APOR", "DBQA_SelectAportaciones");
+                string Query = ConfigReader.GetQuery( 1,"APOR", "DBQA_SelectAportaciones");
 
                 int totalAportaciones = 0; // Variable para almacenar el valor de TotalAportaciones
 
@@ -63,7 +63,7 @@ namespace act_Application.Data.Repository
         {
             try
             {
-                string Query = ConfigReader.GetQuery1( 1,"APOR", "DBQA_SelectAportaciones");
+                string Query = ConfigReader.GetQuery( 1,"APOR", "DBQA_SelectAportaciones");
 
                 List<ActAportacione> aportaciones = new List<ActAportacione>();
 
@@ -140,7 +140,7 @@ namespace act_Application.Data.Repository
         {
             try
             {
-                string Query = ConfigReader.GetQuery1( 1, "APOR", "DBQA_SelectAportacionesUser");
+                string Query = ConfigReader.GetQuery( 1, "APOR", "DBQA_SelectAportacionesUser");
 
                 int totalAportaciones = 0;
 
@@ -172,7 +172,7 @@ namespace act_Application.Data.Repository
         {
             try
             {
-                string Query = ConfigReader.GetQuery1( 1, "APOR", "DBQA_SelectAportacionesUser");
+                string Query = ConfigReader.GetQuery( 1, "APOR", "DBQA_SelectAportacionesUser");
 
                 List<DetallesAportacionesUsers> aportaciones = new List<DetallesAportacionesUsers>();
                 DetallesAportacionesUsers detallesAportaciones = new DetallesAportacionesUsers();
@@ -221,7 +221,7 @@ namespace act_Application.Data.Repository
             string IdA = string.Empty;
             try
             {
-                string Query = ConfigReader.GetQuery1(2, "", "SelectLastIdAporUser");
+                string Query = ConfigReader.GetQuery(2, "", "SelectLastIdAporUser");
                 List<ActAportacione> aportaciones = new List<ActAportacione>();
 
                 using (MySqlConnection connection = new MySqlConnection(connectionString))

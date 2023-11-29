@@ -12,7 +12,7 @@ namespace act_Application.Data.Repository
             int Id = -1;
             try
             {
-                string Query = ConfigReader.GetQuery1( 2, "", "ASQ_SelectLastIdCapturaPantallaUser");
+                string Query = ConfigReader.GetQuery( 2, "", "ASQ_SelectLastIdCapturaPantallaUser");
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
                     MySqlCommand cmd = new MySqlCommand(Query, connection);

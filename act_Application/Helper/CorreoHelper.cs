@@ -6,7 +6,7 @@ namespace act_Application.Helper
     public class CorreoHelper
     {
         private readonly static string connectionString = AppSettingsHelper.GetConnectionString();
-        private readonly static string Query = ConfigReader.GetQuery1(1, "USER", "DBQU_SelectEmail");
+        private readonly static string Query = ConfigReader.GetQuery(1, "USER", "DBQU_SelectEmail");
         public static string ObtenerCorreoDestino()
         {
             using (MySqlConnection connection = new MySqlConnection(connectionString))

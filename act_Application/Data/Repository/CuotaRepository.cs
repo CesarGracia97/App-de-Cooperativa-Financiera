@@ -12,7 +12,7 @@ namespace act_Application.Data.Repository
         {
             try
             {
-                string Query = ConfigReader.GetQuery1( 1, "CUOT", "DBQC_SelectCoutasUser");
+                string Query = ConfigReader.GetQuery( 1, "CUOT", "DBQC_SelectCoutasUser");
 
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
@@ -43,7 +43,7 @@ namespace act_Application.Data.Repository
         {
             try
             {
-                string Query = ConfigReader.GetQuery1( 1, "CUOT", "DBQC_SelectIdCouta");
+                string Query = ConfigReader.GetQuery( 1, "CUOT", "DBQC_SelectIdCouta");
 
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
@@ -76,7 +76,7 @@ namespace act_Application.Data.Repository
             int Id = -1;
             try
             {
-                string Query = ConfigReader.GetQuery1( 2, "", "SelectLastIdCoutaUser");
+                string Query = ConfigReader.GetQuery( 2, "", "SelectLastIdCoutaUser");
 
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
@@ -109,7 +109,7 @@ namespace act_Application.Data.Repository
             List<ActCuota> cuotasList = new List<ActCuota>();
             try
             {
-                string Query = ConfigReader.GetQuery1( 3, "", "ATQ_SelectDateCuotasAll");
+                string Query = ConfigReader.GetQuery( 3, "", "ATQ_SelectDateCuotasAll");
 
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {

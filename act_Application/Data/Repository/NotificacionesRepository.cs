@@ -10,7 +10,7 @@ namespace act_Application.Data.Repository
         private readonly string connectionString = AppSettingsHelper.GetConnectionString();
         public bool GetExistNotificacionesAdmin()
         {
-            string Query = ConfigReader.GetQuery1( 1, "NOTI", "DBQN_SelectAdmiNotificacion");
+            string Query = ConfigReader.GetQuery( 1, "NOTI", "DBQN_SelectAdmiNotificacion");
             int TotalN = 0;
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
@@ -29,16 +29,16 @@ namespace act_Application.Data.Repository
             }
             return TotalN > 0;
         }
-        public bool GetExistNotificacionesUser(int userId)
+        public bool GetExistNotificacionesUser(int IdUser)
         {
-            string Query = ConfigReader.GetQuery1( 1, "NOTI", "DBQN_SelectUserNotificacion");
+            string Query = ConfigReader.GetQuery( 1, "NOTI", "DBQN_SelectUserNotificacion");
             int TotalN = 0;
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
                 using (MySqlCommand cmd = new MySqlCommand(Query, connection))
                 {
                     cmd.CommandType = CommandType.Text;
-                    cmd.Parameters.AddWithValue("@Id", userId);
+                    cmd.Parameters.AddWithValue("@Id", IdUser);
                     connection.Open();
                     using (MySqlDataReader reader = cmd.ExecuteReader())
                     {
@@ -56,7 +56,7 @@ namespace act_Application.Data.Repository
             try
             {
                 List<ActNotificacione> notifiAdmin = new List<ActNotificacione>();
-                string Query = ConfigReader.GetQuery1( 1, "NOTI", "DBQN_SelectAdmiNotificacion");
+                string Query = ConfigReader.GetQuery( 1, "NOTI", "DBQN_SelectAdmiNotificacion");
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
                     connection.Open();
@@ -68,8 +68,8 @@ namespace act_Application.Data.Repository
                             {
                                 ActNotificacione obj = MapToNotificaciones(reader);
                                 notifiAdmin.Add(obj);
-                                PrestamosRepository prestamos = new PrestamosRepository();
-                                prestamos.GetDataPrestamoId(obj.IdActividad);
+                                PrestamosRepository pobj = new PrestamosRepository();
+                                pobj.GetDataPrestamoId(pobj.GetDataPrestamoForIdPres(obj.IdActividad));
                             }
                         }
                     }
@@ -83,18 +83,18 @@ namespace act_Application.Data.Repository
                 return null;
             }
         }
-        public List<ActNotificacione> GetDataNotificacionesUser(int userId) //Consulta para obtener todos los datos de las notificacionesUser del administrador
+        public List<ActNotificacione> GetDataNotificacionesUser(int IdUser) //Consulta para obtener todos los datos de las notificacionesUser del administrador
         {
             try
             {
                 List<ActNotificacione> notifiUser = new List<ActNotificacione>();
-                string Query = ConfigReader.GetQuery1( 1, "NOTI", "DBQN_SelectUserNotificacion");
+                string Query = ConfigReader.GetQuery( 1, "NOTI", "DBQN_SelectUserNotificacion");
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
                     connection.Open();
                     using (MySqlCommand command = new MySqlCommand(Query, connection))
                     {
-                        command.Parameters.AddWithValue("@Id", userId);
+                        command.Parameters.AddWithValue("@Id", IdUser);
                         using (MySqlDataReader reader = command.ExecuteReader())
                         { 
                             while (reader.Read())
@@ -102,8 +102,8 @@ namespace act_Application.Data.Repository
                                 ActNotificacione obj = MapToNotificaciones(reader);
                                 
                                 notifiUser.Add(obj);
-                                PrestamosRepository prestamo = new PrestamosRepository();
-                                prestamo.GetDataPrestamoId(obj.IdActividad);
+                                PrestamosRepository pobj = new PrestamosRepository();
+                                pobj.GetDataPrestamoId(pobj.GetDataPrestamoForIdPres(obj.IdActividad));
                             }
                         }
                     }

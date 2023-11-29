@@ -6,26 +6,7 @@ namespace act_Application.Helper
     {
         private readonly static string filePath = Path.Combine("Data", "json", "config.json");
         private readonly static string json = File.ReadAllText(filePath);
-        public static string GetQuery(int opcion, string queryName)
-        {
-            JObject config = JObject.Parse(json);
-            switch (opcion)
-            {
-                case 1:
-                    //Queries para consulta de datos
-                    return config["Queries"][queryName].ToString();
-                case 2:
-                    //Asistentes
-                    return config["Assistant"][queryName].ToString();
-                case 3:
-                    return config["Automatic"][queryName].ToString();
-                default:
-                    Console.WriteLine("Opcion no reconocida.");
-                    break;
-            }
-            return string.Empty;
-        }
-        public static string GetQuery1(int Opcion, string Categoria, string queryName)
+        public static string GetQuery(int Opcion, string Categoria, string queryName)
         {
             JObject config = JObject.Parse(json);
             switch (Opcion)

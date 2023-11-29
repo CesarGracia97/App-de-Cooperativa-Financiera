@@ -2,23 +2,54 @@
 using act_Application.Models.BD;
 using act_Application.Models.Sistema.Complementos;
 using MySql.Data.MySqlClient;
+using ZstdSharp.Unsafe;
 
 namespace act_Application.Data.Repository
 {
     public class PrestamosRepository
     {
         private readonly string connectionString = AppSettingsHelper.GetConnectionString();
-        public ActPrestamo GetDataPrestamoId(string IdPres) //Consulta para obtener todos los datos de una transaccion especifica
+        public int GetDataPrestamoForIdPres(string IdPres)
         {
+            int Id = 0;
             try
             {
-                string Query = ConfigReader.GetQuery1( 1, "PRES", "DBQP_SelectPrestamoIdPres");
+                string Query = ConfigReader.GetQuery(1, "PRES", "DBQP_SelectPrestamoIdPres");
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
                     connection.Open();
                     using (MySqlCommand command = new MySqlCommand(Query, connection))
                     {
                         command.Parameters.AddWithValue("@IdPres", IdPres);
+                        using (MySqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                Id = Convert.ToInt32(reader["Id"]);
+                            }
+                        }
+                    }
+                }
+                return Id;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("GetDataPrestamoForIdPre | Error.");
+                Console.WriteLine("Detalles del error: " + ex.Message);
+                return Id = -1;
+            }
+        }
+        public ActPrestamo GetDataPrestamoId(int IdPrestamo) //Consulta para obtener todos los datos de una transaccion especifica
+        {
+            try
+            {
+                string Query = ConfigReader.GetQuery( 1, "PRES", "DBQP_SelectPrestamoId");
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                {
+                    connection.Open();
+                    using (MySqlCommand command = new MySqlCommand(Query, connection))
+                    {
+                        command.Parameters.AddWithValue("@IdPrestamo", IdPrestamo);
                         using (MySqlDataReader reader = command.ExecuteReader())
                         {
                             while (reader.Read())
@@ -41,7 +72,7 @@ namespace act_Application.Data.Repository
         {
             try
             {
-                string Query = ConfigReader.GetQuery1( 1, "PRES", "DBQP_SelectPrestamoUser");
+                string Query = ConfigReader.GetQuery( 1, "PRES", "DBQP_SelectPrestamoUser");
 
                 int totalPrestamos = 0;
 
@@ -73,7 +104,7 @@ namespace act_Application.Data.Repository
         {
             try
             {
-                string Query = ConfigReader.GetQuery1( 1, "PRES", "DBQP_SelectPrestamoUser");
+                string Query = ConfigReader.GetQuery( 1, "PRES", "DBQP_SelectPrestamoUser");
 
                 List<DetallesPrestamosUsers> prestamos = new List<DetallesPrestamosUsers>();
                 DetallesPrestamosUsers detallesPrestamos = new DetallesPrestamosUsers();
@@ -124,7 +155,7 @@ namespace act_Application.Data.Repository
             string IdA = string.Empty;
             try
             {
-                string Query = ConfigReader.GetQuery1( 2, "", "ASQ_SelectLastIdPresUser");
+                string Query = ConfigReader.GetQuery( 2, "", "ASQ_SelectLastIdPresUser");
                 List<ActAportacione> aportaciones = new List<ActAportacione>();
 
 

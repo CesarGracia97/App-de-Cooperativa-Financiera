@@ -12,7 +12,7 @@ namespace act_Application.Data.Repository
         {
             try
             {
-                string Query = ConfigReader.GetQuery1( 1, "MULT", "DBQM_SelectMulta");
+                string Query = ConfigReader.GetQuery( 1, "MULT", "DBQM_SelectMulta");
 
                 int totalMultas = 0; // Variable para almacenar el valor de TotalAportaciones
 
@@ -47,7 +47,7 @@ namespace act_Application.Data.Repository
         {
             try
             {
-                string multasQuery = ConfigReader.GetQuery1( 1, "MULT", "DBQM_SelectMulta");
+                string multasQuery = ConfigReader.GetQuery( 1, "MULT", "DBQM_SelectMulta");
 
                 List<ActMulta> multas = new List<ActMulta>();
 
@@ -127,7 +127,7 @@ namespace act_Application.Data.Repository
         {
             try
             {
-                string Query = ConfigReader.GetQuery1( 1, "MULT", "DBQM_SelectIdMultaUser");
+                string Query = ConfigReader.GetQuery( 1, "MULT", "DBQM_SelectIdMultaUser");
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
                     MySqlCommand cmd = new MySqlCommand(Query, connection);
@@ -155,7 +155,7 @@ namespace act_Application.Data.Repository
         {
             try
             {
-                string Query = ConfigReader.GetQuery1( 1, "MULT", "DBQM_SelectMultasUser");
+                string Query = ConfigReader.GetQuery( 1, "MULT", "DBQM_SelectMultasUser");
                 int totalMultas = 0;
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
@@ -186,7 +186,7 @@ namespace act_Application.Data.Repository
             int Id = -1;
             try
             {
-                string Query = ConfigReader.GetQuery1( 2, "", "ASQ_SelectLastIdMultaUser");
+                string Query = ConfigReader.GetQuery( 2, "", "ASQ_SelectLastIdMultaUser");
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
                     MySqlCommand cmd = new MySqlCommand(Query, connection);
