@@ -249,25 +249,25 @@ namespace act_Application.Data.Repository
             return multas;
         }
         */
-        private ActMulta MapToMulta(MySqlDataReader rd)
+        private ActMulta MapToMulta(MySqlDataReader reader)
         {
             return new ActMulta
             {
-                Id = Convert.ToInt32(rd["Id"]),
-                IdMult = Convert.ToString(rd["IdMult"]),
-                IdUser = Convert.ToInt32(rd["IdUser"]),
-                FechaGeneracion = Convert.ToDateTime(rd["FechaGeneracion"]),
-                Cuadrante = Convert.ToString(rd["Cuadrante"]),
-                Razon = Convert.ToString(rd["Razon"]),
-                Valor = Convert.ToDecimal(rd["Valor"]),
-                Estado = Convert.ToString(rd["Estado"]),
-                FechaPago = Convert.ToString(rd["CBancoOrigen"]),
-                CBancoOrigen = Convert.ToString(rd["CBancoOrigen"]),
-                NBancoOrigen = Convert.ToString(rd["NBancoOrigen"]),
-                CBancoDestino = Convert.ToString(rd["CBancoDestino"]),
-                NBancoDestino = Convert.ToString(rd["NBancoDestino"]),
-                HistorialValores = Convert.ToString(rd["HistorialValores"]),
-                CapturaPantalla = Convert.ToString(rd["CapturaPantalla"])
+                Id = Convert.ToInt32(reader["Id"]),
+                IdMult = Convert.ToString(reader["IdMult"]),
+                IdUser = Convert.ToInt32(reader["IdUser"]),
+                FechaGeneracion = Convert.ToDateTime(reader["FechaGeneracion"]),
+                Cuadrante = Convert.ToString(reader["Cuadrante"]),
+                Razon = Convert.ToString(reader["Razon"]),
+                Valor = Convert.ToDecimal(reader["Valor"]),
+                Estado = Convert.ToString(reader["Estado"]),
+                FechaPago = Convert.ToString(reader["CBancoOrigen"]),
+                CBancoOrigen = Convert.ToString(reader["CBancoOrigen"]),
+                NBancoOrigen = Convert.ToString(reader["NBancoOrigen"]),
+                CBancoDestino = Convert.ToString(reader["CBancoDestino"]),
+                NBancoDestino = Convert.ToString(reader["NBancoDestino"]),
+                HistorialValores = Convert.ToString(reader["HistorialValores"]),
+                CapturaPantalla = Convert.ToString(reader["CapturaPantalla"])
             };
         }
     }

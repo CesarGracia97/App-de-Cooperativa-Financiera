@@ -10,7 +10,7 @@ namespace act_Application.Data.Repository
         private readonly string connectionString = AppSettingsHelper.GetConnectionString();
         public bool GetExistNotificacionesAdmin()
         {
-            string Query = ConfigReader.GetQuery( 1, "SelectAdminNotificacion");
+            string Query = ConfigReader.GetQuery1( 1, "NOTI", "DBQN_SelectAdmiNotificacion");
             int TotalN = 0;
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
@@ -31,7 +31,7 @@ namespace act_Application.Data.Repository
         }
         public bool GetExistNotificacionesUser(int userId)
         {
-            string Query = ConfigReader.GetQuery( 1, "SelectUserNotificacion");
+            string Query = ConfigReader.GetQuery1( 1, "NOTI", "DBQN_SelectUserNotificacion");
             int TotalN = 0;
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
@@ -56,7 +56,7 @@ namespace act_Application.Data.Repository
             try
             {
                 List<ActNotificacione> notifiAdmin = new List<ActNotificacione>();
-                string Query = ConfigReader.GetQuery( 1, "SelectAdminNotificacion");
+                string Query = ConfigReader.GetQuery1( 1, "NOTI", "DBQN_SelectAdmiNotificacion");
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
                     connection.Open();
@@ -88,7 +88,7 @@ namespace act_Application.Data.Repository
             try
             {
                 List<ActNotificacione> notifiUser = new List<ActNotificacione>();
-                string Query = ConfigReader.GetQuery( 1, "SelectUserNotificacion");
+                string Query = ConfigReader.GetQuery1( 1, "NOTI", "DBQN_SelectUserNotificacion");
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
                     connection.Open();
