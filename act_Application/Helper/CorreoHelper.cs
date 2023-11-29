@@ -5,14 +5,13 @@ namespace act_Application.Helper
 {
     public class CorreoHelper
     {
+        private readonly static string connectionString = AppSettingsHelper.GetConnectionString();
+        private readonly static string Query = ConfigReader.GetQuery1(1, "USER", "DBQU_SelectEmail");
         public static string ObtenerCorreoDestino()
         {
-            string connectionString = AppSettingsHelper.GetConnectionString();
-            string emailQuery = ConfigReader.GetQuery(1, "SelectEmail");
-
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
-                using (MySqlCommand cmd = new MySqlCommand(emailQuery, connection))
+                using (MySqlCommand cmd = new MySqlCommand(Query, connection))
                 {
                     cmd.CommandType = CommandType.Text;
 

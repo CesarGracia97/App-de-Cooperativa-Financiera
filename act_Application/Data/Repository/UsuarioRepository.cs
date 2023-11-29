@@ -13,13 +13,13 @@ namespace act_Application.Data.Repository
         {
             try
             {
-                string userQuery = ConfigReader.GetQuery(1, "SelectUsuario");
+                string Query = ConfigReader.GetQuery1( 1, "USER", "DBQU_SelectUsuario");
 
                 ActUser objeto = new ActUser();
 
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
-                    string query = userQuery;
+                    string query = Query;
                     MySqlCommand cmd = new MySqlCommand(query, connection);
                     cmd.Parameters.AddWithValue("@Correo", Correo);
                     cmd.Parameters.AddWithValue("@Contrasena", Contrasena);
@@ -58,7 +58,7 @@ namespace act_Application.Data.Repository
         {
             try
             {
-                string roleQuery = ConfigReader.GetQuery(1, "SelectRol"); ;
+                string roleQuery = ConfigReader.GetQuery1( 1, "ROLE", "DBQR_SelectRol");
 
                 ActRol objetoRol = null;
 
@@ -99,7 +99,7 @@ namespace act_Application.Data.Repository
         {
             try
             {
-                string Query = ConfigReader.GetQuery(1, "SelectListUser");
+                string Query = ConfigReader.GetQuery1( 1, "USER", "DBQU_SelectListUser");
 
                 List<UserList> users = new List<UserList>();
 
@@ -136,7 +136,7 @@ namespace act_Application.Data.Repository
             string email = string.Empty;
             try
             {
-                string Query = ConfigReader.GetQuery(2, "SelectCorreoUser");
+                string Query = ConfigReader.GetQuery1( 2, "", "ASQ_SelectCorreoUser");
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
                     MySqlCommand cmd = new MySqlCommand(Query, connection);
