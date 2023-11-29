@@ -41,7 +41,6 @@
     "Assistant_Queries": {
       "ASQ_SelectLastIdAporUser": "SELECT IdApor FROM act_Aportaciones WHERE IdUser = @IdUser ORDER BY Id DESC LIMIT 1",
       "ASQ_SelectLastIdPresUser": "SELECT IdPres FROM act_Prestamos WHERE IdUser = @IdUser ORDER BY Id DESC LIMIT 1",
-      "ASQ_SelectLastIdMultUser": "SELECT IdMult FROM act_Multas WHERE IdUser = @IdUser ORDER BY Id DESC LIMIT 1",
       "ASQ_SelectLastIdCoutaUser": "SELECT Id FROM act_Cuotas WHERE IdUser = @IdUser ORDER BY Id DESC LIMIT 1",
       "ASQ_SelectLastIdMultaUser": "SELECT Id FROM act_Multas WHERE IdUser = @IdUser ORDER BY Id DESC LIMIT 1",
       "ASQ_SelectLastIdCapturaPantallaUser": "SELECT Id FROM act_CapturasPantalla WHERE IdUser = @IdUser AND Estado 'PENDIENTE' ORDER BY Id DESC LIMIT 1",

@@ -26,7 +26,7 @@ namespace act_Application.Data.Repository
                     {
                         while (reader.Read())
                         {
-                            ActCuota obj = MapToActCuota(reader);
+                            ActCuota obj = MapToCuota(reader);
                             return obj;
                         }
                     }
@@ -57,7 +57,7 @@ namespace act_Application.Data.Repository
                     {
                         while (reader.Read())
                         {
-                            ActCuota obj = MapToActCuota(reader);
+                            ActCuota obj = MapToCuota(reader);
                             return obj;
                         }
                     }
@@ -122,7 +122,7 @@ namespace act_Application.Data.Repository
                     {
                         while (reader.Read())
                         {
-                            ActCuota obj = MapToActCuota(reader);
+                            ActCuota obj = MapToCuota(reader);
                             cuotasList.Add(obj);
                         }
                     }
@@ -136,7 +136,7 @@ namespace act_Application.Data.Repository
                 return null;
             }
         }
-        private ActCuota MapToActCuota(MySqlDataReader reader)
+        private ActCuota MapToCuota(MySqlDataReader reader)
         {
             return new ActCuota
             {

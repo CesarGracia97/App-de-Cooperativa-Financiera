@@ -12,7 +12,7 @@ namespace act_Application.Data.Repository
         {
             try
             {
-                string Query = ConfigReader.GetQuery(1, "SelectMultas");
+                string Query = ConfigReader.GetQuery1( 1, "MULT", "DBQM_SelectMulta");
 
                 int totalMultas = 0; // Variable para almacenar el valor de TotalAportaciones
 
@@ -47,7 +47,7 @@ namespace act_Application.Data.Repository
         {
             try
             {
-                string multasQuery = ConfigReader.GetQuery(1, "SelectMultas");
+                string multasQuery = ConfigReader.GetQuery1( 1, "MULT", "DBQM_SelectMulta");
 
                 List<ActMulta> multas = new List<ActMulta>();
 
@@ -127,38 +127,18 @@ namespace act_Application.Data.Repository
         {
             try
             {
-                string Query = ConfigReader.GetQuery(1, "SelectIdMultaUser");
-
+                string Query = ConfigReader.GetQuery1( 1, "MULT", "DBQM_SelectIdMultaUser");
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
                     MySqlCommand cmd = new MySqlCommand(Query, connection);
                     cmd.Parameters.AddWithValue("@Id", Id);
                     cmd.CommandType = CommandType.Text;
-
                     connection.Open();
-
-                    using (MySqlDataReader rd = cmd.ExecuteReader())
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
                     {
-                        while (rd.Read())
+                        while (reader.Read())
                         {
-                            ActMulta obj = new ActMulta
-                            {
-                                Id = Convert.ToInt32(rd["Id"]),
-                                IdMult = Convert.ToString(rd["IdMult"]),
-                                IdUser = Convert.ToInt32(rd["IdUser"]),
-                                FechaGeneracion = Convert.ToDateTime(rd["FechaGeneracion"]),
-                                Cuadrante = Convert.ToString(rd["Cuadrante"]),
-                                Razon = Convert.ToString(rd["Razon"]),
-                                Valor = Convert.ToDecimal(rd["Valor"]),
-                                Estado = Convert.ToString(rd["Estado"]),
-                                FechaPago = Convert.ToString(rd["CBancoOrigen"]),
-                                CBancoOrigen = Convert.ToString(rd["CBancoOrigen"]),
-                                NBancoOrigen = Convert.ToString(rd["NBancoOrigen"]),
-                                CBancoDestino = Convert.ToString(rd["CBancoDestino"]),
-                                NBancoDestino = Convert.ToString(rd["NBancoDestino"]),
-                                HistorialValores = Convert.ToString(rd["HistorialValores"]),
-                                CapturaPantalla = Convert.ToString(rd["CapturaPantalla"])
-                            };
+                            ActMulta obj = MapToMulta(reader);
                             return obj;
                         }
                     }
@@ -175,14 +155,12 @@ namespace act_Application.Data.Repository
         {
             try
             {
-                string multaQuery = ConfigReader.GetQuery(1, "SelectMultasUser");
-
+                string Query = ConfigReader.GetQuery1( 1, "MULT", "DBQM_SelectMultasUser");
                 int totalMultas = 0;
-
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
                     connection.Open();
-                    using (MySqlCommand command = new MySqlCommand(multaQuery, connection))
+                    using (MySqlCommand command = new MySqlCommand(Query, connection))
                     {
                         command.Parameters.AddWithValue("@IdUser", IdUser);
                         using (MySqlDataReader reader = command.ExecuteReader())
@@ -208,15 +186,13 @@ namespace act_Application.Data.Repository
             int Id = -1;
             try
             {
-                string Query = ConfigReader.GetQuery(2, "SelectLastIdMultaUser");
+                string Query = ConfigReader.GetQuery1( 2, "", "ASQ_SelectLastIdMultaUser");
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
                     MySqlCommand cmd = new MySqlCommand(Query, connection);
                     cmd.Parameters.AddWithValue("@IdUser", IdUser);
                     cmd.CommandType = CommandType.Text;
-
                     connection.Open();
-
                     using (MySqlDataReader rd = cmd.ExecuteReader())
                     {
                         if (rd.Read())
@@ -273,5 +249,26 @@ namespace act_Application.Data.Repository
             return multas;
         }
         */
+        private ActMulta MapToMulta(MySqlDataReader rd)
+        {
+            return new ActMulta
+            {
+                Id = Convert.ToInt32(rd["Id"]),
+                IdMult = Convert.ToString(rd["IdMult"]),
+                IdUser = Convert.ToInt32(rd["IdUser"]),
+                FechaGeneracion = Convert.ToDateTime(rd["FechaGeneracion"]),
+                Cuadrante = Convert.ToString(rd["Cuadrante"]),
+                Razon = Convert.ToString(rd["Razon"]),
+                Valor = Convert.ToDecimal(rd["Valor"]),
+                Estado = Convert.ToString(rd["Estado"]),
+                FechaPago = Convert.ToString(rd["CBancoOrigen"]),
+                CBancoOrigen = Convert.ToString(rd["CBancoOrigen"]),
+                NBancoOrigen = Convert.ToString(rd["NBancoOrigen"]),
+                CBancoDestino = Convert.ToString(rd["CBancoDestino"]),
+                NBancoDestino = Convert.ToString(rd["NBancoDestino"]),
+                HistorialValores = Convert.ToString(rd["HistorialValores"]),
+                CapturaPantalla = Convert.ToString(rd["CapturaPantalla"])
+            };
+        }
     }
 }
