@@ -12,7 +12,7 @@ namespace act_Application.Data.Repository
         {
             try
             {
-                string Query = ConfigReader.GetQuery(1, "SelectPrestamoId");
+                string Query = ConfigReader.GetQuery1( 1, "PRES", "DBQP_SelectPrestamoIdPres");
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
                     connection.Open();
@@ -41,7 +41,7 @@ namespace act_Application.Data.Repository
         {
             try
             {
-                string Query = ConfigReader.GetQuery(1, "SelectPrestamosUser");
+                string Query = ConfigReader.GetQuery1( 1, "PRES", "DBQP_SelectPrestamoUser");
 
                 int totalPrestamos = 0;
 
@@ -73,7 +73,7 @@ namespace act_Application.Data.Repository
         {
             try
             {
-                string Query = ConfigReader.GetQuery(1, "SelectPrestamosUser");
+                string Query = ConfigReader.GetQuery1( 1, "PRES", "DBQP_SelectPrestamoUser");
 
                 List<DetallesPrestamosUsers> prestamos = new List<DetallesPrestamosUsers>();
                 DetallesPrestamosUsers detallesPrestamos = new DetallesPrestamosUsers();
@@ -124,14 +124,14 @@ namespace act_Application.Data.Repository
             string IdA = string.Empty;
             try
             {
-                string aportacionesQuery = ConfigReader.GetQuery(2, "SelectLastIdPresUser");
+                string Query = ConfigReader.GetQuery1( 2, "", "ASQ_SelectLastIdPresUser");
                 List<ActAportacione> aportaciones = new List<ActAportacione>();
 
 
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
                     connection.Open();
-                    using (MySqlCommand command = new MySqlCommand(aportacionesQuery, connection))
+                    using (MySqlCommand command = new MySqlCommand(Query, connection))
                     {
                         command.Parameters.AddWithValue("@IdUser", IdUser);
                         using (MySqlDataReader reader = command.ExecuteReader())
