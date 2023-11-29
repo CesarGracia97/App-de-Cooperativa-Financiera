@@ -28,7 +28,7 @@
       },
       "CUOT": {
         "DBQC_SelectCoutasUser": "SELECT *.a FROM act_Cuotas a WHERE IdUser = @IdUser AND Estado = 'PENDIENTE'",
-        "DBQC_SelectIdCoutas": "SELECT *.a FROM act_Cuotas a WHERE Id = @Id"
+        "DBQC_SelectIdCouta": "SELECT *.a FROM act_Cuotas a WHERE Id = @Id"
       },
       "DEST": {
         "DBQD_SelectDestino": "SELECT Id, NumeroCuenta, NombreBanco FROM act_CuentaDestino"
@@ -49,7 +49,7 @@
     },
     "Automatic_Queries": {
       "ATQ_SelectDateCuotasAll": "SELECT a.Id, a.IdPrestamo, a.IdUser, a.IdCuot, a.FechaCuota, a.Valor e.NombreYApellido e.TipoUser FROM act_Cuotas a JOIN act_User e ON a.IdUser = e.Id WHERE a.Estado = 'PENDIENTE' OR a.Estado = 'PENDIENTE M1'",
-      "ATQ_electParticipantesPrestamo": "SELECT a.Id, a.ParticipantesId FROM act_Eventos a WHERE Estado = 'CONCURSO' AND IdPrestamo = @IdPrestamo"
+      "ATQ_SelectParticipantesPrestamo": "SELECT a.Id, a.ParticipantesId FROM act_Eventos a WHERE Estado = 'CONCURSO' AND IdPrestamo = @IdPrestamo"
     }
   },
   "SMTP": {
