@@ -8,35 +8,23 @@ namespace act_Application.Data.Repository
     public class PrestamosRepository
     {
         private readonly string connectionString = AppSettingsHelper.GetConnectionString();
-        public ActPrestamo GetDataPrestamoId(int idPrestamos) //Consulta para obtener todos los datos de una transaccion especifica
+        public ActPrestamo GetDataPrestamoId(string IdPres) //Consulta para obtener todos los datos de una transaccion especifica
         {
             try
             {
-                string query = ConfigReader.GetQuery(1, "SelectPrestamoId");
+                string Query = ConfigReader.GetQuery(1, "SelectPrestamoId");
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
                     connection.Open();
-                    using (MySqlCommand command = new MySqlCommand(query, connection))
+                    using (MySqlCommand command = new MySqlCommand(Query, connection))
                     {
-                        command.Parameters.AddWithValue("@Id", idPrestamos);
+                        command.Parameters.AddWithValue("@IdPres", IdPres);
                         using (MySqlDataReader reader = command.ExecuteReader())
                         {
-                            if (reader.Read())
+                            while (reader.Read())
                             {
-                                ActPrestamo transaccion = new ActPrestamo
-                                {
-                                    Id = Convert.ToInt32(reader["Id"]),
-                                    IdPres = Convert.ToString(reader["IdPres"]),
-                                    IdUser = Convert.ToInt32(reader["IdUser"]),
-                                    Valor = Convert.ToDecimal(reader["Valor"]),
-                                    FechaGeneracion = Convert.ToDateTime(reader["FechaGeneracion"]),
-                                    FechaEntregaDinero = Convert.ToDateTime(reader["FechaEntregaDinero"]),
-                                    FechaInicioPagoCuotas = Convert.ToDateTime(reader["FechaIniCoutaPrestamo"]),
-                                    FechaPagoTotalPrestamo = Convert.ToDateTime(reader["FechaPagoTotalPrestamo"]),
-                                    TipoCuota = Convert.ToString(reader["TipoCuota"]),
-                                    Estado = Convert.ToString(reader["Estado"])
-                                };
-                                return transaccion;
+                                ActPrestamo obj = MappToPrestamo(reader);
+                                return obj;
                             }
                         }
                     }
@@ -163,6 +151,22 @@ namespace act_Application.Data.Repository
                 Console.WriteLine("Detalles del error: " + ex.Message);
                 return IdA;
             }
+        }
+        private ActPrestamo MappToPrestamo(MySqlDataReader reader)
+        {
+            return new ActPrestamo
+            {
+                Id = Convert.ToInt32(reader["Id"]),
+                IdPres = Convert.ToString(reader["IdPres"]),
+                IdUser = Convert.ToInt32(reader["IdUser"]),
+                Valor = Convert.ToDecimal(reader["Valor"]),
+                FechaGeneracion = Convert.ToDateTime(reader["FechaGeneracion"]),
+                FechaEntregaDinero = Convert.ToDateTime(reader["FechaEntregaDinero"]),
+                FechaInicioPagoCuotas = Convert.ToDateTime(reader["FechaInicioPagoCuotas"]),
+                FechaPagoTotalPrestamo = Convert.ToDateTime(reader["FechaPagoTotalPrestamo"]),
+                TipoCuota = Convert.ToString(reader["TipoCuota"]),
+                Estado = Convert.ToString(reader["Estado"])
+            };
         }
     }
 }

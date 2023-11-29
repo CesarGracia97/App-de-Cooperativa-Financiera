@@ -51,7 +51,7 @@ namespace act_Application.Data.Repository
             }
             return TotalN > 0;
         }
-        public IEnumerable<ActNotificacione> GetDataNotificacionesAdmin() //Consulta para obtener todos los datos de las notificacionesAdmin del administrador
+        public List<ActNotificacione> GetDataNotificacionesAdmin() //Consulta para obtener todos los datos de las notificacionesAdmin del administrador
         {
             try
             {
@@ -64,7 +64,6 @@ namespace act_Application.Data.Repository
                     {
                         using (MySqlDataReader reader = command.ExecuteReader())
                         {
-
                             while (reader.Read())
                             {
                                 ActNotificacione obj = MapToNotificaciones(reader);
@@ -72,10 +71,10 @@ namespace act_Application.Data.Repository
                                 PrestamosRepository prestamos = new PrestamosRepository();
                                 prestamos.GetDataPrestamoId(obj.IdActividad);
                             }
-                            return notifiAdmin;
                         }
                     }
                 }
+                return notifiAdmin;
             }
             catch (Exception ex)
             {
@@ -84,7 +83,7 @@ namespace act_Application.Data.Repository
                 return null;
             }
         }
-        public IEnumerable<ActNotificacione> GetDataNotificacionesUser(int userId) //Consulta para obtener todos los datos de las notificacionesUser del administrador
+        public List<ActNotificacione> GetDataNotificacionesUser(int userId) //Consulta para obtener todos los datos de las notificacionesUser del administrador
         {
             try
             {
@@ -97,8 +96,7 @@ namespace act_Application.Data.Repository
                     {
                         command.Parameters.AddWithValue("@Id", userId);
                         using (MySqlDataReader reader = command.ExecuteReader())
-                        {
-
+                        { 
                             while (reader.Read())
                             {
                                 ActNotificacione obj = MapToNotificaciones(reader);
@@ -107,10 +105,10 @@ namespace act_Application.Data.Repository
                                 PrestamosRepository prestamo = new PrestamosRepository();
                                 prestamo.GetDataPrestamoId(obj.IdActividad);
                             }
-                            return notifiUser;
                         }
                     }
                 }
+                return notifiUser;
             }
             catch (Exception ex)
             {
