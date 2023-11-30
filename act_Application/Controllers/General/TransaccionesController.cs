@@ -19,7 +19,7 @@ namespace act_Application.Controllers.General
         {
             _context = context;
         }
-        public IActionResult Transaccion()
+        public IActionResult Index()
         {
             return View();
         }

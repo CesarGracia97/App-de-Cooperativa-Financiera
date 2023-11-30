@@ -96,32 +96,38 @@
                             </li>
                         }
 
-                        @if (User.HasClaim("Rol", "Administrador") || User.HasClaim("Rol", "Socio"))
+                        <li class="nav-link">
+                            <a href="~/Notificaciones/Index">
+                                <i class='bx bx-bell icon'></i>
+                                <span class="text nav-text">Notificationes</span>
+                            </a>
+                        </li>
+                        
+                        @if (User.HasClaim("Rol", "Administrador") || User.HasClaim("Rol", "Socio") || User.HasClaim("Rol", "Referido"))
                         {
                             <li class="nav-link">
-                                <a href="#">
+                                <a href="~/Transacciones/Index">
                                     <i class='bx bx-money icon'></i>
                                     <span class="text nav-text">Transacciones</span>
                                 </a>
                             </li>
                         }
 
-                        @if (User.HasClaim("Rol", "Administrador") || User.HasClaim("Rol", "Referido"))
+                        @if (User.HasClaim("Rol", "Administrador") || User.HasClaim("Rol", "Socio"))
                         {
-                            <li class="nav-link">
-                                <a href="#">
-                                    <i class='bx bx-money-withdraw icon'></i>
-                                    <span class="text nav-text">Peticiones</span>
+                            <li class="nav-link hidden-item">
+                                <a href="~/TablaAportantes/Index">
+                                    <i class='bx bx-table icon'></i>
+                                    <span class="text nav-text">Aportantes</span>
+                                </a>
+                            </li>
+                            <li class="nav-link hidden-item">
+                                <a href="~/TablaMultados/Index">
+                                    <i class='bx bx-table icon'></i>
+                                    <span class="text nav-text">Multados</span>
                                 </a>
                             </li>
                         }
-
-                        <li class="nav-link">
-                            <a href="#">
-                                <i class='bx bx-bell icon'></i>
-                                <span class="text nav-text">Notificationes</span>
-                            </a>
-                        </li>
                     }
                 </ul>
             </div>
