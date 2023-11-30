@@ -10,7 +10,6 @@ using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
-using act_Application.Models.Sistema.ViewModel;
 
 namespace act_Application.Controllers.General
 {
@@ -19,12 +18,9 @@ namespace act_Application.Controllers.General
         private readonly ILogger<HomeController> _logger;
         private readonly NotificacionesServices _nservices;
         private readonly ActDesarrolloContext _context;
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, ActDesarrolloContext context)
         {
             _logger = logger;
-        }
-        public HomeController (ActDesarrolloContext context)
-        {
             _context = context;
         }
         [Authorize(Policy = "AllOnly")]

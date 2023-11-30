@@ -263,7 +263,7 @@ public partial class ActDesarrolloContext : DbContext
         {
             entity.HasKey(e => e.Id).HasName("PRIMARY");
 
-            entity.ToTable("act_User", tb => tb.HasComment("Tabla de Intereses"));
+            entity.ToTable("act_TablaIntereses", tb => tb.HasComment("Tabla de Intereses"));
 
             entity.Property(e => e.Id).HasColumnType("int(11)");
             entity.Property(e => e.IdUser).HasColumnType("int(11)");

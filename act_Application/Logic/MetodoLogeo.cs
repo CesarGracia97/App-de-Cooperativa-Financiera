@@ -23,7 +23,7 @@ namespace act_Application.Logic
         }
         public void EnviarNotificacionInicioSesion(ActUser usuario)
         {
-            SmtpConfig smtpConfig = SmtpConfig.LoadConfig("Data/Config/smtp.json");
+            SmtpConfig smtpConfig = SmtpConfig.LoadConfig("Data/json/smtp.json");
             string correoDestino = CorreoHelper.ObtenerCorreoDestino(); // Obtener el correo de destino dinámicamente
 
             using (SmtpClient smtpClient = new SmtpClient(smtpConfig.Server, smtpConfig.Port))

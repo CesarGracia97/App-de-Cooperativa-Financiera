@@ -16,7 +16,7 @@ namespace act_Application.Helper
                     {
                         case "USER":
                             return config["Queries"]["DB_Queries"]["USER"][queryName].ToString();
-                        case "ROL":
+                        case "ROLE":
                             return config["Queries"]["DB_Queries"]["ROLE"][queryName].ToString();
                         case "APOR":
                             return config["Queries"]["DB_Queries"]["APOR"][queryName].ToString();

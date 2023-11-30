@@ -14,8 +14,8 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<ActDesarrolloContext>(options => options.UseMySQL(builder.Configuration.GetConnectionString("Cadena")));
 
 //Servicios en Segundo Plano
-builder.Services.AddHostedService<SAFinalizacionEventos>();
-builder.Services.AddHostedService<SAGeneradorMultas>();
+// --> builder.Services.AddHostedService<SAFinalizacionEventos>();
+// --> builder.Services.AddHostedService<SAGeneradorMultas>();
 
 //Autenticacion
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options =>
