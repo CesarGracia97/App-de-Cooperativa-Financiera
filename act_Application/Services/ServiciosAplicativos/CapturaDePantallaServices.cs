@@ -71,7 +71,7 @@ namespace act_Application.Services.ServiciosAplicativos
                     try
                     {
                         var obj = new MultaRepository();
-                        var multOriginal = obj.GetDataIdMultaUser(Id);
+                        var multOriginal = obj.GetData_MultasId(Id);
                         if (multOriginal != null)
                         {
                             actMulta.Id = multOriginal.Id;

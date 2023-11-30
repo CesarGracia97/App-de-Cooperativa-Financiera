@@ -9,7 +9,7 @@ namespace act_Application.Controllers.General
         [Authorize(Policy = "AdminSocioOnly")]
         public IActionResult Index()
         {
-            var mrobj = new MultaRepository().GetDataMultas();
+            var mrobj = new MultaRepository().GetData_Multas();
             return View(mrobj);
         }
     }

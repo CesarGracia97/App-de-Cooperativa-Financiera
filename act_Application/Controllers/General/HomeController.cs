@@ -3,10 +3,14 @@ using act_Application.Data.Repository;
 using act_Application.Models;
 using act_Application.Models.BD;
 using act_Application.Services.ServiciosAplicativos;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
+using act_Application.Models.Sistema.ViewModel;
 
 namespace act_Application.Controllers.General
 {
@@ -23,7 +27,7 @@ namespace act_Application.Controllers.General
         {
             _context = context;
         }
-
+        [Authorize(Policy = "AllOnly")]
         public IActionResult Index()
         {
             return View();
@@ -39,6 +43,7 @@ namespace act_Application.Controllers.General
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
         public async Task<IActionResult> Participar(int Id, [Bind("Id,IdEven,IdPrestamo,IdUser,ParticiantesId,NombresPId,FechaGeneracion,FechaInicio,FechaFinalizacion,Estado")] ActEvento actEvento)
         {
             if(Id != actEvento.Id)
@@ -80,11 +85,19 @@ namespace act_Application.Controllers.General
                 }
                 catch (DbUpdateConcurrencyException ex)
                 {
-                    Console.WriteLine("Hubo un problema al actualizar el registro del pago de la Cuota.");
-                    Console.WriteLine("Detalles del error: " + ex.Message);
+                    Console.WriteLine($"\n----------------------------------------");
+                    Console.WriteLine($"\nParticipar()-HomeController | Error.");
+                    Console.WriteLine($"\nDetalles del error: " + ex.Message);
+                    Console.WriteLine($"\n----------------------------------------");
                 }
             }
             return View(actEvento);
+        }
+        public ActionResult CerrarSesion()
+        {
+            HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+
+            return RedirectToAction("Index", "Login");
         }
     }
 }

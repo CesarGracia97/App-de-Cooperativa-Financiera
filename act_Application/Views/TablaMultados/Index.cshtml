@@ -3,7 +3,7 @@
 @model IEnumerable<act_Application.Models.BD.ActMulta>;
 @{
     ViewData["Title"] = "Tabla de Multados";
-    bool condicion = new MultaRepository().GetExistMultas();
+    bool condicion = (bool)new MultaRepository().OperacionesMulta(1, 0, 0);
 }
 <header>
     <meta charset="UTF-8">
@@ -16,7 +16,7 @@
         <h1>Tabla de Multas</h1>
         <hr />
         <div class="table-container">
-            @if (condicion == true)
+            @if (condicion)
             {
                 <table class="multa-table">
                     <thead>

@@ -8,7 +8,7 @@ namespace act_Application.Data.Repository
     public class MultaRepository
     {
         private readonly string connectionString = AppSettingsHelper.GetConnectionString();
-        public bool GetExistMultas()
+        private bool GetExist_Multas() //Existen multas a nivel global 
         {
             try
             {
@@ -38,27 +38,52 @@ namespace act_Application.Data.Repository
             }
             catch (Exception ex)
             {
-                Console.WriteLine("GetExistMultas || Error");
+                Console.WriteLine("GetExist_Multas || Error");
                 Console.WriteLine("Razon del Error: " + ex.Message);
                 return false;
             }
         }
-        public List<ActMulta> GetDataMultas()
+        public bool GetExist_MultasUser(int IdUser) //Existen multas del Usuario 
         {
             try
             {
-                string multasQuery = ConfigReader.GetQuery( 1, "MULT", "DBQM_SelectMulta");
-
-                List<ActMulta> multas = new List<ActMulta>();
-
+                string Query = ConfigReader.GetQuery(1, "MULT", "DBQM_SelectMultasUser");
+                int totalMultas = 0;
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
-                    using (MySqlCommand cmd = new MySqlCommand(multasQuery, connection))
+                    connection.Open();
+                    using (MySqlCommand command = new MySqlCommand(Query, connection))
+                    {
+                        command.Parameters.AddWithValue("@IdUser", IdUser);
+                        using (MySqlDataReader reader = command.ExecuteReader())
+                        {
+                            if (reader.Read())
+                                totalMultas = Convert.ToInt32(reader["TotalMultas"]);
+                        }
+                    }
+                }
+                return totalMultas > 0;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("GetExist_MultasUser || Error");
+                Console.WriteLine("Razon del Error: " + ex.Message);
+                return false;
+            }
+        }
+        public List<ActMulta> GetData_Multas() //Obtener todas los registro de Multas. 
+        {
+            try
+            {
+
+                List<ActMulta> multas = new List<ActMulta>();
+                string Query = ConfigReader.GetQuery( 1, "MULT", "DBQM_SelectMulta");
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                {
+                    using (MySqlCommand cmd = new MySqlCommand(Query, connection))
                     {
                         cmd.CommandType = CommandType.Text;
-
                         connection.Open();
-
                         using (MySqlDataReader rd = cmd.ExecuteReader())
                         {
                             var multasPorUsuario = rd.Cast<IDataRecord>()
@@ -118,16 +143,49 @@ namespace act_Application.Data.Repository
             }
             catch (Exception ex)
             {
-                Console.WriteLine("GetDataMultas || Error");
+                Console.WriteLine("GetData_Multas || Error");
                 Console.WriteLine("Razon del Error: " + ex.Message);
                 return null;
             }
         }
-        public ActMulta GetDataIdMultaUser(int Id)
+        private List<ActMulta> GetData_MultasUser(int IdUser) //Obtener todos los registros de Multas de un Usuario en Especifico 
         {
             try
             {
-                string Query = ConfigReader.GetQuery( 1, "MULT", "DBQM_SelectIdMultaUser");
+                List<ActMulta> List = new List<ActMulta>();
+                string Query = ConfigReader.GetQuery(1, "MULT", "DBQM_SelectMultasUser");
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                {
+                    connection.Open();
+                    using (MySqlCommand command = new MySqlCommand(Query, connection))
+                    {
+                        command.Parameters.AddWithValue("@IdUser", IdUser);
+                        using (MySqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                ActMulta obj = MapToMulta(reader);
+                                List.Add(obj);
+                            }
+                        }
+                    }
+                }
+                return List;
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine("\n-----------------------------------");
+                Console.WriteLine("\nGetDataMultaUser || Error.");
+                Console.WriteLine("\nRazon del Error: " + ex.Message);
+                Console.WriteLine("\n-----------------------------------");
+                return null;
+            }
+        }
+        public ActMulta GetData_MultasId(int Id) //Obtener un registro en Especifico de Multas 
+        {
+            try
+            {
+                string Query = ConfigReader.GetQuery( 1, "MULT", "DBQM_SelectMultasId");
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
                     MySqlCommand cmd = new MySqlCommand(Query, connection);
@@ -146,42 +204,12 @@ namespace act_Application.Data.Repository
             }
             catch (Exception ex)
             {
-                Console.WriteLine("GetDataIdMultaUser | Error");
+                Console.WriteLine("GetData_MultasId | Error");
                 Console.WriteLine("Detalles del error: " + ex.Message);
             }
             return null;
         }
-        public bool GetExistMultasUser(int IdUser)
-        {
-            try
-            {
-                string Query = ConfigReader.GetQuery( 1, "MULT", "DBQM_SelectMultasUser");
-                int totalMultas = 0;
-                using (MySqlConnection connection = new MySqlConnection(connectionString))
-                {
-                    connection.Open();
-                    using (MySqlCommand command = new MySqlCommand(Query, connection))
-                    {
-                        command.Parameters.AddWithValue("@IdUser", IdUser);
-                        using (MySqlDataReader reader = command.ExecuteReader())
-                        {
-                            if (reader.Read())
-                            {
-                                totalMultas = Convert.ToInt32(reader["TotalMultas"]);
-                            }
-                        }
-                    }
-                }
-                return totalMultas > 0;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("GetExistMultasUser || Error");
-                Console.WriteLine("Razon del Error: " + ex.Message);
-                return false;
-            }
-        }
-        public int A_GetLastIdMultaData(int IdUser)
+        public int A_GetData_LastIdMultaUser(int IdUser) //Obtiene el Id del ultimo registro de la Multa de un Usuario. 
         {
             int Id = -1;
             try
@@ -210,45 +238,6 @@ namespace act_Application.Data.Repository
             }
             return Id;
         }
-        /*
-        public List<DetallesMultasUsers> GetDataMultasUser(int IdUser)
-        {
-            string connectionString = AppSettingsHelper.GetConnectionString();
-            string multasQuery = ConfigReader.GetQuery(1, "SelectMultasUser");
-
-            List<DetallesMultasUsers> multas = new List<DetallesMultasUsers>();
-            DetallesMultasUsers detallesMultas = new DetallesMultasUsers();
-
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
-            {
-                connection.Open();
-                using (MySqlCommand command = new MySqlCommand(multasQuery, connection))
-                {
-                    command.Parameters.AddWithValue("@IdUser", IdUser);
-                    using (MySqlDataReader reader = command.ExecuteReader())
-                    {
-                        decimal multasAcumuladas = 0;
-                        while (reader.Read())
-                        {
-                            detallesMultas.TotalMultas = Convert.ToInt32(reader["TotalMultas"]);
-                            detallesMultas.TotalCancelados = Convert.ToInt32(reader["TotalCancelados"]);
-                            DetallesMultasUsers.DetallesPorMulta multa = new DetallesMultasUsers.DetallesPorMulta
-                            {
-                                Id = Convert.ToInt32(reader["Id"]),
-                                Valor = Convert.ToDecimal(reader["Valor"]),
-                                Aprobacion = Convert.ToString(reader["Aprobacion"])
-                            };
-                            detallesMultas.Detalles.Add(multa);
-                            multasAcumuladas += multa.Valor;
-                        }
-                        detallesMultas.MultasAcumuladas = multasAcumuladas;
-                    }
-                }
-            }
-            multas.Add(detallesMultas);
-            return multas;
-        }
-        */
         private ActMulta MapToMulta(MySqlDataReader reader)
         {
             return new ActMulta
@@ -269,6 +258,40 @@ namespace act_Application.Data.Repository
                 HistorialValores = Convert.ToString(reader["HistorialValores"]),
                 CapturaPantalla = Convert.ToString(reader["CapturaPantalla"])
             };
+        }
+        public object OperacionesMulta(int Opcion, int Id, int IdUser)
+        {
+            try
+            {
+                switch (Opcion)
+                {
+                    case 1:
+                        return GetExist_Multas();
+                    case 2:
+                        return GetExist_MultasUser(IdUser);
+                    case 3:
+                        return GetData_Multas();
+                    case 4:
+                        return GetData_MultasUser(IdUser);
+                    case 5:
+                        return GetData_MultasId(Id);
+                    case 6:
+                        return A_GetData_LastIdMultaUser(IdUser);
+                    default:
+                        Console.WriteLine("\n-----------------------------------------");
+                        Console.WriteLine("\nOperacionesMulta || Opcion Inexistente.");
+                        Console.WriteLine("\n-----------------------------------------\n");
+                        return null;
+                }
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine("\n-----------------------------------");
+                Console.WriteLine("\nOperacionesMulta || Error.");
+                Console.WriteLine("\nRazon del Error: " + ex.Message);
+                Console.WriteLine("\n-----------------------------------");
+                return null;
+            }
         }
     }
 }

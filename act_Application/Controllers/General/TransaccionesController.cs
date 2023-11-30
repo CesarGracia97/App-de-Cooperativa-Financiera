@@ -191,7 +191,7 @@ namespace act_Application.Controllers.General
             }
             return View(actPrestamo);
         }
-        public async Task<IActionResult> PagoMulta(int Id, string Razon, decimal Valor, string CBancoOrigen, string NBancoOrigen, string CBancoDestino, string NBancoDestino, [FromForm] IFormFile CapturaPantalla, [Bind("Id,IdMult,IdUser,FechaGeneracion,Cuadrante,Razon,Valor,Estado,FechaPago,CBancoOrigen,NBancoOrigen,CBancoDestino,NBancoDestino,HistorialValores,CapturaPantalla")]ActMulta actMulta)
+        public async Task<IActionResult> PagoMulta(int Id, decimal Valor, string CBancoOrigen, string NBancoOrigen, string CBancoDestino, string NBancoDestino, [FromForm] IFormFile CapturaPantalla, [Bind("Id,IdMult,IdUser,FechaGeneracion,Cuadrante,Razon,Valor,Estado,FechaPago,CBancoOrigen,NBancoOrigen,CBancoDestino,NBancoDestino,HistorialValores,CapturaPantalla")]ActMulta actMulta)
         {
             try
             {
@@ -208,7 +208,7 @@ namespace act_Application.Controllers.General
                         var userIdentificacion = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value;
                         //
                         var mobj = new MultaRepository();
-                        var multOriginal = mobj.GetDataIdMultaUser(Id);
+                        var multOriginal = mobj.GetData_MultasId(Id);
                         if (multOriginal == null)
                         {
                             return RedirectToAction("Error", "Home");

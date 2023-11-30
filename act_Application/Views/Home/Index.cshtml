@@ -1,8 +1,186 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@model IEnumerable<act_Application.Models.Sistema.ViewModel.Home_VM>
+@using act_Application.Data.Repository;
+@using act_Application.Data;
+@using act_Application.Logic;
+@{
+    ViewBag.Title = "Home";
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+    var eventosRepository = new EventosRepository();
+    var valorVisualizacion = new MetodoVisualizacion();
+    var aportacionRepository = new AportacionRepository();
+    var multaRepository = new MultaRepository();
+    var transaccionesRepository = new PrestamosRepository();
+    var userIdClaim = User.Claims.FirstOrDefault(c => c.Type == "Id");
+}
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/General/Menu/Esqueleto/Esqueleto.css" />
+    <link rel="stylesheet" href="/css/General/Menu/Profile/item1.css" />
+    <link rel="stylesheet" href="/css/General/Menu/Date-Place/item2item3.css" />
+    <link rel="stylesheet" href="/css/General/Menu/Transaccion/item4.css" />
+    <link rel="stylesheet" href="/css/General/Menu/Main/item5.css" />
+    <link rel="stylesheet" href="/css/General/Menu/Eventos/item6.css" />
+    <link rel="stylesheet" href="/css/General/Menu/Eventos/item6VM.css" />
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/js/General/Menu/Eventos/Eventos.js"></script>
+    <script src="/js/General/Menu/Localizacion/localizacion.js"></script>
+</head>
+<body>
+    @if (userIdClaim != null && int.TryParse(userIdClaim.Value, out int IdUser))
+    {
+        <div class="grid-container">
+            <div class="item1">
+                <div class="perfil-card">
+                    <div class="cont-img">
+                        <img src="/img/Screenshot_38.png" alt="Imagen de perfil" />
+                    </div>
+                    <div class="cont-title">
+                        <span class="profession">@User.Identity.Name</span>
+                        <span class="tipousuario">@User.FindFirst("TipoUsuario")?.Value</span>
+                    </div>
+                </div>
+            </div>
+            <div class="item2">
+                <label class="item2-title">Fecha Actual: </label>
+            </div>
+            <div class="item3">
+                <label class="item3-title">Ubicacion Actual: <span id="userLocation"></span></label>
+            </div>
+            <div class="item4">
+                <label>Transacciones</label>
+                <div class="trans-container">
+                    @if (transaccionesRepository.GetExistPrestamosUser(IdUser) == true)
+                    {
+                        var firstModel = Model.FirstOrDefault();
+                        if (firstModel != null)
+                        {
+                            <p>Total de Prestamos: @firstModel.PrestamosUser.TotalPrestamos</p>
+                            <p>Total de Prestamos Aprobados: @firstModel.PrestamosUser.TotalAprobado</p>
+                            <p>Total de Prestamos Pendientes: @firstModel.PrestamosUser.TotalPendiente</p>
+                            <p>Total de Prestamos Rechazados: @firstModel.PrestamosUser.TotalRechazado</p>
+                            <hr />
+                            <p>Valor de Prestamos Acumulados: @firstModel.PrestamosUser.ValorTotalPrestado</p>
+                        }
+                        else
+                        {
+                            <p>Por el momento no presentas Acciones de Prestamo</p>
+                        }
+                    }
+                    else
+                    {
+                        <p>Por el momento no presentas Acciones de Prestamo</p>
+                    }
+                </div>
+            </div>
+            <div class="item5">
+                <table class="main">
+                    <tr>
+                        <td class="col-aport">
+                            @if (aportacionRepository.GetExistApotacionesUser(IdUser) == true)
+                            {
+                                var firstModel = Model.FirstOrDefault();
+                                if (firstModel != null)
+                                {
+                                    <p class="Taportacioes">Total de Aportaciones: @firstModel.AportacionesUser.TotalAportaciones</p>
+                                    <p class="Aaprobadas">Aportaciones Aprobadas: @firstModel.AportacionesUser.TotalAprobados</p>
+                                    <p class="Aaprobadas">Aportaciones En Espera: @firstModel.AportacionesUser.TotalEspera</p>
+                                    <p class="Vaportacioes">Valor de Aportaciones Totales: @firstModel.AportacionesUser.AportacionesAcumuladas</p>
+                                    <p class="CbancariaUsadas">Banco mas Usado: </p>
+                                }
+                                else
+                                {
+                                    <p>Por el momento no tienes Aportaciones</p>
+                                }
+                            }
+                            else
+                            {
+                                <p>Por el Momento no tienes Aportaciones Realizadas</p>
+                            }
+                        </td>
+                        <td class="col-mult">
+                            @if ((bool) multaRepository.OperacionesMulta(2, 0, IdUser))
+                            {
+                                var firstModel = Model.FirstOrDefault();
+                                if (firstModel != null)
+                                {
+                                    <p class="TMultas">Total de Multas: @firstModel.MultaUser.TotalMultas</p>
+                                    <p class="MCanceladas">Multas Canceladas: @firstModel.MultaUser.TotalCancelados</p>
+                                    <p class="VMultas">Valor de Multas: @firstModel.MultaUser.MultasAcumuladas</p>
+                                }
+                                else
+                                {
+                                    <p>Por el momento no tienes Multas</p>
+                                }
+                            }
+                            else
+                            {
+                                <p>Por el Momento no presentas Multas</p>
+                            }
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-part" colspan="2">
+                            <label class="TEvent">Total de Eventos Participados</label>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="item6">
+                <div class="fila-supr">
+                    <div class="fs-titulo">
+                        <label class="fs-t1">Eventos de Participacion</label>
+                    </div>
+                </div>
+                <div class="fila-infr">
+                    @if (eventosRepository.GetExistEventos() == true)
+                    {
+                        @foreach (var evento in Model)
+                        {
+                            var userIdentificacion = User.Claims.FirstOrDefault(c => c.Type == System.Security.Claims.ClaimTypes.Name)?.Value;
+                            @if (IdUser != evento.Eventos.IdUser && evento.Eventos.Estado == "CONCURSO" && valorVisualizacion.CondicionVisualizacion(IdUser, userIdentificacion, evento.Eventos.NombresPId, evento.Eventos.ParticipantesId) == true)
+                            {
+                                <div class="content-formulario" id="content-formulario-@evento.Eventos.Id">
+                                    <button type="submit" class="btn-participante" data-event-id="@evento.Eventos.Id">Evento #@evento.Eventos.Id </button>
+                                </div>
+                                <div class="eventos-modal" id="eventos-modal-@evento.Eventos.Id">
+                                    <div class="modal-content">
+                                        <div class="modal-supr">
+                                            <h2 class="modal-evento-titulo">Evento de Participacion #@evento.Eventos.Id</h2>
+                                            <p class="modal-parrafo">Nombre Referido Dueño de la Transaccion: @evento.Eventos.NombreUsuario</p>
+                                            <p class="modal-parrafo">Valor del Prestamo: @evento.Prestamos.Valor</p>
+                                            <p class="modal-parrafo">Tipo de Cuota: @evento.Prestamos.TipoCuota</p>
+                                            <p class="modal-parrafo">Fecha de Pago de Deuda: @evento.Prestamos.FechaPagoTotalPrestamo.ToString("dd-MMMM-yyyy")</p>
+                                        </div>
+                                        <div class="modal-infr" id="modal-infr-@evento.Eventos.Id">
+                                            <form asp-action="Participar">
+                                                <input type="hidden" asp-for="@evento.Eventos.Id" id="IdP" name="IdP" />
+                                                <button class="add-participante" type="submit" data-event-id="@evento.Eventos.Id">Participar</button>
+                                                <a href="" class="close-modal" data-event-id="@evento.Eventos.Id">Cerrar</a>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                            else
+                            {
+                                <label>Por el momento no hay eventos para participar</label>
+                            }
+                        }
+                    }
+                    else
+                    {
+                        <label>Por el momento no hay eventos para participar</label>
+                    }
+
+                </div>
+            </div>
+
+        </div>
+    }
+    else
+    {
+        <label>Fallo obtener el id del Usuario</label>
+    }
+</body>

@@ -16,7 +16,7 @@
       "MULT": {
         "DBQM_SelectMultas": "SELECT (SELECT COUNT(*) FROM act_Multas) AS TotalMultas, a.*,  u.NombreYApellido AS NombreUsuario FROM act_Multas a INNER JOIN act_User u ON a.IdUser = u.Id",
         "DBQM_SelectMultasUser": "SELECT (SELECT COUNT(*) FROM act_Multas WHERE IdUser = @IdUser) AS TotalMultas, (SELECT COUNT(*) FROM act_Multas WHERE Estado='CANCELADO' AND IdUser = @IdUser) AS TotalCancelados, a.* FROM act_Multas a WHERE a.IdUser = @IdUser",
-        "DBQM_SelectIdMultaUser": "SELECT * FROM act_Multas WHERE Id = @Id AND  IdUser = @IdUser"
+        "DBQM_SelectMultasId": "SELECT * FROM act_Multas WHERE Id = @Id"
       },
       "EVEN": {
         "DBQE_SelectEventos": "SELECT (SELECT COUNT(*) FROM act_Eventos WHERE Estado = 'CONCURSO') AS TotalEventos, x.*, u.NombreYApellido AS NombreUsuario FROM act_Eventos x INNER JOIN act_User u ON x.IdUser = u.Id WHERE x.Estado = 'CONCURSO'",
