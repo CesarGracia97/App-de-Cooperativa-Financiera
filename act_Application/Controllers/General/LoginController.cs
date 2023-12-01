@@ -42,17 +42,17 @@ namespace act_Application.Controllers.General
 
             string hashedPassword = HashPassword(Contrasena);
 
-            ActUser objeto = new UsuarioRepository().GetDataUser(Correo, hashedPassword);
+            var uobj = (ActUser) new UsuarioRepository().OperacionesUsuario(1, 0, 0, Correo, hashedPassword);
             var claims = new List<Claim>();
 
-            if (objeto != null)
+            if (uobj != null)
             {
-                if (objeto.Estado != "ACTIVO")
+                if (uobj.Estado != "ACTIVO")
                 {
                     string mensaje = string.Empty;
 
                     // Establecer el mensaje según el estado del usuario
-                    switch (objeto.Estado)
+                    switch (uobj.Estado)
                     {
                         case "INACTIVO":
                             return RedirectToAction("Cuenta_Inactiva", "Login");
@@ -64,21 +64,19 @@ namespace act_Application.Controllers.General
                             return RedirectToAction("CSE", "Login");
                     }
                 }
-                if (objeto.NombreYapellido != null)
+                if (uobj.NombreYapellido != null)
                 {
-                    UsuarioRepository usuarioRepository = new UsuarioRepository();
+                    var robj = (ActRol) new UsuarioRepository().OperacionesUsuario( 2, uobj.IdRol, 0, "", "");
 
-                    ActRol objetoRol = usuarioRepository.GetDataRolUser(objeto.IdRol);
-
-                    if (objetoRol != null)
+                    if (robj != null)
                     {
-                        claims.Add(new Claim(ClaimTypes.Name, objeto.NombreYapellido));
-                        claims.Add(new Claim(ClaimTypes.Email, objeto.Correo));
-                        claims.Add(new Claim("CI", objeto.Cedula));
-                        claims.Add(new Claim("Id", objeto.Id.ToString()));
-                        claims.Add(new Claim("IdRol", objeto.IdRol.ToString()));
-                        claims.Add(new Claim("Rol", objetoRol.NombreRol));
-                        claims.Add(new Claim("TipoUsuario", objeto.TipoUser));
+                        claims.Add(new Claim(ClaimTypes.Name, uobj.NombreYapellido));
+                        claims.Add(new Claim(ClaimTypes.Email, uobj.Correo));
+                        claims.Add(new Claim("CI", uobj.Cedula));
+                        claims.Add(new Claim("Id", uobj.Id.ToString()));
+                        claims.Add(new Claim("IdRol", uobj.IdRol.ToString()));
+                        claims.Add(new Claim("Rol", robj.NombreRol));
+                        claims.Add(new Claim("TipoUsuario", uobj.TipoUser));
                     }
 
                     var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
@@ -88,7 +86,7 @@ namespace act_Application.Controllers.General
 
                     try
                     {
-                        new MetodoLogeo().EnviarNotificacionInicioSesion(objeto);
+                        new MetodoLogeo().EnviarNotificacionInicioSesion(uobj);
                     }
                     catch (Exception ex)
                     {
@@ -121,8 +119,7 @@ namespace act_Application.Controllers.General
         }
         public IActionResult Registrarse()
         {
-            UsuarioRepository usuarioRepository = new UsuarioRepository();
-            List<UserList> listUsuarios = usuarioRepository.GetDataListUser();
+            var listUsuarios = (List<UserList>) new UsuarioRepository().OperacionesUsuario( 3, 0, 0, "", "");
 
             var itemListUsuarios = listUsuarios.Select(usuarios =>
             new

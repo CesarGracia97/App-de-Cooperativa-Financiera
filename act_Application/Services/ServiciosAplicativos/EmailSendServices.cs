@@ -68,8 +68,7 @@ namespace act_Application.Services.ServiciosAplicativos
         }
         public async Task EnviarCorreoUsuario(int IdUser, int opcion, string Descripcion)
         {
-            var uobj = new UsuarioRepository();
-            string userEmail = uobj.CorreoUser(IdUser), subject = string.Empty;
+            string userEmail = (string) new UsuarioRepository().OperacionesUsuario(4, 0, IdUser, "", ""), subject = string.Empty;
             if (userEmail != null)
             {
                 switch (opcion)
