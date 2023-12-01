@@ -1,5 +1,6 @@
 ﻿using act_Application.Data.Context;
 using act_Application.Data.Repository;
+using act_Application.Models.BD;
 using act_Application.Models.Sistema.ViewModel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -23,7 +24,7 @@ namespace act_Application.Controllers.General
             {
                 if(User.HasClaim("Rol", "Administrador"))
                 {
-                    var notiAdmi = new NotificacionesRepository().GetDataNotificacionesAdmin();
+                    var notiAdmi = (List<ActNotificacione>) new NotificacionesRepository().OperacionesNotificaciones(3, 0, 0);
                     var viewModelList = notiAdmi.Select(notificacion => new Notificaciones_VM
                     {
                         Notificaciones = notificacion,
@@ -43,7 +44,7 @@ namespace act_Application.Controllers.General
                         int Bandera = 0;
                         if (userIdClaim != null && int.TryParse(userIdClaim.Value, out int IdUser))
                             Bandera = IdUser;
-                        var notiUser = new NotificacionesRepository().GetDataNotificacionesUser(Bandera);
+                        var notiUser = (List<ActNotificacione>) new NotificacionesRepository().OperacionesNotificaciones( 4, 0, Bandera);
                         var viewModelList = notiUser.Select(notificacion => new Notificaciones_VM
                         {
                             Notificaciones = notificacion,

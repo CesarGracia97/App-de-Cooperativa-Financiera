@@ -8,55 +8,87 @@ namespace act_Application.Data.Repository
     public class NotificacionesRepository
     {
         private readonly string connectionString = AppSettingsHelper.GetConnectionString();
-        public bool GetExistNotificacionesAdmin()
+        private bool GetExistNotificacionesAdmin()
         {
-            string Query = ConfigReader.GetQuery( 1, "NOTI", "DBQN_SelectAdmiNotificacion");
-            int TotalN = 0;
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            try
             {
-                using (MySqlCommand cmd = new MySqlCommand(Query, connection))
+                string Query = ConfigReader.GetQuery(1, "NOTI", "DBQN_SelectAdmiNotificacion");
+                int TotalN = 0;
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
-                    cmd.CommandType = CommandType.Text;
-                    connection.Open();
-                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    using (MySqlCommand cmd = new MySqlCommand(Query, connection))
                     {
-                        if (reader.Read()) // Avanzar al primer registro
+                        cmd.CommandType = CommandType.Text;
+                        connection.Open();
+                        using (MySqlDataReader reader = cmd.ExecuteReader())
                         {
-                            TotalN = Convert.ToInt32(reader["TotalNotificaciones"]);
+                            if (reader.Read()) // Avanzar al primer registro
+                            {
+                                TotalN = Convert.ToInt32(reader["TotalNotificaciones"]);
+                            }
                         }
                     }
                 }
+                return TotalN > 0;
             }
-            return TotalN > 0;
-        }
-        public bool GetExistNotificacionesUser(int IdUser)
-        {
-            string Query = ConfigReader.GetQuery( 1, "NOTI", "DBQN_SelectUserNotificacion");
-            int TotalN = 0;
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            catch (MySqlException ex)
             {
-                using (MySqlCommand cmd = new MySqlCommand(Query, connection))
+                Console.WriteLine($"\nGetExistNotificacionesAdmin || Error de Mysql");
+                Console.WriteLine($"\nRazon del Error: {ex.Message}\n");
+                throw;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"\nGetExistNotificacionesAdmin || ErrorGeneral");
+                Console.WriteLine($"\nRazon del Error: {ex.Message}\n");
+                return false;
+            }
+
+        }
+        private bool GetExistNotificacionesUser(int IdUser)
+        {
+            try
+            {
+                string Query = ConfigReader.GetQuery(1, "NOTI", "DBQN_SelectUserNotificacion");
+                int TotalN = 0;
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
-                    cmd.CommandType = CommandType.Text;
-                    cmd.Parameters.AddWithValue("@Id", IdUser);
-                    connection.Open();
-                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    using (MySqlCommand cmd = new MySqlCommand(Query, connection))
                     {
-                        if (reader.Read()) // Avanzar al primer registro
+                        cmd.CommandType = CommandType.Text;
+                        cmd.Parameters.AddWithValue("@Id", IdUser);
+                        connection.Open();
+                        using (MySqlDataReader reader = cmd.ExecuteReader())
                         {
-                            TotalN = Convert.ToInt32(reader["TotalNotificaciones"]);
+                            if (reader.Read()) // Avanzar al primer registro
+                            {
+                                TotalN = Convert.ToInt32(reader["TotalNotificaciones"]);
+                            }
                         }
                     }
                 }
+                return TotalN > 0;
+
             }
-            return TotalN > 0;
+            catch (MySqlException ex)
+            {
+                Console.WriteLine($"\nGetExistNotificacionesUser || Error de Mysql");
+                Console.WriteLine($"\nRazon del Error: {ex.Message}\n");
+                throw;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"\nGetExistNotificacionesUser || ErrorGeneral");
+                Console.WriteLine($"\nRazon del Error: {ex.Message}\n");
+                return false;
+            }
         }
-        public List<ActNotificacione> GetDataNotificacionesAdmin() //Consulta para obtener todos los datos de las notificacionesAdmin del administrador
+        private List<ActNotificacione> GetDataNotificacionesAdmin() //Consulta para obtener todos los datos de las notificacionesAdmin del administrador
         {
             try
             {
                 List<ActNotificacione> notifiAdmin = new List<ActNotificacione>();
-                string Query = ConfigReader.GetQuery( 1, "NOTI", "DBQN_SelectAdmiNotificacion");
+                string Query = ConfigReader.GetQuery(1, "NOTI", "DBQN_SelectAdmiNotificacion");
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
                     connection.Open();
@@ -76,14 +108,20 @@ namespace act_Application.Data.Repository
                 }
                 return notifiAdmin;
             }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine($"\nGetDataNotificacionesAdmin || Error de Mysql");
+                Console.WriteLine($"\nRazon del Error: {ex.Message}\n");
+                throw;
+            }
             catch (Exception ex)
             {
-                Console.WriteLine("Hubo un error en la consulta de notifiUser");
-                Console.WriteLine("Detalles del error: " + ex.Message);
+                Console.WriteLine($"\nGetDataNotificacionesAdmin || ErrorGeneral");
+                Console.WriteLine($"\nRazon del Error: {ex.Message}\n");
                 return null;
             }
         }
-        public List<ActNotificacione> GetDataNotificacionesUser(int IdUser) //Consulta para obtener todos los datos de las notificacionesUser del administrador
+        private List<ActNotificacione> GetDataNotificacionesUser(int IdUser) //Consulta para obtener todos los datos de las notificacionesUser del administrador
         {
             try
             {
@@ -110,10 +148,16 @@ namespace act_Application.Data.Repository
                 }
                 return notifiUser;
             }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine($"\nGetDataNotificacionesUser || Error de Mysql");
+                Console.WriteLine($"\nRazon del Error: {ex.Message}\n");
+                throw;
+            }
             catch (Exception ex)
             {
-                Console.WriteLine("Hubo un error en la consulta de notifiUser");
-                Console.WriteLine("Detalles del error: " + ex.Message);
+                Console.WriteLine($"\nGetDataNotificacionesUser || ErrorGeneral");
+                Console.WriteLine($"\nRazon del Error: {ex.Message}\n");
                 return null;
             }
         }
@@ -130,6 +174,36 @@ namespace act_Application.Data.Repository
                 Destino = Convert.ToString(reader["Destino"]),
                 Visto = Convert.ToString(reader["Visto"])
             };
+        }
+        public object OperacionesNotificaciones(int Opciones, int Id, int IdUser)
+        {
+            try
+            {
+                switch (Opciones)
+                {
+                    case 1:
+                        return GetExistNotificacionesAdmin();
+                    case 2:
+                        return GetExistNotificacionesUser(IdUser);
+                    case 3:
+                        return GetDataNotificacionesAdmin();
+                    case 4:
+                        return GetDataNotificacionesUser(IdUser);
+                    default:
+                        Console.WriteLine("\n---------------------------------------------------");
+                        Console.WriteLine("\nOperacionesNotificaciones || Opcion Inexistente.");
+                        Console.WriteLine("\n---------------------------------------------------\n");
+                        return null;
+                }
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine("\n-----------------------------------");
+                Console.WriteLine("\nOperacionesNotificaciones || Error.");
+                Console.WriteLine("\nRazon del Error: " + ex.Message);
+                Console.WriteLine("\n-----------------------------------");
+                return null;
+            }
         }
     }
 }
