@@ -9,7 +9,7 @@ namespace act_Application.Data.Repository
     public class PrestamosRepository
     {
         private readonly string connectionString = AppSettingsHelper.GetConnectionString();
-        public int GetDataPrestamoForIdPres(string IdPres)
+        public int GetData_PrestamoIdPres(string IdPres)
         {
             int Id = 0;
             try
@@ -31,6 +31,12 @@ namespace act_Application.Data.Repository
                     }
                 }
                 return Id;
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine($"\nGetData_PrestamoIdPres || Error de Mysql");
+                Console.WriteLine($"\nRazon del Error: {ex.Message}\n");
+                throw;
             }
             catch (Exception ex)
             {
