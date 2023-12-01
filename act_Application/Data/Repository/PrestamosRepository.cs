@@ -9,7 +9,7 @@ namespace act_Application.Data.Repository
     public class PrestamosRepository
     {
         private readonly string connectionString = AppSettingsHelper.GetConnectionString();
-        public int GetData_PrestamoIdPres(string IdPres)
+        private int GetData_PrestamoIdPres(string IdPres)
         {
             int Id = 0;
             try
@@ -40,15 +40,16 @@ namespace act_Application.Data.Repository
             }
             catch (Exception ex)
             {
-                Console.WriteLine("GetDataPrestamoForIdPre | Error.");
-                Console.WriteLine("Detalles del error: " + ex.Message);
+                Console.WriteLine($"\nGetData_PrestamoIdPres || ErrorGeneral");
+                Console.WriteLine($"\nRazon del Error: {ex.Message}\n");
                 return Id = -1;
             }
         }
-        public ActPrestamo GetDataPrestamoId(int IdPrestamo) //Consulta para obtener todos los datos de una transaccion especifica
+        private ActPrestamo GetData_PrestamoId(int IdPrestamo) //Consulta para obtener todos los datos de una transaccion especifica
         {
             try
             {
+                var pobj = new ActPrestamo();
                 string Query = ConfigReader.GetQuery( 1, "PRES", "DBQP_SelectPrestamoId");
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
@@ -61,27 +62,34 @@ namespace act_Application.Data.Repository
                             while (reader.Read())
                             {
                                 ActPrestamo obj = MappToPrestamo(reader);
-                                return obj;
+                                pobj = obj;
                             }
+                            
                         }
                     }
                 }
+                return pobj;
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine($"\nGetData_PrestamoId || Error de Mysql");
+                Console.WriteLine($"\nRazon del Error: {ex.Message}\n");
+                throw;
             }
             catch (Exception ex)
             {
-                Console.WriteLine("GetDataPrestamoId | Error.");
-                Console.WriteLine("Detalles del error: " + ex.Message);
+                Console.WriteLine($"\nGetData_PrestamoId || ErrorGeneral");
+                Console.WriteLine($"\nRazon del Error: {ex.Message}\n");
+                return null;
             }
-            return null;
+
         }
-        public bool GetExistPrestamosUser(int IdUser)
+        private bool GetExist_PrestamosUser(int IdUser)
         {
             try
             {
                 string Query = ConfigReader.GetQuery( 1, "PRES", "DBQP_SelectPrestamoUser");
-
                 int totalPrestamos = 0;
-
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
                     connection.Open();
@@ -99,14 +107,20 @@ namespace act_Application.Data.Repository
                 }
                 return totalPrestamos > 0;
             }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine($"\nGetExist_PrestamosUser || Error de Mysql");
+                Console.WriteLine($"\nRazon del Error: {ex.Message}\n");
+                throw;
+            }
             catch (Exception ex)
             {
-                Console.WriteLine("GetExistPrestamosUser | Error.");
-                Console.WriteLine("Detalles del error: " + ex.Message);
+                Console.WriteLine($"\nGetExist_PrestamosUser || ErrorGeneral");
+                Console.WriteLine($"\nRazon del Error: {ex.Message}\n");
                 return false;
             }
         }
-        public List<DetallesPrestamosUsers> GetDataPrestamosUser(int IdUser)
+        private List<DetallesPrestamosUsers> GetData_PrestamosUser(int IdUser)
         {
             try
             {
@@ -149,14 +163,20 @@ namespace act_Application.Data.Repository
                 prestamos.Add(detallesPrestamos);
                 return prestamos;
             }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine($"\nGetData_PrestamosUser || Error de Mysql");
+                Console.WriteLine($"\nRazon del Error: {ex.Message}\n");
+                throw;
+            }
             catch (Exception ex)
             {
-                Console.WriteLine("GetDataPrestamosUser | Error.");
-                Console.WriteLine("Detalles del error: " + ex.Message);
+                Console.WriteLine($"\nGetData_PrestamosUser || ErrorGeneral");
+                Console.WriteLine($"\nRazon del Error: {ex.Message}\n");
                 return null;
             }
         }
-        public string H_GetLastIdPres(int IdUser)
+        private string H_GetData_LastIdPres(int IdUser)
         {
             string IdA = string.Empty;
             try
@@ -182,11 +202,17 @@ namespace act_Application.Data.Repository
                 }
                 return IdA;
             }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine($"\n H_GetData_LastIdPres || Error de Mysql");
+                Console.WriteLine($"\nRazon del Error: {ex.Message}\n");
+                throw;
+            }
             catch (Exception ex)
             {
-                Console.WriteLine("H_GetLastIdPres | Error.");
-                Console.WriteLine("Detalles del error: " + ex.Message);
-                return IdA;
+                Console.WriteLine($"\n H_GetData_LastIdPres || ErrorGeneral");
+                Console.WriteLine($"\nRazon del Error: {ex.Message}\n");
+                return null;
             }
         }
         private ActPrestamo MappToPrestamo(MySqlDataReader reader)
@@ -204,6 +230,38 @@ namespace act_Application.Data.Repository
                 TipoCuota = Convert.ToString(reader["TipoCuota"]),
                 Estado = Convert.ToString(reader["Estado"])
             };
+        }
+        public object OperacionesPrestamos(int Opcion, int Id, int IdUser, string IdPres)
+        {
+            try
+            {
+                switch (Opcion)
+                {
+                    case 1:
+                        return GetData_PrestamoIdPres(IdPres);
+                    case 2:
+                        return GetData_PrestamoId(Id);
+                    case 3:
+                        return GetExist_PrestamosUser(IdUser);
+                    case 4:
+                        return GetData_PrestamosUser(IdUser);
+                    case 5:
+                        return H_GetData_LastIdPres(IdUser);
+                    default:
+                        Console.WriteLine("\n-----------------------------------------");
+                        Console.WriteLine("\nOperacionesPrestamos || Opcion Inexistente.");
+                        Console.WriteLine("\n-----------------------------------------\n");
+                        return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("\n-----------------------------------");
+                Console.WriteLine("\nOperacionesPrestamos || Error.");
+                Console.WriteLine("\nRazon del Error: " + ex.Message);
+                Console.WriteLine("\n-----------------------------------");
+                return null;
+            }
         }
     }
 }

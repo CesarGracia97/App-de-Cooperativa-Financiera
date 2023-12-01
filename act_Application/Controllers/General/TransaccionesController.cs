@@ -175,8 +175,7 @@ namespace act_Application.Controllers.General
                                                 $" e inicio de pago de la deuda para el dia {actPrestamo.FechaInicioPagoCuotas}" +
                                                 $"\nEstado: {actPrestamo.Estado}" +
                                                 $"\nTipo de Cuota: {actPrestamo.TipoCuota}";
-                        PrestamosRepository pobj = new PrestamosRepository();
-                        await _nservices.CrearNotificacion(4, IdUser, pobj.H_GetLastIdPres(IdUser), "PETICION DE PRESTAMO", DescripcionA, "ADMINISTRADOR", new ActNotificacione());
+                        await _nservices.CrearNotificacion(4, IdUser, (string) new PrestamosRepository().OperacionesPrestamos( 5, 0, IdUser, ""), "PETICION DE PRESTAMO", DescripcionA, "ADMINISTRADOR", new ActNotificacione());
                         var essA = new EmailSendServices().EnviarCorreoAdmin(7, DescripcionA);
                         var essU = new EmailSendServices().EnviarCorreoUsuario(IdUser, 1, DescripcionU);
                     }

@@ -101,7 +101,7 @@ namespace act_Application.Data.Repository
                                 ActNotificacione obj = MapToNotificaciones(reader);
                                 notifiAdmin.Add(obj);
                                 PrestamosRepository pobj = new PrestamosRepository();
-                                pobj.GetDataPrestamoId(pobj.GetData_PrestamoIdPres(obj.IdActividad));
+                                pobj.OperacionesPrestamos( 2,(int) new PrestamosRepository().OperacionesPrestamos( 1, 0, 0, obj.IdActividad), 0, "");
                             }
                         }
                     }
@@ -141,7 +141,7 @@ namespace act_Application.Data.Repository
                                 
                                 notifiUser.Add(obj);
                                 PrestamosRepository pobj = new PrestamosRepository();
-                                pobj.GetDataPrestamoId(pobj.GetData_PrestamoIdPres(obj.IdActividad));
+                                pobj.OperacionesPrestamos(2, (int)new PrestamosRepository().OperacionesPrestamos(1, 0, 0, obj.IdActividad), 0, "");
                             }
                         }
                     }

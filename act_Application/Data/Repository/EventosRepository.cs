@@ -78,7 +78,7 @@ namespace act_Application.Data.Repository
                             ActEvento obj = MapToEventos(reader);
                             eventoList.Add(obj);
                             var prestamos = new PrestamosRepository();
-                            prestamos.GetDataPrestamoId(obj.IdPrestamo);
+                            prestamos.OperacionesPrestamos( 2, obj.IdPrestamo, 0, "");
                         }
                     }
                 }

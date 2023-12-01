@@ -6,7 +6,6 @@
     ViewBag.Title = "Home";
 
     var valorVisualizacion = new MetodoVisualizacion();
-    var transaccionesRepository = new PrestamosRepository();
     var userIdClaim = User.Claims.FirstOrDefault(c => c.Type == "Id");
 }
 <head>
@@ -48,7 +47,7 @@
             <div class="item4">
                 <label>Transacciones</label>
                 <div class="trans-container">
-                    @if (transaccionesRepository.GetExistPrestamosUser(IdUser) == true)
+                    @if ((bool)new PrestamosRepository().OperacionesPrestamos(3, 0, IdUser, ""))
                     {
                         var firstModel = Model.FirstOrDefault();
                         if (firstModel != null)
