@@ -127,9 +127,9 @@ namespace act_Application.Data.Repository
         }
         private string GetData_CorreoUser(int IdUser)
         {
-            string email = string.Empty;
             try
             {
+                string email = string.Empty;
                 string Query = ConfigReader.GetQuery(2, "", "ASQ_SelectCorreoUser");
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
