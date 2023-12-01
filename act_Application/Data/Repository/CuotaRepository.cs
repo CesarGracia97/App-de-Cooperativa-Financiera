@@ -8,7 +8,7 @@ namespace act_Application.Data.Repository
     public class CuotaRepository
     {
         private readonly string connectionString = AppSettingsHelper.GetConnectionString();
-        public ActCuota GetDataCuotasUser(int IdUser)
+        private ActCuota GetData_CuotasUser(int IdUser)
         {
             try
             {
@@ -32,14 +32,20 @@ namespace act_Application.Data.Repository
                     }
                 }
             }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine($"\nGetData_CuotasUser || Error de Mysql");
+                Console.WriteLine($"\nRazon del Error: {ex.Message}\n");
+                throw;
+            }
             catch (Exception ex)
             {
-                Console.WriteLine("GetDataCuotasUser | Error.");
+                Console.WriteLine("GetData_CuotasUser | Error.");
                 Console.WriteLine("Detalles del error: " + ex.Message);
             }
             return null;
         }
-        public ActCuota GetIdDataCuotaUser(int Id)
+        private ActCuota GetData_IdCuotaUser(int Id)
         {
             try
             {
@@ -64,14 +70,20 @@ namespace act_Application.Data.Repository
                 }
 
             }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine($"\nGetData_IdCuotaUser || Error de Mysql");
+                Console.WriteLine($"\nRazon del Error: {ex.Message}\n");
+                throw;
+            }
             catch (Exception ex)
             {
-                Console.WriteLine("GetIdDataCuotaUser | Error.");
+                Console.WriteLine("GetData_IdCuotaUser | Error.");
                 Console.WriteLine("Detalles del error: " + ex.Message);
             }
             return null;
         }
-        public int H_GetLastIdCouta(int IdUser)
+        private int H_GetData_LastIdCouta(int IdUser)
         {
             int Id = -1;
             try
@@ -96,15 +108,21 @@ namespace act_Application.Data.Repository
                 }
                 return Id;
             }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine($"\nH_GetData_LastIdCouta || Error de Mysql");
+                Console.WriteLine($"\nRazon del Error: {ex.Message}\n");
+                throw;
+            }
             catch (Exception ex)
             {
-                Console.WriteLine("H_GetLastIdCouta | Error. ");
+                Console.WriteLine("H_GetData_LastIdCouta | Error. ");
                 Console.WriteLine("Detalles del error: " + ex.Message);
                 return Id;
             }
 
         }
-        public List<ActCuota> SA_GetDateCuotasAll()
+        private List<ActCuota> SA_GetData_DateCuotasAll()
         {
             List<ActCuota> cuotasList = new List<ActCuota>();
             try
@@ -129,9 +147,15 @@ namespace act_Application.Data.Repository
                 }
                 return cuotasList;
             }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine($"\nSA_GetData_DateCuotasAll || Error de Mysql");
+                Console.WriteLine($"\nRazon del Error: {ex.Message}\n");
+                throw;
+            }
             catch (Exception ex)
             {
-                Console.WriteLine($"SA_GetDateCuotasAll | Error \n");
+                Console.WriteLine($"SA_GetData_DateCuotasAll | Error \n");
                 Console.WriteLine($"Detalles del error: " + ex.Message);
                 return null;
             }
@@ -156,6 +180,36 @@ namespace act_Application.Data.Repository
                 HistorialValores = Convert.ToString(reader["HistorialValores"]),
                 CapturaPantalla = Convert.ToString(reader["CapturaPantalla"])
             };
+        }
+        public object OperacionesCuotas (int Opciones, int Id, int IdUser)
+        {
+            try
+            {
+                switch (Opciones)
+                {
+                    case 1:
+                        return GetData_CuotasUser(IdUser);
+                    case 2:
+                        return GetData_IdCuotaUser(Id);
+                    case 3:
+                        return H_GetData_LastIdCouta(IdUser);
+                    case 4:
+                        return SA_GetData_DateCuotasAll();
+                    default:
+                        Console.WriteLine("\n-----------------------------------------");
+                        Console.WriteLine("\nOperacionesCuotas || Opcion Inexistente.");
+                        Console.WriteLine("\n-----------------------------------------\n");
+                        return null;
+                }
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine("\n-----------------------------------");
+                Console.WriteLine("\nOperacionesCuotas || Error.");
+                Console.WriteLine("\nRazon del Error: " + ex.Message);
+                Console.WriteLine("\n-----------------------------------");
+                return null;
+            }
         }
     }
 }

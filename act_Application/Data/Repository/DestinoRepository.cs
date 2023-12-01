@@ -7,7 +7,7 @@ namespace act_Application.Data.Repository
     public class DestinoRepository
     {
         private readonly string connectionString = AppSettingsHelper.GetConnectionString();
-        public List<ActCuentaDestino> GetDataDestinos()
+        private List<ActCuentaDestino> GetDataDestinos()
         {
             try
             {
@@ -31,10 +31,16 @@ namespace act_Application.Data.Repository
                 }
                 return cuentasDestino;
             }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine($"\nGetDataDestinos || Error de Mysql");
+                Console.WriteLine($"\nRazon del Error: {ex.Message}\n");
+                throw;
+            }
             catch (Exception ex)
             {
-                Console.WriteLine("GetDataDestinos | Error");
-                Console.WriteLine("Detalles del error: " + ex.Message);
+                Console.WriteLine($"\nGetDataDestinos | Error");
+                Console.WriteLine($"\nDetalles del error: {ex.Message}\n");
                 return null;
             }
         }
@@ -46,6 +52,30 @@ namespace act_Application.Data.Repository
                 NumeroCuentaB = Convert.ToString(reader["NumeroCuentaB"]),
                 NombreBanco = Convert.ToString(reader["NombreBanco"])
             };
+        }
+        public object OperacionDestino(int Opcion, int Id, int IdUser)
+        {
+            try
+            {
+                switch (Opcion)
+                {
+                    case 1:
+                        return GetDataDestinos();
+                    default:
+                        Console.WriteLine("\n-----------------------------------------");
+                        Console.WriteLine("\nOperacionesDestino || Opcion Inexistente.");
+                        Console.WriteLine("\n-----------------------------------------\n");
+                        return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("\n-----------------------------------");
+                Console.WriteLine("\nOperacionesDestino || Error.");
+                Console.WriteLine("\nRazon del Error: " + ex.Message);
+                Console.WriteLine("\n-----------------------------------");
+                return null;
+            }
         }
     }
 }

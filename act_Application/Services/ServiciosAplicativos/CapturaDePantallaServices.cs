@@ -38,8 +38,7 @@ namespace act_Application.Services.ServiciosAplicativos
                     //CUOTAS
                     try
                     {
-                        var obj = new CuotaRepository();
-                        var cuotOriginal = obj.GetIdDataCuotaUser(Id);
+                        var cuotOriginal = (ActCuota) new CuotaRepository().OperacionesCuotas(2, Id, 0);
                         if (cuotOriginal != null)
                         {
                             actCuota.Id = cuotOriginal.Id;

@@ -38,8 +38,7 @@ namespace act_Application.Services.ServiciosAutomaticos
         }
         public async void GeneradorMultas(object state)
         {
-            var cobj = new CuotaRepository();
-            List<ActCuota> cuotas = cobj.SA_GetDateCuotasAll();
+            var cuotas = (List<ActCuota>) new CuotaRepository().OperacionesCuotas( 4, 0, 0);
             for (int i = 0; i < cuotas.Count; i++)
             {
                 if (cuotas[i].Estado == "PENDIENTE" || cuotas[i].Estado == "PENDIENTE M1")

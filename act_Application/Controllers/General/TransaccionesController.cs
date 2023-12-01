@@ -78,8 +78,7 @@ namespace act_Application.Controllers.General
                         //
                         var userIdentificacion = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value;
                         //
-                        var obj = new CuotaRepository();
-                        var cuotOriginal = obj.GetIdDataCuotaUser(Id);
+                        var cuotOriginal = (ActCuota) new CuotaRepository().OperacionesCuotas( 2, Id, 0);
                         if (cuotOriginal == null)
                         {
                             return RedirectToAction("Error", "Home");
