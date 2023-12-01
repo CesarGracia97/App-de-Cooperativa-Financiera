@@ -70,8 +70,7 @@ namespace act_Application.Services.ServiciosAplicativos
                     //MULTAS
                     try
                     {
-                        var obj = new MultaRepository();
-                        var multOriginal = obj.GetData_MultasId(Id);
+                        var multOriginal = (ActMulta)new MultaRepository().OperacionesMulta(5, Id, 0);
                         if (multOriginal != null)
                         {
                             actMulta.Id = multOriginal.Id;

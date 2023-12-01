@@ -43,7 +43,7 @@ namespace act_Application.Data.Repository
                 return false;
             }
         }
-        public bool GetExist_MultasUser(int IdUser) //Existen multas del Usuario 
+        private bool GetExist_MultasUser(int IdUser) //Existen multas del Usuario 
         {
             try
             {
@@ -71,7 +71,7 @@ namespace act_Application.Data.Repository
                 return false;
             }
         }
-        public List<ActMulta> GetData_Multas() //Obtener todas los registro de Multas. 
+        private List<ActMulta> GetData_Multas() //Obtener todas los registro de Multas. 
         {
             try
             {
@@ -181,7 +181,7 @@ namespace act_Application.Data.Repository
                 return null;
             }
         }
-        public ActMulta GetData_MultasId(int Id) //Obtener un registro en Especifico de Multas 
+        private ActMulta GetData_MultasId(int Id) //Obtener un registro en Especifico de Multas 
         {
             try
             {
@@ -209,7 +209,7 @@ namespace act_Application.Data.Repository
             }
             return null;
         }
-        public int A_GetData_LastIdMultaUser(int IdUser) //Obtiene el Id del ultimo registro de la Multa de un Usuario. 
+        private int A_GetData_LastIdMultaUser(int IdUser) //Obtiene el Id del ultimo registro de la Multa de un Usuario. 
         {
             int Id = -1;
             try

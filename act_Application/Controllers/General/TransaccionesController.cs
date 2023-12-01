@@ -196,9 +196,7 @@ namespace act_Application.Controllers.General
             try
             {
                 if (Id != actMulta.Id)
-                {
                     return RedirectToAction("Error", "Home");
-                }
                 if (ModelState.IsValid)
                 {
                     var userIdClaim = User.Claims.FirstOrDefault(c => c.Type == "Id");
@@ -207,12 +205,9 @@ namespace act_Application.Controllers.General
                         //
                         var userIdentificacion = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value;
                         //
-                        var mobj = new MultaRepository();
-                        var multOriginal = mobj.GetData_MultasId(Id);
+                        var multOriginal = (ActMulta) new MultaRepository().OperacionesMulta(5, Id, 0);
                         if (multOriginal == null)
-                        {
                             return RedirectToAction("Error", "Home");
-                        }
 
                         string DescripcionA = string.Empty, DescripcionU = string.Empty;
 

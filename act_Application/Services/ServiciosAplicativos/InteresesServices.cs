@@ -14,7 +14,7 @@ namespace act_Application.Services.ServiciosAplicativos
         }
         public async Task AddNewInteres(int IdUser, string torigen, decimal Valor, decimal PorcentajeGarante, decimal PorcentajeTodos, [Bind("Id,IdUser,IdPersonnalizado,Valor,Estado,ValorGarante,ValorTodos,ValorActual")]ActTablaInteres actTablaInteres)
         {
-            int IdMultaUser = new MultaRepository().A_GetData_LastIdMultaUser(IdUser);
+            int IdMultaUser = (int) new MultaRepository().OperacionesMulta(6, 0, IdUser);
             actTablaInteres.IdUser = IdUser;
             actTablaInteres.IdPersonalizado = torigen + "-" + IdMultaUser.ToString();
             actTablaInteres.Valor = Valor;

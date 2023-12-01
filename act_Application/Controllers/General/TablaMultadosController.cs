@@ -1,4 +1,5 @@
 ﻿using act_Application.Data.Repository;
+using act_Application.Models.BD;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,8 +10,8 @@ namespace act_Application.Controllers.General
         [Authorize(Policy = "AdminSocioOnly")]
         public IActionResult Index()
         {
-            var mrobj = new MultaRepository().GetData_Multas();
-            return View(mrobj);
+            var mobj = (List<ActMulta>)new MultaRepository().OperacionesMulta(3, 0, 0);
+            return View(mobj);
         }
     }
 }
