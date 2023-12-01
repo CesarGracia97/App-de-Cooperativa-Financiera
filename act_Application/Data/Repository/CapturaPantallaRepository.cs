@@ -7,7 +7,7 @@ namespace act_Application.Data.Repository
     public class CapturaPantallaRepository
     {
         private readonly string connectionString = AppSettingsHelper.GetConnectionString();
-        public int H_GetDataCapturaPantallaLastIdUser(int IdUser)
+        private int H_GetDataCapturaPantallaLastIdUser(int IdUser)
         {
             int Id = -1;
             try
@@ -30,11 +30,41 @@ namespace act_Application.Data.Repository
                 }
                 return Id;
             }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine($"\nH_GetDataCapturaPantallaLastIdUser|| Error de Mysql");
+                Console.WriteLine($"\nRazon del Error: {ex.Message}\n");
+                throw;
+            }
             catch (Exception ex)
             {
-                Console.WriteLine("H_GetDataCapturaPantallaLastIdUser | Error.");
-                Console.WriteLine("Detalles del error: " + ex.Message);
+                Console.WriteLine($"\nH_GetDataCapturaPantallaLastIdUser | Error.");
+                Console.WriteLine($"\nDetalles del error: {ex.Message}\n");
                 return Id;
+            }
+        }
+        public object OperacionesCapPan(int Opcion, int Id, int IdUser)
+        {
+            try
+            {
+                switch (Opcion)
+                {
+                    case 1:
+                        return H_GetDataCapturaPantallaLastIdUser(IdUser);
+                    default:
+                        Console.WriteLine("\n-----------------------------------------");
+                        Console.WriteLine("\nOperacionesCapPan || Opcion Inexistente.");
+                        Console.WriteLine("\n-----------------------------------------\n");
+                        return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("\n-----------------------------------");
+                Console.WriteLine("\nOperacionesCapPan || Error.");
+                Console.WriteLine("\nRazon del Error: " + ex.Message);
+                Console.WriteLine("\n-----------------------------------");
+                return null;
             }
         }
     }

@@ -3,7 +3,7 @@
 @using act_Application.Data.Repository;
 @{
     ViewData["Title"] = "Tabla de Aportantes";
-    bool condicion = new AportacionRepository().GetExistAportaciones();
+    bool condicion = (bool) new AportacionRepository().OperacionesAportaciones(1, 0, 0);
 
 }
 <header>

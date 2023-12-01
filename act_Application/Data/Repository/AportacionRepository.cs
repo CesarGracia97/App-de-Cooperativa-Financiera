@@ -8,8 +8,23 @@ namespace act_Application.Data.Repository
 {
     public class AportacionRepository
     {
+        /*
+         He desarrollado tantos programas, trantos proyectos, trabajos y ninguno me ha hecho sentir tan antusiasmado como el kue kuiero desarrollar
+         contigo a mi lado, uno al kue kuiero poner de nombre "Relacion eterna". Uno donde ambos nos apoyemos, trabajemos, tengamos funciones iterativas
+         kue permitan el desarrollo y evolucion mutua como una Inteligencia Artificar de tipo Red Neuronal. Donde podamos crecer y resolver problemas 
+         propios y congregados. Donde podamos crecer juntos profesionalmente en tu carrera y yo en la mia como Servidores de Base de Datos enlazados
+         Y donde kuiero kue creemos un futuro juntos como, kue fusionemos nuestras pasiones, sueños, deseos, metas, anhelos, fortalezas, debilidades
+         miedos, valores y sobre todo nuestros espiritus y creemos algo unico similar al universo en donde tu alma y la mia converjan en armonia 
+         como objetos a la espera de una union funcionalmente activa.
+         Se que ahora las cosas estan complicadas, y que esto se lo puede ver muy enogorroso que la noche se la ve muy oscura y espeza, pero se que podras ver un bonito
+         Amanecer, podremos ver juntos un bonito amanecer. La vida nos pone pruebas todo el tiempo y nuestro primer deber superarlas, y esta es la primera gran prueba
+         que tienes y que se que la superaras. Demuestra quien eres, demuestra de lo que estas hecha. Destruye a todo aquel que atente contra ti y crea lo que en tus sueños
+         habita. Despues no volveras a ser la misma pero renaceras como un ser nuevo, alguien etereo. Yo creo en eso y no solo volveras a tu Prime... Seras mejor
+         que el Prime que obtuviste anteriormente. 
+        */
+
         private readonly string connectionString = AppSettingsHelper.GetConnectionString();
-        public bool GetExistAportaciones()
+        private bool GetExist_Aportaciones()
         {
             try
             {
@@ -40,26 +55,44 @@ namespace act_Application.Data.Repository
             }
             catch (Exception ex)
             {
-                Console.WriteLine("GetExistAportaciones | Error.");
+                Console.WriteLine("GetExist_Aportaciones | Error.");
                 Console.WriteLine("Detalles del error: " + ex.Message);
                 return false;
             }
         }
-        /*
-         He desarrollado tantos programas, trantos proyectos, trabajos y ninguno me ha hecho sentir tan antusiasmado como el kue kuiero desarrollar
-         contigo a mi lado, uno al kue kuiero poner de nombre "Relacion eterna". Uno donde ambos nos apoyemos, trabajemos, tengamos funciones iterativas
-         kue permitan el desarrollo y evolucion mutua como una Inteligencia Artificar de tipo Red Neuronal. Donde podamos crecer y resolver problemas 
-         propios y congregados. Donde podamos crecer juntos profesionalmente en tu carrera y yo en la mia como Servidores de Base de Datos enlazados
-         Y donde kuiero kue creemos un futuro juntos como, kue fusionemos nuestras pasiones, sueños, deseos, metas, anhelos, fortalezas, debilidades
-         miedos, valores y sobre todo nuestros espiritus y creemos algo unico similar al universo en donde tu alma y la mia converjan en armonia 
-         como objetos a la espera de una union funcionalmente activa.
-         Se que ahora las cosas estan complicadas, y que esto se lo puede ver muy enogorroso que la noche se la ve muy oscura y espeza, pero se que podras ver un bonito
-         Amanecer, podremos ver juntos un bonito amanecer. La vida nos pone pruebas todo el tiempo y nuestro primer deber superarlas, y esta es la primera gran prueba
-         que tienes y que se que la superaras. Demuestra quien eres, demuestra de lo que estas hecha. Destruye a todo aquel que atente contra ti y crea lo que en tus sueños
-         habita. Despues no volveras a ser la misma pero renaceras como un ser nuevo, alguien etereo. Yo creo en eso y no solo volveras a tu Prime... Seras mejor
-         que el Prime que obtuviste anteriormente. 
-         */
-        public List<ActAportacione> GetDataAportaciones()
+        private bool GetExist_ApotacionesUser(int IdUser)
+        {
+            try
+            {
+                string Query = ConfigReader.GetQuery(1, "APOR", "DBQA_SelectAportacionesUser");
+
+                int totalAportaciones = 0;
+
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                {
+                    connection.Open();
+                    using (MySqlCommand command = new MySqlCommand(Query, connection))
+                    {
+                        command.Parameters.AddWithValue("@IdUser", IdUser);
+                        using (MySqlDataReader reader = command.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                totalAportaciones = Convert.ToInt32(reader["TotalAportaciones"]);
+                            }
+                        }
+                    }
+                }
+                return totalAportaciones > 0;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("GetExist_ApotacionesUser | Error.");
+                Console.WriteLine("Detalles del error: " + ex.Message);
+                return false;
+            }
+        }
+        private List<ActAportacione> GetData_Aportaciones()
         {
             try
             {
@@ -131,44 +164,12 @@ namespace act_Application.Data.Repository
             }
             catch (Exception ex)
             {
-                Console.WriteLine("GetDataAportaciones | Error.");
+                Console.WriteLine("GetData_Aportaciones | Error.");
                 Console.WriteLine("Detalles del error: " + ex.Message);
                 return null;
             }
         }
-        public bool GetExistApotacionesUser(int IdUser)
-        {
-            try
-            {
-                string Query = ConfigReader.GetQuery( 1, "APOR", "DBQA_SelectAportacionesUser");
-
-                int totalAportaciones = 0;
-
-                using (MySqlConnection connection = new MySqlConnection(connectionString))
-                {
-                    connection.Open();
-                    using (MySqlCommand command = new MySqlCommand(Query, connection))
-                    {
-                        command.Parameters.AddWithValue("@IdUser", IdUser);
-                        using (MySqlDataReader reader = command.ExecuteReader())
-                        {
-                            if (reader.Read())
-                            {
-                                totalAportaciones = Convert.ToInt32(reader["TotalAportaciones"]);
-                            }
-                        }
-                    }
-                }
-                return totalAportaciones > 0;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("GetExistApotacionesUser | Error.");
-                Console.WriteLine("Detalles del error: " + ex.Message);
-                return false;
-            }
-        }
-        public List<DetallesAportacionesUsers> GetDataAportacionesUser(int IdUser)
+        private List<DetallesAportacionesUsers> GetData_AportacionesUser(int IdUser)
         {
             try
             {
@@ -211,12 +212,12 @@ namespace act_Application.Data.Repository
             }
             catch (Exception ex)
             {
-                Console.WriteLine("GetDataAportacionesUser | Error.");
+                Console.WriteLine("GetData_AportacionesUser | Error.");
                 Console.WriteLine("Detalles del error: " + ex.Message);
                 return null;
             }
         }
-        public string H_GetLastIdApor (int IdUser)
+        private string H_GetData_LastIdApor (int IdUser)
         {
             string IdA = string.Empty;
             try
@@ -243,9 +244,41 @@ namespace act_Application.Data.Repository
             }
             catch (Exception ex)
             {
-                Console.WriteLine("H_GetLastIdApor | Error.");
+                Console.WriteLine("H_GetData_LastIdApor | Error.");
                 Console.WriteLine("Detalles del error: " + ex.Message);
                 return IdA;
+            }
+        }
+        public object OperacionesAportaciones (int Opciones, int Id, int IdUser)
+        {
+            try
+            {
+                switch (Opciones)
+                {
+                    case 1:
+                        return GetExist_Aportaciones();
+                    case 2:
+                        return GetData_Aportaciones();
+                    case 3:
+                        return GetExist_ApotacionesUser(IdUser);
+                    case 4:
+                        return GetData_AportacionesUser(IdUser);
+                    case 5:
+                        return H_GetData_LastIdApor(IdUser);
+                    default:
+                        Console.WriteLine("\n-----------------------------------------");
+                        Console.WriteLine("\nOperacionesAportaciones || Opcion Inexistente.");
+                        Console.WriteLine("\n-----------------------------------------\n");
+                        return null;
+                }
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine("\n-----------------------------------");
+                Console.WriteLine("\nOperacionesAportaciones || Error.");
+                Console.WriteLine("\nRazon del Error: " + ex.Message);
+                Console.WriteLine("\n-----------------------------------");
+                return null;
             }
         }
     }

@@ -1,4 +1,5 @@
 ﻿using act_Application.Data.Repository;
+using act_Application.Models.BD;
 using Microsoft.AspNetCore.Mvc;
 
 namespace act_Application.Controllers.General
@@ -7,7 +8,7 @@ namespace act_Application.Controllers.General
     {
         public IActionResult Index()
         {
-            var arobj = new AportacionRepository().GetDataAportaciones();
+            var arobj = (List<ActAportacione>) new AportacionRepository().OperacionesAportaciones( 2, 0, 0);
             return View(arobj);
         }
     }

@@ -7,8 +7,6 @@
 
     var eventosRepository = new EventosRepository();
     var valorVisualizacion = new MetodoVisualizacion();
-    var aportacionRepository = new AportacionRepository();
-    var multaRepository = new MultaRepository();
     var transaccionesRepository = new PrestamosRepository();
     var userIdClaim = User.Claims.FirstOrDefault(c => c.Type == "Id");
 }
@@ -78,7 +76,7 @@
                 <table class="main">
                     <tr>
                         <td class="col-aport">
-                            @if (aportacionRepository.GetExistApotacionesUser(IdUser) == true)
+                            @if ((bool)new AportacionRepository().OperacionesAportaciones(3, 0, IdUser))
                             {
                                 var firstModel = Model.FirstOrDefault();
                                 if (firstModel != null)
@@ -100,7 +98,7 @@
                             }
                         </td>
                         <td class="col-mult">
-                            @if ((bool) multaRepository.OperacionesMulta(2, 0, IdUser))
+                            @if ((bool) new MultaRepository().OperacionesMulta(2, 0, IdUser))
                             {
                                 var firstModel = Model.FirstOrDefault();
                                 if (firstModel != null)

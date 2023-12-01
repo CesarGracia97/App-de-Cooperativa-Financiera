@@ -28,12 +28,12 @@ namespace act_Application.Controllers.General
             if (ModelState.IsValid)
             {
                 var userIdClaim = User.Claims.FirstOrDefault(c => c.Type == "Id");
-                if (userIdClaim != null && int.TryParse(userIdClaim.Value, out int userId))
+                if (userIdClaim != null && int.TryParse(userIdClaim.Value, out int IdUser))
                 {
                     //
                     var userIdentificacion = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value;
                     //
-                    actAportacione.IdUser = userId; 
+                    actAportacione.IdUser = IdUser; 
                     actAportacione.FechaAportacion = DateTime.Now;
                     ObtenerCuadrante obj = new ObtenerCuadrante();
                     actAportacione.Cuadrante = obj.Cuadrante(DateTime.Now);
@@ -53,10 +53,9 @@ namespace act_Application.Controllers.General
                     }
                     _context.Add(actAportacione);
                     await _context.SaveChangesAsync();
-                    AportacionRepository aobj = new AportacionRepository();
-                    string DescripcionA = $"El Usuario {userIdentificacion} (Usuario Id {userId}) a realizado un Aporte de {actAportacione.Valor} el dia {actAportacione.FechaAportacion}.";
+                    string DescripcionA = $"El Usuario {userIdentificacion} (Usuario Id {IdUser}) a realizado un Aporte de {actAportacione.Valor} el dia {actAportacione.FechaAportacion}.";
                     string DescripcionU = $"Haz  realizado un Aporte de {actAportacione.Valor} el dia {actAportacione.FechaAportacion}.";
-                    await _nservices.CrearNotificacion( 2, userId, aobj.H_GetLastIdApor(actAportacione.IdUser),"Aporte", DescripcionA,"ADMINISTRADOR", new ActNotificacione());
+                    await _nservices.CrearNotificacion( 2, IdUser, (string) new AportacionRepository().OperacionesAportaciones(5,0,IdUser),"Aporte", DescripcionA,"ADMINISTRADOR", new ActNotificacione());
                     var essA = new EmailSendServices().EnviarCorreoAdmin(2, DescripcionA);
                     return RedirectToAction("Index", "Home");
                 }
@@ -129,8 +128,8 @@ namespace act_Application.Controllers.General
                         await _context.SaveChangesAsync();
                         await _nservices.CrearNotificacion( 3, IdUser, cuotOriginal.IdCuot, "PAGO DE CUOTA", DescripcionA, "ADMINISTRADOR", new ActNotificacione());
                         await _cpservices.SubirCapturaDePantalla( IdUser, "act_Cuotas", Id, CapturaPantalla, new ActCapturasPantalla());
-                        CapturaPantallaRepository capobj = new CapturaPantallaRepository();
-                        await _cpservices.ActualizarIdCapturaPantallaUser( 1, Id, capobj.H_GetDataCapturaPantallaLastIdUser(IdUser), new ActCuota(), new ActMulta());
+                        int capobj = (int) new CapturaPantallaRepository().OperacionesCapPan( 1, 0, IdUser);
+                        await _cpservices.ActualizarIdCapturaPantallaUser( 1, Id, capobj, new ActCuota(), new ActMulta());
 
                     }
 
@@ -253,8 +252,8 @@ namespace act_Application.Controllers.General
 
                         await _nservices.CrearNotificacion(5, IdUser, multOriginal.IdMult, "PAGO DE MULTA", DescripcionA, "ADMINISTRADOR", new ActNotificacione());
                         await _cpservices.SubirCapturaDePantalla(IdUser, "act_Multas", Id, CapturaPantalla, new ActCapturasPantalla());
-                        CapturaPantallaRepository capobj = new CapturaPantallaRepository();
-                        await _cpservices.ActualizarIdCapturaPantallaUser(2, Id, capobj.H_GetDataCapturaPantallaLastIdUser(IdUser), new ActCuota(), new ActMulta());
+                        int capobj = (int)new CapturaPantallaRepository().OperacionesCapPan( 1, 0, IdUser);
+                        await _cpservices.ActualizarIdCapturaPantallaUser(2, Id, capobj, new ActCuota(), new ActMulta());
                     }
 
                 }
