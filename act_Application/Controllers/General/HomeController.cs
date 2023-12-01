@@ -50,7 +50,7 @@ namespace act_Application.Controllers.General
             {
                 try
                 {
-                    var eobj = new EventosRepository().GetDataEventoPorId(Id);
+                    var eobj = (ActEvento) new EventosRepository().OperacionesEventos( 3, Id, 0);
 
                     var userIdClaim = User.Claims.FirstOrDefault(c => c.Type == "Id");
                     if (userIdClaim != null && int.TryParse(userIdClaim.Value, out int IdUser))

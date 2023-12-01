@@ -8,7 +8,7 @@ namespace act_Application.Data.Repository
     public class EventosRepository
     {
         private readonly string connectionString = AppSettingsHelper.GetConnectionString();
-        public bool GetExistEventos()
+        private bool GetExist_Eventos()
         {
             try
             {
@@ -36,14 +36,20 @@ namespace act_Application.Data.Repository
                 // Si totalAportaciones es mayor que 0, devuelve true, de lo contrario, devuelve false.
                 return totalAportaciones > 0;
             }
-            catch(Exception ex)
+            catch (MySqlException ex)
             {
-                Console.WriteLine("GetExistEventos | Error.");
-                Console.WriteLine("Detalles del error: " + ex.Message);
+                Console.WriteLine($"\nGetExist_Eventos || Error de Mysql");
+                Console.WriteLine($"\nRazon del Error: {ex.Message}\n");
+                throw;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"\nGetExist_Eventos | Error.");
+                Console.WriteLine($"\nDetalles del error:  {ex.Message}\n");
                 return false;
             }
         }
-        public List<ActEvento> GetAllDataEventos()
+        private List<ActEvento> GetData_Eventos()
         {
             List<ActEvento> eventoList = new List<ActEvento>();
             try
@@ -69,7 +75,7 @@ namespace act_Application.Data.Repository
                         */
                         while (reader.Read())
                         {
-                            ActEvento obj = MapToActEventos(reader);
+                            ActEvento obj = MapToEventos(reader);
                             eventoList.Add(obj);
                             var prestamos = new PrestamosRepository();
                             prestamos.GetDataPrestamoId(obj.IdPrestamo);
@@ -78,14 +84,20 @@ namespace act_Application.Data.Repository
                 }
                 return eventoList;
             }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine($"\nGetData_Eventos || Error de Mysql");
+                Console.WriteLine($"\nRazon del Error: {ex.Message}\n");
+                throw;
+            }
             catch (Exception ex)
             {
-                Console.WriteLine("GetAllDataEventos | Error.");
+                Console.WriteLine("GetData_Eventos | Error.");
                 Console.WriteLine("Detalles del error: " + ex.Message);
                 return null;
             }
         }
-        public ActEvento GetDataEventoPorId(int Id)
+        private ActEvento GetData_EventosId(int Id)
         {
             try
             {
@@ -100,21 +112,27 @@ namespace act_Application.Data.Repository
                         {
                             if (reader.Read())
                             {
-                                ActEvento eventos = MapToActEventos(reader);
+                                ActEvento eventos = MapToEventos(reader);
                                 return eventos;
                             }
                         }
                     }
                 }
             }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine($"\nGetData_EventosId || Error de Mysql");
+                Console.WriteLine($"\nRazon del Error: {ex.Message}\n");
+                throw;
+            }
             catch (Exception ex)
             {
-                Console.WriteLine("GetDataEventoPorId | Error.");
+                Console.WriteLine("GetData_EventosId | Error.");
                 Console.WriteLine("Detalles del error: " + ex.Message);
             }
             return null;
         }
-        public ActEvento Auto_GetParticipantesPrestamoEvento(int IdPrestamo)
+        private ActEvento Auto_GetData_ParticipantesEventos(int IdPrestamo)
         {
             try
             {
@@ -129,21 +147,27 @@ namespace act_Application.Data.Repository
                         {
                             while (reader.Read())
                             {
-                                ActEvento obj = MapToActEventos(reader);
+                                ActEvento obj = MapToEventos(reader);
                                 return obj;
                             }
                         }
                     }
                 }
             }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine($"\nAuto_GetData_ParticipantesEventos || Error de Mysql");
+                Console.WriteLine($"\nRazon del Error: {ex.Message}\n");
+                throw;
+            }
             catch (Exception ex)
             {
-                Console.WriteLine("Auto_GetParticipantesPrestam | Error");
+                Console.WriteLine("Auto_GetData_ParticipantesEventos | Error");
                 Console.WriteLine("Detalles del error: " + ex.Message);
             }
             return null;
         }
-        private ActEvento MapToActEventos(MySqlDataReader reader)
+        private ActEvento MapToEventos(MySqlDataReader reader)
         {
             return new ActEvento 
             {
@@ -159,6 +183,36 @@ namespace act_Application.Data.Repository
                 Estado = Convert.ToString(reader["Estado"]),
                 NombreUsuario = Convert.ToString(reader["NombreUsuario"])
             };
+        }
+        public object OperacionesEventos(int Opcion, int Id, int IdUser)
+        {
+            try
+            {
+                switch (Opcion)
+                {
+                    case 1:
+                        return GetExist_Eventos();
+                    case 2:
+                        return GetData_Eventos();
+                    case 3:
+                        return GetData_EventosId(Id);
+                    case 4:
+                        return Auto_GetData_ParticipantesEventos(Id);
+                    default:
+                        Console.WriteLine("\n-----------------------------------------");
+                        Console.WriteLine("\nOperacionesEventos || Opcion Inexistente.");
+                        Console.WriteLine("\n-----------------------------------------\n");
+                        return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("\n-----------------------------------");
+                Console.WriteLine("\nOperacionesEventos || Error.");
+                Console.WriteLine("\nRazon del Error: " + ex.Message);
+                Console.WriteLine("\n-----------------------------------");
+                return null;
+            }
         }
     }
 }

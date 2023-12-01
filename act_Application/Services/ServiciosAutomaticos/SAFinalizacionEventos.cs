@@ -32,8 +32,7 @@ namespace act_Application.Services
         public async void FinalizarEventos(object state)
         {
             Console.WriteLine("FinalizarEventos | Funciona la funcion");
-            var erobj = new EventosRepository();
-            List<ActEvento> eventos = erobj.GetAllDataEventos();
+            var eventos = (List<ActEvento>) new EventosRepository().OperacionesEventos(2, 0, 0);
             for (int i = 0; i < eventos.Count; i++)
             {
                 if (eventos[i].Estado == "CONCURSO")

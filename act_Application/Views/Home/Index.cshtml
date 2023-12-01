@@ -5,7 +5,6 @@
 @{
     ViewBag.Title = "Home";
 
-    var eventosRepository = new EventosRepository();
     var valorVisualizacion = new MetodoVisualizacion();
     var transaccionesRepository = new PrestamosRepository();
     var userIdClaim = User.Claims.FirstOrDefault(c => c.Type == "Id");
@@ -132,7 +131,7 @@
                     </div>
                 </div>
                 <div class="fila-infr">
-                    @if (eventosRepository.GetExistEventos() == true)
+                    @if ((bool) new EventosRepository().OperacionesEventos(1,0,0))
                     {
                         @foreach (var evento in Model)
                         {
