@@ -36,10 +36,16 @@ namespace act_Application.Data.Repository
                 // Si totalAportaciones es mayor que 0, devuelve true, de lo contrario, devuelve false.
                 return totalMultas > 0;
             }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine($"\nGetExist_Multas || Error de Mysql");
+                Console.WriteLine($"\nRazon del Error: {ex.Message}\n");
+                throw;
+            }
             catch (Exception ex)
             {
-                Console.WriteLine("GetExist_Multas || Error");
-                Console.WriteLine("Razon del Error: " + ex.Message);
+                Console.WriteLine($"\nGetExist_Multas || ErrorGeneral");
+                Console.WriteLine($"\nRazon del Error: {ex.Message}\n");
                 return false;
             }
         }
@@ -63,6 +69,12 @@ namespace act_Application.Data.Repository
                     }
                 }
                 return totalMultas > 0;
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine($"\nGetExist_MultasUser|| Error de Mysql");
+                Console.WriteLine($"\nRazon del Error: {ex.Message}\n");
+                throw;
             }
             catch (Exception ex)
             {
@@ -139,7 +151,12 @@ namespace act_Application.Data.Repository
                     }
                 }
                 return multas;
-
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine($"\nGetData_Multas|| Error de Mysql");
+                Console.WriteLine($"\nRazon del Error: {ex.Message}\n");
+                throw;
             }
             catch (Exception ex)
             {
@@ -172,7 +189,13 @@ namespace act_Application.Data.Repository
                 }
                 return List;
             }
-            catch(Exception ex)
+            catch (MySqlException ex)
+            {
+                Console.WriteLine($"\nGetData_MultasUser|| Error de Mysql");
+                Console.WriteLine($"\nRazon del Error: {ex.Message}\n");
+                throw;
+            }
+            catch (Exception ex)
             {
                 Console.WriteLine("\n-----------------------------------");
                 Console.WriteLine("\nGetDataMultaUser || Error.");
@@ -201,6 +224,12 @@ namespace act_Application.Data.Repository
                         }
                     }
                 }
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine($"\nGetData_MultasId|| Error de Mysql");
+                Console.WriteLine($"\nRazon del Error: {ex.Message}\n");
+                throw;
             }
             catch (Exception ex)
             {
@@ -231,9 +260,15 @@ namespace act_Application.Data.Repository
                     }
                 }
             }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine($"\nA_GetData_LastIdMultaUser|| Error de Mysql");
+                Console.WriteLine($"\nRazon del Error: {ex.Message}\n");
+                throw;
+            }
             catch (Exception ex)
             {
-                Console.WriteLine("GetLastIdMultaData || Error");
+                Console.WriteLine("A_GetData_LastIdMultaUser|| Error");
                 Console.WriteLine("Razon del Error: " + ex.Message);
             }
             return Id;
