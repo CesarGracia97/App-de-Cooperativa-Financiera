@@ -53,10 +53,16 @@ namespace act_Application.Data.Repository
                 return totalAportaciones > 0;
 
             }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine($"\nGetExist_Aportaciones || Error de Mysql");
+                Console.WriteLine($"\nRazon del Error: {ex.Message}\n");
+                throw;
+            }
             catch (Exception ex)
             {
-                Console.WriteLine("GetExist_Aportaciones | Error.");
-                Console.WriteLine("Detalles del error: " + ex.Message);
+                Console.WriteLine($"\nGetExist_Aportaciones || Error.");
+                Console.WriteLine($"\nRazon del Error: {ex.Message}\n");
                 return false;
             }
         }
@@ -85,10 +91,16 @@ namespace act_Application.Data.Repository
                 }
                 return totalAportaciones > 0;
             }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine($"\nGetExist_ApotacionesUser || Error de Mysql");
+                Console.WriteLine($"\nRazon del Error: {ex.Message}\n");
+                throw;
+            }
             catch (Exception ex)
             {
-                Console.WriteLine("GetExist_ApotacionesUser | Error.");
-                Console.WriteLine("Detalles del error: " + ex.Message);
+                Console.WriteLine($"\nGetExist_ApotacionesUser|| Error.");
+                Console.WriteLine($"\nRazon del Error: {ex.Message}\n");
                 return false;
             }
         }
