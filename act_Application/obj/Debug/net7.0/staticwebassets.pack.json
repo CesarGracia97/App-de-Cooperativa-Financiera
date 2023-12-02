@@ -1,347 +1,347 @@
 {
   "Files": [
     {
-      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\obj\\Debug\\net7.0\\scopedcss\\projectbundle\\act_Application.bundle.scp.css",
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\obj\\Debug\\net7.0\\scopedcss\\projectbundle\\act_Application.bundle.scp.css",
       "PackagePath": "staticwebassets\\act_Application.bundle.scp.css"
     },
     {
-      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\css\\General\\Complementos\\ventanaModal.css",
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\css\\General\\Complementos\\ventanaModal.css",
       "PackagePath": "staticwebassets\\css\\General\\Complementos\\ventanaModal.css"
     },
     {
-      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\css\\General\\Login\\Login.css",
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\css\\General\\Login\\Login.css",
       "PackagePath": "staticwebassets\\css\\General\\Login\\Login.css"
     },
     {
-      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\css\\General\\Login\\Registro.css",
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\css\\General\\Login\\Registro.css",
       "PackagePath": "staticwebassets\\css\\General\\Login\\Registro.css"
     },
     {
-      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\css\\General\\Menu\\Date-Place\\item2item3.css",
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\css\\General\\Menu\\Date-Place\\item2item3.css",
       "PackagePath": "staticwebassets\\css\\General\\Menu\\Date-Place\\item2item3.css"
     },
     {
-      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\css\\General\\Menu\\Esqueleto\\Esqueleto.css",
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\css\\General\\Menu\\Esqueleto\\Esqueleto.css",
       "PackagePath": "staticwebassets\\css\\General\\Menu\\Esqueleto\\Esqueleto.css"
     },
     {
-      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\css\\General\\Menu\\Eventos\\item6.css",
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\css\\General\\Menu\\Eventos\\item6.css",
       "PackagePath": "staticwebassets\\css\\General\\Menu\\Eventos\\item6.css"
     },
     {
-      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\css\\General\\Menu\\Eventos\\item6VM.css",
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\css\\General\\Menu\\Eventos\\item6VM.css",
       "PackagePath": "staticwebassets\\css\\General\\Menu\\Eventos\\item6VM.css"
     },
     {
-      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\css\\General\\Menu\\Main\\item5.css",
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\css\\General\\Menu\\Main\\item5.css",
       "PackagePath": "staticwebassets\\css\\General\\Menu\\Main\\item5.css"
     },
     {
-      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\css\\General\\Menu\\Profile\\item1.css",
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\css\\General\\Menu\\Profile\\item1.css",
       "PackagePath": "staticwebassets\\css\\General\\Menu\\Profile\\item1.css"
     },
     {
-      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\css\\General\\Menu\\Transaccion\\item4.css",
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\css\\General\\Menu\\Transaccion\\item4.css",
       "PackagePath": "staticwebassets\\css\\General\\Menu\\Transaccion\\item4.css"
     },
     {
-      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\css\\General\\Notificaciones\\Notificaciones_1.css",
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\css\\General\\Notificaciones\\Notificaciones_1.css",
       "PackagePath": "staticwebassets\\css\\General\\Notificaciones\\Notificaciones_1.css"
     },
     {
-      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\css\\General\\Notificaciones\\Notificaciones_2.css",
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\css\\General\\Notificaciones\\Notificaciones_2.css",
       "PackagePath": "staticwebassets\\css\\General\\Notificaciones\\Notificaciones_2.css"
     },
     {
-      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\css\\General\\Shared\\_Layout.css",
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\css\\General\\Shared\\_Layout.css",
       "PackagePath": "staticwebassets\\css\\General\\Shared\\_Layout.css"
     },
     {
-      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\css\\General\\Tablas\\T_Aportantes\\T_Aportantes.css",
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\css\\General\\Tablas\\T_Aportantes\\T_Aportantes.css",
       "PackagePath": "staticwebassets\\css\\General\\Tablas\\T_Aportantes\\T_Aportantes.css"
     },
     {
-      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\css\\General\\Tablas\\T_Multados\\T_Multados.css",
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\css\\General\\Tablas\\T_Multados\\T_Multados.css",
       "PackagePath": "staticwebassets\\css\\General\\Tablas\\T_Multados\\T_Multados.css"
     },
     {
-      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\favicon.ico",
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\favicon.ico",
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
-      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\img\\Logo.png",
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\img\\Logo.png",
       "PackagePath": "staticwebassets\\img\\Logo.png"
     },
     {
-      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\img\\universo.jpg",
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\img\\universo.jpg",
       "PackagePath": "staticwebassets\\img\\universo.jpg"
     },
     {
-      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\js\\General\\Login\\MsjCorreoValidacionLogin.js",
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\js\\General\\Login\\MsjCorreoValidacionLogin.js",
       "PackagePath": "staticwebassets\\js\\General\\Login\\MsjCorreoValidacionLogin.js"
     },
     {
-      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\js\\General\\Login\\Registro.js",
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\js\\General\\Login\\Registro.js",
       "PackagePath": "staticwebassets\\js\\General\\Login\\Registro.js"
     },
     {
-      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\js\\General\\Menu\\Eventos\\Eventos.js",
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\js\\General\\Menu\\Eventos\\Eventos.js",
       "PackagePath": "staticwebassets\\js\\General\\Menu\\Eventos\\Eventos.js"
     },
     {
-      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\js\\General\\Menu\\Localizacion\\localizacion.js",
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\js\\General\\Menu\\Localizacion\\localizacion.js",
       "PackagePath": "staticwebassets\\js\\General\\Menu\\Localizacion\\localizacion.js"
     },
     {
-      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\js\\General\\Notificaciones\\Notificaciones_1.js",
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\js\\General\\Notificaciones\\Notificaciones_1.js",
       "PackagePath": "staticwebassets\\js\\General\\Notificaciones\\Notificaciones_1.js"
     },
     {
-      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\js\\General\\Notificaciones\\Notificaciones_2.js",
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\js\\General\\Notificaciones\\Notificaciones_2.js",
       "PackagePath": "staticwebassets\\js\\General\\Notificaciones\\Notificaciones_2.js"
     },
     {
-      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\js\\General\\Shared\\_Layout\\Layout.js",
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\js\\General\\Shared\\_Layout\\Layout.js",
       "PackagePath": "staticwebassets\\js\\General\\Shared\\_Layout\\Layout.js"
     },
     {
-      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\js\\General\\Shared\\_Layout\\Logout.js",
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\js\\General\\Shared\\_Layout\\Logout.js",
       "PackagePath": "staticwebassets\\js\\General\\Shared\\_Layout\\Logout.js"
     },
     {
-      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\js\\General\\Tablas\\T_Aportantes\\MSJ_TablAportantes.js",
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\js\\General\\Tablas\\T_Aportantes\\MSJ_TablAportantes.js",
       "PackagePath": "staticwebassets\\js\\General\\Tablas\\T_Aportantes\\MSJ_TablAportantes.js"
     },
     {
-      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\js\\General\\Tablas\\T_Multados\\MSJ_TablMultados.js",
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\js\\General\\Tablas\\T_Multados\\MSJ_TablMultados.js",
       "PackagePath": "staticwebassets\\js\\General\\Tablas\\T_Multados\\MSJ_TablMultados.js"
     },
     {
-      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\lib\\bootstrap\\LICENSE",
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\lib\\bootstrap\\LICENSE",
       "PackagePath": "staticwebassets\\lib\\bootstrap"
     },
     {
-      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css"
     },
     {
-      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map",
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map"
     },
     {
-      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css",
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css"
     },
     {
-      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map",
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map"
     },
     {
-      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css",
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css"
     },
     {
-      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map",
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map"
     },
     {
-      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css",
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css"
     },
     {
-      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map",
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map"
     },
     {
-      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css",
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css"
     },
     {
-      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map",
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map"
     },
     {
-      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css",
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css"
     },
     {
-      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map",
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map"
     },
     {
-      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css",
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css"
     },
     {
-      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map",
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map"
     },
     {
-      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css",
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css"
     },
     {
-      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map",
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map"
     },
     {
-      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css",
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css"
     },
     {
-      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map",
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map"
     },
     {
-      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css",
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css"
     },
     {
-      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map",
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map"
     },
     {
-      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css",
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css"
     },
     {
-      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map",
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map"
     },
     {
-      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css",
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css"
     },
     {
-      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map",
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map"
     },
     {
-      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css"
     },
     {
-      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map",
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css.map"
     },
     {
-      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css",
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css"
     },
     {
-      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map",
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map"
     },
     {
-      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css",
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css"
     },
     {
-      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map",
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map"
     },
     {
-      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css",
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css"
     },
     {
-      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map",
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map"
     },
     {
-      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js",
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js"
     },
     {
-      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map",
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map"
     },
     {
-      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js",
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js"
     },
     {
-      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map",
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map"
     },
     {
-      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js",
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js"
     },
     {
-      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map",
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map"
     },
     {
-      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js",
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js"
     },
     {
-      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map",
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map"
     },
     {
-      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js",
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js"
     },
     {
-      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map",
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js.map"
     },
     {
-      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js",
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js"
     },
     {
-      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map"
     },
     {
-      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",
       "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
     },
     {
-      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js",
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js",
       "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js"
     },
     {
-      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js",
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js",
       "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js"
     },
     {
-      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\lib\\jquery-validation\\LICENSE.md",
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\lib\\jquery-validation\\LICENSE.md",
       "PackagePath": "staticwebassets\\lib\\jquery-validation\\LICENSE.md"
     },
     {
-      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
       "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.js"
     },
     {
-      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js",
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js",
       "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.min.js"
     },
     {
-      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
       "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.js"
     },
     {
-      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js",
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js",
       "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.min.js"
     },
     {
-      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\lib\\jquery\\LICENSE.txt",
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\lib\\jquery\\LICENSE.txt",
       "PackagePath": "staticwebassets\\lib\\jquery\\LICENSE.txt"
     },
     {
-      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\lib\\jquery\\dist\\jquery.js",
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\lib\\jquery\\dist\\jquery.js",
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.js"
     },
     {
-      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\lib\\jquery\\dist\\jquery.min.js",
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\lib\\jquery\\dist\\jquery.min.js",
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.js"
     },
     {
-      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
+      "Id": "E:\\cesar.gracia\\Proyectos\\C#\\act_Application\\act_Application\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
     },
     {

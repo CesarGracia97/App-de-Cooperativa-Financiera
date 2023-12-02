@@ -31,7 +31,7 @@ namespace act_Application.Helper
                         case "DEST":
                             return config["Queries"]["DB_Queries"]["DEST"][queryName].ToString();
                         case "NOTI":
-                            return config["Queries"]["DB_Queries"]["DEST"][queryName].ToString();
+                            return config["Queries"]["DB_Queries"]["NOTI"][queryName].ToString();
                         default:
                             Console.WriteLine("Categoria no reconocida.");
                             break;

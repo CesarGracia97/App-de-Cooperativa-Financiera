@@ -64,10 +64,9 @@ namespace act_Application.Controllers.General
                             return RedirectToAction("CSE", "Login");
                     }
                 }
-                if (uobj.NombreYapellido != null)
+                if (uobj != null)
                 {
                     var robj = (ActRol) new UsuarioRepository().OperacionesUsuario( 2, uobj.IdRol, 0, "", "");
-
                     if (robj != null)
                     {
                         claims.Add(new Claim(ClaimTypes.Name, uobj.NombreYapellido));
@@ -101,10 +100,9 @@ namespace act_Application.Controllers.General
             {
                 TempData["ErrorMessage"] = "Contraseña incorrecta";
             }
-
-            return RedirectToAction("Index", "Login");
+            return RedirectToAction("Index", "Home");
         }
-        public string HashPassword(string password)
+        private string HashPassword(string password)
         {
             using (var sha256 = SHA256.Create())
             {

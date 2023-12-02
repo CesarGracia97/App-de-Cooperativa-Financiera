@@ -108,19 +108,18 @@ namespace act_Application.Data.Repository
 
                         connection.Open();
 
-                        using (MySqlDataReader rd = cmd.ExecuteReader())
+                        using (MySqlDataReader reader = cmd.ExecuteReader())
                         {
-                            var aportacionesPorUsuario = rd.Cast<IDataRecord>()
-                                .Select(r => new
+                            var aportacionesPorUsuario = reader.Cast<IDataRecord>()
+                                .Select(reader => new
                                 {
-                                    Id = Convert.ToInt32(r["Id"]),
-                                    Razon = Convert.ToString(r["Razon"]),
-                                    Valor = Convert.ToDecimal(r["Valor"]),
-                                    IdUser = Convert.ToInt32(r["IdUser"]),
-                                    FechaAportacion = Convert.ToDateTime(r["FechaAportacion"]),
-                                    Estado = Convert.ToString(r["Estado"]),
-                                    CapturaPantalla = r.IsDBNull(r.GetOrdinal("CapturaPantalla")) ? null : (byte[])r["CapturaPantalla"],
-                                    NombreUsuario = Convert.ToString(r["NombreUsuario"]),
+                                    Id = Convert.ToInt32(reader["Id"]),
+                                    Valor = Convert.ToDecimal(reader["Valor"]),
+                                    IdUser = Convert.ToInt32(reader["IdUser"]),
+                                    FechaAportacion = Convert.ToDateTime(reader["FechaAportacion"]),
+                                    Estado = Convert.ToString(reader["Estado"]),
+                                    CapturaPantalla = reader.IsDBNull(reader.GetOrdinal("CapturaPantalla")) ? null : (byte[])reader["CapturaPantalla"],
+                                    NombreUsuario = Convert.ToString(reader["NombreUsuario"]),
 
                                 })
                                 .ToList();
@@ -162,10 +161,16 @@ namespace act_Application.Data.Repository
 
                 return aportaciones;
             }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine($"\nGetData_Aportaciones || Error de Mysql");
+                Console.WriteLine($"\nRazon del Error: {ex.Message}\n");
+                throw;
+            }
             catch (Exception ex)
             {
-                Console.WriteLine("GetData_Aportaciones | Error.");
-                Console.WriteLine("Detalles del error: " + ex.Message);
+                Console.WriteLine($"\nGetData_Aportaciones || Error.");
+                Console.WriteLine($"\nRazon del Error: {ex.Message}\n");
                 return null;
             }
         }
@@ -210,6 +215,12 @@ namespace act_Application.Data.Repository
                 aportaciones.Add(detallesAportaciones);
                 return aportaciones;
             }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine($"\nGetData_AportacionesUser || Error de Mysql");
+                Console.WriteLine($"\nRazon del Error: {ex.Message}\n");
+                throw;
+            }
             catch (Exception ex)
             {
                 Console.WriteLine("GetData_AportacionesUser | Error.");
@@ -241,6 +252,12 @@ namespace act_Application.Data.Repository
                     }
                 }
                 return IdA;
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine($"\nH_GetData_LastIdApor || Error de Mysql");
+                Console.WriteLine($"\nRazon del Error: {ex.Message}\n");
+                throw;
             }
             catch (Exception ex)
             {
