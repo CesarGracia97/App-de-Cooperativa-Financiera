@@ -2,7 +2,7 @@
 {
     public class ObtenerTipoNotificacion
     {
-        public static string ClasificarInformacion(string cadena)
+        public string ClasificarInformacion(string cadena)
         {
             if (cadena.Length >= 4)
             {

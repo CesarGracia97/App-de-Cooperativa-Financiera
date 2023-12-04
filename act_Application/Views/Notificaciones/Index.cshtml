@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<act_Application.Models.Sistema.ViewModel.Notificaciones_VM>
 @using act_Application.Data.Repository;
-@using act_Application.Logic;
+@using act_Application.Logic.ComplementosLogicos;
 @{
     ViewData["Title"] = "Notificaciones";
 
@@ -34,88 +34,57 @@
                 <div class="content-notif">
                     @foreach (var notificacionAdmin in notificacionAdminList)
                     {
-                        <p class="notif-text">Razon: @notificacionAdmin.Notificaciones.FechaGeneracion</p>
-                        <div class="notif-container">
-                            <p class="notif-text">Razon: @notificacionAdmin.Notificaciones.Razon</p>
-                            <p class="notif-text">Fecha: @notificacionAdmin.Notificaciones.FechaGeneracion.ToString("dd-MMMM-yyyy")</p>
-                            <button class="btn-visualizar" data-notification-id="@notificacionAdmin.Notificaciones.Id">Visualizar</button>
-                        </div>
-
-                        @if (notificacionAdmin.Prestamos.Estado == "PENDIENTE ADMIN")
+                        @if(notificacionAdmin.Notificaciones.Visto == "NO")
                         {
-                            <div class="modal-principal" id="modal-@notificacionAdmin.Notificaciones.Id">
-                                <div class="modal__container">
-                                    <h2 class="modal__title">Detalles</h2>
-                                    <div class="modal__content">
-                                        <p class="modal__paragraph"><strong>Razon:</strong> @notificacionAdmin.Notificaciones.Razon</p>
-                                        <p class="modal__paragraph"><strong>Fecha:</strong> @notificacionAdmin.Notificaciones.FechaGeneracion.ToString("dd-MM-yyyy")</p>
-                                        <p class="modal__paragraph"><strong>IdUser:</strong> @notificacionAdmin.Notificaciones.IdUser</p>
-                                        <p class="modal__paragraph"><strong>Tipo de Cuota:</strong> @notificacionAdmin.Prestamos.TipoCuota</p>
-                                        <p class="modal__paragraph"><strong>Descripcion:</strong></p>
-                                        <p class="modal__description">@notificacionAdmin.Notificaciones.Descripcion</p>
-                                        <p class="modal__paragraph"><strong>Destino:</strong> @notificacionAdmin.Notificaciones.Destino</p>
-                                        <div class="container-modal-btn">
-                                            <button class="btn-mdl-confir" data-notification-id="@notificacionAdmin.Notificaciones.Id">Confirmar</button>
-                                            <button class="bt-denegar" data-notification-id="@notificacionAdmin.Notificaciones.Id">Denegar</button>
-                                            <a href="~/Notificaciones/Notificacion" class="modal__close" data-notification-id="@notificacionAdmin.Notificaciones.Id">Cerrar</a>
-                                        </div>
+                            switch ((string) new ObtenerTipoNotificacion().ClasificarInformacion(notificacionAdmin.Notificaciones.IdActividad))
+                            {
+                                case "NUSE":
+                                    <p class="notif-text">Razon: @notificacionAdmin.Notificaciones.FechaGeneracion</p>
+                                    <div class="notif-container">
+                                        <p class="notif-text">Razon: @notificacionAdmin.Notificaciones.IdActividad | Nuevo Usuario</p>
+                                        <p class="notif-text">Razon: @notificacionAdmin.Notificaciones.Razon</p>
+                                        <p class="notif-text">Fecha: @notificacionAdmin.Notificaciones.FechaGeneracion.ToString("dd-MMMM-yyyy")</p>
+                                        <button class="btn-visualizar" data-notification-id="@notificacionAdmin.Notificaciones.Id">Visualizar</button>
                                     </div>
-                                </div>
-                            </div>
-
-                            /*Si Elije Negar El Prestamo*/
-                            <div class="modal-denagado" id="modal-dene-@notificacionAdmin.Notificaciones.Id">
-                                <div class="modal-denegado__container">
-                                    <h2 class="modal__title">Establesca la Razon de la Denegacion</h2>
-                                    <form asp-action="EditTDenegado">
-                                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                                        <input type="hidden" asp-for="@notificacionAdmin.Prestamos.Id" name="Id" id="Id" />
-                                        <div class="form-group">
-                                            <input asp-for="@notificacionAdmin.Notificaciones.Descripcion" class="input-descripcion" name="Descripcion" id="Descripcion" required />
-                                        </div>
-                                        <div class="container-modal-denagado-btn">
-                                            <button type="submit" class="save-button" data-notification-id="@notificacionAdmin.Notificaciones.Id">Guardar</button>
-                                            <a href="~/Notificaciones/Notificacion" class="modal-secundaria__close" data-notification-id="@notificacionAdmin.Notificaciones.Id">Cerrar</a>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-
-                            /*Si decide Aceptar el Prestamo*/
-                            <div class="modal-secundaria" id="modal-resp-@notificacionAdmin.Notificaciones.Id">
-                                <div class="modal-secundaria__container">
-                                    <h2 class="modal__title">Establesca la Fecha de Pago Total del Prestamo</h2>
-                                    <div class="modal-secundaria__content">
-                                        <form asp-action="EditTConfirmado">
-                                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                                            <input type="hidden" asp-for="@notificacionAdmin.Prestamos.Id" name="id" id="id" />
-                                            <div class="form-group">
-                                                <label asp-for="@notificacionAdmin.Prestamos.FechaPagoTotalPrestamo" class="control-label">Fecha de Pago del Prestamo -> Fecha de Inicio de Pago de Cuotas @notificacionAdmin.Prestamos.FechaInicioPagoCuotas.ToString("dd-MMMM-yyyy")</label>
-                                                <input asp-for="@notificacionAdmin.Prestamos.FechaPagoTotalPrestamo" required type="date" class="input-date" name="FechaPagoTotalPrestamo" id="FechaPagoTotalPrestamo" min="@fechaactual" />
-                                                <span asp-validation-for="@notificacionAdmin.Prestamos.FechaPagoTotalPrestamo" class="text-danger"></span>
-                                            </div>
-                                            <div class="form-group">
-                                                <label asp-for="@notificacionAdmin.Eventos.FechaInicio" class="control-label">Fecha Inicio de Inscripcion de Garantes</label>
-                                                <input asp-for="@notificacionAdmin.Eventos.FechaInicio" required type="date" class="input-date" name="FechaInicio" id="FechaInicio" min="@fechaactual" />
-                                                <span asp-validation-for="@notificacionAdmin.Eventos.FechaInicio" class="text-danger"></span>
-                                            </div>
-                                            <div class="form-group">
-                                                <label asp-for="@notificacionAdmin.Eventos.FechaFinalizacion" class="control-label">Fecha Finalizacion de Inscripcion de Garantes</label>
-                                                <input asp-for="@notificacionAdmin.Eventos.FechaFinalizacion" required type="date" class="input-date" name="FechaFinalizacion" id="FechaFinalizacion" min="@fechaactual" />
-                                                <span asp-validation-for="@notificacionAdmin.Eventos.FechaFinalizacion" class="text-danger"></span>
-                                            </div>
-                                            <div class="container-modal-btn">
-                                                <button type="submit" data-notification-id="@notificacionAdmin.Notificaciones.Id" class="save-button">Guardar</button>
-                                                <a href="~/Notificaciones/Notificacion" class="modal-secundaria__close" data-notification-id="@notificacionAdmin.Notificaciones.Id">Cerrar</a>
-                                            </div>
-                                        </form>
+                                    break;
+                                case "APOR":
+                                    <p class="notif-text">Razon: @notificacionAdmin.Notificaciones.FechaGeneracion</p>
+                                    <div class="notif-container">
+                                        <p class="notif-text">Razon: @notificacionAdmin.Notificaciones.IdActividad | Nueva Aportacion</p>
+                                        <p class="notif-text">Razon: @notificacionAdmin.Notificaciones.Razon</p>
+                                        <p class="notif-text">Fecha: @notificacionAdmin.Notificaciones.FechaGeneracion.ToString("dd-MMMM-yyyy")</p>
+                                        <button class="btn-visualizar" data-notification-id="@notificacionAdmin.Notificaciones.Id">Visualizar</button>
                                     </div>
-                                </div>
-                            </div>
-                        }
-                        else
-                        {
-                            @if (notificacionAdmin.Prestamos.Estado != "PENDIENTE ADMIN" && notificacionAdmin.Prestamos.Estado == "APROBADO")
+                                    break;
+                                case "MULT":
+                                    <p class="notif-text">Razon: @notificacionAdmin.Notificaciones.FechaGeneracion</p>
+                                    <div class="notif-container">
+                                        <p class="notif-text">Razon: @notificacionAdmin.Notificaciones.IdActividad | Nueva Multa</p>
+                                        <p class="notif-text">Razon: @notificacionAdmin.Notificaciones.Razon</p>
+                                        <p class="notif-text">Fecha: @notificacionAdmin.Notificaciones.FechaGeneracion.ToString("dd-MMMM-yyyy")</p>
+                                        <button class="btn-visualizar" data-notification-id="@notificacionAdmin.Notificaciones.Id">Visualizar</button>
+                                    </div>
+                                    break;
+                                case "CUOT":
+                                    <p class="notif-text">Razon: @notificacionAdmin.Notificaciones.FechaGeneracion</p>
+                                    <div class="notif-container">
+                                        <p class="notif-text">Razon: @notificacionAdmin.Notificaciones.IdActividad | Cuota</p>
+                                        <p class="notif-text">Razon: @notificacionAdmin.Notificaciones.Razon</p>
+                                        <p class="notif-text">Fecha: @notificacionAdmin.Notificaciones.FechaGeneracion.ToString("dd-MMMM-yyyy")</p>
+                                        <button class="btn-visualizar" data-notification-id="@notificacionAdmin.Notificaciones.Id">Visualizar</button>
+                                    </div>
+                                    break;
+                                case "PRES":
+                                    <p class="notif-text">Razon: @notificacionAdmin.Notificaciones.FechaGeneracion</p>
+                                    <div class="notif-container">
+                                        <p class="notif-text">Razon: @notificacionAdmin.Notificaciones.IdActividad | Prestamo Generado</p>
+                                        <p class="notif-text">Razon: @notificacionAdmin.Notificaciones.Razon</p>
+                                        <p class="notif-text">Fecha: @notificacionAdmin.Notificaciones.FechaGeneracion.ToString("dd-MMMM-yyyy")</p>
+                                        <button class="btn-visualizar" data-notification-id="@notificacionAdmin.Notificaciones.Id">Visualizar</button>
+                                    </div>
+                                    break;
+                            }
+                            @if (notificacionAdmin.Prestamos.Estado == "PENDIENTE ADMIN")
                             {
                                 <div class="modal-principal" id="modal-@notificacionAdmin.Notificaciones.Id">
                                     <div class="modal__container">
@@ -129,26 +98,102 @@
                                             <p class="modal__description">@notificacionAdmin.Notificaciones.Descripcion</p>
                                             <p class="modal__paragraph"><strong>Destino:</strong> @notificacionAdmin.Notificaciones.Destino</p>
                                             <div class="container-modal-btn">
+                                                <button class="btn-mdl-confir" data-notification-id="@notificacionAdmin.Notificaciones.Id">Confirmar</button>
+                                                <button class="bt-denegar" data-notification-id="@notificacionAdmin.Notificaciones.Id">Denegar</button>
                                                 <a href="~/Notificaciones/Notificacion" class="modal__close" data-notification-id="@notificacionAdmin.Notificaciones.Id">Cerrar</a>
                                             </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                /*Si Elije Negar El Prestamo*/
+                                <div class="modal-denagado" id="modal-dene-@notificacionAdmin.Notificaciones.Id">
+                                    <div class="modal-denegado__container">
+                                        <h2 class="modal__title">Establesca la Razon de la Denegacion</h2>
+                                        <form asp-action="EditTDenegado">
+                                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                            <input type="hidden" asp-for="@notificacionAdmin.Prestamos.Id" name="Id" id="Id" />
+                                            <div class="form-group">
+                                                <input asp-for="@notificacionAdmin.Notificaciones.Descripcion" class="input-descripcion" name="Descripcion" id="Descripcion" required />
+                                            </div>
+                                            <div class="container-modal-denagado-btn">
+                                                <button type="submit" class="save-button" data-notification-id="@notificacionAdmin.Notificaciones.Id">Guardar</button>
+                                                <a href="~/Notificaciones/Notificacion" class="modal-secundaria__close" data-notification-id="@notificacionAdmin.Notificaciones.Id">Cerrar</a>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+
+                                /*Si decide Aceptar el Prestamo*/
+                                <div class="modal-secundaria" id="modal-resp-@notificacionAdmin.Notificaciones.Id">
+                                    <div class="modal-secundaria__container">
+                                        <h2 class="modal__title">Establesca la Fecha de Pago Total del Prestamo</h2>
+                                        <div class="modal-secundaria__content">
+                                            <form asp-action="EditTConfirmado">
+                                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                                <input type="hidden" asp-for="@notificacionAdmin.Prestamos.Id" name="id" id="id" />
+                                                <div class="form-group">
+                                                    <label asp-for="@notificacionAdmin.Prestamos.FechaPagoTotalPrestamo" class="control-label">Fecha de Pago del Prestamo -> Fecha de Inicio de Pago de Cuotas @notificacionAdmin.Prestamos.FechaInicioPagoCuotas.ToString("dd-MMMM-yyyy")</label>
+                                                    <input asp-for="@notificacionAdmin.Prestamos.FechaPagoTotalPrestamo" required type="date" class="input-date" name="FechaPagoTotalPrestamo" id="FechaPagoTotalPrestamo" min="@fechaactual" />
+                                                    <span asp-validation-for="@notificacionAdmin.Prestamos.FechaPagoTotalPrestamo" class="text-danger"></span>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label asp-for="@notificacionAdmin.Eventos.FechaInicio" class="control-label">Fecha Inicio de Inscripcion de Garantes</label>
+                                                    <input asp-for="@notificacionAdmin.Eventos.FechaInicio" required type="date" class="input-date" name="FechaInicio" id="FechaInicio" min="@fechaactual" />
+                                                    <span asp-validation-for="@notificacionAdmin.Eventos.FechaInicio" class="text-danger"></span>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label asp-for="@notificacionAdmin.Eventos.FechaFinalizacion" class="control-label">Fecha Finalizacion de Inscripcion de Garantes</label>
+                                                    <input asp-for="@notificacionAdmin.Eventos.FechaFinalizacion" required type="date" class="input-date" name="FechaFinalizacion" id="FechaFinalizacion" min="@fechaactual" />
+                                                    <span asp-validation-for="@notificacionAdmin.Eventos.FechaFinalizacion" class="text-danger"></span>
+                                                </div>
+                                                <div class="container-modal-btn">
+                                                    <button type="submit" data-notification-id="@notificacionAdmin.Notificaciones.Id" class="save-button">Guardar</button>
+                                                    <a href="~/Notificaciones/Notificacion" class="modal-secundaria__close" data-notification-id="@notificacionAdmin.Notificaciones.Id">Cerrar</a>
+                                                </div>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
                             }
                             else
                             {
-                                <div class="modal-principal" id="modal-@notificacionAdmin.Notificaciones.Id">
-                                    <div class="modal__container">
-                                        <h2 class="modal__title">Detalles</h2>
-                                        <div class="modal__content">
-                                            <p>Transaccion Con Estado Erroneo</p>
-                                            <div class="container-modal-btn">
-                                                <a href="~/Notificaciones/Notificacion" class="modal__close" data-notification-id="@notificacionAdmin.Notificaciones.Id">Cerrar</a>
+                                @if (notificacionAdmin.Prestamos.Estado != "PENDIENTE ADMIN" && notificacionAdmin.Prestamos.Estado == "APROBADO")
+                                {
+                                    <div class="modal-principal" id="modal-@notificacionAdmin.Notificaciones.Id">
+                                        <div class="modal__container">
+                                            <h2 class="modal__title">Detalles</h2>
+                                            <div class="modal__content">
+                                                <p class="modal__paragraph"><strong>Razon:</strong> @notificacionAdmin.Notificaciones.Razon</p>
+                                                <p class="modal__paragraph"><strong>Fecha:</strong> @notificacionAdmin.Notificaciones.FechaGeneracion.ToString("dd-MM-yyyy")</p>
+                                                <p class="modal__paragraph"><strong>IdUser:</strong> @notificacionAdmin.Notificaciones.IdUser</p>
+                                                <p class="modal__paragraph"><strong>Tipo de Cuota:</strong> @notificacionAdmin.Prestamos.TipoCuota</p>
+                                                <p class="modal__paragraph"><strong>Descripcion:</strong></p>
+                                                <p class="modal__description">@notificacionAdmin.Notificaciones.Descripcion</p>
+                                                <p class="modal__paragraph"><strong>Destino:</strong> @notificacionAdmin.Notificaciones.Destino</p>
+                                                <div class="container-modal-btn">
+                                                    <a href="~/Notificaciones/Notificacion" class="modal__close" data-notification-id="@notificacionAdmin.Notificaciones.Id">Cerrar</a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                }
+                                else
+                                {
+                                    <div class="modal-principal" id="modal-@notificacionAdmin.Notificaciones.Id">
+                                        <div class="modal__container">
+                                            <h2 class="modal__title">Detalles</h2>
+                                            <div class="modal__content">
+                                                <p>Transaccion Con Estado Erroneo</p>
+                                                <div class="container-modal-btn">
+                                                    <a href="~/Notificaciones/Notificacion" class="modal__close" data-notification-id="@notificacionAdmin.Notificaciones.Id">Cerrar</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
                             }
+
                         }
                     }
                 </div>
@@ -256,13 +301,6 @@
             else
             {
                 <p>Usted no tiene permisos para esta funcion.</p>
-            }
-        }
-        @if (User.HasClaim("Rol", "Administrador"))
-        {
-            @if ((bool) new NotificacionesRepository().OperacionesNotificaciones( 1, 0, 0))
-            {
-                
             }
         }
     </div>
