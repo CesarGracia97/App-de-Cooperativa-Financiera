@@ -1,7 +1,7 @@
 ﻿@model act_Application.Models.Sistema.ViewModel.Transacciones_VM;
 @using act_Application.Models.Sistema.Complementos;
 @{
-    ViewData["Title"] = "Aportar";
+    ViewData["Title"] = "Transacciones";
 }
 <head>
     <meta charset="utf-8" />
@@ -38,6 +38,18 @@
                     </div>
                 </div>
             </form>
+            <!--Contenedor de la Cuenta Bancaria-->
+            <div class="form-group">
+                <label asp-for="Aportaciones.CBancoOrigen">Cuenta:</label>
+                <input asp-for="Aportaciones.CBancoOrigen" class="input-cuenta" type="number" min="10000000" max="999999999999" name="Cbancaria" />
+                <span asp-validation-for="Aportaciones.CBancoOrigen" class="text-danger"></span>
+            </div>
+            <!--Contenedor de la Cuenta Bancaria-->
+            <div class="form-group">
+                <label asp-for="Aportaciones.NBancoDestino">Cuenta:</label>
+                <input asp-for="Aportaciones.NBancoDestino" class="input-cuenta" type="number" min="10000000" max="999999999999" name="Cbancaria" />
+                <span asp-validation-for="Aportaciones.NBancoDestino" class="text-danger"></span>
+            </div>
         </div>
         <div class="c_pcuo">
             <label>Pago de Cuota</label>

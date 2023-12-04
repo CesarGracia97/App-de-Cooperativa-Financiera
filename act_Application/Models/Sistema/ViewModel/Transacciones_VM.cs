@@ -1,4 +1,5 @@
 ﻿using act_Application.Models.BD;
+using act_Application.Models.Sistema.Complementos;
 
 namespace act_Application.Models.Sistema.ViewModel
 {
@@ -15,5 +16,7 @@ namespace act_Application.Models.Sistema.ViewModel
         public ActPrestamo Prestamos { get; set; }
         public ActCuota Cuotas {  get; set; }
         public ActMulta Multas {  get; set; }
+        public List<ListItems> ItemsNBanco { get; set; }
+        public List<ActCuentaDestino> ItemCuentaBancoDestino { get; set; }
     }
 }

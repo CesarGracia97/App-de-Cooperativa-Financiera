@@ -1,8 +1,9 @@
-﻿using act_Application.Data;
-using act_Application.Data.Context;
+﻿using act_Application.Data.Context;
 using act_Application.Data.Repository;
 using act_Application.Logic.ComplementosLogicos;
 using act_Application.Models.BD;
+using act_Application.Models.Sistema.Complementos;
+using act_Application.Models.Sistema.ViewModel;
 using act_Application.Services.ServiciosAplicativos;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -19,9 +20,35 @@ namespace act_Application.Controllers.General
         {
             _context = context;
         }
+        private List<ListItems> ObtenerItemsNBanco()          //Contenido de la Lista Bancos
+        {
+            return new List<ListItems>
+            {
+                new ListItems { Id = 1, Nombre = "Banco Pichincha" },
+                new ListItems { Id = 2, Nombre = "Banco Guayaquil" },
+                new ListItems { Id = 3, Nombre = "Produbanco" },
+                new ListItems { Id = 4, Nombre = "Banco del Austro" },
+                new ListItems { Id = 5, Nombre = "Banco Internacional" }
+            };
+        }
         public IActionResult Index()
         {
-            return View();
+            ViewData["ItemsNBanco"] = ObtenerItemsNBanco();
+            var obj = (List<ActCuentaDestino>) new DestinoRepository().OperacionDestino(1, 0, 0);
+            // Estructurar las listas para las opciones del banco destino
+            var itemCuentaBancoDestino = obj.Select(cuenta =>
+                new
+                {
+                    Value = $"{cuenta.NombreBanco} - #{cuenta.NumeroCuentaB}",
+                    Text = $"{cuenta.NombreBanco} - #{cuenta.NumeroCuentaB}"
+                }).ToList();
+
+            var viewModel = new Transacciones_VM
+            {
+               ItemCuentaBancoDestino = obj
+            };
+
+            return View(viewModel);
         }
         public async Task<IActionResult> Aporte(decimal Valor, string NBancoOrigen, string CBancoOrigen, string NBancoDestino, string CBancoDestino, [FromForm] IFormFile CapturaPantalla, [Bind("Id,IdApor,IdUser,FechaAportacion,Cuadrante,Valor,NBancoOrigen,CBancoOrigen,NBancoDestino,CBancoDestino,CapturaPantalla,Estado")] ActAportacione actAportacione)
         {
