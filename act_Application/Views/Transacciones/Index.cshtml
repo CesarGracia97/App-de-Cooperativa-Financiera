@@ -2,6 +2,13 @@
 @using act_Application.Models.Sistema.Complementos;
 @{
     ViewData["Title"] = "Transacciones";
+    bool condiCuotUser = false;
+    var userIdClaim = User.Claims.FirstOrDefault(c => c.Type == "Id");
+    int IdUser = -1;
+    if (userIdClaim != null && int.TryParse(userIdClaim.Value, out IdUser))
+    {
+        
+    }
 }
 <head>
     <meta charset="utf-8" />
@@ -23,6 +30,7 @@
                 <option value="Prestamo">OP 4 - Prestamo</option>
             </select>
         </div>
+
         <div class="c_apor">
             <label>Aportacion</label>
             <form asp-action="Aporte" method="post" enctype="multipart/form-data">
@@ -38,31 +46,65 @@
                     </div>
                 </div>
             </form>
-            <!--Contenedor de la Cuenta Bancaria-->
-            <div class="form-group">
-                <label asp-for="Aportaciones.CBancoOrigen">Cuenta:</label>
-                <input asp-for="Aportaciones.CBancoOrigen" class="input-cuenta" type="number" min="10000000" max="999999999999" name="Cbancaria" />
-                <span asp-validation-for="Aportaciones.CBancoOrigen" class="text-danger"></span>
-            </div>
-            <!--Contenedor de la Cuenta Bancaria-->
+            <!--Contenedor del Nombre del Banco de Origen-->
             <div class="form-group">
                 <label asp-for="Aportaciones.NBancoDestino">Cuenta:</label>
-                <input asp-for="Aportaciones.NBancoDestino" class="input-cuenta" type="number" min="10000000" max="999999999999" name="Cbancaria" />
+                <input asp-for="Aportaciones.NBancoDestino" class="input-nco" type="text" name="NBancoDestino" />
                 <span asp-validation-for="Aportaciones.NBancoDestino" class="text-danger"></span>
             </div>
+
+            <!--Contenedor de la Cuenta Bancaria de Origen-->
+            <div class="form-group">
+                <label asp-for="Aportaciones.CBancoOrigen">Cuenta:</label>
+                <input asp-for="Aportaciones.CBancoOrigen" class="input-cbo" type="number" min="10000000" max="999999999999" name="CBancoOrigen" />
+                <span asp-validation-for="Aportaciones.CBancoOrigen" class="text-danger"></span>
+            </div>
+
+            <!--Contenedor de Banco Destino-->
+            <div class="form-group">
+                <label>Banco Destino:</label>
+                <select id="CuentaDestino" name="CuentaDestino" required>
+                    <option value="">Seleccionar un Banco Destino...</option>
+                    @foreach (var cuenta in Model.ItemCuentaBancoDestino)
+                    {
+                        <option value="@cuenta.NombreBanco - #@cuenta.NumeroCuentaB">@cuenta.NombreBanco - #@cuenta.NumeroCuentaB</option>
+                    }
+                </select>
+            </div>
+
+            <!--Contenedor de Valor-->
+            <div class="form-group">
+                <label asp-for="Aportaciones.Valor">Monto:</label>
+                <div class="input-container">
+                    <span class="dollar-sign">$</span>
+                    <input asp-for="Aportaciones.Valor" class="input-monto" type="number" min="5" step="0.01" name="Valor" />
+                    <span asp-validation-for="Aportaciones.Valor" class="text-danger"></span>
+                </div>
+            </div>
+            <!--Contenedor de Captura de Pantalla-->
+            <div class="form-group">
+                <label asp-for="Aportaciones.CapturaPantalla">Comprobante de Transferencia:</label>
+                <input asp-for="Aportaciones.CapturaPantalla" id="imagen" name="CapturaPantalla" class="input-file" type="file" accept=".jpg, .png" />
+                <span asp-validation-for="Aportaciones.CapturaPantalla" class="text-danger"></span>
+            </div>
         </div>
+        
         <div class="c_pcuo">
             <label>Pago de Cuota</label>
+
             <form asp-action="PagoCuota" method="post" enctype="multipart/form-data">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
             </form>
         </div>
+        
         <div class="c_pmul">
             <label>Pago de Multas</label>
             <form asp-action="PagoMulta" method="post" enctype="multipart/form-data">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             </form>
         </div>
+       
         <div class="c_pres">
             <label>Peticion de Prestamo</label>
             <form asp-action="Prestamo" method="post" enctype="multipart/form-data">

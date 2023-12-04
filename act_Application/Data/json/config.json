@@ -28,7 +28,7 @@
         "DBQP_SelectPrestamoIdPres": "SELECT Id FROM act_Prestamo WHERE IdPres = @IdPres"
       },
       "CUOT": {
-        "DBQC_SelectCoutasUser": "SELECT *.a FROM act_Cuotas a WHERE IdUser = @IdUser AND Estado = 'PENDIENTE'",
+        "DBQC_SelectCoutasUser": "SELECT (SELECT COUNT(*) FROM act_Cuotas WHERE IdUser = @IdUser AND Estado = 'PENDIENTE') AS TotalCuotas, *.a FROM act_Cuotas a WHERE IdUser = @IdUser AND Estado = 'PENDIENTE'",
         "DBQC_SelectIdCouta": "SELECT *.a FROM act_Cuotas a WHERE Id = @Id"
       },
       "DEST": {

@@ -40,11 +40,11 @@ namespace act_Application.Data.Repository
 
                         connection.Open();
 
-                        using (MySqlDataReader rd = cmd.ExecuteReader())
+                        using (MySqlDataReader reader = cmd.ExecuteReader())
                         {
-                            if (rd.Read()) // Avanzar al primer registro
+                            if (reader.Read()) // Avanzar al primer registro
                             {
-                                totalAportaciones = Convert.ToInt32(rd["TotalAportaciones"]);
+                                totalAportaciones = Convert.ToInt32(reader["TotalAportaciones"]);
                             }
                         }
                     }

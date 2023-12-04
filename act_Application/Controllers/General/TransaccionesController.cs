@@ -50,7 +50,7 @@ namespace act_Application.Controllers.General
 
             return View(viewModel);
         }
-        public async Task<IActionResult> Aporte(decimal Valor, string NBancoOrigen, string CBancoOrigen, string NBancoDestino, string CBancoDestino, [FromForm] IFormFile CapturaPantalla, [Bind("Id,IdApor,IdUser,FechaAportacion,Cuadrante,Valor,NBancoOrigen,CBancoOrigen,NBancoDestino,CBancoDestino,CapturaPantalla,Estado")] ActAportacione actAportacione)
+        public async Task<IActionResult> Aporte(decimal Valor, string NBancoOrigen, string CBancoOrigen, string CuentaDestino, [FromForm] IFormFile CapturaPantalla, [Bind("Id,IdApor,IdUser,FechaAportacion,Cuadrante,Valor,NBancoOrigen,CBancoOrigen,NBancoDestino,CBancoDestino,CapturaPantalla,Estado")] ActAportacione actAportacione)
         {
             if (ModelState.IsValid)
             {
@@ -67,8 +67,15 @@ namespace act_Application.Controllers.General
                     actAportacione.Valor = Valor;
                     actAportacione.NBancoOrigen = NBancoOrigen;
                     actAportacione.CBancoOrigen = CBancoOrigen;
-                    actAportacione.NBancoDestino = NBancoDestino;
-                    actAportacione.CBancoDestino = CBancoDestino;
+                    if (!string.IsNullOrEmpty(CuentaDestino))
+                    {
+                        var parts = CuentaDestino.Split(" - #");
+                        if (parts.Length == 2)
+                        {
+                            actAportacione.NBancoDestino = parts[0];
+                            actAportacione.CBancoDestino = parts[1];
+                        }
+                    }
                     if (CapturaPantalla != null && CapturaPantalla.Length > 0)
                     {
                         using (var ms = new MemoryStream())

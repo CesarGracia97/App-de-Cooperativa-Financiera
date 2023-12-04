@@ -8,10 +8,46 @@ namespace act_Application.Data.Repository
     public class CuotaRepository
     {
         private readonly string connectionString = AppSettingsHelper.GetConnectionString();
-        private ActCuota GetData_CuotasUser(int IdUser)
+        private bool GetExist_CuotasUser(int IdUser)
         {
             try
             {
+                string Query = ConfigReader.GetQuery(1, "CUOT", "DBQC_SelectCoutasUser");
+                int totalCuotas = 0;
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                {
+                    MySqlCommand cmd = new MySqlCommand(Query, connection);
+                    cmd.Parameters.AddWithValue("@IdUser", IdUser);
+                    cmd.CommandType = CommandType.Text;
+                    connection.Open();
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            totalCuotas = Convert.ToInt32(reader["TotalCuotas"]);
+                        }
+                    }
+                }
+                return totalCuotas > 0;
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine($"\nGetExist_CuotasUser || Error de Mysql");
+                Console.WriteLine($"\nRazon del Error: {ex.Message}\n");
+                throw;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"GetExist_CuotasUser | Error \n");
+                Console.WriteLine($"Detalles del error: " + ex.Message);
+                return false;
+            }
+        }
+        private List<ActCuota> GetData_CuotasUser(int IdUser)
+        {
+            try
+            {
+                List<ActCuota> listCuota = new List<ActCuota>();
                 string Query = ConfigReader.GetQuery( 1, "CUOT", "DBQC_SelectCoutasUser");
 
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
@@ -19,18 +55,17 @@ namespace act_Application.Data.Repository
                     MySqlCommand cmd = new MySqlCommand(Query, connection);
                     cmd.Parameters.AddWithValue("@IdUser", IdUser);
                     cmd.CommandType = CommandType.Text;
-
                     connection.Open();
-
                     using (MySqlDataReader reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
                         {
                             ActCuota obj = MapToCuota(reader);
-                            return obj;
+                            listCuota.Add(obj);
                         }
                     }
                 }
+                return listCuota;
             }
             catch (MySqlException ex)
             {
@@ -42,8 +77,8 @@ namespace act_Application.Data.Repository
             {
                 Console.WriteLine("GetData_CuotasUser | Error.");
                 Console.WriteLine("Detalles del error: " + ex.Message);
+                return null;
             }
-            return null;
         }
         private ActCuota GetData_IdCuotaUser(int Id)
         {
@@ -195,6 +230,8 @@ namespace act_Application.Data.Repository
                         return H_GetData_LastIdCouta(IdUser);
                     case 4:
                         return SA_GetData_DateCuotasAll();
+                    case 5:
+                        return GetExist_CuotasUser(IdUser);
                     default:
                         Console.WriteLine("\n-----------------------------------------");
                         Console.WriteLine("\nOperacionesCuotas || Opcion Inexistente.");
