@@ -20,20 +20,17 @@ namespace act_Application.Controllers.General
         {
             _context = context;
         }
-        private List<ListItems> ObtenerItemsNBanco()          //Contenido de la Lista Bancos
+        private List<ListItems> ObtenerItemsCuota()
         {
             return new List<ListItems>
             {
-                new ListItems { Id = 1, Nombre = "Banco Pichincha" },
-                new ListItems { Id = 2, Nombre = "Banco Guayaquil" },
-                new ListItems { Id = 3, Nombre = "Produbanco" },
-                new ListItems { Id = 4, Nombre = "Banco del Austro" },
-                new ListItems { Id = 5, Nombre = "Banco Internacional" }
+                new ListItems { Id = 1, Nombre = "PAGO UNICO" },
+                new ListItems { Id = 2, Nombre = "PAGO MENSUAL" }
             };
         }
         public IActionResult Index()
         {
-            ViewData["ItemsNBanco"] = ObtenerItemsNBanco();
+            ViewData["ItemsCuota"] = ObtenerItemsCuota();
             var obj = (List<ActCuentaDestino>) new DestinoRepository().OperacionDestino(1, 0, 0);
             // Estructurar las listas para las opciones del banco destino
             var itemCuentaBancoDestino = obj.Select(cuenta =>
@@ -45,7 +42,8 @@ namespace act_Application.Controllers.General
 
             var viewModel = new Transacciones_VM
             {
-               ItemCuentaBancoDestino = obj
+                ItemCuentaBancoDestino = obj,
+                ItemCuotas = ObtenerItemsCuota()
             };
 
             return View(viewModel);

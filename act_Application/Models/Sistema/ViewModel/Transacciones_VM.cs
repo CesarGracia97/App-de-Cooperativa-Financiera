@@ -1,5 +1,6 @@
 ﻿using act_Application.Models.BD;
 using act_Application.Models.Sistema.Complementos;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 
 namespace act_Application.Models.Sistema.ViewModel
 {
@@ -18,5 +19,6 @@ namespace act_Application.Models.Sistema.ViewModel
         public ActMulta Multas {  get; set; }
         public List<ListItems> ItemsNBanco { get; set; }
         public List<ActCuentaDestino> ItemCuentaBancoDestino { get; set; }
+        public List<ListItems> ItemCuotas { get; set; }
     }
 }

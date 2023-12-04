@@ -1,5 +1,6 @@
 ﻿@model act_Application.Models.Sistema.ViewModel.Transacciones_VM;
 @using act_Application.Data.Repository;
+@using act_Application.Models.BD;
 @using act_Application.Models.Sistema.Complementos;
 @{
     ViewData["Title"] = "Transacciones";
@@ -53,98 +54,59 @@
                         </script>
                     </div>
                 </div>
-            </form>
-            <!--Contenedor del Nombre del Banco de Origen-->
-            <div class="form-group">
-                <label asp-for="Aportaciones.NBancoOrigen">Cuenta:</label>
-                <input asp-for="Aportaciones.NBancoOrigen" class="input-nco" type="text" name="NBancoOrigen" placeholder="Agrega el nombre del Banco de donde hiciste el deposito" required />
-                <span asp-validation-for="Aportaciones.NBancoOrigen" class="text-danger"></span>
-            </div>
 
-            <!--Contenedor de la Cuenta Bancaria de Origen-->
-            <div class="form-group">
-                <label asp-for="Aportaciones.CBancoOrigen">Cuenta:</label>
-                <input asp-for="Aportaciones.CBancoOrigen" class="input-cbo" type="number" min="10000000" max="999999999999" name="CBancoOrigen" placeholder="Agrega el numero de cuenta de donde transeferencia, 0 si lo hiciste por deposito." required />
-                <span asp-validation-for="Aportaciones.CBancoOrigen" class="text-danger"></span>
-            </div>
-
-            <!--Contenedor de Banco Destino-->
-            <div class="form-group">
-                <label>Banco Destino:</label>
-                <select id="CuentaDestino" name="CuentaDestino" required>
-                    <option value="">Seleccionar un Banco Destino...</option>
-                    @foreach (var cuenta in Model.ItemCuentaBancoDestino)
-                    {
-                        <option value="@cuenta.NombreBanco - #@cuenta.NumeroCuentaB">@cuenta.NombreBanco - #@cuenta.NumeroCuentaB</option>
-                    }
-                </select>
-            </div>
-
-            <!--Contenedor de Valor-->
-            <div class="form-group">
-                <label asp-for="Aportaciones.Valor">Monto:</label>
-                <div class="input-container">
-                    <span class="dollar-sign">$</span>
-                    <input asp-for="Aportaciones.Valor" class="input-monto" type="number" min="5" step="0.01" name="Valor" />
-                    <span asp-validation-for="Aportaciones.Valor" class="text-danger"></span>
+                <!--Contenedor del Nombre del Banco de Origen-->
+                <div class="form-group">
+                    <label asp-for="Aportaciones.NBancoOrigen">Cuenta:</label>
+                    <input asp-for="Aportaciones.NBancoOrigen" class="input-nco" type="text" name="NBancoOrigen" placeholder="Agrega el nombre del Banco de donde hiciste el deposito" required />
+                    <span asp-validation-for="Aportaciones.NBancoOrigen" class="text-danger"></span>
                 </div>
-            </div>
-            <!--Contenedor de Captura de Pantalla-->
-            <div class="form-group">
-                <label asp-for="Aportaciones.CapturaPantalla">Comprobante de Transferencia:</label>
-                <input asp-for="Aportaciones.CapturaPantalla" name="CapturaPantalla" class="input-file" type="file" accept=".jpg, .png" />
-                <span asp-validation-for="Aportaciones.CapturaPantalla" class="text-danger"></span>
-            </div>
 
-            <!--Contenedor de los Botones-->
-            <div class="buttons">
-                <button type="submit" class="save-button">Guardar</button>
-                <button type="button" class="clear-button">Limpiar</button>
-            </div>
-        </div>
-        
-        <div class="c_pcuo">
-            <label>Pago de Cuota</label>
-            @if (condiCuotUser)
-            {
-                <form asp-action="PagoCuota" method="post" enctype="multipart/form-data">
-                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <!--Contenedor de la Cuenta Bancaria de Origen-->
+                <div class="form-group">
+                    <label asp-for="Aportaciones.CBancoOrigen">Cuenta:</label>
+                    <input asp-for="Aportaciones.CBancoOrigen" class="input-cbo" type="number" min="10000000" max="999999999999" name="CBancoOrigen" placeholder="Agrega el numero de cuenta de donde transeferencia, 0 si lo hiciste por deposito." required />
+                    <span asp-validation-for="Aportaciones.CBancoOrigen" class="text-danger"></span>
+                </div>
 
-                    <!--Contenedor de los Botones-->
-                    <div class="buttons">
-                        <button type="submit" class="save-button">Guardar</button>
-                        <button type="button" class="clear-button">Limpiar</button>
+                <!--Contenedor de Banco Destino-->
+                <div class="form-group">
+                    <label>Banco Destino:</label>
+                    <select id="CuentaDestino" name="CuentaDestino" required>
+                        <option value="">Seleccionar un Banco Destino...</option>
+                        @foreach (var cuenta in Model.ItemCuentaBancoDestino)
+                        {
+                            <option value="@cuenta.NombreBanco - #@cuenta.NumeroCuentaB">@cuenta.NombreBanco - #@cuenta.NumeroCuentaB</option>
+                        }
+                    </select>
+                </div>
+
+                <!--Contenedor de Valor-->
+                <div class="form-group">
+                    <label asp-for="Aportaciones.Valor">Monto:</label>
+                    <div class="input-container">
+                        <span class="dollar-sign">$</span>
+                        <input asp-for="Aportaciones.Valor" class="input-monto" type="number" min="5" step="0.01" name="Valor" />
+                        <span asp-validation-for="Aportaciones.Valor" class="text-danger"></span>
                     </div>
-                </form>
-            }
-            else
-            {
-                <p>No Adeudas Cuotas actualmente</p>
-            }
+                </div>
+
+                <!--Contenedor de Captura de Pantalla-->
+                <div class="form-group">
+                    <label asp-for="Aportaciones.CapturaPantalla">Comprobante de Transferencia:</label>
+                    <input asp-for="Aportaciones.CapturaPantalla" name="CapturaPantalla" class="input-file" type="file" accept=".jpg, .png" />
+                    <span asp-validation-for="Aportaciones.CapturaPantalla" class="text-danger"></span>
+                </div>
+
+                <!--Contenedor de los Botones-->
+                <div class="buttons">
+                    <button type="submit" class="save-button">Guardar</button>
+                    <button type="button" class="clear-button">Limpiar</button>
+                </div>
+            </form>
 
         </div>
-        
-        <div class="c_pmul">
-            <label>Pago de Multas</label>
-            @if (condiMultUser)
-            {
-                <form asp-action="PagoMulta" method="post" enctype="multipart/form-data">
-                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-                    <!--Contenedor de los Botones-->
-                    <div class="buttons">
-                        <button type="submit" class="save-button">Guardar</button>
-                        <button type="button" class="clear-button">Limpiar</button>
-                    </div>
-                </form>
-            }
-            else
-            {
-                <p>No Adeudas Multas Actualmente</p>
-            }
-
-        </div>
-       
         <div class="c_pres">
             <label>Peticion de Prestamo</label>
             <form asp-action="Prestamo" method="post" enctype="multipart/form-data">
@@ -194,6 +156,156 @@
 
             </form>
         </div>
+        
+        <div class="c_pcuo">
+            <label>Pago de Cuota</label>
+            @if (condiCuotUser)
+            {
+                var obj = (List<ActCuota>) new CuotaRepository().OperacionesCuotas(1, 0, IdUser);
+                <form asp-action="PagoCuota" method="post" enctype="multipart/form-data">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
+                    <!--Contenedor Id de la Cuota a pagar-->
+                    <select asp-for="Cuotas.Id" name="Id" placeholder="Selecciona una Cuota" required>
+                        <option value="">Selecciona la Cuota a Pagar</option>
+                        @for (int i = 0;  i < obj.Count; i++)
+                        {
+                            <option value="@obj[i].Id">Cuota #@obj[i].Id - Estado:@obj[i].Estado / F.P. @obj[i].FechaCuota</option>
+                        }
+                    </select>
+
+                    <!--Contenedor del Nombre del Banco de Origen-->
+                    <div class="form-group">
+                        <label asp-for="Cuotas.NBancoOrigen">Cuenta:</label>
+                        <input asp-for="Cuotas.NBancoOrigen" class="input-nco" type="text" name="NBancoOrigen" placeholder="Agrega el nombre del Banco de donde hiciste el deposito" required />
+                        <span asp-validation-for="Cuotas.NBancoOrigen" class="text-danger"></span>
+                    </div>
+
+                    <!--Contenedor de la Cuenta Bancaria de Origen-->
+                    <div class="form-group">
+                        <label asp-for="Cuotas.CBancoOrigen">Cuenta:</label>
+                        <input asp-for="Cuotas.CBancoOrigen" class="input-cbo" type="number" min="10000000" max="999999999999" name="CBancoOrigen" placeholder="Agrega el numero de cuenta de donde transeferencia, 0 si lo hiciste por deposito." required />
+                        <span asp-validation-for="Cuotas.CBancoOrigen" class="text-danger"></span>
+                    </div>
+
+                    <!--Contenedor de Banco Destino-->
+                    <div class="form-group">
+                        <label>Banco Destino:</label>
+                        <select id="CuentaDestino" name="CuentaDestino" required>
+                            <option value="">Seleccionar un Banco Destino...</option>
+                            @foreach (var cuenta in Model.ItemCuentaBancoDestino)
+                            {
+                                <option value="@cuenta.NombreBanco - #@cuenta.NumeroCuentaB">@cuenta.NombreBanco - #@cuenta.NumeroCuentaB</option>
+                            }
+                        </select>
+                    </div>
+
+                    <!--Contenedor de Valor-->
+                    <div class="form-group">
+                        <label asp-for="Cuotas.Valor">Monto:</label>
+                        <div class="input-container">
+                            <span class="dollar-sign">$</span>
+                            <input asp-for="Cuotas.Valor" class="input-monto" type="number" min="5" step="0.01" name="Valor" />
+                            <span asp-validation-for="Cuotas.Valor" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <!--Contenedor de Captura de Pantalla-->
+                    <div class="form-group">
+                        <label>Comprobante de Transferencia:</label>
+                        <input name="CapturaPantalla" class="input-file" type="file" accept=".jpg, .png" />
+                        <span  class="text-danger"></span>
+                    </div>
+
+                    <!--Contenedor de los Botones-->
+                    <div class="buttons">
+                        <button type="submit" class="save-button">Guardar</button>
+                        <button type="button" class="clear-button">Limpiar</button>
+                    </div>
+                </form>
+            }
+            else
+            {
+                <p>No Adeudas Cuotas actualmente</p>
+            }
+
+        </div>
+        
+        <div class="c_pmul">
+            <label>Pago de Multas</label>
+            @if (condiMultUser)
+            {
+                var obj = (List<ActMulta>) new MultaRepository().OperacionesMultas(4, 0, IdUser);
+                <form asp-action="PagoMulta" method="post" enctype="multipart/form-data">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <!--Contenedor Id de la Cuota a pagar-->
+                    <select asp-for="Multas.Id" name="Id" placeholder="Selecciona una Cuota" required>
+                        <option value="">Selecciona la Cuota a Pagar</option>
+                        @for (int i = 0; i < obj.Count; i++)
+                        {
+                            <option value="@obj[i].Id">Multa #@obj[i].Id - Estado:@obj[i].Estado </option>
+                        }
+                    </select>
+
+                    <!--Contenedor del Nombre del Banco de Origen-->
+                    <div class="form-group">
+                        <label asp-for="Multas.NBancoOrigen">Cuenta:</label>
+                        <input asp-for="Multas.NBancoOrigen" class="input-nco" type="text" name="NBancoOrigen" placeholder="Agrega el nombre del Banco de donde hiciste el deposito" required />
+                        <span asp-validation-for="Multas.NBancoOrigen" class="text-danger"></span>
+                    </div>
+
+                    <!--Contenedor de la Cuenta Bancaria de Origen-->
+                    <div class="form-group">
+                        <label asp-for="Multas.CBancoOrigen">Cuenta:</label>
+                        <input asp-for="Multas.CBancoOrigen" class="input-cbo" type="number" min="10000000" max="999999999999" name="CBancoOrigen" placeholder="Agrega el numero de cuenta de donde transeferencia, 0 si lo hiciste por deposito." required />
+                        <span asp-validation-for="Multas.CBancoOrigen" class="text-danger"></span>
+                    </div>
+
+                    <!--Contenedor de Banco Destino-->
+                    <div class="form-group">
+                        <label>Banco Destino:</label>
+                        <select id="CuentaDestino" name="CuentaDestino" required>
+                            <option value="">Seleccionar un Banco Destino...</option>
+                            @foreach (var cuenta in Model.ItemCuentaBancoDestino)
+                            {
+                                <option value="@cuenta.NombreBanco - #@cuenta.NumeroCuentaB">@cuenta.NombreBanco - #@cuenta.NumeroCuentaB</option>
+                            }
+                        </select>
+                    </div>
+
+                    <!--Contenedor de Valor-->
+                    <div class="form-group">
+                        <label asp-for="Multas.Valor">Monto:</label>
+                        <div class="input-container">
+                            <span class="dollar-sign">$</span>
+                            <input asp-for="Multas.Valor" class="input-monto" type="number" min="5" step="0.01" name="Valor" />
+                            <span asp-validation-for="Multas.Valor" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <!--Contenedor de Captura de Pantalla-->
+                    <div class="form-group">
+                        <label>Comprobante de Transferencia:</label>
+                        <input name="CapturaPantalla" class="input-file" type="file" accept=".jpg, .png" />
+                        <span class="text-danger"></span>
+                    </div>
+
+                    <!--Contenedor de los Botones-->
+                    <div class="buttons">
+                        <button type="submit" class="save-button">Guardar</button>
+                        <button type="button" class="clear-button">Limpiar</button>
+                    </div>
+                </form>
+            }
+            else
+            {
+                <p>No Adeudas Multas Actualmente</p>
+            }
+
+        </div>
+       
 
     </div>
 </body>
