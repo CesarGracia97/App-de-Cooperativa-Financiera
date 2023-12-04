@@ -157,6 +157,7 @@
                 <p>Actualmente no Tienes Notificaciones.</p>
             }
         }
+    
         else
         {
             @if (!User.HasClaim("Rol", "Administrador") && (User.HasClaim("Rol", "Socio") || User.HasClaim("Rol", "Referido")))
@@ -254,6 +255,13 @@
             else
             {
                 <p>Usted no tiene permisos para esta funcion.</p>
+            }
+        }
+        @if (User.HasClaim("Rol", "Administrador"))
+        {
+            @if ((bool) new NotificacionesRepository().OperacionesNotificaciones( 1, 0, 0))
+            {
+                
             }
         }
     </div>
