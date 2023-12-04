@@ -236,7 +236,7 @@ namespace act_Application.Controllers.General
                         //
                         var userIdentificacion = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value;
                         //
-                        var multOriginal = (ActMulta) new MultaRepository().OperacionesMulta(5, Id, 0);
+                        var multOriginal = (ActMulta) new MultaRepository().OperacionesMultas(5, Id, 0);
                         if (multOriginal == null)
                             return RedirectToAction("Error", "Home");
 

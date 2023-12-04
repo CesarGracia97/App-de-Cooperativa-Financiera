@@ -1,14 +1,23 @@
 ﻿@model act_Application.Models.Sistema.ViewModel.Transacciones_VM;
+@using act_Application.Data.Repository;
 @using act_Application.Models.Sistema.Complementos;
 @{
     ViewData["Title"] = "Transacciones";
-    bool condiCuotUser = false;
+    bool condiCuotUser = false, condiMultUser = false;
     var userIdClaim = User.Claims.FirstOrDefault(c => c.Type == "Id");
     int IdUser = -1;
     if (userIdClaim != null && int.TryParse(userIdClaim.Value, out IdUser))
     {
-        
+        condiCuotUser = (bool) new CuotaRepository().OperacionesCuotas(5, 0, IdUser);
+        condiMultUser = (bool) new MultaRepository().OperacionesMultas(2, 0, IdUser);
     }
+    DateTime minDate = DateTime.Now.AddDays(14);
+    string minDateStr = minDate.ToString("yyyy-MM-dd");
+    DateTime maxDate = DateTime.Now.AddDays(25);
+    string maxDateStr = maxDate.ToString("yyyy-MM-dd");
+    DateTime minDateP = DateTime.Now.AddDays(26);
+    string minDateStrP = minDateP.ToString("yyyy-MM-dd");
+}
 }
 <head>
     <meta charset="utf-8" />
@@ -22,8 +31,7 @@
         <h2>Transacciones</h2>
         <div class ="Container-Selector">
             <label>Elija la Transaccion que va a realizar.</label>
-            <select id="" name="CuentaDestino" required>
-                <option value="">Seleccionar un Banco Destino...</option>
+            <select class="select-opcion" placeholder="Seleccionar un Tipo de Cuota..." required>
                 <option value="Aporte">OP 1 - Aportacion</option>
                 <option value="PMulta">OP 2 - Pago de Multa</option>
                 <option value="PCuota">OP 3 - Pago de Cuota</option>
@@ -48,15 +56,15 @@
             </form>
             <!--Contenedor del Nombre del Banco de Origen-->
             <div class="form-group">
-                <label asp-for="Aportaciones.NBancoDestino">Cuenta:</label>
-                <input asp-for="Aportaciones.NBancoDestino" class="input-nco" type="text" name="NBancoDestino" />
-                <span asp-validation-for="Aportaciones.NBancoDestino" class="text-danger"></span>
+                <label asp-for="Aportaciones.NBancoOrigen">Cuenta:</label>
+                <input asp-for="Aportaciones.NBancoOrigen" class="input-nco" type="text" name="NBancoOrigen" placeholder="Agrega el nombre del Banco de donde hiciste el deposito" required />
+                <span asp-validation-for="Aportaciones.NBancoOrigen" class="text-danger"></span>
             </div>
 
             <!--Contenedor de la Cuenta Bancaria de Origen-->
             <div class="form-group">
                 <label asp-for="Aportaciones.CBancoOrigen">Cuenta:</label>
-                <input asp-for="Aportaciones.CBancoOrigen" class="input-cbo" type="number" min="10000000" max="999999999999" name="CBancoOrigen" />
+                <input asp-for="Aportaciones.CBancoOrigen" class="input-cbo" type="number" min="10000000" max="999999999999" name="CBancoOrigen" placeholder="Agrega el numero de cuenta de donde transeferencia, 0 si lo hiciste por deposito." required />
                 <span asp-validation-for="Aportaciones.CBancoOrigen" class="text-danger"></span>
             </div>
 
@@ -84,31 +92,106 @@
             <!--Contenedor de Captura de Pantalla-->
             <div class="form-group">
                 <label asp-for="Aportaciones.CapturaPantalla">Comprobante de Transferencia:</label>
-                <input asp-for="Aportaciones.CapturaPantalla" id="imagen" name="CapturaPantalla" class="input-file" type="file" accept=".jpg, .png" />
+                <input asp-for="Aportaciones.CapturaPantalla" name="CapturaPantalla" class="input-file" type="file" accept=".jpg, .png" />
                 <span asp-validation-for="Aportaciones.CapturaPantalla" class="text-danger"></span>
+            </div>
+
+            <!--Contenedor de los Botones-->
+            <div class="buttons">
+                <button type="submit" class="save-button">Guardar</button>
+                <button type="button" class="clear-button">Limpiar</button>
             </div>
         </div>
         
         <div class="c_pcuo">
             <label>Pago de Cuota</label>
+            @if (condiCuotUser)
+            {
+                <form asp-action="PagoCuota" method="post" enctype="multipart/form-data">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-            <form asp-action="PagoCuota" method="post" enctype="multipart/form-data">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <!--Contenedor de los Botones-->
+                    <div class="buttons">
+                        <button type="submit" class="save-button">Guardar</button>
+                        <button type="button" class="clear-button">Limpiar</button>
+                    </div>
+                </form>
+            }
+            else
+            {
+                <p>No Adeudas Cuotas actualmente</p>
+            }
 
-            </form>
         </div>
         
         <div class="c_pmul">
             <label>Pago de Multas</label>
-            <form asp-action="PagoMulta" method="post" enctype="multipart/form-data">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            </form>
+            @if (condiMultUser)
+            {
+                <form asp-action="PagoMulta" method="post" enctype="multipart/form-data">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <!--Contenedor de los Botones-->
+                    <div class="buttons">
+                        <button type="submit" class="save-button">Guardar</button>
+                        <button type="button" class="clear-button">Limpiar</button>
+                    </div>
+                </form>
+            }
+            else
+            {
+                <p>No Adeudas Multas Actualmente</p>
+            }
+
         </div>
        
         <div class="c_pres">
             <label>Peticion de Prestamo</label>
             <form asp-action="Prestamo" method="post" enctype="multipart/form-data">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <!--Contenedor de Valor-->
+                <div class="form-group">
+                    <label asp-for="Prestamos.Valor">Monto:</label>
+                    <div class="input-container">
+                        <span class="dollar-sign">$</span>
+                        <input asp-for="Prestamos.Valor" class="input-monto" type="number" step="0.50" min="5.00" id="Valor" placeholder="Agrega el Valor que deseas que te presten" required />
+                        <span asp-validation-for="Prestamos.Valor" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <!--Contenedor del Tipo de Cuota-->
+                <div class="form-group">
+                    <label asp-for="Prestamos.TipoCuota">Tipo de Cuota:</label>
+                    <select asp-for="Prestamos.TipoCuota" id="TipoCuota" placeholder="Seleccionar un Tipo de Cuota..." required>
+                        <option value="">Seleccionar un Tipo de Cuota...</option>
+                        @foreach (var item in ViewData["ItemsCuota"] as List<ListItems>)
+                        {
+                            <option value="@item.Nombre">@item.Nombre</option>
+                        }
+                        <input type="hidden" asp-for="Prestamos.TipoCuota" />
+                    </select>
+                    <span asp-validation-for="Prestamos.TipoCuota" class="text-danger"></span>
+                </div>
+                <!--Contenedor de la Fecha de Entrega del Dinero-->
+                <div class="form-group">
+                    <label asp-for="Prestamos.FechaEntregaDinero">Fecha de Entrega del Efectivo</label>
+                    <input asp-for="Prestamos.FechaEntregaDinero" type="date" class="inpdate" min="@minDateStr" max="@maxDateStr" id="FechaEntregaDinero" required />
+                    <span asp-validation-for="Prestamos.FechaEntregaDinero" class="text-danger"></span>
+                </div>
+
+                <!--Contenedor de la Fecha de Inicio de Pago-->
+                <div class="form-group">
+                    <label asp-for="Prestamos.FechaInicioPagoCuotas">Fecha Inicio de Pago de Cuotas</label>
+                    <input asp-for="Prestamos.FechaInicioPagoCuotas" type="date" class="inpdate" id="FechaIniCoutaPrestamo" min="@minDateStrP" required />
+                    <span asp-validation-for="Prestamos.FechaInicioPagoCuotas" class="text-danger"></span>
+                </div>
+
+                <!--Contenedor de los Botones-->
+                <div class="buttons">
+                    <button type="submit" class="save-button">Guardar</button>
+                    <button type="button" onclick="limpiar()" class="clear-button">Limpiar</button>
+                </div>
+
             </form>
         </div>
 

@@ -294,7 +294,7 @@ namespace act_Application.Data.Repository
                 CapturaPantalla = Convert.ToString(reader["CapturaPantalla"])
             };
         }
-        public object OperacionesMulta(int Opcion, int Id, int IdUser)
+        public object OperacionesMultas(int Opcion, int Id, int IdUser)
         {
             try
             {
