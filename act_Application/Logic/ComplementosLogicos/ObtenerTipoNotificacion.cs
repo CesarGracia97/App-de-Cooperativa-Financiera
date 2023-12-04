@@ -20,7 +20,6 @@
                     return "NUSE";
                 }
             }
-
             // Si no cumple ninguna condición, devolver un mensaje indicando que no se pudo clasificar
             return "No se pudo clasificar la información";
         }

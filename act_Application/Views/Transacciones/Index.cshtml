@@ -1,5 +1,63 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model act_Application.Models.Sistema.ViewModel.Transacciones_VM;
+@using act_Application.Models.Sistema.Complementos;
 @{
+    ViewData["Title"] = "Aportar";
 }
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/General/Aportar/Aportar.css" />
+    <script src="~/js/Aportar/Aportar.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+    <div class="container">
+        <h2>Transacciones</h2>
+        <div class ="Container-Selector">
+            <label>Elija la Transaccion que va a realizar.</label>
+            <select id="" name="CuentaDestino" required>
+                <option value="">Seleccionar un Banco Destino...</option>
+                <option value="Aporte">OP 1 - Aportacion</option>
+                <option value="PMulta">OP 2 - Pago de Multa</option>
+                <option value="PCuota">OP 3 - Pago de Cuota</option>
+                <option value="Prestamo">OP 4 - Prestamo</option>
+            </select>
+        </div>
+        <div class="c_apor">
+            <label>Aportacion</label>
+            <form asp-action="Aporte" method="post" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <!--Contenedor de la Fecha-->
+                <div class="form-group">
+                    <label asp-for="Aportaciones.FechaAportacion">Fecha de Hoy:</label>
+                    <div class="date">
+                        <script>
+                            date = new Date().toLocaleDateString();
+                            document.write(date);
+                        </script>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="c_pcuo">
+            <label>Pago de Cuota</label>
+            <form asp-action="PagoCuota" method="post" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            </form>
+        </div>
+        <div class="c_pmul">
+            <label>Pago de Multas</label>
+            <form asp-action="PagoMulta" method="post" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            </form>
+        </div>
+        <div class="c_pres">
+            <label>Peticion de Prestamo</label>
+            <form asp-action="Prestamo" method="post" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            </form>
+        </div>
+
+    </div>
+</body>
+

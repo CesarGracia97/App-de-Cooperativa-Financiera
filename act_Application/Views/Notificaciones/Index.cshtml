@@ -1,7 +1,6 @@
 ﻿@model IEnumerable<act_Application.Models.Sistema.ViewModel.Notificaciones_VM>
 @using act_Application.Data.Repository;
 @using act_Application.Logic;
-@using act_Application.Models.Sistema.ViewModel;
 @{
     ViewData["Title"] = "Notificaciones";
 
@@ -15,6 +14,7 @@
     string fechaactual = fechaActual.ToString("yyyy-MM-dd");
     DateTime minDateP = DateTime.Now.AddDays(46);
     string minDateStrP = minDateP.ToString("dd-MMMM-yyyy");
+    var notificacionAdminList = Model.OrderByDescending(notif => notif.Notificaciones.FechaGeneracion).ToList();
 }
 <header>
     <meta charset="UTF-8">
@@ -32,8 +32,9 @@
             @if ((bool) new NotificacionesRepository().OperacionesNotificaciones( 1, 0, 0))
             {
                 <div class="content-notif">
-                    @foreach (var notificacionAdmin in Model)
+                    @foreach (var notificacionAdmin in notificacionAdminList)
                     {
+                        <p class="notif-text">Razon: @notificacionAdmin.Notificaciones.FechaGeneracion</p>
                         <div class="notif-container">
                             <p class="notif-text">Razon: @notificacionAdmin.Notificaciones.Razon</p>
                             <p class="notif-text">Fecha: @notificacionAdmin.Notificaciones.FechaGeneracion.ToString("dd-MMMM-yyyy")</p>
