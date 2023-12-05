@@ -42,3 +42,18 @@ document.addEventListener('DOMContentLoaded', function () {
     // Llama a la función inicialmente para establecer el estado inicial
     mostrarOcultarDivs();
 });
+function limpiar() {
+    // Obtén las referencias a los elementos que deseas limpiar
+    var inputsToClear = document.querySelectorAll('.c_apor input, .c_pres input, .c_pcuo input, .c_pmul input');
+    var selectsToReset = document.querySelectorAll('.c_apor select, .c_pres select, .c_pcuo select, .c_pmul select');
+
+    // Limpiar cajas de texto
+    inputsToClear.forEach(function (input) {
+        input.value = '';
+    });
+
+    // Resetear selectores a la primera opción
+    selectsToReset.forEach(function (select) {
+        select.selectedIndex = 0;
+    });
+}

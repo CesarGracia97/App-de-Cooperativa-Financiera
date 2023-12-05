@@ -14,11 +14,11 @@ namespace act_Application.Controllers.General
     public class TransaccionesController : Controller
     {
         private readonly ActDesarrolloContext _context;
-        private readonly NotificacionesServices _nservices;
-        private readonly CapturaDePantallaServices _cpservices;
-        public TransaccionesController(ActDesarrolloContext context)
+        private readonly ILogger<TransaccionesController> logger;
+        public TransaccionesController(ActDesarrolloContext context, ILogger<TransaccionesController> logger)
         {
             _context = context;
+            this.logger = logger;
         }
         private List<ListItems> ObtenerItemsCuota()
         {
@@ -50,49 +50,59 @@ namespace act_Application.Controllers.General
         }
         public async Task<IActionResult> Aporte(decimal Valor, string NBancoOrigen, string CBancoOrigen, string CuentaDestino, [FromForm] IFormFile CapturaPantalla, [Bind("Id,IdApor,IdUser,FechaAportacion,Cuadrante,Valor,NBancoOrigen,CBancoOrigen,NBancoDestino,CBancoDestino,CapturaPantalla,Estado")] ActAportacione actAportacione)
         {
-            if (ModelState.IsValid)
+            try
             {
-                var userIdClaim = User.Claims.FirstOrDefault(c => c.Type == "Id");
-                if (userIdClaim != null && int.TryParse(userIdClaim.Value, out int IdUser))
+                if (ModelState.IsValid)
                 {
-                    //
-                    var userIdentificacion = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value;
-                    //
-                    actAportacione.IdUser = IdUser; 
-                    actAportacione.FechaAportacion = DateTime.Now;
-                    ObtenerCuadrante obj = new ObtenerCuadrante();
-                    actAportacione.Cuadrante = obj.Cuadrante(DateTime.Now);
-                    actAportacione.Valor = Valor;
-                    actAportacione.NBancoOrigen = NBancoOrigen;
-                    actAportacione.CBancoOrigen = CBancoOrigen;
-                    if (!string.IsNullOrEmpty(CuentaDestino))
+                    var userIdClaim = User.Claims.FirstOrDefault(c => c.Type == "Id");
+                    if (userIdClaim != null && int.TryParse(userIdClaim.Value, out int IdUser))
                     {
-                        var parts = CuentaDestino.Split(" - #");
-                        if (parts.Length == 2)
+                        //
+                        var userIdentificacion = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value;
+                        //
+                        actAportacione.IdUser = IdUser;
+                        actAportacione.FechaAportacion = DateTime.Now;
+                        ObtenerCuadrante obj = new ObtenerCuadrante();
+                        actAportacione.Cuadrante = obj.Cuadrante(DateTime.Now);
+                        actAportacione.Valor = Valor;
+                        actAportacione.NBancoOrigen = NBancoOrigen;
+                        actAportacione.CBancoOrigen = CBancoOrigen;
+                        if (!string.IsNullOrEmpty(CuentaDestino))
                         {
-                            actAportacione.NBancoDestino = parts[0];
-                            actAportacione.CBancoDestino = parts[1];
+                            var parts = CuentaDestino.Split(" - #");
+                            if (parts.Length == 2)
+                            {
+                                actAportacione.NBancoDestino = parts[0];
+                                actAportacione.CBancoDestino = parts[1];
+                            }
                         }
-                    }
-                    if (CapturaPantalla != null && CapturaPantalla.Length > 0)
-                    {
-                        using (var ms = new MemoryStream())
+                        if (CapturaPantalla != null && CapturaPantalla.Length > 0)
                         {
-                            await CapturaPantalla.CopyToAsync(ms);
-                            var bytes = ms.ToArray();
-                            actAportacione.CapturaPantalla = bytes; // Asigna los bytes de la imagen a la propiedad CapturaPantalla
+                            using (var ms = new MemoryStream())
+                            {
+                                await CapturaPantalla.CopyToAsync(ms);
+                                var bytes = ms.ToArray();
+                                actAportacione.CapturaPantalla = bytes; // Asigna los bytes de la imagen a la propiedad CapturaPantalla
+                            }
                         }
+                        actAportacione.Estado = "ESPERA";
+                        _context.Add(actAportacione);
+                        await _context.SaveChangesAsync();
+                        string DescripcionA = $"El Usuario {userIdentificacion} (Usuario Id {IdUser}) a realizado un Aporte de {actAportacione.Valor} el dia {actAportacione.FechaAportacion}.";
+                        string DescripcionU = $"Haz  realizado un Aporte de {actAportacione.Valor} el dia {actAportacione.FechaAportacion}.";
+                        string IdActividad = (string)new AportacionRepository().OperacionesAportaciones(5, 0, IdUser);
+                        await new NotificacionesServices(_context).CrearNotificacion(2, IdUser, IdActividad, "Aporte", DescripcionA, "ADMINISTRADOR", new ActNotificacione());
+                        var essA = new EmailSendServices().EnviarCorreoAdmin(2, DescripcionA);
+                        return RedirectToAction("Index", "Home");
                     }
-                    _context.Add(actAportacione);
-                    await _context.SaveChangesAsync();
-                    string DescripcionA = $"El Usuario {userIdentificacion} (Usuario Id {IdUser}) a realizado un Aporte de {actAportacione.Valor} el dia {actAportacione.FechaAportacion}.";
-                    string DescripcionU = $"Haz  realizado un Aporte de {actAportacione.Valor} el dia {actAportacione.FechaAportacion}.";
-                    await _nservices.CrearNotificacion( 2, IdUser, (string) new AportacionRepository().OperacionesAportaciones(5,0,IdUser),"Aporte", DescripcionA,"ADMINISTRADOR", new ActNotificacione());
-                    var essA = new EmailSendServices().EnviarCorreoAdmin(2, DescripcionA);
-                    return RedirectToAction("Index", "Home");
                 }
+                return View(actAportacione);
             }
-            return View(actAportacione);
+            catch (Exception ex)
+            {
+                logger.LogError("TransaccionesController. Error en Aportar: ", ex);
+                return null;
+            }
         }
         public async Task<IActionResult> PagoCuota(int Id, decimal Valor, string CBancoOrigen, string NBancoOrigen,string CBancoDestino, string NBancoDestino, [FromForm] IFormFile CapturaPantalla, [Bind("Id,IdCuot,IdUser,IdPrestamo,FechaCuota,Valor,Estado,FechaPago,CBancoOrigen,NBancoOrigen,CBancoDestino,NBancoDestino,HistorialValores,CapturaPantalla")] ActCuota actCuota)
         {
@@ -157,13 +167,12 @@ namespace act_Application.Controllers.General
                         }
                         _context.Update(actCuota);
                         await _context.SaveChangesAsync();
-                        await _nservices.CrearNotificacion( 3, IdUser, cuotOriginal.IdCuot, "PAGO DE CUOTA", DescripcionA, "ADMINISTRADOR", new ActNotificacione());
-                        await _cpservices.SubirCapturaDePantalla( IdUser, "act_Cuotas", Id, CapturaPantalla, new ActCapturasPantalla());
+                        await new NotificacionesServices(_context).CrearNotificacion( 3, IdUser, cuotOriginal.IdCuot, "PAGO DE CUOTA", DescripcionA, "ADMINISTRADOR", new ActNotificacione());
+                        await new CapturaDePantallaServices(_context).SubirCapturaDePantalla( IdUser, "act_Cuotas", Id, CapturaPantalla, new ActCapturasPantalla());
                         int capobj = (int) new CapturaPantallaRepository().OperacionesCapPan( 1, 0, IdUser);
-                        await _cpservices.ActualizarIdCapturaPantallaUser( 1, Id, capobj, new ActCuota(), new ActMulta());
-
+                        await new CapturaDePantallaServices(_context).ActualizarIdCapturaPantallaUser( 1, Id, capobj, new ActCuota(), new ActMulta());
+                        return RedirectToAction("Index", "Home");
                     }
-
                 }
                 catch (DbUpdateConcurrencyException ex)
                 {
@@ -207,9 +216,10 @@ namespace act_Application.Controllers.General
                                                 $" e inicio de pago de la deuda para el dia {actPrestamo.FechaInicioPagoCuotas}" +
                                                 $"\nEstado: {actPrestamo.Estado}" +
                                                 $"\nTipo de Cuota: {actPrestamo.TipoCuota}";
-                        await _nservices.CrearNotificacion(4, IdUser, (string) new PrestamosRepository().OperacionesPrestamos( 5, 0, IdUser, ""), "PETICION DE PRESTAMO", DescripcionA, "ADMINISTRADOR", new ActNotificacione());
+                        await new NotificacionesServices(_context).CrearNotificacion(4, IdUser, (string) new PrestamosRepository().OperacionesPrestamos( 5, 0, IdUser, ""), "PETICION DE PRESTAMO", DescripcionA, "ADMINISTRADOR", new ActNotificacione());
                         var essA = new EmailSendServices().EnviarCorreoAdmin(7, DescripcionA);
                         var essU = new EmailSendServices().EnviarCorreoUsuario(IdUser, 1, DescripcionU);
+                        return RedirectToAction("Index", "Home");
                     }
                 }
                 catch (DbUpdateConcurrencyException ex)
@@ -280,12 +290,12 @@ namespace act_Application.Controllers.General
                         _context.Update(actMulta);
                         await _context.SaveChangesAsync();
 
-                        await _nservices.CrearNotificacion(5, IdUser, multOriginal.IdMult, "PAGO DE MULTA", DescripcionA, "ADMINISTRADOR", new ActNotificacione());
-                        await _cpservices.SubirCapturaDePantalla(IdUser, "act_Multas", Id, CapturaPantalla, new ActCapturasPantalla());
+                        await new NotificacionesServices(_context).CrearNotificacion(5, IdUser, multOriginal.IdMult, "PAGO DE MULTA", DescripcionA, "ADMINISTRADOR", new ActNotificacione());
+                        await new CapturaDePantallaServices(_context).SubirCapturaDePantalla(IdUser, "act_Multas", Id, CapturaPantalla, new ActCapturasPantalla());
                         int capobj = (int)new CapturaPantallaRepository().OperacionesCapPan( 1, 0, IdUser);
-                        await _cpservices.ActualizarIdCapturaPantallaUser(2, Id, capobj, new ActCuota(), new ActMulta());
+                        await new CapturaDePantallaServices(_context).ActualizarIdCapturaPantallaUser(2, Id, capobj, new ActCuota(), new ActMulta());
+                        return RedirectToAction("Index", "Home");
                     }
-
                 }
             }
             catch (DbUpdateConcurrencyException ex)

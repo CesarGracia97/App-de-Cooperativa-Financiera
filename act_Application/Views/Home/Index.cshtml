@@ -49,20 +49,7 @@
                 <div class="trans-container">
                     @if ((bool)new PrestamosRepository().OperacionesPrestamos(3, 0, IdUser, ""))
                     {
-                        var firstModel = Model.FirstOrDefault();
-                        if (firstModel != null)
-                        {
-                            <p>Total de Prestamos: @firstModel.PrestamosUser.TotalPrestamos</p>
-                            <p>Total de Prestamos Aprobados: @firstModel.PrestamosUser.TotalAprobado</p>
-                            <p>Total de Prestamos Pendientes: @firstModel.PrestamosUser.TotalPendiente</p>
-                            <p>Total de Prestamos Rechazados: @firstModel.PrestamosUser.TotalRechazado</p>
-                            <hr />
-                            <p>Valor de Prestamos Acumulados: @firstModel.PrestamosUser.ValorTotalPrestado</p>
-                        }
-                        else
-                        {
-                            <p>Por el momento no presentas Acciones de Prestamo</p>
-                        }
+                        <p>Si tienes prestamos pero esta seccion esta en desarrollo</p>
                     }
                     else
                     {

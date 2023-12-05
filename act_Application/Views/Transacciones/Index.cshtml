@@ -23,7 +23,6 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/css/General/Transacciones/Transacciones.css" />
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
     <div class="container">
@@ -56,15 +55,15 @@
 
                 <!--Contenedor del Nombre del Banco de Origen-->
                 <div class="form-group">
-                    <label asp-for="Aportaciones.NBancoOrigen">Cuenta:</label>
+                    <label asp-for="Aportaciones.NBancoOrigen">Nombre del Banco:</label>
                     <input asp-for="Aportaciones.NBancoOrigen" class="input-nco" type="text" name="NBancoOrigen" placeholder="Agrega el nombre del Banco de donde hiciste el deposito" required />
                     <span asp-validation-for="Aportaciones.NBancoOrigen" class="text-danger"></span>
                 </div>
 
                 <!--Contenedor de la Cuenta Bancaria de Origen-->
                 <div class="form-group">
-                    <label asp-for="Aportaciones.CBancoOrigen">Cuenta:</label>
-                    <input asp-for="Aportaciones.CBancoOrigen" class="input-cbo" type="number" min="10000000" max="999999999999" name="CBancoOrigen" placeholder="Agrega el numero de cuenta de donde transeferencia, 0 si lo hiciste por deposito." required />
+                    <label asp-for="Aportaciones.CBancoOrigen">Cuenta Bancaria:</label>
+                    <input asp-for="Aportaciones.CBancoOrigen" class="input-cbo" type="number" min="000000" max="999999999999" name="CBancoOrigen" placeholder="Agrega el # de cuenta de transeferencia, 000000 si hiciste por deposito." required />
                     <span asp-validation-for="Aportaciones.CBancoOrigen" class="text-danger"></span>
                 </div>
 
@@ -85,7 +84,7 @@
                     <label asp-for="Aportaciones.Valor">Monto:</label>
                     <div class="input-container">
                         <span class="dollar-sign">$</span>
-                        <input asp-for="Aportaciones.Valor" class="input-monto" type="number" min="5" step="0.01" name="Valor" />
+                        <input asp-for="Aportaciones.Valor" class="input-monto" type="number" min="5" step="0.01" placeholder="Agrega el monto a Aportar." name="Valor" />
                         <span asp-validation-for="Aportaciones.Valor" class="text-danger"></span>
                     </div>
                 </div>
@@ -93,7 +92,7 @@
                 <!--Contenedor de Captura de Pantalla-->
                 <div class="form-group">
                     <label asp-for="Aportaciones.CapturaPantalla">Comprobante de Transferencia:</label>
-                    <input asp-for="Aportaciones.CapturaPantalla" name="CapturaPantalla" class="input-file" type="file" accept=".jpg, .png" />
+                    <input asp-for="Aportaciones.CapturaPantalla" name="CapturaPantalla" class="input-file" type="file" accept=".jpg, .png" required />
                     <span asp-validation-for="Aportaciones.CapturaPantalla" class="text-danger"></span>
                 </div>
 

@@ -37,9 +37,16 @@
     display: none;
 }
 
+.date {
+    justify-content: center;
+    text-align: center;
+    align-content: center;
+}
+
 label {
     display: block;
-    margin-bottom: 8px;
+    margin-bottom: 5px;
+    font-weight: bold;
 }
 
 input, select {
@@ -57,9 +64,18 @@ input, select {
 
 .dollar-sign {
     position: absolute;
-    left: 8px;
-    top: 50%;
-    transform: translateY(-50%);
+    top: 8px;
+    left: 15px;
+    z-index: 1; 
+}
+
+.input-monto {
+    width: 100%;
+    padding: 8px 8px 8px 30px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
 }
 
 .input-file {
@@ -69,18 +85,36 @@ input, select {
 }
 
 .buttons {
+    display: flex;
+    justify-content: space-between;
     margin-top: 20px;
+    justify-content: center;
 }
 
-.save-button, .clear-button {
-    padding: 10px;
-    background-color: #4caf50;
-    color: #fff;
+.save-button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 8px 16px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    margin-right: 10px;
+    margin-right: 20px;
+    margin-left: 20px;
+    justify-content: center;
 }
+
+.clear-button {
+    background-color: #f44336;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 20px;
+    margin-right: 20px;
+    justify-content: center;
+}
+
 
 .clear-button {
     background-color: #f44336;

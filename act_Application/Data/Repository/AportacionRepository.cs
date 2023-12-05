@@ -245,7 +245,7 @@ namespace act_Application.Data.Repository
             string IdA = string.Empty;
             try
             {
-                string Query = ConfigReader.GetQuery(2, "", "SelectLastIdAporUser");
+                string Query = ConfigReader.GetQuery(2, "", "ASQ_SelectLastIdAporUser");
                 List<ActAportacione> aportaciones = new List<ActAportacione>();
 
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
