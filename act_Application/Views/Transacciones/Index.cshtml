@@ -19,7 +19,6 @@
     DateTime minDateP = DateTime.Now.AddDays(26);
     string minDateStrP = minDateP.ToString("yyyy-MM-dd");
 }
-}
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -31,7 +30,8 @@
         <h2>Transacciones</h2>
         <div class ="Container-Selector">
             <label>Elija la Transaccion que va a realizar.</label>
-            <select class="select-opcion" placeholder="Seleccionar un Tipo de Cuota..." required>
+            <select class="select-opcion" placeholder="Seleccione una Operacion..." required>
+                <option value="">Seleccione una Operacion...</option>
                 <option value="Aporte">OP 1 - Aportacion</option>
                 <option value="Prestamo">OP 2 - Prestamo</option>
                 <option value="PCuota">OP 3 - Pago de Cuota</option>
@@ -307,52 +307,4 @@
 
     </div>
 </body>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        // Función para mostrar u ocultar el formulario según la opción seleccionada
-        function mostrarFormulario() {
-            var select = document.querySelector('.select-opcion');
-            var option = select.options[select.selectedIndex].value;
-
-            // Ocultar todos los formularios
-            var formularios = document.querySelectorAll('.container > div[class^="c_"]');
-            formularios.forEach(function (formulario) {
-                formulario.style.display = 'none';
-            });
-
-            // Mostrar el formulario correspondiente
-            var formularioMostrar = document.querySelector('.container > div.' + option.toLowerCase());
-            if (formularioMostrar) {
-                formularioMostrar.style.display = 'block';
-            }
-        }
-
-        // Asignar la función al evento change del select
-        var selectOpcion = document.querySelector('.select-opcion');
-        selectOpcion.addEventListener('change', mostrarFormulario);
-
-        // Función para limpiar los campos de texto en todos los formularios
-        function limpiar() {
-            var inputs = document.querySelectorAll('.container input[type="text"], .container input[type="number"], .container input[type="date"]');
-            inputs.forEach(function (input) {
-                input.value = '';
-            });
-
-            // Limpiar también la selección en el select
-            selectOpcion.value = '';
-
-            // Ocultar todos los formularios
-            var formularios = document.querySelectorAll('.container > div[class^="c_"]');
-            formularios.forEach(function (formulario) {
-                formulario.style.display = 'none';
-            });
-        }
-
-        // Asignar la función al evento click del botón Limpiar
-        var btnLimpiar = document.querySelector('.container .clear-button');
-        btnLimpiar.addEventListener('click', limpiar);
-    });
-</script>
-
-
+<script src="/js/General/Transacciones/Transacciones.js"></script>

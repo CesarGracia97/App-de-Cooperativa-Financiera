@@ -121,6 +121,10 @@
       "PackagePath": "staticwebassets\\js\\General\\Tablas\\T_Multados\\MSJ_TablMultados.js"
     },
     {
+      "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\js\\General\\Transacciones\\Transacciones.js",
+      "PackagePath": "staticwebassets\\js\\General\\Transacciones\\Transacciones.js"
+    },
+    {
       "Id": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\lib\\bootstrap\\LICENSE",
       "PackagePath": "staticwebassets\\lib\\bootstrap"
     },
