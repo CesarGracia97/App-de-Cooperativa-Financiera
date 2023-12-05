@@ -28,11 +28,11 @@
         "DBQP_SelectPrestamoIdPres": "SELECT Id FROM act_Prestamo WHERE IdPres = @IdPres"
       },
       "CUOT": {
-        "DBQC_SelectCoutasUser": "SELECT (SELECT COUNT(*) FROM act_Cuotas WHERE IdUser = @IdUser AND Estado = 'PENDIENTE') AS TotalCuotas, *.a FROM act_Cuotas a WHERE IdUser = @IdUser AND Estado = 'PENDIENTE'",
+        "DBQC_SelectCoutasUser": "SELECT (SELECT COUNT(*) FROM act_Cuotas WHERE IdUser = @IdUser AND Estado = 'PENDIENTE') AS TotalCuotas, a.* FROM act_Cuotas a WHERE IdUser = @IdUser AND Estado = 'PENDIENTE'",
         "DBQC_SelectIdCouta": "SELECT *.a FROM act_Cuotas a WHERE Id = @Id"
       },
       "DEST": {
-        "DBQD_SelectDestino": "SELECT Id, NumeroCuenta, NombreBanco FROM act_CuentaDestino"
+        "DBQD_SelectDestino": "SELECT Id, NumeroCuentaB, NombreBanco FROM act_CuentasDestino"
       },
       "NOTI": {
         "DBQN_SelectAdmiNotificacion": "SELECT (SELECT COUNT(*) FROM act_Notificaciones WHERE Destino = 'ADMINISTRADOR') AS TotalNotificaciones, a.* FROM act_Notificaciones a WHERE a.Destino ='ADMINISTRADOR'",

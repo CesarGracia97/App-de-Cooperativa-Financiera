@@ -74,26 +74,6 @@
                 <table class="main">
                     <tr>
                         <td class="col-aport">
-                            @if ((bool)new AportacionRepository().OperacionesAportaciones(3, 0, IdUser))
-                            {
-                                var firstModel = Model.FirstOrDefault();
-                                if (firstModel != null)
-                                {
-                                    <p class="Taportacioes">Total de Aportaciones: @firstModel.AportacionesUser.TotalAportaciones</p>
-                                    <p class="Aaprobadas">Aportaciones Aprobadas: @firstModel.AportacionesUser.TotalAprobados</p>
-                                    <p class="Aaprobadas">Aportaciones En Espera: @firstModel.AportacionesUser.TotalEspera</p>
-                                    <p class="Vaportacioes">Valor de Aportaciones Totales: @firstModel.AportacionesUser.AportacionesAcumuladas</p>
-                                    <p class="CbancariaUsadas">Banco mas Usado: </p>
-                                }
-                                else
-                                {
-                                    <p>Por el momento no tienes Aportaciones</p>
-                                }
-                            }
-                            else
-                            {
-                                <p>Por el Momento no tienes Aportaciones Realizadas</p>
-                            }
                         </td>
                         <td class="col-mult">
                             @if ((bool) new MultaRepository().OperacionesMultas(2, 0, IdUser))

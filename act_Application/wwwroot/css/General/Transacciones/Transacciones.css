@@ -1,0 +1,84 @@
+﻿body {
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    width: 50%;
+    margin: 50px auto;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+input, select, button {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.input-container {
+    position: relative;
+}
+
+    .input-container .dollar-sign {
+        position: absolute;
+        left: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.save-button, .clear-button {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.save-button {
+    background-color: #4CAF50;
+    color: #fff;
+}
+
+.clear-button {
+    background-color: #5bc0de;
+    color: #fff;
+}
+
+.save-button:hover {
+    background-color: #45a049;
+}
+
+.clear-button:hover {
+    background-color: #4cae4c;
+}
+
+select {
+    appearance: none;
+    padding: 10px;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAZ0lEQVR4AWMYB3MlLopAElYh5j6AkNECJXoKEBGAG4BG8AqAKrAKxhOA5zGAyDgwM/ihXAUjBgqBiAYRgMjWIIYY4tDZ2CkIAAAAASUVORK5CYII=') no-repeat right center/15px 15px;
+}
+
+.select-opcion {
+    width: calc(100% - 30px);
+}
+
+[type="file"] {
+    width: calc(100% - 40px);
+}

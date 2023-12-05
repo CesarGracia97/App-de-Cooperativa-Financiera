@@ -23,8 +23,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/css/General/Aportar/Aportar.css" />
-    <script src="~/js/Aportar/Aportar.js"></script>
+    <link rel="stylesheet" href="/css/General/Transacciones/Transacciones.css" />
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
@@ -34,9 +33,9 @@
             <label>Elija la Transaccion que va a realizar.</label>
             <select class="select-opcion" placeholder="Seleccionar un Tipo de Cuota..." required>
                 <option value="Aporte">OP 1 - Aportacion</option>
-                <option value="PMulta">OP 2 - Pago de Multa</option>
+                <option value="Prestamo">OP 2 - Prestamo</option>
                 <option value="PCuota">OP 3 - Pago de Cuota</option>
-                <option value="Prestamo">OP 4 - Prestamo</option>
+                <option value="PMulta">OP 4 - Pago de Multa</option>
             </select>
         </div>
 
@@ -46,7 +45,7 @@
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <!--Contenedor de la Fecha-->
                 <div class="form-group">
-                    <label asp-for="Aportaciones.FechaAportacion">Fecha de Hoy:</label>
+                    <label>Fecha de Hoy:</label>
                     <div class="date">
                         <script>
                             date = new Date().toLocaleDateString();
@@ -72,7 +71,7 @@
                 <!--Contenedor de Banco Destino-->
                 <div class="form-group">
                     <label>Banco Destino:</label>
-                    <select id="CuentaDestino" name="CuentaDestino" required>
+                    <select name="CuentaDestino" required>
                         <option value="">Seleccionar un Banco Destino...</option>
                         @foreach (var cuenta in Model.ItemCuentaBancoDestino)
                         {
@@ -101,7 +100,7 @@
                 <!--Contenedor de los Botones-->
                 <div class="buttons">
                     <button type="submit" class="save-button">Guardar</button>
-                    <button type="button" class="clear-button">Limpiar</button>
+                    <button type="button" onclick="limpiar()" class="clear-button">Limpiar</button>
                 </div>
             </form>
 
@@ -124,7 +123,7 @@
                 <!--Contenedor del Tipo de Cuota-->
                 <div class="form-group">
                     <label asp-for="Prestamos.TipoCuota">Tipo de Cuota:</label>
-                    <select asp-for="Prestamos.TipoCuota" id="TipoCuota" placeholder="Seleccionar un Tipo de Cuota..." required>
+                    <select asp-for="Prestamos.TipoCuota" name="TipoCupota" placeholder="Seleccionar un Tipo de Cuota..." required>
                         <option value="">Seleccionar un Tipo de Cuota...</option>
                         @foreach (var item in ViewData["ItemsCuota"] as List<ListItems>)
                         {
@@ -134,17 +133,18 @@
                     </select>
                     <span asp-validation-for="Prestamos.TipoCuota" class="text-danger"></span>
                 </div>
+
                 <!--Contenedor de la Fecha de Entrega del Dinero-->
                 <div class="form-group">
                     <label asp-for="Prestamos.FechaEntregaDinero">Fecha de Entrega del Efectivo</label>
-                    <input asp-for="Prestamos.FechaEntregaDinero" type="date" class="inpdate" min="@minDateStr" max="@maxDateStr" id="FechaEntregaDinero" required />
+                    <input asp-for="Prestamos.FechaEntregaDinero" type="date" class="inp-date" min="@minDateStr" max="@maxDateStr" id="FechaEntregaDinero" required />
                     <span asp-validation-for="Prestamos.FechaEntregaDinero" class="text-danger"></span>
                 </div>
 
                 <!--Contenedor de la Fecha de Inicio de Pago-->
                 <div class="form-group">
                     <label asp-for="Prestamos.FechaInicioPagoCuotas">Fecha Inicio de Pago de Cuotas</label>
-                    <input asp-for="Prestamos.FechaInicioPagoCuotas" type="date" class="inpdate" id="FechaIniCoutaPrestamo" min="@minDateStrP" required />
+                    <input asp-for="Prestamos.FechaInicioPagoCuotas" type="date" class="inp-date" id="FechaIniCoutaPrestamo" min="@minDateStrP" required />
                     <span asp-validation-for="Prestamos.FechaInicioPagoCuotas" class="text-danger"></span>
                 </div>
 
@@ -164,7 +164,6 @@
                 var obj = (List<ActCuota>) new CuotaRepository().OperacionesCuotas(1, 0, IdUser);
                 <form asp-action="PagoCuota" method="post" enctype="multipart/form-data">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
 
                     <!--Contenedor Id de la Cuota a pagar-->
                     <select asp-for="Cuotas.Id" name="Id" placeholder="Selecciona una Cuota" required>
@@ -192,7 +191,7 @@
                     <!--Contenedor de Banco Destino-->
                     <div class="form-group">
                         <label>Banco Destino:</label>
-                        <select id="CuentaDestino" name="CuentaDestino" required>
+                        <select name="CuentaDestino" required>
                             <option value="">Seleccionar un Banco Destino...</option>
                             @foreach (var cuenta in Model.ItemCuentaBancoDestino)
                             {
@@ -221,7 +220,7 @@
                     <!--Contenedor de los Botones-->
                     <div class="buttons">
                         <button type="submit" class="save-button">Guardar</button>
-                        <button type="button" class="clear-button">Limpiar</button>
+                        <button type="button" onclick="limpiar()" class="clear-button">Limpiar</button>
                     </div>
                 </form>
             }
@@ -266,7 +265,7 @@
                     <!--Contenedor de Banco Destino-->
                     <div class="form-group">
                         <label>Banco Destino:</label>
-                        <select id="CuentaDestino" name="CuentaDestino" required>
+                        <select name="CuentaDestino" required>
                             <option value="">Seleccionar un Banco Destino...</option>
                             @foreach (var cuenta in Model.ItemCuentaBancoDestino)
                             {
@@ -295,7 +294,7 @@
                     <!--Contenedor de los Botones-->
                     <div class="buttons">
                         <button type="submit" class="save-button">Guardar</button>
-                        <button type="button" class="clear-button">Limpiar</button>
+                        <button type="button" onclick="limpiar()" class="clear-button">Limpiar</button>
                     </div>
                 </form>
             }
@@ -305,8 +304,55 @@
             }
 
         </div>
-       
 
     </div>
 </body>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Función para mostrar u ocultar el formulario según la opción seleccionada
+        function mostrarFormulario() {
+            var select = document.querySelector('.select-opcion');
+            var option = select.options[select.selectedIndex].value;
+
+            // Ocultar todos los formularios
+            var formularios = document.querySelectorAll('.container > div[class^="c_"]');
+            formularios.forEach(function (formulario) {
+                formulario.style.display = 'none';
+            });
+
+            // Mostrar el formulario correspondiente
+            var formularioMostrar = document.querySelector('.container > div.' + option.toLowerCase());
+            if (formularioMostrar) {
+                formularioMostrar.style.display = 'block';
+            }
+        }
+
+        // Asignar la función al evento change del select
+        var selectOpcion = document.querySelector('.select-opcion');
+        selectOpcion.addEventListener('change', mostrarFormulario);
+
+        // Función para limpiar los campos de texto en todos los formularios
+        function limpiar() {
+            var inputs = document.querySelectorAll('.container input[type="text"], .container input[type="number"], .container input[type="date"]');
+            inputs.forEach(function (input) {
+                input.value = '';
+            });
+
+            // Limpiar también la selección en el select
+            selectOpcion.value = '';
+
+            // Ocultar todos los formularios
+            var formularios = document.querySelectorAll('.container > div[class^="c_"]');
+            formularios.forEach(function (formulario) {
+                formulario.style.display = 'none';
+            });
+        }
+
+        // Asignar la función al evento click del botón Limpiar
+        var btnLimpiar = document.querySelector('.container .clear-button');
+        btnLimpiar.addEventListener('click', limpiar);
+    });
+</script>
+
 
