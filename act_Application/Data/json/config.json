@@ -44,7 +44,7 @@
       "ASQ_SelectLastIdPresUser": "SELECT IdPres FROM act_Prestamos WHERE IdUser = @IdUser ORDER BY Id DESC LIMIT 1",
       "ASQ_SelectLastIdCoutaUser": "SELECT Id FROM act_Cuotas WHERE IdUser = @IdUser ORDER BY Id DESC LIMIT 1",
       "ASQ_SelectLastIdMultaUser": "SELECT Id FROM act_Multas WHERE IdUser = @IdUser ORDER BY Id DESC LIMIT 1",
-      "ASQ_SelectLastIdCapturaPantallaUser": "SELECT Id FROM act_CapturasPantallas WHERE IdUser = @IdUser AND Estado 'PENDIENTE' ORDER BY Id DESC LIMIT 1",
+      "ASQ_SelectLastIdCapturaPantallaUser": "SELECT Id FROM act_CapturasPantallas WHERE IdUser = @IdUser ORDER BY Id DESC LIMIT 1",
       "ASQ_SelectCorreoUser": "SELECT Correo FROM act_User WHERE Id = @IdUser"
     },
     "Automatic_Queries": {

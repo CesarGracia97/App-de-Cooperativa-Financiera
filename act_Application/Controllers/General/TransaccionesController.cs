@@ -171,7 +171,7 @@ namespace act_Application.Controllers.General
                             return RedirectToAction("Error", "Home");
 
                         string DescripcionA = string.Empty, DescripcionU = string.Empty;
-
+                        await new CapturaDePantallaServices(_context).SubirCapturaDePantalla(IdUser, "act_Multas", Id, CapturaPantalla, new ActCapturasPantalla());
                         actMulta.IdUser = multOriginal.IdUser;
                         actMulta.FechaGeneracion = multOriginal.FechaGeneracion;
                         actMulta.Cuadrante = multOriginal.Cuadrante;
@@ -194,6 +194,8 @@ namespace act_Application.Controllers.General
                                 }
                             }
                             actMulta.HistorialValores = multOriginal.HistorialValores + Valor.ToString();
+                            int capobj = (int)new CapturaPantallaRepository().OperacionesCapPan(1, 0, IdUser);
+                            actMulta.CapturaPantalla =multOriginal.CapturaPantalla + capobj.ToString();
 
                             DescripcionA = $"El Usuario {userIdentificacion} a Realizado un PAGO DE MULTA el dia {DateTime.Now}, cuyo valor es de ${Valor}. La MULTA a sido PAGADA COMPLETAMENTE (CANCELADA).";
                             DescripcionU = $"Haz  Realizado un PAGO DE MULTA el dia {DateTime.Now}, cuyo valor es de ${Valor}. La MULTA a sido PAGADA COMPLETAMENTE (CANCELADA).";
@@ -218,6 +220,8 @@ namespace act_Application.Controllers.General
                                 }
                             }
                             actMulta.HistorialValores = multOriginal.HistorialValores + Valor.ToString() + ",";
+                            int capobj = (int)new CapturaPantallaRepository().OperacionesCapPan(1, 0, IdUser);
+                            actMulta.CapturaPantalla = multOriginal.CapturaPantalla + capobj.ToString() + ",";
 
                             DescripcionA = $"El Usuario {userIdentificacion} a Realizado un PAGO DE MULTA el dia {DateTime.Now}, cuyo valor es de ${Valor}, dejando un valor residual de ${multOriginal.Valor - Valor}. La MULTA sigue estando PENDIENTE. ";
                             DescripcionU = $"El Usuario {userIdentificacion} a Realizado un PAGO DE MULTA el dia {DateTime.Now}, cuyo valor es de ${Valor}. La MULTA a sido PAGADA COMPLETAMENTE (CANCELADA).";
@@ -228,9 +232,6 @@ namespace act_Application.Controllers.General
                         await _context.SaveChangesAsync();
 
                         await new NotificacionesServices(_context).CrearNotificacion(5, IdUser, multOriginal.IdMult, "PAGO DE MULTA", DescripcionA, "ADMINISTRADOR", new ActNotificacione());
-                        await new CapturaDePantallaServices(_context).SubirCapturaDePantalla(IdUser, "act_Multas", Id, CapturaPantalla, new ActCapturasPantalla());
-                        int capobj = (int)new CapturaPantallaRepository().OperacionesCapPan(1, 0, IdUser);
-                        await new CapturaDePantallaServices(_context).ActualizarIdCapturaPantallaUser(2, Id, capobj, new ActCuota(), new ActMulta());
                         return RedirectToAction("Index", "Home");
                     }
                 }
@@ -264,6 +265,7 @@ namespace act_Application.Controllers.General
                             return RedirectToAction("Error", "Home");
                         }
                         string DescripcionA = string.Empty, DescripcionU = string.Empty;
+                        await new CapturaDePantallaServices(_context).SubirCapturaDePantalla(IdUser, "act_Cuotas", Id, CapturaPantalla, new ActCapturasPantalla());
                         actCuota.IdUser = IdUser;
                         actCuota.IdPrestamo = cuotOriginal.IdPrestamo;
                         actCuota.FechaGeneracion = cuotOriginal.FechaGeneracion;
@@ -286,6 +288,8 @@ namespace act_Application.Controllers.General
                                 }
                             }
                             actCuota.HistorialValores = cuotOriginal.HistorialValores +  Valor.ToString();
+                            int capobj = (int)new CapturaPantallaRepository().OperacionesCapPan(1, 0, IdUser);
+                            actCuota.CapturaPantalla = cuotOriginal.CapturaPantalla + capobj.ToString();
 
                             DescripcionA = $"El Usuario {userIdentificacion} a Realizado un PAGO DE CUOTA el dia {DateTime.Now}, cuyo valor es de ${Valor}. La CUOTA a sido PAGADA COMPLETAMENTE (CANCELADA).";
                             DescripcionU = $"Haz Realizado un PAGO DE CUOTA el dia {DateTime.Now}, cuyo valor es de ${Valor}. La CUOTA a sido PAGADA COMPLETAMENTE (CANCELADA).";
@@ -311,6 +315,8 @@ namespace act_Application.Controllers.General
                                 }
                             }
                             actCuota.HistorialValores = cuotOriginal.HistorialValores + Valor.ToString() + ",";
+                            int capobj = (int)new CapturaPantallaRepository().OperacionesCapPan(1, 0, IdUser);
+                            actCuota.CapturaPantalla = cuotOriginal.CapturaPantalla + capobj.ToString() + ",";
 
                             DescripcionA = $"El Usuario {userIdentificacion} a Realizado un PAGO DE CUOTA el dia {DateTime.Now}, cuyo valor es de ${Valor}, dejando un valor residual de ${cuotOriginal.Valor - Valor}. La CUOTA sigue estando PENDIENTE. ";
                             DescripcionU = $"Haz Realizado un PAGO DE CUOTA el dia {DateTime.Now}, cuyo valor es de ${Valor}, dejando un valor residual de ${cuotOriginal.Valor - Valor}. La CUOTA sigue estando PENDIENTE. ";
@@ -320,9 +326,6 @@ namespace act_Application.Controllers.General
                         _context.Update(actCuota);
                         await _context.SaveChangesAsync();
                         await new NotificacionesServices(_context).CrearNotificacion( 3, IdUser, cuotOriginal.IdCuot, "PAGO DE CUOTA", DescripcionA, "ADMINISTRADOR", new ActNotificacione());
-                        await new CapturaDePantallaServices(_context).SubirCapturaDePantalla( IdUser, "act_Cuotas", Id, CapturaPantalla, new ActCapturasPantalla());
-                        int capobj = (int) new CapturaPantallaRepository().OperacionesCapPan( 1, 0, IdUser);
-                        await new CapturaDePantallaServices(_context).ActualizarIdCapturaPantallaUser( 1, Id, capobj, new ActCuota(), new ActMulta());
                         return RedirectToAction("Index", "Home");
                     }
                 }
