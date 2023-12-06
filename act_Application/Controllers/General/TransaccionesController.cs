@@ -104,85 +104,7 @@ namespace act_Application.Controllers.General
                 return null;
             }
         }
-        public async Task<IActionResult> PagoCuota(int Id, decimal Valor, string CBancoOrigen, string NBancoOrigen,string CBancoDestino, string NBancoDestino, [FromForm] IFormFile CapturaPantalla, [Bind("Id,IdCuot,IdUser,IdPrestamo,FechaCuota,Valor,Estado,FechaPago,CBancoOrigen,NBancoOrigen,CBancoDestino,NBancoDestino,HistorialValores,CapturaPantalla")] ActCuota actCuota)
-        {
-            if (Id != actCuota.Id)
-            {
-                return RedirectToAction("Error", "Home");
-            }
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    var userIdClaim = User.Claims.FirstOrDefault(c => c.Type == "Id");
-                    if (userIdClaim != null && int.TryParse(userIdClaim.Value, out int IdUser))
-                    {
-                        //
-                        var userIdentificacion = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value;
-                        //
-                        var cuotOriginal = (ActCuota) new CuotaRepository().OperacionesCuotas( 2, Id, 0);
-                        if (cuotOriginal == null)
-                        {
-                            return RedirectToAction("Error", "Home");
-                        }
-
-                        string DescripcionA = string.Empty, DescripcionU = string.Empty;
-
-                        actCuota.IdUser = IdUser;
-                        actCuota.IdPrestamo = cuotOriginal.IdPrestamo;
-                        actCuota.FechaGeneracion = cuotOriginal.FechaGeneracion;
-                        actCuota.FechaCuota = cuotOriginal.FechaCuota;
-                        if (cuotOriginal.Valor - Valor <= 0)
-                        {
-                            actCuota.Valor = (cuotOriginal.Valor - Valor);
-                            actCuota.Estado = "CUOTA CANCELADA";
-                            actCuota.FechaPago =    cuotOriginal.FechaPago + DateTime.Now.ToString();
-                            actCuota.CBancoOrigen = cuotOriginal.CBancoOrigen + CBancoOrigen;
-                            actCuota.NBancoOrigen = cuotOriginal.NBancoOrigen + NBancoOrigen;
-                            actCuota.CBancoDestino = cuotOriginal.CBancoDestino + CBancoDestino;
-                            actCuota.NBancoDestino = cuotOriginal.NBancoDestino + NBancoDestino;
-                            actCuota.HistorialValores = cuotOriginal.HistorialValores +  Valor.ToString();
-
-                            DescripcionA = $"El Usuario {userIdentificacion} a Realizado un PAGO DE CUOTA el dia {DateTime.Now}, cuyo valor es de ${Valor}. La CUOTA a sido PAGADA COMPLETAMENTE (CANCELADA).";
-                            DescripcionU = $"Haz Realizado un PAGO DE CUOTA el dia {DateTime.Now}, cuyo valor es de ${Valor}. La CUOTA a sido PAGADA COMPLETAMENTE (CANCELADA).";
-
-                            var essA = new EmailSendServices().EnviarCorreoAdmin( 5, DescripcionA);
-                            var essU = new EmailSendServices().EnviarCorreoUsuario(IdUser, 5, DescripcionU);
-                        }
-                        else if (cuotOriginal.Valor - Valor > 0)
-                        {
-                            actCuota.Valor = cuotOriginal.Valor - Valor;
-                            actCuota.Estado = cuotOriginal.Estado;
-                            actCuota.FechaPago = cuotOriginal.FechaPago + DateTime.Now.ToString() + ",";
-                            actCuota.CBancoOrigen = cuotOriginal.CBancoOrigen + CBancoOrigen + ",";
-                            actCuota.NBancoOrigen = cuotOriginal.NBancoOrigen + NBancoOrigen + ",";
-                            actCuota.CBancoDestino = cuotOriginal.CBancoDestino + CBancoDestino + ",";
-                            actCuota.NBancoDestino = cuotOriginal.NBancoDestino + NBancoDestino + ",";
-                            actCuota.HistorialValores = cuotOriginal.HistorialValores + Valor.ToString() + ",";
-
-                            DescripcionA = $"El Usuario {userIdentificacion} a Realizado un PAGO DE CUOTA el dia {DateTime.Now}, cuyo valor es de ${Valor}, dejando un valor residual de ${cuotOriginal.Valor - Valor}. La CUOTA sigue estando PENDIENTE. ";
-                            DescripcionU = $"Haz Realizado un PAGO DE CUOTA el dia {DateTime.Now}, cuyo valor es de ${Valor}, dejando un valor residual de ${cuotOriginal.Valor - Valor}. La CUOTA sigue estando PENDIENTE. ";
-                            var essA = new EmailSendServices().EnviarCorreoAdmin( 6, DescripcionA);
-                            var essU = new EmailSendServices().EnviarCorreoUsuario(IdUser, 4, DescripcionU);
-                        }
-                        _context.Update(actCuota);
-                        await _context.SaveChangesAsync();
-                        await new NotificacionesServices(_context).CrearNotificacion( 3, IdUser, cuotOriginal.IdCuot, "PAGO DE CUOTA", DescripcionA, "ADMINISTRADOR", new ActNotificacione());
-                        await new CapturaDePantallaServices(_context).SubirCapturaDePantalla( IdUser, "act_Cuotas", Id, CapturaPantalla, new ActCapturasPantalla());
-                        int capobj = (int) new CapturaPantallaRepository().OperacionesCapPan( 1, 0, IdUser);
-                        await new CapturaDePantallaServices(_context).ActualizarIdCapturaPantallaUser( 1, Id, capobj, new ActCuota(), new ActMulta());
-                        return RedirectToAction("Index", "Home");
-                    }
-                }
-                catch (DbUpdateConcurrencyException ex)
-                {
-                    Console.WriteLine("Hubo un problema al actualizar el registro del pago de la Cuota.");
-                    Console.WriteLine("Detalles del error: " + ex.Message);
-                }
-            }
-            return View(actCuota);
-        }
-        public async Task<IActionResult> Prestamo(decimal Valor, DateTime FechaEntrgaDinero, DateTime FechaInicioPagoCuotas, string  TipoCuota, [Bind("Id,IdPres,IdUser,Valor,FechaGeneracion,FechaEntregaDinero,FechaInicioPagoCuotas,FechaPagoTotalPrestamo,TipoCuota,Estado")] ActPrestamo actPrestamo)
+        public async Task<IActionResult> Prestamo(decimal Valor, DateTime FechaEntrgaDinero, DateTime FechaInicioPagoCuotas, string TipoCuota, [Bind("Id,IdPres,IdUser,Valor,FechaGeneracion,FechaEntregaDinero,FechaInicioPagoCuotas,FechaPagoTotalPrestamo,TipoCuota,Estado")] ActPrestamo actPrestamo)
         {
             if (ModelState.IsValid)
             {
@@ -210,13 +132,13 @@ namespace act_Application.Controllers.General
                         await _context.SaveChangesAsync();
                         DescripcionA = $"El usuario {userIdentificacion} con C.I. {userCI} esta solicitando un prestamo de $ {actPrestamo.Valor} USD," +
                                                 $"con fecha de entrega para el dia {actPrestamo.FechaEntregaDinero}, e inicio de pago de la deuda para el dia {actPrestamo.FechaInicioPagoCuotas}\n" +
-                                                $"Estado: {actPrestamo.Estado}\n" + 
+                                                $"Estado: {actPrestamo.Estado}\n" +
                                                 $"Tipo de Cuota: {actPrestamo.TipoCuota}";
                         DescripcionU = $"Haz solicitado un prestamo de $ {actPrestamo.Valor} USD, con fecha de entrega para el dia {actPrestamo.FechaEntregaDinero}," +
                                                 $" e inicio de pago de la deuda para el dia {actPrestamo.FechaInicioPagoCuotas}" +
                                                 $"\nEstado: {actPrestamo.Estado}" +
                                                 $"\nTipo de Cuota: {actPrestamo.TipoCuota}";
-                        await new NotificacionesServices(_context).CrearNotificacion(4, IdUser, (string) new PrestamosRepository().OperacionesPrestamos( 5, 0, IdUser, ""), "PETICION DE PRESTAMO", DescripcionA, "ADMINISTRADOR", new ActNotificacione());
+                        await new NotificacionesServices(_context).CrearNotificacion(4, IdUser, (string)new PrestamosRepository().OperacionesPrestamos(5, 0, IdUser, ""), "PETICION DE PRESTAMO", DescripcionA, "ADMINISTRADOR", new ActNotificacione());
                         var essA = new EmailSendServices().EnviarCorreoAdmin(7, DescripcionA);
                         var essU = new EmailSendServices().EnviarCorreoUsuario(IdUser, 1, DescripcionU);
                         return RedirectToAction("Index", "Home");
@@ -230,7 +152,7 @@ namespace act_Application.Controllers.General
             }
             return View(actPrestamo);
         }
-        public async Task<IActionResult> PagoMulta(int Id, decimal Valor, string CBancoOrigen, string NBancoOrigen, string CBancoDestino, string NBancoDestino, [FromForm] IFormFile CapturaPantalla, [Bind("Id,IdMult,IdUser,FechaGeneracion,Cuadrante,Razon,Valor,Estado,FechaPago,CBancoOrigen,NBancoOrigen,CBancoDestino,NBancoDestino,HistorialValores,CapturaPantalla")]ActMulta actMulta)
+        public async Task<IActionResult> PagoMulta(int Id, decimal Valor, string CBancoOrigen, string NBancoOrigen, string CuentaDestino, [FromForm] IFormFile CapturaPantalla, [Bind("Id,IdMult,IdUser,FechaGeneracion,Cuadrante,Razon,Valor,Estado,FechaPago,CBancoOrigen,NBancoOrigen,CBancoDestino,NBancoDestino,HistorialValores,CapturaPantalla")] ActMulta actMulta)
         {
             try
             {
@@ -244,42 +166,57 @@ namespace act_Application.Controllers.General
                         //
                         var userIdentificacion = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value;
                         //
-                        var multOriginal = (ActMulta) new MultaRepository().OperacionesMultas(5, Id, 0);
+                        var multOriginal = (ActMulta)new MultaRepository().OperacionesMultas(5, Id, 0);
                         if (multOriginal == null)
                             return RedirectToAction("Error", "Home");
 
                         string DescripcionA = string.Empty, DescripcionU = string.Empty;
 
-                        actMulta.IdMult = multOriginal.IdMult;
                         actMulta.IdUser = multOriginal.IdUser;
                         actMulta.FechaGeneracion = multOriginal.FechaGeneracion;
                         actMulta.Cuadrante = multOriginal.Cuadrante;
                         actMulta.Razon = multOriginal.Razon;
-                        if(multOriginal.Valor - Valor <= 0)
+                        if (multOriginal.Valor - Valor <= 0)
                         {
                             actMulta.Valor = (multOriginal.Valor - Valor);
+                            actMulta.IdMult = "CMUL-" + Id;
                             actMulta.Estado = "MULTA CANCELADA";
                             actMulta.FechaPago = multOriginal.FechaPago + DateTime.Now.ToString();
                             actMulta.NBancoOrigen = multOriginal.NBancoOrigen + NBancoOrigen;
                             actMulta.CBancoOrigen = multOriginal.CBancoOrigen + CBancoOrigen;
-                            actMulta.NBancoDestino = multOriginal.NBancoDestino + NBancoDestino;
-                            actMulta.CBancoDestino = multOriginal.CBancoDestino + CBancoDestino + ",";
+                            if (!string.IsNullOrEmpty(CuentaDestino))
+                            {
+                                var parts = CuentaDestino.Split(" - #");
+                                if (parts.Length == 2)
+                                {
+                                    actMulta.NBancoDestino = multOriginal.NBancoDestino + parts[0] + ",";
+                                    actMulta.CBancoDestino = multOriginal.CBancoDestino + parts[1] + ",";
+                                }
+                            }
                             actMulta.HistorialValores = multOriginal.HistorialValores + Valor.ToString();
 
                             DescripcionA = $"El Usuario {userIdentificacion} a Realizado un PAGO DE MULTA el dia {DateTime.Now}, cuyo valor es de ${Valor}. La MULTA a sido PAGADA COMPLETAMENTE (CANCELADA).";
-                            DescripcionU = $"Haz  Realizado un PAGO DE MULTA el dia {DateTime.Now}, cuyo valor es de ${Valor}. La MULTA a sido PAGADA COMPLETAMENTE (CANCELADA)."; 
+                            DescripcionU = $"Haz  Realizado un PAGO DE MULTA el dia {DateTime.Now}, cuyo valor es de ${Valor}. La MULTA a sido PAGADA COMPLETAMENTE (CANCELADA).";
                             var essA = new EmailSendServices().EnviarCorreoAdmin(3, DescripcionA);
                             var essU = new EmailSendServices().EnviarCorreoUsuario(IdUser, 5, DescripcionU);
                         }
                         else if (multOriginal.Valor - Valor > 0)
                         {
+                            actMulta.IdMult = "AMUL-" + Id;
                             actMulta.Valor = (multOriginal.Valor - Valor);
                             actMulta.Estado = multOriginal.Estado;
                             actMulta.FechaPago = multOriginal.FechaPago + DateTime.Now.ToString();
                             actMulta.NBancoOrigen = multOriginal.NBancoOrigen + NBancoOrigen + ",";
                             actMulta.CBancoOrigen = multOriginal.CBancoOrigen + CBancoOrigen + ",";
-                            actMulta.NBancoDestino = multOriginal.NBancoDestino + NBancoDestino + ",";
-                            actMulta.CBancoDestino = multOriginal.CBancoDestino + CBancoDestino + ",";
+                            if (!string.IsNullOrEmpty(CuentaDestino))
+                            {
+                                var parts = CuentaDestino.Split(" - #");
+                                if (parts.Length == 2)
+                                {
+                                    actMulta.NBancoDestino = multOriginal.NBancoDestino + parts[0] + ",";
+                                    actMulta.CBancoDestino = multOriginal.CBancoDestino + parts[1] + ",";
+                                }
+                            }
                             actMulta.HistorialValores = multOriginal.HistorialValores + Valor.ToString() + ",";
 
                             DescripcionA = $"El Usuario {userIdentificacion} a Realizado un PAGO DE MULTA el dia {DateTime.Now}, cuyo valor es de ${Valor}, dejando un valor residual de ${multOriginal.Valor - Valor}. La MULTA sigue estando PENDIENTE. ";
@@ -292,7 +229,7 @@ namespace act_Application.Controllers.General
 
                         await new NotificacionesServices(_context).CrearNotificacion(5, IdUser, multOriginal.IdMult, "PAGO DE MULTA", DescripcionA, "ADMINISTRADOR", new ActNotificacione());
                         await new CapturaDePantallaServices(_context).SubirCapturaDePantalla(IdUser, "act_Multas", Id, CapturaPantalla, new ActCapturasPantalla());
-                        int capobj = (int)new CapturaPantallaRepository().OperacionesCapPan( 1, 0, IdUser);
+                        int capobj = (int)new CapturaPantallaRepository().OperacionesCapPan(1, 0, IdUser);
                         await new CapturaDePantallaServices(_context).ActualizarIdCapturaPantallaUser(2, Id, capobj, new ActCuota(), new ActMulta());
                         return RedirectToAction("Index", "Home");
                     }
@@ -304,6 +241,98 @@ namespace act_Application.Controllers.General
                 Console.WriteLine("Detalles del error: " + ex.Message);
             }
             return View(actMulta);
+        }
+        public async Task<IActionResult> PagoCuota(int Id, decimal Valor, string CBancoOrigen, string NBancoOrigen, string CuentaDestino, [FromForm] IFormFile CapturaPantalla, [Bind("Id,IdCuot,IdUser,IdPrestamo,FechaCuota,Valor,Estado,FechaPago,CBancoOrigen,NBancoOrigen,CBancoDestino,NBancoDestino,HistorialValores,CapturaPantalla")] ActCuota actCuota)
+        {
+            if (Id != actCuota.Id)
+            {
+                return RedirectToAction("Error", "Home");
+            }
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var userIdClaim = User.Claims.FirstOrDefault(c => c.Type == "Id");
+                    if (userIdClaim != null && int.TryParse(userIdClaim.Value, out int IdUser))
+                    {
+                        //
+                        var userIdentificacion = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value;
+                        //
+                        var cuotOriginal = (ActCuota) new CuotaRepository().OperacionesCuotas( 2, Id, 0);
+                        if (cuotOriginal == null)
+                        {
+                            return RedirectToAction("Error", "Home");
+                        }
+                        string DescripcionA = string.Empty, DescripcionU = string.Empty;
+                        actCuota.IdUser = IdUser;
+                        actCuota.IdPrestamo = cuotOriginal.IdPrestamo;
+                        actCuota.FechaGeneracion = cuotOriginal.FechaGeneracion;
+                        actCuota.FechaCuota = cuotOriginal.FechaCuota;
+                        if (cuotOriginal.Valor - Valor <= 0)
+                        {
+                            actCuota.Valor = (cuotOriginal.Valor - Valor);
+                            actCuota.Estado = "CUOTA CANCELADA";
+                            actCuota.IdCuot = "CCUO-" + Id;
+                            actCuota.FechaPago =    cuotOriginal.FechaPago + DateTime.Now.ToString();
+                            actCuota.CBancoOrigen = cuotOriginal.CBancoOrigen + CBancoOrigen;
+                            actCuota.NBancoOrigen = cuotOriginal.NBancoOrigen + NBancoOrigen;
+                            if (!string.IsNullOrEmpty(CuentaDestino))
+                            {
+                                var parts = CuentaDestino.Split(" - #");
+                                if (parts.Length == 2)
+                                {
+                                    actCuota.NBancoDestino = cuotOriginal.NBancoDestino + parts[0] + ",";
+                                    actCuota.CBancoDestino = cuotOriginal.CBancoDestino + parts[1] + ",";
+                                }
+                            }
+                            actCuota.HistorialValores = cuotOriginal.HistorialValores +  Valor.ToString();
+
+                            DescripcionA = $"El Usuario {userIdentificacion} a Realizado un PAGO DE CUOTA el dia {DateTime.Now}, cuyo valor es de ${Valor}. La CUOTA a sido PAGADA COMPLETAMENTE (CANCELADA).";
+                            DescripcionU = $"Haz Realizado un PAGO DE CUOTA el dia {DateTime.Now}, cuyo valor es de ${Valor}. La CUOTA a sido PAGADA COMPLETAMENTE (CANCELADA).";
+
+                            var essA = new EmailSendServices().EnviarCorreoAdmin( 5, DescripcionA);
+                            var essU = new EmailSendServices().EnviarCorreoUsuario(IdUser, 5, DescripcionU);
+                        }
+                        else if (cuotOriginal.Valor - Valor > 0)
+                        {
+                            actCuota.IdCuot = "ACUO-" + Id;
+                            actCuota.Valor = cuotOriginal.Valor - Valor;
+                            actCuota.Estado = cuotOriginal.Estado;
+                            actCuota.FechaPago = cuotOriginal.FechaPago + DateTime.Now.ToString() + ",";
+                            actCuota.CBancoOrigen = cuotOriginal.CBancoOrigen + CBancoOrigen + ",";
+                            actCuota.NBancoOrigen = cuotOriginal.NBancoOrigen + NBancoOrigen + ",";
+                            if (!string.IsNullOrEmpty(CuentaDestino))
+                            {
+                                var parts = CuentaDestino.Split(" - #");
+                                if (parts.Length == 2)
+                                {
+                                    actCuota.NBancoDestino = cuotOriginal.NBancoDestino + parts[0] + ",";
+                                    actCuota.CBancoDestino = cuotOriginal.CBancoDestino + parts[1] + ",";
+                                }
+                            }
+                            actCuota.HistorialValores = cuotOriginal.HistorialValores + Valor.ToString() + ",";
+
+                            DescripcionA = $"El Usuario {userIdentificacion} a Realizado un PAGO DE CUOTA el dia {DateTime.Now}, cuyo valor es de ${Valor}, dejando un valor residual de ${cuotOriginal.Valor - Valor}. La CUOTA sigue estando PENDIENTE. ";
+                            DescripcionU = $"Haz Realizado un PAGO DE CUOTA el dia {DateTime.Now}, cuyo valor es de ${Valor}, dejando un valor residual de ${cuotOriginal.Valor - Valor}. La CUOTA sigue estando PENDIENTE. ";
+                            var essA = new EmailSendServices().EnviarCorreoAdmin( 6, DescripcionA);
+                            var essU = new EmailSendServices().EnviarCorreoUsuario(IdUser, 4, DescripcionU);
+                        }
+                        _context.Update(actCuota);
+                        await _context.SaveChangesAsync();
+                        await new NotificacionesServices(_context).CrearNotificacion( 3, IdUser, cuotOriginal.IdCuot, "PAGO DE CUOTA", DescripcionA, "ADMINISTRADOR", new ActNotificacione());
+                        await new CapturaDePantallaServices(_context).SubirCapturaDePantalla( IdUser, "act_Cuotas", Id, CapturaPantalla, new ActCapturasPantalla());
+                        int capobj = (int) new CapturaPantallaRepository().OperacionesCapPan( 1, 0, IdUser);
+                        await new CapturaDePantallaServices(_context).ActualizarIdCapturaPantallaUser( 1, Id, capobj, new ActCuota(), new ActMulta());
+                        return RedirectToAction("Index", "Home");
+                    }
+                }
+                catch (DbUpdateConcurrencyException ex)
+                {
+                    Console.WriteLine("Hubo un problema al actualizar el registro del pago de la Cuota.");
+                    Console.WriteLine("Detalles del error: " + ex.Message);
+                }
+            }
+            return View(actCuota);
         }
     }
 }

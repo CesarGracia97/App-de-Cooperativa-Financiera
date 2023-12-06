@@ -114,7 +114,7 @@
                     <label asp-for="Prestamos.Valor">Monto:</label>
                     <div class="input-container">
                         <span class="dollar-sign">$</span>
-                        <input asp-for="Prestamos.Valor" class="input-monto" type="number" step="0.50" min="5.00" id="Valor" placeholder="Agrega el Valor que deseas que te presten" required />
+                        <input  name="Valor" class="input-monto" type="number" step="0.50" min="5.00" id="Valor" placeholder="Agrega el Valor que deseas que te presten" required />
                         <span asp-validation-for="Prestamos.Valor" class="text-danger"></span>
                     </div>
                 </div>
@@ -122,7 +122,7 @@
                 <!--Contenedor del Tipo de Cuota-->
                 <div class="form-group">
                     <label asp-for="Prestamos.TipoCuota">Tipo de Cuota:</label>
-                    <select asp-for="Prestamos.TipoCuota" name="TipoCupota" placeholder="Seleccionar un Tipo de Cuota..." required>
+                    <select  name="TipoCupota" placeholder="Seleccionar un Tipo de Cuota..." required>
                         <option value="">Seleccionar un Tipo de Cuota...</option>
                         @foreach (var item in ViewData["ItemsCuota"] as List<ListItems>)
                         {
@@ -136,14 +136,14 @@
                 <!--Contenedor de la Fecha de Entrega del Dinero-->
                 <div class="form-group">
                     <label asp-for="Prestamos.FechaEntregaDinero">Fecha de Entrega del Efectivo</label>
-                    <input asp-for="Prestamos.FechaEntregaDinero" type="date" class="inp-date" min="@minDateStr" max="@maxDateStr" id="FechaEntregaDinero" required />
+                    <input name="FechaEntregaDinero" type="date" class="inp-date" min="@minDateStr" max="@maxDateStr" required />
                     <span asp-validation-for="Prestamos.FechaEntregaDinero" class="text-danger"></span>
                 </div>
 
                 <!--Contenedor de la Fecha de Inicio de Pago-->
                 <div class="form-group">
                     <label asp-for="Prestamos.FechaInicioPagoCuotas">Fecha Inicio de Pago de Cuotas</label>
-                    <input asp-for="Prestamos.FechaInicioPagoCuotas" type="date" class="inp-date" id="FechaIniCoutaPrestamo" min="@minDateStrP" required />
+                    <input name="FechaInicioPagoCuotas" type="date" class="inp-date" min="@minDateStrP" required />
                     <span asp-validation-for="Prestamos.FechaInicioPagoCuotas" class="text-danger"></span>
                 </div>
 
@@ -165,7 +165,7 @@
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
                     <!--Contenedor Id de la Cuota a pagar-->
-                    <select asp-for="Cuotas.Id" name="Id" placeholder="Selecciona una Cuota" required>
+                    <select name="Id" placeholder="Selecciona una Cuota" required>
                         <option value="">Selecciona la Cuota a Pagar</option>
                         @for (int i = 0;  i < obj.Count; i++)
                         {
@@ -204,7 +204,7 @@
                         <label asp-for="Cuotas.Valor">Monto:</label>
                         <div class="input-container">
                             <span class="dollar-sign">$</span>
-                            <input asp-for="Cuotas.Valor" class="input-monto" type="number" min="5" step="0.01" name="Valor" />
+                            <input asp-for="Cuotas.Valor" class="input-monto" type="number" min="1" step="0.01" name="Valor" />
                             <span asp-validation-for="Cuotas.Valor" class="text-danger"></span>
                         </div>
                     </div>

@@ -73,7 +73,7 @@ public partial class ActDesarrolloContext : DbContext
         {
             entity.HasKey(e => e.Id).HasName("PRIMARY");
 
-            entity.ToTable("act_CapturaPantallas", tb => tb.HasComment("Capturas de pantalla"));
+            entity.ToTable("act_CapturasPantallas", tb => tb.HasComment("Capturas de pantalla"));
 
             entity.HasIndex(e => e.Id, "Id_UNIQUE").IsUnique();
 

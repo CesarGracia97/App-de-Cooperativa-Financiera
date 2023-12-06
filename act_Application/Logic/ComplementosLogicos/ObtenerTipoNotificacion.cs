@@ -33,15 +33,24 @@
             switch (tipo)
             {
                 case "APOR":
-                    return "APOR";
+                    return "APOR"; //Aportes
                 case "MULT":
-                    return "MULT";
+                    return "MULT"; //Multa Generada
+                case "AMUL":
+                    return "AMUL"; //Multa Abonada
+                case "CMUL":
+                    return "CMUL"; //Multa Cancelada
                 case "CUOT":
-                    return "CUOT";
+                    return "CUOT"; //Cuota Generada
+                case "ACUO":
+                    return "ACUO"; //Cuota Abonada
+                case "CCUO":
+                    return "CCUO"; //Cuota Cancelada
                 case "EVEN":
-                    return "EVEN";
+                    return "EVEN"; //Evento generado
                 case "PRES":
-                    return "PRES";
+                    return "PRES"; //PrestamoGenerado
+
                 default:
                     return "Tipo de actividad no reconocido";
             }
