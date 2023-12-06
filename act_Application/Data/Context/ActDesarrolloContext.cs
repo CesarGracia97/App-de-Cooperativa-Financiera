@@ -167,7 +167,7 @@ public partial class ActDesarrolloContext : DbContext
             entity.Property(e => e.Id).HasColumnType("int(11)");
             entity.Property(e => e.IdMult).HasMaxLength(45);
             entity.Property(e => e.IdUser).HasColumnType("int(11)");
-            entity.Property(e => e.FechaGeneracion).HasColumnType("date");
+            entity.Property(e => e.FechaGeneracion).HasColumnType("datetime");
             entity.Property(e => e.Cuadrante).HasMaxLength(45);
             entity.Property(e => e.Razon).HasMaxLength(45);
             entity.Property(e => e.Valor).HasPrecision(10);

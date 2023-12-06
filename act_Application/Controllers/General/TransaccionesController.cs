@@ -189,8 +189,8 @@ namespace act_Application.Controllers.General
                                 var parts = CuentaDestino.Split(" - #");
                                 if (parts.Length == 2)
                                 {
-                                    actMulta.NBancoDestino = multOriginal.NBancoDestino + parts[0] + ",";
-                                    actMulta.CBancoDestino = multOriginal.CBancoDestino + parts[1] + ",";
+                                    actMulta.NBancoDestino = multOriginal.NBancoDestino + parts[0];
+                                    actMulta.CBancoDestino = multOriginal.CBancoDestino + parts[1];
                                 }
                             }
                             actMulta.HistorialValores = multOriginal.HistorialValores + Valor.ToString();

@@ -169,7 +169,7 @@
                         <option value="">Selecciona la Cuota a Pagar</option>
                         @for (int i = 0;  i < obj.Count; i++)
                         {
-                            <option value="@obj[i].Id">Cuota #@obj[i].Id - Estado:@obj[i].Estado / F.P. @obj[i].FechaCuota</option>
+                            <option value="@obj[i].Id">Cuota #@obj[i].Id - Estado:@obj[i].Estado (VALOR: @obj[i].Valor) / F.P. @obj[i].FechaCuota</option>
                         }
                     </select>
 
@@ -243,7 +243,7 @@
                         <option value="">Selecciona la Cuota a Pagar</option>
                         @for (int i = 0; i < obj.Count; i++)
                         {
-                            <option value="@obj[i].Id">Multa #@obj[i].Id - Estado:@obj[i].Estado </option>
+                            <option value="@obj[i].Id">Multa #@obj[i].Id - Estado:@obj[i].Estado/F.P. @obj[i].FechaGeneracion (VALOR: @obj[i].Valor)</option>
                         }
                     </select>
 
