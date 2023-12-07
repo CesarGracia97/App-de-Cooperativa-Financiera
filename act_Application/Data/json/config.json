@@ -25,7 +25,7 @@
       "PRES": {
         "DBQP_SelectPrestamoId": "SELECT (SELECT COUNT(*) FROM act_Prestamos WHERE Id = @Id) AS TotalPrestamos, a.* FROM act_Prestamos a WHERE Id = @Id",
         "DBQP_SelectPrestamoUser": "SELECT (SELECT COUNT(*) FROM act_Prestamos WHERE IdUser = @IdUser) AS TotalPrestamos, (SELECT COUNT(*) FROM act_Prestamos WHERE IdUser = @IdUser AND Estado = 'APROBADO') AS TotalAprobado, (SELECT COUNT(*) FROM act_Prestamos WHERE IdUser = @IdUser AND Estado IN ('DENEGADO', 'RECHAZADO')) AS TotalRechazado, (SELECT COUNT(*) FROM act_Prestamos WHERE IdUser = @IdUser AND Estado  IN ('PENDIENTE REFERENTE', 'PENDIENTE ADMIN')) AS TotalPendiente, (SELECT COUNT(*) FROM act_Prestamos WHERE IdUser = @IdUser AND TipoCuota ='PagoUnico') AS TotalPagoUnico, (SELECT COUNT(*) FROM act_Prestamos WHERE IdUser = @IdUser AND TipoCuota = 'CUOTA') AS TotalCuota, a.* FROM act_Prestamos a WHERE IdUser = @IdUser",
-        "DBQP_SelectPrestamoIdPres": "SELECT Id FROM act_Prestamo WHERE IdPres = @IdPres"
+        "DBQP_SelectPrestamoIdPres": "SELECT Id FROM act_Prestamos WHERE IdPres = @IdPres"
       },
       "CUOT": {
         "DBQC_SelectCoutasUser": "SELECT (SELECT COUNT(*) FROM act_Cuotas WHERE IdUser = @IdUser AND Estado = 'PENDIENTE') AS TotalCuotas, a.* FROM act_Cuotas a WHERE IdUser = @IdUser AND Estado = 'PENDIENTE'",
