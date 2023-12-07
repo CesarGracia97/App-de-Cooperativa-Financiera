@@ -110,27 +110,34 @@ namespace act_Application.Data.Repository
                                 switch (new ObtenerTipoNotificacion().ClasificarInformacion(obj.IdActividad))
                                 {
                                     case "NUSE":
-
+                                        uobj.OperacionesUsuario();
                                         break;
                                     case "APOR":
+                                        aobj.OperacionesAportaciones();
                                         break;
                                     case "PRES":
                                         pobj.OperacionesPrestamos(2, (int)new PrestamosRepository().OperacionesPrestamos(1, 0, 0, obj.IdActividad), 0, "");
                                         break;
                                     case "MULT":
-
+                                        mobj.OperacionesMultas();
                                         break;
                                     case "CMUL":
+                                        mobj.OperacionesMultas();
                                         break;
                                     case "AMUL":
+                                        mobj.OperacionesMultas();
                                         break;
                                     case "CUOT":
+                                        cobj.OperacionesCuotas();
                                         break;
                                     case "CCUO":
+                                        cobj.OperacionesCuotas();
                                         break;
                                     case "ACUO":
+                                        cobj.OperacionesCuotas();
                                         break;
                                     case "EVEN":
+                                        eobj.OperacionesEventos();
                                         break;
                                     default:
                                         Console.WriteLine($"\n----------------------------------------------------------------------------------------------");
