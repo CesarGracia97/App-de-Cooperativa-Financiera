@@ -101,13 +101,24 @@ namespace act_Application.Data.Repository
                             {
                                 ActNotificacione obj = MapToNotificaciones(reader);
                                 notifiAdmin.Add(obj);
-                                switch(new ObtenerTipoNotificacion().ClasificarInformacion(obj.IdActividad))
+                                UsuarioRepository uobj = new UsuarioRepository();
+                                AportacionRepository aobj = new AportacionRepository();
+                                PrestamosRepository pobj = new PrestamosRepository();
+                                MultaRepository mobj = new MultaRepository();
+                                CuotaRepository cobj = new CuotaRepository();
+                                EventosRepository eobj = new EventosRepository();
+                                switch (new ObtenerTipoNotificacion().ClasificarInformacion(obj.IdActividad))
                                 {
                                     case "NUSE":
+
                                         break;
                                     case "APOR":
                                         break;
+                                    case "PRES":
+                                        pobj.OperacionesPrestamos(2, (int)new PrestamosRepository().OperacionesPrestamos(1, 0, 0, obj.IdActividad), 0, "");
+                                        break;
                                     case "MULT":
+
                                         break;
                                     case "CMUL":
                                         break;
@@ -121,10 +132,12 @@ namespace act_Application.Data.Repository
                                         break;
                                     case "EVEN":
                                         break;
-
+                                    default:
+                                        Console.WriteLine($"\n----------------------------------------------------------------------------------------------");
+                                        Console.WriteLine($"GetData_NotificacionesAdmin | Error, Opcion Inexistente. Tipo de IdActividad: {obj.IdActividad}");
+                                        Console.WriteLine($"\n----------------------------------------------------------------------------------------------");
+                                        break;
                                 }
-                                PrestamosRepository pobj = new PrestamosRepository();
-                                pobj.OperacionesPrestamos( 2,(int) new PrestamosRepository().OperacionesPrestamos( 1, 0, 0, obj.IdActividad), 0, "");
                             }
                         }
                     }
