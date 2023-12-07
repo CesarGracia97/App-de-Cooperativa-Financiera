@@ -23,7 +23,7 @@ namespace act_Application.Services.ServiciosAplicativos
                     actNotificacione.Razon = $"| NUSER-{IdActividad} | {Razon}";
                     actNotificacione.Descripcion = Descripcion;
                     actNotificacione.Destino = Destino;
-                    actNotificacione.Visto = "";
+                    actNotificacione.Visto = "NO";
                     _context.Add(actNotificacione);
                     await _context.SaveChangesAsync();
                     break;

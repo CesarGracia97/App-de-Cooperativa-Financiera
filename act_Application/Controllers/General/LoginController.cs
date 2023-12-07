@@ -140,8 +140,8 @@ namespace act_Application.Controllers.General
             if (ModelState.IsValid)
             {
                 string Razon = "Nuevo Usuario Registrado - Peticion de Adminision";
-                string Descripcion = string.Empty;
-                string Destino = "TODOS";
+                string Descripcion;
+                string Destino = "Administrador";
                 actUser.Cedula = Cedula;
                 actUser.NombreYapellido = NombreYapellido;
                 actUser.Correo = Correo;

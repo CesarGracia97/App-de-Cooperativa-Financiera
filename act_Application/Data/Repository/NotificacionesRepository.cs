@@ -8,7 +8,7 @@ namespace act_Application.Data.Repository
     public class NotificacionesRepository
     {
         private readonly string connectionString = AppSettingsHelper.GetConnectionString();
-        private bool GetExistNotificacionesAdmin()
+        private bool GetExist_NotificacionesAdmin()
         {
             try
             {
@@ -45,7 +45,7 @@ namespace act_Application.Data.Repository
             }
 
         }
-        private bool GetExistNotificacionesUser(int IdUser)
+        private bool GetExist_NotificacionesUser(int IdUser)
         {
             try
             {
@@ -83,7 +83,7 @@ namespace act_Application.Data.Repository
                 return false;
             }
         }
-        private List<ActNotificacione> GetDataNotificacionesAdmin() //Consulta para obtener todos los datos de las notificacionesAdmin del administrador
+        private List<ActNotificacione> GetData_NotificacionesAdmin() //Consulta para obtener todos los datos de las notificacionesAdmin del administrador
         {
             try
             {
@@ -121,7 +121,7 @@ namespace act_Application.Data.Repository
                 return null;
             }
         }
-        private List<ActNotificacione> GetDataNotificacionesUser(int IdUser) //Consulta para obtener todos los datos de las notificacionesUser del administrador
+        private List<ActNotificacione> GetData_NotificacionesUser(int IdUser) //Consulta para obtener todos los datos de las notificacionesUser del administrador
         {
             try
             {
@@ -182,13 +182,13 @@ namespace act_Application.Data.Repository
                 switch (Opciones)
                 {
                     case 1:
-                        return GetExistNotificacionesAdmin();
+                        return GetExist_NotificacionesAdmin();
                     case 2:
-                        return GetExistNotificacionesUser(IdUser);
+                        return GetExist_NotificacionesUser(IdUser);
                     case 3:
-                        return GetDataNotificacionesAdmin();
+                        return GetData_NotificacionesAdmin();
                     case 4:
-                        return GetDataNotificacionesUser(IdUser);
+                        return GetData_NotificacionesUser(IdUser);
                     default:
                         Console.WriteLine("\n---------------------------------------------------");
                         Console.WriteLine("\nOperacionesNotificaciones || Opcion Inexistente.");
