@@ -1,5 +1,17 @@
 <h1 align="center"> Aplicacion de Cooperativa "act_application" </h1>
 
+ #EJECUCION
+ *Comando Docker
+docker build -t app_net7:1.0 -f act_Application/Dockerfile .
+docker run --name act_Application -d -p 8080:80 app_net7:1.0  
+
+* Como ejecutar?
+Primero se debe ejecutar la base de datos y cargar los datos
+docker-compose up -d bd_application (este no hasta no tener lista la BD)
+La estructura de la BD se encuentra en la carpeta sql en un archivo de nombre "Query", ahi esta la estructura de la BD con tablas, relaciones e injeccion de Datos.
+
+Ejecutarla para luego ejecutar la app.
+docker-compose up -d app_application
 # Objetivo 1 (L_R)
  -- Sistema Login.
  -- Sistema de Registro.
