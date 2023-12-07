@@ -62,6 +62,25 @@
                                             <p class="notif-text">Fecha: @notificacionAdmin.Notificaciones.FechaGeneracion.ToString("dd-MMMM-yyyy")</p>
                                             <button class="btn-visualizar" data-notification-id="@notificacionAdmin.Notificaciones.Id">Visualizar</button>
                                         </div>
+                                        <div class="modal-principal" id="modal-@notificacionAdmin.Notificaciones.Id">
+                                            <div class="modal__container">
+                                                <h2 class="modal__title">Detalles</h2>
+                                                <div class="modal__content">
+                                                    <p class="modal__paragraph"><strong>Razon:</strong> @notificacionAdmin.Notificaciones.Razon</p>
+                                                    <p class="modal__paragraph"><strong>Fecha:</strong> @notificacionAdmin.Notificaciones.FechaGeneracion.ToString("dd-MM-yyyy")</p>
+                                                    <p class="modal__paragraph"><strong>Valor:</strong> @notificacionAdmin.Aportaciones.Valor</p>
+                                                    <p class="modal__paragraph"><strong>Descripcion:</strong></p>
+                                                    <p class="modal__description">@notificacionAdmin.Notificaciones.Descripcion</p>
+                                                    <form asp-action="Visuzalizado">
+                                                        <div class="container-modal-btn">
+                                                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                                            <input type="hidden" asp-for="@notificacionAdmin.Notificaciones.Id" name="Id" />
+                                                            <button type="submit" data-notification-id="@notificacionAdmin.Notificaciones.Id" class="modal__close">Cerrar</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
                                         break;
                                     case "MULT":
                                         <div class="notif-container">
@@ -160,9 +179,13 @@
                                                     <p class="modal__paragraph"><strong>Valor:</strong> @notificacionUsers.Aportaciones.Valor</p>
                                                     <p class="modal__paragraph"><strong>Descripcion:</strong></p>
                                                     <p class="modal__description">@notificacionUsers.Notificaciones.Descripcion</p>
-                                                    <div class="container-modal-btn">
-                                                        <a href="~/Notificaciones/Notificacion" class="modal__close" data-notification-id="@notificacionUsers.Notificaciones.Id">Cerrar</a>
-                                                    </div>
+                                                    <form asp-action="Visuzalizado">
+                                                        <div class="container-modal-btn">
+                                                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                                            <input type="hidden" asp-for="@notificacionUsers.Notificaciones.Id" name="Id" />
+                                                            <button type="submit" data-notification-id="@notificacionUsers.Notificaciones.Id" class="modal__close">Cerrar</button>
+                                                        </div>
+                                                    </form>
                                                 </div>
                                             </div>
                                         </div>

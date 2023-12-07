@@ -4,6 +4,7 @@ using act_Application.Models.BD;
 using act_Application.Models.Sistema.ViewModel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ActionConstraints;
 using Microsoft.EntityFrameworkCore;
 
 namespace act_Application.Controllers.General
@@ -78,5 +79,29 @@ namespace act_Application.Controllers.General
                 return RedirectToAction("Error", "Home");
             }
         }
+        public async Task<IActionResult> Visualizado(int Id, [Bind("Id,IdActividad,FechaGeneracion,Razon,Descripcion,Destino,Visto")] ActNotificacione actNotificacione)
+        {
+            if (Id != actNotificacione.Id)
+            {
+                return RedirectToAction("Error", "Home");
+            }
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    actNotificacione.Visto = "SI";
+                    _context.Update(actNotificacione);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction("Index", "Notificaciones");
+                }
+                catch (DbUpdateConcurrencyException ex)
+                {
+                    Console.WriteLine("Hubo un problema al actualizar el registro del pago de la Cuota.");
+                    Console.WriteLine("Detalles del error: " + ex.Message);
+                    return RedirectToAction("Error", "Home");
+                }
+            }
+            return View(actNotificacione);
+        }            
     }
 }
