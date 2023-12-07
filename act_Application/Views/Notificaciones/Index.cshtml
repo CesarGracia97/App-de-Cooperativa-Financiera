@@ -13,7 +13,15 @@
     string fechaactual = fechaActual.ToString("yyyy-MM-dd");
     DateTime minDateP = DateTime.Now.AddDays(46);
     string minDateStrP = minDateP.ToString("dd-MMMM-yyyy");
-    var notificacionAdminList = Model.OrderByDescending(notifA => notifA.Notificaciones.FechaGeneracion).ToList();
+
+    var notificacionAdminList = Model
+        .Where(notif => User.HasClaim("Rol", "Administrador") && notif.Notificaciones.Destino == "Administrador")
+        .OrderByDescending(notifA => notifA.Notificaciones.FechaGeneracion)
+        .ToList();
+    var notificacionUsersList = Model
+        .Where(notif => !User.HasClaim("Rol", "Administrador") && (User.HasClaim("Rol", "Socio") || User.HasClaim("Rol", "Referido")) && notif.Notificaciones.Destino != Bandera.ToString())
+        .OrderByDescending(notifU => notifU.Notificaciones.FechaGeneracion)
+        .ToList();
 }
 <header>
     <meta charset="UTF-8">
@@ -33,86 +41,85 @@
                 <div class="content-notif">
                     @foreach (var notificacionAdmin in notificacionAdminList)
                     {
-                        @if(notificacionAdmin.Notificaciones.Visto == "NO")
+                        if (notificacionAdmin.Notificaciones.Destino == "Administrador")
                         {
-                            if(notificacionAdmin.Notificaciones.Destino == "Administrador")
+                            if (notificacionAdmin.Notificaciones.Visto == "NO")
                             {
-                                
-                            }
-                            switch ((string) new ObtenerTipoNotificacion().ClasificarInformacion(notificacionAdmin.Notificaciones.IdActividad))
-                            {
-                                case "NUSE":
-                                    <div class="notif-container">
-                                        <p class="notif-text">Tipo: @notificacionAdmin.Notificaciones.IdActividad: Nuevo Usuario</p>
-                                        <p class="notif-text">Razon: @notificacionAdmin.Notificaciones.Razon</p>
-                                        <p class="notif-text">Fecha: @notificacionAdmin.Notificaciones.FechaGeneracion.ToString("dd-MMMM-yyyy")</p>
-                                        <button class="btn-visualizar" data-notification-id="@notificacionAdmin.Notificaciones.Id">Visualizar</button>
-                                    </div>
-                                    break;
-                                case "APOR":
-                                    <div class="notif-container">
-                                        <p class="notif-text">Tipo: @notificacionAdmin.Notificaciones.IdActividad: Nueva Aportacion</p>
-                                        <p class="notif-text">Razon: @notificacionAdmin.Notificaciones.Razon</p>
-                                        <p class="notif-text">Fecha: @notificacionAdmin.Notificaciones.FechaGeneracion.ToString("dd-MMMM-yyyy")</p>
-                                        <button class="btn-visualizar" data-notification-id="@notificacionAdmin.Notificaciones.Id">Visualizar</button>
-                                    </div>
-                                    break;
-                                case "MULT":
-                                    <div class="notif-container">
-                                        <p class="notif-text">Razon: @notificacionAdmin.Notificaciones.IdActividad: Multa</p>
-                                        <p class="notif-text">Razon: @notificacionAdmin.Notificaciones.Razon</p>
-                                        <p class="notif-text">Fecha: @notificacionAdmin.Notificaciones.FechaGeneracion.ToString("dd-MMMM-yyyy")</p>
-                                        <button class="btn-visualizar" data-notification-id="@notificacionAdmin.Notificaciones.Id">Visualizar</button>
-                                    </div>
-                                    break;
-                                case "CMUL":
-                                    <div class="notif-container">
-                                        <p class="notif-text">Razon: @notificacionAdmin.Notificaciones.IdActividad: Multa</p>
-                                        <p class="notif-text">Razon: @notificacionAdmin.Notificaciones.Razon</p>
-                                        <p class="notif-text">Fecha: @notificacionAdmin.Notificaciones.FechaGeneracion.ToString("dd-MMMM-yyyy")</p>
-                                        <button class="btn-visualizar" data-notification-id="@notificacionAdmin.Notificaciones.Id">Visualizar</button>
-                                    </div>
-                                    break;
-                                case "AMUL":
-                                    <div class="notif-container">
-                                        <p class="notif-text">Razon: @notificacionAdmin.Notificaciones.IdActividad: Multa</p>
-                                        <p class="notif-text">Razon: @notificacionAdmin.Notificaciones.Razon</p>
-                                        <p class="notif-text">Fecha: @notificacionAdmin.Notificaciones.FechaGeneracion.ToString("dd-MMMM-yyyy")</p>
-                                        <button class="btn-visualizar" data-notification-id="@notificacionAdmin.Notificaciones.Id">Visualizar</button>
-                                    </div>
-                                    break;
-                                case "CUOT":
-                                    <div class="notif-container">
-                                        <p class="notif-text">Razon: @notificacionAdmin.Notificaciones.IdActividad: Cuota</p>
-                                        <p class="notif-text">Razon: @notificacionAdmin.Notificaciones.Razon</p>
-                                        <p class="notif-text">Fecha: @notificacionAdmin.Notificaciones.FechaGeneracion.ToString("dd-MMMM-yyyy")</p>
-                                        <button class="btn-visualizar" data-notification-id="@notificacionAdmin.Notificaciones.Id">Visualizar</button>
-                                    </div>
-                                    break;
-                                case "CCUO":
-                                    <div class="notif-container">
-                                        <p class="notif-text">Razon: @notificacionAdmin.Notificaciones.IdActividad: Cuota</p>
-                                        <p class="notif-text">Razon: @notificacionAdmin.Notificaciones.Razon</p>
-                                        <p class="notif-text">Fecha: @notificacionAdmin.Notificaciones.FechaGeneracion.ToString("dd-MMMM-yyyy")</p>
-                                        <button class="btn-visualizar" data-notification-id="@notificacionAdmin.Notificaciones.Id">Visualizar</button>
-                                    </div>
-                                    break;
-                                case "ACUO":
-                                    <div class="notif-container">
-                                        <p class="notif-text">Razon: @notificacionAdmin.Notificaciones.IdActividad: Cuota</p>
-                                        <p class="notif-text">Razon: @notificacionAdmin.Notificaciones.Razon</p>
-                                        <p class="notif-text">Fecha: @notificacionAdmin.Notificaciones.FechaGeneracion.ToString("dd-MMMM-yyyy")</p>
-                                        <button class="btn-visualizar" data-notification-id="@notificacionAdmin.Notificaciones.Id">Visualizar</button>
-                                    </div>
-                                    break;
-                                case "PRES":
-                                    <div class="notif-container">
-                                        <p class="notif-text">Razon: @notificacionAdmin.Notificaciones.IdActividad: Prestamo </p>
-                                        <p class="notif-text">Razon: @notificacionAdmin.Notificaciones.Razon</p>
-                                        <p class="notif-text">Fecha: @notificacionAdmin.Notificaciones.FechaGeneracion.ToString("dd-MMMM-yyyy")</p>
-                                        <button class="btn-visualizar" data-notification-id="@notificacionAdmin.Notificaciones.Id">Visualizar</button>
-                                    </div>
-                                    break;
+                                switch ((string)new ObtenerTipoNotificacion().ClasificarInformacion(notificacionAdmin.Notificaciones.IdActividad))
+                                {
+                                    case "NUSE":
+                                        <div class="notif-container">
+                                            <p class="notif-text">Tipo: @notificacionAdmin.Notificaciones.IdActividad: Nuevo Usuario</p>
+                                            <p class="notif-text">Razon: @notificacionAdmin.Notificaciones.Razon</p>
+                                            <p class="notif-text">Fecha: @notificacionAdmin.Notificaciones.FechaGeneracion.ToString("dd-MMMM-yyyy")</p>
+                                            <button class="btn-visualizar" data-notification-id="@notificacionAdmin.Notificaciones.Id">Visualizar</button>
+                                        </div>
+                                        break;
+                                    case "APOR":
+                                        <div class="notif-container">
+                                            <p class="notif-text">Tipo: @notificacionAdmin.Notificaciones.IdActividad: Nueva Aportacion</p>
+                                            <p class="notif-text">Razon: @notificacionAdmin.Notificaciones.Razon</p>
+                                            <p class="notif-text">Fecha: @notificacionAdmin.Notificaciones.FechaGeneracion.ToString("dd-MMMM-yyyy")</p>
+                                            <button class="btn-visualizar" data-notification-id="@notificacionAdmin.Notificaciones.Id">Visualizar</button>
+                                        </div>
+                                        break;
+                                    case "MULT":
+                                        <div class="notif-container">
+                                            <p class="notif-text">Razon: @notificacionAdmin.Notificaciones.IdActividad: Multa</p>
+                                            <p class="notif-text">Razon: @notificacionAdmin.Notificaciones.Razon</p>
+                                            <p class="notif-text">Fecha: @notificacionAdmin.Notificaciones.FechaGeneracion.ToString("dd-MMMM-yyyy")</p>
+                                            <button class="btn-visualizar" data-notification-id="@notificacionAdmin.Notificaciones.Id">Visualizar</button>
+                                        </div>
+                                        break;
+                                    case "CMUL":
+                                        <div class="notif-container">
+                                            <p class="notif-text">Razon: @notificacionAdmin.Notificaciones.IdActividad: Multa</p>
+                                            <p class="notif-text">Razon: @notificacionAdmin.Notificaciones.Razon</p>
+                                            <p class="notif-text">Fecha: @notificacionAdmin.Notificaciones.FechaGeneracion.ToString("dd-MMMM-yyyy")</p>
+                                            <button class="btn-visualizar" data-notification-id="@notificacionAdmin.Notificaciones.Id">Visualizar</button>
+                                        </div>
+                                        break;
+                                    case "AMUL":
+                                        <div class="notif-container">
+                                            <p class="notif-text">Razon: @notificacionAdmin.Notificaciones.IdActividad: Multa</p>
+                                            <p class="notif-text">Razon: @notificacionAdmin.Notificaciones.Razon</p>
+                                            <p class="notif-text">Fecha: @notificacionAdmin.Notificaciones.FechaGeneracion.ToString("dd-MMMM-yyyy")</p>
+                                            <button class="btn-visualizar" data-notification-id="@notificacionAdmin.Notificaciones.Id">Visualizar</button>
+                                        </div>
+                                        break;
+                                    case "CUOT":
+                                        <div class="notif-container">
+                                            <p class="notif-text">Razon: @notificacionAdmin.Notificaciones.IdActividad: Cuota</p>
+                                            <p class="notif-text">Razon: @notificacionAdmin.Notificaciones.Razon</p>
+                                            <p class="notif-text">Fecha: @notificacionAdmin.Notificaciones.FechaGeneracion.ToString("dd-MMMM-yyyy")</p>
+                                            <button class="btn-visualizar" data-notification-id="@notificacionAdmin.Notificaciones.Id">Visualizar</button>
+                                        </div>
+                                        break;
+                                    case "CCUO":
+                                        <div class="notif-container">
+                                            <p class="notif-text">Razon: @notificacionAdmin.Notificaciones.IdActividad: Cuota</p>
+                                            <p class="notif-text">Razon: @notificacionAdmin.Notificaciones.Razon</p>
+                                            <p class="notif-text">Fecha: @notificacionAdmin.Notificaciones.FechaGeneracion.ToString("dd-MMMM-yyyy")</p>
+                                            <button class="btn-visualizar" data-notification-id="@notificacionAdmin.Notificaciones.Id">Visualizar</button>
+                                        </div>
+                                        break;
+                                    case "ACUO":
+                                        <div class="notif-container">
+                                            <p class="notif-text">Razon: @notificacionAdmin.Notificaciones.IdActividad: Cuota</p>
+                                            <p class="notif-text">Razon: @notificacionAdmin.Notificaciones.Razon</p>
+                                            <p class="notif-text">Fecha: @notificacionAdmin.Notificaciones.FechaGeneracion.ToString("dd-MMMM-yyyy")</p>
+                                            <button class="btn-visualizar" data-notification-id="@notificacionAdmin.Notificaciones.Id">Visualizar</button>
+                                        </div>
+                                        break;
+                                    case "PRES":
+                                        <div class="notif-container">
+                                            <p class="notif-text">Razon: @notificacionAdmin.Notificaciones.IdActividad: Prestamo </p>
+                                            <p class="notif-text">Razon: @notificacionAdmin.Notificaciones.Razon</p>
+                                            <p class="notif-text">Fecha: @notificacionAdmin.Notificaciones.FechaGeneracion.ToString("dd-MMMM-yyyy")</p>
+                                            <button class="btn-visualizar" data-notification-id="@notificacionAdmin.Notificaciones.Id">Visualizar</button>
+                                        </div>
+                                        break;
+                                }
                             }
                         }
                     }
@@ -129,7 +136,91 @@
             if((bool) new NotificacionesRepository().OperacionesNotificaciones( 2, 0, Bandera))
             {
                 <div class="content-notif">
+                    @foreach( var notificacionUsers in notificacionUsersList)
+                    {
+                        if (notificacionUsers.Notificaciones.Destino == Bandera.ToString())
+                        {
+                            if (notificacionUsers.Notificaciones.Visto == "NO")
+                            {
+                                switch ((string)new ObtenerTipoNotificacion().ClasificarInformacion(notificacionUsers.Notificaciones.IdActividad))
+                                {
+                                    case "NUSE":
+                                        <div class="notif-container">
+                                            <p class="notif-text">Tipo: @notificacionUsers.Notificaciones.IdActividad: Nuevo Usuario</p>
+                                            <p class="notif-text">Razon: @notificacionUsers.Notificaciones.Razon</p>
+                                            <p class="notif-text">Fecha: @notificacionUsers.Notificaciones.FechaGeneracion.ToString("dd-MMMM-yyyy")</p>
+                                            <button class="btn-visualizar" data-notification-id="@notificacionUsers.Notificaciones.Id">Visualizar</button>
+                                        </div>
+                                        break;
+                                    case "APOR":
+                                        <div class="notif-container">
+                                            <p class="notif-text">Tipo: @notificacionUsers.Notificaciones.IdActividad: Nueva Aportacion</p>
+                                            <p class="notif-text">Razon: @notificacionUsers.Notificaciones.Razon</p>
+                                            <p class="notif-text">Fecha: @notificacionUsers.Notificaciones.FechaGeneracion.ToString("dd-MMMM-yyyy")</p>
+                                            <button class="btn-visualizar" data-notification-id="@notificacionUsers.Notificaciones.Id">Visualizar</button>
+                                        </div>
+                                        break;
+                                    case "MULT":
+                                        <div class="notif-container">
+                                            <p class="notif-text">Razon: @notificacionUsers.Notificaciones.IdActividad: Multa</p>
+                                            <p class="notif-text">Razon: @notificacionUsers.Notificaciones.Razon</p>
+                                            <p class="notif-text">Fecha: @notificacionUsers.Notificaciones.FechaGeneracion.ToString("dd-MMMM-yyyy")</p>
+                                            <button class="btn-visualizar" data-notification-id="@notificacionUsers.Notificaciones.Id">Visualizar</button>
+                                        </div>
+                                        break;
+                                    case "CMUL":
+                                        <div class="notif-container">
+                                            <p class="notif-text">Razon: @notificacionUsers.Notificaciones.IdActividad: Multa</p>
+                                            <p class="notif-text">Razon: @notificacionUsers.Notificaciones.Razon</p>
+                                            <p class="notif-text">Fecha: @notificacionUsers.Notificaciones.FechaGeneracion.ToString("dd-MMMM-yyyy")</p>
+                                            <button class="btn-visualizar" data-notification-id="@notificacionUsers.Notificaciones.Id">Visualizar</button>
+                                        </div>
+                                        break;
+                                    case "AMUL":
+                                        <div class="notif-container">
+                                            <p class="notif-text">Razon: @notificacionUsers.Notificaciones.IdActividad: Multa</p>
+                                            <p class="notif-text">Razon: @notificacionUsers.Notificaciones.Razon</p>
+                                            <p class="notif-text">Fecha: @notificacionUsers.Notificaciones.FechaGeneracion.ToString("dd-MMMM-yyyy")</p>
+                                            <button class="btn-visualizar" data-notification-id="@notificacionUsers.Notificaciones.Id">Visualizar</button>
+                                        </div>
+                                        break;
+                                    case "CUOT":
+                                        <div class="notif-container">
+                                            <p class="notif-text">Razon: @notificacionUsers.Notificaciones.IdActividad: Cuota</p>
+                                            <p class="notif-text">Razon: @notificacionUsers.Notificaciones.Razon</p>
+                                            <p class="notif-text">Fecha: @notificacionUsers.Notificaciones.FechaGeneracion.ToString("dd-MMMM-yyyy")</p>
+                                            <button class="btn-visualizar" data-notification-id="@notificacionUsers.Notificaciones.Id">Visualizar</button>
+                                        </div>
+                                        break;
+                                    case "CCUO":
+                                        <div class="notif-container">
+                                            <p class="notif-text">Razon: @notificacionUsers.Notificaciones.IdActividad: Cuota</p>
+                                            <p class="notif-text">Razon: @notificacionUsers.Notificaciones.Razon</p>
+                                            <p class="notif-text">Fecha: @notificacionUsers.Notificaciones.FechaGeneracion.ToString("dd-MMMM-yyyy")</p>
+                                            <button class="btn-visualizar" data-notification-id="@notificacionUsers.Notificaciones.Id">Visualizar</button>
+                                        </div>
+                                        break;
+                                    case "ACUO":
+                                        <div class="notif-container">
+                                            <p class="notif-text">Razon: @notificacionUsers.Notificaciones.IdActividad: Cuota</p>
+                                            <p class="notif-text">Razon: @notificacionUsers.Notificaciones.Razon</p>
+                                            <p class="notif-text">Fecha: @notificacionUsers.Notificaciones.FechaGeneracion.ToString("dd-MMMM-yyyy")</p>
+                                            <button class="btn-visualizar" data-notification-id="@notificacionUsers.Notificaciones.Id">Visualizar</button>
+                                        </div>
+                                        break;
+                                    case "PRES":
+                                        <div class="notif-container">
+                                            <p class="notif-text">Razon: @notificacionUsers.Notificaciones.IdActividad: Prestamo </p>
+                                            <p class="notif-text">Razon: @notificacionUsers.Notificaciones.Razon</p>
+                                            <p class="notif-text">Fecha: @notificacionUsers.Notificaciones.FechaGeneracion.ToString("dd-MMMM-yyyy")</p>
+                                            <button class="btn-visualizar" data-notification-id="@notificacionUsers.Notificaciones.Id">Visualizar</button>
+                                        </div>
+                                        break;
+                                }
+                            }
+                        }
 
+                    }
                 </div>
             }
             else
