@@ -12,7 +12,7 @@ namespace act_Application.Data.Repository
         {
             try
             {
-                string Query = ConfigReader.GetQuery( 1, "MULT", "DBQM_SelectMulta");
+                string Query = ConfigReader.GetQuery( 1, "MULT", "DBQM_SelectMultas");
 
                 int totalMultas = 0; // Variable para almacenar el valor de TotalAportaciones
 
@@ -89,7 +89,7 @@ namespace act_Application.Data.Repository
             {
 
                 List<ActMulta> multas = new List<ActMulta>();
-                string Query = ConfigReader.GetQuery( 1, "MULT", "DBQM_SelectMulta");
+                string Query = ConfigReader.GetQuery( 1, "MULT", "DBQM_SelectMultas");
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
                     using (MySqlCommand cmd = new MySqlCommand(Query, connection))
@@ -114,7 +114,7 @@ namespace act_Application.Data.Repository
                                     NBancoOrigen = Convert.ToString(r["NBancoOrigen"]),
                                     CBancoDestino = Convert.ToString(r["CBancoDestino"]),
                                     NBancoDestino = Convert.ToString(r["NBancoDestino"]),
-                                    HisotiralValores = Convert.ToString(r["HisotiralValores"]),
+                                    HisotiralValores = Convert.ToString(r["HistorialValores"]),
                                     CapturaPantalla = Convert.ToString(r["CapturaPantalla"]),
                                     NombreUsuario = Convert.ToString(r["NombreUsuario"])
                                 })

@@ -10,7 +10,11 @@ namespace act_Application.Controllers.General
         [Authorize(Policy = "AdminSocioOnly")]
         public IActionResult Index()
         {
-            var mobj = (List<ActMulta>)new MultaRepository().OperacionesMultas(3, 0, 0);
+            List<ActMulta> mobj = null;
+            if ((bool)new MultaRepository().OperacionesMultas(1, 0, 0))
+            {
+                mobj = (List<ActMulta>) new MultaRepository().OperacionesMultas(3, 0, 0);
+            }
             return View(mobj);
         }
     }
