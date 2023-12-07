@@ -1,0 +1,10 @@
+version: '3'
+services:
+  app_application:
+    image: ${DOCKER_REGISTRY-}app_application
+    container_name: app_net7
+    build:
+      context: .
+      dockerfile: act_Application/Dockerfile
+    ports:
+      - 80:80
