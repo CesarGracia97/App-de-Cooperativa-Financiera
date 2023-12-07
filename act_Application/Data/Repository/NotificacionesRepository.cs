@@ -1,4 +1,5 @@
 ﻿using act_Application.Helper;
+using act_Application.Logic.ComplementosLogicos;
 using act_Application.Models.BD;
 using MySql.Data.MySqlClient;
 using System.Data;
@@ -100,6 +101,28 @@ namespace act_Application.Data.Repository
                             {
                                 ActNotificacione obj = MapToNotificaciones(reader);
                                 notifiAdmin.Add(obj);
+                                switch(new ObtenerTipoNotificacion().ClasificarInformacion(obj.IdActividad))
+                                {
+                                    case "NUSE":
+                                        break;
+                                    case "APOR":
+                                        break;
+                                    case "MULT":
+                                        break;
+                                    case "CMUL":
+                                        break;
+                                    case "AMUL":
+                                        break;
+                                    case "CUOT":
+                                        break;
+                                    case "CCUO":
+                                        break;
+                                    case "ACUO":
+                                        break;
+                                    case "EVEN":
+                                        break;
+
+                                }
                                 PrestamosRepository pobj = new PrestamosRepository();
                                 pobj.OperacionesPrestamos( 2,(int) new PrestamosRepository().OperacionesPrestamos( 1, 0, 0, obj.IdActividad), 0, "");
                             }

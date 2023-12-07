@@ -45,7 +45,7 @@
                         {
                             if (notificacionAdmin.Notificaciones.Visto == "NO")
                             {
-                                switch ((string)new ObtenerTipoNotificacion().ClasificarInformacion(notificacionAdmin.Notificaciones.IdActividad))
+                                switch (new ObtenerTipoNotificacion().ClasificarInformacion(notificacionAdmin.Notificaciones.IdActividad))
                                 {
                                     case "NUSE":
                                         <div class="notif-container">
