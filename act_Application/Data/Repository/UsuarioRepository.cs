@@ -48,6 +48,30 @@ namespace act_Application.Data.Repository
                 return null;
             }
         }
+        private int GetData_IdUser(string Cedula) //Cedula porque es el IdActividad en Notificaciones
+        {
+            try
+            {
+                int Id = 0;
+                string Query = ConfigReader.GetQuery(2, "", "DBQU_SelectIdUser");
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                {
+
+                }
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine($"\nGetData_IdUser || Error de Mysql");
+                Console.WriteLine($"\nRazon del Error: {ex.Message}\n");
+                throw;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"\nGetData_IdUser || ErrorGeneral");
+                Console.WriteLine($"\nRazon del Error: {ex.Message}\n");
+                return -1;
+            }
+        }
         private ActRol GetData_RolUser(int IdRol)
         {
             try

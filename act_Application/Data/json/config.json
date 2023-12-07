@@ -4,7 +4,8 @@
       "USER": {
         "DBQU_SelectUsuario": "SELECT u.Id, u.Cedula, u.Correo, u.NombreYApellido, u.Celular, u.TipoUser, u.Estado, r.IdRol FROM act_User u LEFT JOIN act_RolUser r ON u.Id = r.IdUser WHERE u.Correo = @Correo AND u.Contrasena = @Contrasena",
         "DBQU_SelectListUser": "SELECT Id, NombreYApellido FROM act_User WHERE TipoUser = 'Socio' OR TipoUser = 'Administrador'",
-        "DBQU_SelectEmail": "SELECT Correo FROM act_User WHERE Id =1"
+        "DBQU_SelectEmail": "SELECT Correo FROM act_User WHERE Id =1",
+        "DBQU_SelectIdUser": "SELECT Id FROM act_User WHERE Cedula = @Cedula"
       },
       "ROLE": {
         "DBQR_SelectRol": "SELECT * FROM act_Rol WHERE Id = @IdRol"
