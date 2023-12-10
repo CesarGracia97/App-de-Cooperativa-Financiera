@@ -56,8 +56,21 @@ namespace act_Application.Data.Repository
                 string Query = ConfigReader.GetQuery(2, "", "DBQU_SelectIdUser");
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
-
+                    using (MySqlCommand cmd = new MySqlCommand(Query, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@Cedula", Cedula);
+                        cmd.CommandType = CommandType.Text;
+                        connection.Open();
+                        using (MySqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                Id = Convert.ToInt32(reader["Id"]);
+                            }
+                        }
+                    }
                 }
+                return Id;
             }
             catch (MySqlException ex)
             {
@@ -222,6 +235,8 @@ namespace act_Application.Data.Repository
                         return GetData_ListUser();
                     case 4:
                         return GetData_CorreoUser(IdUser);
+                    case 5:
+                        return GetData_IdUser(Correo);
                     default:
                         Console.WriteLine("\n-----------------------------------------");
                         Console.WriteLine("\nOperacionesUsuario || Opcion Inexistente.");
