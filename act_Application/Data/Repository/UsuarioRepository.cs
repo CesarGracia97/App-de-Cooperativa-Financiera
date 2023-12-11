@@ -48,7 +48,7 @@ namespace act_Application.Data.Repository
                 return null;
             }
         }
-        private int GetData_IdUser(string Cedula) //Cedula porque es el IdActividad en Notificaciones
+        private int GetData_IdUser(string Cedula) // Obtener el Id de un Usuario por medio de su Cedula porque es el Id Personalizado en Notificaciones
         {
             try
             {
