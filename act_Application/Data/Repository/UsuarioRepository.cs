@@ -53,7 +53,7 @@ namespace act_Application.Data.Repository
             try
             {
                 int Id = 0;
-                string Query = ConfigReader.GetQuery(2, "", "DBQU_SelectIdUser");
+                string Query = ConfigReader.GetQuery(1, "USER", "DBQU_SelectIdUser");
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
                     using (MySqlCommand cmd = new MySqlCommand(Query, connection))

@@ -284,7 +284,7 @@ namespace act_Application.Data.Repository
             try
             {
                 int Id = 0;
-                string Query = ConfigReader.GetQuery(2, "", "DBQA_SelectAportacionesIdApor");
+                string Query = ConfigReader.GetQuery(1, "APOR", "DBQA_SelectAportacionesIdApor");
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
                     connection.Open();
