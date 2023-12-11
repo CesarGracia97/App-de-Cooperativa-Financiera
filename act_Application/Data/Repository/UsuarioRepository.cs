@@ -164,7 +164,8 @@ namespace act_Application.Data.Repository
         {
             try
             {
-
+                string Query = ConfigReader.GetQuery(1, "USER", "DBQU_SelectDataUserId");
+                ActUser uobj = new ActUser();
             }
             catch (MySqlException ex)
             {
