@@ -238,7 +238,7 @@ namespace act_Application.Data.Repository
             }
             return null;
         }
-        private int A_GetData_LastIdMultaUser(int IdUser) //Obtiene el Id del ultimo registro de la Multa de un Usuario. 
+        private int Auto_GetData_LastIdMultaUser(int IdUser) //Obtiene el Id del ultimo registro de la Multa de un Usuario. 
         {
             int Id = -1;
             try
@@ -268,10 +268,14 @@ namespace act_Application.Data.Repository
             }
             catch (Exception ex)
             {
-                Console.WriteLine("A_GetData_LastIdMultaUser|| Error");
+                Console.WriteLine("Auto_GetData_LastIdMultaUser|| Error");
                 Console.WriteLine("Razon del Error: " + ex.Message);
             }
             return Id;
+        }
+        private int GetData_IdMulta(string IdMult)
+        {
+
         }
         private ActMulta MapToMulta(MySqlDataReader reader)
         {
@@ -294,7 +298,7 @@ namespace act_Application.Data.Repository
                 CapturaPantalla = Convert.ToString(reader["CapturaPantalla"])
             };
         }
-        public object OperacionesMultas(int Opcion, int Id, int IdUser)
+        public object OperacionesMultas(int Opcion, int Id, int IdUser, string Cadena)
         {
             try
             {
@@ -311,7 +315,9 @@ namespace act_Application.Data.Repository
                     case 5:
                         return GetData_MultasId(Id);
                     case 6:
-                        return A_GetData_LastIdMultaUser(IdUser);
+                        return Auto_GetData_LastIdMultaUser(IdUser);
+                    case 7:
+                        return GetData_IdMulta(Cadena);
                     default:
                         Console.WriteLine("\n-----------------------------------------");
                         Console.WriteLine("\nOperacionesMulta || Opcion Inexistente.");
