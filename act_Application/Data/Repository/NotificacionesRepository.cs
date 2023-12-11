@@ -116,16 +116,16 @@ namespace act_Application.Data.Repository
                                         aobj.OperacionesAportaciones( 7, (int) new AportacionRepository().OperacionesAportaciones( 6, 0, 0, obj.IdActividad), 0, "");
                                         break;
                                     case "PRES":
-                                        pobj.OperacionesPrestamos(2, (int) new PrestamosRepository().OperacionesPrestamos(1, 0, 0, obj.IdActividad), 0, "");
+                                        pobj.OperacionesPrestamos( 2, (int) new PrestamosRepository().OperacionesPrestamos(1, 0, 0, obj.IdActividad), 0, "");
                                         break;
                                     case "MULT":
-                                        mobj.OperacionesMultas();
+                                        mobj.OperacionesMultas( 5, (int) new MultaRepository().OperacionesMultas( 7, 0, 0, obj.IdActividad), 0, "");
                                         break;
                                     case "CMUL":
-                                        mobj.OperacionesMultas();
+                                        mobj.OperacionesMultas(5, (int)new MultaRepository().OperacionesMultas(7, 0, 0, obj.IdActividad), 0, ""));
                                         break;
                                     case "AMUL":
-                                        mobj.OperacionesMultas();
+                                        mobj.OperacionesMultas(5, (int)new MultaRepository().OperacionesMultas(7, 0, 0, obj.IdActividad), 0, ""));
                                         break;
                                     case "CUOT":
                                         cobj.OperacionesCuotas();
