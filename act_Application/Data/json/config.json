@@ -24,6 +24,7 @@
       "EVEN": {
         "DBQE_SelectEventos": "SELECT (SELECT COUNT(*) FROM act_Eventos WHERE Estado = 'CONCURSO') AS TotalEventos, x.*, u.NombreYApellido AS NombreUsuario FROM act_Eventos x INNER JOIN act_User u ON x.IdUser = u.Id WHERE x.Estado = 'CONCURSO'",
         "DBQE_SelectEventosUser": "SELECT (SELECT COUNT(*) FROM act_Eventos WHERE Id = @Id) AS TotalEventos, a.* FROM act_Eventos a WHERE Id = @Id",
+        "DBQE_SelectEventosIdEven": "SELECT Id FROM act_Eventos WHERE IdEven = @IdEven"
       },
       "PRES": {
         "DBQP_SelectPrestamoId": "SELECT (SELECT COUNT(*) FROM act_Prestamos WHERE Id = @Id) AS TotalPrestamos, a.* FROM act_Prestamos a WHERE Id = @Id",
