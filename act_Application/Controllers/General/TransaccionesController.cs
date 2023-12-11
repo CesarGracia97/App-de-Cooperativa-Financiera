@@ -90,7 +90,7 @@ namespace act_Application.Controllers.General
                         await _context.SaveChangesAsync();
                         string DescripcionA = $"El Usuario {userIdentificacion} (Usuario Id {IdUser}) a realizado un Aporte de {actAportacione.Valor} el dia {actAportacione.FechaAportacion}.";
                         string DescripcionU = $"Haz  realizado un Aporte de {actAportacione.Valor} el dia {actAportacione.FechaAportacion}.";
-                        string IdActividad = (string)new AportacionRepository().OperacionesAportaciones(5, 0, IdUser);
+                        string IdActividad = (string)new AportacionRepository().OperacionesAportaciones(5, 0, IdUser, "");
                         await new NotificacionesServices(_context).CrearNotificacion(2, IdUser, IdActividad, "Aporte", DescripcionA, "Administrador", new ActNotificacione());
                         var essA = new EmailSendServices().EnviarCorreoAdmin(2, DescripcionA);
                         return RedirectToAction("Index", "Home");

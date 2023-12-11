@@ -2,7 +2,9 @@
 using act_Application.Models.BD;
 using act_Application.Models.Sistema.Complementos;
 using MySql.Data.MySqlClient;
+using Org.BouncyCastle.Crypto;
 using System.Data;
+using static Microsoft.ApplicationInsights.MetricDimensionNames.TelemetryContext;
 
 namespace act_Application.Data.Repository
 {
@@ -22,13 +24,12 @@ namespace act_Application.Data.Repository
          habita. Despues no volveras a ser la misma pero renaceras como un ser nuevo, alguien etereo. Yo creo en eso y no solo volveras a tu Prime... Seras mejor
          que el Prime que obtuviste anteriormente. 
         */
-
         private readonly string connectionString = AppSettingsHelper.GetConnectionString();
         private bool GetExist_Aportaciones()
         {
             try
             {
-                string Query = ConfigReader.GetQuery( 1,"APOR", "DBQA_SelectAportaciones");
+                string Query = ConfigReader.GetQuery(1, "APOR", "DBQA_SelectAportaciones");
 
                 int totalAportaciones = 0; // Variable para almacenar el valor de TotalAportaciones
 
@@ -108,7 +109,7 @@ namespace act_Application.Data.Repository
         {
             try
             {
-                string Query = ConfigReader.GetQuery( 1,"APOR", "DBQA_SelectAportaciones");
+                string Query = ConfigReader.GetQuery(1, "APOR", "DBQA_SelectAportaciones");
 
                 List<ActAportacione> aportaciones = new List<ActAportacione>();
 
@@ -190,7 +191,7 @@ namespace act_Application.Data.Repository
         {
             try
             {
-                string Query = ConfigReader.GetQuery( 1, "APOR", "DBQA_SelectAportacionesUser");
+                string Query = ConfigReader.GetQuery(1, "APOR", "DBQA_SelectAportacionesUser");
 
                 List<DetallesAportacionesUsers> aportaciones = new List<DetallesAportacionesUsers>();
                 DetallesAportacionesUsers detallesAportaciones = new DetallesAportacionesUsers();
@@ -240,7 +241,7 @@ namespace act_Application.Data.Repository
                 return null;
             }
         }
-        private string H_GetData_LastIdApor (int IdUser)
+        private string Auto_GetData_LastIdApor(int IdUser)
         {
             string IdA = string.Empty;
             try
@@ -256,7 +257,7 @@ namespace act_Application.Data.Repository
                         command.Parameters.AddWithValue("@IdUser", IdUser);
                         using (MySqlDataReader reader = command.ExecuteReader())
                         {
-                            if (reader.Read())
+                            while (reader.Read())
                             {
                                 IdA = Convert.ToString(reader["IdApor"]);
                             }
@@ -273,12 +274,49 @@ namespace act_Application.Data.Repository
             }
             catch (Exception ex)
             {
-                Console.WriteLine("H_GetData_LastIdApor | Error.");
+                Console.WriteLine("Auto_GetData_LastIdApor | Error.");
                 Console.WriteLine("Detalles del error: " + ex.Message);
                 return IdA;
             }
         }
-        public object OperacionesAportaciones (int Opciones, int Id, int IdUser)
+        private int GetData_IdAportacion(string IdApor)
+        {
+
+            try
+            {
+                int Id = 0;
+                string Query = ConfigReader.GetQuery(2, "", "DBQA_SelectAportacionesIdApor");
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                {
+                    connection.Open();
+                    using (MySqlCommand command = new MySqlCommand(Query, connection))
+                    {
+                        command.Parameters.AddWithValue("@IdApor", IdApor);
+                        using (MySqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                Id = Convert.ToInt32(reader["Id"]);
+                            }
+                        }
+                    }
+                }
+                return Id;
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine($"\nGetData_IdAportacion || Error de Mysql");
+                Console.WriteLine($"\nRazon del Error: {ex.Message}\n");
+                throw;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("\nGetData_IdAportacion | Error.");
+                Console.WriteLine("\nDetalles del error: " + ex.Message);
+                return -1;
+            }
+        }
+        public object OperacionesAportaciones (int Opciones, int Id, int IdUser, string Cadena)
         {
             try
             {
@@ -293,11 +331,13 @@ namespace act_Application.Data.Repository
                     case 4:
                         return GetData_AportacionesUser(IdUser);
                     case 5:
-                        return H_GetData_LastIdApor(IdUser);
+                        return Auto_GetData_LastIdApor(IdUser);
+                    case 6:
+                        return GetData_IdAportacion(Cadena);
                     default:
-                        Console.WriteLine("\n-----------------------------------------");
+                        Console.WriteLine("\n----------------------------------------------");
                         Console.WriteLine("\nOperacionesAportaciones || Opcion Inexistente.");
-                        Console.WriteLine("\n-----------------------------------------\n");
+                        Console.WriteLine("\n----------------------------------------------\n");
                         return null;
                 }
             }

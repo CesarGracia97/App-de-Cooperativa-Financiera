@@ -85,45 +85,6 @@ namespace act_Application.Data.Repository
                 return -1;
             }
         }
-        private ActRol GetData_RolUser(int IdRol)
-        {
-            try
-            {
-                string Query = ConfigReader.GetQuery(1, "ROLE", "DBQR_SelectRol");
-                ActRol robj = new ActRol();
-                using (MySqlConnection connection = new MySqlConnection(connectionString))
-                {
-                    using (MySqlCommand cmd = new MySqlCommand(Query, connection))
-                    {
-                        cmd.Parameters.AddWithValue("@IdRol", IdRol);
-                        cmd.CommandType = CommandType.Text;
-
-                        connection.Open();
-
-                        using (MySqlDataReader reader = cmd.ExecuteReader())
-                        {
-                            while (reader.Read())
-                            {
-                                robj = MapToRol(reader);
-                            }
-                        }
-                    }
-                }
-                return robj;
-            }
-            catch (MySqlException ex)
-            {
-                Console.WriteLine($"\nGetData_RolUser || Error de Mysql");
-                Console.WriteLine($"\nRazon del Error: {ex.Message}\n");
-                throw;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"\nGetData_RolUser || ErrorGeneral");
-                Console.WriteLine($"\nRazon del Error: {ex.Message}\n");
-                return null;
-            }
-        }
         private List<UserList> GetData_ListUser()
         {
             try
@@ -195,6 +156,45 @@ namespace act_Application.Data.Repository
             catch (Exception ex)
             {
                 Console.WriteLine($"\nGetData_CorreoUser || ErrorGeneral");
+                Console.WriteLine($"\nRazon del Error: {ex.Message}\n");
+                return null;
+            }
+        }
+        private ActRol GetData_RolUser(int IdRol)
+        {
+            try
+            {
+                string Query = ConfigReader.GetQuery(1, "ROLE", "DBQR_SelectRol");
+                ActRol robj = new ActRol();
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                {
+                    using (MySqlCommand cmd = new MySqlCommand(Query, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@IdRol", IdRol);
+                        cmd.CommandType = CommandType.Text;
+
+                        connection.Open();
+
+                        using (MySqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                robj = MapToRol(reader);
+                            }
+                        }
+                    }
+                }
+                return robj;
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine($"\nGetData_RolUser || Error de Mysql");
+                Console.WriteLine($"\nRazon del Error: {ex.Message}\n");
+                throw;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"\nGetData_RolUser || ErrorGeneral");
                 Console.WriteLine($"\nRazon del Error: {ex.Message}\n");
                 return null;
             }

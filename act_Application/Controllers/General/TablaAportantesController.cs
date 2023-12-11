@@ -8,7 +8,7 @@ namespace act_Application.Controllers.General
     {
         public IActionResult Index()
         {
-            var arobj = (List<ActAportacione>) new AportacionRepository().OperacionesAportaciones( 2, 0, 0);
+            var arobj = (List<ActAportacione>) new AportacionRepository().OperacionesAportaciones( 2, 0, 0, "");
             return View(arobj);
         }
     }

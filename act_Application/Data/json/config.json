@@ -12,7 +12,8 @@
       },
       "APOR": {
         "DBQA_SelectAportaciones": "SELECT (SELECT COUNT(*) FROM act_Aportaciones) AS TotalAportaciones, a.*, u.NombreYApellido AS NombreUsuario FROM act_Aportaciones a INNER JOIN act_User u ON a.IdUser = u.Id",
-        "DBQA_SelectAportacionesUser": "SELECT (SELECT COUNT(*) FROM  act_Aportaciones WHERE IdUser = @IdUser) AS TotalAportaciones, (SELECT COUNT(*) FROM  act_Aportaciones WHERE Estado ='APROBADO' AND IdUser = @IdUser) AS TotalAprobados, (SELECT COUNT(*) FROM  act_Aportaciones WHERE Estado = 'EN ESPERA' AND IdUser = @IdUser) AS TotalEspera, a.* FROM act_Aportaciones a WHERE a.IdUser = @IdUser"
+        "DBQA_SelectAportacionesUser": "SELECT (SELECT COUNT(*) FROM  act_Aportaciones WHERE IdUser = @IdUser) AS TotalAportaciones, (SELECT COUNT(*) FROM  act_Aportaciones WHERE Estado ='APROBADO' AND IdUser = @IdUser) AS TotalAprobados, (SELECT COUNT(*) FROM  act_Aportaciones WHERE Estado = 'EN ESPERA' AND IdUser = @IdUser) AS TotalEspera, a.* FROM act_Aportaciones a WHERE a.IdUser = @IdUser",
+        "DBQA_SelectAportacionesIdApor": "SELECT Id FROM act_Aportaciones WHERE IdApor = @IdApor"
       },
       "MULT": {
         "DBQM_SelectMultas": "SELECT (SELECT COUNT(*) FROM act_Multas WHERE Estado = 'PENDIENTE') AS TotalMultas, a.*,  u.NombreYApellido AS NombreUsuario FROM act_Multas a INNER JOIN act_User u ON a.IdUser = u.Id WHERE a.Estado = 'PENDIENTE'",
