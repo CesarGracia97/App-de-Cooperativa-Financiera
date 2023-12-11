@@ -176,7 +176,7 @@ namespace act_Application.Data.Repository
                 return null;
             }
         }
-        private string H_GetData_LastIdPres(int IdUser)
+        private string Auto_GetData_LastIdPres(int IdUser)
         {
             string IdA = string.Empty;
             try
@@ -204,13 +204,13 @@ namespace act_Application.Data.Repository
             }
             catch (MySqlException ex)
             {
-                Console.WriteLine($"\n H_GetData_LastIdPres || Error de Mysql");
+                Console.WriteLine($"\n Auto_GetData_LastIdPres || Error de Mysql");
                 Console.WriteLine($"\nRazon del Error: {ex.Message}\n");
                 throw;
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"\n H_GetData_LastIdPres || ErrorGeneral");
+                Console.WriteLine($"\n Auto_GetData_LastIdPres || ErrorGeneral");
                 Console.WriteLine($"\nRazon del Error: {ex.Message}\n");
                 return null;
             }
@@ -246,7 +246,7 @@ namespace act_Application.Data.Repository
                     case 4:
                         return GetData_PrestamosUser(IdUser);
                     case 5:
-                        return H_GetData_LastIdPres(IdUser);
+                        return Auto_GetData_LastIdPres(IdUser);
                     default:
                         Console.WriteLine("\n-----------------------------------------");
                         Console.WriteLine("\nOperacionesPrestamos || Opcion Inexistente.");

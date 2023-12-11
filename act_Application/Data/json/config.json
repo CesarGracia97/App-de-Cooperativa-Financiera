@@ -18,11 +18,12 @@
       "MULT": {
         "DBQM_SelectMultas": "SELECT (SELECT COUNT(*) FROM act_Multas WHERE Estado = 'PENDIENTE') AS TotalMultas, a.*,  u.NombreYApellido AS NombreUsuario FROM act_Multas a INNER JOIN act_User u ON a.IdUser = u.Id WHERE a.Estado = 'PENDIENTE'",
         "DBQM_SelectMultasUser": "SELECT (SELECT COUNT(*) FROM act_Multas WHERE IdUser = @IdUser) AS TotalMultas, (SELECT COUNT(*) FROM act_Multas WHERE Estado='CANCELADO' AND IdUser = @IdUser) AS TotalCancelados, a.* FROM act_Multas a WHERE a.IdUser = @IdUser AND Estado ='PENDIENTE'",
-        "DBQM_SelectMultasId": "SELECT * FROM act_Multas WHERE Id = @Id"
+        "DBQM_SelectMultasId": "SELECT * FROM act_Multas WHERE Id = @Id",
+        "DBQM_SelectMultasIdMult":"SELECT Id FROM act_Multas WHERE IdApor = @IdApor"
       },
       "EVEN": {
         "DBQE_SelectEventos": "SELECT (SELECT COUNT(*) FROM act_Eventos WHERE Estado = 'CONCURSO') AS TotalEventos, x.*, u.NombreYApellido AS NombreUsuario FROM act_Eventos x INNER JOIN act_User u ON x.IdUser = u.Id WHERE x.Estado = 'CONCURSO'",
-        "DBQE_SelectEventosUser": "SELECT (SELECT COUNT(*) FROM act_Eventos WHERE Id = @Id) AS TotalEventos, a.* FROM act_Eventos a WHERE Id = @Id"
+        "DBQE_SelectEventosUser": "SELECT (SELECT COUNT(*) FROM act_Eventos WHERE Id = @Id) AS TotalEventos, a.* FROM act_Eventos a WHERE Id = @Id",
       },
       "PRES": {
         "DBQP_SelectPrestamoId": "SELECT (SELECT COUNT(*) FROM act_Prestamos WHERE Id = @Id) AS TotalPrestamos, a.* FROM act_Prestamos a WHERE Id = @Id",
