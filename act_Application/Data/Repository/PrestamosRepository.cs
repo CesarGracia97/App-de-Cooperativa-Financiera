@@ -61,7 +61,7 @@ namespace act_Application.Data.Repository
                         {
                             while (reader.Read())
                             {
-                                ActPrestamo obj = MappToPrestamo(reader);
+                                ActPrestamo obj = MapToPrestamo(reader);
                                 pobj = obj;
                             }
                             
@@ -215,7 +215,7 @@ namespace act_Application.Data.Repository
                 return null;
             }
         }
-        private ActPrestamo MappToPrestamo(MySqlDataReader reader)
+        private ActPrestamo MapToPrestamo(MySqlDataReader reader)
         {
             return new ActPrestamo
             {

@@ -1,8 +1,11 @@
 ﻿using act_Application.Helper;
 using act_Application.Models.BD;
 using act_Application.Models.Sistema.Complementos;
+using Microsoft.AspNetCore.Identity;
 using MySql.Data.MySqlClient;
 using System.Data;
+using static Microsoft.ApplicationInsights.MetricDimensionNames.TelemetryContext;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace act_Application.Data.Repository
 {
@@ -277,7 +280,7 @@ namespace act_Application.Data.Repository
                 return IdA;
             }
         }
-        private int GetData_IdAportacion_IdApor(string IdApor) // Obtienes el Id de una aportacion por medio de su IdPersonalizado.
+        private int GetData_IdAportacion_IdApor(string IdApor) //Obtienes el Id de una aportacion por medio de su IdPersonalizado.
         {
             try
             {
@@ -313,7 +316,61 @@ namespace act_Application.Data.Repository
                 return -1;
             }
         }
-        private 
+        private ActAportacione GetDta_DataAportaciones_Id(int Id) //Obtienes todos los datos de una aportacion por medio de su Id de Registro.
+        {
+            try
+            {
+                string Query = ConfigReader.GetQuery(1, "APOR", "DBQA_SelectAportacionesDataId");
+                var aobj = new ActAportacione();
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                {
+                    connection.Open();
+                    using (MySqlCommand command = new MySqlCommand(Query, connection))
+                    {
+                        command.Parameters.AddWithValue("@Id", Id);
+                        using (MySqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                ActAportacione obj = MapToAportaciones(reader);
+                                aobj = obj;
+                            }
+                        }
+                    }
+                }
+                return aobj;
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine($"\nGetDta_DataAportaciones_Id || Error de Mysql");
+                Console.WriteLine($"\nRazon del Error: {ex.Message}\n");
+                throw;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("\nGetDta_DataAportaciones_Id | Error.");
+                Console.WriteLine("\nDetalles del error: " + ex.Message);
+                return null;
+            }
+        }
+        private ActAportacione MapToAportaciones (MySqlDataReader reader)
+        {
+            return new ActAportacione
+            {
+                Id = Convert.ToInt32(reader["Id"]),
+                IdApor = Convert.ToString(reader["IdApor"]),
+                IdUser = Convert.ToInt32(reader["IdUser"]),
+                FechaAportacion = Convert.ToDateTime(reader["FechaAportacion"]),
+                Cuadrante = Convert.ToString(reader["Cuadrante"]),
+                Valor = Convert.ToDecimal(reader["Valor"]),
+                NBancoOrigen = Convert.ToString(reader["NBancoOrigen"]),
+                CBancoOrigen = Convert.ToString(reader["CBancoOrigen"]),
+                NBancoDestino = Convert.ToString(reader["NBancoDestino"]),
+                CBancoDestino = Convert.ToString(reader["CBancoDestino"]),
+                CapturaPantalla = reader.IsDBNull(reader.GetOrdinal("CapturaPantalla")) ? null : (byte[])reader["CapturaPantalla"],
+                Estado = Convert.ToString(reader["Estado"])
+            };
+        }
         public object OperacionesAportaciones (int Opciones, int Id, int IdUser, string Cadena)
         {
             try
@@ -332,6 +389,8 @@ namespace act_Application.Data.Repository
                         return Auto_GetData_LastIdApor(IdUser);
                     case 6:
                         return GetData_IdAportacion_IdApor(Cadena);
+                    case 7:
+                        return GetDta_DataAportaciones_Id(Id);
                     default:
                         Console.WriteLine("\n----------------------------------------------");
                         Console.WriteLine("\nOperacionesAportaciones || Opcion Inexistente.");

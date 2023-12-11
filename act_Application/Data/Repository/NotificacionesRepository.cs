@@ -113,7 +113,7 @@ namespace act_Application.Data.Repository
                                         uobj.OperacionesUsuario( 6, (int) new UsuarioRepository().OperacionesUsuario( 5, 0, 0, obj.IdActividad, ""), 0, "", "");
                                         break;
                                     case "APOR":
-                                        aobj.OperacionesAportaciones();
+                                        aobj.OperacionesAportaciones( 7, (int) new AportacionRepository().OperacionesAportaciones( 6, 0, 0, obj.IdActividad), 0, "");
                                         break;
                                     case "PRES":
                                         pobj.OperacionesPrestamos(2, (int) new PrestamosRepository().OperacionesPrestamos(1, 0, 0, obj.IdActividad), 0, "");
