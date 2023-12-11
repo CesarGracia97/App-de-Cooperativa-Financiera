@@ -110,13 +110,13 @@ namespace act_Application.Data.Repository
                                 switch (new ObtenerTipoNotificacion().ClasificarInformacion(obj.IdActividad))
                                 {
                                     case "NUSE":
-                                        uobj.OperacionesUsuario();
+                                        uobj.OperacionesUsuario( 6, (int) new UsuarioRepository().OperacionesUsuario( 5, 0, 0, obj.IdActividad, ""), 0, "", "");
                                         break;
                                     case "APOR":
                                         aobj.OperacionesAportaciones();
                                         break;
                                     case "PRES":
-                                        pobj.OperacionesPrestamos(2, (int)new PrestamosRepository().OperacionesPrestamos(1, 0, 0, obj.IdActividad), 0, "");
+                                        pobj.OperacionesPrestamos(2, (int) new PrestamosRepository().OperacionesPrestamos(1, 0, 0, obj.IdActividad), 0, "");
                                         break;
                                     case "MULT":
                                         mobj.OperacionesMultas();

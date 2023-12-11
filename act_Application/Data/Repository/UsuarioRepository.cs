@@ -160,12 +160,30 @@ namespace act_Application.Data.Repository
                 return null;
             }
         }
-        private ActUser GetData_DataUser()
+        private ActUser GetData_DataUser(int Id)
         {
             try
             {
                 string Query = ConfigReader.GetQuery(1, "USER", "DBQU_SelectDataUserId");
                 ActUser uobj = new ActUser();
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                {
+                    MySqlCommand cmd = new MySqlCommand(Query, connection);
+                    cmd.Parameters.AddWithValue("@Id", Id);
+                    cmd.CommandType = CommandType.Text;
+
+                    connection.Open();
+
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            uobj = MapToUser(reader);
+
+                        }
+                    }
+                }
+                return uobj;
             }
             catch (MySqlException ex)
             {
@@ -257,6 +275,8 @@ namespace act_Application.Data.Repository
                         return GetData_CorreoUser(IdUser);
                     case 5:
                         return GetData_IdUser_Cedula(Correo);
+                    case 6:
+                        return GetData_DataUser(Id);
                     default:
                         Console.WriteLine("\n-----------------------------------------");
                         Console.WriteLine("\nOperacionesUsuario || Opcion Inexistente.");
