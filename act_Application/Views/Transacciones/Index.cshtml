@@ -9,8 +9,8 @@
     int IdUser = -1;
     if (userIdClaim != null && int.TryParse(userIdClaim.Value, out IdUser))
     {
-        condiCuotUser = (bool) new CuotaRepository().OperacionesCuotas(5, 0, IdUser);
-        condiMultUser = (bool) new MultaRepository().OperacionesMultas(2, 0, IdUser);
+        condiCuotUser = (bool) new CuotaRepository().OperacionesCuotas(5, 0, IdUser, "");
+        condiMultUser = (bool) new MultaRepository().OperacionesMultas(2, 0, IdUser, "");
     }
     DateTime minDate = DateTime.Now.AddDays(14);
     string minDateStr = minDate.ToString("yyyy-MM-dd");
@@ -160,7 +160,7 @@
             <label>Pago de Cuota</label>
             @if (condiCuotUser)
             {
-                var obj = (List<ActCuota>) new CuotaRepository().OperacionesCuotas(1, 0, IdUser);
+                var obj = (List<ActCuota>) new CuotaRepository().OperacionesCuotas(1, 0, IdUser, "");
                 <form asp-action="PagoCuota" method="post" enctype="multipart/form-data">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
@@ -234,7 +234,7 @@
             <label>Pago de Multas</label>
             @if (condiMultUser)
             {
-                var obj = (List<ActMulta>) new MultaRepository().OperacionesMultas(4, 0, IdUser);
+                var obj = (List<ActMulta>) new MultaRepository().OperacionesMultas(4, 0, IdUser, "");
                 <form asp-action="PagoMulta" method="post" enctype="multipart/form-data">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 

@@ -16,7 +16,7 @@
         <h1>Tabla de Multas</h1>
         <hr />
         <div class="table-container">
-            @if ((bool)new MultaRepository().OperacionesMultas(1, 0, 0))
+            @if ((bool)new MultaRepository().OperacionesMultas(1, 0, 0, ""))
             {
                 <table class="multa-table">
                     <thead>

@@ -11,9 +11,9 @@ namespace act_Application.Controllers.General
         public IActionResult Index()
         {
             List<ActMulta> mobj = null;
-            if ((bool)new MultaRepository().OperacionesMultas(1, 0, 0))
+            if ((bool)new MultaRepository().OperacionesMultas(1, 0, 0, ""))
             {
-                mobj = (List<ActMulta>) new MultaRepository().OperacionesMultas(3, 0, 0);
+                mobj = (List<ActMulta>) new MultaRepository().OperacionesMultas(3, 0, 0, "");
             }
             return View(mobj);
         }

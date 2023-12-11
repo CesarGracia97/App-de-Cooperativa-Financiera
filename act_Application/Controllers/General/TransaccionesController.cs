@@ -166,7 +166,7 @@ namespace act_Application.Controllers.General
                         //
                         var userIdentificacion = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value;
                         //
-                        var multOriginal = (ActMulta)new MultaRepository().OperacionesMultas(5, Id, 0);
+                        var multOriginal = (ActMulta)new MultaRepository().OperacionesMultas(5, Id, 0, "");
                         if (multOriginal == null)
                             return RedirectToAction("Error", "Home");
 
@@ -259,7 +259,7 @@ namespace act_Application.Controllers.General
                         //
                         var userIdentificacion = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value;
                         //
-                        var cuotOriginal = (ActCuota) new CuotaRepository().OperacionesCuotas( 2, Id, 0);
+                        var cuotOriginal = (ActCuota) new CuotaRepository().OperacionesCuotas( 2, Id, 0, "");
                         if (cuotOriginal == null)
                         {
                             return RedirectToAction("Error", "Home");

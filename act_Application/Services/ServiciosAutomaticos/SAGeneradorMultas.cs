@@ -38,7 +38,7 @@ namespace act_Application.Services.ServiciosAutomaticos
         }
         public async void GeneradorMultas(object state)
         {
-            var cuotas = (List<ActCuota>) new CuotaRepository().OperacionesCuotas( 4, 0, 0);
+            var cuotas = (List<ActCuota>) new CuotaRepository().OperacionesCuotas( 4, 0, 0, "");
             for (int i = 0; i < cuotas.Count; i++)
             {
                 if (cuotas[i].Estado == "PENDIENTE" || cuotas[i].Estado == "PENDIENTE M1")
@@ -79,7 +79,7 @@ namespace act_Application.Services.ServiciosAutomaticos
             ObtenerCuadrante ocobj = new ObtenerCuadrante();
             actMulta.Cuadrante = ocobj.Cuadrante(DateTime.Now);
             actMulta.Razon = "Cuota Id #: " + Id.ToString() + " | " + Razon;
-            var erobj = (ActEvento) new EventosRepository().OperacionesEventos( 4, IdPrestamo, 0);
+            var erobj = (ActEvento) new EventosRepository().OperacionesEventos( 4, IdPrestamo, 0, "");
             bool opobj = new ObtenerParticipantes().NombresParticipantes(erobj.ParticipantesId, erobj.NombresPId);
             decimal porcentaje = 0m;
             switch (opcion)

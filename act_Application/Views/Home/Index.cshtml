@@ -63,7 +63,7 @@
                         <td class="col-aport">
                         </td>
                         <td class="col-mult">
-                            @if ((bool) new MultaRepository().OperacionesMultas(2, 0, IdUser))
+                            @if ((bool) new MultaRepository().OperacionesMultas(2, 0, IdUser, ""))
                             {
                                 <p>Tienes multas activas, esta opcion esta en desarrollo.</p>
                             }
@@ -87,7 +87,7 @@
                     </div>
                 </div>
                 <div class="fila-infr">
-                    @if ((bool) new EventosRepository().OperacionesEventos(1,0,0))
+                    @if ((bool) new EventosRepository().OperacionesEventos(1,0,0,""))
                     {
                         @foreach (var evento in Model)
                         {
