@@ -169,7 +169,39 @@ namespace act_Application.Data.Repository
         }
         private int GetData_IdEvento(string IdEven)
         {
-
+            try
+            {
+                int Id = 0;
+                string Query = ConfigReader.GetQuery(1, "MULT", "DBQE_SelectEventosIdEven");
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                {
+                    connection.Open();
+                    using (MySqlCommand command = new MySqlCommand(Query, connection))
+                    {
+                        command.Parameters.AddWithValue("@IdEvent", IdEven);
+                        using (MySqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                Id = Convert.ToInt32(reader["Id"]);
+                            }
+                        }
+                    }
+                }
+                return Id;
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine($"\nGetData_IdEvento || Error de Mysql");
+                Console.WriteLine($"\nRazon del Error: {ex.Message}\n");
+                throw;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("\nGetData_IdEvento | Error.");
+                Console.WriteLine("\nDetalles del error: " + ex.Message);
+                return -1;
+            }
         } 
         private ActEvento MapToEventos(MySqlDataReader reader)
         {
