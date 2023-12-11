@@ -118,7 +118,7 @@ namespace act_Application.Data.Repository
             }
             return null;
         }
-        private int H_GetData_LastIdCouta(int IdUser)
+        private int Auto_GetData_LastIdCouta(int IdUser)
         {
             int Id = -1;
             try
@@ -151,10 +151,14 @@ namespace act_Application.Data.Repository
             }
             catch (Exception ex)
             {
-                Console.WriteLine("H_GetData_LastIdCouta | Error. ");
+                Console.WriteLine("Auto_GetData_LastIdCouta | Error. ");
                 Console.WriteLine("Detalles del error: " + ex.Message);
                 return Id;
             }
+
+        }
+        private int GetData_IdCuota(int IdCuot) // Obtienes el Id de un registro de cuota por medio de su IdPersonalizado.
+        {
 
         }
         private List<ActCuota> SA_GetData_DateCuotasAll()
@@ -227,11 +231,13 @@ namespace act_Application.Data.Repository
                     case 2:
                         return GetData_IdCuotaUser(Id);
                     case 3:
-                        return H_GetData_LastIdCouta(IdUser);
+                        return Auto_GetData_LastIdCouta(IdUser);
                     case 4:
                         return SA_GetData_DateCuotasAll();
                     case 5:
                         return GetExist_CuotasUser(IdUser);
+                    case 6:
+                        return GetData_IdCuota();
                     default:
                         Console.WriteLine("\n-----------------------------------------");
                         Console.WriteLine("\nOperacionesCuotas || Opcion Inexistente.");

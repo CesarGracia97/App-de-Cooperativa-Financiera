@@ -279,9 +279,8 @@ namespace act_Application.Data.Repository
                 return IdA;
             }
         }
-        private int GetData_IdAportacion(string IdApor)
+        private int GetData_IdAportacion(string IdApor) // Obtienes el Id de una aportacion por medio de su IdPersonalizado.
         {
-
             try
             {
                 int Id = 0;
