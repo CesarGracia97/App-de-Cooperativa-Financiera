@@ -279,7 +279,7 @@ namespace act_Application.Data.Repository
                 return IdA;
             }
         }
-        private int GetData_IdAportacion(string IdApor) // Obtienes el Id de una aportacion por medio de su IdPersonalizado.
+        private int GetData_IdAportacion_IdApor(string IdApor) // Obtienes el Id de una aportacion por medio de su IdPersonalizado.
         {
             try
             {
@@ -332,7 +332,7 @@ namespace act_Application.Data.Repository
                     case 5:
                         return Auto_GetData_LastIdApor(IdUser);
                     case 6:
-                        return GetData_IdAportacion(Cadena);
+                        return GetData_IdAportacion_IdApor(Cadena);
                     default:
                         Console.WriteLine("\n----------------------------------------------");
                         Console.WriteLine("\nOperacionesAportaciones || Opcion Inexistente.");

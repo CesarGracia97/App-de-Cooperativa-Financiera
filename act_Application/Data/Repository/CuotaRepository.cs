@@ -157,7 +157,7 @@ namespace act_Application.Data.Repository
             }
 
         }
-        private int GetData_IdCuota(string IdCuot) // Obtienes el Id de un registro de cuota por medio de su IdPersonalizado.
+        private int GetData_IdCuota_IdCuot(string IdCuot) // Obtienes el Id de un registro de cuota por medio de su IdPersonalizado.
         {
             try
             {
@@ -269,7 +269,7 @@ namespace act_Application.Data.Repository
                     case 5:
                         return GetExist_CuotasUser(IdUser);
                     case 6:
-                        return GetData_IdCuota(Cadena);
+                        return GetData_IdCuota_IdCuot(Cadena);
                     default:
                         Console.WriteLine("\n-----------------------------------------");
                         Console.WriteLine("\nOperacionesCuotas || Opcion Inexistente.");

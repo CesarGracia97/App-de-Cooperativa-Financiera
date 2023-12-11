@@ -167,7 +167,7 @@ namespace act_Application.Data.Repository
             }
             return null;
         }
-        private int GetData_IdEvento(string IdEven) //Obtener el Id de Registro de Evento por medio de su Id Personalizado.
+        private int GetData_IdEvento_IdEven(string IdEven) //Obtener el Id de Registro de Evento por medio de su Id Personalizado.
         {
             try
             {
@@ -235,7 +235,7 @@ namespace act_Application.Data.Repository
                     case 4:
                         return Auto_GetData_ParticipantesEventos(Id);
                     case 5:
-                        return GetData_IdEvento(Cadena);
+                        return GetData_IdEvento_IdEven(Cadena);
                     default:
                         Console.WriteLine("\n-----------------------------------------");
                         Console.WriteLine("\nOperacionesEventos || Opcion Inexistente.");

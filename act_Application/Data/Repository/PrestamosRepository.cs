@@ -9,7 +9,7 @@ namespace act_Application.Data.Repository
     public class PrestamosRepository
     {
         private readonly string connectionString = AppSettingsHelper.GetConnectionString();
-        private int GetData_PrestamoIdPres(string IdPres)
+        private int GetData_IdPrestamo_IdPres(string IdPres)
         {
             int Id = 0;
             try
@@ -238,7 +238,7 @@ namespace act_Application.Data.Repository
                 switch (Opcion)
                 {
                     case 1:
-                        return GetData_PrestamoIdPres(IdPres);
+                        return GetData_IdPrestamo_IdPres(IdPres);
                     case 2:
                         return GetData_PrestamoId(Id);
                     case 3:

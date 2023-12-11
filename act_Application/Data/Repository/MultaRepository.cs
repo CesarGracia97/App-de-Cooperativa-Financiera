@@ -273,7 +273,7 @@ namespace act_Application.Data.Repository
             }
             return Id;
         }
-        private int GetData_IdMulta(string IdMult) //Obtiene el Id del Registro por medio del Id Personalizado.
+        private int GetData_IdMulta_IdMult(string IdMult) //Obtiene el Id del Registro por medio del Id Personalizado.
         {
             try
             {
@@ -349,7 +349,7 @@ namespace act_Application.Data.Repository
                     case 6:
                         return Auto_GetData_LastIdMultaUser(IdUser);
                     case 7:
-                        return GetData_IdMulta(Cadena);
+                        return GetData_IdMulta_IdMult(Cadena);
                     default:
                         Console.WriteLine("\n-----------------------------------------");
                         Console.WriteLine("\nOperacionesMulta || Opcion Inexistente.");

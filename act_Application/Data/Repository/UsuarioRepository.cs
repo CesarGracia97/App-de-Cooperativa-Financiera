@@ -48,7 +48,7 @@ namespace act_Application.Data.Repository
                 return null;
             }
         }
-        private int GetData_IdUser(string Cedula) // Obtener el Id de un Usuario por medio de su Cedula porque es el Id Personalizado en Notificaciones
+        private int GetData_IdUser_Cedula(string Cedula) // Obtener el Id de un Usuario por medio de su Cedula porque es el Id Personalizado en Notificaciones
         {
             try
             {
@@ -236,7 +236,7 @@ namespace act_Application.Data.Repository
                     case 4:
                         return GetData_CorreoUser(IdUser);
                     case 5:
-                        return GetData_IdUser(Correo);
+                        return GetData_IdUser_Cedula(Correo);
                     default:
                         Console.WriteLine("\n-----------------------------------------");
                         Console.WriteLine("\nOperacionesUsuario || Opcion Inexistente.");
