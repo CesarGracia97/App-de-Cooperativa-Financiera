@@ -2,9 +2,7 @@
 using act_Application.Models.BD;
 using act_Application.Models.Sistema.Complementos;
 using MySql.Data.MySqlClient;
-using Org.BouncyCastle.Crypto;
 using System.Data;
-using static Microsoft.ApplicationInsights.MetricDimensionNames.TelemetryContext;
 
 namespace act_Application.Data.Repository
 {
@@ -315,6 +313,7 @@ namespace act_Application.Data.Repository
                 return -1;
             }
         }
+        private 
         public object OperacionesAportaciones (int Opciones, int Id, int IdUser, string Cadena)
         {
             try
