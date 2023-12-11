@@ -167,6 +167,10 @@ namespace act_Application.Data.Repository
             }
             return null;
         }
+        private int GetData_IdEvento(string IdEven)
+        {
+
+        } 
         private ActEvento MapToEventos(MySqlDataReader reader)
         {
             return new ActEvento 
@@ -184,7 +188,7 @@ namespace act_Application.Data.Repository
                 NombreUsuario = Convert.ToString(reader["NombreUsuario"])
             };
         }
-        public object OperacionesEventos(int Opcion, int Id, int IdUser)
+        public object OperacionesEventos(int Opcion, int Id, int IdUser, string Cadena)
         {
             try
             {
@@ -198,6 +202,8 @@ namespace act_Application.Data.Repository
                         return GetData_EventosId(Id);
                     case 4:
                         return Auto_GetData_ParticipantesEventos(Id);
+                    case 5:
+                        return GetData_IdEvento(Cadena);
                     default:
                         Console.WriteLine("\n-----------------------------------------");
                         Console.WriteLine("\nOperacionesEventos || Opcion Inexistente.");
