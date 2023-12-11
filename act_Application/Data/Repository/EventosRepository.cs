@@ -167,7 +167,7 @@ namespace act_Application.Data.Repository
             }
             return null;
         }
-        private int GetData_IdEvento(string IdEven)
+        private int GetData_IdEvento(string IdEven) //Obtener el Id de Registro de Evento por medio de su Id Personalizado.
         {
             try
             {
