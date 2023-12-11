@@ -160,6 +160,25 @@ namespace act_Application.Data.Repository
                 return null;
             }
         }
+        private ActUser GetData_DataUser()
+        {
+            try
+            {
+
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine($"\nGetData_DataUser || Error de Mysql");
+                Console.WriteLine($"\nRazon del Error: {ex.Message}\n");
+                throw;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"\nGetData_DataUser || ErrorGeneral");
+                Console.WriteLine($"\nRazon del Error: {ex.Message}\n");
+                return null;
+            }
+        }
         private ActRol GetData_RolUser(int IdRol)
         {
             try
