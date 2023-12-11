@@ -157,9 +157,41 @@ namespace act_Application.Data.Repository
             }
 
         }
-        private int GetData_IdCuota(int IdCuot) // Obtienes el Id de un registro de cuota por medio de su IdPersonalizado.
+        private int GetData_IdCuota(string IdCuot) // Obtienes el Id de un registro de cuota por medio de su IdPersonalizado.
         {
-
+            try
+            {
+                int Id = 0;
+                string Query = ConfigReader.GetQuery(1, "CUOT", "DBQC_SelectIdCoutaIdCuot");
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                {
+                    connection.Open();
+                    using (MySqlCommand command = new MySqlCommand(Query, connection))
+                    {
+                        command.Parameters.AddWithValue("@IdCuot", IdCuot);
+                        using (MySqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                Id = Convert.ToInt32(reader["Id"]);
+                            }
+                        }
+                    }
+                }
+                return Id;
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine($"\nGetData_IdCuota || Error de Mysql");
+                Console.WriteLine($"\nRazon del Error: {ex.Message}\n");
+                throw;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("\nGetData_IdCuota | Error.");
+                Console.WriteLine("\nDetalles del error: " + ex.Message);
+                return -1;
+            }
         }
         private List<ActCuota> SA_GetData_DateCuotasAll()
         {
@@ -220,7 +252,7 @@ namespace act_Application.Data.Repository
                 CapturaPantalla = Convert.ToString(reader["CapturaPantalla"])
             };
         }
-        public object OperacionesCuotas (int Opciones, int Id, int IdUser)
+        public object OperacionesCuotas (int Opciones, int Id, int IdUser, string Cadena)
         {
             try
             {
@@ -237,7 +269,7 @@ namespace act_Application.Data.Repository
                     case 5:
                         return GetExist_CuotasUser(IdUser);
                     case 6:
-                        return GetData_IdCuota();
+                        return GetData_IdCuota(Cadena);
                     default:
                         Console.WriteLine("\n-----------------------------------------");
                         Console.WriteLine("\nOperacionesCuotas || Opcion Inexistente.");
