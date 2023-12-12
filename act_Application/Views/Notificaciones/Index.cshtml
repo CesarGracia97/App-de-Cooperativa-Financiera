@@ -89,7 +89,7 @@
                                                     <p class="modal__paragraph"><strong>Valor:</strong> @notificacionAdmin.Aportaciones.Valor</p>
                                                     <p class="modal__paragraph"><strong>Descripcion:</strong></p>
                                                     <p class="modal__description">@notificacionAdmin.Notificaciones.Descripcion</p>
-                                                    <form asp-action="VisualizadoA">
+                                                    <form asp-action="Visualizado">
                                                         <div class="container-modal-btn">
                                                             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                                                             <input type="hidden" asp-for="@notificacionAdmin.Notificaciones.Id" name="Id" />
@@ -124,7 +124,7 @@
                                                     <p class="modal__paragraph"><strong>Valor:</strong> @notificacionAdmin.Cuotas.Valor</p>
                                                     <p class="modal__paragraph"><strong>Descripcion:</strong></p>
                                                     <p class="modal__description">@notificacionAdmin.Notificaciones.Descripcion</p>
-                                                    <form asp-action="VisualizadoC">
+                                                    <form asp-action="Visualizado">
                                                         <div class="container-modal-btn">
                                                             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                                                             <input type="hidden" asp-for="@notificacionAdmin.Notificaciones.Id" name="Id" />

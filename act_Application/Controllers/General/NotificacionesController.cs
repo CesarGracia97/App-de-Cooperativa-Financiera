@@ -79,7 +79,7 @@ namespace act_Application.Controllers.General
                 return RedirectToAction("Error", "Home");
             }
         }
-        public async Task<IActionResult> VisualizadoA(int Id, [Bind("Id,IdActividad,FechaGeneracion,Razon,Descripcion,Destino,Visto")] ActNotificacione actNotificacione)
+        public async Task<IActionResult> Visualizado(int Id, [Bind("Id,IdActividad,FechaGeneracion,Razon,Descripcion,Destino,Visto")] ActNotificacione actNotificacione)
         {
             if (Id != actNotificacione.Id)
             {
@@ -90,6 +90,7 @@ namespace act_Application.Controllers.General
                 try
                 {
                     var nobj = (ActNotificacione)new NotificacionesRepository().OperacionesNotificaciones(5, Id, 0);
+                    actNotificacione.IdUser = nobj.IdUser;
                     actNotificacione.IdActividad = nobj.IdActividad;
                     actNotificacione.FechaGeneracion = nobj.FechaGeneracion;
                     actNotificacione.Razon = nobj.Razon;
@@ -102,8 +103,8 @@ namespace act_Application.Controllers.General
                 }
                 catch (DbUpdateConcurrencyException ex)
                 {
-                    Console.WriteLine("Hubo un problema al actualizar 'Visto' en Notificaciones de Aportaciones.");
-                    Console.WriteLine("Detalles del error: " + ex.Message);
+                    Console.WriteLine($"Hubo un problema al actualizar 'Visto' en el Id.{Id}");
+                    Console.WriteLine($"Detalles del error: {ex.Message}");
                     return RedirectToAction("Error", "Home");
                 }
             }
