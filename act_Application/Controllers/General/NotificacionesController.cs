@@ -89,8 +89,12 @@ namespace act_Application.Controllers.General
             {
                 try
                 {
-                    var aobj = (ActNotificacione) new NotificacionesRepository().OperacionesNotificaciones()
-
+                    var nobj = (ActNotificacione)new NotificacionesRepository().OperacionesNotificaciones(5, Id, 0);
+                    actNotificacione.IdActividad = nobj.IdActividad;
+                    actNotificacione.FechaGeneracion = nobj.FechaGeneracion;
+                    actNotificacione.Razon = nobj.Razon;
+                    actNotificacione.Descripcion = nobj.Descripcion;
+                    actNotificacione.Destino = nobj.Destino;
                     actNotificacione.Visto = "SI";
                     _context.Update(actNotificacione);
                     await _context.SaveChangesAsync();

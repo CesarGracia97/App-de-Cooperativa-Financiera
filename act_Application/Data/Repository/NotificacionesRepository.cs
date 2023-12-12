@@ -208,7 +208,24 @@ namespace act_Application.Data.Repository
         {
             try
             {
-
+                ActNotificacione nobj = new ActNotificacione();
+                string Query = ConfigReader.GetQuery(1, "NOTI", "DBQN_SelectNotificacionesId");
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                {
+                    MySqlCommand command = new MySqlCommand(Query, connection);
+                    command.Parameters.AddWithValue("@Id", Id);
+                    command.CommandType = CommandType.Text;
+                    connection.Open();
+                    using (MySqlDataReader reader = command.ExecuteReader())
+                    {
+                        while(reader.Read())
+                        {
+                            ActNotificacione obj = MapToNotificaciones(reader);
+                            nobj = obj;
+                        }
+                    }
+                }
+                return nobj;
             }
             catch (MySqlException ex)
             {
@@ -251,6 +268,8 @@ namespace act_Application.Data.Repository
                         return GetData_NotificacionesAdmin();
                     case 4:
                         return GetData_NotificacionesUser(IdUser);
+                    case 5:
+                        return GetData_NotificacionesId(Id);
                     default:
                         Console.WriteLine("\n---------------------------------------------------");
                         Console.WriteLine("\nOperacionesNotificaciones || Opcion Inexistente.");
