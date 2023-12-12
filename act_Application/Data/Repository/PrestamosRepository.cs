@@ -45,7 +45,7 @@ namespace act_Application.Data.Repository
                 return Id = -1;
             }
         }
-        private ActPrestamo GetData_PrestamoId(int IdPrestamo) //Consulta para obtener todos los datos de una transaccion especifica
+        private ActPrestamo GetData_PrestamoId(int Id) //Consulta para obtener todos los datos de una transaccion especifica
         {
             try
             {
@@ -56,7 +56,7 @@ namespace act_Application.Data.Repository
                     connection.Open();
                     using (MySqlCommand command = new MySqlCommand(Query, connection))
                     {
-                        command.Parameters.AddWithValue("@IdPrestamo", IdPrestamo);
+                        command.Parameters.AddWithValue("@Id", Id);
                         using (MySqlDataReader reader = command.ExecuteReader())
                         {
                             while (reader.Read())
