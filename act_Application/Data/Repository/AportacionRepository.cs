@@ -321,20 +321,19 @@ namespace act_Application.Data.Repository
             try
             {
                 string Query = ConfigReader.GetQuery(1, "APOR", "DBQA_SelectAportacionesDataId");
-                var aobj = new ActAportacione();
+                ActAportacione aobj = new ActAportacione();
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
+                    MySqlCommand cmd = new MySqlCommand(Query, connection);
+                    cmd.Parameters.AddWithValue("@Id", Id);
+                    cmd.CommandType = CommandType.Text;
                     connection.Open();
-                    using (MySqlCommand command = new MySqlCommand(Query, connection))
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
                     {
-                        command.Parameters.AddWithValue("@Id", Id);
-                        using (MySqlDataReader reader = command.ExecuteReader())
+                        while (reader.Read())
                         {
-                            while (reader.Read())
-                            {
-                                ActAportacione obj = MapToAportaciones(reader);
-                                aobj = obj;
-                            }
+                            ActAportacione obj = MapToAportaciones(reader);
+                            aobj = obj;
                         }
                     }
                 }

@@ -208,6 +208,7 @@ namespace act_Application.Data.Repository
         {
             try
             {
+                ActMulta mobj = new ActMulta();
                 string Query = ConfigReader.GetQuery( 1, "MULT", "DBQM_SelectMultasId");
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
@@ -220,10 +221,11 @@ namespace act_Application.Data.Repository
                         while (reader.Read())
                         {
                             ActMulta obj = MapToMulta(reader);
-                            return obj;
+                            mobj = obj;
                         }
                     }
                 }
+                return mobj;
             }
             catch (MySqlException ex)
             {
@@ -235,8 +237,8 @@ namespace act_Application.Data.Repository
             {
                 Console.WriteLine("GetData_MultasId | Error");
                 Console.WriteLine("Detalles del error: " + ex.Message);
+                return null;
             }
-            return null;
         }
         private int Auto_GetData_LastIdMultaUser(int IdUser) //Obtiene el Id del ultimo registro de la Multa de un Usuario. 
         {
