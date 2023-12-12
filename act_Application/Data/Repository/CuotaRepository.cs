@@ -80,7 +80,7 @@ namespace act_Application.Data.Repository
                 return null;
             }
         }
-        private ActCuota GetData_IdCuotaUser(int Id)
+        private ActCuota GetData_IdCuota(int Id)
         {
             try
             {
@@ -113,7 +113,7 @@ namespace act_Application.Data.Repository
             }
             catch (Exception ex)
             {
-                Console.WriteLine("GetData_IdCuotaUser | Error.");
+                Console.WriteLine("GetData_IdCuota | Error.");
                 Console.WriteLine("Detalles del error: " + ex.Message);
             }
             return null;
@@ -261,7 +261,7 @@ namespace act_Application.Data.Repository
                     case 1:
                         return GetData_CuotasUser(IdUser);
                     case 2:
-                        return GetData_IdCuotaUser(Id);
+                        return GetData_IdCuota(Id);
                     case 3:
                         return Auto_GetData_LastIdCouta(IdUser);
                     case 4:
