@@ -204,6 +204,25 @@ namespace act_Application.Data.Repository
                 return null;
             }
         }
+        private ActNotificacione GetData_NotificacionesId(int Id)
+        {
+            try
+            {
+
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine($"\nGetData_NotificacionesId || Error de Mysql");
+                Console.WriteLine($"\nRazon del Error: {ex.Message}\n");
+                throw;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"\nGetData_NotificacionesId || ErrorGeneral");
+                Console.WriteLine($"\nRazon del Error: {ex.Message}\n");
+                return null;
+            }
+        }
         private ActNotificacione MapToNotificaciones(MySqlDataReader reader)
         {
             return new ActNotificacione

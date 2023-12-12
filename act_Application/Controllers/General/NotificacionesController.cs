@@ -79,7 +79,7 @@ namespace act_Application.Controllers.General
                 return RedirectToAction("Error", "Home");
             }
         }
-        public async Task<IActionResult> Visualizado(int Id, [Bind("Id,IdActividad,FechaGeneracion,Razon,Descripcion,Destino,Visto")] ActNotificacione actNotificacione)
+        public async Task<IActionResult> VisualizadoA(int Id, [Bind("Id,IdActividad,FechaGeneracion,Razon,Descripcion,Destino,Visto")] ActNotificacione actNotificacione)
         {
             if (Id != actNotificacione.Id)
             {
@@ -89,6 +89,8 @@ namespace act_Application.Controllers.General
             {
                 try
                 {
+                    var aobj = (ActNotificacione) new NotificacionesRepository().OperacionesNotificaciones()
+
                     actNotificacione.Visto = "SI";
                     _context.Update(actNotificacione);
                     await _context.SaveChangesAsync();
