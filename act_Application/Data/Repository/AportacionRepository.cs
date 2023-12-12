@@ -316,7 +316,7 @@ namespace act_Application.Data.Repository
                 return -1;
             }
         }
-        private ActAportacione GetDta_DataAportaciones_Id(int Id) //Obtienes todos los datos de una aportacion por medio de su Id de Registro.
+        private ActAportacione GetData_DataAportaciones_Id(int Id) //Obtienes todos los datos de una aportacion por medio de su Id de Registro.
         {
             try
             {
@@ -342,13 +342,13 @@ namespace act_Application.Data.Repository
             }
             catch (MySqlException ex)
             {
-                Console.WriteLine($"\nGetDta_DataAportaciones_Id || Error de Mysql");
+                Console.WriteLine($"\nGetData_DataAportaciones_Id || Error de Mysql");
                 Console.WriteLine($"\nRazon del Error: {ex.Message}\n");
                 throw;
             }
             catch (Exception ex)
             {
-                Console.WriteLine("\nGetDta_DataAportaciones_Id | Error.");
+                Console.WriteLine("\nGetData_DataAportaciones_Id | Error.");
                 Console.WriteLine("\nDetalles del error: " + ex.Message);
                 return null;
             }
@@ -390,7 +390,7 @@ namespace act_Application.Data.Repository
                     case 6:
                         return GetData_IdAportacion_IdApor(Cadena);
                     case 7:
-                        return GetDta_DataAportaciones_Id(Id);
+                        return GetData_DataAportaciones_Id(Id);
                     default:
                         Console.WriteLine("\n----------------------------------------------");
                         Console.WriteLine("\nOperacionesAportaciones || Opcion Inexistente.");
