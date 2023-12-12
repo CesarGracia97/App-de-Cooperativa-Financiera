@@ -110,36 +110,6 @@ namespace act_Application.Controllers.General
             }
             return View(actNotificacione);
         }
-        public async Task<IActionResult> VisualizadoC(int Id, [Bind("Id,IdActividad,FechaGeneracion,Razon,Descripcion,Destino,Visto")] ActNotificacione actNotificacione)
-        {
-            if (Id != actNotificacione.Id)
-            {
-                return RedirectToAction("Error", "Home");
-            }
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    var nobj = (ActNotificacione)new NotificacionesRepository().OperacionesNotificaciones(5, Id, 0);
-                    actNotificacione.IdActividad = nobj.IdActividad;
-                    actNotificacione.FechaGeneracion = nobj.FechaGeneracion;
-                    actNotificacione.Razon = nobj.Razon;
-                    actNotificacione.Descripcion = nobj.Descripcion;
-                    actNotificacione.Destino = nobj.Destino;
-                    actNotificacione.Visto = "SI";
-                    _context.Update(actNotificacione);
-                    await _context.SaveChangesAsync();
-                    return RedirectToAction("Index", "Notificaciones");
-                }
-                catch (DbUpdateConcurrencyException ex)
-                {
-                    Console.WriteLine("Hubo un problema al actualizar 'Visto' en Notificaciones de Cuotas.");
-                    Console.WriteLine("Detalles del error: " + ex.Message);
-                    return RedirectToAction("Error", "Home");
-                }
-            }
-            return View(actNotificacione);
-        }
 
     }
 }
