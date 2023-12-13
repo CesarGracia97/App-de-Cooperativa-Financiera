@@ -2,8 +2,6 @@ using act_Application.Data.Repository;
 using act_Application.Data.Context;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
-using act_Application.Services;
-using act_Application.Services.ServiciosAutomaticos;
 
 var builder = WebApplication.CreateBuilder(args);
 

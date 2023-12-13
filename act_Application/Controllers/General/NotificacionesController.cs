@@ -103,7 +103,7 @@ namespace act_Application.Controllers.General
                 return RedirectToAction("Error", "Home");
             }
         }
-        public async Task<IActionResult> Visualizado(int IdN, int IdA, int Opcion, [Bind("Id,IdActividad,FechaGeneracion,Razon,Descripcion,Destino,Visto")] ActNotificacione actNotificacione, [Bind("Id,Cedula,NombreYApellido,Contrasena,Celular,TipoUser,IdSocio,FotoPerfil")] ActUser actUser, [Bind("Id,IdPres,IdUser,Valor,FechaGeneracion,FechaEntregaDinero,FechaInicioPagoCuotas,FechaPagoTotalPrestamo,TipoCuota,Estado")] ActPrestamo actPrestamo)
+        public async Task<IActionResult> Visualizado(int IdN, int IdA, int Opcion, string Estado, string TipoUser, DateTime FechaPagoTotalPrestamo, DateTime FechaInicioPagoCuotas, string TipoCuota, string PEstado, [Bind("Id,IdActividad,FechaGeneracion,Razon,Descripcion,Destino,Visto")] ActNotificacione actNotificacione, [Bind("Id,Cedula,NombreYApellido,Contrasena,Celular,TipoUser,IdSocio,FotoPerfil")] ActUser actUser, [Bind("Id,IdPres,IdUser,Valor,FechaGeneracion,FechaEntregaDinero,FechaInicioPagoCuotas,FechaPagoTotalPrestamo,TipoCuota,Estado")] ActPrestamo actPrestamo)
         {
             if (IdN != actNotificacione.Id)
             {
@@ -148,7 +148,28 @@ namespace act_Application.Controllers.General
                             {
                                 try
                                 {
-                                    var uobj = new UsuarioRepository().OperacionesUsuario(6, IdA, 0, "", "");
+                                    var uobj = (ActUser) new UsuarioRepository().OperacionesUsuario(6, IdA, 0, "", "");
+                                    actUser.Cedula = uobj.Cedula;
+                                    actUser.Correo = uobj.Correo;
+                                    actUser.NombreYapellido = uobj.NombreYapellido;
+                                    actUser.Celular = uobj.Celular;
+                                    actUser.Contrasena = uobj.Contrasena;
+                                    actUser.IdSocio = uobj.IdSocio;
+                                    actUser.FotoPerfil = uobj.FotoPerfil;
+                                    if(Estado == "ACTIVO")
+                                    {
+                                        actUser.Estado = Estado;
+                                        actUser.TipoUser = TipoUser;
+                                    }
+                                    else 
+                                    if(Estado != "ACTIVO" && Estado == "INACTIVO" || Estado == "DENEGADO" || Estado == "EN EVALUACION" )
+                                    {
+                                        actUser.Estado = Estado;
+                                        actUser.TipoUser = "Denegado";
+                                    }
+                                    _context.Update(actUser);
+                                    await _context.SaveChangesAsync();
+                                    return RedirectToAction("Index", "Notificaciones");
                                 }
                                 catch (DbUpdateConcurrencyException ex)
                                 {
@@ -177,7 +198,18 @@ namespace act_Application.Controllers.General
                             {
                                 try
                                 {
-
+                                    var pobj = (ActPrestamo) new PrestamosRepository().OperacionesPrestamos(2, IdA, 0, "");
+                                    actPrestamo.IdPres = pobj.IdPres;
+                                    actPrestamo.IdUser = pobj.IdUser;
+                                    actPrestamo.Valor = pobj.Valor;
+                                    actPrestamo.FechaGeneracion = pobj.FechaGeneracion;
+                                    actPrestamo.FechaEntregaDinero = pobj.FechaEntregaDinero;
+                                    actPrestamo.FechaPagoTotalPrestamo = FechaPagoTotalPrestamo;
+                                    actPrestamo.FechaInicioPagoCuotas = FechaInicioPagoCuotas;
+                                    actPrestamo.TipoCuota = TipoCuota;
+                                    actPrestamo.Estado = PEstado;
+                                    _context.Update(actPrestamo);
+                                    await _context.SaveChangesAsync();
                                 }
                                 catch (DbUpdateConcurrencyException ex)
                                 {
