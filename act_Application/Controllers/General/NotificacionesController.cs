@@ -33,7 +33,8 @@ namespace act_Application.Controllers.General
                         Cuotas = _context.ActCuotas.FirstOrDefault(t => t.IdCuot == notificacion.IdActividad),
                         Aportaciones = _context.ActAportaciones.FirstOrDefault(t => t.IdApor == notificacion.IdActividad),
                         Eventos = _context.ActEventos.FirstOrDefault(t => t.IdEven == notificacion.IdActividad),
-                        Multas = _context.ActMultas.FirstOrDefault(t => t.IdMult == notificacion.IdActividad)
+                        Multas = _context.ActMultas.FirstOrDefault(t => t.IdMult == notificacion.IdActividad),
+                        Usuarios = _context.ActUsers.FirstOrDefault(t => t.Cedula == notificacion.IdActividad)
                     });
                     return View(viewModelList);
                 }
@@ -52,7 +53,7 @@ namespace act_Application.Controllers.General
                             Prestamos = _context.ActPrestamos.FirstOrDefault(t => t.IdPres == notificacion.IdActividad),
                             Cuotas = _context.ActCuotas.FirstOrDefault(t => t.IdCuot == notificacion.IdActividad),
                             Eventos = _context.ActEventos.FirstOrDefault(t => t.IdEven == notificacion.IdActividad),
-                            Multas = _context.ActMultas.FirstOrDefault(t => t.IdMult == notificacion.IdActividad)
+                            Multas = _context.ActMultas.FirstOrDefault(t => t.IdMult == notificacion.IdActividad),
                         });
                         return View(viewModelList);
                     }
