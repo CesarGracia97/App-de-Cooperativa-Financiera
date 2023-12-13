@@ -2,7 +2,6 @@
 using act_Application.Models.BD;
 using act_Application.Models.Sistema.Complementos;
 using MySql.Data.MySqlClient;
-using ZstdSharp.Unsafe;
 
 namespace act_Application.Data.Repository
 {
