@@ -148,7 +148,7 @@ namespace act_Application.Controllers.General
                             {
                                 try
                                 {
-                                    
+                                    var uobj = new UsuarioRepository().OperacionesUsuario(6, IdA, 0, "", "");
                                 }
                                 catch (DbUpdateConcurrencyException ex)
                                 {
