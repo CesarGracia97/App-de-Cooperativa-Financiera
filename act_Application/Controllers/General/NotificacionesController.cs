@@ -79,7 +79,7 @@ namespace act_Application.Controllers.General
                 return RedirectToAction("Error", "Home");
             }
         }
-        public async Task<IActionResult> Visualizado(int Id, [Bind("Id,IdActividad,FechaGeneracion,Razon,Descripcion,Destino,Visto")] ActNotificacione actNotificacione)
+        public async Task<IActionResult> Visualizado(int Id, int IdU, int Opcion, [Bind("Id,IdActividad,FechaGeneracion,Razon,Descripcion,Destino,Visto")] ActNotificacione actNotificacione, [Bind("Id,Cedula,NombreYApellido,Contrasena,Celular,TipoUser,IdSocio,FotoPerfil")] ActUser actUser, [Bind("Id,IdPres,IdUser,Valor,FechaGeneracion,FechaEntregaDinero,FechaInicioPagoCuotas,FechaPagoTotalPrestamo,TipoCuota,Estado")] ActPrestamo actPrestamo)
         {
             if (Id != actNotificacione.Id)
             {
@@ -90,16 +90,50 @@ namespace act_Application.Controllers.General
                 try
                 {
                     var nobj = (ActNotificacione)new NotificacionesRepository().OperacionesNotificaciones(5, Id, 0);
-                    actNotificacione.IdUser = nobj.IdUser;
-                    actNotificacione.IdActividad = nobj.IdActividad;
-                    actNotificacione.FechaGeneracion = nobj.FechaGeneracion;
-                    actNotificacione.Razon = nobj.Razon;
-                    actNotificacione.Descripcion = nobj.Descripcion;
-                    actNotificacione.Destino = nobj.Destino;
-                    actNotificacione.Visto = "SI";
-                    _context.Update(actNotificacione);
-                    await _context.SaveChangesAsync();
-                    return RedirectToAction("Index", "Notificaciones");
+                    switch (Opcion)
+                    {
+                        case 1/*Solo Actualiza la Notificacion a Vista.*/:
+                            //---Actualizacion Visualizacion
+                            actNotificacione.IdUser = nobj.IdUser;
+                            actNotificacione.IdActividad = nobj.IdActividad;
+                            actNotificacione.FechaGeneracion = nobj.FechaGeneracion;
+                            actNotificacione.Razon = nobj.Razon;
+                            actNotificacione.Descripcion = nobj.Descripcion;
+                            actNotificacione.Destino = nobj.Destino;
+                            actNotificacione.Visto = "SI";
+                            _context.Update(actNotificacione);
+                            await _context.SaveChangesAsync();
+                            return RedirectToAction("Index", "Notificaciones");
+                        case 2/*Confirmar o Rechazar Nuevo Usuario*/:
+                            //---Actualizacion Visualizacion
+                            actNotificacione.IdUser = nobj.IdUser;
+                            actNotificacione.IdActividad = nobj.IdActividad;
+                            actNotificacione.FechaGeneracion = nobj.FechaGeneracion;
+                            actNotificacione.Razon = nobj.Razon;
+                            actNotificacione.Descripcion = nobj.Descripcion;
+                            actNotificacione.Destino = nobj.Destino;
+                            actNotificacione.Visto = "SI";
+                            _context.Update(actNotificacione);
+                            await _context.SaveChangesAsync();
+                            //----Actualizar Estado de Usuario
+
+                            return RedirectToAction("Index", "Notificaciones");
+                        case 3/*Solicitud de Prestamo*/:
+                            //---Actualizacion Visualizacion
+                            actNotificacione.IdUser = nobj.IdUser;
+                            actNotificacione.IdActividad = nobj.IdActividad;
+                            actNotificacione.FechaGeneracion = nobj.FechaGeneracion;
+                            actNotificacione.Razon = nobj.Razon;
+                            actNotificacione.Descripcion = nobj.Descripcion;
+                            actNotificacione.Destino = nobj.Destino;
+                            actNotificacione.Visto = "SI";
+                            _context.Update(actNotificacione);
+                            await _context.SaveChangesAsync();
+                            return RedirectToAction("Index", "Notificaciones");
+                        default:
+                            break;
+                    }
+
                 }
                 catch (DbUpdateConcurrencyException ex)
                 {
@@ -110,6 +144,5 @@ namespace act_Application.Controllers.General
             }
             return View(actNotificacione);
         }
-
     }
 }

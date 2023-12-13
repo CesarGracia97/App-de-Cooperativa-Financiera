@@ -11,6 +11,7 @@ namespace act_Application.Models.Sistema.ViewModel
             Cuotas = new ActCuota();
             Multas = new ActMulta();
             Notificaciones = new ActNotificacione();
+            Usuarios = new ActUser();
         }
         public ActNotificacione Notificaciones { get; set; }
         public ActPrestamo Prestamos { get; set; }
@@ -18,5 +19,7 @@ namespace act_Application.Models.Sistema.ViewModel
         public ActAportacione Aportaciones { get; set; }
         public ActEvento Eventos { get; set; }
         public ActMulta Multas { get; set; }
+
+        public ActUser Usuarios { get; set; }
     }
 }

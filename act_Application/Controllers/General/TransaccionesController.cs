@@ -194,7 +194,7 @@ namespace act_Application.Controllers.General
                                 }
                             }
                             actMulta.HistorialValores = multOriginal.HistorialValores + Valor.ToString();
-                            int capobj = (int)new CapturaPantallaRepository().OperacionesCapPan(1, 0, IdUser);
+                            int capobj = (int) new CapturaPantallaRepository().OperacionesCapPan(1, 0, IdUser);
                             actMulta.CapturaPantalla =multOriginal.CapturaPantalla + capobj.ToString();
 
                             DescripcionA = $"El Usuario {userIdentificacion} a Realizado un PAGO DE MULTA el dia {DateTime.Now}, cuyo valor es de ${Valor}. La MULTA a sido PAGADA COMPLETAMENTE (CANCELADA).";
@@ -220,7 +220,7 @@ namespace act_Application.Controllers.General
                                 }
                             }
                             actMulta.HistorialValores = multOriginal.HistorialValores + Valor.ToString() + ",";
-                            int capobj = (int)new CapturaPantallaRepository().OperacionesCapPan(1, 0, IdUser);
+                            int capobj = (int) new CapturaPantallaRepository().OperacionesCapPan(1, 0, IdUser);
                             actMulta.CapturaPantalla = multOriginal.CapturaPantalla + capobj.ToString() + ",";
 
                             DescripcionA = $"El Usuario {userIdentificacion} a Realizado un PAGO DE MULTA el dia {DateTime.Now}, cuyo valor es de ${Valor}, dejando un valor residual de ${multOriginal.Valor - Valor}. La MULTA sigue estando PENDIENTE. ";
