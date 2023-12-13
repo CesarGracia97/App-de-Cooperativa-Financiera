@@ -1,6 +1,7 @@
 ﻿@model IEnumerable<act_Application.Models.Sistema.ViewModel.Notificaciones_VM>
 @using act_Application.Data.Repository;
 @using act_Application.Logic.ComplementosLogicos;
+@using act_Application.Models.Sistema.Complementos;
 @{
     ViewData["Title"] = "Notificaciones";
 
@@ -101,22 +102,23 @@
                                                         <div class="modal-secundaria__content">
                                                             <form asp-action="Visualizado">
                                                                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                                                                <input type="hidden" asp-for="@notificacionAdmin.Transacciones.Id" name="id" id="id" />
-                                                                <div class="form-group">
-                                                                    <label asp-for="@notificacionAdmin.Transacciones.FechaPagoTotalPrestamo" class="control-label">Fecha de Pago del Prestamo -> Fecha de Inicio de Pago de Cuotas @notificacionAdmin.Transacciones.FechaIniCoutaPrestamo.ToString("dd-MMMM-yyyy")</label>
-                                                                    <input asp-for="@notificacionAdmin.Transacciones.FechaPagoTotalPrestamo" required type="date" class="input-date" name="FechaPagoTotalPrestamo" id="FechaPagoTotalPrestamo" min="@fechaactual" />
-                                                                    <span asp-validation-for="@notificacionAdmin.Transacciones.FechaPagoTotalPrestamo" class="text-danger"></span>
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <label asp-for="@notificacionAdmin.Eventos.FechaInicio" class="control-label">Fecha Inicio de Inscripcion de Garantes</label>
-                                                                    <input asp-for="@notificacionAdmin.Eventos.FechaInicio" required type="date" class="input-date" name="FechaInicio" id="FechaInicio" min="@fechaactual" />
-                                                                    <span asp-validation-for="@notificacionAdmin.Eventos.FechaInicio" class="text-danger"></span>
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <label asp-for="@notificacionAdmin.Eventos.FechaFinalizacion" class="control-label">Fecha Finalizacion de Inscripcion de Garantes</label>
-                                                                    <input asp-for="@notificacionAdmin.Eventos.FechaFinalizacion" required type="date" class="input-date" name="FechaFinalizacion" id="FechaFinalizacion" min="@fechaactual" />
-                                                                    <span asp-validation-for="@notificacionAdmin.Eventos.FechaFinalizacion" class="text-danger"></span>
-                                                                </div>
+                                                                <input type="hidden" asp-for="@notificacionAdmin.Notificaciones.Id" name="Id" />
+                                                                <input type="hidden" asp-for="@notificacionAdmin.Usuarios.Id" name="IdU" />
+                                                                <input type="hidden" value="1" name="Opcion" required/>
+                                                                <select name="TipoUser" required>
+                                                                    <option value="">Selecciona el Tipo de Usuario</option>
+                                                                    @foreach(var item in ViewData["ItemTipoUs"] as List<ListItems>)
+                                                                    {
+                                                                        <option value="@item.Nombre">@item.Nombre</option>
+                                                                    }
+                                                                </select>
+                                                                <select name="TipoEstado" required>
+                                                                    <option value="">Selecciona el Tipo de Usuario</option>
+                                                                    @foreach (var item in ViewData["ItemEstado"] as List<ListItems>)
+                                                                    {
+                                                                        <option value="@item.Nombre">@item.Nombre</option>
+                                                                    }
+                                                                </select>
                                                                 <div class="container-modal-btn">
                                                                     <button type="submit" data-notification-id="@notificacionAdmin.Notificaciones.Id" class="save-button">Guardar</button>
                                                                     <a href="~/Notificaciones/Notificacion" class="modal-secundaria__close" data-notification-id="@notificacionAdmin.Notificaciones.Id">Cerrar</a>

@@ -23,15 +23,18 @@ namespace act_Application.Controllers.General
             return new List<ListItems>
             {
                 new ListItems{Id = 1, Nombre = "Socio"},
-                new ListItems{Id = 2 , Nombre ="Referido"},
-                new ListItems{Id = 2 , Nombre ="Referido"}
-
+                new ListItems{Id = 2, Nombre = "Referido"},
+                new ListItems{Id = 3, Nombre = "En Espera"}
             };
         }
         private List<ListItems> ItemsTipoEstado()
         {
             return new List<ListItems>
             {
+                new ListItems{Id = 1, Nombre = "ACTIVO"},
+                new ListItems{Id = 2, Nombre = "INACTIVO"},
+                new ListItems{Id = 3, Nombre = "EN EVALUACION"},
+                new ListItems{Id = 4, Nombre = "DENEGADO"}
 
             };
         }
@@ -43,6 +46,8 @@ namespace act_Application.Controllers.General
             {
                 if(User.HasClaim("Rol", "Administrador"))
                 {
+                    ViewData["ItemEstado"] = ItemsTipoEstado();
+                    ViewData["ItemTipoUs"] = ItemsTipoUsuario();
                     var notiAdmi = (List<ActNotificacione>) new NotificacionesRepository().OperacionesNotificaciones(3, 0, 0);
                     var viewModelList = notiAdmi.Select(notificacion => new Notificaciones_VM
                     {
@@ -53,7 +58,7 @@ namespace act_Application.Controllers.General
                         Eventos = _context.ActEventos.FirstOrDefault(t => t.IdEven == notificacion.IdActividad),
                         Multas = _context.ActMultas.FirstOrDefault(t => t.IdMult == notificacion.IdActividad),
                         Usuarios = _context.ActUsers.FirstOrDefault(t => t.Cedula == notificacion.IdActividad)
-                    });
+                    }).ToList();
                     return View(viewModelList);
                 }
                 else
@@ -98,9 +103,9 @@ namespace act_Application.Controllers.General
                 return RedirectToAction("Error", "Home");
             }
         }
-        public async Task<IActionResult> Visualizado(int Id, int IdU, int Opcion, [Bind("Id,IdActividad,FechaGeneracion,Razon,Descripcion,Destino,Visto")] ActNotificacione actNotificacione, [Bind("Id,Cedula,NombreYApellido,Contrasena,Celular,TipoUser,IdSocio,FotoPerfil")] ActUser actUser, [Bind("Id,IdPres,IdUser,Valor,FechaGeneracion,FechaEntregaDinero,FechaInicioPagoCuotas,FechaPagoTotalPrestamo,TipoCuota,Estado")] ActPrestamo actPrestamo)
+        public async Task<IActionResult> Visualizado(int IdN, int IdA, int Opcion, [Bind("Id,IdActividad,FechaGeneracion,Razon,Descripcion,Destino,Visto")] ActNotificacione actNotificacione, [Bind("Id,Cedula,NombreYApellido,Contrasena,Celular,TipoUser,IdSocio,FotoPerfil")] ActUser actUser, [Bind("Id,IdPres,IdUser,Valor,FechaGeneracion,FechaEntregaDinero,FechaInicioPagoCuotas,FechaPagoTotalPrestamo,TipoCuota,Estado")] ActPrestamo actPrestamo)
         {
-            if (Id != actNotificacione.Id)
+            if (IdN != actNotificacione.Id)
             {
                 return RedirectToAction("Error", "Home");
             }
@@ -108,7 +113,7 @@ namespace act_Application.Controllers.General
             {
                 try
                 {
-                    var nobj = (ActNotificacione)new NotificacionesRepository().OperacionesNotificaciones(5, Id, 0);
+                    var nobj = (ActNotificacione)new NotificacionesRepository().OperacionesNotificaciones(5, IdN, 0);
                     switch (Opcion)
                     {
                         case 1/*Solo Actualiza la Notificacion a Vista.*/:
@@ -135,7 +140,23 @@ namespace act_Application.Controllers.General
                             _context.Update(actNotificacione);
                             await _context.SaveChangesAsync();
                             //----Actualizar Estado de Usuario
-
+                            if (IdA != actUser.Id)
+                            {
+                                return RedirectToAction("Error", "Home");
+                            }
+                            if (ModelState.IsValid)
+                            {
+                                try
+                                {
+                                    
+                                }
+                                catch (DbUpdateConcurrencyException ex)
+                                {
+                                    Console.WriteLine($"Hubo un problema al actualizar el registro del Estado del Usuario en el Id.{IdA}");
+                                    Console.WriteLine($"Detalles del error: {ex.Message}");
+                                    return RedirectToAction("Error", "Home");
+                                }
+                            }
                             return RedirectToAction("Index", "Notificaciones");
                         case 3/*Solicitud de Prestamo*/:
                             //---Actualizacion Visualizacion
@@ -148,6 +169,23 @@ namespace act_Application.Controllers.General
                             actNotificacione.Visto = "SI";
                             _context.Update(actNotificacione);
                             await _context.SaveChangesAsync();
+                            if (IdA != actPrestamo.Id)
+                            {
+                                return RedirectToAction("Error", "Home");
+                            }
+                            if (ModelState.IsValid)
+                            {
+                                try
+                                {
+
+                                }
+                                catch (DbUpdateConcurrencyException ex)
+                                {
+                                    Console.WriteLine($"Hubo un problema al actualizar el registro del Estado de Prestamo en el Id.{IdA}");
+                                    Console.WriteLine($"Detalles del error: {ex.Message}");
+                                    return RedirectToAction("Error", "Home");
+                                }
+                            }
                             return RedirectToAction("Index", "Notificaciones");
                         default:
                             break;
@@ -156,7 +194,7 @@ namespace act_Application.Controllers.General
                 }
                 catch (DbUpdateConcurrencyException ex)
                 {
-                    Console.WriteLine($"Hubo un problema al actualizar 'Visto' en el Id.{Id}");
+                    Console.WriteLine($"Hubo un problema al actualizar 'Visto' en el Id.{IdN}");
                     Console.WriteLine($"Detalles del error: {ex.Message}");
                     return RedirectToAction("Error", "Home");
                 }
