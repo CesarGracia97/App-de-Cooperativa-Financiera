@@ -1,4 +1,5 @@
 ﻿using act_Application.Models.BD;
+using act_Application.Models.Sistema.Complementos;
 
 namespace act_Application.Models.Sistema.ViewModel
 {
@@ -19,7 +20,8 @@ namespace act_Application.Models.Sistema.ViewModel
         public ActAportacione Aportaciones { get; set; }
         public ActEvento Eventos { get; set; }
         public ActMulta Multas { get; set; }
-
         public ActUser Usuarios { get; set; }
+        public List<ListItems> TipoUsuario { get; set; }
+        public List<ListItems> Estado { get; set; }
     }
 }

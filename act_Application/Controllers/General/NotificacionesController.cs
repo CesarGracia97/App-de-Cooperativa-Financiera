@@ -1,6 +1,7 @@
 ﻿using act_Application.Data.Context;
 using act_Application.Data.Repository;
 using act_Application.Models.BD;
+using act_Application.Models.Sistema.Complementos;
 using act_Application.Models.Sistema.ViewModel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -16,6 +17,23 @@ namespace act_Application.Controllers.General
         public NotificacionesController(ActDesarrolloContext context)
         {
             _context = context;
+        }
+        private List<ListItems> ItemsTipoUsuario()
+        {
+            return new List<ListItems>
+            {
+                new ListItems{Id = 1, Nombre = "Socio"},
+                new ListItems{Id = 2 , Nombre ="Referido"},
+                new ListItems{Id = 2 , Nombre ="Referido"}
+
+            };
+        }
+        private List<ListItems> ItemsTipoEstado()
+        {
+            return new List<ListItems>
+            {
+
+            };
         }
         [Authorize(Policy = "AllOnly")]
         public IActionResult Index()

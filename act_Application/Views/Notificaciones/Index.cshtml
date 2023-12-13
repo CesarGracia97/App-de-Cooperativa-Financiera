@@ -56,20 +56,74 @@
                                         </div>
                                         <div class="modal-principal" id="modal-@notificacionAdmin.Notificaciones.Id">
                                             <div class="modal__container">
-                                                <h2 class="modal__title">Detalles</h2>
+                                                <h2 class="modal__title">Peticion de Registro de Usuario.</h2>
+                                                <hr />
                                                 <div class="modal__content">
-                                                    <p class="modal__paragraph"><strong>Razon:</strong> @notificacionAdmin.Notificaciones.Razon</p>
-                                                    <p class="modal__paragraph"><strong>Fecha:</strong> @notificacionAdmin.Notificaciones.FechaGeneracion.ToString("dd-MM-yyyy")</p>
-                                                    <p class="modal__paragraph"><strong>Descripcion:</strong></p>
-                                                    <p class="modal__description">@notificacionAdmin.Notificaciones.Descripcion</p>
-                                                    <form asp-action="Visualizado">
-                                                        <div class="container-modal-btn">
-                                                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                                                            <input type="hidden" asp-for="@notificacionAdmin.Notificaciones.Id" name="Id" />
-                                                            <input type="hidden" value="1" name="Opcion" />
-                                                            <button type="submit" data-notification-id="@notificacionAdmin.Notificaciones.Id" class="modal__close">Cerrar</button>
+                                                    <h3 class="modal__title">Detalles</h3>
+                                                    <table class="modal__table">
+                                                        <tr>
+                                                            <td><strong>Fecha de Registro:</strong></td>
+                                                            <td>@notificacionAdmin.Notificaciones.FechaGeneracion.ToString("dd-MM-yyyy")</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><strong>Nombre del Usuario:</strong></td>
+                                                            <td>@notificacionAdmin.Usuarios.NombreYapellido</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><strong>Cedula del Usuario:</strong></td>
+                                                            <td>@notificacionAdmin.Usuarios.Cedula</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><strong>Celular:</strong></td>
+                                                            <td>@notificacionAdmin.Usuarios.Celular</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><strong>Correo Electrónico:</strong></td>
+                                                            <td>@notificacionAdmin.Usuarios.Correo</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><strong>ID Socio:</strong></td>
+                                                            <td>@notificacionAdmin.Usuarios.IdSocio</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><strong>Estado:</strong></td>
+                                                            <td>@notificacionAdmin.Usuarios.Estado</td>
+                                                        </tr>
+                                                    </table>
+                                                    <div class="container-modal-btn">
+                                                        <button type="submit" data-notification-id="@notificacionAdmin.Notificaciones.Id" class="btn-mdl-confir">Confirmar</button>
+                                                        <a href="~/Notificaciones/Index" class="modal__close" data-notification-id="@notificacionAdmin.Notificaciones.Id">Cerrar</a>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-secundaria" id="modal-resp-@notificacionAdmin.Notificaciones.Id">
+                                                    <div class="modal-secundaria__container">
+                                                        <h2 class="modal__title">Establesca la Fecha de Pago Total del Prestamo</h2>
+                                                        <div class="modal-secundaria__content">
+                                                            <form asp-action="Visualizado">
+                                                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                                                <input type="hidden" asp-for="@notificacionAdmin.Transacciones.Id" name="id" id="id" />
+                                                                <div class="form-group">
+                                                                    <label asp-for="@notificacionAdmin.Transacciones.FechaPagoTotalPrestamo" class="control-label">Fecha de Pago del Prestamo -> Fecha de Inicio de Pago de Cuotas @notificacionAdmin.Transacciones.FechaIniCoutaPrestamo.ToString("dd-MMMM-yyyy")</label>
+                                                                    <input asp-for="@notificacionAdmin.Transacciones.FechaPagoTotalPrestamo" required type="date" class="input-date" name="FechaPagoTotalPrestamo" id="FechaPagoTotalPrestamo" min="@fechaactual" />
+                                                                    <span asp-validation-for="@notificacionAdmin.Transacciones.FechaPagoTotalPrestamo" class="text-danger"></span>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label asp-for="@notificacionAdmin.Eventos.FechaInicio" class="control-label">Fecha Inicio de Inscripcion de Garantes</label>
+                                                                    <input asp-for="@notificacionAdmin.Eventos.FechaInicio" required type="date" class="input-date" name="FechaInicio" id="FechaInicio" min="@fechaactual" />
+                                                                    <span asp-validation-for="@notificacionAdmin.Eventos.FechaInicio" class="text-danger"></span>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label asp-for="@notificacionAdmin.Eventos.FechaFinalizacion" class="control-label">Fecha Finalizacion de Inscripcion de Garantes</label>
+                                                                    <input asp-for="@notificacionAdmin.Eventos.FechaFinalizacion" required type="date" class="input-date" name="FechaFinalizacion" id="FechaFinalizacion" min="@fechaactual" />
+                                                                    <span asp-validation-for="@notificacionAdmin.Eventos.FechaFinalizacion" class="text-danger"></span>
+                                                                </div>
+                                                                <div class="container-modal-btn">
+                                                                    <button type="submit" data-notification-id="@notificacionAdmin.Notificaciones.Id" class="save-button">Guardar</button>
+                                                                    <a href="~/Notificaciones/Notificacion" class="modal-secundaria__close" data-notification-id="@notificacionAdmin.Notificaciones.Id">Cerrar</a>
+                                                                </div>
+                                                            </form>
                                                         </div>
-                                                    </form>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
