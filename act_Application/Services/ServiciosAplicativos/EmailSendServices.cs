@@ -75,11 +75,11 @@ namespace act_Application.Services.ServiciosAplicativos
                 {
                     case 1:
                         //Solicitud de Prestamos Fase 1
-                        subject = "act - Application: Solicitud de Prestamo (FASE 1) ({DateTime.Now})";
+                        subject = $"act - Application: Solicitud de Prestamo (FASE 1) ({DateTime.Now})";
                         break;
                     case 2:
                         //Solicitud de Prestamos Fase 2
-                        subject = "act - Application: Solicitud de Prestamo (FASE 2) ({DateTime.Now})";
+                        subject = $"act - Application: Solicitud de Prestamo (FASE 2) ({DateTime.Now})";
                         break;
                     case 3:
                         //Movimiento de Aportacion
@@ -107,6 +107,12 @@ namespace act_Application.Services.ServiciosAplicativos
                         break;
                     case 9:
                         subject = $"act - Application: Aplicacion de Multa ({DateTime.Now})";
+                        break;
+                    case 10:
+                        subject = $"act - Application: Cuenta Aceptada ({DateTime.Now})";
+                        break;
+                    case 11:
+                        subject = $"act - Application: Cuenta Rechazada ({DateTime.Now})";
                         break;
                     default:
                         Console.WriteLine("EnviarCorreoUsuario - EmailSendServices. Opcion inexistente");
