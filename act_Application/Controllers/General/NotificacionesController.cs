@@ -132,7 +132,7 @@ namespace act_Application.Controllers.General
                                     actNotificacione.Visto = "SI";
                                     _context.Update(actNotificacione);
                                     await _context.SaveChangesAsync();
-                                    break;
+                                    return RedirectToAction("Index", "Notificaciones");
                                 case 2/*Solicitud de Prestamo Usuario -> Admin (Fase 1)*/:
                                     await Update_EstadoPrestamo(IdA, IdUser, IdN, actNotificacione.IdActividad, FechaPagoTotalPrestamo, FechaInicioPagoCuotas, TipoCuota, PEstado, FechaInicio, FechaFinalizacion, new ActPrestamo());
                                     return RedirectToAction("Index", "Notificaciones");
@@ -146,7 +146,8 @@ namespace act_Application.Controllers.General
                                     actNotificacione.Visto = "SI";
                                     _context.Update(actNotificacione);
                                     await _context.SaveChangesAsync();
-                                    break;
+                                    await Update_EstadoPrestamo(IdA, IdUser, IdN, actNotificacione.IdActividad, FechaPagoTotalPrestamo, FechaInicioPagoCuotas, TipoCuota, PEstado, FechaInicio, FechaFinalizacion, new ActPrestamo());
+                                    return RedirectToAction("Index", "Notificaciones");
                                 case 4/*Confirmar o Rechazar Nuevo Usuario*/:
                                     actNotificacione.IdUser = nobj.IdUser;
                                     actNotificacione.IdActividad = nobj.IdActividad;
@@ -159,7 +160,6 @@ namespace act_Application.Controllers.General
                                     await _context.SaveChangesAsync();
                                     await Update_EstadoUsuario(IdA, Estado, TipoUser, new ActUser());
                                     return RedirectToAction("Index", "Notificaciones");
-
                                 default:
                                     break;
                             }
@@ -319,7 +319,6 @@ namespace act_Application.Controllers.General
                                 await _context.SaveChangesAsync();
                                 await new NotificacionesServices(_context).CrearNotificacion(1, 4, IdN, IdUser, IdActividad, Razon, Descripcion, pobj.IdUser.ToString(), new ActNotificacione());
                                 await new EmailSendServices().EnviarCorreoUsuario(pobj.IdUser, 11, Descripcion);
-
                             }
                             else if (PEstado != "ACEPTADO UF2" && PEstado == "DENEGADO" || PEstado == "RECHAZADO")
                             {
