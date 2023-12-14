@@ -282,7 +282,8 @@ namespace act_Application.Controllers.General
                                 actPrestamo.Estado = PEstado;
                                 _context.Update(actPrestamo);
                                 Razon = $"Solicitud de Prestamo (CONDICIONES ACEPTADAS POR EL USUARIO)";
-                                Descripcion = $"El Usuario Acepto las condiciones para el prestamo.";
+                                Descripcion = $"El Usuario Acepto las condiciones para el prestamo. Se generaron las Cuotas.";
+                                await new CuotaGeneradorServices(_context).CrearCuotas(actPrestamo.Id, actPrestamo.FechaPagoTotalPrestamo, new ActCuota());
                                 await _context.SaveChangesAsync();
                                 await new NotificacionesServices(_context).CrearNotificacion(4, IdUser, IdActividad, Razon, Descripcion, pobj.IdUser.ToString(), new ActNotificacione());
                                 await new EmailSendServices().EnviarCorreoUsuario(pobj.IdUser, 11, Descripcion);
