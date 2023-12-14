@@ -211,6 +211,7 @@ namespace act_Application.Controllers.General
         }
         private async Task<IActionResult> Update_EstadoPrestamo(int Id, int IdUser, string IdActividad, DateTime FechaPagoTotalPrestamo, DateTime FechaInicioPagoCuotas, string TipoCuota, string PEstado, [Bind("Id,IdPres,IdUser,Valor,FechaGeneracion,FechaEntregaDinero,FechaInicioPagoCuotas,FechaPagoTotalPrestamo,TipoCuota,Estado")] ActPrestamo actPrestamo)
         {
+            string Razon = string.Empty, Descripcion = string.Empty;
             actPrestamo.Id = Id;
             if (Id != actPrestamo.Id)
             {
@@ -222,18 +223,42 @@ namespace act_Application.Controllers.General
                 {
                     try
                     {
-                        var pobj = (ActPrestamo)new PrestamosRepository().OperacionesPrestamos(2, Id, 0, "");
-                        actPrestamo.IdPres = pobj.IdPres;
-                        actPrestamo.IdUser = pobj.IdUser;
-                        actPrestamo.Valor = pobj.Valor;
-                        actPrestamo.FechaGeneracion = pobj.FechaGeneracion;
-                        actPrestamo.FechaEntregaDinero = pobj.FechaEntregaDinero;
-                        actPrestamo.FechaPagoTotalPrestamo = FechaPagoTotalPrestamo;
-                        actPrestamo.FechaInicioPagoCuotas = FechaInicioPagoCuotas;
-                        actPrestamo.TipoCuota = TipoCuota;
-                        actPrestamo.Estado = PEstado;
-                        _context.Update(actPrestamo);
-                        await _context.SaveChangesAsync();
+                        if (PEstado == "ACEPTADO")
+                        {
+                            var pobj = (ActPrestamo)new PrestamosRepository().OperacionesPrestamos(2, Id, 0, "");
+                            actPrestamo.IdPres = pobj.IdPres;
+                            actPrestamo.IdUser = pobj.IdUser;
+                            actPrestamo.Valor = pobj.Valor;
+                            actPrestamo.FechaGeneracion = pobj.FechaGeneracion;
+                            actPrestamo.FechaEntregaDinero = pobj.FechaEntregaDinero;
+                            actPrestamo.FechaPagoTotalPrestamo = FechaPagoTotalPrestamo;
+                            actPrestamo.FechaInicioPagoCuotas = FechaInicioPagoCuotas;
+                            actPrestamo.TipoCuota = TipoCuota;
+                            actPrestamo.Estado = PEstado;
+                            _context.Update(actPrestamo);
+                            await _context.SaveChangesAsync();
+                            await new NotificacionesServices(_context).CrearNotificacion(4, IdUser, IdActividad, Razon, Descripcion, pobj.IdUser.ToString(), new ActNotificacione());
+                            await new EmailSendServices().EnviarCorreoUsuario(pobj.IdUser, 11, Descripcion);
+
+                        }
+                        else if(PEstado != "ACEPTADO" && PEstado =="DENEGADO")
+                        {
+                            var pobj = (ActPrestamo)new PrestamosRepository().OperacionesPrestamos(2, Id, 0, "");
+                            actPrestamo.IdPres = pobj.IdPres;
+                            actPrestamo.IdUser = pobj.IdUser;
+                            actPrestamo.Valor = pobj.Valor;
+                            actPrestamo.FechaGeneracion = pobj.FechaGeneracion;
+                            actPrestamo.FechaEntregaDinero = pobj.FechaEntregaDinero;
+                            actPrestamo.FechaPagoTotalPrestamo = FechaPagoTotalPrestamo;
+                            actPrestamo.FechaInicioPagoCuotas = FechaInicioPagoCuotas;
+                            actPrestamo.TipoCuota = "";
+                            actPrestamo.Estado = PEstado;
+                            _context.Update(actPrestamo);
+                            await _context.SaveChangesAsync();
+                            await new NotificacionesServices(_context).CrearNotificacion(4, IdUser, IdActividad, Razon, Descripcion, pobj.IdUser.ToString(), new ActNotificacione());
+                            await new EmailSendServices().EnviarCorreoUsuario(pobj.IdUser, 11, Descripcion);
+
+                        }
                     }
                     catch (DbUpdateConcurrencyException ex)
                     {

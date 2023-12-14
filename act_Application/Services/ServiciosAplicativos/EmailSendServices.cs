@@ -106,13 +106,20 @@ namespace act_Application.Services.ServiciosAplicativos
                         subject = $"act - Application: Garante de Participacion ({DateTime.Now})";
                         break;
                     case 9:
+                        //Multa Aplicada
                         subject = $"act - Application: Aplicacion de Multa ({DateTime.Now})";
                         break;
                     case 10:
+                        //Cuenta Aceptada
                         subject = $"act - Application: Cuenta Aceptada ({DateTime.Now})";
                         break;
                     case 11:
+                        //Cuenta Rechazada.
                         subject = $"act - Application: Cuenta Rechazada ({DateTime.Now})";
+                        break;
+                    case 12:
+                        //PRestamo Rechazado.
+                        subject = $"act - Application: Solicitud de Prestamo RECHAZADA ({DateTime.Now})";
                         break;
                     default:
                         Console.WriteLine("EnviarCorreoUsuario - EmailSendServices. Opcion inexistente");
