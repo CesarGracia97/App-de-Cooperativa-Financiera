@@ -236,6 +236,8 @@ namespace act_Application.Controllers.General
                             actPrestamo.TipoCuota = TipoCuota;
                             actPrestamo.Estado = PEstado;
                             _context.Update(actPrestamo);
+                            Razon = $"Solicitud de Prestamos Aceptado";
+                            Descripcion = $"Tu solicitud de Prestamo fue Aceptada. Acepta las Condiciones como las fechas de Pago.";
                             await _context.SaveChangesAsync();
                             await new NotificacionesServices(_context).CrearNotificacion(4, IdUser, IdActividad, Razon, Descripcion, pobj.IdUser.ToString(), new ActNotificacione());
                             await new EmailSendServices().EnviarCorreoUsuario(pobj.IdUser, 11, Descripcion);
@@ -254,10 +256,11 @@ namespace act_Application.Controllers.General
                             actPrestamo.TipoCuota = "";
                             actPrestamo.Estado = PEstado;
                             _context.Update(actPrestamo);
+                            Razon = $"Solicitud de Prestamos DENEGADO";
+                            Descripcion = $"Tu solicitud de Prestamo fue DENEGADO.";
                             await _context.SaveChangesAsync();
                             await new NotificacionesServices(_context).CrearNotificacion(4, IdUser, IdActividad, Razon, Descripcion, pobj.IdUser.ToString(), new ActNotificacione());
                             await new EmailSendServices().EnviarCorreoUsuario(pobj.IdUser, 11, Descripcion);
-
                         }
                     }
                     catch (DbUpdateConcurrencyException ex)
