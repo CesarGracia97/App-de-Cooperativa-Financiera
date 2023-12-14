@@ -211,7 +211,7 @@ namespace act_Application.Controllers.General
         }
         private async Task<IActionResult> Update_EstadoPrestamo(int Id, int IdUser, string IdActividad, DateTime FechaPagoTotalPrestamo, DateTime FechaInicioPagoCuotas, string TipoCuota, string PEstado, [Bind("Id,IdPres,IdUser,Valor,FechaGeneracion,FechaEntregaDinero,FechaInicioPagoCuotas,FechaPagoTotalPrestamo,TipoCuota,Estado")] ActPrestamo actPrestamo)
         {
-            string Razon = string.Empty, Descripcion = string.Empty;
+            string Razon, Descripcion;
             actPrestamo.Id = Id;
             if (Id != actPrestamo.Id)
             {
@@ -223,44 +223,90 @@ namespace act_Application.Controllers.General
                 {
                     try
                     {
-                        if (PEstado == "ACEPTADO")
+                        if (User.HasClaim("Rol", "Administrador"))
                         {
-                            var pobj = (ActPrestamo)new PrestamosRepository().OperacionesPrestamos(2, Id, 0, "");
-                            actPrestamo.IdPres = pobj.IdPres;
-                            actPrestamo.IdUser = pobj.IdUser;
-                            actPrestamo.Valor = pobj.Valor;
-                            actPrestamo.FechaGeneracion = pobj.FechaGeneracion;
-                            actPrestamo.FechaEntregaDinero = pobj.FechaEntregaDinero;
-                            actPrestamo.FechaPagoTotalPrestamo = FechaPagoTotalPrestamo;
-                            actPrestamo.FechaInicioPagoCuotas = FechaInicioPagoCuotas;
-                            actPrestamo.TipoCuota = TipoCuota;
-                            actPrestamo.Estado = PEstado;
-                            _context.Update(actPrestamo);
-                            Razon = $"Solicitud de Prestamos Aceptado";
-                            Descripcion = $"Tu solicitud de Prestamo fue Aceptada. Acepta las Condiciones como las fechas de Pago.";
-                            await _context.SaveChangesAsync();
-                            await new NotificacionesServices(_context).CrearNotificacion(4, IdUser, IdActividad, Razon, Descripcion, pobj.IdUser.ToString(), new ActNotificacione());
-                            await new EmailSendServices().EnviarCorreoUsuario(pobj.IdUser, 11, Descripcion);
+                            if (PEstado == "ACEPTADO AF1")
+                            {
+                                var pobj = (ActPrestamo)new PrestamosRepository().OperacionesPrestamos(2, Id, 0, "");
+                                actPrestamo.IdPres = pobj.IdPres;
+                                actPrestamo.IdUser = pobj.IdUser;
+                                actPrestamo.Valor = pobj.Valor;
+                                actPrestamo.FechaGeneracion = pobj.FechaGeneracion;
+                                actPrestamo.FechaEntregaDinero = pobj.FechaEntregaDinero;
+                                actPrestamo.FechaPagoTotalPrestamo = FechaPagoTotalPrestamo;
+                                actPrestamo.FechaInicioPagoCuotas = FechaInicioPagoCuotas;
+                                actPrestamo.TipoCuota = TipoCuota;
+                                actPrestamo.Estado = PEstado;
+                                _context.Update(actPrestamo);
+                                Razon = $"Solicitud de Prestamos Aceptado";
+                                Descripcion = $"Tu solicitud de Prestamo fue Aceptada. Acepta las Condiciones como las fechas de Pago.";
+                                await _context.SaveChangesAsync();
+                                await new NotificacionesServices(_context).CrearNotificacion(4, IdUser, IdActividad, Razon, Descripcion, pobj.IdUser.ToString(), new ActNotificacione());
+                                await new EmailSendServices().EnviarCorreoUsuario(pobj.IdUser, 11, Descripcion);
+
+                            }
+                            else if (PEstado != "ACEPTADO AF1" && PEstado == "DENEGADO" || PEstado == "RECHAZADO")
+                            {
+                                var pobj = (ActPrestamo)new PrestamosRepository().OperacionesPrestamos(2, Id, 0, "");
+                                actPrestamo.IdPres = pobj.IdPres;
+                                actPrestamo.IdUser = pobj.IdUser;
+                                actPrestamo.Valor = pobj.Valor;
+                                actPrestamo.FechaGeneracion = pobj.FechaGeneracion;
+                                actPrestamo.FechaEntregaDinero = pobj.FechaEntregaDinero;
+                                actPrestamo.FechaPagoTotalPrestamo = FechaPagoTotalPrestamo;
+                                actPrestamo.FechaInicioPagoCuotas = FechaInicioPagoCuotas;
+                                actPrestamo.TipoCuota = "";
+                                actPrestamo.Estado = PEstado;
+                                _context.Update(actPrestamo);
+                                Razon = $"Solicitud de Prestamos DENEGADO";
+                                Descripcion = $"Tu solicitud de Prestamo fue DENEGADO.";
+                                await _context.SaveChangesAsync();
+                                await new NotificacionesServices(_context).CrearNotificacion(4, IdUser, IdActividad, Razon, Descripcion, pobj.IdUser.ToString(), new ActNotificacione());
+                                await new EmailSendServices().EnviarCorreoUsuario(pobj.IdUser, 11, Descripcion);
+                            }
 
                         }
-                        else if(PEstado != "ACEPTADO" && PEstado =="DENEGADO")
+                        else if (!User.HasClaim("Rol", "Administrador") && User.HasClaim("Rol", "Socio") || User.HasClaim("Rol", "Referido"))
                         {
-                            var pobj = (ActPrestamo)new PrestamosRepository().OperacionesPrestamos(2, Id, 0, "");
-                            actPrestamo.IdPres = pobj.IdPres;
-                            actPrestamo.IdUser = pobj.IdUser;
-                            actPrestamo.Valor = pobj.Valor;
-                            actPrestamo.FechaGeneracion = pobj.FechaGeneracion;
-                            actPrestamo.FechaEntregaDinero = pobj.FechaEntregaDinero;
-                            actPrestamo.FechaPagoTotalPrestamo = FechaPagoTotalPrestamo;
-                            actPrestamo.FechaInicioPagoCuotas = FechaInicioPagoCuotas;
-                            actPrestamo.TipoCuota = "";
-                            actPrestamo.Estado = PEstado;
-                            _context.Update(actPrestamo);
-                            Razon = $"Solicitud de Prestamos DENEGADO";
-                            Descripcion = $"Tu solicitud de Prestamo fue DENEGADO.";
-                            await _context.SaveChangesAsync();
-                            await new NotificacionesServices(_context).CrearNotificacion(4, IdUser, IdActividad, Razon, Descripcion, pobj.IdUser.ToString(), new ActNotificacione());
-                            await new EmailSendServices().EnviarCorreoUsuario(pobj.IdUser, 11, Descripcion);
+                            if (PEstado == "ACEPTADO UF2")
+                            {
+                                var pobj = (ActPrestamo)new PrestamosRepository().OperacionesPrestamos(2, Id, 0, "");
+                                actPrestamo.IdPres = pobj.IdPres;
+                                actPrestamo.IdUser = pobj.IdUser;
+                                actPrestamo.Valor = pobj.Valor;
+                                actPrestamo.FechaGeneracion = pobj.FechaGeneracion;
+                                actPrestamo.FechaEntregaDinero = pobj.FechaEntregaDinero;
+                                actPrestamo.FechaPagoTotalPrestamo = FechaPagoTotalPrestamo;
+                                actPrestamo.FechaInicioPagoCuotas = FechaInicioPagoCuotas;
+                                actPrestamo.TipoCuota = TipoCuota;
+                                actPrestamo.Estado = PEstado;
+                                _context.Update(actPrestamo);
+                                Razon = $"Solicitud de Prestamo (CONDICIONES ACEPTADAS POR EL USUARIO)";
+                                Descripcion = $"El Usuario Acepto las condiciones para el prestamo.";
+                                await _context.SaveChangesAsync();
+                                await new NotificacionesServices(_context).CrearNotificacion(4, IdUser, IdActividad, Razon, Descripcion, pobj.IdUser.ToString(), new ActNotificacione());
+                                await new EmailSendServices().EnviarCorreoUsuario(pobj.IdUser, 11, Descripcion);
+
+                            }
+                            else if (PEstado != "ACEPTADO UF2" && PEstado == "DENEGADO" || PEstado == "RECHAZADO")
+                            {
+                                var pobj = (ActPrestamo)new PrestamosRepository().OperacionesPrestamos(2, Id, 0, "");
+                                actPrestamo.IdPres = pobj.IdPres;
+                                actPrestamo.IdUser = pobj.IdUser;
+                                actPrestamo.Valor = pobj.Valor;
+                                actPrestamo.FechaGeneracion = pobj.FechaGeneracion;
+                                actPrestamo.FechaEntregaDinero = pobj.FechaEntregaDinero;
+                                actPrestamo.FechaPagoTotalPrestamo = FechaPagoTotalPrestamo;
+                                actPrestamo.FechaInicioPagoCuotas = FechaInicioPagoCuotas;
+                                actPrestamo.TipoCuota = "";
+                                actPrestamo.Estado = PEstado;
+                                _context.Update(actPrestamo);
+                                Razon = $"Solicitud de Prestamo (CONDICIONES RECHAZADAS POR EL USUARIO)";
+                                Descripcion = $"El usuario rechazo las condiciones para recibir el prestamo.";
+                                await _context.SaveChangesAsync();
+                                await new NotificacionesServices(_context).CrearNotificacion(4, IdUser, IdActividad, Razon, Descripcion, pobj.IdUser.ToString(), new ActNotificacione());
+                                await new EmailSendServices().EnviarCorreoUsuario(pobj.IdUser, 11, Descripcion);
+                            }
                         }
                     }
                     catch (DbUpdateConcurrencyException ex)
