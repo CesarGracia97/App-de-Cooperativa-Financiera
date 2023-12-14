@@ -103,7 +103,7 @@ namespace act_Application.Controllers.General
                 return RedirectToAction("Error", "Home");
             }
         }
-        public async Task<IActionResult> Visualizado(int IdN, int IdA, int Opcion, string Estado, string TipoUser, DateTime FechaPagoTotalPrestamo, DateTime FechaInicioPagoCuotas, string TipoCuota, string PEstado, [Bind("Id,IdActividad,FechaGeneracion,Razon,Descripcion,Destino,Visto")] ActNotificacione actNotificacione)
+        public async Task<IActionResult> Visualizado(int IdN, int IdA, int Opcion, string Estado, string TipoUser, DateTime FechaPagoTotalPrestamo, DateTime FechaInicioPagoCuotas, string TipoCuota, string PEstado, DateTime FechaInicio, DateTime FechaFinalizacion, [Bind("Id,IdActividad,FechaGeneracion,Razon,Descripcion,Destino,Visto")] ActNotificacione actNotificacione)
         {
             actNotificacione.Id = IdN;
             if (IdN != actNotificacione.Id)
@@ -114,28 +114,52 @@ namespace act_Application.Controllers.General
             {
                 try
                 {
-                    if(User.HasClaim("Rol", "Administrador")){
+                    if(User.HasClaim("Rol", "Administrador"))
+                    {
                         var userIdClaim = User.Claims.FirstOrDefault(c => c.Type == "Id");
                         if (userIdClaim != null && int.TryParse(userIdClaim.Value, out int IdUser))
                         {
                             var nobj = (ActNotificacione)new NotificacionesRepository().OperacionesNotificaciones(5, IdN, 0);
-                            actNotificacione.IdUser = nobj.IdUser;
-                            actNotificacione.IdActividad = nobj.IdActividad;
-                            actNotificacione.FechaGeneracion = nobj.FechaGeneracion;
-                            actNotificacione.Razon = nobj.Razon;
-                            actNotificacione.Descripcion = nobj.Descripcion;
-                            actNotificacione.Destino = nobj.Destino;
-                            actNotificacione.Visto = "SI";
-                            _context.Update(actNotificacione);
-                            await _context.SaveChangesAsync();
                             switch (Opcion)
                             {
-                                case 1/*Confirmar o Rechazar Nuevo Usuario*/:
-                                    await Update_EstadoUsuario(IdA, IdUser,actNotificacione.IdActividad, Estado, TipoUser, new ActUser());
+                                case 1/*Actualizar y Finalizar*/:
+                                    actNotificacione.IdUser = nobj.IdUser;
+                                    actNotificacione.IdActividad = nobj.IdActividad;
+                                    actNotificacione.FechaGeneracion = nobj.FechaGeneracion;
+                                    actNotificacione.Razon = nobj.Razon;
+                                    actNotificacione.Descripcion = nobj.Descripcion;
+                                    actNotificacione.Destino = nobj.Destino;
+                                    actNotificacione.Visto = "SI";
+                                    _context.Update(actNotificacione);
+                                    await _context.SaveChangesAsync();
+                                    break;
+                                case 2/*Solicitud de Prestamo Usuario -> Admin (Fase 1)*/:
+                                    await Update_EstadoPrestamo(IdA, IdUser, IdN, actNotificacione.IdActividad, FechaPagoTotalPrestamo, FechaInicioPagoCuotas, TipoCuota, PEstado, FechaInicio, FechaFinalizacion, new ActPrestamo());
                                     return RedirectToAction("Index", "Notificaciones");
-                                case 2/*Solicitud de Prestamo*/:
-                                    await Update_EstadoPrestamo(IdA, IdUser, actNotificacione.IdActividad, FechaPagoTotalPrestamo, FechaInicioPagoCuotas, TipoCuota, PEstado, new ActPrestamo());
+                                case 3/*Solicitud de Prestamo Usuario -> Admin (Generacion Cuotas)*/:
+                                    actNotificacione.IdUser = nobj.IdUser;
+                                    actNotificacione.IdActividad = nobj.IdActividad;
+                                    actNotificacione.FechaGeneracion = nobj.FechaGeneracion;
+                                    actNotificacione.Razon = nobj.Razon;
+                                    actNotificacione.Descripcion = nobj.Descripcion;
+                                    actNotificacione.Destino = nobj.Destino;
+                                    actNotificacione.Visto = "SI";
+                                    _context.Update(actNotificacione);
+                                    await _context.SaveChangesAsync();
+                                    break;
+                                case 4/*Confirmar o Rechazar Nuevo Usuario*/:
+                                    actNotificacione.IdUser = nobj.IdUser;
+                                    actNotificacione.IdActividad = nobj.IdActividad;
+                                    actNotificacione.FechaGeneracion = nobj.FechaGeneracion;
+                                    actNotificacione.Razon = nobj.Razon;
+                                    actNotificacione.Descripcion = nobj.Descripcion;
+                                    actNotificacione.Destino = nobj.Destino;
+                                    actNotificacione.Visto = "SI";
+                                    _context.Update(actNotificacione);
+                                    await _context.SaveChangesAsync();
+                                    await Update_EstadoUsuario(IdA, Estado, TipoUser, new ActUser());
                                     return RedirectToAction("Index", "Notificaciones");
+
                                 default:
                                     break;
                             }
@@ -146,7 +170,16 @@ namespace act_Application.Controllers.General
                         var userIdClaim = User.Claims.FirstOrDefault(c => c.Type == "Id");
                         if (userIdClaim != null && int.TryParse(userIdClaim.Value, out int IdUser))
                         {
+                            switch (Opcion)
+                            {
+                                case 1/*Actualizar y Finalizar*/:
+                                    break;
+                                case 2/*Solicitud de Prestamo Admin -> Usuario (Fase 2)*/:
+                                    break;
 
+                                default:
+                                    break;
+                            }
                         }
                     }
                 }
@@ -159,9 +192,9 @@ namespace act_Application.Controllers.General
             }
             return View(actNotificacione);
         }
-        private async Task<IActionResult> Update_EstadoUsuario(int Id, int IdUser, string IdActividad, string Estado, string TipoUser, [Bind("Id,Cedula,NombreYApellido,Contrasena,Celular,TipoUser,IdSocio,FotoPerfil")] ActUser actUser)
+        private async Task<IActionResult> Update_EstadoUsuario(int Id, string Estado, string TipoUser, [Bind("Id,Cedula,NombreYApellido,Contrasena,Celular,TipoUser,IdSocio,FotoPerfil")] ActUser actUser)
         {
-            string Razon = string.Empty, Descripcion = string.Empty;
+            string Descripcion = string.Empty;
             actUser.Id = Id;
             if (Id != actUser.Id)
             {
@@ -183,7 +216,6 @@ namespace act_Application.Controllers.General
                     {
                         actUser.Estado = Estado;
                         actUser.TipoUser = TipoUser;
-                        Razon = $"CUENTA ACTIVADA";
                         Descripcion = $"Tu cuenta a sido Activada Exitosamente. Se te dio la categoria de {TipoUser}. Puedes acceder al sistema con tus credenciales.";
 
                     }
@@ -195,10 +227,9 @@ namespace act_Application.Controllers.General
                         Descripcion = $"Tu peticion de ingreso fue denegada...";
 
                     }
-                    await new NotificacionesServices(_context).CrearNotificacion(4, IdUser, IdActividad, Razon, Descripcion, actUser.Id.ToString(), new ActNotificacione());
-                    await new EmailSendServices().EnviarCorreoUsuario(actUser.Id, 11,Descripcion);
                     _context.Update(actUser);
                     await _context.SaveChangesAsync();
+                    await new EmailSendServices().EnviarCorreoUsuario(actUser.Id, 11, Descripcion);
                 }
                 catch (DbUpdateConcurrencyException ex)
                 {
@@ -209,7 +240,7 @@ namespace act_Application.Controllers.General
             }
             return View(actUser);
         }
-        private async Task<IActionResult> Update_EstadoPrestamo(int Id, int IdUser, string IdActividad, DateTime FechaPagoTotalPrestamo, DateTime FechaInicioPagoCuotas, string TipoCuota, string PEstado, [Bind("Id,IdPres,IdUser,Valor,FechaGeneracion,FechaEntregaDinero,FechaInicioPagoCuotas,FechaPagoTotalPrestamo,TipoCuota,Estado")] ActPrestamo actPrestamo)
+        private async Task<IActionResult> Update_EstadoPrestamo(int Id, int IdUser, int IdN, string IdActividad, DateTime FechaPagoTotalPrestamo, DateTime FechaInicioPagoCuotas, string TipoCuota, string PEstado, DateTime FechaInicio, DateTime FechaFinalizacion, [Bind("Id,IdPres,IdUser,Valor,FechaGeneracion,FechaEntregaDinero,FechaInicioPagoCuotas,FechaPagoTotalPrestamo,TipoCuota,Estado")] ActPrestamo actPrestamo)
         {
             string Razon, Descripcion;
             actPrestamo.Id = Id;
@@ -241,7 +272,7 @@ namespace act_Application.Controllers.General
                                 Razon = $"Solicitud de Prestamos Aceptado";
                                 Descripcion = $"Tu solicitud de Prestamo fue Aceptada. Acepta las Condiciones como las fechas de Pago.";
                                 await _context.SaveChangesAsync();
-                                await new NotificacionesServices(_context).CrearNotificacion(4, IdUser, IdActividad, Razon, Descripcion, pobj.IdUser.ToString(), new ActNotificacione());
+                                await new NotificacionesServices(_context).CrearNotificacion(1, 3, IdN, IdUser, IdActividad, Razon, Descripcion, pobj.IdUser.ToString(), new ActNotificacione());
                                 await new EmailSendServices().EnviarCorreoUsuario(pobj.IdUser, 11, Descripcion);
 
                             }
@@ -261,7 +292,7 @@ namespace act_Application.Controllers.General
                                 Razon = $"Solicitud de Prestamos DENEGADO";
                                 Descripcion = $"Tu solicitud de Prestamo fue DENEGADO.";
                                 await _context.SaveChangesAsync();
-                                await new NotificacionesServices(_context).CrearNotificacion(4, IdUser, IdActividad, Razon, Descripcion, pobj.IdUser.ToString(), new ActNotificacione());
+                                await new NotificacionesServices(_context).CrearNotificacion(1, 3, IdN, IdUser, IdActividad, Razon, Descripcion, pobj.IdUser.ToString(), new ActNotificacione());
                                 await new EmailSendServices().EnviarCorreoUsuario(pobj.IdUser, 11, Descripcion);
                             }
 
@@ -284,8 +315,9 @@ namespace act_Application.Controllers.General
                                 Razon = $"Solicitud de Prestamo (CONDICIONES ACEPTADAS POR EL USUARIO)";
                                 Descripcion = $"El Usuario Acepto las condiciones para el prestamo. Se generaron las Cuotas.";
                                 await new CuotaGeneradorServices(_context).CrearCuotas(actPrestamo.Id, actPrestamo.FechaPagoTotalPrestamo, new ActCuota());
+                                await new EventosGeneradorServices(_context).CrearEvento(actPrestamo.Id, actPrestamo.IdUser,FechaInicio,FechaFinalizacion, new ActEvento());
                                 await _context.SaveChangesAsync();
-                                await new NotificacionesServices(_context).CrearNotificacion(4, IdUser, IdActividad, Razon, Descripcion, pobj.IdUser.ToString(), new ActNotificacione());
+                                await new NotificacionesServices(_context).CrearNotificacion(1, 4, IdN, IdUser, IdActividad, Razon, Descripcion, pobj.IdUser.ToString(), new ActNotificacione());
                                 await new EmailSendServices().EnviarCorreoUsuario(pobj.IdUser, 11, Descripcion);
 
                             }
@@ -305,7 +337,7 @@ namespace act_Application.Controllers.General
                                 Razon = $"Solicitud de Prestamo (CONDICIONES RECHAZADAS POR EL USUARIO)";
                                 Descripcion = $"El usuario rechazo las condiciones para recibir el prestamo.";
                                 await _context.SaveChangesAsync();
-                                await new NotificacionesServices(_context).CrearNotificacion(4, IdUser, IdActividad, Razon, Descripcion, pobj.IdUser.ToString(), new ActNotificacione());
+                                await new NotificacionesServices(_context).CrearNotificacion(1, 4, IdN, IdUser, IdActividad, Razon, Descripcion, pobj.IdUser.ToString(), new ActNotificacione());
                                 await new EmailSendServices().EnviarCorreoUsuario(pobj.IdUser, 11, Descripcion);
                             }
                         }
