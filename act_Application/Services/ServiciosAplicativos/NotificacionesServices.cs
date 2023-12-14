@@ -36,9 +36,9 @@ namespace act_Application.Services.ServiciosAplicativos
                                 break;
                             case 2/*Si es una Transaccion de Pago de Cuotas*/:
                                 actNotificacione.IdUser = IdUser;
-                                actNotificacione.IdActividad = IdActividad;
+                                actNotificacione.IdActividad = nobj.IdActividad;
                                 actNotificacione.FechaGeneracion = DateTime.Now;
-                                actNotificacione.Razon = $"| {IdActividad} | {Razon}";
+                                actNotificacione.Razon = $"| {nobj.IdActividad} | {Razon}";
                                 actNotificacione.Descripcion = Descripcion;
                                 actNotificacione.Destino = Destino;
                                 actNotificacione.Visto = "SI";
