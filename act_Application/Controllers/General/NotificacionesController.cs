@@ -7,6 +7,7 @@ using act_Application.Services.ServiciosAplicativos;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace act_Application.Controllers.General
 {
@@ -329,6 +330,7 @@ namespace act_Application.Controllers.General
         private async Task<IActionResult> Update_EstadoUsuario(int Id, string Estado, string TipoUser, [Bind("Id,Cedula,NombreYApellido,Contrasena,Celular,TipoUser,IdSocio,FotoPerfil")] ActUser actUser)
         {
             string Descripcion = string.Empty;
+            bool Condicion = false;
             actUser.Id = Id;
             if (Id != actUser.Id)
             {
@@ -351,15 +353,16 @@ namespace act_Application.Controllers.General
                         actUser.Estado = Estado;
                         actUser.TipoUser = TipoUser;
                         Descripcion = $"Tu cuenta a sido Activada Exitosamente. Se te dio la categoria de {TipoUser}. Puedes acceder al sistema con tus credenciales.";
-
+                        Condicion = true;
+                        await Update_EstadoRol(uobj.Id, Condicion,TipoUser, new ActRolUser());
                     }
                     else
                     if (Estado != "ACTIVO" && Estado == "INACTIVO" || Estado == "DENEGADO" || Estado == "EN EVALUACION")
                     {
                         actUser.Estado = Estado;
-                        actUser.TipoUser = "Denegado";
+                        actUser.TipoUser = "DENEGADO";
                         Descripcion = $"Tu peticion de ingreso fue denegada...";
-
+                        await Update_EstadoRol(uobj.Id, Condicion, actUser.TipoUser, new ActRolUser());
                     }
                     _context.Update(actUser);
                     await _context.SaveChangesAsync();
@@ -373,6 +376,64 @@ namespace act_Application.Controllers.General
                 }
             }
             return View(actUser);
+        }
+        private async Task<IActionResult> Update_EstadoRol(int IdUser, bool Condicion, string TipoUser, [Bind("Id,IdUser,IdRol")]ActRolUser actRolUser)
+        {
+            var ruobj = (ActRolUser) new UsuarioRepository().OperacionesUsuario(7, 0, IdUser, "", "");
+            if (ruobj != null)
+            {
+                try
+                {
+                    actRolUser.Id = ruobj.Id;
+                    if(ruobj.Id != actRolUser.Id)
+                    {
+                        return RedirectToAction("Error", "Home");
+                    }
+                    if (ModelState.IsValid)
+                    {
+                        if (Condicion)
+                        {
+                            switch (TipoUser)
+                            {
+                                case "Socio":
+                                    actRolUser.IdUser = ruobj.IdUser;
+                                    actRolUser.IdRol = 2;
+                                    break;
+                                case "Referido":
+                                    actRolUser.IdUser = ruobj.IdUser;
+                                    actRolUser.IdRol = 3;
+                                    break;
+                                case "En Espera":
+                                    actRolUser.IdUser = ruobj.IdUser;
+                                    actRolUser.IdRol = 5;
+                                    break;
+                                default:
+                                    Console.WriteLine($"Opcion al momento de Actualizar el Registro RolUser de {IdUser}");
+                                    break;
+                            }
+                        }
+                        else
+                        {
+                            actRolUser.IdUser = ruobj.IdUser;
+                            actRolUser.IdRol = 5;
+                        }
+                        _context.Update(actRolUser);
+                        await _context.SaveChangesAsync();
+                    }
+                }
+                catch (DbUpdateConcurrencyException ex)
+                {
+                    Console.WriteLine($"NotificacionesController - Update_EstadoRol | Hubo un problema al actualizar el registro del Estado del Rol Usuario en el IdUser.{IdUser}");
+                    Console.WriteLine($"Detalles del error: {ex.Message}");
+                    return RedirectToAction("Error", "Home");
+                }
+            }
+            else
+            {
+                Console.WriteLine($"NotificacionesController - Update_EstadoRol |Hubo un error al momento de Cargar los Datos del rol del Usuario ");
+                return RedirectToAction("Error", "Home");
+            }
+            return View(actRolUser);
         }
     }
 }

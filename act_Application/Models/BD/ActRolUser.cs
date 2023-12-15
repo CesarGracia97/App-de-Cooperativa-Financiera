@@ -9,8 +9,6 @@ namespace act_Application.Models.BD;
 public partial class ActRolUser
 {
     public int Id { get; set; }
-
     public int IdUser { get; set; }
-
     public int IdRol { get; set; }
 }

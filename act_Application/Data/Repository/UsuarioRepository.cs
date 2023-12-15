@@ -171,15 +171,12 @@ namespace act_Application.Data.Repository
                     MySqlCommand cmd = new MySqlCommand(Query, connection);
                     cmd.Parameters.AddWithValue("@Id", Id);
                     cmd.CommandType = CommandType.Text;
-
                     connection.Open();
-
                     using (MySqlDataReader reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
                         {
                             uobj = MapToUser(reader);
-
                         }
                     }
                 }
@@ -237,6 +234,41 @@ namespace act_Application.Data.Repository
                 return null;
             }
         }
+        private ActRolUser GetData_DataUserRol(int IdUser)
+        {
+            try
+            {
+                string Query = ConfigReader.GetQuery(1, "ROLE", "DBQR_SelectDataaUserRol");
+                ActRolUser robj = new ActRolUser();
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                {
+                    MySqlCommand cmd = new MySqlCommand(Query, connection);
+                    cmd.Parameters.AddWithValue("@Id", IdUser);
+                    cmd.CommandType = CommandType.Text;
+                    connection.Open();
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            robj = MapToRolUser(reader);
+                        }
+                    }
+                }
+                return robj;
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine($"\nGetData_DataUserRol || Error de Mysql");
+                Console.WriteLine($"\nRazon del Error: {ex.Message}\n");
+                throw;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"\nGetData_DataUserRol || ErrorGeneral");
+                Console.WriteLine($"\nRazon del Error: {ex.Message}\n");
+                return null;
+            }
+        }
         private ActUser MapToUser(MySqlDataReader reader)
         {
             return new ActUser
@@ -259,6 +291,15 @@ namespace act_Application.Data.Repository
                 DescripcionRol = reader["DescripcionRol"].ToString()
             };
         }
+        private ActRolUser MapToRolUser(MySqlDataReader reader)
+        {
+            return new ActRolUser
+            {
+                Id = reader.GetInt32("Id"),
+                IdUser = reader.GetInt32("IdUser"),
+                IdRol = reader.GetInt32("IdRol"),
+            };
+        }
         public object OperacionesUsuario(int Opcion, int Id, int IdUser, string Correo, string Contrasena)
         {
             try
@@ -277,6 +318,8 @@ namespace act_Application.Data.Repository
                         return GetData_IdUser_Cedula(Correo);
                     case 6:
                         return GetData_DataUser(Id);
+                    case 7:
+                        return GetData_DataUserRol(IdUser);
                     default:
                         Console.WriteLine("\n-----------------------------------------");
                         Console.WriteLine("\nOperacionesUsuario || Opcion Inexistente.");

@@ -9,7 +9,8 @@
         "DBQU_SelectDataUserId": "SELECT u.*, r.IdRol FROM act_User u LEFT JOIN act_RolUser r ON u.Id = r.IdUser WHERE u.Id = @Id"
       },
       "ROLE": {
-        "DBQR_SelectRol": "SELECT * FROM act_Rol WHERE Id = @IdRol"
+        "DBQR_SelectRol": "SELECT * FROM act_Rol WHERE Id = @IdRol",
+        "DBQR_SelectDataaUserRol": "Select * FROM act_RolUser WHERE IdUser = @IdUser"
       },
       "APOR": {
         "DBQA_SelectAportaciones": "SELECT (SELECT COUNT(*) FROM act_Aportaciones) AS TotalAportaciones, a.*, u.NombreYApellido AS NombreUsuario FROM act_Aportaciones a INNER JOIN act_User u ON a.IdUser = u.Id",
