@@ -91,7 +91,7 @@ namespace act_Application.Controllers.General
                         string DescripcionA = $"El Usuario {userIdentificacion} (Usuario Id {IdUser}) a realizado un Aporte de {actAportacione.Valor} el dia {actAportacione.FechaAportacion}.";
                         string DescripcionU = $"Haz  realizado un Aporte de {actAportacione.Valor} el dia {actAportacione.FechaAportacion}.";
                         string IdActividad = (string)new AportacionRepository().OperacionesAportaciones(5, 0, IdUser, "");
-                        await new NotificacionesServices(_context).CrearNotificacion(2, IdUser, IdActividad, "Aporte", DescripcionA, "Administrador", new ActNotificacione());
+                        await new NotificacionesServices(_context).CrearNotificacion(2, 2, 0, IdUser, IdActividad, "Aporte", DescripcionA, "Administrador", new ActNotificacione());
                         var essA = new EmailSendServices().EnviarCorreoAdmin(2, DescripcionA);
                         return RedirectToAction("Index", "Home");
                     }
@@ -138,7 +138,7 @@ namespace act_Application.Controllers.General
                                                 $" e inicio de pago de la deuda para el dia {actPrestamo.FechaInicioPagoCuotas}" +
                                                 $"\nEstado: {actPrestamo.Estado}" +
                                                 $"\nTipo de Cuota: {actPrestamo.TipoCuota}";
-                        await new NotificacionesServices(_context).CrearNotificacion(4, IdUser, (string)new PrestamosRepository().OperacionesPrestamos(5, 0, IdUser, ""), "PETICION DE PRESTAMO", DescripcionA, "Administrador", new ActNotificacione());
+                        await new NotificacionesServices(_context).CrearNotificacion(2, 4, 0, IdUser, (string)new PrestamosRepository().OperacionesPrestamos(5, 0, IdUser, ""), "PETICION DE PRESTAMO", DescripcionA, "Administrador", new ActNotificacione());
                         var essA = new EmailSendServices().EnviarCorreoAdmin(7, DescripcionA);
                         var essU = new EmailSendServices().EnviarCorreoUsuario(IdUser, 1, DescripcionU);
                         return RedirectToAction("Index", "Home");
@@ -231,7 +231,7 @@ namespace act_Application.Controllers.General
                         _context.Update(actMulta);
                         await _context.SaveChangesAsync();
 
-                        await new NotificacionesServices(_context).CrearNotificacion(5, IdUser, multOriginal.IdMult, "PAGO DE MULTA", DescripcionA, "Administrador", new ActNotificacione());
+                        await new NotificacionesServices(_context).CrearNotificacion(2, 5, 0, IdUser, multOriginal.IdMult, "PAGO DE MULTA", DescripcionA, "Administrador", new ActNotificacione());
                         return RedirectToAction("Index", "Home");
                     }
                 }
@@ -325,7 +325,7 @@ namespace act_Application.Controllers.General
                         }
                         _context.Update(actCuota);
                         await _context.SaveChangesAsync();
-                        await new NotificacionesServices(_context).CrearNotificacion( 3, IdUser, cuotOriginal.IdCuot, "PAGO DE CUOTA", DescripcionA, "Administrador", new ActNotificacione());
+                        await new NotificacionesServices(_context).CrearNotificacion(2, 3, 0, IdUser, cuotOriginal.IdCuot, "PAGO DE CUOTA", DescripcionA, "Administrador", new ActNotificacione());
                         return RedirectToAction("Index", "Home");
                     }
                 }
