@@ -103,7 +103,7 @@ namespace act_Application.Controllers.General
                 return RedirectToAction("Error", "Home");
             }
         }
-        public async Task<IActionResult> Visualizado(int IdN, int IdA, int Opcion, string Estado, string TipoUser, DateTime FechaPagoTotalPrestamo, DateTime FechaInicioPagoCuotas, string TipoCuota, string PEstado, DateTime FechaInicio, DateTime FechaFinalizacion, [Bind("Id,IdActividad,FechaGeneracion,Razon,Descripcion,Destino,Visto")] ActNotificacione actNotificacione)
+        public async Task<IActionResult> Visualizado(int IdN, int IdA, int Opcion, string Estado, string TipoUser, DateTime FechaPagoTotalPrestamo, DateTime FechaInicioPagoCuotas, string PEstado, DateTime FechaInicio, DateTime FechaFinalizacion, [Bind("Id,IdActividad,FechaGeneracion,Razon,Descripcion,Destino,Visto")] ActNotificacione actNotificacione)
         {
             actNotificacione.Id = IdN;
             if (IdN != actNotificacione.Id)
@@ -134,7 +134,7 @@ namespace act_Application.Controllers.General
                                     await _context.SaveChangesAsync();
                                     return RedirectToAction("Index", "Notificaciones");
                                 case 2/*Solicitud de Prestamo Usuario -> Admin (Fase 1)*/:
-                                    await Update_EstadoPrestamo(IdA, IdUser, IdN, actNotificacione.IdActividad, FechaPagoTotalPrestamo, FechaInicioPagoCuotas, TipoCuota, PEstado, FechaInicio, FechaFinalizacion, new ActPrestamo());
+                                    await Update_EstadoPrestamo(IdA, IdUser, IdN, actNotificacione.IdActividad, FechaPagoTotalPrestamo, FechaInicioPagoCuotas, PEstado, FechaInicio, FechaFinalizacion, new ActPrestamo());
                                     return RedirectToAction("Index", "Notificaciones");
                                 case 3/*Solicitud de Prestamo Usuario -> Admin (Generacion Cuotas)*/:
                                     actNotificacione.IdUser = nobj.IdUser;
@@ -146,7 +146,7 @@ namespace act_Application.Controllers.General
                                     actNotificacione.Visto = "NO";
                                     _context.Update(actNotificacione);
                                     await _context.SaveChangesAsync();
-                                    await Update_EstadoPrestamo(IdA, IdUser, IdN, actNotificacione.IdActividad, FechaPagoTotalPrestamo, FechaInicioPagoCuotas, TipoCuota, PEstado, FechaInicio, FechaFinalizacion, new ActPrestamo());
+                                    await Update_EstadoPrestamo(IdA, IdUser, IdN, actNotificacione.IdActividad, FechaPagoTotalPrestamo, FechaInicioPagoCuotas, PEstado, FechaInicio, FechaFinalizacion, new ActPrestamo());
                                     return RedirectToAction("Index", "Notificaciones");
                                 case 4/*Confirmar o Rechazar Nuevo Usuario*/:
                                     actNotificacione.IdUser = nobj.IdUser;
@@ -195,7 +195,7 @@ namespace act_Application.Controllers.General
                                     actNotificacione.Visto = "NO";
                                     _context.Update(actNotificacione);
                                     await _context.SaveChangesAsync();
-                                    await Update_EstadoPrestamo(IdA, IdUser, IdN, actNotificacione.IdActividad, DateTime.MinValue, DateTime.MinValue, "", "", DateTime.MinValue, DateTime.MinValue, new ActPrestamo());
+                                    await Update_EstadoPrestamo(IdA, IdUser, IdN, actNotificacione.IdActividad, DateTime.MinValue, DateTime.MinValue, "", DateTime.MinValue, DateTime.MinValue, new ActPrestamo());
 
                                     return RedirectToAction("Index", "Notificaciones");
                                 default:
@@ -214,7 +214,7 @@ namespace act_Application.Controllers.General
             }
             return View(actNotificacione);
         }
-        private async Task<IActionResult> Update_EstadoPrestamo(int Id, int IdUser, int IdN, string IdActividad, DateTime FechaPagoTotalPrestamo, DateTime FechaInicioPagoCuotas, string TipoCuota, string PEstado, DateTime FechaInicio, DateTime FechaFinalizacion, [Bind("Id,IdPres,IdUser,Valor,FechaGeneracion,FechaEntregaDinero,FechaInicioPagoCuotas,FechaPagoTotalPrestamo,TipoCuota,Estado")] ActPrestamo actPrestamo)
+        private async Task<IActionResult> Update_EstadoPrestamo(int Id, int IdUser, int IdN, string IdActividad, DateTime FechaPagoTotalPrestamo, DateTime FechaInicioPagoCuotas, string PEstado, DateTime FechaInicio, DateTime FechaFinalizacion, [Bind("Id,IdPres,IdUser,Valor,FechaGeneracion,FechaEntregaDinero,FechaInicioPagoCuotas,FechaPagoTotalPrestamo,TipoCuota,Estado")] ActPrestamo actPrestamo)
         {
             string Razon, Descripcion;
             actPrestamo.Id = Id;
@@ -240,7 +240,7 @@ namespace act_Application.Controllers.General
                                 actPrestamo.FechaEntregaDinero = pobj.FechaEntregaDinero;
                                 actPrestamo.FechaPagoTotalPrestamo = FechaPagoTotalPrestamo;
                                 actPrestamo.FechaInicioPagoCuotas = FechaInicioPagoCuotas;
-                                actPrestamo.TipoCuota = TipoCuota;
+                                actPrestamo.TipoCuota = pobj.TipoCuota;
                                 actPrestamo.Estado = PEstado;
                                 _context.Update(actPrestamo);
                                 Razon = $"Solicitud de Prestamos Aceptado";
@@ -260,7 +260,7 @@ namespace act_Application.Controllers.General
                                 actPrestamo.FechaEntregaDinero = pobj.FechaEntregaDinero;
                                 actPrestamo.FechaPagoTotalPrestamo = FechaPagoTotalPrestamo;
                                 actPrestamo.FechaInicioPagoCuotas = FechaInicioPagoCuotas;
-                                actPrestamo.TipoCuota = "";
+                                actPrestamo.TipoCuota = pobj.TipoCuota;
                                 actPrestamo.Estado = PEstado;
                                 _context.Update(actPrestamo);
                                 Razon = $"Solicitud de Prestamos DENEGADO";
