@@ -144,3 +144,11 @@
         .modal__table td:first-child {
             text-align: left;
         }
+
+.select-modal {
+    padding:10px;
+    align-content: center;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+}

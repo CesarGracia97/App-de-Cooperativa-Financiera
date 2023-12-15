@@ -465,8 +465,19 @@
                                                             <td>@notificacionAdmin.Prestamos.Estado</td>
                                                         </tr>
                                                     </table>
-                                                    <div class="container-modal-btn">
+                                                    <div class="select-modal">
+                                                        <select class="select-acep-dene">
+                                                            <option value="">Aceptar o Denegar Solicitud de Prestamo...</option>
+                                                            <option value="SI">Aceptar</option>
+                                                            <option value="NO">Denegar</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="S-container-modal-btn">
                                                         <button type="submit" data-notification-id="@notificacionAdmin.Notificaciones.Id" class="btn-mdl-confir">Confirmar</button>
+                                                        <a href="~/Notificaciones/Index" class="modal__close" data-notification-id="@notificacionAdmin.Notificaciones.Id">Cerrar</a>
+                                                    </div>
+                                                    <div class="N-container-modal-btn">
+                                                        <button type="submit" data-notification-id="@notificacionAdmin.Notificaciones.Id" class="bt-rechazar">Denegar</button>
                                                         <a href="~/Notificaciones/Index" class="modal__close" data-notification-id="@notificacionAdmin.Notificaciones.Id">Cerrar</a>
                                                     </div>
                                                 </div>
