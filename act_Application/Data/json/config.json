@@ -29,7 +29,7 @@
         "DBQE_SelectEventosIdEven": "SELECT Id FROM act_Eventos WHERE IdEven = @IdEven"
       },
       "PRES": {
-        "DBQP_SelectPrestamoId": "SELECT (SELECT COUNT(*) FROM act_Prestamos WHERE Id = @Id) AS TotalPrestamos, a.* FROM act_Prestamos a WHERE Id = @Id",
+        "DBQP_SelectPrestamoId": "SELECT (SELECT COUNT(*) FROM act_Prestamos WHERE Id = @Id) AS TotalPrestamos, a.* b.NombreYApellido AS DueñoPrestamo FROM act_Prestamos a INNER JOIN act_User b ON a.IdUser = b.Id  WHERE a.Id = @Id",
         "DBQP_SelectPrestamoUser": "SELECT (SELECT COUNT(*) FROM act_Prestamos WHERE IdUser = @IdUser) AS TotalPrestamos, (SELECT COUNT(*) FROM act_Prestamos WHERE IdUser = @IdUser AND Estado = 'APROBADO') AS TotalAprobado, (SELECT COUNT(*) FROM act_Prestamos WHERE IdUser = @IdUser AND Estado IN ('DENEGADO', 'RECHAZADO')) AS TotalRechazado, (SELECT COUNT(*) FROM act_Prestamos WHERE IdUser = @IdUser AND Estado  IN ('PENDIENTE REFERENTE', 'PENDIENTE ADMIN')) AS TotalPendiente, (SELECT COUNT(*) FROM act_Prestamos WHERE IdUser = @IdUser AND TipoCuota ='PagoUnico') AS TotalPagoUnico, (SELECT COUNT(*) FROM act_Prestamos WHERE IdUser = @IdUser AND TipoCuota = 'CUOTA') AS TotalCuota, a.* FROM act_Prestamos a WHERE IdUser = @IdUser",
         "DBQP_SelectPrestamoIdPres": "SELECT Id FROM act_Prestamos WHERE IdPres = @IdPres"
       },

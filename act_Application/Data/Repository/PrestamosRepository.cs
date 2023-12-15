@@ -227,7 +227,8 @@ namespace act_Application.Data.Repository
                 FechaInicioPagoCuotas = Convert.ToDateTime(reader["FechaInicioPagoCuotas"]),
                 FechaPagoTotalPrestamo = Convert.ToDateTime(reader["FechaPagoTotalPrestamo"]),
                 TipoCuota = Convert.ToString(reader["TipoCuota"]),
-                Estado = Convert.ToString(reader["Estado"])
+                Estado = Convert.ToString(reader["Estado"]),
+                DueñoPrestamo = Convert.ToString(reader["DuseñoPrestamo"])
             };
         }
         public object OperacionesPrestamos(int Opcion, int Id, int IdUser, string IdPres)

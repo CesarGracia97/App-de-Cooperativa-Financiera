@@ -1,4 +1,6 @@
-﻿namespace act_Application.Models.BD;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace act_Application.Models.BD;
 public partial class ActPrestamo
 {
     public int Id { get; set; }
@@ -11,4 +13,6 @@ public partial class ActPrestamo
     public DateTime FechaPagoTotalPrestamo { get; set; }
     public string TipoCuota { get; set; }
     public string Estado { get; set; }
+    [NotMapped]
+    public string DueñoPrestamo { get; set; }
 }
