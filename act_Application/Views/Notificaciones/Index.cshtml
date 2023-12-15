@@ -477,8 +477,14 @@
                                                         <a href="~/Notificaciones/Index" class="modal__close" data-notification-id="@notificacionAdmin.Notificaciones.Id">Cerrar</a>
                                                     </div>
                                                     <div class="N-container-modal-btn">
-                                                        <button type="submit" data-notification-id="@notificacionAdmin.Notificaciones.Id" class="bt-rechazar">Denegar</button>
-                                                        <a href="~/Notificaciones/Index" class="modal__close" data-notification-id="@notificacionAdmin.Notificaciones.Id">Cerrar</a>
+                                                        <form asp-action="Visualizado">
+                                                            <input type="hidden" asp-for="@notificacionAdmin.Notificaciones.Id" name="IdN" />
+                                                            <input type="hidden" asp-for="@notificacionAdmin.Prestamos.Id" name="IdA" />
+                                                            <input type="hidden" value="2" name="Opcion" />
+                                                            <input type="hidden" value="DENEGADO" name="PEstado" />
+                                                            <button type="submit" data-notification-id="@notificacionAdmin.Notificaciones.Id" class="bt-rechazar">Denegar</button>
+                                                            <a href="~/Notificaciones/Index" class="modal__close" data-notification-id="@notificacionAdmin.Notificaciones.Id">Cerrar</a>
+                                                        </form>
                                                     </div>
                                                 </div>
                                             </div>
