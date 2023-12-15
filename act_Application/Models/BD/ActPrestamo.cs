@@ -14,5 +14,5 @@ public partial class ActPrestamo
     public string TipoCuota { get; set; }
     public string Estado { get; set; }
     [NotMapped]
-    public string DueñoPrestamo { get; set; }
+    public string DuenoPrestamo { get; set; }
 }

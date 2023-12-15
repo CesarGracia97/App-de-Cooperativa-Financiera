@@ -161,6 +161,7 @@ namespace act_Application.Controllers.General
                                     await Update_EstadoUsuario(IdA, Estado, TipoUser, new ActUser());
                                     return RedirectToAction("Index", "Notificaciones");
                                 default:
+                                    Console.WriteLine($"Opcion Inexistente: {Opcion}");
                                     Console.WriteLine($"Hubo un problema al actualizar 'Visto' en el Id {IdN}. Usuario Normal");
                                     break;
                             }
