@@ -104,7 +104,7 @@ namespace act_Application.Controllers.General
                 return null;
             }
         }
-        public async Task<IActionResult> Prestamo(decimal Valor, DateTime FechaEntrgaDinero, DateTime FechaInicioPagoCuotas, string TipoCuota, [Bind("Id,IdPres,IdUser,Valor,FechaGeneracion,FechaEntregaDinero,FechaInicioPagoCuotas,FechaPagoTotalPrestamo,TipoCuota,Estado")] ActPrestamo actPrestamo)
+        public async Task<IActionResult> Prestamo(decimal Valor, DateTime FechaEntregaDinero, DateTime FechaInicioPagoCuotas, string TipoCuota, [Bind("Id,IdPres,IdUser,Valor,FechaGeneracion,FechaEntregaDinero,FechaInicioPagoCuotas,FechaPagoTotalPrestamo,TipoCuota,Estado")] ActPrestamo actPrestamo)
         {
             if (ModelState.IsValid)
             {
@@ -123,7 +123,7 @@ namespace act_Application.Controllers.General
                         actPrestamo.IdUser = IdUser;
                         actPrestamo.Valor = Valor;
                         actPrestamo.FechaGeneracion = DateTime.Now;
-                        actPrestamo.FechaEntregaDinero = FechaEntrgaDinero;
+                        actPrestamo.FechaEntregaDinero = FechaEntregaDinero;
                         actPrestamo.FechaInicioPagoCuotas = FechaInicioPagoCuotas;
                         actPrestamo.FechaPagoTotalPrestamo = DateTime.MinValue;
                         actPrestamo.TipoCuota = TipoCuota;
