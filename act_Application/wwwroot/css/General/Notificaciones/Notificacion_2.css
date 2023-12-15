@@ -75,7 +75,7 @@
     }
 
     100% {
-        top: 25%;
+        top: 15%;
     }
 }
 
@@ -116,3 +116,31 @@
     .btn-mdl-rechazar:hover {
         background-color: #ff0000;
     }
+
+.modal__table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+    .modal__table th,
+    .modal__table td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+        font-size: 12px; /* Tamaño de fuente ajustado a 9px */
+    }
+
+    .modal__table th {
+        background-color: #f2f2f2;
+    }
+
+    /* Alineación justificada para los elementos td */
+    .modal__table td {
+        text-align: justify;
+    }
+
+        /* Alineación específica para el primer td (Razon) */
+        .modal__table td:first-child {
+            text-align: left;
+        }

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "kaozj8LHCU720CkMiOn1rwK5XMjHqlKzjlkp7IewrdA=",
+  "Hash": "uvFKjk2QhJCaar2+ssldcd2TKjqeNmYsxLMXJoCnOmk=",
   "Source": "act_Application",
   "BasePath": "_content/act_Application",
   "Mode": "Default",
@@ -221,12 +221,12 @@
       "OriginalItemSpec": "wwwroot\\css\\General\\Menu\\Transaccion\\item4.css"
     },
     {
-      "Identity": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\css\\General\\Notificaciones\\Notificaciones_1.css",
+      "Identity": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\css\\General\\Notificaciones\\Notificacion_1.css",
       "SourceId": "act_Application",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\",
       "BasePath": "_content/act_Application",
-      "RelativePath": "css/General/Notificaciones/Notificaciones_1.css",
+      "RelativePath": "css/General/Notificaciones/Notificacion_1.css",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -235,15 +235,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\css\\General\\Notificaciones\\Notificaciones_1.css"
+      "OriginalItemSpec": "wwwroot\\css\\General\\Notificaciones\\Notificacion_1.css"
     },
     {
-      "Identity": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\css\\General\\Notificaciones\\Notificaciones_2.css",
+      "Identity": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\css\\General\\Notificaciones\\Notificacion_2.css",
       "SourceId": "act_Application",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\",
       "BasePath": "_content/act_Application",
-      "RelativePath": "css/General/Notificaciones/Notificaciones_2.css",
+      "RelativePath": "css/General/Notificaciones/Notificacion_2.css",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -252,7 +252,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\css\\General\\Notificaciones\\Notificaciones_2.css"
+      "OriginalItemSpec": "wwwroot\\css\\General\\Notificaciones\\Notificacion_2.css"
     },
     {
       "Identity": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\css\\General\\Shared\\_Layout.css",

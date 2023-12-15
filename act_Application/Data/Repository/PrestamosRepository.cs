@@ -60,8 +60,7 @@ namespace act_Application.Data.Repository
                         {
                             while (reader.Read())
                             {
-                                ActPrestamo obj = MapToPrestamo(reader);
-                                pobj = obj;
+                                pobj = MapToPrestamo(reader);
                             }
                             
                         }

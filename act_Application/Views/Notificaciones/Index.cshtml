@@ -27,8 +27,8 @@
 <header>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/General/Notificaciones/Notificaciones_1.css" />
-    <link rel="stylesheet" href="/css/General/Notificaciones/Notificaciones_2.css" />
+    <link rel="stylesheet" href="/css/General/Notificaciones/Notificacion_1.css" />
+    <link rel="stylesheet" href="/css/General/Notificaciones/Notificacion_2.css" />
     <script src="/js/General/Notificaciones/Notificaciones_1.js"></script>
     <script src="/js/General/Notificaciones/Notificaciones_2.js"></script>
 </header>
@@ -424,44 +424,54 @@
                                             <p class="notif-text">Fecha: @notificacionAdmin.Notificaciones.FechaGeneracion.ToString("dd-MMMM-yyyy")</p>
                                             <button class="btn-visualizar" data-notification-id="@notificacionAdmin.Notificaciones.Id">Visualizar</button>
                                         </div>
-                                        <div class="modal__content">
-                                            <h3 class="modal__title">Detalles - Peticion de Prestamo</h3>
-                                            <table class="modal__table">
-                                                <tr>
-                                                    <td><strong>Fecha de Notificacion:</strong></td>
-                                                    <td>@notificacionAdmin.Notificaciones.FechaGeneracion.ToString("dd-MM-yyyy")</td>
-                                                </tr>
-                                                <tr>
-                                                    <td><strong>Usuario de la Peticion:</strong></td>
-                                                    <td>@notificacionAdmin.Prestamos.DuenoPrestamo</td>
-                                                </tr>
-                                                <tr>
-                                                    <td><strong>Valor a Prestamo</strong></td>
-                                                    <td>@notificacionAdmin.Prestamos.Valor</td>
-                                                </tr>
-                                                <tr>
-                                                    <td><strong>Tipo de Cuota:</strong></td>
-                                                    <td>@notificacionAdmin.Prestamos.TipoCuota</td>
-                                                </tr>
-                                                <tr>
-                                                    <td><strong>Fecha de Entrega de Dinero:</strong></td>
-                                                    <td>@notificacionAdmin.Prestamos.FechaEntregaDinero</td>
-                                                </tr>
-                                                <tr>
-                                                    <td><strong>Fecha de Inicio de Pago de Deuda:</strong></td>
-                                                    <td>@notificacionAdmin.Prestamos.FechaInicioPagoCuotas</td>
-                                                </tr>
-                                                <tr>
-                                                    <td><strong>Estado:</strong></td>
-                                                    <td>@notificacionAdmin.Prestamos.Estado</td>
-                                                </tr>
-                                            </table>
-                                            <div class="container-modal-btn">
-                                                <button type="submit" data-notification-id="@notificacionAdmin.Notificaciones.Id" class="btn-mdl-confir">Confirmar</button>
-                                                <a href="~/Notificaciones/Index" class="modal__close" data-notification-id="@notificacionAdmin.Notificaciones.Id">Cerrar</a>
+                                        <div class="modal-principal" id="modal-@notificacionAdmin.Notificaciones.Id">
+                                            <div class="modal__container">
+                                                <div class="modal__content">
+                                                    <table class="modal__table">
+                                                        <tr>
+                                                        <td></td>
+                                                            <td><h3 class="modal__title">Detalles - Peticion de Prestamo</h3></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><strong>Fecha de Notificacion:</strong></td>
+                                                            <td>@notificacionAdmin.Notificaciones.FechaGeneracion.ToString("dd-MM-yyyy")</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><strong>Detalles:</strong></td>
+                                                            <td>@notificacionAdmin.Notificaciones.Descripcion</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><strong>Codigo de Identificacion:</strong></td>
+                                                            <td>@notificacionAdmin.Prestamos.IdPres</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><strong>Valor a Prestamo</strong></td>
+                                                            <td>@notificacionAdmin.Prestamos.Valor</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><strong>Tipo de Cuota:</strong></td>
+                                                            <td>@notificacionAdmin.Prestamos.TipoCuota</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><strong>Fecha de Entrega de Dinero:</strong></td>
+                                                            <td>@notificacionAdmin.Prestamos.FechaEntregaDinero</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><strong>Fecha de Inicio de Pago de Deuda:</strong></td>
+                                                            <td>@notificacionAdmin.Prestamos.FechaInicioPagoCuotas</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><strong>Estado:</strong></td>
+                                                            <td>@notificacionAdmin.Prestamos.Estado</td>
+                                                        </tr>
+                                                    </table>
+                                                    <div class="container-modal-btn">
+                                                        <button type="submit" data-notification-id="@notificacionAdmin.Notificaciones.Id" class="btn-mdl-confir">Confirmar</button>
+                                                        <a href="~/Notificaciones/Index" class="modal__close" data-notification-id="@notificacionAdmin.Notificaciones.Id">Cerrar</a>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-
                                         break;
                                 }
                             }

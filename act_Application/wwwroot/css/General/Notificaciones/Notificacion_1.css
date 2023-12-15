@@ -2,6 +2,13 @@
     margin: 0px 30px 0px 40px;
 }
 
+h3 {
+    align-content: center;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+}
+
 .content-notif {
     align-items: center;
     display: flex;
@@ -64,9 +71,6 @@ body:not(.dark) .content-text {
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 1000;
-    justify-content: center;
-    align-items: center;
-    z-index: 999;
 }
 
 .modal__container {
@@ -79,7 +83,6 @@ body:not(.dark) .content-text {
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
     max-width: 400px;
     width: 100%;
-    text-align: center;
     animation: slideIn 0.5s forwards;
     max-width: 80%; /* Ajusta este valor según tus preferencias */
 }
@@ -90,7 +93,7 @@ body:not(.dark) .content-text {
     }
 
     100% {
-        top: 25%;
+        top: 5%;
     }
 }
 
@@ -121,8 +124,6 @@ body:not(.dark) .content-text {
 .modal__content {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
     height: 100%;
 }
 
@@ -192,6 +193,10 @@ body:not(.dark) .content-text {
 .container-modal-btn {
     display: flex;
     justify-content: space-between;
+    align-content: center;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
     align-items: center;
     margin-top: 20px; /* Separación del botón cerrar */
 }
@@ -347,7 +352,7 @@ body:not(.dark) .content-text {
     }
 
     100% {
-        top: 25%;
+        top: 15%;
     }
 }
 

@@ -122,7 +122,7 @@
                 <!--Contenedor del Tipo de Cuota-->
                 <div class="form-group">
                     <label asp-for="Prestamos.TipoCuota">Tipo de Cuota:</label>
-                    <select  name="TipoCupota" placeholder="Seleccionar un Tipo de Cuota..." required>
+                    <select name="TipoCuota" placeholder="Seleccionar un Tipo de Cuota..." required>
                         <option value="">Seleccionar un Tipo de Cuota...</option>
                         @foreach (var item in ViewData["ItemsCuota"] as List<ListItems>)
                         {
