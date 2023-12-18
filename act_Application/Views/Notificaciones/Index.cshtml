@@ -472,7 +472,6 @@
                                                             <option value="NO">Denegar</option>
                                                         </select>
                                                     </div>
-
                                                     <div class="S-container-modal-btn">
                                                         <form asp-action="Visualizado">
                                                             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -480,9 +479,25 @@
                                                             <input type="hidden" asp-for="@notificacionAdmin.Prestamos.Id" name="IdA" />
                                                             <input type="hidden" value="2" name="Opcion" />
                                                             <input type="hidden" value="ACEPTADO AF1" name="PEstado" />
-                                                            <button type="submit" data-notification-id="@notificacionAdmin.Notificaciones.Id" class="btn-mdl-confir">Confirmar</button>
-                                                            <a href="~/Notificaciones/Index" class="modal__close" data-notification-id="@notificacionAdmin.Notificaciones.Id">Cerrar</a>
-
+                                                            <div class="form-group">
+                                                                <label asp-for="@notificacionAdmin.Prestamos.FechaPagoTotalPrestamo" class="control-label">Fecha de Pago del Prestamo -> Fecha de Inicio de Pago de Cuotas @notificacionAdmin.Prestamos.FechaInicioPagoCuotas.ToString("dd-MMMM-yyyy")</label>
+                                                                <input asp-for="@notificacionAdmin.Prestamos.FechaPagoTotalPrestamo"  type="date" class="input-date" name="FechaPagoTotalPrestamo" min="@fechaactual" required />
+                                                                <span asp-validation-for="@notificacionAdmin.Prestamos.FechaPagoTotalPrestamo" class="text-danger"></span>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label asp-for="@notificacionAdmin.Eventos.FechaInicio" class="control-label">Fecha Inicio de Inscripcion de Garantes</label>
+                                                                <input asp-for="@notificacionAdmin.Eventos.FechaInicio" type="date" class="input-date" name="FechaInicio"min="@fechaactual" required />
+                                                                <span asp-validation-for="@notificacionAdmin.Eventos.FechaInicio" class="text-danger"></span>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label asp-for="@notificacionAdmin.Eventos.FechaFinalizacion" class="control-label">Fecha Finalizacion de Inscripcion de Garantes</label>
+                                                                <input asp-for="@notificacionAdmin.Eventos.FechaFinalizacion" type="date" class="input-date" name="FechaFinalizacion" min="@fechaactual" required />
+                                                                <span asp-validation-for="@notificacionAdmin.Eventos.FechaFinalizacion" class="text-danger"></span>
+                                                            </div>
+                                                            <div class="container-modal-btn">
+                                                                <button type="submit" data-notification-id="@notificacionAdmin.Notificaciones.Id" class="btn-mdl-confir">Confirmar</button>
+                                                                <a href="~/Notificaciones/Index" class="modal__close" data-notification-id="@notificacionAdmin.Notificaciones.Id">Cerrar</a>
+                                                            </div>
                                                         </form>
                                                     </div>
                                                     <div class="N-container-modal-btn">
