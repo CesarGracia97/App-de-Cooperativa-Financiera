@@ -247,7 +247,10 @@ namespace act_Application.Controllers.General
                                 actPrestamo.Estado = PEstado;
                                 _context.Update(actPrestamo);
                                 Razon = $"Solicitud de Prestamos Aceptado";
-                                Descripcion = $"Tu solicitud de Prestamo fue Aceptada. Acepta las Condiciones como las fechas de Pago.";
+                                Descripcion = $"Tu solicitud de Prestamo fue Aceptada. Acepta las Condiciones como las fechas de Pago." +
+                                              $"\nCONDICIONES" +
+                                              $"\nFecha de Inicio de Pago de las Cuotas:{FechaInicioPagoCuotas}" +
+                                              $"\nFecha de Pago total de la Deuda: {FechaInicioPagoCuotas}";
                                 await _context.SaveChangesAsync();
                                 await new EventosGeneradorServices(_context).CrearEvento(Id, IdUser, FechaInicio, FechaFinalizacion, new ActEvento());
                                 await new NotificacionesServices(_context).CrearNotificacion(1, 3, IdN, IdUser, IdActividad, Razon, Descripcion, pobj.IdUser.ToString(), new ActNotificacione());

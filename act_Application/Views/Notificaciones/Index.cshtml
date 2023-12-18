@@ -529,6 +529,14 @@
                                                             <p class="modal__paragraph"><strong>Fecha:</strong> @notificacionAdmin.Notificaciones.FechaGeneracion.ToString("dd-MM-yyyy")</p>
                                                             <p class="modal__paragraph"><strong>Descripcion:</strong></p>
                                                             <p class="modal__description">@notificacionAdmin.Notificaciones.Descripcion</p>
+                                                            <form asp-action="Visualizado">
+                                                                <div class="container-modal-btn">
+                                                                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                                                    <input type="hidden" asp-for="@notificacionAdmin.Notificaciones.Id" name="IdN" />
+                                                                    <input type="hidden" value="1" name="Opcion" required />
+                                                                    <button type="submit" data-notification-id="@notificacionAdmin.Notificaciones.Id" class="modal__close">Cerrar</button>
+                                                                </div>
+                                                            </form>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -563,8 +571,6 @@
                                                     </div>
                                                 </div>
                                             break;
-                                            default:
-                                                break;
                                         }
                                         break;
                                 }
@@ -615,6 +621,32 @@
                                             <p class="notif-text">Fecha: @notificacionUsers.Notificaciones.FechaGeneracion.ToString("dd-MMMM-yyyy")</p>
                                             <button class="btn-visualizar" data-notification-id="@notificacionUsers.Notificaciones.Id">Visualizar</button>
                                         </div>
+                                        switch (notificacionUsers.Prestamos.Estado)
+                                        {
+                                            case "RECHAZADO":
+                                                <div class="modal-principal" id="modal-@notificacionUsers.Notificaciones.Id">
+                                                    <div class="modal__container">
+                                                        <div class="modal__content">
+                                                            <p class="modal__paragraph"><strong>Razon:</strong> @notificacionUsers.Notificaciones.Razon</p>
+                                                            <p class="modal__paragraph"><strong>Fecha:</strong> @notificacionUsers.Notificaciones.FechaGeneracion.ToString("dd-MM-yyyy")</p>
+                                                            <p class="modal__paragraph"><strong>Descripcion:</strong></p>
+                                                            <p class="modal__description">@notificacionUsers.Notificaciones.Descripcion</p>
+                                                            <form asp-action="Visualizado">
+                                                                <div class="container-modal-btn">
+                                                                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                                                    <input type="hidden" asp-for="@notificacionUsers.Notificaciones.Id" name="IdN" />
+                                                                    <input type="hidden" value="1" name="Opcion" required />
+                                                                    <button type="submit" data-notification-id="@notificacionUsers.Notificaciones.Id" class="modal__close">Cerrar</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                break;
+                                            case "ACEPTADO AF1":
+
+                                                break;
+                                        }
                                         break;
                                 }
                             }
