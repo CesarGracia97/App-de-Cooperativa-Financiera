@@ -613,7 +613,7 @@
                                             <p class="notif-text">Fecha: @notificacionUsers.Notificaciones.FechaGeneracion.ToString("dd-MMMM-yyyy")</p>
                                             <button class="btn-visualizar" data-notification-id="@notificacionUsers.Notificaciones.Id">Visualizar</button>
                                         </div>
-                                        break;
+                                    break;
                                     case "PRES":
                                         <div class="notif-container">
                                             <p class="notif-text">Razon: @notificacionUsers.Notificaciones.IdActividad: Prestamo </p>
@@ -642,12 +642,51 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                break;
+                                            break;
                                             case "ACEPTADO AF1":
+                                                <div class="modal-principal" id="modal-@notificacionUsers.Notificaciones.Id">
+                                                    <div class="modal__container">
+                                                        <div class="modal__content">
+                                                            <p class="modal__paragraph"><strong>Razon:</strong> @notificacionUsers.Notificaciones.Razon</p>
+                                                            <p class="modal__paragraph"><strong>Fecha:</strong> @notificacionUsers.Notificaciones.FechaGeneracion.ToString("dd-MM-yyyy")</p>
+                                                            <p class="modal__paragraph"><strong>Descripcion:</strong></p>
+                                                            <p class="modal__description">@notificacionUsers.Notificaciones.Descripcion</p>
+                                                            <div class="select-modal">
+                                                                <select class="select-acep-dene">
+                                                                    <option value="">Aceptar o Denegar Solicitud de Prestamo...</option>
+                                                                    <option value="SI">Aceptar</option>
+                                                                    <option value="NO">Denegar</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="S-container-modal-btn">
+                                                                <form asp-action="Visualizado">
+                                                                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                                                    <input type="hidden" asp-for="@notificacionUsers.Notificaciones.Id" name="IdN" />
+                                                                    <input type="hidden" asp-for="@notificacionUsers.Prestamos.Id" name="IdA" />
+                                                                    <input type="hidden" value="2" name="Opcion" />
+                                                                    <input type="hidden" value="APROBADO" name="PEstado" />
+                                                                </form>
+                                                            </div>
+                                                            <div class="N-container-modal-btn">
+                                                                <form asp-action="Visualizado">
+                                                                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                                                    <input type="hidden" asp-for="@notificacionUsers.Notificaciones.Id" name="IdN" />
+                                                                    <input type="hidden" asp-for="@notificacionUsers.Prestamos.Id" name="IdA" />
+                                                                    <input type="hidden" value="2" name="Opcion" />
+                                                                    <input type="hidden" value="RECHAZADO" name="PEstado" />
+                                                                    <div class="container-modal-btn">
+                                                                        <button type="submit" data-notification-id="@notificacionUsers.Notificaciones.Id" class="bt-rechazar">Denegar</button>
+                                                                        <a href="~/Notificaciones/Index" class="modal__close" data-notification-id="@notificacionUsers.Notificaciones.Id">Cerrar</a>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
 
-                                                break;
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            break;
                                         }
-                                        break;
+                                    break;
                                 }
                             }
                         }
