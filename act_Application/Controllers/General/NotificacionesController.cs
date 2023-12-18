@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System.Security.Claims;
 
 namespace act_Application.Controllers.General
 {
@@ -248,6 +249,7 @@ namespace act_Application.Controllers.General
                                 Razon = $"Solicitud de Prestamos Aceptado";
                                 Descripcion = $"Tu solicitud de Prestamo fue Aceptada. Acepta las Condiciones como las fechas de Pago.";
                                 await _context.SaveChangesAsync();
+                                await new EventosGeneradorServices(_context).CrearEvento(Id, IdUser, FechaInicio, FechaFinalizacion, new ActEvento());
                                 await new NotificacionesServices(_context).CrearNotificacion(1, 3, IdN, IdUser, IdActividad, Razon, Descripcion, pobj.IdUser.ToString(), new ActNotificacione());
                                 await new EmailSendServices().EnviarCorreoUsuario(pobj.IdUser, 11, Descripcion);
 
@@ -275,7 +277,8 @@ namespace act_Application.Controllers.General
                         }
                         else if (!User.HasClaim("Rol", "Administrador") && User.HasClaim("Rol", "Socio") || User.HasClaim("Rol", "Referido"))
                         {
-                            if (PEstado == "ACEPTADO UF2")
+                            var NombreUsuario = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value;
+                            if (PEstado == "APROBADO")
                             {
                                 var pobj = (ActPrestamo)new PrestamosRepository().OperacionesPrestamos(2, Id, 0, "");
                                 actPrestamo.IdPres = pobj.IdPres;
@@ -289,14 +292,14 @@ namespace act_Application.Controllers.General
                                 actPrestamo.Estado = pobj.Estado;
                                 _context.Update(actPrestamo);
                                 Razon = $"Solicitud de Prestamo (CONDICIONES ACEPTADAS POR EL USUARIO)";
-                                Descripcion = $"El Usuario Acepto las condiciones para el prestamo. Se generaron las Cuotas.";
+                                Descripcion = $"El Usuario {NombreUsuario} Acepto las condiciones para el prestamo. Se generaron las Cuotas.";
                                 await new CuotaGeneradorServices(_context).CrearCuotas(actPrestamo.Id, actPrestamo.FechaPagoTotalPrestamo, new ActCuota());
-                                await new EventosGeneradorServices(_context).CrearEvento(actPrestamo.Id, actPrestamo.IdUser,FechaInicio,FechaFinalizacion, new ActEvento());
+                                await new EventosGeneradorServices(_context).ActualizarEvento(Id, PEstado, new ActEvento());
                                 await _context.SaveChangesAsync();
                                 await new NotificacionesServices(_context).CrearNotificacion(1, 4, IdN, IdUser, IdActividad, Razon, Descripcion, pobj.IdUser.ToString(), new ActNotificacione());
                                 await new EmailSendServices().EnviarCorreoUsuario(pobj.IdUser, 11, Descripcion);
                             }
-                            else if (PEstado != "ACEPTADO UF2" && PEstado == "DENEGADO" || PEstado == "RECHAZADO")
+                            else if (PEstado != "APROBADO" && PEstado == "DENEGADO" || PEstado == "RECHAZADO")
                             {
                                 var pobj = (ActPrestamo)new PrestamosRepository().OperacionesPrestamos(2, Id, 0, "");
                                 actPrestamo.IdPres = pobj.IdPres;
@@ -312,6 +315,7 @@ namespace act_Application.Controllers.General
                                 Razon = $"Solicitud de Prestamo (CONDICIONES RECHAZADAS POR EL USUARIO)";
                                 Descripcion = $"El usuario rechazo las condiciones para recibir el prestamo.";
                                 await _context.SaveChangesAsync();
+                                await new EventosGeneradorServices(_context).ActualizarEvento(Id, PEstado, new ActEvento());
                                 await new NotificacionesServices(_context).CrearNotificacion(1, 4, IdN, IdUser, IdActividad, Razon, Descripcion, pobj.IdUser.ToString(), new ActNotificacione());
                                 await new EmailSendServices().EnviarCorreoUsuario(pobj.IdUser, 11, Descripcion);
                             }

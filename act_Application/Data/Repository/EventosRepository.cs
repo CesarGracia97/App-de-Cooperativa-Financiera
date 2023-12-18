@@ -134,8 +134,10 @@ namespace act_Application.Data.Repository
         }
         private ActEvento Auto_GetData_ParticipantesEventos(int IdPrestamo)
         {
+
             try
             {
+                ActEvento obj = new ActEvento();
                 string Query = ConfigReader.GetQuery( 3, "", "ATQ_SelectParticipantesPrestamoEvento");
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
@@ -147,12 +149,13 @@ namespace act_Application.Data.Repository
                         {
                             while (reader.Read())
                             {
-                                ActEvento obj = MapToEventos(reader);
-                                return obj;
+                                obj = MapToEventos(reader);
+
                             }
                         }
                     }
                 }
+                return obj;
             }
             catch (MySqlException ex)
             {
@@ -164,8 +167,8 @@ namespace act_Application.Data.Repository
             {
                 Console.WriteLine("Auto_GetData_ParticipantesEventos | Error");
                 Console.WriteLine("Detalles del error: " + ex.Message);
+                return null;
             }
-            return null;
         }
         private int GetData_IdEvento_IdEven(string IdEven) //Obtener el Id de Registro de Evento por medio de su Id Personalizado.
         {
@@ -203,6 +206,43 @@ namespace act_Application.Data.Repository
                 return -1;
             }
         } 
+        private ActEvento GetData_DataEventos_IdPrestamo(int IdPrestamo)
+        {
+            try
+            {
+                ActEvento obj = new ActEvento();
+                string Query = ConfigReader.GetQuery(1, "EVEN", "DBQE_SelectDataEventoIdPrestamo");
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                {
+                    connection.Open();
+                    using (MySqlCommand command = new MySqlCommand(Query, connection))
+                    {
+                        command.Parameters.AddWithValue("@IdPrestamo", IdPrestamo);
+                        using (MySqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                obj = MapToEventos(reader);
+
+                            }
+                        }
+                    }
+                }
+                return obj;
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine($"\nGetData_DataEventos_IdPrestamo || Error de Mysql");
+                Console.WriteLine($"\nRazon del Error: {ex.Message}\n");
+                throw;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("GetData_DataEventos_IdPrestamo | Error");
+                Console.WriteLine("Detalles del error: " + ex.Message);
+                return null;
+            }
+        }
         private ActEvento MapToEventos(MySqlDataReader reader)
         {
             return new ActEvento 
@@ -236,6 +276,8 @@ namespace act_Application.Data.Repository
                         return Auto_GetData_ParticipantesEventos(Id);
                     case 5:
                         return GetData_IdEvento_IdEven(Cadena);
+                    case 6:
+                        return GetData_DataEventos_IdPrestamo(Id);
                     default:
                         Console.WriteLine("\n-----------------------------------------");
                         Console.WriteLine("\nOperacionesEventos || Opcion Inexistente.");

@@ -521,13 +521,36 @@
                                                     </div>
                                                 </div>
                                             break;
-                                            case "PENDIENTE UF2":
-                                                
+                                            case "APROBADO":
+                                                <div class="modal-principal" id="modal-@notificacionAdmin.Notificaciones.Id">
+                                                    <div class="modal__container">
+                                                        <div class="modal__content">
+                                                            <p class="modal__paragraph"><strong>Razon:</strong> @notificacionAdmin.Notificaciones.Razon</p>
+                                                            <p class="modal__paragraph"><strong>Fecha:</strong> @notificacionAdmin.Notificaciones.FechaGeneracion.ToString("dd-MM-yyyy")</p>
+                                                            <p class="modal__paragraph"><strong>Descripcion:</strong></p>
+                                                            <p class="modal__description">@notificacionAdmin.Notificaciones.Descripcion</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             break;
                                             case "RECHAZADO":
                                                 <div class="modal-principal" id="modal-@notificacionAdmin.Notificaciones.Id">
                                                     <div class="modal__container">
                                                         <div class="modal__content">
+                                                            <table class="modal__table">
+                                                                <tr>
+                                                                    <th>Razon:</th>
+                                                                    <td>@notificacionAdmin.Notificaciones.Razon</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th>Fecha:</th>
+                                                                    <td>@notificacionAdmin.Notificaciones.FechaGeneracion.ToString("dd-MM-yyyy")</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th>Descripcion:</th>
+                                                                    <td>@notificacionAdmin.Notificaciones.Descripcion</td>
+                                                                </tr>
+                                                            </table>
                                                             <form asp-action="Visualizado">
                                                                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                                                                 <input type="hidden" asp-for="@notificacionAdmin.Notificaciones.Id" name="IdN" />
