@@ -175,16 +175,57 @@ namespace act_Application.Data.Repository
                     connection.Open();
                     using (MySqlCommand command = new MySqlCommand(Query, connection))
                     {
-                        command.Parameters.AddWithValue("@Id", IdUser);
+                        command.Parameters.AddWithValue("@IdUser", IdUser);
                         using (MySqlDataReader reader = command.ExecuteReader())
                         { 
                             while (reader.Read())
                             {
                                 ActNotificacione obj = MapToNotificaciones(reader);
-                                
                                 notifiUser.Add(obj);
+                                UsuarioRepository uobj = new UsuarioRepository();
+                                AportacionRepository aobj = new AportacionRepository();
                                 PrestamosRepository pobj = new PrestamosRepository();
-                                pobj.OperacionesPrestamos(2, (int)new PrestamosRepository().OperacionesPrestamos(1, 0, 0, obj.IdActividad), 0, "");
+                                MultaRepository mobj = new MultaRepository();
+                                CuotaRepository cobj = new CuotaRepository();
+                                EventosRepository eobj = new EventosRepository();
+                                switch (new ObtenerTipoNotificacion().ClasificarInformacion(obj.IdActividad))
+                                {
+                                    case "NUSE":
+                                        uobj.OperacionesUsuario(6, (int)new UsuarioRepository().OperacionesUsuario(5, 0, 0, obj.IdActividad, ""), 0, "", "");
+                                        break;
+                                    case "APOR":
+                                        aobj.OperacionesAportaciones(7, (int)new AportacionRepository().OperacionesAportaciones(6, 0, 0, obj.IdActividad), 0, "");
+                                        break;
+                                    case "PRES":
+                                        pobj.OperacionesPrestamos(2, (int)new PrestamosRepository().OperacionesPrestamos(1, 0, 0, obj.IdActividad), 0, "");
+                                        break;
+                                    case "MULT":
+                                        mobj.OperacionesMultas(5, (int)new MultaRepository().OperacionesMultas(7, 0, 0, obj.IdActividad), 0, "");
+                                        break;
+                                    case "CMUL":
+                                        mobj.OperacionesMultas(5, (int)new MultaRepository().OperacionesMultas(7, 0, 0, obj.IdActividad), 0, "");
+                                        break;
+                                    case "AMUL":
+                                        mobj.OperacionesMultas(5, (int)new MultaRepository().OperacionesMultas(7, 0, 0, obj.IdActividad), 0, "");
+                                        break;
+                                    case "CUOT":
+                                        cobj.OperacionesCuotas(2, (int)new CuotaRepository().OperacionesCuotas(6, 0, 0, obj.IdActividad), 0, "");
+                                        break;
+                                    case "CCUO":
+                                        cobj.OperacionesCuotas(2, (int)new CuotaRepository().OperacionesCuotas(6, 0, 0, obj.IdActividad), 0, "");
+                                        break;
+                                    case "ACUO":
+                                        cobj.OperacionesCuotas(2, (int)new CuotaRepository().OperacionesCuotas(6, 0, 0, obj.IdActividad), 0, "");
+                                        break;
+                                    case "EVEN":
+                                        eobj.OperacionesEventos(3, (int)new EventosRepository().OperacionesEventos(5, 0, 0, obj.IdActividad), 0, "");
+                                        break;
+                                    default:
+                                        Console.WriteLine($"\n----------------------------------------------------------------------------------------------");
+                                        Console.WriteLine($"GetData_NotificacionesAdmin | Error, Opcion Inexistente. Tipo de IdActividad: {obj.IdActividad}");
+                                        Console.WriteLine($"\n----------------------------------------------------------------------------------------------");
+                                        break;
+                                }
                             }
                         }
                     }
