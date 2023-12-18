@@ -190,25 +190,23 @@ body:not(.dark) .content-text {
         background-color: #ff6a00;
     }
 
-.S-container-modal-btn {
+.container-modal-btn {
     display: flex;
     justify-content: space-between;
-    align-content: center;
-    align-items: center;
-    text-align: center;
-    justify-content: center;
     align-items: center;
     margin-top: 20px; /* Separación del botón cerrar */
-}
-
-.N-container-modal-btn {
-    display: flex;
-    justify-content: space-between;
     align-content: center;
     align-items: center;
     text-align: center;
-    justify-content: center;
+}
+
+.S-container-modal-btn,
+.N-container-modal-btn {
+    display: none; /* Ocultar por defecto */
+    justify-content:space-between;
+    align-content: center;
     align-items: center;
+    text-align: center;
     margin-top: 20px; /* Separación del botón cerrar */
 }
 

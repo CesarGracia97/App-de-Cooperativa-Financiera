@@ -31,6 +31,7 @@
     <link rel="stylesheet" href="/css/General/Notificaciones/Notificacion_2.css" />
     <script src="/js/General/Notificaciones/Notificaciones_1.js"></script>
     <script src="/js/General/Notificaciones/Notificaciones_2.js"></script>
+    <script src="/js/General/Notificaciones/Notificaciones_3.js"></script>
 </header>
 <body>
     <div class="content-text">
@@ -507,8 +508,10 @@
                                                             <input type="hidden" asp-for="@notificacionAdmin.Prestamos.Id" name="IdA" />
                                                             <input type="hidden" value="2" name="Opcion" />
                                                             <input type="hidden" value="DENEGADO" name="PEstado" />
-                                                            <button type="submit" data-notification-id="@notificacionAdmin.Notificaciones.Id" class="bt-rechazar">Denegar</button>
-                                                            <a href="~/Notificaciones/Index" class="modal__close" data-notification-id="@notificacionAdmin.Notificaciones.Id">Cerrar</a>
+                                                            <div class="container-modal-btn">
+                                                                <button type="submit" data-notification-id="@notificacionAdmin.Notificaciones.Id" class="bt-rechazar">Denegar</button>
+                                                                <a href="~/Notificaciones/Index" class="modal__close" data-notification-id="@notificacionAdmin.Notificaciones.Id">Cerrar</a>
+                                                            </div>
                                                         </form>
                                                     </div>
                                                 </div>
