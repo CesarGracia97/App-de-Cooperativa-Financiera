@@ -57,7 +57,7 @@ namespace act_Application.Data.Repository
                     using (MySqlCommand cmd = new MySqlCommand(Query, connection))
                     {
                         cmd.CommandType = CommandType.Text;
-                        cmd.Parameters.AddWithValue("@Id", IdUser);
+                        cmd.Parameters.AddWithValue("@IdUser", IdUser);
                         connection.Open();
                         using (MySqlDataReader reader = cmd.ExecuteReader())
                         {
