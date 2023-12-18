@@ -472,12 +472,22 @@
                                                             <option value="NO">Denegar</option>
                                                         </select>
                                                     </div>
+
                                                     <div class="S-container-modal-btn">
-                                                        <button type="submit" data-notification-id="@notificacionAdmin.Notificaciones.Id" class="btn-mdl-confir">Confirmar</button>
-                                                        <a href="~/Notificaciones/Index" class="modal__close" data-notification-id="@notificacionAdmin.Notificaciones.Id">Cerrar</a>
+                                                        <form asp-action="Visualizado">
+                                                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                                            <input type="hidden" asp-for="@notificacionAdmin.Notificaciones.Id" name="IdN" />
+                                                            <input type="hidden" asp-for="@notificacionAdmin.Prestamos.Id" name="IdA" />
+                                                            <input type="hidden" value="2" name="Opcion" />
+                                                            <input type="hidden" value="ACEPTADO AF1" name="PEstado" />
+                                                            <button type="submit" data-notification-id="@notificacionAdmin.Notificaciones.Id" class="btn-mdl-confir">Confirmar</button>
+                                                            <a href="~/Notificaciones/Index" class="modal__close" data-notification-id="@notificacionAdmin.Notificaciones.Id">Cerrar</a>
+
+                                                        </form>
                                                     </div>
                                                     <div class="N-container-modal-btn">
                                                         <form asp-action="Visualizado">
+                                                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                                                             <input type="hidden" asp-for="@notificacionAdmin.Notificaciones.Id" name="IdN" />
                                                             <input type="hidden" asp-for="@notificacionAdmin.Prestamos.Id" name="IdA" />
                                                             <input type="hidden" value="2" name="Opcion" />
