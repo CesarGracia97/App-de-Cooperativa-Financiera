@@ -105,7 +105,7 @@
                                                                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                                                                 <input type="hidden" asp-for="@notificacionAdmin.Notificaciones.Id" name="IdN" />
                                                                 <input type="hidden" asp-for="@notificacionAdmin.Usuarios.Id" name="IdA" />
-                                                                <input type="hidden" value="4" name="Opcion" required/>
+                                                                <input type="hidden" value="3" name="Opcion" required/>
                                                                 <select asp-for="@notificacionAdmin.Usuarios.TipoUser" name="TipoUser" required>
                                                                     <option value="">Selecciona el Tipo de Usuario</option>
                                                                     @foreach(var item in ViewData["ItemTipoUs"] as List<ListItems>)
@@ -481,12 +481,18 @@
                                                                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                                                                     <input type="hidden" asp-for="@notificacionAdmin.Notificaciones.Id" name="IdN" />
                                                                     <input type="hidden" asp-for="@notificacionAdmin.Prestamos.Id" name="IdA" />
+                                                                    <input type="hidden" asp-for="@notificacionAdmin.Prestamos.IdPres" name="IdActividad" />
                                                                     <input type="hidden" value="2" name="Opcion" />
                                                                     <input type="hidden" value="ACEPTADO AF1" name="PEstado" />
                                                                     <div class="form-group">
-                                                                        <label asp-for="@notificacionAdmin.Prestamos.FechaPagoTotalPrestamo" class="control-label">Fecha de Pago del Prestamo -> Fecha de Inicio de Pago de Cuotas @notificacionAdmin.Prestamos.FechaInicioPagoCuotas.ToString("dd-MMMM-yyyy")</label>
+                                                                        <label asp-for="@notificacionAdmin.Prestamos.FechaPagoTotalPrestamo" class="control-label">Fecha del Pago Total del Prestamo -> Fecha de Inicio de Pago de Cuotas @notificacionAdmin.Prestamos.FechaInicioPagoCuotas.ToString("dd-MMMM-yyyy")</label>
                                                                         <input asp-for="@notificacionAdmin.Prestamos.FechaPagoTotalPrestamo" type="date" class="input-date" name="FechaPagoTotalPrestamo" min="@fechaactual" required />
                                                                         <span asp-validation-for="@notificacionAdmin.Prestamos.FechaPagoTotalPrestamo" class="text-danger"></span>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label asp-for="@notificacionAdmin.Prestamos.FechaPagoTotalPrestamo" class="control-label">Fecha de Inicio de Pago de Cuotas</label>
+                                                                        <input asp-for="@notificacionAdmin.Prestamos.FechaInicioPagoCuotas" type="date" class="input-date" name="FechaInicioPagoCuotas" min="@fechaactual" required />
+                                                                        <span asp-validation-for="@notificacionAdmin.Prestamos.FechaInicioPagoCuotas" class="text-danger"></span>
                                                                     </div>
                                                                     <div class="form-group">
                                                                         <label asp-for="@notificacionAdmin.Eventos.FechaInicio" class="control-label">Fecha Inicio de Inscripcion de Garantes</label>
@@ -509,6 +515,7 @@
                                                                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                                                                     <input type="hidden" asp-for="@notificacionAdmin.Notificaciones.Id" name="IdN" />
                                                                     <input type="hidden" asp-for="@notificacionAdmin.Prestamos.Id" name="IdA" />
+                                                                    <input type="hidden" asp-for="@notificacionAdmin.Prestamos.IdPres" name="IdActividad" />
                                                                     <input type="hidden" value="2" name="Opcion" />
                                                                     <input type="hidden" value="DENEGADO" name="PEstado" />
                                                                     <div class="container-modal-btn">
@@ -623,7 +630,7 @@
                                         </div>
                                         switch (notificacionUsers.Prestamos.Estado)
                                         {
-                                            case "RECHAZADO":
+                                            case "DENEGADO":
                                                 <div class="modal-principal" id="modal-@notificacionUsers.Notificaciones.Id">
                                                     <div class="modal__container">
                                                         <div class="modal__content">
@@ -661,15 +668,21 @@
                                                             <div class="S-container-modal-btn">
                                                                 <form asp-action="Visualizado">
                                                                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                                                    <input type="hidden" asp-for="@notificacionUsers.Notificaciones.IdActividad" name="IdActividad" />
                                                                     <input type="hidden" asp-for="@notificacionUsers.Notificaciones.Id" name="IdN" />
                                                                     <input type="hidden" asp-for="@notificacionUsers.Prestamos.Id" name="IdA" />
                                                                     <input type="hidden" value="2" name="Opcion" />
                                                                     <input type="hidden" value="APROBADO" name="PEstado" />
+                                                                    <div class="container-modal-btn">
+                                                                        <button type="submit" data-notification-id="@notificacionUsers.Notificaciones.Id" class="btn-mdl-confir">Confirmar</button>
+                                                                        <a href="~/Notificaciones/Index" class="modal__close" data-notification-id="@notificacionUsers.Notificaciones.Id">Cerrar</a>
+                                                                    </div>
                                                                 </form>
                                                             </div>
                                                             <div class="N-container-modal-btn">
                                                                 <form asp-action="Visualizado">
                                                                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                                                    <input type="hidden" asp-for="@notificacionUsers.Notificaciones.IdActividad" name="IdActividad" />
                                                                     <input type="hidden" asp-for="@notificacionUsers.Notificaciones.Id" name="IdN" />
                                                                     <input type="hidden" asp-for="@notificacionUsers.Prestamos.Id" name="IdA" />
                                                                     <input type="hidden" value="2" name="Opcion" />

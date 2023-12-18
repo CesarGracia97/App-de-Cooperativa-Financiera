@@ -24,7 +24,7 @@ namespace act_Application.Services.ServiciosAplicativos
                         switch (subopcion)
                         {
                             case 1/*Si es una Transaccion de Aportacion*/:
-                                actNotificacione.IdUser = IdUser;
+                                actNotificacione.IdUser = nobj.IdUser;
                                 actNotificacione.IdActividad = IdActividad;
                                 actNotificacione.FechaGeneracion = DateTime.Now;
                                 actNotificacione.Razon = $"| {IdActividad} | {Razon}";
@@ -41,12 +41,12 @@ namespace act_Application.Services.ServiciosAplicativos
                                 actNotificacione.Razon = $"| {nobj.IdActividad} | {Razon}";
                                 actNotificacione.Descripcion = Descripcion;
                                 actNotificacione.Destino = Destino;
-                                actNotificacione.Visto = "SI";
+                                actNotificacione.Visto = "NO";
                                 _context.Update(actNotificacione);
                                 await _context.SaveChangesAsync();
                                 break;
                             case 3/*Si es una Transaccion de Prestamo*/:
-                                actNotificacione.IdUser = IdUser;
+                                actNotificacione.IdUser = nobj.IdUser;
                                 actNotificacione.IdActividad = IdActividad;
                                 actNotificacione.FechaGeneracion = DateTime.Now;
                                 actNotificacione.Razon = $"| {IdActividad} | {Razon}";
@@ -63,7 +63,7 @@ namespace act_Application.Services.ServiciosAplicativos
                                 actNotificacione.Razon = $"| {IdActividad} | {Razon}";
                                 actNotificacione.Descripcion = Descripcion;
                                 actNotificacione.Destino = Destino;
-                                actNotificacione.Visto = "SI";
+                                actNotificacione.Visto = "NO";
                                 _context.Update(actNotificacione);
                                 await _context.SaveChangesAsync();
                                 break;
@@ -74,7 +74,7 @@ namespace act_Application.Services.ServiciosAplicativos
                                 actNotificacione.Razon = $"| {IdActividad} | {Razon}";
                                 actNotificacione.Descripcion = Descripcion;
                                 actNotificacione.Destino = Destino;
-                                actNotificacione.Visto = "SI";
+                                actNotificacione.Visto = "NO";
                                 _context.Update(actNotificacione);
                                 await _context.SaveChangesAsync();
                                 break;

@@ -189,21 +189,12 @@ namespace act_Application.Controllers.General
                                     await _context.SaveChangesAsync();
                                     return RedirectToAction("Index", "Notificaciones");
                                 case 2/*Solicitud de Prestamo Admin -> Usuario (Fase 2)*/:
-                                    actNotificacione.IdUser = nobj.IdUser;
-                                    actNotificacione.IdActividad = nobj.IdActividad;
-                                    actNotificacione.FechaGeneracion = nobj.FechaGeneracion;
-                                    actNotificacione.Razon = nobj.Razon;
-                                    actNotificacione.Descripcion = nobj.Descripcion;
-                                    actNotificacione.Destino = "Administrador";
-                                    actNotificacione.Visto = "NO";
-                                    _context.Update(actNotificacione);
-                                    await _context.SaveChangesAsync();
-                                    await Update_EstadoPrestamo(IdA, IdUser, IdN, actNotificacione.IdActividad, DateTime.MinValue, DateTime.MinValue, "", DateTime.MinValue, DateTime.MinValue, new ActPrestamo());
-
+                                    await Update_EstadoPrestamo(IdA, IdUser, IdN, actNotificacione.IdActividad, FechaPagoTotalPrestamo, FechaInicioPagoCuotas, PEstado, FechaInicio, FechaFinalizacion, new ActPrestamo());
                                     return RedirectToAction("Index", "Notificaciones");
+                                
                                 default:
                                     Console.WriteLine($"Hubo un problema al actualizar 'Visto' en el Id {IdN}. Usuario Normal");
-                                    break;
+                                break;
                             }
                         }
                     }
@@ -250,7 +241,7 @@ namespace act_Application.Controllers.General
                                 Descripcion = $"Tu solicitud de Prestamo fue Aceptada. Acepta las Condiciones como las fechas de Pago." +
                                               $"\nCONDICIONES" +
                                               $"\nFecha de Inicio de Pago de las Cuotas:{FechaInicioPagoCuotas}" +
-                                              $"\nFecha de Pago total de la Deuda: {FechaInicioPagoCuotas}";
+                                              $"\nFecha de Pago total de la Deuda:{FechaPagoTotalPrestamo}";
                                 await _context.SaveChangesAsync();
                                 await new EventosGeneradorServices(_context).CrearEvento(Id, IdUser, FechaInicio, FechaFinalizacion, new ActEvento());
                                 await new NotificacionesServices(_context).CrearNotificacion(1, 3, IdN, IdUser, IdActividad, Razon, Descripcion, pobj.IdUser.ToString(), new ActNotificacione());
@@ -292,14 +283,14 @@ namespace act_Application.Controllers.General
                                 actPrestamo.FechaPagoTotalPrestamo = pobj.FechaPagoTotalPrestamo;
                                 actPrestamo.FechaInicioPagoCuotas = pobj.FechaInicioPagoCuotas;
                                 actPrestamo.TipoCuota = pobj.TipoCuota;
-                                actPrestamo.Estado = pobj.Estado;
+                                actPrestamo.Estado = PEstado;
                                 _context.Update(actPrestamo);
                                 Razon = $"Solicitud de Prestamo (CONDICIONES ACEPTADAS POR EL USUARIO)";
                                 Descripcion = $"El Usuario {NombreUsuario} Acepto las condiciones para el prestamo. Se generaron las Cuotas.";
                                 await new CuotaGeneradorServices(_context).CrearCuotas(actPrestamo.Id, actPrestamo.FechaPagoTotalPrestamo, new ActCuota());
                                 await new EventosGeneradorServices(_context).ActualizarEvento(Id, PEstado, new ActEvento());
                                 await _context.SaveChangesAsync();
-                                await new NotificacionesServices(_context).CrearNotificacion(1, 4, IdN, IdUser, IdActividad, Razon, Descripcion, pobj.IdUser.ToString(), new ActNotificacione());
+                                await new NotificacionesServices(_context).CrearNotificacion(1, 4, IdN, pobj.IdUser, IdActividad, Razon, Descripcion, "Administrador", new ActNotificacione());
                                 await new EmailSendServices().EnviarCorreoUsuario(pobj.IdUser, 11, Descripcion);
                             }
                             else if (PEstado != "APROBADO" && PEstado == "DENEGADO" || PEstado == "RECHAZADO")
@@ -319,7 +310,7 @@ namespace act_Application.Controllers.General
                                 Descripcion = $"El usuario rechazo las condiciones para recibir el prestamo.";
                                 await _context.SaveChangesAsync();
                                 await new EventosGeneradorServices(_context).ActualizarEvento(Id, PEstado, new ActEvento());
-                                await new NotificacionesServices(_context).CrearNotificacion(1, 4, IdN, IdUser, IdActividad, Razon, Descripcion, pobj.IdUser.ToString(), new ActNotificacione());
+                                await new NotificacionesServices(_context).CrearNotificacion(1, 4, IdN, pobj.IdUser, IdActividad, Razon, Descripcion, "Administrador", new ActNotificacione());
                                 await new EmailSendServices().EnviarCorreoUsuario(pobj.IdUser, 11, Descripcion);
                             }
                         }

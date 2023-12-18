@@ -55,7 +55,14 @@ namespace act_Application.Services.ServiciosAplicativos
                     actEvento.FechaGeneracion = eobj.FechaGeneracion;
                     actEvento.FechaInicio = eobj.FechaInicio;
                     actEvento.FechaFinalizacion = eobj.FechaFinalizacion;
-                    actEvento.Estado = Estado;
+                    if(Estado == "APROBADO")
+                    {
+                        actEvento.Estado = "CONCURSO";
+                    }
+                    else if(Estado != "APROBADO")
+                    {
+                        actEvento.Estado = "CANCELADO";
+                    }
                     _context.Update(actEvento);
                     await _context.SaveChangesAsync();
                 }

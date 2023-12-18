@@ -135,21 +135,35 @@ namespace act_Application.Services.ServiciosAplicativos
         /*Envia el Correo*/
         private async Task EnviarCorreo(string destinatario, string asunto, string mensaje)
         {
-            var smtpConfig = SmtpConfig.LoadConfig("Data/json/smtp.json");
-
-            using (var smtpClient = new SmtpClient(smtpConfig.Server, smtpConfig.Port))
+            try
             {
-                smtpClient.Credentials = new NetworkCredential(smtpConfig.Username, smtpConfig.Password);
-                smtpClient.EnableSsl = true;
-                var mailMessage = new MailMessage
+                var smtpConfig = SmtpConfig.LoadConfig("Data/json/smtp.json");
+
+                using (var smtpClient = new SmtpClient(smtpConfig.Server, smtpConfig.Port))
                 {
-                    From = new MailAddress(smtpConfig.Username),
-                    Subject = asunto,
-                    Body = mensaje,
-                    IsBodyHtml = false
-                };
-                mailMessage.To.Add(destinatario);
-                await smtpClient.SendMailAsync(mailMessage);
+                    smtpClient.Credentials = new NetworkCredential(smtpConfig.Username, smtpConfig.Password);
+                    smtpClient.EnableSsl = true;
+                    var mailMessage = new MailMessage
+                    {
+                        From = new MailAddress(smtpConfig.Username),
+                        Subject = asunto,
+                        Body = mensaje,
+                        IsBodyHtml = false
+                    };
+                    mailMessage.To.Add(destinatario);
+                    await smtpClient.SendMailAsync(mailMessage);
+                }
+
+            }
+            catch (SmtpException smtpEx)
+            {
+                Console.WriteLine($"EnviarCorreo - EmailSenServices Error");
+                Console.WriteLine($"Detalles del error: {smtpEx.Message}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"EnviarCorreo - EmailSenServices Error");
+                Console.WriteLine($"Detalles del error: {ex.Message}");
             }
         }
     }
