@@ -83,18 +83,8 @@ body:not(.dark) .content-text {
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
     max-width: 400px;
     width: 100%;
-    animation: slideIn 0.5s forwards;
+    animation: deslice 0.5s forwards;
     max-width: 80%; /* Ajusta este valor según tus preferencias */
-}
-
-@keyframes slideIn {
-    0% {
-        top: -100%;
-    }
-
-    100% {
-        top: 5%;
-    }
 }
 
 .modal__title {
@@ -242,17 +232,17 @@ body:not(.dark) .content-text {
     max-width: 400px;
     width: 100%;
     text-align: center;
-    animation: slideIn 0.5s forwards;
+    animation: deslice 0.5s forwards;
     max-width: 80%; /* Ajusta este valor según tus preferencias */
 }
 
-@keyframes slideIn {
+@keyframes deslice {
     0% {
         top: -100%;
     }
 
     100% {
-        top: 25%;
+        top: 2.5%;
     }
 }
 
@@ -353,16 +343,6 @@ body:not(.dark) .content-text {
     text-align: center;
     animation: slideIn 0.5s forwards;
     max-width: 80%; /* Ajusta este valor según tus preferencias */
-}
-
-@keyframes slideIn {
-    0% {
-        top: -100%;
-    }
-
-    100% {
-        top: 15%;
-    }
 }
 
 .input-descripcion {

@@ -135,7 +135,7 @@ namespace act_Application.Services.ServiciosAplicativos
         /*Envia el Correo*/
         private async Task EnviarCorreo(string destinatario, string asunto, string mensaje)
         {
-            var smtpConfig = SmtpConfig.LoadConfig("Data/Config/smtpconfig.json");
+            var smtpConfig = SmtpConfig.LoadConfig("Data/Config/smtp.json");
 
             using (var smtpClient = new SmtpClient(smtpConfig.Server, smtpConfig.Port))
             {

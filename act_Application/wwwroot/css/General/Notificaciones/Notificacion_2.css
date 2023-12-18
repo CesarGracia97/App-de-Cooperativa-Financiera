@@ -1,5 +1,4 @@
-﻿
-/*Aceptar*/
+﻿/*Aceptar*/
 .modal-aceptar {
     display: none;
     position: fixed;
@@ -30,7 +29,7 @@
     max-width: 400px;
     width: 100%;
     text-align: center;
-    animation: slideIn 0.5s forwards;
+    animation: deslice 0.5s forwards;
     max-width: 80%; /* Ajusta este valor según tus preferencias */
 }
 
@@ -65,18 +64,8 @@
     max-width: 400px;
     width: 100%;
     text-align: center;
-    animation: slideIn 0.5s forwards;
+    animation: deslice 0.5s forwards;
     max-width: 80%; /* Ajusta este valor según tus preferencias */
-}
-
-@keyframes slideIn {
-    0% {
-        top: -100%;
-    }
-
-    100% {
-        top: 15%;
-    }
 }
 
 .btn-mdl-aceptar {
