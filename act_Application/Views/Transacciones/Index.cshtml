@@ -140,13 +140,6 @@
                     <span asp-validation-for="Prestamos.FechaEntregaDinero" class="text-danger"></span>
                 </div>
 
-                <!--Contenedor de la Fecha de Inicio de Pago-->
-                <div class="form-group">
-                    <label asp-for="Prestamos.FechaInicioPagoCuotas">Fecha Inicio de Pago de Cuotas</label>
-                    <input name="FechaInicioPagoCuotas" type="date" class="inp-date" min="@minDateStrP" required />
-                    <span asp-validation-for="Prestamos.FechaInicioPagoCuotas" class="text-danger"></span>
-                </div>
-
                 <!--Contenedor de los Botones-->
                 <div class="buttons">
                     <button type="submit" class="save-button">Guardar</button>

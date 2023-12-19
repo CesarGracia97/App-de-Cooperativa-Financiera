@@ -104,7 +104,7 @@ namespace act_Application.Controllers.General
                 return null;
             }
         }
-        public async Task<IActionResult> Prestamo(decimal Valor, DateTime FechaEntregaDinero, DateTime FechaInicioPagoCuotas, string TipoCuota, [Bind("Id,IdPres,IdUser,Valor,FechaGeneracion,FechaEntregaDinero,FechaInicioPagoCuotas,FechaPagoTotalPrestamo,TipoCuota,Estado")] ActPrestamo actPrestamo)
+        public async Task<IActionResult> Prestamo(decimal Valor, DateTime FechaEntregaDinero, string TipoCuota, [Bind("Id,IdPres,IdUser,Valor,FechaGeneracion,FechaEntregaDinero,FechaInicioPagoCuotas,FechaPagoTotalPrestamo,TipoCuota,Estado")] ActPrestamo actPrestamo)
         {
             if (ModelState.IsValid)
             {
@@ -124,18 +124,17 @@ namespace act_Application.Controllers.General
                         actPrestamo.Valor = Valor;
                         actPrestamo.FechaGeneracion = DateTime.Now;
                         actPrestamo.FechaEntregaDinero = FechaEntregaDinero;
-                        actPrestamo.FechaInicioPagoCuotas = FechaInicioPagoCuotas;
+                        actPrestamo.FechaInicioPagoCuotas = DateTime.MinValue;
                         actPrestamo.FechaPagoTotalPrestamo = DateTime.MinValue;
                         actPrestamo.TipoCuota = TipoCuota;
                         actPrestamo.Estado = "PENDIENTE A";
                         _context.Add(actPrestamo);
                         await _context.SaveChangesAsync();
                         DescripcionA = $"El usuario {userIdentificacion} con C.I. {userCI} esta solicitando un prestamo de $ {actPrestamo.Valor} USD," +
-                                                $"con fecha de entrega para el dia {actPrestamo.FechaEntregaDinero}, e inicio de pago de la deuda para el dia {actPrestamo.FechaInicioPagoCuotas}\n" +
+                                                $"con fecha de entrega para el dia {actPrestamo.FechaEntregaDinero}\n" +
                                                 $"Estado: {actPrestamo.Estado}\n" +
                                                 $"Tipo de Cuota: {actPrestamo.TipoCuota}";
-                        DescripcionU = $"Haz solicitado un prestamo de $ {actPrestamo.Valor} USD, con fecha de entrega para el dia {actPrestamo.FechaEntregaDinero}," +
-                                                $" e inicio de pago de la deuda para el dia {actPrestamo.FechaInicioPagoCuotas}" +
+                        DescripcionU = $"Haz solicitado un prestamo de $ {actPrestamo.Valor} USD, con fecha de entrega para el dia {actPrestamo.FechaEntregaDinero}." +
                                                 $"\nEstado: {actPrestamo.Estado}" +
                                                 $"\nTipo de Cuota: {actPrestamo.TipoCuota}";
                         await new NotificacionesServices(_context).CrearNotificacion(2, 4, 0, IdUser, (string)new PrestamosRepository().OperacionesPrestamos(5, 0, IdUser, ""), "PETICION DE PRESTAMO", DescripcionA, "Administrador", new ActNotificacione());
