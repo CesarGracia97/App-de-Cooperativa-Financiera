@@ -7,6 +7,7 @@ namespace act_Application.Data.Repository
 {
     public class EventosRepository
     {
+
         private readonly string connectionString = AppSettingsHelper.GetConnectionString();
         private bool GetExist_Eventos()
         {

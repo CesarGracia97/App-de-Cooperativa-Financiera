@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
+using act_Application.Models.Sistema.ViewModel;
 
 namespace act_Application.Controllers.General
 {
@@ -26,7 +27,26 @@ namespace act_Application.Controllers.General
         [Authorize(Policy = "AllOnly")]
         public IActionResult Index()
         {
-            return View();
+            var userIdClaim = User.Claims.FirstOrDefault(c => c.Type == "Id");
+            if (userIdClaim != null && int.TryParse(userIdClaim.Value, out int userId))
+            {
+                List<Home_VM> viewModelList = new List<Home_VM>();
+                if((bool) new EventosRepository().OperacionesEventos(1, 0, 0, ""))
+                {
+                    var eobj = (List<ActEvento>)new EventosRepository().OperacionesEventos(2, 0, 0, "");
+                    foreach (var eventos in eobj)
+                    {
+                        Home_VM viewModel = new Home_VM
+                        {
+                            Eventos = eventos,
+                            Prestamos = _context.ActPrestamos.FirstOrDefault(t => t.Id == eventos.IdPrestamo)
+                        };
+                        viewModelList.Add(viewModel);
+                    }
+                    return View(viewModelList);
+                }
+            }
+            return View(new List<Home_VM>());
         }
 
         public IActionResult Privacy()
