@@ -5,6 +5,7 @@ using act_Application.Models.BD;
 using act_Application.Models.Sistema.Complementos;
 using act_Application.Models.Sistema.ViewModel;
 using act_Application.Services.ServiciosAplicativos;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
@@ -28,6 +29,7 @@ namespace act_Application.Controllers.General
                 new ListItems { Id = 2, Nombre = "PAGO MENSUAL" }
             };
         }
+        [Authorize(Policy = "AllOnly")]
         public IActionResult Index()
         {
             ViewData["ItemsCuota"] = ObtenerItemsCuota();
