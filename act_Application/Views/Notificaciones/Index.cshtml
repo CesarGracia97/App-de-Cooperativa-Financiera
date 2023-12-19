@@ -631,6 +631,14 @@
                                                             <th><strong>Fecha Generacion:</strong></th>
                                                             <td><p class="modal__description">@notificacionUsers.Notificaciones.Descripcion</p></td>
                                                         </tr>
+                                                        <tr>
+                                                            <th><strong>Valor de la Multa:</strong></th>
+                                                            <td><p class="modal__description">@notificacionUsers.Multas.Valor</p></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th><strong>Razon de la Multa:</strong></th>
+                                                            <td><p class="modal__description">@notificacionUsers.Multas.Razon</p></td>
+                                                        </tr>
                                                     </table>
                                                     <form asp-action="Visualizado">
                                                         <div class="container-modal-btn">
@@ -790,6 +798,50 @@
                                                 </div>
                                             break;
                                         }
+                                    break;
+                                    case "EVEN":
+                                        <div class="notif-container">
+                                            <p class="notif-text">Id: @notificacionUsers.Notificaciones.IdActividad: EVENTO</p>
+                                            <p class="notif-text">Razon: @notificacionUsers.Notificaciones.Razon</p>
+                                            <p class="notif-text">Fecha: @notificacionUsers.Notificaciones.FechaGeneracion.ToString("dd-MMMM-yyyy")</p>
+                                            <button class="btn-visualizar" data-notification-id="@notificacionUsers.Notificaciones.Id">Visualizar</button>
+                                        </div>
+                                        <div class="modal-principal" id="modal-@notificacionUsers.Notificaciones.Id">
+                                            <div class="modal__container">
+                                                <div class="modal__content">
+                                                    <table class="modal__table">
+                                                        <tr>
+                                                            <th></th>
+                                                            <th>Descripcion</th>
+                                                        </tr>
+                                                        <tr>
+                                                            <th><strong>Razon:</strong></th>
+                                                            <td>@notificacionUsers.Notificaciones.Razon</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th><strong>Fecha Generacion:</strong></th>
+                                                            <td>@notificacionUsers.Notificaciones.FechaGeneracion.ToString("dd-MM-yyyy")</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th><strong>Fecha Generacion:</strong></th>
+                                                            <td><p class="modal__description">@notificacionUsers.Notificaciones.Descripcion</p></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th><strong>Mensaje:</strong></th>
+                                                            <td><p class="modal__description">@notificacionUsers.Notificaciones.Descripcion</p></td>
+                                                        </tr>
+                                                    </table>
+                                                    <form asp-action="Visualizado">
+                                                        <div class="container-modal-btn">
+                                                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                                            <input type="hidden" asp-for="@notificacionUsers.Notificaciones.Id" name="IdN" />
+                                                            <input type="hidden" value="1" name="Opcion" required />
+                                                            <button type="submit" data-notification-id="@notificacionUsers.Notificaciones.Id" class="modal__close">Cerrar</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
                                     break;
                                 }
                             }

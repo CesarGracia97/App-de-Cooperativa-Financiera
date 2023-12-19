@@ -175,13 +175,13 @@ namespace act_Application.Data.Repository
             try
             {
                 int Id = 0;
-                string Query = ConfigReader.GetQuery(1, "MULT", "DBQE_SelectEventosIdEven");
+                string Query = ConfigReader.GetQuery(1, "EVEN", "DBQE_SelectEventosIdEven");
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
                     connection.Open();
                     using (MySqlCommand command = new MySqlCommand(Query, connection))
                     {
-                        command.Parameters.AddWithValue("@IdEvent", IdEven);
+                        command.Parameters.AddWithValue("@IdEven", IdEven);
                         using (MySqlDataReader reader = command.ExecuteReader())
                         {
                             while (reader.Read())

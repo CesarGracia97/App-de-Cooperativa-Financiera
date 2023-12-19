@@ -78,7 +78,7 @@ namespace act_Application.Controllers.General
                         var Nombreusuario = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value;
                         actEvento.IdEven = eobj.IdEven;
                         actEvento.IdPrestamo = eobj.IdPrestamo;
-                        actEvento.IdUser = actEvento.IdUser;
+                        actEvento.IdUser = eobj.IdUser;
                         actEvento.ParticipantesId = eobj.ParticipantesId + IdUser.ToString() + ",";
                         actEvento.NombresPId = eobj.NombresPId + Nombreusuario + ",";
                         actEvento.FechaGeneracion = eobj.FechaGeneracion;
@@ -86,10 +86,10 @@ namespace act_Application.Controllers.General
                         actEvento.FechaFinalizacion = eobj.FechaFinalizacion;
                         actEvento.Estado = eobj.Estado;
                         string Razon = $"Un Usuario a decidio Participar";
-                        string DescripcionU = $"El Usuario a {Nombreusuario} a decidido participar como tu Garante en el evento de participacion de Garantes de tu Solicitud de Prestamo ID: {actEvento.IdPrestamo}." +
+                        string DescripcionU = $"El Usuario  {Nombreusuario} a decidido participar como tu Garante en el evento de participacion de Garantes de tu Solicitud de Prestamo ID: {actEvento.IdPrestamo}." +
                                             $"\nSolcitud Realizada el dia {DateTime.Now}";
-                        await _nservices.CrearNotificacion(2, 6, 0, IdUser, actEvento.IdEven, Razon, DescripcionU, actEvento.IdUser.ToString(), new ActNotificacione());
-                        var essU = new EmailSendServices().EnviarCorreoUsuario(actEvento.IdUser, 8, DescripcionU); //IdUser apuntado al usuario dueño del evento del Prestamo para que este enterado.
+                        await new NotificacionesServices(_context).CrearNotificacion(2, 6, 0, IdUser, actEvento.IdEven, Razon, DescripcionU, actEvento.IdUser.ToString(), new ActNotificacione());
+                        await new EmailSendServices().EnviarCorreoUsuario(actEvento.IdUser, 8, DescripcionU); //IdUser apuntado al usuario dueño del evento del Prestamo para que este enterado.
                     }
                     _context.Update(actEvento);
                     await _context.SaveChangesAsync();
