@@ -243,7 +243,7 @@ namespace act_Application.Controllers.General
                                               $"\nFecha de Inicio de Pago de las Cuotas:{FechaInicioPagoCuotas}" +
                                               $"\nFecha de Pago total de la Deuda:{FechaPagoTotalPrestamo}";
                                 await _context.SaveChangesAsync();
-                                await new EventosGeneradorServices(_context).CrearEvento(Id, IdUser, FechaInicio, FechaFinalizacion, new ActEvento());
+                                await new EventosGeneradorServices(_context).CrearEvento(Id, pobj.IdUser, FechaInicio, FechaFinalizacion, new ActEvento());
                                 await new NotificacionesServices(_context).CrearNotificacion(1, 3, IdN, IdUser, IdActividad, Razon, Descripcion, pobj.IdUser.ToString(), new ActNotificacione());
                                 await new EmailSendServices().EnviarCorreoUsuario(pobj.IdUser, 11, Descripcion);
 

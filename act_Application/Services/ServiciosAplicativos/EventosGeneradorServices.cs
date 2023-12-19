@@ -48,6 +48,7 @@ namespace act_Application.Services.ServiciosAplicativos
                 if(eobj != null)
                 {
                     actEvento.Id = eobj.Id;
+                    actEvento.IdUser = eobj.IdUser;
                     actEvento.IdEven = eobj.IdEven;
                     actEvento.IdPrestamo = Id;
                     actEvento.ParticipantesId = eobj.ParticipantesId;

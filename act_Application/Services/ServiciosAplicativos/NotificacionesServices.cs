@@ -122,7 +122,7 @@ namespace act_Application.Services.ServiciosAplicativos
                             actNotificacione.Razon = $"| {IdActividad} | {Razon}";
                             actNotificacione.Descripcion = Descripcion;
                             actNotificacione.Destino = Destino;
-                            actNotificacione.Visto = "";
+                            actNotificacione.Visto = "NO";
                             _context.Add(actNotificacione);
                             await _context.SaveChangesAsync();
                             break;
@@ -134,7 +134,7 @@ namespace act_Application.Services.ServiciosAplicativos
                             actNotificacione.Razon = $"| {IdActividad} | {Razon}";
                             actNotificacione.Descripcion = Descripcion;
                             actNotificacione.Destino = Destino;
-                            actNotificacione.Visto = "";
+                            actNotificacione.Visto = "NO";
                             _context.Add(actNotificacione);
                             await _context.SaveChangesAsync();
                             break;
@@ -146,7 +146,7 @@ namespace act_Application.Services.ServiciosAplicativos
                             actNotificacione.Razon = $"| {IdActividad} | {Razon}";
                             actNotificacione.Descripcion = Descripcion;
                             actNotificacione.Destino = Destino;
-                            actNotificacione.Visto = "";
+                            actNotificacione.Visto = "NO";
                             _context.Add(actNotificacione);
                             await _context.SaveChangesAsync();
                             break;
@@ -158,7 +158,7 @@ namespace act_Application.Services.ServiciosAplicativos
                             actNotificacione.Razon = $"| {IdActividad} | {Razon}";
                             actNotificacione.Descripcion = Descripcion;
                             actNotificacione.Destino = Destino;
-                            actNotificacione.Visto = "";
+                            actNotificacione.Visto = "NO";
                             _context.Add(actNotificacione);
                             await _context.SaveChangesAsync();
                             break;
@@ -170,7 +170,7 @@ namespace act_Application.Services.ServiciosAplicativos
                             actNotificacione.Razon = $"| {IdActividad} | {Razon}";
                             actNotificacione.Descripcion = Descripcion;
                             actNotificacione.Destino = Destino;
-                            actNotificacione.Visto = "";
+                            actNotificacione.Visto = "NO";
                             _context.Add(actNotificacione);
                             await _context.SaveChangesAsync();
                             break;
@@ -182,7 +182,7 @@ namespace act_Application.Services.ServiciosAplicativos
                             actNotificacione.Razon = $"| {IdActividad} | {Razon}";
                             actNotificacione.Descripcion = Descripcion;
                             actNotificacione.Destino = Destino;
-                            actNotificacione.Visto = "";
+                            actNotificacione.Visto = "NO";
                             _context.Add(actNotificacione);
                             await _context.SaveChangesAsync();
                             break;
