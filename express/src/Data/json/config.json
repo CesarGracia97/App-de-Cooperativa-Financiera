@@ -1,0 +1,9 @@
+{
+    "database": {
+      "host": "192.168.21.193",
+      "port": "3306",
+      "uid": "cgarcia",
+      "password": "cgarcia",
+      "database": "act_desarrollo"
+    }
+}
