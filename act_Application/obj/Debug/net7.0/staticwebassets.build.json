@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "uvFKjk2QhJCaar2+ssldcd2TKjqeNmYsxLMXJoCnOmk=",
+  "Hash": "oZbF+duNNmkZK7nM3AkeV9fvDkJ0HhBk55Y1hKd9ApU=",
   "Source": "act_Application",
   "BasePath": "_content/act_Application",
   "Mode": "Default",
@@ -474,6 +474,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\General\\Notificaciones\\Notificaciones_2.js"
+    },
+    {
+      "Identity": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\js\\General\\Notificaciones\\Notificaciones_4.js",
+      "SourceId": "act_Application",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\",
+      "BasePath": "_content/act_Application",
+      "RelativePath": "js/General/Notificaciones/Notificaciones_4.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\General\\Notificaciones\\Notificaciones_4.js"
     },
     {
       "Identity": "C:\\Users\\cgracia\\source\\repos\\act_Application\\act_Application\\wwwroot\\js\\General\\Shared\\_Layout\\Layout.js",

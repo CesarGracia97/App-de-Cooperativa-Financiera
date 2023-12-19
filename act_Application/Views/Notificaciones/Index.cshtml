@@ -7,21 +7,12 @@
 
     var userIdClaim = User.Claims.FirstOrDefault(c => c.Type == "Id");
     int IdUser = -1, Bandera = 0;
-    if (userIdClaim != null && int.TryParse(userIdClaim.Value, out IdUser))
+    if (userIdClaim != null && int.TryParse(userIdClaim.Value, out IdUser)){
         Bandera = IdUser;
-    //Variables de Vista
-    DateTime fechaActual = DateTime.Now;
-    string fechaactual = fechaActual.ToString("yyyy-MM-dd");
-    DateTime minDateP = DateTime.Now.AddDays(46);
-    string minDateStrP = minDateP.ToString("dd-MMMM-yyyy");
-
+    }
     var notificacionAdminList = Model
         .Where(notif => User.HasClaim("Rol", "Administrador") && notif.Notificaciones.Destino == "Administrador")
         .OrderByDescending(notifA => notifA.Notificaciones.FechaGeneracion)
-        .ToList();
-    var notificacionUsersList = Model
-        .Where(notif => !User.HasClaim("Rol", "Administrador") && (User.HasClaim("Rol", "Socio") || User.HasClaim("Rol", "Referido")) && notif.Notificaciones.Destino != Bandera.ToString())
-        .OrderByDescending(notifU => notifU.Notificaciones.FechaGeneracion)
         .ToList();
 }
 <header>
@@ -29,9 +20,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/General/Notificaciones/Notificacion_1.css" />
     <link rel="stylesheet" href="/css/General/Notificaciones/Notificacion_2.css" />
-    <script src="/js/General/Notificaciones/Notificaciones_1.js"></script>
-    <script src="/js/General/Notificaciones/Notificaciones_2.js"></script>
-    <script src="/js/General/Notificaciones/Notificaciones_3.js"></script>
 </header>
 <body>
     <div class="content-text">
@@ -485,23 +473,24 @@
                                                                     <input type="hidden" value="2" name="Opcion" />
                                                                     <input type="hidden" value="ACEPTADO AF1" name="PEstado" />
                                                                     <div class="form-group">
-                                                                        <label asp-for="@notificacionAdmin.Prestamos.FechaPagoTotalPrestamo" class="control-label">Fecha del Pago Total del Prestamo -> Fecha de Inicio de Pago de Cuotas @notificacionAdmin.Prestamos.FechaInicioPagoCuotas.ToString("dd-MMMM-yyyy")</label>
-                                                                        <input asp-for="@notificacionAdmin.Prestamos.FechaPagoTotalPrestamo" type="date" class="input-date" name="FechaPagoTotalPrestamo" min="@fechaactual" required />
+                                                                        <label class="control-label">Digite la Fecha que quiere que Inicie a Pagar las CUotas</label>
+                                                                        <input type="date" class="input-date" id="FechaInicioPagoCuotas" name="FechaInicioPagoCuotas" required />
+                                                                        <span class="text-danger"></span>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label asp-for="@notificacionAdmin.Prestamos.FechaPagoTotalPrestamo" class="control-label">Ingrese la Fecha Estimada de Cancelacion de Deuda (Pago de Prestamo)</label>
+                                                                        <input  type="date" class="input-date" id="FechaPagoTotalPrestamo" name="FechaPagoTotalPrestamo" required />
                                                                         <span asp-validation-for="@notificacionAdmin.Prestamos.FechaPagoTotalPrestamo" class="text-danger"></span>
                                                                     </div>
-                                                                    <div class="form-group">
-                                                                        <label asp-for="@notificacionAdmin.Prestamos.FechaPagoTotalPrestamo" class="control-label">Fecha de Inicio de Pago de Cuotas</label>
-                                                                        <input asp-for="@notificacionAdmin.Prestamos.FechaInicioPagoCuotas" type="date" class="input-date" name="FechaInicioPagoCuotas" min="@fechaactual" required />
-                                                                        <span asp-validation-for="@notificacionAdmin.Prestamos.FechaInicioPagoCuotas" class="text-danger"></span>
-                                                                    </div>
+
                                                                     <div class="form-group">
                                                                         <label asp-for="@notificacionAdmin.Eventos.FechaInicio" class="control-label">Fecha Inicio de Inscripcion de Garantes</label>
-                                                                        <input asp-for="@notificacionAdmin.Eventos.FechaInicio" type="date" class="input-date" name="FechaInicio" min="@fechaactual" required />
+                                                                        <input type="date" class="input-date" name="FechaInicio" id="FechaInicio" required />
                                                                         <span asp-validation-for="@notificacionAdmin.Eventos.FechaInicio" class="text-danger"></span>
                                                                     </div>
                                                                     <div class="form-group">
                                                                         <label asp-for="@notificacionAdmin.Eventos.FechaFinalizacion" class="control-label">Fecha Finalizacion de Inscripcion de Garantes</label>
-                                                                        <input asp-for="@notificacionAdmin.Eventos.FechaFinalizacion" type="date" class="input-date" name="FechaFinalizacion" min="@fechaactual" required />
+                                                                        <input  type="date" class="input-date" name="FechaFinalizacion" id="FechaFinalizacion" required />
                                                                         <span asp-validation-for="@notificacionAdmin.Eventos.FechaFinalizacion" class="text-danger"></span>
                                                                     </div>
                                                                     <div class="container-modal-btn">
@@ -532,10 +521,20 @@
                                                 <div class="modal-principal" id="modal-@notificacionAdmin.Notificaciones.Id">
                                                     <div class="modal__container">
                                                         <div class="modal__content">
-                                                            <p class="modal__paragraph"><strong>Razon:</strong> @notificacionAdmin.Notificaciones.Razon</p>
-                                                            <p class="modal__paragraph"><strong>Fecha:</strong> @notificacionAdmin.Notificaciones.FechaGeneracion.ToString("dd-MM-yyyy")</p>
-                                                            <p class="modal__paragraph"><strong>Descripcion:</strong></p>
-                                                            <p class="modal__description">@notificacionAdmin.Notificaciones.Descripcion</p>
+                                                            <table class="modal__table">
+                                                                <tr>
+                                                                    <td><strong>Razon:</strong></td>
+                                                                    <td>@notificacionAdmin.Notificaciones.Razon</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><strong>Fecha de Notificacion</strong></td>
+                                                                    <td>@notificacionAdmin.Notificaciones.FechaGeneracion.ToString("dd-MM-yyyy")</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><strong>Fecha de Notificacion</strong></td>
+                                                                    <td> <p class="modal__description">@notificacionAdmin.Notificaciones.Descripcion</p></td>
+                                                                </tr>
+                                                            </table>
                                                             <form asp-action="Visualizado">
                                                                 <div class="container-modal-btn">
                                                                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -717,4 +716,8 @@
             <p>Usted no tiene permisos para esta funcion.</p>
         }
     </div>
+    <script src="/js/General/Notificaciones/Notificaciones_1.js"></script>
+    <script src="/js/General/Notificaciones/Notificaciones_2.js"></script>
+    <script src="/js/General/Notificaciones/Notificaciones_3.js"></script>
+    <script src="/js/General/Notificaciones/Notificaciones_4.js"></script>
 </body>
