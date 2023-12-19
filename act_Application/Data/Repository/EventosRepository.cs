@@ -135,7 +135,6 @@ namespace act_Application.Data.Repository
         }
         private ActEvento Auto_GetData_ParticipantesEventos(int IdPrestamo)
         {
-
             try
             {
                 ActEvento obj = new ActEvento();
