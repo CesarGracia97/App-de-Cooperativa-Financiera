@@ -9,16 +9,22 @@ class DataBaseConnector {
 
       connection.connect((err) => {
         if (err) {
-          console.error('Error connecting to database (if):', err.message);
+          console.log('\n--------------------------------------------');
+          console.error('\nError al Conectar a la base de datos (if):', err.message);
+          console.log('\n--------------------------------------------')
           throw err;
         }
 
-        console.log('Connected to database successfully!');
+        console.log('\n-----------------------------------------');
+        console.log('\nConexion a la Base de Datos Exitosa.');
+        console.log('\n-----------------------------------------');
       });
 
       connection.end();
     } catch (error) {
-      console.error('Error connecting to database (try-catch):', error.message);
+      console.log('\n---------------------------------------------------')
+      console.error('Erro al conectar a la Base de Datos (try-catch):', error.message);
+      console.log('\n---------------------------------------------------')
     }
   }
 }
